@@ -38,7 +38,7 @@ yield 即 "谦让"，也是 Thread 类的方法。它让掉当前线程 CPU 的�
 
 ```
 /**
- * 微信公众号：Java技术栈
+ * 
  */
 public static void main(String[] args) {
 	Runnable runnable = () -> {

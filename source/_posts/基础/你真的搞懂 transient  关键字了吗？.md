@@ -26,14 +26,14 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 /**
- * @author 微信公众号：Java技术栈
+ * @author 
  */
 public class TransientTest {
 
 	public static void main(String[] args) throws Exception {
 
 		User user = new User();
-		user.setUsername("Java技术栈");
+		user.setUsername("Java技术");
 		user.setId("javastack");
 
 		System.out.println("\n序列化之前");
@@ -57,7 +57,7 @@ public class TransientTest {
 }
 
 /**
- * @author 微信公众号：Java技术栈
+ * @author 
  */
 class User implements Serializable {
 
@@ -89,11 +89,11 @@ class User implements Serializable {
 
 ```
 序列化之前
-username: Java技术栈
+username: Java技术
 id: javastack
 
 序列化之后
-username: Java技术栈
+username: Java技术
 id: null
 ```
 
@@ -101,11 +101,11 @@ id: null
 
 ## 静态变量能被序列化吗？
 
-这个话题也是最近栈长的Java技术栈vip群里面讨论的，大家对这个知识点比较模糊，我就写了这篇文章测试总结一下。
+这个话题也是最近栈长的Java技术vip群里面讨论的，大家对这个知识点比较模糊，我就写了这篇文章测试总结一下。
 
 ![](http://img.javastack.cn/微信图片_20190214162351.png)
 
-> 如果你也想加入我们的Java技术栈vip群和各位大牛一起讨论技术，那点击[这个链接](https://mp.weixin.qq.com/s/iqCLAduVzDqt19L6D4FCUQ)了解加入吧。
+> 如果你也想加入我们的Java技术vip群和各位大牛一起讨论技术，那点击[这个链接](https://mp.weixin.qq.com/s/iqCLAduVzDqt19L6D4FCUQ)了解加入吧。
 
 那么，到底静态变量能被序列化吗？废话少说，先动手测试下吧！
 
@@ -119,14 +119,14 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 /**
- * @author 微信公众号：Java技术栈
+ * @author 
  */
 public class TransientStaticTest {
 
 	public static void main(String[] args) throws Exception {
 
 		User2 user = new User2();
-		User2.username = "Java技术栈1";
+		User2.username = "Java技术1";
 		user.setId("javastack");
 
 		System.out.println("\n序列化之前");
@@ -139,7 +139,7 @@ public class TransientStaticTest {
 		os.close();
 		
 		// 在反序列化出来之前，改变静态变量的值
-		User2.username = "Java技术栈2";
+		User2.username = "Java技术2";
 
 		ObjectInputStream is = new ObjectInputStream(new FileInputStream("d:/user.txt"));
 		user = (User2) is.readObject();
@@ -153,7 +153,7 @@ public class TransientStaticTest {
 }
 
 /**
- * @author 微信公众号：Java技术栈
+ * @author 
  */
 class User2 implements Serializable {
 
@@ -181,11 +181,11 @@ class User2 implements Serializable {
 
 ```
 序列化之前
-username: Java技术栈1
+username: Java技术1
 id: javastack
 
 序列化之后
-username: Java技术栈2
+username: Java技术2
 id: null
 ```
 
@@ -209,14 +209,14 @@ import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 
 /**
- * @author 微信公众号：Java技术栈
+ * @author 
  */
 public class ExternalizableTest {
 
 	public static void main(String[] args) throws Exception {
 
 		User3 user = new User3();
-		user.setUsername("Java技术栈");
+		user.setUsername("Java技术");
 		user.setId("javastack");
 		ObjectOutput objectOutput = new ObjectOutputStream(new FileOutputStream(new File("javastack")));
 		objectOutput.writeObject(user);
@@ -234,7 +234,7 @@ public class ExternalizableTest {
 }
 
 /**
- * @author 微信公众号：Java技术栈
+ * @author 
  */
 class User3 implements Externalizable {
 

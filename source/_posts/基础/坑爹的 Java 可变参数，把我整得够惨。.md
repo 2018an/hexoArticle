@@ -14,7 +14,7 @@ tags: 基础
 
 ```
 public static void main(String[] args) {
-    test("name=%s&memo=%s", "Java技术栈", "666");
+    test("name=%s&memo=%s", "Java技术", "666");
 }
 
 private static void test(String text, Object... params) {
@@ -26,14 +26,14 @@ private static void test(String text, Object... params) {
 大家猜结果是什么？结果如我们想象：
 
 ```
-name=Java技术栈&memo=666
+name=Java技术&memo=666
 ```
 
 **示例2**
 
 ```
 public static void main(String[] args) {
-    test("name=%s&memo=%s", "Java技术栈");
+    test("name=%s&memo=%s", "Java技术");
 }
 
 private static void test(String text, Object... params) {
@@ -60,7 +60,5 @@ JDK里面很多有用到可变参数的，可实际开发中，并不建议使�
 > 
 > 正例： public List<User> listUsers(String type, Long... ids) {...}
 
-获取这份阿里巴巴的Java开发手册最新PDF版，大家可以关注Java技术栈微信公众号，在后台回复：手册，即可获取。
 
-阿里巴巴也是不建议大家合作可变参数的，可知它带来的坑会有多坑。。
 

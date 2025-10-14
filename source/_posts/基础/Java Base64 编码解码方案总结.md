@@ -13,7 +13,7 @@ Base64是一种能将任意Binary资料用64种字元组合成字串的方法，
 ```
 final BASE64Encoder encoder = new BASE64Encoder();
 final BASE64Decoder decoder = new BASE64Decoder();
-final String text = "Java技术栈";
+final String text = "Java技术";
 final byte[] textByte = text.getBytes("UTF-8");
 
 //编码
@@ -25,7 +25,7 @@ System.out.println(new String(decoder.decodeBuffer(encodedText), "UTF-8"));
 
 final BASE64Encoder encoder = new BASE64Encoder();
 final BASE64Decoder decoder = new BASE64Decoder();
-final String text = "Java技术栈";
+final String text = "Java技术";
 final byte[] textByte = text.getBytes("UTF-8");
 
 //编码
@@ -45,7 +45,7 @@ Apache Commons Codec有提供Base64的编码与解码功能，会使用到org.ap
 
 ```
 final Base64 base64 = new Base64();
-final String text = "Java技术栈";
+final String text = "Java技术";
 final byte[] textByte = text.getBytes("UTF-8");
 
 //编码
@@ -56,7 +56,7 @@ System.out.println(encodedText);
 System.out.println(new String(base64.decode(encodedText), "UTF-8"));
 
 final Base64 base64 = new Base64();
-final String text = "Java技术栈";
+final String text = "Java技术";
 final byte[] textByte = text.getBytes("UTF-8");
 
 //编码
@@ -76,7 +76,7 @@ Java 8的java.util套件中，新增了Base64的类别，可以用来处理Base6
 ```
 final Base64.Decoder decoder = Base64.getDecoder();
 final Base64.Encoder encoder = Base64.getEncoder();
-final String text = "Java技术栈";
+final String text = "Java技术";
 final byte[] textByte = text.getBytes("UTF-8");
 
 //编码
@@ -88,7 +88,7 @@ System.out.println(new String(decoder.decode(encodedText), "UTF-8"));
 
 final Base64.Decoder decoder = Base64.getDecoder();
 final Base64.Encoder encoder = Base64.getEncoder();
-final String text = "Java技术栈";
+final String text = "Java技术";
 final byte[] textByte = text.getBytes("UTF-8");
 
 //编码

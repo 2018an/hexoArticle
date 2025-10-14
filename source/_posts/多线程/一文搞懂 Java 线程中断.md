@@ -40,7 +40,7 @@ try {
 
 ```
 /**
- * 微信公众号：Java技术栈
+ * 
  */
 private static void test1() {
 	Thread thread = new Thread(() -> {
@@ -59,7 +59,7 @@ private static void test1() {
 
 ```
 /**
- * 微信公众号：Java技术栈
+ * 
  */
 private static void test2() {
 	Thread thread = new Thread(() -> {
@@ -68,7 +68,7 @@ private static void test2() {
 
 			// 响应中断
 			if (Thread.currentThread().isInterrupted()) {
-				System.out.println("Java技术栈线程被中断，程序退出。");
+				System.out.println("Java技术线程被中断，程序退出。");
 				return;
 			}
 		}
@@ -84,21 +84,21 @@ private static void test2() {
 
 ```
 /**
- * 微信公众号：Java技术栈
+ * 
  */
 private static void test3() throws InterruptedException {
 	Thread thread = new Thread(() -> {
 		while (true) {
 			// 响应中断
 			if (Thread.currentThread().isInterrupted()) {
-				System.out.println("Java技术栈线程被中断，程序退出。");
+				System.out.println("Java技术线程被中断，程序退出。");
 				return;
 			}
 
 			try {
 				Thread.sleep(3000);
 			} catch (InterruptedException e) {
-				System.out.println("Java技术栈线程休眠被中断，程序退出。");
+				System.out.println("Java技术线程休眠被中断，程序退出。");
 			}
 		}
 	});
@@ -108,7 +108,7 @@ private static void test3() throws InterruptedException {
 }
 ```
 
-示例3 sleep() 方法被中断，并输出了 `Java技术栈线程休眠被中断，程序退出。` 程序继续运行……为什么呢？
+示例3 sleep() 方法被中断，并输出了 `Java技术线程休眠被中断，程序退出。` 程序继续运行……为什么呢？
 
 来看 sleep 的源码：
 
@@ -120,21 +120,21 @@ private static void test3() throws InterruptedException {
 
 ```
 /**
- * 微信公众号：Java技术栈
+ * 
  */
 private static void test4() throws InterruptedException {
 	Thread thread = new Thread(() -> {
 		while (true) {
 			// 响应中断
 			if (Thread.currentThread().isInterrupted()) {
-				System.out.println("Java技术栈线程被中断，程序退出。");
+				System.out.println("Java技术线程被中断，程序退出。");
 				return;
 			}
 
 			try {
 				Thread.sleep(3000);
 			} catch (InterruptedException e) {
-				System.out.println("Java技术栈线程休眠被中断，程序退出。");
+				System.out.println("Java技术线程休眠被中断，程序退出。");
 				Thread.currentThread().interrupt();
 			}
 		}

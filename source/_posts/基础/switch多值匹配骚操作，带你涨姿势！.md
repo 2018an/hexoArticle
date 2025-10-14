@@ -54,7 +54,7 @@ private static void test(int value) {
 
 ```
 /**
- * @from 微信公众号：Java技术栈
+ * 
  * @author 栈长
  */
 private static void test(int value) {
@@ -77,7 +77,7 @@ private static void test(int value) {
 
 ```
 /**
- * @from 微信公众号：Java技术栈
+ * 
  * @author 栈长
  */
 private static void test(int value) {

@@ -39,12 +39,12 @@ java.lang.ThreadGroup#ThreadGroup(java.lang.ThreadGroup, java.lang.String)
 
 ```
 /**
- * 微信公众号：Java技术栈
+ * 
  */
 public static void main(String[] args) {
 	Runnable runnable = () -> {
-		System.out.println("Java技术栈线程线程组名称：" + Thread.currentThread().getThreadGroup());
-		System.out.println("Java技术栈线程线程名称：" + Thread.currentThread().getName());
+		System.out.println("Java技术线程线程组名称：" + Thread.currentThread().getThreadGroup());
+		System.out.println("Java技术线程线程名称：" + Thread.currentThread().getName());
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
@@ -61,7 +61,7 @@ public static void main(String[] args) {
 	userTask1.start();
 	userTask2.start();
 
-	System.out.println("Java技术栈线程线程组活跃线程数：" + userGroup.activeCount());
+	System.out.println("Java技术线程线程组活跃线程数：" + userGroup.activeCount());
 	userGroup.list();
 
 }
@@ -70,11 +70,11 @@ public static void main(String[] args) {
 程序输出以下结果。
 
 ```
-Java技术栈线程线程组名称：java.lang.ThreadGroup[name=user,maxpri=1]
-Java技术栈线程线程名称：user-task1
-Java技术栈线程线程组活跃线程数：2
-Java技术栈线程线程组名称：java.lang.ThreadGroup[name=user,maxpri=1]
-Java技术栈线程线程名称：user-task2
+Java技术线程线程组名称：java.lang.ThreadGroup[name=user,maxpri=1]
+Java技术线程线程名称：user-task1
+Java技术线程线程组活跃线程数：2
+Java技术线程线程组名称：java.lang.ThreadGroup[name=user,maxpri=1]
+Java技术线程线程名称：user-task2
 java.lang.ThreadGroup[name=user,maxpri=1]
     Thread[user-task1,1,user]
     Thread[user-task2,1,user]

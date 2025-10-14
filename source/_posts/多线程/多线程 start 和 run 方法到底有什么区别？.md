@@ -53,7 +53,7 @@ public synchronized void start() {
 
 ```
 /**
- * 微信公众号：Java技术栈
+ * 
  */
 public static void main(String[] args) {
 	Thread thread = new Thread(() -> {
@@ -62,7 +62,7 @@ public static void main(String[] args) {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		System.out.println("Java技术栈");
+		System.out.println("Java技术");
 	});
 
 	long start = System.currentTimeMillis();
@@ -80,9 +80,9 @@ public static void main(String[] args) {
 
 ```
 0
-Java技术栈
+Java技术
 3000
-Java技术栈
+Java技术
 ```
 
 从程序输出结果可以看出，启动 start 方法前后只用了 0 毫秒，而启动 run 方法则阻塞了 3000 毫秒等程序执行完再继续执行，这就是同步与异步的一个最重要的区别。
