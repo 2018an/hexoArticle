@@ -146,5 +146,4 @@ boolean next() throws SQLException;
 
 它是受检查异常，需要进行手工捕获。
 
-栈长这里只列举了 10 个 Java 中最常见的基本异常，另外，栈长已经整理了 Java 系列核心知识点文章，关注Java技术微信公众号，在后台回复关键字：java，即可获取。
 
