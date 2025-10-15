@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>并行任务执行神器 Fork &amp; Join 实战 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Fork&#x2F;Join是什么？Fork&#x2F;Join框架是Java7提供的并行执行任务框架，思想是将大任务分解成小任务，然后小任务又可以继续分解，然后每个小任务分别计算出结果再合并起来，最后将汇总的结果作为大任务结果。其思想和MapReduce的思想非常类似。对于任务的分割，要求各个子任务之间相互独立，能够并行独立地执行任务，互相之间不影响。 Fork&#x2F;Join的运行流程图如">
+<meta property="og:type" content="article">
+<meta property="og:title" content="并行任务执行神器 Fork &amp; Join 实战">
+<meta property="og:url" content="http://example.com/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E5%B9%B6%E8%A1%8C%E4%BB%BB%E5%8A%A1%E6%89%A7%E8%A1%8C%E7%A5%9E%E5%99%A8%20Fork%20&%20Join%20%E5%AE%9E%E6%88%98/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Fork&#x2F;Join是什么？Fork&#x2F;Join框架是Java7提供的并行执行任务框架，思想是将大任务分解成小任务，然后小任务又可以继续分解，然后每个小任务分别计算出结果再合并起来，最后将汇总的结果作为大任务结果。其思想和MapReduce的思想非常类似。对于任务的分割，要求各个子任务之间相互独立，能够并行独立地执行任务，互相之间不影响。 Fork&#x2F;Join的运行流程图如">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://res.infoq.com/articles/fork-join-introduction/zh/resources/21.png">
+<meta property="og:image" content="http://java.boot.by/ocpjp7-upgrade/images/040501.gif">
+<meta property="og:image" content="https://res.infoq.com/articles/fork-join-introduction/zh/resources/image3.png">
+<meta property="og:image" content="http://img.blog.csdn.net/20160720172854109">
+<meta property="article:published_time" content="2025-10-14T06:42:34.000Z">
+<meta property="article:modified_time" content="2025-10-14T07:16:33.121Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="多线程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://res.infoq.com/articles/fork-join-introduction/zh/resources/21.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-多线程/并行任务执行神器 Fork &amp; Join 实战" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E5%B9%B6%E8%A1%8C%E4%BB%BB%E5%8A%A1%E6%89%A7%E8%A1%8C%E7%A5%9E%E5%99%A8%20Fork%20&%20Join%20%E5%AE%9E%E6%88%98/" class="article-date">
+  <time class="dt-published" datetime="2025-10-14T06:42:34.000Z" itemprop="datePublished">2025-10-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      并行任务执行神器 Fork &amp; Join 实战
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h4 id="Fork-Join是什么？"><a href="#Fork-Join是什么？" class="headerlink" title="Fork&#x2F;Join是什么？"></a>Fork&#x2F;Join是什么？</h4><p>Fork&#x2F;Join框架是Java7提供的并行执行任务框架，思想是将大任务分解成小任务，然后小任务又可以继续分解，然后每个小任务分别计算出结果再合并起来，最后将汇总的结果作为大任务结果。其思想和MapReduce的思想非常类似。对于任务的分割，要求各个子任务之间相互独立，能够并行独立地执行任务，互相之间不影响。</p>
+<p><strong>Fork&#x2F;Join的运行流程图如下：</strong></p>
+<p><img src="https://res.infoq.com/articles/fork-join-introduction/zh/resources/21.png" alt="image"></p>
+<p>我们可以通过Fork&#x2F;Join单词字面上的意思去理解这个框架。Fork是叉子分叉的意思，即将大任务分解成并行的小任务，Join是连接结合的意思，即将所有并行的小任务的执行结果汇总起来。</p>
+<p><img src="http://java.boot.by/ocpjp7-upgrade/images/040501.gif" alt="image"></p>
+<h4 id="工作窃取算法"><a href="#工作窃取算法" class="headerlink" title="工作窃取算法"></a>工作窃取算法</h4><p>ForkJoin采用了工作窃取（work-stealing）算法，若一个工作线程的任务队列为空没有任务执行时，便从其他工作线程中获取任务主动执行。为了实现工作窃取，在工作线程中维护了双端队列，窃取任务线程从队尾获取任务，被窃取任务线程从队头获取任务。这种机制充分利用线程进行并行计算，减少了线程竞争。但是当队列中只存在一个任务了时，两个线程去取反而会造成资源浪费。</p>
+<p><strong>工作窃取的运行流程图如下：</strong></p>
+<p><img src="https://res.infoq.com/articles/fork-join-introduction/zh/resources/image3.png" alt="image"></p>
+<h4 id="Fork-Join核心类"><a href="#Fork-Join核心类" class="headerlink" title="Fork&#x2F;Join核心类"></a>Fork&#x2F;Join核心类</h4><p>Fork&#x2F;Join框架主要由子任务、任务调度两部分组成，类层次图如下。</p>
+<p><img src="http://img.blog.csdn.net/20160720172854109" alt="image"></p>
+<ul>
+<li><strong>ForkJoinPool</strong></li>
+</ul>
+<p>ForkJoinPool是ForkJoin框架中的任务调度器，和ThreadPoolExecutor一样实现了自己的线程池，提供了三种调度子任务的方法：</p>
+<ol>
+<li>execute：异步执行指定任务，无返回结果；</li>
+<li>invoke、invokeAll：异步执行指定任务，等待完成才返回结果；</li>
+<li>submit：异步执行指定任务，并立即返回一个Future对象；</li>
+</ol>
+<ul>
+<li><strong>ForkJoinTask</strong></li>
+</ul>
+<p>Fork&#x2F;Join框架中的实际的执行任务类，有以下两种实现，一般继承这两种实现类即可。</p>
+<ol>
+<li>RecursiveAction：用于无结果返回的子任务；</li>
+<li>RecursiveTask：用于有结果返回的子任务；</li>
+</ol>
+<h4 id="Fork-Join框架实战"><a href="#Fork-Join框架实战" class="headerlink" title="Fork&#x2F;Join框架实战"></a>Fork&#x2F;Join框架实战</h4><p>下面实现一个Fork&#x2F;Join小例子，从1+2+…10亿，每个任务只能处理1000个数相加，超过1000个的自动分解成小任务并行处理；并展示了通过不使用Fork&#x2F;Join和使用时的时间损耗对比。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">import java.util.concurrent.ForkJoinPool;</span><br><span class="line">import java.util.concurrent.RecursiveTask;</span><br><span class="line"></span><br><span class="line">public class ForkJoinTask extends RecursiveTask&lt;Long&gt; &#123;</span><br><span class="line"></span><br><span class="line">	private static final long MAX = 1000000000L;</span><br><span class="line">	private static final long THRESHOLD = 1000L;</span><br><span class="line">	private long start;</span><br><span class="line">	private long end;</span><br><span class="line"></span><br><span class="line">	public ForkJoinTask(long start, long end) &#123;</span><br><span class="line">		this.start = start;</span><br><span class="line">		this.end = end;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		test();</span><br><span class="line">		System.out.println(&quot;--------------------&quot;);</span><br><span class="line">		testForkJoin();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	private static void test() &#123;</span><br><span class="line">		System.out.println(&quot;test&quot;);</span><br><span class="line">		long start = System.currentTimeMillis();</span><br><span class="line">		Long sum = 0L;</span><br><span class="line">		for (long i = 0L; i &lt;= MAX; i++) &#123;</span><br><span class="line">			sum += i;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(sum);</span><br><span class="line">		System.out.println(System.currentTimeMillis() - start + &quot;ms&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	private static void testForkJoin() &#123;</span><br><span class="line">		System.out.println(&quot;testForkJoin&quot;);</span><br><span class="line">		long start = System.currentTimeMillis();</span><br><span class="line">		ForkJoinPool forkJoinPool = new ForkJoinPool();</span><br><span class="line">		Long sum = forkJoinPool.invoke(new ForkJoinTask(1, MAX));</span><br><span class="line">		System.out.println(sum);</span><br><span class="line">		System.out.println(System.currentTimeMillis() - start + &quot;ms&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	protected Long compute() &#123;</span><br><span class="line">		long sum = 0;</span><br><span class="line">		if (end - start &lt;= THRESHOLD) &#123;</span><br><span class="line">			for (long i = start; i &lt;= end; i++) &#123;</span><br><span class="line">				sum += i;</span><br><span class="line">			&#125;</span><br><span class="line">			return sum;</span><br><span class="line">		&#125; else &#123;</span><br><span class="line">			long mid = (start + end) / 2;</span><br><span class="line"></span><br><span class="line">			ForkJoinTask task1 = new ForkJoinTask(start, mid);</span><br><span class="line">			task1.fork();</span><br><span class="line"></span><br><span class="line">			ForkJoinTask task2 = new ForkJoinTask(mid + 1, end);</span><br><span class="line">			task2.fork();</span><br><span class="line"></span><br><span class="line">			return task1.join() + task2.join();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里需要计算结果，所以任务继承的是RecursiveTask类。ForkJoinTask需要实现compute方法，在这个方法里首先需要判断任务是否小于等于阈值1000，如果是就直接执行任务。否则分割成两个子任务，每个子任务在调用fork方法时，又会进入compute方法，看看当前子任务是否需要继续分割成孙任务，如果不需要继续分割，则执行当前子任务并返回结果。使用join方法会阻塞并等待子任务执行完并得到其结果。</p>
+<p>程序输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">test</span><br><span class="line">500000000500000000</span><br><span class="line">4992ms</span><br><span class="line">--------------------</span><br><span class="line">testForkJoin</span><br><span class="line">500000000500000000</span><br><span class="line">508ms</span><br></pre></td></tr></table></figure>
+<p>从结果看出，并行的时间损耗明显要少于串行的，这就是并行任务的好处。</p>
+<p>尽管如此，在使用Fork&#x2F;Join时也得注意，不要盲目使用。</p>
+<ol>
+<li>如果任务拆解的很深，系统内的线程数量堆积，导致系统性能性能严重下降；</li>
+<li>如果函数的调用栈很深，会导致栈内存溢出；</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E5%B9%B6%E8%A1%8C%E4%BB%BB%E5%8A%A1%E6%89%A7%E8%A1%8C%E7%A5%9E%E5%99%A8%20Fork%20&%20Join%20%E5%AE%9E%E6%88%98/" data-id="cmgrfxxd3001y30d4h7433mkq" data-title="并行任务执行神器 Fork &amp; Join 实战" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%80%9A%E4%BF%A1%E7%9A%84%E4%B8%89%E5%A4%A7%E6%B3%95%E5%99%A8%EF%BC%8C%E4%BD%A0%E7%9C%9F%E7%9A%84%E4%BC%9A%E7%94%A8%E5%90%97%EF%BC%9F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          多线程通信的三大法器，你真的会用吗？
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E6%95%99%E4%BD%A0%E5%A6%82%E4%BD%95%E7%9B%91%E6%8E%A7%20Java%20%E7%BA%BF%E7%A8%8B%E6%B1%A0%E8%BF%90%E8%A1%8C%E7%8A%B6%E6%80%81/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">教你如何监控 Java 线程池运行状态</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 18px;">基础</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 16px;">多线程</a> <a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" style="font-size: 20px;">新特性</a> <a href="/tags/%E8%BF%9B%E9%98%B6/" style="font-size: 14px;">进阶</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 12px;">集合</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java%205%20~%2010%20%E6%96%B0%E7%89%B9%E6%80%A7%E5%80%BE%E6%83%85%E6%95%B4%E7%90%86%EF%BC%81/">Java 5 ~ 10 新特性倾情整理！</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%206%20%E9%A2%97%E8%AF%AD%E6%B3%95%E7%B3%96/">Java 中的 6 颗语法糖</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%20String%20%E7%9C%9F%E7%9A%84%E6%98%AF%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%90%97%EF%BC%9F/">Java 中的 String 真的是不可变吗？</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E4%BC%AA%E5%85%B1%E4%BA%AB%E8%AF%A6%E8%A7%A3%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">Java 中的伪共享详解及解决方案</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E5%AE%8F%E5%8F%98%E9%87%8F%EF%BC%8C%E5%AE%8F%E6%9B%BF%E6%8D%A2%E8%AF%A6%E8%A7%A3%E3%80%82/">Java 中的宏变量，宏替换详解。</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

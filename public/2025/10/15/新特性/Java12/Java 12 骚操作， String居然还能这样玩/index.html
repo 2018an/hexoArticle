@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Java 12 骚操作， String居然还能这样玩 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Java 13 都快要来了，12必须跟栈长学起！ Java 13 即将发布，新特性必须抢先看！ Java 12 已经发布数月了：Java 12 正式发布，8大新特性！，今天我再来分享下在 Java 12 中关于 String 的三个骚操作，绝逼有用。 更多关于 Java 的资讯、干货教程、以及好消息，请关注，第一时间推送。 坐稳了，准备起飞！ 1、transformtransform：即字符串转换">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 12 骚操作， String居然还能这样玩">
+<meta property="og:url" content="http://example.com/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java12/Java%2012%20%E9%AA%9A%E6%93%8D%E4%BD%9C%EF%BC%8C%20String%E5%B1%85%E7%84%B6%E8%BF%98%E8%83%BD%E8%BF%99%E6%A0%B7%E7%8E%A9/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Java 13 都快要来了，12必须跟栈长学起！ Java 13 即将发布，新特性必须抢先看！ Java 12 已经发布数月了：Java 12 正式发布，8大新特性！，今天我再来分享下在 Java 12 中关于 String 的三个骚操作，绝逼有用。 更多关于 Java 的资讯、干货教程、以及好消息，请关注，第一时间推送。 坐稳了，准备起飞！ 1、transformtransform：即字符串转换">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://img.javastack.cn/20190613135450.png">
+<meta property="og:image" content="http://img.javastack.cn/20190613135537.png">
+<meta property="article:published_time" content="2025-10-15T03:36:33.000Z">
+<meta property="article:modified_time" content="2025-10-15T03:37:54.760Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="新特性">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://img.javastack.cn/20190613135450.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-新特性/Java12/Java 12 骚操作， String居然还能这样玩" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java12/Java%2012%20%E9%AA%9A%E6%93%8D%E4%BD%9C%EF%BC%8C%20String%E5%B1%85%E7%84%B6%E8%BF%98%E8%83%BD%E8%BF%99%E6%A0%B7%E7%8E%A9/" class="article-date">
+  <time class="dt-published" datetime="2025-10-15T03:36:33.000Z" itemprop="datePublished">2025-10-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Java 12 骚操作， String居然还能这样玩
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Java 13 都快要来了，12必须跟栈长学起！</p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Gg6KKz7vhDRpzeMR8CG4DA">Java 13 即将发布，新特性必须抢先看！</a></p>
+<p>Java 12 已经发布数月了：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/IXOoSTq6qi4ZH63gCaKa3A">Java 12 正式发布，8大新特性！</a>，今天我再来分享下在 Java 12 中关于 String 的三个骚操作，绝逼有用。</p>
+<p>更多关于 Java 的资讯、干货教程、以及好消息，请关注，第一时间推送。</p>
+<p>坐稳了，准备起飞！</p>
+<h2 id="1、transform"><a href="#1、transform" class="headerlink" title="1、transform"></a>1、transform</h2><p>transform：即字符串转换，来看下 transform 的实现源码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public &lt;R&gt; R transform(Function&lt;? super String, ? extends R&gt; f) &#123;</span><br><span class="line">    return f.apply(this);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>传入一个函数式接口 Function，接受一个值，返回一个值，参考：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/nC3f17zZlXC08XNJWA-FBw">Java 8 新特性之函数式接口</a>。</p>
+<p>废话少说，直接上手就是干：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">private static void testTransform() &#123;</span><br><span class="line">    System.out.println(&quot;======test java 12 transform======&quot;);</span><br><span class="line">    List&lt;String&gt; list1 = List.of(&quot;Java&quot;, &quot; Python&quot;, &quot; C++ &quot;);</span><br><span class="line">    List&lt;String&gt; list2 = new ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    list1.forEach(element -&gt;</span><br><span class="line">            list2.add(element.transform(String::strip)</span><br><span class="line">                    .transform(String::toUpperCase)</span><br><span class="line">                    .transform((e) -&gt; &quot;Hi,&quot; + e))</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    list2.forEach(System.out::println);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">======test java 12 transform======</span><br><span class="line">Hi,JAVA</span><br><span class="line">Hi,PYTHON</span><br><span class="line">Hi,C++</span><br></pre></td></tr></table></figure>
+
+<p>示例是对一个字符串连续转换了三遍，代码很简单，大家都能领会的。</p>
+<h2 id="2、indent"><a href="#2、indent" class="headerlink" title="2、indent"></a>2、indent</h2><p>直接看示例吧：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">private static void testIndent() &#123;</span><br><span class="line">    System.out.println(&quot;======test java 12 indent======&quot;);</span><br><span class="line">    String result = &quot;Java\n Python\nC++&quot;.indent(3);</span><br><span class="line">    System.out.println(result);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">======test java 12 indent======</span><br><span class="line">   Java</span><br><span class="line">    Python</span><br><span class="line">   C++</span><br></pre></td></tr></table></figure>
+
+<p>换行符 \n 后前缩进 N 个空格，为 0 或负数不缩进。</p>
+<p>以下是 indent 的核心源码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">private String indent(int n, boolean removeBlanks) &#123;</span><br><span class="line">    Stream&lt;String&gt; stream = removeBlanks ? lines(Integer.MAX_VALUE, Integer.MAX_VALUE)</span><br><span class="line">                                         : lines();</span><br><span class="line">    if (n &gt; 0) &#123;</span><br><span class="line">        final String spaces = &quot; &quot;.repeat(n);</span><br><span class="line">        stream = stream.map(s -&gt; spaces + s);</span><br><span class="line">    &#125; else if (n == Integer.MIN_VALUE) &#123;</span><br><span class="line">        stream = stream.map(s -&gt; s.stripLeading());</span><br><span class="line">    &#125; else if (n &lt; 0) &#123;</span><br><span class="line">        stream = stream.map(s -&gt; s.substring(Math.min(-n, s.indexOfNonWhitespace())));</span><br><span class="line">    &#125;</span><br><span class="line">    return stream.collect(Collectors.joining(&quot;\n&quot;, &quot;&quot;, &quot;\n&quot;));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其实就是调用了 lines() 方法来创建一个 Stream，然后再往前拼接指定数量的空格。</p>
+<p>参考：《<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/OZKvkG5OhMXf4lTklZQzGQ">Java 11 已发布，String 还能这样玩！</a>》这篇文章对 lines() 的介绍。</p>
+<h2 id="3、describeConstable"><a href="#3、describeConstable" class="headerlink" title="3、describeConstable"></a>3、describeConstable</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">private static void testDescribeConstable() &#123;</span><br><span class="line">    System.out.println(&quot;======test java 12 describeConstable======&quot;);</span><br><span class="line">    String name = &quot;Java技术&quot;;</span><br><span class="line">    Optional&lt;String&gt; optional = name.describeConstable();</span><br><span class="line">    System.out.println(optional.get());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">======test java 12 describeConstable======</span><br><span class="line">Java技术</span><br></pre></td></tr></table></figure>
+
+<p>Java 12, String 实现了 Constable 接口：</p>
+<blockquote>
+<p>java.lang.constant.Constable</p>
+</blockquote>
+<p>这个接口就有一个方法，源码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public interface Constable &#123;</span><br><span class="line"></span><br><span class="line">    Optional&lt;? extends ConstantDesc&gt; describeConstable();</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Java 12 String 的实现源码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public Optional&lt;String&gt; describeConstable() &#123;</span><br><span class="line">    return Optional.of(this);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>很简单，其实就是调用 Optional.of 方法返回一个 Optional 类型，Optional不懂的可以参考这篇文章：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/uXw4eTZqLfj871FlciPh6Q">Java 8 新特性之 Optional</a>。</p>
+<p>好了，今天的分享就到这，收藏转发一下吧，多学习了解，日后必定有用！</p>
+<p>历史 Java 新特性干货分享：</p>
+<p><img src="http://img.javastack.cn/20190613135450.png"><br><img src="http://img.javastack.cn/20190613135537.png"></p>
+<p>Java 12 新特性继续更新中……</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java12/Java%2012%20%E9%AA%9A%E6%93%8D%E4%BD%9C%EF%BC%8C%20String%E5%B1%85%E7%84%B6%E8%BF%98%E8%83%BD%E8%BF%99%E6%A0%B7%E7%8E%A9/" data-id="cmgrfxxdd003o30d4fd9cczcu" data-title="Java 12 骚操作， String居然还能这样玩" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java11/Java%2011%20%E6%AD%A3%E5%BC%8F%E5%8F%91%E5%B8%83%EF%BC%8C%E8%BF%99%208%20%E4%B8%AA%E6%96%B0%E7%89%B9%E6%80%A7%E6%95%99%E4%BD%A0%E5%86%99%E5%87%BA%E6%9B%B4%E7%89%9B%E9%80%BC%E7%9A%84%E4%BB%A3%E7%A0%81/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Java 11 正式发布，这 8 个新特性教你写出更牛逼的代码
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java12/Java%2012%20%E9%AA%9A%E6%93%8D%E4%BD%9C%EF%BC%8C%20switch%E5%B1%85%E7%84%B6%E8%BF%98%E8%83%BD%E8%BF%99%E6%A0%B7%E7%8E%A9%EF%BC%81/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java 12 骚操作， switch居然还能这样玩！</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 18px;">基础</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 16px;">多线程</a> <a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" style="font-size: 20px;">新特性</a> <a href="/tags/%E8%BF%9B%E9%98%B6/" style="font-size: 14px;">进阶</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 12px;">集合</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java%205%20~%2010%20%E6%96%B0%E7%89%B9%E6%80%A7%E5%80%BE%E6%83%85%E6%95%B4%E7%90%86%EF%BC%81/">Java 5 ~ 10 新特性倾情整理！</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%206%20%E9%A2%97%E8%AF%AD%E6%B3%95%E7%B3%96/">Java 中的 6 颗语法糖</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%20String%20%E7%9C%9F%E7%9A%84%E6%98%AF%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%90%97%EF%BC%9F/">Java 中的 String 真的是不可变吗？</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E4%BC%AA%E5%85%B1%E4%BA%AB%E8%AF%A6%E8%A7%A3%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">Java 中的伪共享详解及解决方案</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E5%AE%8F%E5%8F%98%E9%87%8F%EF%BC%8C%E5%AE%8F%E6%9B%BF%E6%8D%A2%E8%AF%A6%E8%A7%A3%E3%80%82/">Java 中的宏变量，宏替换详解。</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

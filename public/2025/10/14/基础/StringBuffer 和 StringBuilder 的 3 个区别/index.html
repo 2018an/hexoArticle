@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>StringBuffer 和 StringBuilder 的 3 个区别 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="StringBuffer 和 StringBuilder 它们都是可变的字符串，不过它们之间的区别是 Java 初中级面试出现几率十分高的一道题。这么简单的一道题，栈长在最近的面试过程中，却经常遇到很多求职者说反，搞不清使用场景的情况。 今天，栈长我带大家彻底搞懂 StringBuffer 和 StringBuilder 的几个区别和它们的应用场景，如果你是大牛，请略过，如果你是菜鸟，或者对这两个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="StringBuffer 和 StringBuilder 的 3 个区别">
+<meta property="og:url" content="http://example.com/2025/10/14/%E5%9F%BA%E7%A1%80/StringBuffer%20%E5%92%8C%20StringBuilder%20%E7%9A%84%203%20%E4%B8%AA%E5%8C%BA%E5%88%AB/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="StringBuffer 和 StringBuilder 它们都是可变的字符串，不过它们之间的区别是 Java 初中级面试出现几率十分高的一道题。这么简单的一道题，栈长在最近的面试过程中，却经常遇到很多求职者说反，搞不清使用场景的情况。 今天，栈长我带大家彻底搞懂 StringBuffer 和 StringBuilder 的几个区别和它们的应用场景，如果你是大牛，请略过，如果你是菜鸟，或者对这两个">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://img.javastack.cn/18-12-29/23490736.jpg">
+<meta property="article:published_time" content="2025-10-14T06:42:34.000Z">
+<meta property="article:modified_time" content="2025-10-14T07:36:11.238Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="基础">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://img.javastack.cn/18-12-29/23490736.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-基础/StringBuffer 和 StringBuilder 的 3 个区别" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/10/14/%E5%9F%BA%E7%A1%80/StringBuffer%20%E5%92%8C%20StringBuilder%20%E7%9A%84%203%20%E4%B8%AA%E5%8C%BA%E5%88%AB/" class="article-date">
+  <time class="dt-published" datetime="2025-10-14T06:42:34.000Z" itemprop="datePublished">2025-10-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      StringBuffer 和 StringBuilder 的 3 个区别
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>StringBuffer 和 StringBuilder 它们都是可变的字符串，不过它们之间的区别是 Java 初中级面试出现几率十分高的一道题。这么简单的一道题，栈长在最近的面试过程中，却经常遇到很多求职者说反，搞不清使用场景的情况。</p>
+<p>今天，栈长我带大家彻底搞懂 StringBuffer 和 StringBuilder 的几个区别和它们的应用场景，如果你是大牛，请略过，如果你是菜鸟，或者对这两个不是很清楚，可以学习一下，也可以为年底的面试加油冲刺。</p>
+<p>先看看 StringBuffer 和 StringBuilder 的类结构吧：</p>
+<p><img src="http://img.javastack.cn/18-12-29/23490736.jpg"></p>
+<p>其实很简单，就是继承了一个抽象的字符串父类：<code>AbstractStringBuilder</code>。下面我们再来看看它们的三个区别。</p>
+<h2 id="区别1：线程安全"><a href="#区别1：线程安全" class="headerlink" title="区别1：线程安全"></a>区别1：线程安全</h2><p>StringBuffer：线程安全，StringBuilder：线程不安全。因为 StringBuffer 的所有公开方法都是 synchronized 修饰的，而 StringBuilder 并没有 StringBuilder 修饰。</p>
+<p><strong>StringBuffer 代码片段：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public synchronized StringBuffer append(String str) &#123;</span><br><span class="line">    toStringCache = null;</span><br><span class="line">    super.append(str);</span><br><span class="line">    return this;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="区别2：缓冲区"><a href="#区别2：缓冲区" class="headerlink" title="区别2：缓冲区"></a>区别2：缓冲区</h2><p><strong>StringBuffer 代码片段：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">private transient char[] toStringCache;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public synchronized String toString() &#123;</span><br><span class="line">    if (toStringCache == null) &#123;</span><br><span class="line">        toStringCache = Arrays.copyOfRange(value, 0, count);</span><br><span class="line">    &#125;</span><br><span class="line">    return new String(toStringCache, true);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>StringBuilder 代码片段：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public String toString() &#123;</span><br><span class="line">    // Create a copy, don&#x27;t share the array</span><br><span class="line">    return new String(value, 0, count);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看出，StringBuffer 每次获取 toString 都会直接使用缓存区的 toStringCache 值来构造一个字符串。</p>
+<p>而 StringBuilder 则每次都需要复制一次字符数组，再构造一个字符串。</p>
+<p>所以，缓存冲这也是对 StringBuffer 的一个优化吧，不过 StringBuffer 的这个toString 方法仍然是同步的。</p>
+<h2 id="区别3：性能"><a href="#区别3：性能" class="headerlink" title="区别3：性能"></a>区别3：性能</h2><p>既然 StringBuffer 是线程安全的，它的所有公开方法都是同步的，StringBuilder 是没有对方法加锁同步的，所以毫无疑问，StringBuilder 的性能要远大于 StringBuffer。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>所以，StringBuffer 适用于用在多线程操作同一个 StringBuffer 的场景，如果是单线程场合 StringBuilder 更适合。</p>
+<p>以此送给正在面试或者即将去面试的 Java 程序猿们，如果对你有帮助，也欢迎分享给身边的朋友们，让大家少走弯路。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/10/14/%E5%9F%BA%E7%A1%80/StringBuffer%20%E5%92%8C%20StringBuilder%20%E7%9A%84%203%20%E4%B8%AA%E5%8C%BA%E5%88%AB/" data-id="cmgrfxxct000b30d41mjd7au7" data-title="StringBuffer 和 StringBuilder 的 3 个区别" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/10/14/%E5%9F%BA%E7%A1%80/Java%20%E7%88%B6%E7%B1%BB%E5%BC%BA%E5%88%B6%E8%BD%AC%E6%8D%A2%E5%AD%90%E7%B1%BB%E5%8E%9F%E5%88%99/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Java 父类强制转换子类原则
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/10/14/%E5%9F%BA%E7%A1%80/switch%E5%A4%9A%E5%80%BC%E5%8C%B9%E9%85%8D%E9%AA%9A%E6%93%8D%E4%BD%9C%EF%BC%8C%E5%B8%A6%E4%BD%A0%E6%B6%A8%E5%A7%BF%E5%8A%BF%EF%BC%81/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">switch多值匹配骚操作，带你涨姿势！</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 18px;">基础</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 16px;">多线程</a> <a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" style="font-size: 20px;">新特性</a> <a href="/tags/%E8%BF%9B%E9%98%B6/" style="font-size: 14px;">进阶</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 12px;">集合</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java%205%20~%2010%20%E6%96%B0%E7%89%B9%E6%80%A7%E5%80%BE%E6%83%85%E6%95%B4%E7%90%86%EF%BC%81/">Java 5 ~ 10 新特性倾情整理！</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%206%20%E9%A2%97%E8%AF%AD%E6%B3%95%E7%B3%96/">Java 中的 6 颗语法糖</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%20String%20%E7%9C%9F%E7%9A%84%E6%98%AF%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%90%97%EF%BC%9F/">Java 中的 String 真的是不可变吗？</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E4%BC%AA%E5%85%B1%E4%BA%AB%E8%AF%A6%E8%A7%A3%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">Java 中的伪共享详解及解决方案</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E5%AE%8F%E5%8F%98%E9%87%8F%EF%BC%8C%E5%AE%8F%E6%9B%BF%E6%8D%A2%E8%AF%A6%E8%A7%A3%E3%80%82/">Java 中的宏变量，宏替换详解。</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

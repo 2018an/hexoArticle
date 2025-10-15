@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Java 中的伪共享详解及解决方案 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="1. 什么是伪共享CPU 缓存系统中是以缓存行（cache line）为单位存储的。目前主流的 CPU Cache 的 Cache Line 大小都是 64 Bytes。在多线程情况下，如果需要修改“共享同一个缓存行的变量”，就会无意中影响彼此的性能，这就是伪共享（False Sharing）。 2. 缓存行由于共享变量在 CPU 缓存中的存储是以缓存行为单位，一个缓存行可以存储多个变量（存满当前">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 中的伪共享详解及解决方案">
+<meta property="og:url" content="http://example.com/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E4%BC%AA%E5%85%B1%E4%BA%AB%E8%AF%A6%E8%A7%A3%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1. 什么是伪共享CPU 缓存系统中是以缓存行（cache line）为单位存储的。目前主流的 CPU Cache 的 Cache Line 大小都是 64 Bytes。在多线程情况下，如果需要修改“共享同一个缓存行的变量”，就会无意中影响彼此的性能，这就是伪共享（False Sharing）。 2. 缓存行由于共享变量在 CPU 缓存中的存储是以缓存行为单位，一个缓存行可以存储多个变量（存满当前">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://img.javastack.cn/18-5-31/91078691.jpg">
+<meta property="og:image" content="http://img.javastack.cn/18-5-31/71458405.jpg">
+<meta property="og:image" content="http://img.javastack.cn/18-5-31/66429246.jpg">
+<meta property="article:published_time" content="2025-10-15T03:36:33.000Z">
+<meta property="article:modified_time" content="2025-10-15T03:35:36.408Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="进阶">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://img.javastack.cn/18-5-31/91078691.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-进阶/Java 中的伪共享详解及解决方案" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E4%BC%AA%E5%85%B1%E4%BA%AB%E8%AF%A6%E8%A7%A3%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" class="article-date">
+  <time class="dt-published" datetime="2025-10-15T03:36:33.000Z" itemprop="datePublished">2025-10-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Java 中的伪共享详解及解决方案
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h4 id="1-什么是伪共享"><a href="#1-什么是伪共享" class="headerlink" title="1. 什么是伪共享"></a>1. 什么是伪共享</h4><p>CPU 缓存系统中是以缓存行（cache line）为单位存储的。目前主流的 CPU Cache 的 Cache Line 大小都是 64 Bytes。在多线程情况下，如果需要修改“共享同一个缓存行的变量”，就会无意中影响彼此的性能，这就是伪共享（False Sharing）。</p>
+<h4 id="2-缓存行"><a href="#2-缓存行" class="headerlink" title="2. 缓存行"></a>2. 缓存行</h4><p>由于共享变量在 CPU 缓存中的存储是以缓存行为单位，一个缓存行可以存储多个变量（存满当前缓存行的字节数）；而CPU对缓存的修改又是以缓存行为最小单位的，那么就会出现上诉的伪共享问题。</p>
+<p>Cache Line 可以简单的理解为 CPU Cache 中的最小缓存单位，今天的 CPU 不再是按字节访问内存，而是以 64 字节为单位的块(chunk)拿取，称为一个缓存行(cache line)。当你读一个特定的内存地址，整个缓存行将从主存换入缓存，并且访问同一个缓存行内的其它值的开销是很小的。</p>
+<h4 id="3-CPU-的三级缓存"><a href="#3-CPU-的三级缓存" class="headerlink" title="3. CPU 的三级缓存"></a>3. CPU 的三级缓存</h4><p>由于 CPU 的速度远远大于内存速度，所以 CPU 设计者们就给 CPU 加上了缓存(CPU Cache)。 以免运算被内存速度拖累。（就像我们写代码把共享数据做Cache不想被DB存取速度拖累一样），CPU Cache 分成了三个级别：L1，L2，L3。越靠近CPU的缓存越快也越小。所 以L1 缓存很小但很快，并且紧靠着在使用它的 CPU 内核。L2 大一些，也慢一些，并且仍然只能被一个单独的 CPU 核使用。L3 在现代多核机器中更普遍，仍然更大，更慢，并且被单个插槽上的所有 CPU 核共享。最后，你拥有一块主存，由全部插槽上的所有 CPU 核共享。</p>
+<p>当 CPU 执行运算的时候，它先去L1查找所需的数据，再去L2，然后是L3，最后如果这些缓存中都没有，所需的数据就要去主内存拿。走得越远，运算耗费的时间就越长。所以如果你在做一些很频繁的事，你要确保数据在L1缓存中。</p>
+<p><img src="http://img.javastack.cn/18-5-31/91078691.jpg"></p>
+<h4 id="4-缓存关联性"><a href="#4-缓存关联性" class="headerlink" title="4. 缓存关联性"></a>4. 缓存关联性</h4><p>目前常用的缓存设计是N路组关联(N-Way Set Associative Cache)，他的原理是把一个缓存按照N个 Cache Line 作为一组（Set），缓存按组划为等分。每个内存块能够被映射到相对应的set中的任意一个缓存行中。比如一个16路缓存，16个 Cache Line 作为一个Set，每个内存块能够被映射到相对应的 Set 中的16个 CacheLine 中的任意一个。一般地，具有一定相同低bit位地址的内存块将共享同一个Set。 </p>
+<p>下图为一个2-Way的Cache。由图中可以看到 Main Memory 中的 Index 0,2,4 都映射在Way0的不同 CacheLine 中，Index 1,3,5都映射在Way1的不同 CacheLine 中。</p>
+<p><img src="http://img.javastack.cn/18-5-31/71458405.jpg"></p>
+<h4 id="5-MESI-协议"><a href="#5-MESI-协议" class="headerlink" title="5. MESI 协议"></a>5. MESI 协议</h4><p>多核 CPU 都有自己的专有缓存（一般为L1，L2），以及同一个 CPU 插槽之间的核共享的缓存（一般为L3）。不同核心的CPU缓存中难免会加载同样的数据，那么如何保证数据的一致性呢，就是 MESI 协议了。</p>
+<p>在 MESI 协议中，每个 Cache line 有4个状态，可用 2 个 bit 表示，它们分别是：<br>M(Modified)：这行数据有效，数据被修改了，和内存中的数据不一致，数据只存在于本 Cache 中；<br>E(Exclusive)：这行数据有效，数据和内存中的数据一致，数据只存在于本 Cache 中；<br>S(Shared)：这行数据有效，数据和内存中的数据一致，数据存在于很多 Cache 中；<br>I(Invalid)：这行数据无效。</p>
+<p>那么，假设有一个变量i&#x3D;3（应该是包括变量i的缓存块，块大小为缓存行大小）；已经加载到多核（a,b,c）的缓存中，此时该缓存行的状态为S；此时其中的一个核a改变了变量i的值，那么在核a中的当前缓存行的状态将变为M，b,c核中的当前缓存行状态将变为I。如下图：</p>
+<p><img src="http://img.javastack.cn/18-5-31/66429246.jpg"></p>
+<h4 id="6-解决原理"><a href="#6-解决原理" class="headerlink" title="6. 解决原理"></a>6. 解决原理</h4><p>为了避免由于 false sharing 导致 Cache Line 从 L1,L2,L3 到主存之间重复载入，我们可以使用数据填充的方式来避免，即单个数据填充满一个CacheLine。这本质是一种空间换时间的做法。</p>
+<h4 id="7-Java-对于伪共享的传统解决方案"><a href="#7-Java-对于伪共享的传统解决方案" class="headerlink" title="7. Java 对于伪共享的传统解决方案"></a>7. Java 对于伪共享的传统解决方案</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">/***</span><br><span class="line">* </span><br><span class="line">**/</span><br><span class="line">import java.util.concurrent.atomic.AtomicLong;</span><br><span class="line"></span><br><span class="line">public final class FalseSharing</span><br><span class="line">    implements Runnable</span><br><span class="line">&#123;</span><br><span class="line">    public final static int NUM_THREADS = 4; // change</span><br><span class="line">    public final static long ITERATIONS = 500L * 1000L * 1000L;</span><br><span class="line">    private final int arrayIndex;</span><br><span class="line"></span><br><span class="line">    private static VolatileLong[] longs = new VolatileLong[NUM_THREADS];</span><br><span class="line">    static</span><br><span class="line">    &#123;</span><br><span class="line">        for (int i = 0; i &lt; longs.length; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            longs[i] = new VolatileLong();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public FalseSharing(final int arrayIndex)</span><br><span class="line">    &#123;</span><br><span class="line">        this.arrayIndex = arrayIndex;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(final String[] args) throws Exception</span><br><span class="line">    &#123;</span><br><span class="line">        final long start = System.nanoTime();</span><br><span class="line">        runTest();</span><br><span class="line">        System.out.println(&quot;duration = &quot; + (System.nanoTime() - start));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static void runTest() throws InterruptedException</span><br><span class="line">    &#123;</span><br><span class="line">        Thread[] threads = new Thread[NUM_THREADS];</span><br><span class="line"></span><br><span class="line">        for (int i = 0; i &lt; threads.length; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            threads[i] = new Thread(new FalseSharing(i));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (Thread t : threads)</span><br><span class="line">        &#123;</span><br><span class="line">            t.start();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (Thread t : threads)</span><br><span class="line">        &#123;</span><br><span class="line">            t.join();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void run()</span><br><span class="line">    &#123;</span><br><span class="line">        long i = ITERATIONS + 1;</span><br><span class="line">        while (0 != --i)</span><br><span class="line">        &#123;</span><br><span class="line">            longs[arrayIndex].set(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static long sumPaddingToPreventOptimisation(final int index)</span><br><span class="line">    &#123;</span><br><span class="line">        VolatileLong v = longs[index];</span><br><span class="line">        return v.p1 + v.p2 + v.p3 + v.p4 + v.p5 + v.p6;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //jdk7以上使用此方法(jdk7的某个版本oracle对伪共享做了优化)</span><br><span class="line">    public final static class VolatileLong</span><br><span class="line">    &#123;</span><br><span class="line">        public volatile long value = 0L;</span><br><span class="line">        public long p1, p2, p3, p4, p5, p6;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // jdk7以下使用此方法</span><br><span class="line">    public final static class VolatileLong</span><br><span class="line">    &#123;</span><br><span class="line">        public long p1, p2, p3, p4, p5, p6, p7; // cache line padding</span><br><span class="line">        public volatile long value = 0L;</span><br><span class="line">        public long p8, p9, p10, p11, p12, p13, p14; // cache line padding</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="8-Java-8-中的解决方案"><a href="#8-Java-8-中的解决方案" class="headerlink" title="8. Java 8 中的解决方案"></a>8. Java 8 中的解决方案</h4><p>Java 8 中已经提供了官方的解决方案，Java 8 中新增了一个注解：<code>@sun.misc.Contended</code>。加上这个注解的类会自动补齐缓存行，需要注意的是此注解默认是无效的，需要在 jvm 启动时设置 <code>-XX:-RestrictContended</code> 才会生效。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@sun.misc.Contended</span><br><span class="line">public final static class VolatileLong &#123;</span><br><span class="line">    public volatile long value = 0L;</span><br><span class="line">    //public long p1, p2, p3, p4, p5, p6;</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h4><blockquote>
+<p><a target="_blank" rel="noopener" href="http://igoro.com/archive/gallery-of-processor-cache-effects/">http://igoro.com/archive/gallery-of-processor-cache-effects/</a><br><a target="_blank" rel="noopener" href="http://ifeve.com/false-sharing/">http://ifeve.com/false-sharing/</a><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/muxiqingyang/article/details/6615199">http://blog.csdn.net/muxiqingyang/article/details/6615199</a><br><a target="_blank" rel="noopener" href="https://yq.aliyun.com/articles/62865">https://yq.aliyun.com/articles/62865</a></p>
+</blockquote>
+<p>@码农们，你们是怎么理解和解决伪共享的？欢迎留言！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E4%BC%AA%E5%85%B1%E4%BA%AB%E8%AF%A6%E8%A7%A3%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" data-id="cmgrfxxd5002b30d43rs78qz0" data-title="Java 中的伪共享详解及解决方案" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%20String%20%E7%9C%9F%E7%9A%84%E6%98%AF%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%90%97%EF%BC%9F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Java 中的 String 真的是不可变吗？
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E5%AE%8F%E5%8F%98%E9%87%8F%EF%BC%8C%E5%AE%8F%E6%9B%BF%E6%8D%A2%E8%AF%A6%E8%A7%A3%E3%80%82/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java 中的宏变量，宏替换详解。</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 18px;">基础</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 16px;">多线程</a> <a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" style="font-size: 20px;">新特性</a> <a href="/tags/%E8%BF%9B%E9%98%B6/" style="font-size: 14px;">进阶</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 12px;">集合</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java%205%20~%2010%20%E6%96%B0%E7%89%B9%E6%80%A7%E5%80%BE%E6%83%85%E6%95%B4%E7%90%86%EF%BC%81/">Java 5 ~ 10 新特性倾情整理！</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%206%20%E9%A2%97%E8%AF%AD%E6%B3%95%E7%B3%96/">Java 中的 6 颗语法糖</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%20String%20%E7%9C%9F%E7%9A%84%E6%98%AF%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%90%97%EF%BC%9F/">Java 中的 String 真的是不可变吗？</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E4%BC%AA%E5%85%B1%E4%BA%AB%E8%AF%A6%E8%A7%A3%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">Java 中的伪共享详解及解决方案</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E5%AE%8F%E5%8F%98%E9%87%8F%EF%BC%8C%E5%AE%8F%E6%9B%BF%E6%8D%A2%E8%AF%A6%E8%A7%A3%E3%80%82/">Java 中的宏变量，宏替换详解。</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Java 8 新特性之 Stream 流（七）流与迭代器，流系列大结局！ | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="恭喜你们，马上就要学完Java8 Stream流的一整系列了，其实我相信Stream流对很多使用Java的同学来说，都是一个知识盲点，因为这个原因，我才这么细致地讲解Stream流的各个知识点，通过这一整个系列，我相信只要认真看了的同学，都已掌握的差不多了，就差实战了。 其实我在工作过程中，Stream流对我的帮助真的挺大的，所以，我想和大家分享一下，于是这系列的文章就出来了。 在本系列文章发布的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 8 新特性之 Stream 流（七）流与迭代器，流系列大结局！">
+<meta property="og:url" content="http://example.com/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java8/Stream/Java%208%20%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%20Stream%20%E6%B5%81%EF%BC%88%E4%B8%83%EF%BC%89%E6%B5%81%E4%B8%8E%E8%BF%AD%E4%BB%A3%E5%99%A8%EF%BC%8C%E6%B5%81%E7%B3%BB%E5%88%97%E5%A4%A7%E7%BB%93%E5%B1%80%EF%BC%81/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="恭喜你们，马上就要学完Java8 Stream流的一整系列了，其实我相信Stream流对很多使用Java的同学来说，都是一个知识盲点，因为这个原因，我才这么细致地讲解Stream流的各个知识点，通过这一整个系列，我相信只要认真看了的同学，都已掌握的差不多了，就差实战了。 其实我在工作过程中，Stream流对我的帮助真的挺大的，所以，我想和大家分享一下，于是这系列的文章就出来了。 在本系列文章发布的">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-10-15T03:36:33.000Z">
+<meta property="article:modified_time" content="2025-10-15T03:23:38.200Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="新特性">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-新特性/Java8/Stream/Java 8 新特性之 Stream 流（七）流与迭代器，流系列大结局！" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java8/Stream/Java%208%20%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%20Stream%20%E6%B5%81%EF%BC%88%E4%B8%83%EF%BC%89%E6%B5%81%E4%B8%8E%E8%BF%AD%E4%BB%A3%E5%99%A8%EF%BC%8C%E6%B5%81%E7%B3%BB%E5%88%97%E5%A4%A7%E7%BB%93%E5%B1%80%EF%BC%81/" class="article-date">
+  <time class="dt-published" datetime="2025-10-15T03:36:33.000Z" itemprop="datePublished">2025-10-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Java 8 新特性之 Stream 流（七）流与迭代器，流系列大结局！
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>恭喜你们，马上就要学完Java8 Stream流的一整系列了，其实我相信Stream流对很多使用Java的同学来说，都是一个知识盲点，因为这个原因，我才这么细致地讲解Stream流的各个知识点，通过这一整个系列，我相信只要认真看了的同学，都已掌握的差不多了，就差实战了。</p>
+<p>其实我在工作过程中，Stream流对我的帮助真的挺大的，所以，我想和大家分享一下，于是这系列的文章就出来了。</p>
+<p>在本系列文章发布的时候，有很多同学反映，Stream流的调试和forEach()的调试都不是特别友好，那本篇给出一个折中的调试方法，虽然不能完美解决调试的问题，但是基本上已经能解决绝大部分的调试问题了，没错，就是迭代器了，当然迭代器除了能辅助调试以外，他最重要的还是遍历功能。</p>
+<p>这篇文章除了介绍传统的迭代器外，还会介绍Java8中新增的Spliterator，因为在并行流的场合，Spliterator相当的好用。</p>
+<h4 id="我们先简单介绍一下传统的迭代器"><a href="#我们先简单介绍一下传统的迭代器" class="headerlink" title="我们先简单介绍一下传统的迭代器"></a>我们先简单介绍一下传统的迭代器</h4><p>迭代器是实现了Iterator接口的对象，并且Iterator接口允许遍历，获取或者移除元素。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public interface Iterator&lt;E&gt; &#123;</span><br><span class="line">  Iterator&lt;T&gt; iterator();</span><br><span class="line">  E next();</span><br><span class="line">  default void remove() &#123;</span><br><span class="line">        throw new UnsupportedOperationException(&quot;remove&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">  default void forEachRemaining(Consumer&lt;? super E&gt; action) &#123;</span><br><span class="line">        Objects.requireNonNull(action);</span><br><span class="line">        while (hasNext())</span><br><span class="line">            action.accept(next());</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用Iterator的一般步骤：</p>
+<ul>
+<li><p>(1)通过iterator()方法，获取指向集合或流开头的迭代器。</p>
+</li>
+<li><p>(2)建立一个hasNext()方法调用循环，只要hasNext()返回true,就继续迭代。</p>
+</li>
+<li><p>(3)在循环中，通过调用next()方法获取每个元素。</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">private static void learnIterator() &#123;</span><br><span class="line">    List&lt;String&gt; lists = Arrays.asList(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;);</span><br><span class="line"></span><br><span class="line">    Iterator&lt;String&gt; iterator = lists.stream().iterator();</span><br><span class="line"></span><br><span class="line">    while (iterator.hasNext()) &#123;</span><br><span class="line">        System.out.println(iterator.next());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但是如果我们不修改集合的情况下，使用forEach()其实更加便利的，其实两种方式本质上面是一样的，在你编译之后，forEach()会转换成迭代器的方式进行操作了。有了迭代器，相信调试就得方便起来了，即使不能直接调试，也可以通过迭代器，反推之前，可能发生了什么。</p>
+<p>值得注意的一点是：Java8给基本类型的流提供了额外的迭代器：PrimitiveIterator.OfInt,PrimitiveIterator.OfDouble,PrimitiveIterator.OfLong,PrimitiveIterator,但这些接口都是来扩展自Iterator接口的，所以使用上面也是相同的。</p>
+<h4 id="Spliterator"><a href="#Spliterator" class="headerlink" title="Spliterator"></a>Spliterator</h4><p>Spliterator是Java8新增的一种迭代器，这种迭代器由<code>Spliterator</code>接口定义，Spliterator也有普通的遍历元素功能，这一点与刚才说的迭代器类似的，但是，但是Spliterator方法和使用迭代器的方法是不同的。</p>
+<p>另外，它提供的功能要比Iterator多。最终要的一点，Spliterator支持并行迭代。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public interface Spliterator&lt;T&gt; &#123;</span><br><span class="line">    boolean tryAdvance(Consumer&lt;? super T&gt; action);</span><br><span class="line">    int characteristics();</span><br><span class="line">    long estimateSize();</span><br><span class="line">   Spliterator&lt;T&gt; trySplit();</span><br><span class="line">   default void forEachRemaining(Consumer&lt;? super T&gt; action) &#123;</span><br><span class="line">        do &#123; &#125; while (tryAdvance(action));</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>将Spliterator用于基本迭代任务是非常简单的，只需要调用tryAdvance()方法，直至其返回false.如果要为序列中的每个元素应用相同的动作，那么forEachRemaining()提供了一种更加高效的替代方法。</p>
+<p>对于这两个方法，在每次迭代中将发生的动作都由<code>Consumer</code>对象定义的操作来决定，<code>Consumer</code>也是一个函数式接口，估计大家已经知道怎么分析了，这里就不带大家分析了，他的动作是指定了在迭代中下一个元素上执行的操作。下面来一个简单的例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">private static void learnIterator() &#123;</span><br><span class="line">    List&lt;String&gt; lists = Arrays.asList(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;);</span><br><span class="line"></span><br><span class="line">    Spliterator&lt;String&gt; spliterator = lists.stream().spliterator();</span><br><span class="line"></span><br><span class="line">    while (spliterator.tryAdvance(System.out::println));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用forEachRemaining()方法改进这个例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">private static void learnIterator() &#123;</span><br><span class="line">    List&lt;String&gt; lists = Arrays.asList(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;);</span><br><span class="line">    lists.stream().spliterator().forEachRemaining(System.out::println);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意，使用这个方法时，不需要提供一个循环来一次处理一个元素，而是将各个元素作为一个整体来对待，这是Spliterator的又一个优势。</p>
+<p>Spliterator的另一个值得注意的方法是trySplit()，它将被迭代的元素划分成了两部分，返回其中一部分的新Spliterator,另一部分则通过原来的Spliterator访问。下面再给一个简单的例子</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">private static void learnIterator() &#123;</span><br><span class="line">    List&lt;String&gt; lists = Arrays.asList(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;);</span><br><span class="line"></span><br><span class="line">    Spliterator&lt;String&gt; spliterator = lists.stream().spliterator();</span><br><span class="line"></span><br><span class="line">    Spliterator&lt;String&gt; stringSpliterator = spliterator.trySplit();</span><br><span class="line"></span><br><span class="line">    if (stringSpliterator != null) stringSpliterator.forEachRemaining(System.out::println);</span><br><span class="line"></span><br><span class="line">    System.out.println(&quot;------------------&quot;);</span><br><span class="line"></span><br><span class="line">    spliterator.forEachRemaining(System.out::println);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>打印的结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">A</span><br><span class="line">B</span><br><span class="line">------------------</span><br><span class="line">C</span><br><span class="line">D</span><br></pre></td></tr></table></figure>
+
+<p>这里只是给大家提供了这种方式而已，例子本身没有什么含义，但是当你对大数据集执行并行处理时，拆分可能是极有帮助的了。但更多情况下，要对流执行并行操作时，使用其他某个Stream方法更好，而不必手动处理Spliterator的这些细节，Spliterator最适合的场景是，给定的所有方法都不能满足你的要求时，才考虑。</p>
+<h4 id="最后来一个总结"><a href="#最后来一个总结" class="headerlink" title="最后来一个总结"></a>最后来一个总结</h4><p>到这里，Java8 Stream流的知识，基本上已经介绍完了，缩减操作，并行流，映射，还有收集是Stream流的核心内容，但是要想掌握好这些内容，第二篇的基本知识你是跑不掉的，因此我的建议还是老老实实，从第一篇开始认真看，看完这7篇文章，你基本已经非常系统地掌握Java8的Stream流知识了。</p>
+<p>大家也不要忘记<code>Collectors</code>类，里面提供给我们的方法，基本上能处理各种各样的收集元素问题了，如果你从第一篇文章开始看，一直看到这里了，那你以后尽量多使用Stream流来处理集合吧，只是学会这些知识是没有用的，要多在你们的项目中运用他们，这样才能更加好地理解，如果大家在使有的过程中遇到什么样的问题，欢迎来这里面留言，我看到了，一定第一时间和大家一起探索解决的方法。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java8/Stream/Java%208%20%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%20Stream%20%E6%B5%81%EF%BC%88%E4%B8%83%EF%BC%89%E6%B5%81%E4%B8%8E%E8%BF%AD%E4%BB%A3%E5%99%A8%EF%BC%8C%E6%B5%81%E7%B3%BB%E5%88%97%E5%A4%A7%E7%BB%93%E5%B1%80%EF%BC%81/" data-id="cmgrfxxdh004e30d43bnj65ky" data-title="Java 8 新特性之 Stream 流（七）流与迭代器，流系列大结局！" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java8/Stream/Java%208%20%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%20Stream%20%E6%B5%81%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E7%A1%80%E4%BD%93%E9%AA%8C/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Java 8 新特性之 Stream 流（一）基础体验
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java8/Stream/Java%208%20%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%20Stream%20%E6%B5%81%EF%BC%88%E4%B8%89%EF%BC%89%E7%BC%A9%E5%87%8F%E6%93%8D%E4%BD%9C/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java 8 新特性之 Stream 流（三）缩减操作</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 18px;">基础</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 16px;">多线程</a> <a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" style="font-size: 20px;">新特性</a> <a href="/tags/%E8%BF%9B%E9%98%B6/" style="font-size: 14px;">进阶</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 12px;">集合</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java%205%20~%2010%20%E6%96%B0%E7%89%B9%E6%80%A7%E5%80%BE%E6%83%85%E6%95%B4%E7%90%86%EF%BC%81/">Java 5 ~ 10 新特性倾情整理！</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%206%20%E9%A2%97%E8%AF%AD%E6%B3%95%E7%B3%96/">Java 中的 6 颗语法糖</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%20String%20%E7%9C%9F%E7%9A%84%E6%98%AF%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%90%97%EF%BC%9F/">Java 中的 String 真的是不可变吗？</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E4%BC%AA%E5%85%B1%E4%BA%AB%E8%AF%A6%E8%A7%A3%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">Java 中的伪共享详解及解决方案</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E5%AE%8F%E5%8F%98%E9%87%8F%EF%BC%8C%E5%AE%8F%E6%9B%BF%E6%8D%A2%E8%AF%A6%E8%A7%A3%E3%80%82/">Java 中的宏变量，宏替换详解。</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

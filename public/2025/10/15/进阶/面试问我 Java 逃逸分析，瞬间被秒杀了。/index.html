@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>面试问我 Java 逃逸分析，瞬间被秒杀了。 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="记得几年前有一次栈长去面试，问到了这么一个问题:  Java中的对象都是在堆中分配吗？说明为什么！  当时我被问得一脸蒙逼，瞬间被秒杀得体无完肤，当时我压根就不知道他在考什么知识点，难道对象不是在堆中分配吗？最后就没然后了，回去等通知了。。 这个面试题很经典，我最近也分享到了知识星球上面：  回答很精彩，大家可以加入一起搞技术，我现在将答案总结一下给大家。 什么是逃逸分析？关于 Java 逃逸分析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面试问我 Java 逃逸分析，瞬间被秒杀了。">
+<meta property="og:url" content="http://example.com/2025/10/15/%E8%BF%9B%E9%98%B6/%E9%9D%A2%E8%AF%95%E9%97%AE%E6%88%91%20Java%20%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90%EF%BC%8C%E7%9E%AC%E9%97%B4%E8%A2%AB%E7%A7%92%E6%9D%80%E4%BA%86%E3%80%82/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="记得几年前有一次栈长去面试，问到了这么一个问题:  Java中的对象都是在堆中分配吗？说明为什么！  当时我被问得一脸蒙逼，瞬间被秒杀得体无完肤，当时我压根就不知道他在考什么知识点，难道对象不是在堆中分配吗？最后就没然后了，回去等通知了。。 这个面试题很经典，我最近也分享到了知识星球上面：  回答很精彩，大家可以加入一起搞技术，我现在将答案总结一下给大家。 什么是逃逸分析？关于 Java 逃逸分析">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://img.javastack.cn/20190527134034.png">
+<meta property="article:published_time" content="2025-10-15T03:36:33.000Z">
+<meta property="article:modified_time" content="2025-10-15T03:37:54.803Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="进阶">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://img.javastack.cn/20190527134034.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-进阶/面试问我 Java 逃逸分析，瞬间被秒杀了。" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/%E9%9D%A2%E8%AF%95%E9%97%AE%E6%88%91%20Java%20%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90%EF%BC%8C%E7%9E%AC%E9%97%B4%E8%A2%AB%E7%A7%92%E6%9D%80%E4%BA%86%E3%80%82/" class="article-date">
+  <time class="dt-published" datetime="2025-10-15T03:36:33.000Z" itemprop="datePublished">2025-10-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      面试问我 Java 逃逸分析，瞬间被秒杀了。
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>记得几年前有一次栈长去面试，问到了这么一个问题:</p>
+<blockquote>
+<p>Java中的对象都是在堆中分配吗？说明为什么！</p>
+</blockquote>
+<p>当时我被问得一脸蒙逼，瞬间被秒杀得体无完肤，当时我压根就不知道他在考什么知识点，难道对象不是在堆中分配吗？最后就没然后了，回去等通知了。。</p>
+<p>这个面试题很经典，我最近也分享到了知识星球上面：</p>
+<p><img src="http://img.javastack.cn/20190527134034.png"></p>
+<p>回答很精彩，大家可以加入一起搞技术，我现在将答案总结一下给大家。</p>
+<h2 id="什么是逃逸分析？"><a href="#什么是逃逸分析？" class="headerlink" title="什么是逃逸分析？"></a>什么是逃逸分析？</h2><p>关于 Java 逃逸分析的定义：</p>
+<p>逃逸分析（Escape Analysis）简单来讲就是，Java Hotspot 虚拟机可以分析新创建对象的使用范围，并决定是否在 Java 堆上分配内存的一项技术。</p>
+<p>逃逸分析的 JVM 参数如下：</p>
+<ul>
+<li>开启逃逸分析：-XX:+DoEscapeAnalysis</li>
+<li>关闭逃逸分析：-XX:-DoEscapeAnalysis</li>
+<li>显示分析结果：-XX:+PrintEscapeAnalysis</li>
+</ul>
+<p>逃逸分析技术在 Java SE 6u23+ 开始支持，并默认设置为启用状态，可以不用额外加这个参数。</p>
+<h2 id="逃逸分析算法"><a href="#逃逸分析算法" class="headerlink" title="逃逸分析算法"></a>逃逸分析算法</h2><p>Java Hotspot 编译器实现下面论文中描述的逃逸算法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[Choi99] Jong-Deok Choi, Manish Gupta, Mauricio Seffano,</span><br><span class="line">          Vugranam C. Sreedhar, Sam Midkiff,</span><br><span class="line">          &quot;Escape Analysis for Java&quot;, Procedings of ACM SIGPLAN</span><br><span class="line">          OOPSLA  Conference, November 1, 1999</span><br></pre></td></tr></table></figure>
+
+<p>根据 Jong-Deok Choi, Manish Gupta, Mauricio Seffano,Vugranam C. Sreedhar, Sam Midkiff 等大牛在论文《<strong>Escape Analysis for Java</strong>》中描述的算法进行逃逸分析的。</p>
+<p>该算法引入了连通图，用连通图来构建对象和对象引用之间的可达性关系，并在次基础上，提出一种组合数据流分析法。</p>
+<p>由于算法是上下文相关和流敏感的，并且模拟了对象任意层次的嵌套关系，所以分析精度较高，只是运行时间和内存消耗相对较大。 </p>
+<h2 id="对象逃逸状态"><a href="#对象逃逸状态" class="headerlink" title="对象逃逸状态"></a>对象逃逸状态</h2><p>我们了解了 Java 中的逃逸分析技术，再来了解下一个对象的逃逸状态。</p>
+<h4 id="1、全局逃逸（GlobalEscape）"><a href="#1、全局逃逸（GlobalEscape）" class="headerlink" title="1、全局逃逸（GlobalEscape）"></a>1、全局逃逸（GlobalEscape）</h4><p>即一个对象的作用范围逃出了当前方法或者当前线程，有以下几种场景：</p>
+<ul>
+<li>对象是一个静态变量</li>
+<li>对象是一个已经发生逃逸的对象</li>
+<li>对象作为当前方法的返回值</li>
+</ul>
+<h4 id="2、参数逃逸（ArgEscape）"><a href="#2、参数逃逸（ArgEscape）" class="headerlink" title="2、参数逃逸（ArgEscape）"></a>2、参数逃逸（ArgEscape）</h4><p>即一个对象被作为方法参数传递或者被参数引用，但在调用过程中不会发生全局逃逸，这个状态是通过被调方法的字节码确定的。</p>
+<h4 id="3、没有逃逸"><a href="#3、没有逃逸" class="headerlink" title="3、没有逃逸"></a>3、没有逃逸</h4><p>即方法中的对象没有发生逃逸。</p>
+<h2 id="逃逸分析优化"><a href="#逃逸分析优化" class="headerlink" title="逃逸分析优化"></a>逃逸分析优化</h2><p>针对上面第三点，当一个对象没有逃逸时，可以得到以下几个虚拟机的优化。</p>
+<p><strong>1) 锁消除</strong></p>
+<p>我们知道线程同步锁是非常牺牲性能的，当编译器确定当前对象只有当前线程使用，那么就会移除该对象的同步锁。</p>
+<p>例如，StringBuffer 和 Vector 都是用 synchronized 修饰线程安全的，但大部分情况下，它们都只是在当前线程中用到，这样编译器就会优化移除掉这些锁操作。</p>
+<p>锁消除的 JVM 参数如下：</p>
+<ul>
+<li>开启锁消除：-XX:+EliminateLocks</li>
+<li>关闭锁消除：-XX:-EliminateLocks</li>
+</ul>
+<p>锁消除在 JDK8 中都是默认开启的，并且锁消除都要建立在逃逸分析的基础上。</p>
+<p><strong>2) 标量替换</strong></p>
+<p>首先要明白标量和聚合量，基础类型和对象的引用可以理解为标量，它们不能被进一步分解。而能被进一步分解的量就是聚合量，比如：对象。</p>
+<p>对象是聚合量，它又可以被进一步分解成标量，将其成员变量分解为分散的变量，这就叫做标量替换。</p>
+<p>这样，如果一个对象没有发生逃逸，那压根就不用创建它，只会在栈或者寄存器上创建它用到的成员标量，节省了内存空间，也提升了应用程序性能。</p>
+<p>标量替换的 JVM 参数如下：</p>
+<ul>
+<li>开启标量替换：-XX:+EliminateAllocations</li>
+<li>关闭标量替换：-XX:-EliminateAllocations</li>
+<li>显示标量替换详情：-XX:+PrintEliminateAllocations</li>
+</ul>
+<p>标量替换同样在 JDK8 中都是默认开启的，并且都要建立在逃逸分析的基础上。</p>
+<p><strong>3) 栈上分配</strong></p>
+<p>当对象没有发生逃逸时，该对象就可以通过标量替换分解成成员标量分配在栈内存中，和方法的生命周期一致，随着栈帧出栈时销毁，减少了 GC 压力，提高了应用程序性能。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>逃逸分析讲完了，总结了不少时间，我们也应该大概知道逃逸分析是为了优化 JVM 内存和提升程序性能的。</p>
+<p>我们知道这点后，在平时开发过程中就要可尽可能的控制变量的作用范围了，变量范围越小越好，让虚拟机尽可能有优化的空间。</p>
+<p>简单举一个例子吧，如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">return sb;</span><br></pre></td></tr></table></figure>
+
+<p>可以改为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">return sb.toString();</span><br></pre></td></tr></table></figure>
+
+<p>这是一种优化案例，把 StringBuilder 变量控制在了当前方法之内，没有逃出当前方法作用域。</p>
+<p>大家还有没有别的优化经验，欢迎分享~</p>
+<p>参考资料：</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/technotes/guides/vm/performance-enhancements-7.html#escapeAnalysis">https://docs.oracle.com/javase/8/docs/technotes/guides/vm/performance-enhancements-7.html#escapeAnalysis</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/rickiyeat/article/details/76802085">https://blog.csdn.net/rickiyeat/article/details/76802085</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/baichoufei90/article/details/85180478">https://blog.csdn.net/baichoufei90/article/details/85180478</a></p>
+</li>
+<li><p>你真的搞懂 transient 关键字了吗？</p>
+</li>
+<li><p>面试常考：Synchronized 有几种用法？</p>
+</li>
+<li><p>Java 11 已发布，String 还能这样玩！</p>
+</li>
+<li><p>Java 中的 String 真的是不可变吗？</p>
+</li>
+<li><p>sleep( ) 和 wait( ) 的这 5 个区别</p>
+</li>
+<li><p>……</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/10/15/%E8%BF%9B%E9%98%B6/%E9%9D%A2%E8%AF%95%E9%97%AE%E6%88%91%20Java%20%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90%EF%BC%8C%E7%9E%AC%E9%97%B4%E8%A2%AB%E7%A7%92%E6%9D%80%E4%BA%86%E3%80%82/" data-id="cmgrfxxda003330d4a6vb3oiv" data-title="面试问我 Java 逃逸分析，瞬间被秒杀了。" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/%E9%87%91%E8%9E%8D%E7%B3%BB%E7%BB%9F%E4%B8%AD%E6%AD%A3%E7%A1%AE%E7%9A%84%E9%87%91%E9%A2%9D%E8%AE%A1%E7%AE%97%E5%8F%8A%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          金融系统中正确的金额计算及存储方式
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/10/15/%E9%9B%86%E5%90%88/HashMap%20%E5%92%8C%20Hashtable%20%E7%9A%84%206%20%E4%B8%AA%E5%8C%BA%E5%88%AB/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">HashMap 和 Hashtable 的 6 个区别</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 18px;">基础</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 16px;">多线程</a> <a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" style="font-size: 20px;">新特性</a> <a href="/tags/%E8%BF%9B%E9%98%B6/" style="font-size: 14px;">进阶</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 12px;">集合</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java%205%20~%2010%20%E6%96%B0%E7%89%B9%E6%80%A7%E5%80%BE%E6%83%85%E6%95%B4%E7%90%86%EF%BC%81/">Java 5 ~ 10 新特性倾情整理！</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%206%20%E9%A2%97%E8%AF%AD%E6%B3%95%E7%B3%96/">Java 中的 6 颗语法糖</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%20String%20%E7%9C%9F%E7%9A%84%E6%98%AF%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%90%97%EF%BC%9F/">Java 中的 String 真的是不可变吗？</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E4%BC%AA%E5%85%B1%E4%BA%AB%E8%AF%A6%E8%A7%A3%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">Java 中的伪共享详解及解决方案</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E5%AE%8F%E5%8F%98%E9%87%8F%EF%BC%8C%E5%AE%8F%E6%9B%BF%E6%8D%A2%E8%AF%A6%E8%A7%A3%E3%80%82/">Java 中的宏变量，宏替换详解。</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Java 10 的 10 个新特性，将彻底改变你写代码的方式 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Java 9才发布几个月，很多玩意都没整明白，现在Java 10又快要来了。。 这时候我真尼玛想说：线上用的JDK 7 甚至JDK 6，JDK 8 还没用熟，JDK 9 才发布不久不知道啥玩意，JDK 10…… 刚学Java的同学是不是感觉一脸蒙逼？！！！ 就连我这个老司机也同样感觉如此！ Java 更新越来越快，我们做技术的也要跟上步伐，不然总会慢别人一拍，这新东西从国外到国内应用一般要好几年">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 10 的 10 个新特性，将彻底改变你写代码的方式">
+<meta property="og:url" content="http://example.com/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java10/Java%2010%20%E7%9A%84%2010%20%E4%B8%AA%E6%96%B0%E7%89%B9%E6%80%A7%EF%BC%8C%E5%B0%86%E5%BD%BB%E5%BA%95%E6%94%B9%E5%8F%98%E4%BD%A0%E5%86%99%E4%BB%A3%E7%A0%81%E7%9A%84%E6%96%B9%E5%BC%8F/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Java 9才发布几个月，很多玩意都没整明白，现在Java 10又快要来了。。 这时候我真尼玛想说：线上用的JDK 7 甚至JDK 6，JDK 8 还没用熟，JDK 9 才发布不久不知道啥玩意，JDK 10…… 刚学Java的同学是不是感觉一脸蒙逼？！！！ 就连我这个老司机也同样感觉如此！ Java 更新越来越快，我们做技术的也要跟上步伐，不然总会慢别人一拍，这新东西从国外到国内应用一般要好几年">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://img.javastack.cn/18-3-8/94675270.jpg">
+<meta property="og:image" content="http://img.javastack.cn/18-3-8/56770623.jpg">
+<meta property="article:published_time" content="2025-10-15T03:36:33.000Z">
+<meta property="article:modified_time" content="2025-10-15T03:28:16.346Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="新特性">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://img.javastack.cn/18-3-8/94675270.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-新特性/Java10/Java 10 的 10 个新特性，将彻底改变你写代码的方式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java10/Java%2010%20%E7%9A%84%2010%20%E4%B8%AA%E6%96%B0%E7%89%B9%E6%80%A7%EF%BC%8C%E5%B0%86%E5%BD%BB%E5%BA%95%E6%94%B9%E5%8F%98%E4%BD%A0%E5%86%99%E4%BB%A3%E7%A0%81%E7%9A%84%E6%96%B9%E5%BC%8F/" class="article-date">
+  <time class="dt-published" datetime="2025-10-15T03:36:33.000Z" itemprop="datePublished">2025-10-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Java 10 的 10 个新特性，将彻底改变你写代码的方式
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="http://img.javastack.cn/18-3-8/94675270.jpg" alt="image"></p>
+<p>Java 9才发布几个月，很多玩意都没整明白，现在Java 10又快要来了。。</p>
+<p>这时候我真尼玛想说：线上用的JDK 7 甚至JDK 6，JDK 8 还没用熟，JDK 9 才发布不久不知道啥玩意，JDK 10……</p>
+<p>刚学Java的同学是不是感觉一脸蒙逼？！！！</p>
+<p>就连我这个老司机也同样感觉如此！</p>
+<p>Java 更新越来越快，我们做技术的也要跟上步伐，不然总会慢别人一拍，这新东西从国外到国内应用一般要好几年的时间，如果我们提前了解并应用这些新技术对自己不是坏事。</p>
+<h3 id="Java-10的新特性"><a href="#Java-10的新特性" class="headerlink" title="Java 10的新特性"></a>Java 10的新特性</h3><p>说了这么多，看Java 10都会有哪些特性来改变我们写代码的方式呢？！</p>
+<h4 id="1-局部变量类型推断"><a href="#1-局部变量类型推断" class="headerlink" title="1.局部变量类型推断"></a>1.局部变量类型推断</h4><p>局部变量类型推断可以说是Java 10中最值得注意的特性，这是Java语言开发人员为了简化Java应用程序的编写而采取的又一步，如下图所示。</p>
+<p><img src="http://img.javastack.cn/18-3-8/56770623.jpg" alt="image"></p>
+<p>这个新功能将为Java增加一些语法糖 - 简化它并改善开发者体验。新的语法将减少与编写Java相关的冗长度，同时保持对静态类型安全性的承诺。</p>
+<p>局部变量类型推断将引入”var”关键字，也就是你可以随意定义变量而不必指定变量的类型，如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">List &lt;String&gt; list = new ArrayList &lt;String&gt;（）; </span><br><span class="line">Stream &lt;String&gt; stream = getStream（）;</span><br></pre></td></tr></table></figure>
+
+<p>将被下面这个新语法所取代：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var list = new ArrayList &lt;String&gt;（）; </span><br><span class="line">var stream = getStream（）;</span><br></pre></td></tr></table></figure>
+
+<p>看完是不是有点JS的即视感？？？越来越像JS了吗？！虽然类型推断在Java中不是一个新概念，但在局部变量中确是很大的一个改进。</p>
+<p>说到类型推断，从JDK 5引进泛型，到JDK 7的”&lt;&gt;”操作符允许不绑定类型而初始化List，再到JDK 8的Lambda表达式，再到现在JDK 10的局部变量类型推断，Java类型推断正大刀阔斧的向前发展。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 该运算符允许在没有绑定ArrayList &lt;&gt;的类型的情况下初始化列表</span><br><span class="line">List &lt;String&gt; list = new LinkedList &lt;&gt;（）;</span><br></pre></td></tr></table></figure>
+
+<p><strong>局部变量类型推荐仅限于如下使用场景：</strong></p>
+<ul>
+<li>局部变量初始化</li>
+<li>for循环内部索引变量</li>
+<li>传统的for循环声明变量</li>
+</ul>
+<p><strong>Java官方表示，它不能用于以下几个地方：</strong></p>
+<ul>
+<li>方法参数</li>
+<li>构造函数参数</li>
+<li>方法返回类型</li>
+<li>字段</li>
+<li>捕获表达式（或任何其他类型的变量声明）</li>
+</ul>
+<h4 id="2-GC改进和其他内务管理"><a href="#2-GC改进和其他内务管理" class="headerlink" title="2.GC改进和其他内务管理"></a>2.GC改进和其他内务管理</h4><p>JDK 10中有2个JEP专门用于改进当前的垃圾收集元素。</p>
+<p>第一个垃圾收集器接口是（JEP 304），它将引入一个纯净的垃圾收集器接口，以帮助改进不同垃圾收集器的源代码隔离。</p>
+<p>预定用于Java 10的第二个JEP是针对G1的并行完全GC（JEP 307），其重点在于通过完全GC并行来改善G1最坏情况的等待时间。G1是Java 9中的默认GC，并且此JEP的目标是使G1平行。</p>
+<h4 id="3-线程本地握手（JEP-312）"><a href="#3-线程本地握手（JEP-312）" class="headerlink" title="3.线程本地握手（JEP 312）"></a>3.线程本地握手（JEP 312）</h4><p>JDK 10将引入一种在线程上执行回调的新方法，因此这将会很方便能停止单个线程而不是停止全部线程或者一个都不停。</p>
+<h4 id="4-备用内存设备上的堆分配（JEP-316）"><a href="#4-备用内存设备上的堆分配（JEP-316）" class="headerlink" title="4.备用内存设备上的堆分配（JEP 316）"></a>4.备用内存设备上的堆分配（JEP 316）</h4><p>允许HotSpot VM在备用内存设备上分配Java对象堆内存，该内存设备将由用户指定。</p>
+<h4 id="5-其他Unicode语言-标记扩展（JEP-314）"><a href="#5-其他Unicode语言-标记扩展（JEP-314）" class="headerlink" title="5.其他Unicode语言 - 标记扩展（JEP 314）"></a>5.其他Unicode语言 - 标记扩展（JEP 314）</h4><p>目标是增强java.util.Locale及其相关的API，以便实现语言标记语法的其他Unicode扩展（BCP 47）。</p>
+<h4 id="6-基于Java的实验性JIT编译器（JEP-317）"><a href="#6-基于Java的实验性JIT编译器（JEP-317）" class="headerlink" title="6.基于Java的实验性JIT编译器（JEP 317）"></a>6.基于Java的实验性JIT编译器（JEP 317）</h4><p>Oracle希望将其Java JIT编译器Graal用作Linux &#x2F; x64平台上的实验性JIT编译器。</p>
+<h4 id="7-根证书（JEP-319）"><a href="#7-根证书（JEP-319）" class="headerlink" title="7.根证书（JEP 319）"></a>7.根证书（JEP 319）</h4><p>这个的目标是在Oracle的Java SE中开源根证书。</p>
+<h4 id="8-根证书认证程序（CA）"><a href="#8-根证书认证程序（CA）" class="headerlink" title="8.根证书认证程序（CA）"></a>8.根证书认证程序（CA）</h4><p>这将使OpenJDK对开发人员更具吸引力，它还旨在减少OpenJDK和Oracle JDK构建之间的差异。</p>
+<h4 id="9-将JDK生态整合到单个存储库中（JEP-296）"><a href="#9-将JDK生态整合到单个存储库中（JEP-296）" class="headerlink" title="9.将JDK生态整合到单个存储库中（JEP 296）"></a>9.将JDK生态整合到单个存储库中（JEP 296）</h4><p>此JEP的主要目标是执行一些内存管理，并将JDK生态的众多存储库组合到一个存储库中。</p>
+<h4 id="10-删除Native-Header生成工具（javah）（JEP-313）"><a href="#10-删除Native-Header生成工具（javah）（JEP-313）" class="headerlink" title="10.删除Native-Header生成工具（javah）（JEP 313）"></a>10.删除Native-Header生成工具（javah）（JEP 313）</h4><p>从JDK中移除了javah工具，这个很简单并且很重要。</p>
+<h3 id="尝鲜"><a href="#尝鲜" class="headerlink" title="尝鲜"></a>尝鲜</h3><p>就像所有其他JDK版本一样，Oracle已经发布了一个Java 10初始候选版本，Java开发者可以下载此版本用来测试新功能。如果你对Java 10抱有期待想提早尝试，那么现在就开始吧！</p>
+<blockquote>
+<p>尝鲜地址：<a target="_blank" rel="noopener" href="http://openjdk.java.net/projects/jdk/10/">http://openjdk.java.net/projects/jdk/10/</a></p>
+</blockquote>
+<h4 id="最后的感悟"><a href="#最后的感悟" class="headerlink" title="最后的感悟"></a>最后的感悟</h4><p>对于第一点新特性来说确实是一个大的跨越，其他特性或多或少都能带给开发者福音。但最终Java 10会是什么样，或许还会增加更多实用性的新功能或者优化，我们还得期待！</p>
+<p>现在要做的就是，赶紧熟悉JDK 8，现在已经是很多互联网企业标配了。如果还在使用JDK4-7，那真的是要OUT了。。</p>
+<p>在不久的将来，Java 10将彻底改变你写代码的方式！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java10/Java%2010%20%E7%9A%84%2010%20%E4%B8%AA%E6%96%B0%E7%89%B9%E6%80%A7%EF%BC%8C%E5%B0%86%E5%BD%BB%E5%BA%95%E6%94%B9%E5%8F%98%E4%BD%A0%E5%86%99%E4%BB%A3%E7%A0%81%E7%9A%84%E6%96%B9%E5%BC%8F/" data-id="cmgrfxxdc003h30d4fo4u65yf" data-title="Java 10 的 10 个新特性，将彻底改变你写代码的方式" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java10/Java%2010%20%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E7%B1%BB%E5%9E%8B%E6%8E%A8%E6%96%AD%E4%BB%8B%E7%BB%8D%E5%8F%8A%E5%AE%9E%E6%88%98/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Java 10 局部变量类型推断介绍及实战
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java11/Java%2011%20%E5%B7%B2%E5%8F%91%E5%B8%83%EF%BC%8CString%20%E8%BF%98%E8%83%BD%E8%BF%99%E6%A0%B7%E7%8E%A9/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java 11 已发布，String 还能这样玩</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 18px;">基础</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 16px;">多线程</a> <a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" style="font-size: 20px;">新特性</a> <a href="/tags/%E8%BF%9B%E9%98%B6/" style="font-size: 14px;">进阶</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 12px;">集合</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java%205%20~%2010%20%E6%96%B0%E7%89%B9%E6%80%A7%E5%80%BE%E6%83%85%E6%95%B4%E7%90%86%EF%BC%81/">Java 5 ~ 10 新特性倾情整理！</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%206%20%E9%A2%97%E8%AF%AD%E6%B3%95%E7%B3%96/">Java 中的 6 颗语法糖</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%20String%20%E7%9C%9F%E7%9A%84%E6%98%AF%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%90%97%EF%BC%9F/">Java 中的 String 真的是不可变吗？</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E4%BC%AA%E5%85%B1%E4%BA%AB%E8%AF%A6%E8%A7%A3%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">Java 中的伪共享详解及解决方案</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E5%AE%8F%E5%8F%98%E9%87%8F%EF%BC%8C%E5%AE%8F%E6%9B%BF%E6%8D%A2%E8%AF%A6%E8%A7%A3%E3%80%82/">Java 中的宏变量，宏替换详解。</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

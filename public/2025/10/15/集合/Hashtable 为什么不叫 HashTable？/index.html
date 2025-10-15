@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hashtable 为什么不叫 HashTable？ | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="什么是驼峰命名规则，来看下面的关键字：  HashMap ArrayList ConcurrentHashMap  简单来说就是，标识符的每个单词首字母必须大写，看起来像是驼峰的形状。  当时就很好奇，Hashtable 为什么不是 HashTable 呢？作为一名初级的 Java 程序员都应该知道的基本的驼峰命名规则，为什么 JDK 代码里面还有这种不规范的命名呢？ 我想大家应该都比较好奇，我">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hashtable 为什么不叫 HashTable？">
+<meta property="og:url" content="http://example.com/2025/10/15/%E9%9B%86%E5%90%88/Hashtable%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E5%8F%AB%20HashTable%EF%BC%9F/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="什么是驼峰命名规则，来看下面的关键字：  HashMap ArrayList ConcurrentHashMap  简单来说就是，标识符的每个单词首字母必须大写，看起来像是驼峰的形状。  当时就很好奇，Hashtable 为什么不是 HashTable 呢？作为一名初级的 Java 程序员都应该知道的基本的驼峰命名规则，为什么 JDK 代码里面还有这种不规范的命名呢？ 我想大家应该都比较好奇，我">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://qianniu.javastack.cn/18-12-6/56236009.jpg">
+<meta property="og:image" content="http://qianniu.javastack.cn/18-12-6/79250944.jpg">
+<meta property="og:image" content="http://qianniu.javastack.cn/18-12-6/49796932.jpg">
+<meta property="article:published_time" content="2025-10-15T03:36:33.000Z">
+<meta property="article:modified_time" content="2025-10-15T03:37:54.798Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="集合">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://qianniu.javastack.cn/18-12-6/56236009.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-集合/Hashtable 为什么不叫 HashTable？" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/10/15/%E9%9B%86%E5%90%88/Hashtable%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E5%8F%AB%20HashTable%EF%BC%9F/" class="article-date">
+  <time class="dt-published" datetime="2025-10-15T03:36:33.000Z" itemprop="datePublished">2025-10-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Hashtable 为什么不叫 HashTable？
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>什么是驼峰命名规则，来看下面的关键字：</p>
+<ul>
+<li>HashMap</li>
+<li>ArrayList</li>
+<li>ConcurrentHashMap</li>
+</ul>
+<p>简单来说就是，标识符的每个单词首字母必须大写，看起来像是驼峰的形状。</p>
+</blockquote>
+<p>当时就很好奇，Hashtable 为什么不是 HashTable 呢？作为一名初级的 Java 程序员都应该知道的基本的驼峰命名规则，为什么 JDK 代码里面还有这种不规范的命名呢？</p>
+<p>我想大家应该都比较好奇，我特意去查了下资料，没有查到官方的说法，不过在 stackoverflow 上看到了同样的这个问题。</p>
+<p>原贴如下：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/12506706/why-is-the-t-in-hash-tablehashtable-in-java-not-capitalized">https://stackoverflow.com/questions/12506706/why-is-the-t-in-hash-tablehashtable-in-java-not-capitalized</a></p>
+</blockquote>
+<p><img src="http://qianniu.javastack.cn/18-12-6/56236009.jpg"></p>
+<p>最佳答案是：</p>
+<blockquote>
+<p>Hashtable was created in Java v1. The consistent naming conventions for collections were established later, in Java2, when the other classes were published as part of the brand new Java Collection Framework.</p>
+<p>Which btw made Hashtable obsolete, so it should not be used in new code.</p>
+<p>Hope that helps.</p>
+</blockquote>
+<p>意思就是：</p>
+<blockquote>
+<p>Hashtable 是在 Java 1.0 的时候创建的，而集合的统一规范命名是在后来的 Java 2 开始约定的，当时其他一部分集合类的发布构成了新的集合框架。</p>
+<p>顺便说一下，这样就使得 Hashtable 过时了，所以不应该在新代码中继续使用它。</p>
+</blockquote>
+<p>栈长看了下，Hashtable 确实是 JDK1.0 添加的，最早的一个集合类，这样也说得过去。那为什么不在后面的 JDK 版本中修复它呢？可能是为了考虑兼容使用 JDK 老版本的系统吧。所以就将错就错封存在了 JDK，直到现在 JDK 11 了也还没有修复或者考虑删除它。</p>
+<p>另外，关于《<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/EGqKMndXiJDIMeRQwxBd_w">HashMap 和 Hashtable 的 6 个区别</a>》，有人留言说可以使用 currenthashtable。</p>
+<p><img src="http://qianniu.javastack.cn/18-12-6/79250944.jpg"></p>
+<p>栈长又去证实了下，没有 currenthashtable 和 concurrenthashtable 这个类，所有 concurrent* 开头的并发类和接口都在这里了。</p>
+<p><img src="http://qianniu.javastack.cn/18-12-6/49796932.jpg"></p>
+<p>好了，关于 Hashtable 的迷惑就此全都解开了。</p>
+<p>有收获？转发给更多的人吧！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/10/15/%E9%9B%86%E5%90%88/Hashtable%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E5%8F%AB%20HashTable%EF%BC%9F/" data-id="cmgrfxxda003730d45ou4ehph" data-title="Hashtable 为什么不叫 HashTable？" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/10/15/%E9%9B%86%E5%90%88/HashMap%20%E5%92%8C%20Hashtable%20%E7%9A%84%206%20%E4%B8%AA%E5%8C%BA%E5%88%AB/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          HashMap 和 Hashtable 的 6 个区别
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/10/15/%E9%9B%86%E5%90%88/Java%20%E4%B8%AD%E5%88%9D%E5%A7%8B%E5%8C%96%20List%20%E9%9B%86%E5%90%88%E7%9A%84%206%20%E7%A7%8D%E6%96%B9%E5%BC%8F!/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java 中初始化 List 集合的 6 种方式!</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 18px;">基础</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 16px;">多线程</a> <a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" style="font-size: 20px;">新特性</a> <a href="/tags/%E8%BF%9B%E9%98%B6/" style="font-size: 14px;">进阶</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 12px;">集合</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java%205%20~%2010%20%E6%96%B0%E7%89%B9%E6%80%A7%E5%80%BE%E6%83%85%E6%95%B4%E7%90%86%EF%BC%81/">Java 5 ~ 10 新特性倾情整理！</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%206%20%E9%A2%97%E8%AF%AD%E6%B3%95%E7%B3%96/">Java 中的 6 颗语法糖</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%20String%20%E7%9C%9F%E7%9A%84%E6%98%AF%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%90%97%EF%BC%9F/">Java 中的 String 真的是不可变吗？</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E4%BC%AA%E5%85%B1%E4%BA%AB%E8%AF%A6%E8%A7%A3%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">Java 中的伪共享详解及解决方案</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E5%AE%8F%E5%8F%98%E9%87%8F%EF%BC%8C%E5%AE%8F%E6%9B%BF%E6%8D%A2%E8%AF%A6%E8%A7%A3%E3%80%82/">Java 中的宏变量，宏替换详解。</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

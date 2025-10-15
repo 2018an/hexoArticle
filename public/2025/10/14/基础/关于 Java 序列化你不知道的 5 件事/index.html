@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>关于 Java 序列化你不知道的 5 件事 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="关于本系列大约一年前，一个负责管理应用程序所有用户设置的开发人员，决定将用户设置存储在一个 Hashtable中，然后将这个 Hashtable 序列化到磁盘，以便持久化。当用户更改设置时，便重新将 Hashtable 写到磁盘。 这是一个优雅的、开放式的设置系统，但是，当团队决定从 Hashtable 迁移到 Java Collections 库中的HashMap 时，这个系统便面临崩溃。 Ha">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于 Java 序列化你不知道的 5 件事">
+<meta property="og:url" content="http://example.com/2025/10/14/%E5%9F%BA%E7%A1%80/%E5%85%B3%E4%BA%8E%20Java%20%E5%BA%8F%E5%88%97%E5%8C%96%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84%205%20%E4%BB%B6%E4%BA%8B/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="关于本系列大约一年前，一个负责管理应用程序所有用户设置的开发人员，决定将用户设置存储在一个 Hashtable中，然后将这个 Hashtable 序列化到磁盘，以便持久化。当用户更改设置时，便重新将 Hashtable 写到磁盘。 这是一个优雅的、开放式的设置系统，但是，当团队决定从 Hashtable 迁移到 Java Collections 库中的HashMap 时，这个系统便面临崩溃。 Ha">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-10-14T06:42:34.000Z">
+<meta property="article:modified_time" content="2025-10-14T07:36:11.275Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="基础">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-基础/关于 Java 序列化你不知道的 5 件事" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/10/14/%E5%9F%BA%E7%A1%80/%E5%85%B3%E4%BA%8E%20Java%20%E5%BA%8F%E5%88%97%E5%8C%96%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84%205%20%E4%BB%B6%E4%BA%8B/" class="article-date">
+  <time class="dt-published" datetime="2025-10-14T06:42:34.000Z" itemprop="datePublished">2025-10-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      关于 Java 序列化你不知道的 5 件事
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="关于本系列"><a href="#关于本系列" class="headerlink" title="关于本系列"></a>关于本系列</h3><p>大约一年前，一个负责管理应用程序所有用户设置的开发人员，决定将用户设置存储在一个 Hashtable中，然后将这个 Hashtable 序列化到磁盘，以便持久化。当用户更改设置时，便重新将 Hashtable 写到磁盘。</p>
+<p>这是一个优雅的、开放式的设置系统，但是，当团队决定从 Hashtable 迁移到 Java Collections 库中的HashMap 时，这个系统便面临崩溃。</p>
+<p>Hashtable 和 HashMap 在磁盘上的格式是不相同、不兼容的。除非对每个持久化的用户设置运行某种类型的数据转换实用程序（极其庞大的任务），否则以后似乎只能一直用Hashtable 作为应用程序的存储格式。</p>
+<p>团队感到陷入僵局，但这只是因为他们不知道关于 Java 序列化的一个重要事实：Java 序列化允许随着时间的推移而改变类型。当我向他们展示如何自动进行序列化替换后，他们终于按计划完成了向 HashMap 的转变。</p>
+<p>本文是本系列的第一篇文章，这个系列专门揭示关于 Java 平台的一些有用的小知识 — 这些小知识不易理解，但对于解决 Java 编程挑战迟早有用。</p>
+<p>将 Java 对象序列化 API 作为开端是一个不错的选择，因为它从一开始就存在于 JDK 1.1 中。本文介绍的关于序列化的 5 件事情将说服您重新审视那些标准 Java API。</p>
+<h3 id="Java-序列化简介"><a href="#Java-序列化简介" class="headerlink" title="Java 序列化简介"></a>Java 序列化简介</h3><p>Java 对象序列化是 JDK 1.1 中引入的一组开创性特性之一，用于作为一种将 Java 对象的状态转换为字节数组，以便存储或传输的机制，以后，仍可以将字节数组转换回 Java 对象原有的状态。</p>
+<p>实际上，序列化的思想是 “冻结” 对象状态，传输对象状态（写到磁盘、通过网络传输等等），然后 “解冻” 状态，重新获得可用的 Java 对象。所有这些事情的发生有点像是魔术，这要归功于 ObjectInputStream&#x2F;ObjectOutputStream 类、完全保真的元数据以及程序员愿意用Serializable 标识接口标记他们的类，从而 “参与” 这个过程。</p>
+<p>清单 1 显示一个实现 Serializable 的 Person 类。</p>
+<p><strong>清单 1. Serializable Person</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">package com.tedneward;</span><br><span class="line"></span><br><span class="line">public class Person</span><br><span class="line">    implements java.io.Serializable</span><br><span class="line">&#123;</span><br><span class="line">    public Person(String fn, String ln, int a)</span><br><span class="line">    &#123;</span><br><span class="line">        this.firstName = fn; this.lastName = ln; this.age = a;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getFirstName() &#123; return firstName; &#125;</span><br><span class="line">    public String getLastName() &#123; return lastName; &#125;</span><br><span class="line">    public int getAge() &#123; return age; &#125;</span><br><span class="line">    public Person getSpouse() &#123; return spouse; &#125;</span><br><span class="line"></span><br><span class="line">    public void setFirstName(String value) &#123; firstName = value; &#125;</span><br><span class="line">    public void setLastName(String value) &#123; lastName = value; &#125;</span><br><span class="line">    public void setAge(int value) &#123; age = value; &#125;</span><br><span class="line">    public void setSpouse(Person value) &#123; spouse = value; &#125;</span><br><span class="line"></span><br><span class="line">    public String toString()</span><br><span class="line">    &#123;</span><br><span class="line">        return &quot;[Person: firstName=&quot; + firstName + </span><br><span class="line">            &quot; lastName=&quot; + lastName +</span><br><span class="line">            &quot; age=&quot; + age +</span><br><span class="line">            &quot; spouse=&quot; + spouse.getFirstName() +</span><br><span class="line">            &quot;]&quot;;</span><br><span class="line">    &#125;    </span><br><span class="line"></span><br><span class="line">    private String firstName;</span><br><span class="line">    private String lastName;</span><br><span class="line">    private int age;</span><br><span class="line">    private Person spouse;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>将 Person 序列化后，很容易将对象状态写到磁盘，然后重新读出它，下面的 JUnit 4 单元测试对此做了演示。</p>
+<p><strong>清单 2. 对 Person 进行反序列化</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">public class SerTest</span><br><span class="line">&#123;</span><br><span class="line">    @Test public void serializeToDisk()</span><br><span class="line">    &#123;</span><br><span class="line">        try</span><br><span class="line">        &#123;</span><br><span class="line">            com.tedneward.Person ted = new com.tedneward.Person(&quot;Ted&quot;, &quot;Neward&quot;, 39);</span><br><span class="line">            com.tedneward.Person charl = new com.tedneward.Person(&quot;Charlotte&quot;,</span><br><span class="line">                &quot;Neward&quot;, 38);</span><br><span class="line"></span><br><span class="line">            ted.setSpouse(charl); charl.setSpouse(ted);</span><br><span class="line"></span><br><span class="line">            FileOutputStream fos = new FileOutputStream(&quot;tempdata.ser&quot;);</span><br><span class="line">            ObjectOutputStream oos = new ObjectOutputStream(fos);</span><br><span class="line">            oos.writeObject(ted);</span><br><span class="line">            oos.close();</span><br><span class="line">        &#125;</span><br><span class="line">        catch (Exception ex)</span><br><span class="line">        &#123;</span><br><span class="line">            fail(&quot;Exception thrown during test: &quot; + ex.toString());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        try</span><br><span class="line">        &#123;</span><br><span class="line">            FileInputStream fis = new FileInputStream(&quot;tempdata.ser&quot;);</span><br><span class="line">            ObjectInputStream ois = new ObjectInputStream(fis);</span><br><span class="line">            com.tedneward.Person ted = (com.tedneward.Person) ois.readObject();</span><br><span class="line">            ois.close();</span><br><span class="line"></span><br><span class="line">            assertEquals(ted.getFirstName(）， &quot;Ted&quot;);</span><br><span class="line">            assertEquals(ted.getSpouse().getFirstName(）， &quot;Charlotte&quot;);</span><br><span class="line"></span><br><span class="line">            // Clean up the file</span><br><span class="line">            new File(&quot;tempdata.ser&quot;).delete();</span><br><span class="line">        &#125;</span><br><span class="line">        catch (Exception ex)</span><br><span class="line">        &#123;</span><br><span class="line">            fail(&quot;Exception thrown during test: &quot; + ex.toString());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>到现在为止，还没有看到什么新鲜的或令人兴奋的事情，但是这是一个很好的出发点。我们将使用 Person 来发现您可能不 知道的关于 Java 对象序列化 的 5 件事。</p>
+<h4 id="1-序列化允许重构"><a href="#1-序列化允许重构" class="headerlink" title="1. 序列化允许重构"></a>1. 序列化允许重构</h4><p>序列化允许一定数量的类变种，甚至重构之后也是如此，ObjectInputStream 仍可以很好地将其读出来。<br>Java Object Serialization 规范可以自动管理的关键任务是：</p>
+<ul>
+<li><p>将新字段添加到类中</p>
+</li>
+<li><p>将字段从 static 改为非 static</p>
+</li>
+<li><p>将字段从 transient 改为非 transient</p>
+</li>
+</ul>
+<p>取决于所需的向后兼容程度，转换字段形式（从非 static 转换为 static 或从非 transient 转换为 transient）或者删除字段需要额外的消息传递。</p>
+<p><strong>重构序列化类</strong></p>
+<p>既然已经知道序列化允许重构，我们来看看当把新字段添加到 Person 类中时，会发生什么事情。</p>
+<p>如清单 3 所示，PersonV2 在原先 Person 类的基础上引入一个表示性别的新字段。</p>
+<p><strong>清单 3. 将新字段添加到序列化的 Person 中</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">enum Gender</span><br><span class="line">&#123;</span><br><span class="line">    MALE, FEMALE</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class Person</span><br><span class="line">    implements java.io.Serializable</span><br><span class="line">&#123;</span><br><span class="line">    public Person(String fn, String ln, int a, Gender g)</span><br><span class="line">    &#123;</span><br><span class="line">        this.firstName = fn; this.lastName = ln; this.age = a; this.gender = g;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getFirstName() &#123; return firstName; &#125;</span><br><span class="line">    public String getLastName() &#123; return lastName; &#125;</span><br><span class="line">    public Gender getGender() &#123; return gender; &#125;</span><br><span class="line">    public int getAge() &#123; return age; &#125;</span><br><span class="line">    public Person getSpouse() &#123; return spouse; &#125;</span><br><span class="line"></span><br><span class="line">    public void setFirstName(String value) &#123; firstName = value; &#125;</span><br><span class="line">    public void setLastName(String value) &#123; lastName = value; &#125;</span><br><span class="line">    public void setGender(Gender value) &#123; gender = value; &#125;</span><br><span class="line">    public void setAge(int value) &#123; age = value; &#125;</span><br><span class="line">    public void setSpouse(Person value) &#123; spouse = value; &#125;</span><br><span class="line"></span><br><span class="line">    public String toString()</span><br><span class="line">    &#123;</span><br><span class="line">        return &quot;[Person: firstName=&quot; + firstName + </span><br><span class="line">            &quot; lastName=&quot; + lastName +</span><br><span class="line">            &quot; gender=&quot; + gender +</span><br><span class="line">            &quot; age=&quot; + age +</span><br><span class="line">            &quot; spouse=&quot; + spouse.getFirstName() +</span><br><span class="line">            &quot;]&quot;;</span><br><span class="line">    &#125;    </span><br><span class="line"></span><br><span class="line">    private String firstName;</span><br><span class="line">    private String lastName;</span><br><span class="line">    private int age;</span><br><span class="line">    private Person spouse;</span><br><span class="line">    private Gender gender;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>序列化使用一个 hash，该 hash 是根据给定源文件中几乎所有东西 — 方法名称、字段名称、字段类型、访问修改方法等 — 计算出来的，序列化将该 hash 值与序列化流中的 hash 值相比较。</p>
+<p>为了使 Java 运行时相信两种类型实际上是一样的，第二版和随后版本的 Person 必须与第一版有相同的序列化版本 hash（存储为 private static final serialVersionUID 字段）。</p>
+<p>因此，我们需要 serialVersionUID 字段，它是通过对原始（或 V1）版本的 Person 类运行 JDK serialver命令计算出的。</p>
+<p>一旦有了 Person 的 serialVersionUID，不仅可以从原始对象 Person 的序列化数据创建 PersonV2 对象（当出现新字段时，新字段被设为缺省值，最常见的是“null”），还可以反过来做：即从 PersonV2 的数据通过反序列化得到 Person，这毫不奇怪。</p>
+<h4 id="2-序列化并不安全"><a href="#2-序列化并不安全" class="headerlink" title="2. 序列化并不安全"></a>2. 序列化并不安全</h4><p>让 Java 开发人员诧异并感到不快的是，序列化二进制格式完全编写在文档中，并且完全可逆。实际上，只需将二进制序列化流的内容转储到控制台，就足以看清类是什么样子，以及它包含什么内容。</p>
+<p>这对于安全性有着不良影响。例如，当通过 RMI 进行远程方法调用时，通过连接发送的对象中的任何 private 字段几乎都是以明文的方式出现在套接字流中，这显然容易招致哪怕最简单的安全问题。</p>
+<p>幸运的是，序列化允许 “hook” 序列化过程，并在序列化之前和反序列化之后保护（或模糊化）字段数据。可以通过在 Serializable 对象上提供一个 writeObject 方法来做到这一点。</p>
+<p><strong>模糊化序列化数据</strong></p>
+<p>假设 Person 类中的敏感数据是 age 字段。毕竟，女士忌谈年龄。 我们可以在序列化之前模糊化该数据，将数位循环左移一位，然后在反序列化之后复位。（您可以开发更安全的算法，当前这个算法只是作为一个例子。）</p>
+<p>为了 “hook” 序列化过程，我们将在 Person 上实现一个 writeObject 方法；为了 “hook” 反序列化过程，我们将在同一个类上实现一个readObject 方法。重要的是这两个方法的细节要正确 — 如果访问修改方法、参数或名称不同于清单 4 中的内容，那么代码将不被察觉地失败，Person 的 age 将暴露。</p>
+<p><strong>清单 4. 模糊化序列化数据</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">public class Person</span><br><span class="line">    implements java.io.Serializable</span><br><span class="line">&#123;</span><br><span class="line">    public Person(String fn, String ln, int a)</span><br><span class="line">    &#123;</span><br><span class="line">        this.firstName = fn; this.lastName = ln; this.age = a;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getFirstName() &#123; return firstName; &#125;</span><br><span class="line">    public String getLastName() &#123; return lastName; &#125;</span><br><span class="line">    public int getAge() &#123; return age; &#125;</span><br><span class="line">    public Person getSpouse() &#123; return spouse; &#125;</span><br><span class="line"></span><br><span class="line">    public void setFirstName(String value) &#123; firstName = value; &#125;</span><br><span class="line">    public void setLastName(String value) &#123; lastName = value; &#125;</span><br><span class="line">    public void setAge(int value) &#123; age = value; &#125;</span><br><span class="line">    public void setSpouse(Person value) &#123; spouse = value; &#125;</span><br><span class="line"></span><br><span class="line">    private void writeObject(java.io.ObjectOutputStream stream)</span><br><span class="line">        throws java.io.IOException</span><br><span class="line">    &#123;</span><br><span class="line">        // &quot;Encrypt&quot;/obscure the sensitive data</span><br><span class="line">        age = age &lt;&lt; 2;</span><br><span class="line">        stream.defaultWriteObject();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void readObject(java.io.ObjectInputStream stream)</span><br><span class="line">        throws java.io.IOException, ClassNotFoundException</span><br><span class="line">    &#123;</span><br><span class="line">        stream.defaultReadObject();</span><br><span class="line"></span><br><span class="line">        // &quot;Decrypt&quot;/de-obscure the sensitive data</span><br><span class="line">        age = age &lt;&lt; 2;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String toString()</span><br><span class="line">    &#123;</span><br><span class="line">        return &quot;[Person: firstName=&quot; + firstName + </span><br><span class="line">            &quot; lastName=&quot; + lastName +</span><br><span class="line">            &quot; age=&quot; + age +</span><br><span class="line">            &quot; spouse=&quot; + (spouse!=null ? spouse.getFirstName() : &quot;[null]&quot;) +</span><br><span class="line">            &quot;]&quot;;</span><br><span class="line">    &#125;      </span><br><span class="line"></span><br><span class="line">    private String firstName;</span><br><span class="line">    private String lastName;</span><br><span class="line">    private int age;</span><br><span class="line">    private Person spouse;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果需要查看被模糊化的数据，总是可以查看序列化数据流&#x2F;文件。而且，由于该格式被完全文档化，即使不能访问类本身，也仍可以读取序列化流中的内容。</p>
+<h4 id="3-序列化的数据可以被签名和密封"><a href="#3-序列化的数据可以被签名和密封" class="headerlink" title="3. 序列化的数据可以被签名和密封"></a>3. 序列化的数据可以被签名和密封</h4><p>上一个技巧假设您想模糊化序列化数据，而不是对其加密或者确保它不被修改。当然，通过使用 writeObject 和 readObject 可以实现密码加密和签名管理，但其实还有更好的方式。</p>
+<p>如果需要对整个对象进行加密和签名，最简单的是将它放在一个 javax.crypto.SealedObject 和&#x2F;或 java.security.SignedObject 包装器中。两者都是可序列化的，所以将对象包装在 SealedObject 中可以围绕原对象创建一种“包装盒”。必须有对称密钥才能解密，而且密钥必须单独管理。同样，也可以将 SignedObject 用于数据验证，并且对称密钥也必须单独管理。</p>
+<p>结合使用这两种对象，便可以轻松地对序列化数据进行密封和签名，而不必强调关于数字签名验证或加密的细节。很简洁，是吧？</p>
+<h4 id="4-序列化允许将代理放在流中"><a href="#4-序列化允许将代理放在流中" class="headerlink" title="4. 序列化允许将代理放在流中"></a>4. 序列化允许将代理放在流中</h4><p>很多情况下，类中包含一个核心数据元素，通过它可以派生或找到类中的其他字段。在此情况下，没有必要序列化整个对象。可以将字段标记为 transient，但是每当有方法访问一个字段时，类仍然必须显式地产生代码来检查它是否被初始化。</p>
+<p>如果首要问题是序列化，那么最好指定一个 flyweight 或代理放在流中。为原始 Person 提供一个 writeReplace 方法，可以序列化不同类型的对象来代替它。类似地，如果反序列化期间发现一个 readResolve 方法，那么将调用该方法，将替代对象提供给调用者。</p>
+<p><strong>打包和解包代理</strong></p>
+<p>writeReplace 和 readResolve 方法使 Person 类可以将它的所有数据（或其中的核心数据）打包到一个 PersonProxy 中，将它放入到一个流中，然后在反序列化时再进行解包。</p>
+<p><strong>清单 5. 你完整了我，我代替了你</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">class PersonProxy</span><br><span class="line">    implements java.io.Serializable</span><br><span class="line">&#123;</span><br><span class="line">    public PersonProxy(Person orig)</span><br><span class="line">    &#123;</span><br><span class="line">        data = orig.getFirstName() + &quot;,&quot; + orig.getLastName() + &quot;,&quot; + orig.getAge();</span><br><span class="line">        if (orig.getSpouse() != null)</span><br><span class="line">        &#123;</span><br><span class="line">            Person spouse = orig.getSpouse();</span><br><span class="line">            data = data + &quot;,&quot; + spouse.getFirstName() + &quot;,&quot; + spouse.getLastName() + &quot;,&quot;  </span><br><span class="line">              + spouse.getAge();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String data;</span><br><span class="line">    private Object readResolve()</span><br><span class="line">        throws java.io.ObjectStreamException</span><br><span class="line">    &#123;</span><br><span class="line">        String[] pieces = data.split(&quot;,&quot;);</span><br><span class="line">        Person result = new Person(pieces[0], pieces[1], Integer.parseInt(pieces[2]));</span><br><span class="line">        if (pieces.length &gt; 3)</span><br><span class="line">        &#123;</span><br><span class="line">            result.setSpouse(new Person(pieces[3], pieces[4], Integer.parseInt</span><br><span class="line">              (pieces[5])));</span><br><span class="line">            result.getSpouse().setSpouse(result);</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class Person</span><br><span class="line">    implements java.io.Serializable</span><br><span class="line">&#123;</span><br><span class="line">    public Person(String fn, String ln, int a)</span><br><span class="line">    &#123;</span><br><span class="line">        this.firstName = fn; this.lastName = ln; this.age = a;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getFirstName() &#123; return firstName; &#125;</span><br><span class="line">    public String getLastName() &#123; return lastName; &#125;</span><br><span class="line">    public int getAge() &#123; return age; &#125;</span><br><span class="line">    public Person getSpouse() &#123; return spouse; &#125;</span><br><span class="line"></span><br><span class="line">    private Object writeReplace()</span><br><span class="line">        throws java.io.ObjectStreamException</span><br><span class="line">    &#123;</span><br><span class="line">        return new PersonProxy(this);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setFirstName(String value) &#123; firstName = value; &#125;</span><br><span class="line">    public void setLastName(String value) &#123; lastName = value; &#125;</span><br><span class="line">    public void setAge(int value) &#123; age = value; &#125;</span><br><span class="line">    public void setSpouse(Person value) &#123; spouse = value; &#125;   </span><br><span class="line"></span><br><span class="line">    public String toString()</span><br><span class="line">    &#123;</span><br><span class="line">        return &quot;[Person: firstName=&quot; + firstName + </span><br><span class="line">            &quot; lastName=&quot; + lastName +</span><br><span class="line">            &quot; age=&quot; + age +</span><br><span class="line">            &quot; spouse=&quot; + spouse.getFirstName() +</span><br><span class="line">            &quot;]&quot;;</span><br><span class="line">    &#125;    </span><br><span class="line"></span><br><span class="line">    private String firstName;</span><br><span class="line">    private String lastName;</span><br><span class="line">    private int age;</span><br><span class="line">    private Person spouse;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意，PersonProxy 必须跟踪 Person 的所有数据。这通常意味着代理需要是 Person 的一个内部类，以便能访问 private 字段。有时候，代理还需要追踪其他对象引用并手动序列化它们，例如 Person 的 spouse。</p>
+<p>这种技巧是少数几种不需要读&#x2F;写平衡的技巧之一。例如，一个类被重构成另一种类型后的版本可以提供一个 readResolve 方法，以便静默地将被序列化的对象转换成新类型。类似地，它可以采用 writeReplace 方法将旧类序列化成新版本。</p>
+<h4 id="5-信任，但要验证"><a href="#5-信任，但要验证" class="headerlink" title="5. 信任，但要验证"></a>5. 信任，但要验证</h4><p>认为序列化流中的数据总是与最初写到流中的数据一致，这没有问题。但是，正如一位美国前总统所说的，“信任，但要验证”。<br>对于序列化的对象，这意味着验证字段，以确保在反序列化之后它们仍具有正确的值，“以防万一”。</p>
+<p>为此，可以实现 ObjectInputValidation接口，并覆盖 validateObject() 方法。如果调用该方法时发现某处有错误，则抛出一个 InvalidObjectException。</p>
+<h3 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h3><p>Java 对象序列化比大多数 Java 开发人员想象的更灵活，这使我们有更多的机会解决棘手的情况。</p>
+<p>幸运的是，像这样的编程妙招在 JVM 中随处可见。关键是要知道它们，在遇到难题的时候能用上它们。</p>
+<p>来源：<a target="_blank" rel="noopener" href="http://www.topthink.com/topic/11361.html">www.topthink.com/topic/11361.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/10/14/%E5%9F%BA%E7%A1%80/%E5%85%B3%E4%BA%8E%20Java%20%E5%BA%8F%E5%88%97%E5%8C%96%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84%205%20%E4%BB%B6%E4%BA%8B/" data-id="cmgrfxxcw000q30d49w0m6nh2" data-title="关于 Java 序列化你不知道的 5 件事" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/10/14/%E5%9F%BA%E7%A1%80/%E5%85%B3%E4%BA%8EJava%E5%BA%8F%E5%88%97%E5%8C%96%E4%BD%A0%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84%E4%B8%80%E5%88%87/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          关于Java序列化你应该知道的一切
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/10/14/%E5%9F%BA%E7%A1%80/%E5%9D%91%E7%88%B9%E7%9A%84%20Java%20%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%EF%BC%8C%E6%8A%8A%E6%88%91%E6%95%B4%E5%BE%97%E5%A4%9F%E6%83%A8%E3%80%82/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">坑爹的 Java 可变参数，把我整得够惨。</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 18px;">基础</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 16px;">多线程</a> <a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" style="font-size: 20px;">新特性</a> <a href="/tags/%E8%BF%9B%E9%98%B6/" style="font-size: 14px;">进阶</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 12px;">集合</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java%205%20~%2010%20%E6%96%B0%E7%89%B9%E6%80%A7%E5%80%BE%E6%83%85%E6%95%B4%E7%90%86%EF%BC%81/">Java 5 ~ 10 新特性倾情整理！</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%206%20%E9%A2%97%E8%AF%AD%E6%B3%95%E7%B3%96/">Java 中的 6 颗语法糖</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%20String%20%E7%9C%9F%E7%9A%84%E6%98%AF%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%90%97%EF%BC%9F/">Java 中的 String 真的是不可变吗？</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E4%BC%AA%E5%85%B1%E4%BA%AB%E8%AF%A6%E8%A7%A3%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">Java 中的伪共享详解及解决方案</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E5%AE%8F%E5%8F%98%E9%87%8F%EF%BC%8C%E5%AE%8F%E6%9B%BF%E6%8D%A2%E8%AF%A6%E8%A7%A3%E3%80%82/">Java 中的宏变量，宏替换详解。</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

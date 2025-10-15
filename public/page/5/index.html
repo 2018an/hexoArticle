@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/page/5/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-新特性/Java8/Stream/Java 8 新特性之 Stream 流（五）映射" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java8/Stream/Java%208%20%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%20Stream%20%E6%B5%81%EF%BC%88%E4%BA%94%EF%BC%89%E6%98%A0%E5%B0%84/" class="article-date">
+  <time class="dt-published" datetime="2025-10-15T03:36:33.000Z" itemprop="datePublished">2025-10-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java8/Stream/Java%208%20%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%20Stream%20%E6%B5%81%EF%BC%88%E4%BA%94%EF%BC%89%E6%98%A0%E5%B0%84/">Java 8 新特性之 Stream 流（五）映射</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>经过了前面四篇文章的学习，相信大家对Stream流已经是相当的熟悉了，同时也掌握了一些高级功能了，如果你之前有阅读过集合框架的基石<code>Collection</code>接口，是不是在经过前面的学习，以前看不懂的东西，突然之间就恍然大悟了呢？</p>
+<p>今天我们的主角是Stream流里面的映射。由于之前，映射并没有再我们的Demo，例子中出现过，所以对大家来说可能会稍微有一点点陌生的，但通过这一篇文章，我相信能解决你的疑问。</p>
+<p>在正式开始之前，我和大家继续说说流API操作，不知道大家有没有注意到，其实我们所有的流API操作都是针对流中的元素进行的，并且都是基于同一流里面的，大家有没有这样的疑问，怎么样把一个流的元素弄到另一个流里面呢？怎么把流中的一些满足条件的元素放到一个新流里面呢？</p>
+<p>通过这一节，你将会掌握解决刚才问题的本领。另外再提一点，如果流操作只有中间操作，没有终端操作，那么这些中间操作是不会执行的，换句话说，只有终端操作才能触发中间操作的运行。</p>
+<h4 id="我们为什么需要映射？"><a href="#我们为什么需要映射？" class="headerlink" title="我们为什么需要映射？"></a>我们为什么需要映射？</h4><p>因为在很多时候，将一个流的元素映射到另一个流对我们是非常有帮助的。比如有一个包含有名字，手机号码和钱的数据库构成的流，可能你只想要映射钱这个字段到另一个流，这时候可能之前学到的知识就还不能解决，于是映射就站了出来了。</p>
+<p>另外，如果你希望对流中的元素应用一些转换，然后把转换的元素映射到一个新流里面，这时候也可以用映射。</p>
+<p>我们先来看看流API库给我们提供了什么样的支持</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public interface Stream&lt;T&gt; extends BaseStream&lt;T, Stream&lt;T&gt;&gt; &#123;</span><br><span class="line">    &lt;R&gt; Stream&lt;R&gt; map(Function&lt;? super T, ? extends R&gt; mapper);//line2</span><br><span class="line">    IntStream mapToInt(ToIntFunction&lt;? super T&gt; mapper);//line3</span><br><span class="line">    LongStream mapToLong(ToLongFunction&lt;? super T&gt; mapper);//line4</span><br><span class="line">    DoubleStream mapToDouble(ToDoubleFunction&lt;? super T&gt; mapper);//line5</span><br><span class="line">    &lt;R&gt; Stream&lt;R&gt; flatMap(Function&lt;? super T, ? extends Stream&lt;? extends R&gt;&gt; mapper);//line6</span><br><span class="line">    IntStream flatMapToInt(Function&lt;? super T, ? extends IntStream&gt; mapper);//line7</span><br><span class="line">    LongStream flatMapToLong(Function&lt;? super T, ? extends LongStream&gt; mapper);//line8</span><br><span class="line">    DoubleStream flatMapToDouble(Function&lt;? super T, ? extends DoubleStream&gt; mapper);//line9</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我和大家分析一个最具有一般性的映射方法map()，相信大家就能举一反三了，map()定义如下，</p>
+<p> <strong><R> Stream<R> map(Function&lt;? super T, ? extends R&gt; mapper);</strong></p>
+<p>其中，R指定新流的元素类型，T指定调用流的元素类型，mapper是完成映射的Function实例，被称为映射函数，映射函数必须是无状态和不干预的（大家对这二个约束条件应该很熟悉了吧）。因为map()方法会返回一个新流，因此它是一个中间操作。</p>
+<p><code>Function</code>是 <code>java.util.function</code>包中声明的一个函数式接口，声明如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@FunctionalInterface</span><br><span class="line">public interface Function&lt;T, R&gt; &#123;</span><br><span class="line">     R apply(T t);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在map()的使有过程中，T是调用流的元素类型，R是映射的结果类型。其中,apply(T t)中的t是对被映射对象的引用，被返回映射结果。下面我们将上一篇中的例子进行变形，用映射来完成他:</p>
+<p><code>假设List里面有三个Integer类型的元素分别为1，2，3。现在的需求是分别让List里面的每个元素都放大两倍后，再求积。这个需求的正确答案应该是48;</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">private static void learnMap() &#123;</span><br><span class="line">     List&lt;Integer&gt; lists = new ArrayList&lt;&gt;();</span><br><span class="line">        lists.add(1);</span><br><span class="line">        lists.add(2);</span><br><span class="line">        lists.add(3);</span><br><span class="line">     //使用并行流来处理</span><br><span class="line">     Integer product = lists.parallelStream().reduce(1, (a, b) -&gt; a *  (b * 2),</span><br><span class="line">                                                        (a, b) -&gt; a * b);</span><br><span class="line">     System.out.println(&quot;product:&quot; + product);//48</span><br><span class="line"></span><br><span class="line">     //使用映射来处理 </span><br><span class="line">     //Integer productMap = lists.parallelStream().map((a) -&gt; a * 2).reduce(1, (a, b) -&gt; a * b);</span><br><span class="line">     Stream&lt;Integer&gt; productNewMapStream = lists.parallelStream().map((a) -&gt; a * 2);</span><br><span class="line">     Integer productMap = productNewMapStream.reduce(1, (a, b) -&gt; a * b);</span><br><span class="line">     System.out.println(&quot;productMap:&quot; + productMap);//48</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>与使用并行流不同，在使用映射处理的时候，元素扩大2倍发生时机不一样了，使用并行流元素扩大是在缩减的过程当中的，而使用映射处理时，元素扩大是发生在映射过程中的。因此映射过程完程之后，不需要reduce()提供合并器了。</p>
+<p>上面的这个例子还是简单了一点，下面再举一个例子,王者荣耀团队经济计算：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">#玩家使用的英雄以及当前获得的金币数</span><br><span class="line">public class HeroPlayerGold &#123;</span><br><span class="line">    /** 使用的英雄名字 */</span><br><span class="line">    private String hero;</span><br><span class="line">    /** 玩家的ID */</span><br><span class="line">    private String player;</span><br><span class="line">    /** 获得的金币数 */</span><br><span class="line">    private int gold;</span><br><span class="line"></span><br><span class="line">    public HeroPlayerGold(String hero, String player, int gold) &#123;</span><br><span class="line">        this.hero = hero;</span><br><span class="line">        this.player = player;</span><br><span class="line">        this.gold = gold;</span><br><span class="line">    &#125;</span><br><span class="line">  //省略get/set/toString</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#玩家获得的金币数</span><br><span class="line">public class Gold &#123;</span><br><span class="line">    /** 获得的金币数 */</span><br><span class="line">    private int gold;</span><br><span class="line"></span><br><span class="line">    public Gold(int gold) &#123;</span><br><span class="line">        this.gold = gold;</span><br><span class="line">    &#125;</span><br><span class="line"> //省略get/set/toString</span><br><span class="line">｝</span><br><span class="line"></span><br><span class="line">#测试类</span><br><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        learnMap2th();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static void learnMap2th() &#123;</span><br><span class="line">        List&lt;HeroPlayerGold&gt; lists = new ArrayList&lt;&gt;();</span><br><span class="line">        lists.add(new HeroPlayerGold(&quot;盖伦&quot;, &quot;RNG-Letme&quot;, 100));</span><br><span class="line">        lists.add(new HeroPlayerGold(&quot;诸葛亮&quot;, &quot;RNG-Xiaohu&quot;, 300));</span><br><span class="line">        lists.add(new HeroPlayerGold(&quot;露娜&quot;, &quot;RNG-MLXG&quot;, 300));</span><br><span class="line">        lists.add(new HeroPlayerGold(&quot;狄仁杰&quot;, &quot;RNG-UZI&quot;, 500));</span><br><span class="line">        lists.add(new HeroPlayerGold(&quot;牛头&quot;, &quot;RNG-Ming&quot;, 500));</span><br><span class="line"></span><br><span class="line">        //计算团队经济</span><br><span class="line">        int teamMoney = lists.stream()</span><br><span class="line">                .map(player -&gt; new Gold(player.getGold()))//note1</span><br><span class="line">                .mapToInt(Gold::getGold)</span><br><span class="line">                .reduce(0, (a, b) -&gt; a + b);</span><br><span class="line">        System.out.println(&quot;团队经济：&quot; + teamMoney);//1700</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        //计算团队经济2</span><br><span class="line">        double teamMoney2 = lists.stream()</span><br><span class="line">                .mapToDouble(HeroPlayerGold::getGold)</span><br><span class="line">                .reduce(0, (a, b) -&gt; a + b);</span><br><span class="line">        System.out.println(&quot;团队经济：&quot; + teamMoney2);//1700.0</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>代码应该不难理解，通过代码，大家应该知道我们假设的场景了。我们的RNG去参加王者荣耀比赛了，像这种团队游戏，观众在经济方面关注更多的可能是团队经济，而不是个人经济。</p>
+<p>在我们<code>HeroPlayerGold</code>类里面存有明星玩家，使用的英雄，和这局比赛某个玩家当前获得的金币数，我们另有一个专们管理金币的<code>Gold</code>类，我们第一种计算团队经济的方式，使把<code>HeroPlayerGold</code>里面的<code>gold</code>字段转换到<code>Gold</code>里面了<sup> <code>//note1</code> </sup>,这里产生的新流只包含了原始流中选定的<code>gold</code>字段，因为我们的原始流中包含了<code>hero</code>、<code>player</code>、<code>gold</code>,三个字段，我们只选取了<code>gold</code>字段（因为我们只关心这个字段），所以其它的两个字段被丢弃了。然后从新流取出<code>Gold</code>里面的<code>gold</code>字段并把他转成一个<code>IntStream</code>，然后我们就要以通过缩减操作完成我们的团队经济计算了。</p>
+<p>第一种方式，大家需要好好理解，理解了，我相信你们的项目中，很多很多地方可以用得上了，再也不需要动不动就查数据库了，怎样效率高怎样来，只是一种建议。第二种只是快速计算团队经济而已，没什么值得讲的。</p>
+<p>接下来讲一下他的扩展方向：大家还记得我在第二篇中介绍中间操作概念的时候吗？<code>中间操作会产生另一个流。因此中间操作可以用来创建执行一系列动作的管道。</code>我们可以把多个中间操作放到管道中，所以我们很容易就创建出很强大的组合操作了，发挥你的想象，打出你们的组合拳;</p>
+<p>我现在举一个例子：比如现在相统计团队里面两个C位的经济占了多少，代码看起来可能就是这样了：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">private static void learnMap2th() &#123;</span><br><span class="line">       List&lt;HeroPlayerGold&gt; lists = new ArrayList&lt;&gt;();</span><br><span class="line">       lists.add(new HeroPlayerGold(&quot;盖伦&quot;, &quot;RNG-Letme&quot;, 100));</span><br><span class="line">       lists.add(new HeroPlayerGold(&quot;诸葛亮&quot;, &quot;RNG-Xiaohu&quot;, 300));</span><br><span class="line">       lists.add(new HeroPlayerGold(&quot;露娜&quot;, &quot;RNG-MLXG&quot;, 300));</span><br><span class="line">       lists.add(new HeroPlayerGold(&quot;狄仁杰&quot;, &quot;RNG-UZI&quot;, 500));</span><br><span class="line">       lists.add(new HeroPlayerGold(&quot;牛头&quot;, &quot;RNG-Ming&quot;, 500));</span><br><span class="line">       </span><br><span class="line">       //计算两个C位的经济和</span><br><span class="line">       lists.stream()</span><br><span class="line">               .filter(player-&gt; &quot;RNG-Xiaohu&quot;.equals(player.getPlayer()) || &quot;RNG-UZI&quot;.equals(player.getPlayer()))</span><br><span class="line">               .map(player-&gt;new Gold(player.getGold()))</span><br><span class="line">               .mapToInt(Gold::getGold)</span><br><span class="line">               .reduce((a,b)-&gt;a+b)</span><br><span class="line">               .ifPresent(System.out::println);//800</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>大家有没有感觉，这种操作怎么带有点数据库的风格啊？其实在创建数据库查询的时候，这种过滤操作十分常见，如果你经常在你的项目中使用流API，这几个条件算什么?等你们把流API用熟了之后，你们完全可以通过这种链式操作创建出非常复杂的查询，合并和选择的操作。</p>
+<p>通过前面的例子，我们已经把<code>map()</code>，<code>mapToInt()</code>，<code>mapToLong()</code>，<code>mapToDouble</code>都讲了。那么剩下的就是flatMap()方法了。本来想让大家自行去理解这个方法的，因为怕这篇文章写得太长了。但是后面想想，还是我来给大家分析一下吧。</p>
+<p><strong><R> Stream<R> flatMap(Function&lt;? super T, ? extends Stream&lt;? extends R&gt;&gt; mapper);</strong></p>
+<p>通过前面的学习我们知道<code>mapper</code>是一个映射函数，它和map()方法也一样也会返回一个新流，我们把返回的新流称为映射流。<strong>我们提供的映射函数会处理原始流中的每一个元素，而映射流中包含了所有经过我们映射函数处理后产生的新元素。</strong> 加粗部份需要重点理解。</p>
+<p>我们来看一下源码对flatMap()的注释:</p>
+<blockquote>
+<p>The  flatMap() operation has the effect of applying a one-to-many  transformation to the elements of the stream, and then flattening the resulting elements into a new stream.</p>
+</blockquote>
+<p>大意就是：<strong>flatMap()操作能把原始流中的元素进行一对多的转换，并且将新生成的元素全都合并到它返回的流里面。</strong>根据我们所学的知识，他的这种一对多的转换功能肯定就是映射函数提供的，这一点没有疑问吧！然后源码的注释上面还提供了一个例子，通过注释加例子，我相信大家都能非常清楚地理解flatMap()了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/* &lt;p&gt;If &#123;@code orders&#125; is a stream of purchase orders, and each purchase</span><br><span class="line"> * order contains a collection of line items, then the following produces a</span><br><span class="line"> * stream containing all the line items in all the orders:</span><br><span class="line"> * &lt;pre&gt;&#123;@code</span><br><span class="line"> *     orders.flatMap(order -&gt; order.getLineItems().stream())...</span><br><span class="line"> * &#125;&lt;/pre&gt;</span><br><span class="line"> */</span><br></pre></td></tr></table></figure>
+
+<p><strong>如果orders是一批采购订单对应的流，并且每一个采购订单都包含一系列的采购项，那么<code>orders.flatMap(order -&gt; order.getLineItems().stream())...</code>生成的新流将包含这一批采购订单中所有采购项。</strong> </p>
+<p>我们用伪代码来就更加清晰了<code>Stream&lt;Orders&lt;OrderItem&gt;&gt;</code>&#x3D;&#x3D;&#x3D;&#x3D;&gt;Stream<OrderItem>。大家能理解了吗？还没理解？再来一个例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">private static void learnFlatMap() &#123;</span><br><span class="line">       //(广州  深圳  上海  北京)的全拼的一些组合,下面我们就把每一个城市都划分一下</span><br><span class="line">       List&lt;String&gt; citys = Arrays.asList(&quot;GuangZhou ShangHai&quot;, &quot;GuangZhou ShenZhen&quot;,</span><br><span class="line">               &quot;ShangHai ShenZhen&quot;, &quot;BeiJing ShangHai&quot;, &quot;GuangZhou BeiJing&quot;, &quot;ShenZhen BeiJing&quot;);</span><br><span class="line"></span><br><span class="line">       //这里打印的数组对应的地址</span><br><span class="line">       citys.stream().map(mCitys -&gt; Arrays.stream(mCitys.split(&quot; &quot;))).forEach(System.out::println);//note1</span><br><span class="line"></span><br><span class="line">       System.out.println();</span><br><span class="line"></span><br><span class="line">       //流里面的元素还是一个数组</span><br><span class="line">       citys.stream()</span><br><span class="line">               .map(mCities -&gt; Arrays.stream(mCities.split(&quot; &quot;)))//流里面的每个元素还是数组</span><br><span class="line">               .forEach(cities -&gt;cities.forEach(city-&gt; System.out.print(city+&quot; &quot;)));//note2</span><br><span class="line"></span><br><span class="line">       System.out.println();</span><br><span class="line">       System.out.println();</span><br><span class="line"></span><br><span class="line">       //直接一个flatMap()就把数组合并到映射流里面了</span><br><span class="line">       citys.stream().flatMap(mCities-&gt;Arrays.stream(mCities.split(&quot; &quot;))).forEach(System.out::println);//note3</span><br><span class="line"></span><br><span class="line">       System.out.println();</span><br><span class="line"></span><br><span class="line">       //使用distinct()方法去重！</span><br><span class="line">       citys.stream().flatMap(mCities-&gt;Arrays.stream(mCities.split(&quot; &quot;))).distinct().forEach(System.out::println);//note4</span><br><span class="line"></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中<sup> <code>//note1</code> </sup>处是无法打印元素的，使用map()打印元素的方式在<sup> <code>//note2</code> </sup>，原因也在注释中交待了，但是使用了flatMap()方法后，直接就可以打印了<sup> <code>//note3</code> </sup>，到这里，应该就能理解<strong>如果orders是一批采购订单对应的流，并且每一个采购订单都包含一系列的采购项，那么<code>orders.flatMap(order -&gt; order.getLineItems().stream())...</code>生成的新流将包含这一批采购订单中所有采购项。</strong> 了吧。最后<sup> <code>//note4</code> </sup>是一个去重的方法，大家运行一遍吧。</p>
+<h4 id="小结一下"><a href="#小结一下" class="headerlink" title="小结一下"></a>小结一下</h4><p>通过这一篇文章，相信大家对流API中的映射已经不再陌生了，其实最需要注意的一个点是,map()和flatMap()的区别，我也一步步地带着大家理解和应用了。其实在流API这一块中，大家单单掌握概念是没什么用的，一定要去实战了，一个项目里面，集合框架这种东西用得还是特别多的，用到集合框架的大部份情况，其实都可以考虑一下用Stream流去操作一下，不仅增加效率，还可以增加业务流程的清晰度。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java8/Stream/Java%208%20%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%20Stream%20%E6%B5%81%EF%BC%88%E4%BA%94%EF%BC%89%E6%98%A0%E5%B0%84/" data-id="cmgrfxxdi004i30d47zq68xto" data-title="Java 8 新特性之 Stream 流（五）映射" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-新特性/Java8/Stream/Java 8 新特性之 Stream 流（二）关键知识点" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java8/Stream/Java%208%20%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%20Stream%20%E6%B5%81%EF%BC%88%E4%BA%8C%EF%BC%89%E5%85%B3%E9%94%AE%E7%9F%A5%E8%AF%86%E7%82%B9/" class="article-date">
+  <time class="dt-published" datetime="2025-10-15T03:36:33.000Z" itemprop="datePublished">2025-10-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java8/Stream/Java%208%20%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%20Stream%20%E6%B5%81%EF%BC%88%E4%BA%8C%EF%BC%89%E5%85%B3%E9%94%AE%E7%9F%A5%E8%AF%86%E7%82%B9/">Java 8 新特性之 Stream 流（二）关键知识点</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>我们的第一篇文章，主要是通过一个Demo，让大家体验了一下使用流API的那种酣畅淋漓的感觉。如果你没有实践，我还是再次呼吁你动手敲一敲，自己实实在跑一遍上一篇的Demo。相信你的感受和理解也会随之加深的。继续探索流API的高级功能之前，我们先从接口级别全面了解一下流API，这个对于我们来说是至关重要的。接下来，我给大家准备了一张流API关键知识点的UML图。但是大家只需要花一两分钟，整理看一下就可以了，不需要记住，先有个印象，后面我给大家讲解一些关键的方法:</p>
+<h4 id="流API-UML"><a href="#流API-UML" class="headerlink" title="流API UML"></a>流API UML</h4><p><img src="https://upload-images.jianshu.io/upload_images/1640787-129cbee787eef3b4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="流API UML"></p>
+<p>我先整体介绍一下:流API定义的几个接口，都是在java.util.stream包中的.其中上图中的BaseStream接口是最基础的接口，它提供了所有流都可以使用的基本功能:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface BaseStream&lt;T, S extends BaseStream&lt;T, S&gt;&gt; extends AutoCloseable &#123;</span><br><span class="line">//....先忽略这些具体的细节</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由这个接口的定义我们得知，BaseStream是一个泛型接口,它有两个类型参数T和S， 其中T指定了流中的元素的类型,并且由&lt;S extends BaseStream&lt;T, S&gt;&gt;可以知道S必须为BaseStream或BaseStream子类(换句话说,就是S必须是扩展自BaseStream的)。BaseStream继承了AutoCloseable接口。这个接口主要是简化了关闭资源的操作。但是像平时我们操作的集合或数组，基本上都不会出现关闭流的情况。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//由BaseStream接口派生出的流接口包括IntStream ，LongStream，DoubleStream ，Stream&lt;T&gt;</span><br><span class="line">public interface IntStream extends BaseStream&lt;Integer, IntStream&gt; &#123;</span><br><span class="line">&#125;</span><br><span class="line">public interface LongStream extends BaseStream&lt;Long, LongStream&gt; &#123;</span><br><span class="line">&#125;</span><br><span class="line">public interface DoubleStream extends BaseStream&lt;Double, DoubleStream&gt; &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//这是最具代表性的接口</span><br><span class="line">public interface Stream&lt;T&gt; extends BaseStream&lt;T, Stream&lt;T&gt;&gt; &#123;</span><br><span class="line">//....先忽略这些具体的细节</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由于Stream接口是最具代表性的，所以我们就选择它来讲解，其实在我们学完Stream接口，其它的三个接口，在使用上基本是一致的了，我们上一篇的Demo基本上也是使用Stream接口来做的练习。我们回想一下:在上一个Demo中我们通过集合框架的stream()方法，就能返回一个流了，它的返回类型就是Stream<T>，比如我们Stream<Integer>，由此得知，Stream接口里的类型参数T就是流中的元素的类型。木有错，就是这样滴。到这里，整个系列你们已经全部学会了，下课。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1640787-cac539e2ac3e760f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<p>战斗才刚刚开始！</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1640787-65d8e79c87d2ec76.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<p>现在是时候开始记忆一些知识了.</p>
+<h4 id="BaseStream详解"><a href="#BaseStream详解" class="headerlink" title="BaseStream详解:"></a>BaseStream详解:</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public interface BaseStream&lt;T, S extends BaseStream&lt;T, S&gt;&gt; extends AutoCloseable &#123;</span><br><span class="line">     Iterator&lt;T&gt; iterator();//line2</span><br><span class="line">     Spliterator&lt;T&gt; spliterator();//line3</span><br><span class="line">     boolean isParallel();//line4</span><br><span class="line">     S sequential();//line5</span><br><span class="line">     S parallel();//line6</span><br><span class="line">     S unordered();//line7</span><br><span class="line">     S onClose(Runnable closeHandler);//line8</span><br><span class="line">     @Override</span><br><span class="line">     void close();//line10</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>Iterator<T> iterator();</strong>  <em><code>//line2</code></em><br>获得流的迭代器，并返回对该迭代器的引用(终端操作)</li>
+<li><strong>Spliterator<T> spliterator();</strong> <em><code>//line3</code></em><br>获取流的spliterator，并返回其引用(终端操作)</li>
+<li><strong>boolean isParallel();</strong> <em><code>//line4</code></em><br>如果调用流是一个并行流，则返回true;如果调用流是一个顺序流，则返回false。</li>
+<li><strong>S sequential();</strong> <em><code>//line5</code></em><br>基于调用流，返回一个顺序流。如果调用流已经是顺序流了，就返回该流。(中间操作)</li>
+<li><strong>S parallel();</strong> <em><code>//line6</code></em><br>基于调用流，返回一个并行流。如果调用流已经是并行流了，就返回该流。(中间操作)</li>
+<li><strong>S unordered();</strong> <em><code>//line7</code></em><br>基于调用流，返回一个无序流。如果调用流已经是无序流了，就返回该流。(中间操作)</li>
+<li><strong>S onClose(Runnable closeHandler);</strong> <em><code>//line8</code></em><br>返回一个新流，closeHandler指定了该流的关闭处理程序，当关闭该流时，将调用这个处理程序。(中间操作)</li>
+<li><strong>void close();</strong> <em><code>//line10</code></em><br>从AutoCloseable继承来的，调用注册关闭处理程序，关闭调用流(很少会被使用到)</li>
+</ul>
+<h4 id="“终端操作”-”中间操作”"><a href="#“终端操作”-”中间操作”" class="headerlink" title="“终端操作”&amp;”中间操作”"></a>“终端操作”&amp;”中间操作”</h4><p>细心的同学应该注意到了，BaseStream接口里面的很多方法都在最后标识了(终端操作)和(中间操作)，它们之间的区别是非常重要的。</p>
+<ul>
+<li><p><strong>终端操作</strong>   会消费流，这种操作会产生一个结果的，比如上面的 iterator()和 spliterator()，以及上一篇中提到的min()和max()，或者是执行某一种操作，比如上一篇的forEach()，如果一个流被消费过了，那它就不能被重用的。</p>
+</li>
+<li><p><strong>中间操作</strong>   中间操作会产生另一个流。因此中间操作可以用来创建执行一系列动作的管道。一个特别需要注意的点是:中间操作不是立即发生的。相反，当在中间操作创建的新流上执行完终端操作后，中间操作指定的操作才会发生。所以中间操作是延迟发生的，中间操作的延迟行为主要是让流API能够更加高效地执行。</p>
+</li>
+</ul>
+<h4 id="“中间操作”的状态"><a href="#“中间操作”的状态" class="headerlink" title="“中间操作”的状态"></a>“中间操作”的状态</h4><p>流的中间操作，可以为分<code>无状态操作</code>和<code>有状态操作</code>两种，在无状态操作中，在处理流中的元素时，会对当前的元素进行单独处理。比如:谓词过滤操作，因为每个元素都是被单独进行处理的，所有它和流中的其它元素无关，因此被称为无状态操作;而在有状态操作中，某个元素的处理可能依赖于其他元素。比如查找最小值，最大值，和排序，因为他们都依赖于其他的元素。因此为称为有状态操作。<code>当需要进行并行处理流时，有状态的操作和无状态的区别是非常重要的，因为有状态操作可能需要几次处理才能完成，后面的文章我将会给大家详细地讲，现在只需要正常学习下去就可以了</code></p>
+<p>另外，指出一点，如果大家了解泛型的话，应该知道，泛型的类型参数只能是引用类型，因此Stream操作的对象只能是引用类型的，不能用于基本类型。当然官方早已考虑到这一点了，前面你们看到的IntStream，LongStream，DoubleStream就是官方给我们提供的处理基本类型的流了。此处是不是应该给他们掌声！</p>
+<h4 id="Stream详解"><a href="#Stream详解" class="headerlink" title="Stream详解"></a>Stream详解</h4><p>在有了前面的那些知识作铺垫之后，学Stream接口应该会顺风顺水了。还是先看看Stream的详情先:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line">public interface Stream&lt;T&gt; extends BaseStream&lt;T, Stream&lt;T&gt;&gt; &#123;</span><br><span class="line">    Stream&lt;T&gt; filter(Predicate&lt;? super T&gt; predicate);//line2</span><br><span class="line">    &lt;R&gt; Stream&lt;R&gt; map(Function&lt;? super T, ? extends R&gt; mapper);//line3</span><br><span class="line">    IntStream mapToInt(ToIntFunction&lt;? super T&gt; mapper);//line4</span><br><span class="line">    LongStream mapToLong(ToLongFunction&lt;? super T&gt; mapper);</span><br><span class="line">    DoubleStream mapToDouble(ToDoubleFunction&lt;? super T&gt; mapper);</span><br><span class="line">    &lt;R&gt; Stream&lt;R&gt; flatMap(Function&lt;? super T, ? extends Stream&lt;? extends R&gt;&gt; mapper);</span><br><span class="line">    IntStream flatMapToInt(Function&lt;? super T, ? extends IntStream&gt; mapper);</span><br><span class="line">    LongStream flatMapToLong(Function&lt;? super T, ? extends LongStream&gt; mapper);</span><br><span class="line">    DoubleStream flatMapToDouble(Function&lt;? super T, ? extends DoubleStream&gt; mapper);</span><br><span class="line">    Stream&lt;T&gt; distinct();</span><br><span class="line">    Stream&lt;T&gt; sorted();//line12</span><br><span class="line">    Stream&lt;T&gt; sorted(Comparator&lt;? super T&gt; comparator);//line13</span><br><span class="line">    Stream&lt;T&gt; peek(Consumer&lt;? super T&gt; action);</span><br><span class="line">    Stream&lt;T&gt; limit(long maxSize);</span><br><span class="line">    Stream&lt;T&gt; skip(long n);</span><br><span class="line">    void forEach(Consumer&lt;? super T&gt; action);//line17</span><br><span class="line">    void forEachOrdered(Consumer&lt;? super T&gt; action);//line18</span><br><span class="line">    Object[] toArray();</span><br><span class="line">    &lt;A&gt; A[] toArray(IntFunction&lt;A[]&gt; generator);</span><br><span class="line">    T reduce(T identity, BinaryOperator&lt;T&gt; accumulator);</span><br><span class="line">    Optional&lt;T&gt; reduce(BinaryOperator&lt;T&gt; accumulator);</span><br><span class="line">    &lt;U&gt; U reduce(U identity,</span><br><span class="line">                 BiFunction&lt;U, ? super T, U&gt; accumulator,</span><br><span class="line">                 BinaryOperator&lt;U&gt; combiner);</span><br><span class="line">    &lt;R&gt; R collect(Supplier&lt;R&gt; supplier,</span><br><span class="line">                  BiConsumer&lt;R, ? super T&gt; accumulator,</span><br><span class="line">                  BiConsumer&lt;R, R&gt; combiner);</span><br><span class="line">    &lt;R, A&gt; R collect(Collector&lt;? super T, A, R&gt; collector);</span><br><span class="line">    Optional&lt;T&gt; min(Comparator&lt;? super T&gt; comparator);//line30</span><br><span class="line">    Optional&lt;T&gt; max(Comparator&lt;? super T&gt; comparator);//line31</span><br><span class="line">    long count();</span><br><span class="line">    boolean anyMatch(Predicate&lt;? super T&gt; predicate);</span><br><span class="line">    boolean allMatch(Predicate&lt;? super T&gt; predicate);</span><br><span class="line">    boolean noneMatch(Predicate&lt;? super T&gt; predicate);</span><br><span class="line">    Optional&lt;T&gt; findFirst();</span><br><span class="line">    Optional&lt;T&gt; findAny();</span><br><span class="line"></span><br><span class="line">    // Static factories</span><br><span class="line"></span><br><span class="line">    public static&lt;T&gt; Builder&lt;T&gt; builder() &#123;</span><br><span class="line">        return new Streams.StreamBuilderImpl&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public static&lt;T&gt; Stream&lt;T&gt; empty() &#123;</span><br><span class="line">        return StreamSupport.stream(Spliterators.&lt;T&gt;emptySpliterator(), false);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public static&lt;T&gt; Stream&lt;T&gt; of(T t) &#123;</span><br><span class="line">        return StreamSupport.stream(new Streams.StreamBuilderImpl&lt;&gt;(t), false);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @SafeVarargs</span><br><span class="line">    @SuppressWarnings(&quot;varargs&quot;) // Creating a stream from an array is safe</span><br><span class="line">    public static&lt;T&gt; Stream&lt;T&gt; of(T... values) &#123;</span><br><span class="line">        return Arrays.stream(values);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public static&lt;T&gt; Stream&lt;T&gt; iterate(final T seed, final UnaryOperator&lt;T&gt; f) &#123;</span><br><span class="line">        Objects.requireNonNull(f);</span><br><span class="line">        final Iterator&lt;T&gt; iterator = new Iterator&lt;T&gt;() &#123;</span><br><span class="line">            @SuppressWarnings(&quot;unchecked&quot;)</span><br><span class="line">            T t = (T) Streams.NONE;</span><br><span class="line"></span><br><span class="line">            @Override</span><br><span class="line">            public boolean hasNext() &#123;</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            @Override</span><br><span class="line">            public T next() &#123;</span><br><span class="line">                return t = (t == Streams.NONE) ? seed : f.apply(t);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        return StreamSupport.stream(Spliterators.spliteratorUnknownSize(</span><br><span class="line">                iterator,</span><br><span class="line">                Spliterator.ORDERED | Spliterator.IMMUTABLE), false);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public static&lt;T&gt; Stream&lt;T&gt; generate(Supplier&lt;T&gt; s) &#123;</span><br><span class="line">        Objects.requireNonNull(s);</span><br><span class="line">        return StreamSupport.stream(</span><br><span class="line">                new StreamSpliterators.InfiniteSupplyingSpliterator.OfRef&lt;&gt;(Long.MAX_VALUE, s), false);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; Stream&lt;T&gt; concat(Stream&lt;? extends T&gt; a, Stream&lt;? extends T&gt; b) &#123;</span><br><span class="line">        Objects.requireNonNull(a);</span><br><span class="line">        Objects.requireNonNull(b);</span><br><span class="line"></span><br><span class="line">        @SuppressWarnings(&quot;unchecked&quot;)</span><br><span class="line">        Spliterator&lt;T&gt; split = new Streams.ConcatSpliterator.OfRef&lt;&gt;(</span><br><span class="line">                (Spliterator&lt;T&gt;) a.spliterator(), (Spliterator&lt;T&gt;) b.spliterator());</span><br><span class="line">        Stream&lt;T&gt; stream = StreamSupport.stream(split, a.isParallel() || b.isParallel());</span><br><span class="line">        return stream.onClose(Streams.composedClose(a, b));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>Stream<T> filter(Predicate&lt;? super T&gt; predicate);</strong>  <em><code>//line2</code></em><br>产生一个新流，其中包含调用流中满足predicate指定的谓词元素(中间操作)</li>
+<li><strong><R> Stream<R> map(Function&lt;? super T, ? extends R&gt; mapper);</strong>  <em><code>//line3</code></em><br>产生一个新流，对调用流中的元素应用mapper，新流中包含这些元素。(中间操作)</li>
+<li><strong>IntStream mapToInt(ToIntFunction&lt;? super T&gt; mapper);</strong> <em><code>//line4</code></em><br>对调用流中元素应用mapper，产生包含这些元素的一个新IntStream流。(中间操作)</li>
+<li><strong>Stream<T> sorted();</strong> <em><code>//line12</code></em></li>
+<li><strong>Stream<T> sorted(Comparator&lt;? super T&gt; comparator);</strong> <em><code>//line13</code></em>&#96;<br>产生一个自然顺序排序或者指定排序条件的新流(中间操作)</li>
+<li><strong>void forEach(Consumer&lt;? super T&gt; action);</strong>  <em><code>//line17</code></em></li>
+<li><strong>void forEachOrdered(Consumer&lt;? super T&gt; action);</strong> <em><code>//line18</code></em><br>遍历了流中的元素(终端操作)</li>
+<li><strong>Optional<T> min(Comparator&lt;? super T&gt; comparator)</strong>  <em><code>//line30</code></em></li>
+<li><strong>Optional<T> max(Comparator&lt;? super T&gt; comparator);</strong> <em><code>//line31</code></em><br>获得流中最大最小值，比较器可以由自己定义，也可以使用JDK提供的(终端操作)</li>
+</ul>
+<h4 id="小结一下"><a href="#小结一下" class="headerlink" title="小结一下"></a>小结一下</h4><p>这一篇主要是介绍了流API的一些关键方法，和一些关键的概念，虽然稍微枯燥了一点，但是，不能否认，全面地学习流API，会让你对流API的认识会更加的深刻，所以如果时间允许，请再认真读读这一篇文章吧，当然，也可以在实践中慢慢认识它们，但是，对于这些基本概念的知识，你越早掌握，对你的益处是更加大的。到此为止，流API的基础知识已经学完了，后面的几篇文章我们就要开始更加深入地理解和运用他们实现一起强有力的功能了！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java8/Stream/Java%208%20%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%20Stream%20%E6%B5%81%EF%BC%88%E4%BA%8C%EF%BC%89%E5%85%B3%E9%94%AE%E7%9F%A5%E8%AF%86%E7%82%B9/" data-id="cmgrfxxdi004k30d418o5amkj" data-title="Java 8 新特性之 Stream 流（二）关键知识点" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-新特性/Java8/Stream/Java 8 新特性之 Stream 流（六）收集" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java8/Stream/Java%208%20%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%20Stream%20%E6%B5%81%EF%BC%88%E5%85%AD%EF%BC%89%E6%94%B6%E9%9B%86/" class="article-date">
+  <time class="dt-published" datetime="2025-10-15T03:36:33.000Z" itemprop="datePublished">2025-10-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java8/Stream/Java%208%20%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%20Stream%20%E6%B5%81%EF%BC%88%E5%85%AD%EF%BC%89%E6%94%B6%E9%9B%86/">Java 8 新特性之 Stream 流（六）收集</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>我们前面的五篇文章基本都是在说将一个集合转成一个流，然后对流进行操作，其实这种操作是最多的，但有时候我们也是需要从流中收集起一些元素，并以集合的方式返回，我们把这种反向操作称为收集。</p>
+<p>流API也给我们提供了相应的方法。</p>
+<h4 id="如何在流中使用收集功能？"><a href="#如何在流中使用收集功能？" class="headerlink" title="如何在流中使用收集功能？"></a>如何在流中使用收集功能？</h4><p>我们先看一看流API给我们提供的方法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public interface Stream&lt;T&gt; extends BaseStream&lt;T, Stream&lt;T&gt;&gt; &#123;</span><br><span class="line">//...忽略那些不重要的东西</span><br><span class="line">&lt;R&gt; R collect(Supplier&lt;R&gt; supplier,</span><br><span class="line">                  BiConsumer&lt;R, ? super T&gt; accumulator,</span><br><span class="line">                  BiConsumer&lt;R, R&gt; combiner);</span><br><span class="line">&lt;R, A&gt; R collect(Collector&lt;? super T, A, R&gt; collector);</span><br><span class="line">｝</span><br></pre></td></tr></table></figure>
+
+<p>流API中给我们提供了两种，我给大家分析一下</p>
+<p><strong>&lt;R, A&gt; R collect(Collector&lt;? super T, A, R&gt; collector);</strong></p>
+<p>其中R指定结果的类型，T指定了调用流的元素类型。内部积累的类型由A指定。collectorFunc是一个收集器，指定收集过程如何执行，collect()方法是一个终端方法。</p>
+<p>虽然我们基本上很少会用到自定义的collectorFunc,但是了为扩展大家的知识面，我们还是简单地聊一聊Collector，Because it’s my style! </p>
+<p><code>Collector</code>接口位于<code>java.util.stream</code>包中的声明，它的容颜是这样的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">package java.util.stream;</span><br><span class="line">public interface Collector&lt;T, A, R&gt; &#123;</span><br><span class="line">      Supplier&lt;A&gt; supplier();</span><br><span class="line">      BiConsumer&lt;A, T&gt; accumulator();</span><br><span class="line">      BinaryOperator&lt;A&gt; combiner();</span><br><span class="line">      Function&lt;A, R&gt; finisher();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中T、A、R的含义和上面是一样的<code>其中R指定结果的类型，T指定了调用流的元素类型。内部积累的类型由A指定</code>。</p>
+<p>但是这一篇我们不实现他们，因为JDK已经给我们提供了很强大的方法了，他们位于<code>java.util.stream</code>下面的<code>Collectors</code>类，我们本篇也主要是使用<code>Collectors</code>来实现收集的功能。</p>
+<p><code>Collectors</code>类是一个最终类，里面提供了大量的静态的收集器方法，借助他，我们基本可以实现各种复杂的功能了。</p>
+<p>我们来看一下toList和toSet方法:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">public static &lt;T&gt;  Collector&lt;T, ?, List&lt;T&gt;&gt; toList()</span><br><span class="line">public static &lt;T&gt; Collector&lt;T, ?, Set&lt;T&gt;&gt; toSet()</span><br></pre></td></tr></table></figure>
+
+<p>其中<code>Collectors#toList()</code>返回的收集器可以把流中元素收集到一个List中，<code>Collectors#toSet()</code>返回的收集器可以把流中的元素收集到一个Set中。比如：如果你想把元素收集到List中，你可以这样用，<code>steam.collect(Collectors.toList)</code>。</p>
+<p>接下来，我们把我们的王者荣耀团队经济例子修改一下，把明星玩家和当前获得的金币数收集到一个List里面，把出场的英雄收集到一个Set里面：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">#玩家使用的英雄以及当前获得的金币数</span><br><span class="line">public class HeroPlayerGold &#123;</span><br><span class="line">    /** 使用的英雄名字 */</span><br><span class="line">    private String hero;</span><br><span class="line">    /** 玩家的ID */</span><br><span class="line">    private String player;</span><br><span class="line">    /** 获得的金币数 */</span><br><span class="line">    private int gold;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public HeroPlayerGold(String hero, String player, int gold) &#123;</span><br><span class="line">        this.hero = hero;</span><br><span class="line">        this.player = player;</span><br><span class="line">        this.gold = gold;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String toString() &#123;</span><br><span class="line">        return &quot;HeroPlayerGold&#123;&quot; +</span><br><span class="line">                &quot;hero=&#x27;&quot; + hero + &#x27;\&#x27;&#x27; +</span><br><span class="line">                &quot;, player=&#x27;&quot; + player + &#x27;\&#x27;&#x27; +</span><br><span class="line">                &quot;, gold=&quot; + gold +</span><br><span class="line">                &#x27;&#125;&#x27;;</span><br><span class="line">    &#125;</span><br><span class="line">//省略get/set</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#出场的英雄</span><br><span class="line">public class Hero &#123;</span><br><span class="line">    /** 使用的英雄名字 */</span><br><span class="line">    private String hero;</span><br><span class="line"></span><br><span class="line">    public Hero(String hero) &#123;</span><br><span class="line">        this.hero = hero;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String toString() &#123;</span><br><span class="line">        return &quot;Hero&#123;&quot; +</span><br><span class="line">                &quot;hero=&#x27;&quot; + hero + &#x27;\&#x27;&#x27; +</span><br><span class="line">                &#x27;&#125;&#x27;;</span><br><span class="line">    &#125;</span><br><span class="line">//省略get/set</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#测试类</span><br><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        learnCollect();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static void learnCollect() &#123;</span><br><span class="line">        List&lt;HeroPlayerGold&gt; lists = new ArrayList&lt;&gt;();</span><br><span class="line">        lists.add(new HeroPlayerGold(&quot;盖伦&quot;, &quot;RNG-Letme&quot;, 100));</span><br><span class="line">        lists.add(new HeroPlayerGold(&quot;诸葛亮&quot;, &quot;RNG-Xiaohu&quot;, 300));</span><br><span class="line">        lists.add(new HeroPlayerGold(&quot;露娜&quot;, &quot;RNG-MLXG&quot;, 300));</span><br><span class="line">        lists.add(new HeroPlayerGold(&quot;狄仁杰&quot;, &quot;RNG-UZI&quot;, 500));</span><br><span class="line">        lists.add(new HeroPlayerGold(&quot;牛头&quot;, &quot;RNG-Ming&quot;, 500));</span><br><span class="line"></span><br><span class="line">        List&lt;PlayerGold&gt; playerGolds = lists.stream()</span><br><span class="line">                .map(plary -&gt; new PlayerGold(plary.getPlayer(), plary.getGold()))</span><br><span class="line">                .collect(Collectors.toList());</span><br><span class="line">        System.out.println(&quot;============PlayerGold begin==============&quot;);</span><br><span class="line">        playerGolds.forEach(System.out::println);</span><br><span class="line">        System.out.println(&quot;============PlayerGold end================\n&quot;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        Set&lt;Hero&gt; heroes = lists.stream().map(player -&gt; new Hero(player.getHero())).collect(Collectors.toSet());</span><br><span class="line">        System.out.println(&quot;============Hero begin==============&quot;);</span><br><span class="line">        heroes.forEach(System.out::println);</span><br><span class="line">        System.out.println(&quot;============Hero end================&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出的日志：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">============PlayerGold begin==============</span><br><span class="line">PlayerGold&#123;player=&#x27;RNG-Letme&#x27;, gold=100&#125;</span><br><span class="line">PlayerGold&#123;player=&#x27;RNG-Xiaohu&#x27;, gold=300&#125;</span><br><span class="line">PlayerGold&#123;player=&#x27;RNG-MLXG&#x27;, gold=300&#125;</span><br><span class="line">PlayerGold&#123;player=&#x27;RNG-UZI&#x27;, gold=500&#125;</span><br><span class="line">PlayerGold&#123;player=&#x27;RNG-Ming&#x27;, gold=500&#125;</span><br><span class="line">============PlayerGold end================</span><br><span class="line"></span><br><span class="line">============Hero begin==============</span><br><span class="line">Hero&#123;hero=&#x27;露娜&#x27;&#125;</span><br><span class="line">Hero&#123;hero=&#x27;牛头&#x27;&#125;</span><br><span class="line">Hero&#123;hero=&#x27;盖伦&#x27;&#125;</span><br><span class="line">Hero&#123;hero=&#x27;狄仁杰&#x27;&#125;</span><br><span class="line">Hero&#123;hero=&#x27;诸葛亮&#x27;&#125;</span><br><span class="line">============Hero end================</span><br></pre></td></tr></table></figure>
+
+<p>看到这里，大家有感受到流API的威力了吗？提示一下，封装一个工具类，然后结合一FastJson这种东西一起使用！是真的好用啊！其实将数据从集合移到流中，或者将数据从流移回集合的能力，是流API给我们提供的一个强大特性，因为这允许通过流来操作集合，然后把流重新打包成集合。此外，条件合适的时候，让流操作并行发生，提高效率。</p>
+<p>接下来我们分析第二个方法，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;R&gt; R collect(Supplier&lt;R&gt; supplier,</span><br><span class="line">                 BiConsumer&lt;R, ? super T&gt; accumulator,</span><br><span class="line">                 BiConsumer&lt;R, R&gt; combiner);</span><br></pre></td></tr></table></figure>
+
+<p>我们第二个版本的收集方法，主要是可以在收集的过程中，给予更多的控制。其中supplier指定如何创建用于保存结果的对象，比如，要使用ArrayList作为结果的集合，需要指定它的构造函数，accumulator函数是将一个元素添加到结果中，而combiner函数合并两个部分的结果。</p>
+<p>大家应该发现了吧，他的工作方式和我们第三篇介绍缩减操作时的reduce方法是很像的。它们都必须是无状态和不干预的，并且必须有关联性，三个约束条件缺一不可。</p>
+<p><code>Supplier</code>也是<code>java.util.function</code>包中的一个函数式接口:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@FunctionalInterface</span><br><span class="line">public interface Supplier&lt;T&gt; &#123;</span><br><span class="line">    T get();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>只有一个get()，并且是没有参数的，在collect()方法返回一个R类型的对象，并且get()方法返回一个指向集合的引用。</p>
+<p>而accumulator,combiner的类型是<code>BiConsumer</code>，他们也是<code>java.util.function</code>包中的一个函数式接口:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@FunctionalInterface</span><br><span class="line">public interface BiConsumer&lt;T, U&gt; &#123;</span><br><span class="line">    void accept(T t, U u);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中t,u执行某种类型的操作，对于accumulator来说，t指定了目标集合，u指定了要添加到该集合的元素。对于combiner来说，t和u指定的是两个要被合并的集合。</p>
+<p>我们把前面的例子改变一下，然后也详细地说一下，在没有用lambda和使用lambda之后的区别：</p>
+<p>这个是没有使用lambda前的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">private static void learnCollect() &#123;</span><br><span class="line">        List&lt;HeroPlayerGold&gt; lists = new ArrayList&lt;&gt;();</span><br><span class="line">        lists.add(new HeroPlayerGold(&quot;盖伦&quot;, &quot;RNG-Letme&quot;, 100));</span><br><span class="line">        lists.add(new HeroPlayerGold(&quot;诸葛亮&quot;, &quot;RNG-Xiaohu&quot;, 300));</span><br><span class="line">        lists.add(new HeroPlayerGold(&quot;露娜&quot;, &quot;RNG-MLXG&quot;, 300));</span><br><span class="line">        lists.add(new HeroPlayerGold(&quot;狄仁杰&quot;, &quot;RNG-UZI&quot;, 500));</span><br><span class="line">        lists.add(new HeroPlayerGold(&quot;牛头&quot;, &quot;RNG-Ming&quot;, 500));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        lists.stream().collect(new Supplier&lt;HashSet&lt;HeroPlayerGold&gt;&gt;() &#123;</span><br><span class="line">                                   @Override</span><br><span class="line">                                   public HashSet&lt;HeroPlayerGold&gt; get() &#123;</span><br><span class="line">                                       return new HashSet&lt;&gt;();</span><br><span class="line">                                   &#125;</span><br><span class="line">                               &#125;,//第一个参数</span><br><span class="line">                new BiConsumer&lt;HashSet&lt;HeroPlayerGold&gt;, HeroPlayerGold&gt;() &#123;</span><br><span class="line">                    @Override</span><br><span class="line">                    public void accept(HashSet&lt;HeroPlayerGold&gt; heroPlayerGolds, HeroPlayerGold heroPlayerGold) &#123;</span><br><span class="line">                        heroPlayerGolds.add(heroPlayerGold);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;,//第二个参数</span><br><span class="line">                new BiConsumer&lt;HashSet&lt;HeroPlayerGold&gt;, HashSet&lt;HeroPlayerGold&gt;&gt;() &#123;</span><br><span class="line">                    @Override</span><br><span class="line">                    public void accept(HashSet&lt;HeroPlayerGold&gt; heroPlayerGolds, HashSet&lt;HeroPlayerGold&gt; heroPlayerGolds2) &#123;</span><br><span class="line">                        heroPlayerGolds.addAll(heroPlayerGolds2);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;//第三个参数</span><br><span class="line">        ).forEach(System.out::println);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>在没有使用lambda前，虽然看起来的让人眼花缭乱的，但不得不说，他其实能帮助我们实现非常强大的功能，我们自定义的收集过程，全部都可以交给这个家伙，我们用lambda整理一下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">private static void learnCollect() &#123;</span><br><span class="line">        List&lt;HeroPlayerGold&gt; lists = new ArrayList&lt;&gt;();</span><br><span class="line">        lists.add(new HeroPlayerGold(&quot;盖伦&quot;, &quot;RNG-Letme&quot;, 100));</span><br><span class="line">        lists.add(new HeroPlayerGold(&quot;诸葛亮&quot;, &quot;RNG-Xiaohu&quot;, 300));</span><br><span class="line">        lists.add(new HeroPlayerGold(&quot;露娜&quot;, &quot;RNG-MLXG&quot;, 300));</span><br><span class="line">        lists.add(new HeroPlayerGold(&quot;狄仁杰&quot;, &quot;RNG-UZI&quot;, 500));</span><br><span class="line">        lists.add(new HeroPlayerGold(&quot;牛头&quot;, &quot;RNG-Ming&quot;, 500));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        lists.stream().collect(() -&gt; new HashSet&lt;&gt;(),</span><br><span class="line">                                (set,elem)-&gt;set.add(elem),</span><br><span class="line">                                (setA,setB)-&gt;setA.addAll(setB)</span><br><span class="line">        ).forEach(System.out::println);</span><br><span class="line">        </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>大家以为到这里就结束了吗？其实还可以使用方法引用和构造函数引用来简化：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">private static void learnCollect() &#123;</span><br><span class="line">        List&lt;HeroPlayerGold&gt; lists = new ArrayList&lt;&gt;();</span><br><span class="line">        lists.add(new HeroPlayerGold(&quot;盖伦&quot;, &quot;RNG-Letme&quot;, 100));</span><br><span class="line">        lists.add(new HeroPlayerGold(&quot;诸葛亮&quot;, &quot;RNG-Xiaohu&quot;, 300));</span><br><span class="line">        lists.add(new HeroPlayerGold(&quot;露娜&quot;, &quot;RNG-MLXG&quot;, 300));</span><br><span class="line">        lists.add(new HeroPlayerGold(&quot;狄仁杰&quot;, &quot;RNG-UZI&quot;, 500));</span><br><span class="line">        lists.add(new HeroPlayerGold(&quot;牛头&quot;, &quot;RNG-Ming&quot;, 500));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        lists.stream().collect(HashSet::new,</span><br><span class="line">                               HashSet::add,</span><br><span class="line">                               HashSet::addAll</span><br><span class="line">        ).forEach(System.out::println);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="小结一下"><a href="#小结一下" class="headerlink" title="小结一下"></a>小结一下</h4><p>本篇带大家入门了Stream的收集操作，但是有了些这入门操作，我相信，你在我的演变过程中已经发现了扩展点了，不管是supplier，accumulator还是combiner，都可以在里面放一些特别的操作进去，从而满足你们的各种要求。</p>
+<p>另外一个点，大家一定不要忘记了Collectors这个最终类，里面已经提供了很多很强大的静态方法，如果你们遇到一些特别的需求，首先要想到的应该是Collectors，如果里面的方法都不能实现你的要求，再考虑通过第二个版本的collect()方法实现你的自定义收集过程吧。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java8/Stream/Java%208%20%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%20Stream%20%E6%B5%81%EF%BC%88%E5%85%AD%EF%BC%89%E6%94%B6%E9%9B%86/" data-id="cmgrfxxdj004r30d410ttaqv0" data-title="Java 8 新特性之 Stream 流（六）收集" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-新特性/Java8/Stream/Java 8 新特性之 Stream 流（四）并行流" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java8/Stream/Java%208%20%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%20Stream%20%E6%B5%81%EF%BC%88%E5%9B%9B%EF%BC%89%E5%B9%B6%E8%A1%8C%E6%B5%81/" class="article-date">
+  <time class="dt-published" datetime="2025-10-15T03:36:33.000Z" itemprop="datePublished">2025-10-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java8/Stream/Java%208%20%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%20Stream%20%E6%B5%81%EF%BC%88%E5%9B%9B%EF%BC%89%E5%B9%B6%E8%A1%8C%E6%B5%81/">Java 8 新特性之 Stream 流（四）并行流</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>随着对流API认识的慢慢深入，本章我们要讨论的知识点是流API里面的并行流了。</p>
+<p>在开始讨论并行流之前，我先引发一下大家的思考，就你看到这篇文章的时间，你们是不是经常听到，Intel i7 CPU什么8核16线程，什么Android手机8核4GB这种消息，既然我们是处于一个多核处理器的时代，你们有没有想过并行地操作数组和集合框架，从而高速地执行我们对数组或者集合的一些操作呢？</p>
+<p>或许你有想过这个问题，但是因为并行编程比较复杂，所以这些想法还停留在你的脑海当中，又或者你已经在路上了，反正你们就是最棒的（我他妈都这么夸你们了，就不能点个喜欢？）。</p>
+<p>不管如何，在你看到这一篇文章的时候，我将带你走向并行地操作数组或者集合，当然是使用我们的并行流知识啦。</p>
+<h4 id="并行流"><a href="#并行流" class="headerlink" title="并行流"></a>并行流</h4><p>并行编程可谓是十分复杂并且很容易出错的，这估计就是我们绝大部分人的拦脚石。刚好Stream流库给我们解决了这个问题，在流API库里面提供了轻松可靠的并行操作。要想并行处理流相当简单，只需要使用一个并行流就可以了。</p>
+<p>如第二篇文章中提到的那样，我们获取一个并行流是非常简单的，只需要对流调用一下parallel()就可以获取到一个并行流了（什么你居然不知道？那么多人看了我的文章，估计你要被他们甩开几条街了，赶紧回去看吧。），第二种方式就更加简单了，我们可以使用Collection接口提供给我们parallelStream(),也是可以获取到一个并行流的。</p>
+<p>当然，并行操作肯定是需要环境支持的，你搞了一台一核一线程的小霸王，来跑我的高大上并行流，我也只能慢慢来了。如果你不是小霸王，那我们可以开始这节课的实战了，先拿上一篇的例子来改一下先，如果你不认真观察，你都找不出他们的不同之处：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        learnStream();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    private static void learnStream() &#123;</span><br><span class="line">        List&lt;Integer&gt; lists = new ArrayList&lt;&gt;();</span><br><span class="line">        lists.add(1);</span><br><span class="line">        lists.add(2);</span><br><span class="line">        lists.add(3);</span><br><span class="line">        lists.add(4);</span><br><span class="line">        lists.add(5);</span><br><span class="line">        lists.add(6);</span><br><span class="line"></span><br><span class="line">        Optional&lt;Integer&gt; sum = lists.parallelStream().reduce((a, b) -&gt; a + b);//这里把stream()换成了parallelStream（）</span><br><span class="line">        if (sum.isPresent()) System.out.println(&quot;list的总和为:&quot; + sum.get());//21</span><br><span class="line">        //&lt;====&gt; lists.stream().reduce((a, b) -&gt; a + b).ifPresent(System.out::println);</span><br><span class="line"></span><br><span class="line">        Integer sum2 = lists.stream().reduce(0, (a, b) -&gt; a + b);//21</span><br><span class="line">        System.out.println(&quot;list的总和为:&quot; + sum2);</span><br><span class="line"></span><br><span class="line">        Optional&lt;Integer&gt; product = lists.stream().reduce((a, b) -&gt; a * b);</span><br><span class="line">        if (product.isPresent()) System.out.println(&quot;list的积为:&quot; + product.get());//720</span><br><span class="line"></span><br><span class="line">        Integer product2 = lists.parallelStream().reduce(1, (a, b) -&gt; a * b);//这里把stream()换成了parallelStream（）</span><br><span class="line">        System.out.println(&quot;list的积为:&quot; + product2);//720</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>得到结果和上一篇文章的一模一样。但是因为乘法和加法操作是可以发生在不同的线程里面的，因此这两个例子，在数据源足够大的时候，他们的运行的时间，差别相当地大了啊。</p>
+<p>一般来说，应用到并行流的任何操作都必须是符合缩减操作的三个约束条件，无状态，不干预，关联性！因为这三大约束确保在并行流上执行操作的结果和在顺序流上执行的结果是相同的。</p>
+<p>我们在上一篇讲缩减操作的时候，提到了三个reduce(),但是我们只讲了两个，我就不和你们皮了，直接开讲剩下的那一个，在并行流里面，你们会发现这个版本的reduce()才是真爱啊！</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public interface Stream&lt;T&gt; extends BaseStream&lt;T, Stream&lt;T&gt;&gt; &#123;</span><br><span class="line">//、、、忽略其他无关紧要的元素</span><br><span class="line">&lt;U&gt; U reduce(U identity,</span><br><span class="line">          BiFunction&lt;U, ? super T, U&gt; accumulator,</span><br><span class="line">          BinaryOperator&lt;U&gt; combiner);</span><br><span class="line">｝</span><br></pre></td></tr></table></figure>
+
+<p>在reduce()的这个版本当中，accumulator被称为累加器，combiner被称为合成器，combiner定义的函数将accumulator提到的两个值合并起来，因此，我们可以把上面的那个例子改成：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">private static void reduce3th() &#123;</span><br><span class="line">    List&lt;Integer&gt; lists = new ArrayList&lt;&gt;();</span><br><span class="line">    lists.add(1);</span><br><span class="line">    lists.add(2);</span><br><span class="line">    lists.add(3);</span><br><span class="line">    lists.add(4);</span><br><span class="line">    lists.add(5);</span><br><span class="line">    lists.add(6);</span><br><span class="line"></span><br><span class="line">    Integer product2 = lists.parallelStream().reduce(1, (a, b) -&gt; a * b,</span><br><span class="line">                                                        (a, b) -&gt; a * b);</span><br><span class="line">    System.out.println(&quot;list的积为:&quot; + product2);//720</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>他们得到的结果还是一样的。</p>
+<p>你们可能以为accumulator和combiner执行的操作是相同的，但其实他们是可以不同的，下面的例子，你们要认真看了：假设List里面有三个Integer类型的元素分别为1，2，3。</p>
+<p>现在的需求是分别让List里面的每个元素都放大两倍后，再求积。这个需求的正确答案应该是48;</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">private static void reduce3th() &#123;</span><br><span class="line">    List&lt;Integer&gt; lists = new ArrayList&lt;&gt;();</span><br><span class="line">    lists.add(1);</span><br><span class="line">    lists.add(2);</span><br><span class="line">    lists.add(3);</span><br><span class="line"></span><br><span class="line">    Integer product = lists.parallelStream().reduce(1, (a, b) -&gt; a *  (b * 2),</span><br><span class="line">                                                       (a, b) -&gt; a * b);</span><br><span class="line">    System.out.println(&quot;product:&quot; + product);//48</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>累加器部分是将两个元素分别放大两倍后，再相乘,合并器，是将两个部分相乘！如果能理解这里，恭喜你，你的技能有相当大的长进了！估计Stream流你就可以无往而不利了。</p>
+<p>如果你还不能理解，就应该继续往下看了，跟着我的步伐慢慢走：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">    累加器部分（水平向右）</span><br><span class="line">        accumulator</span><br><span class="line">-----------------------------›</span><br><span class="line">thread-1:   1 * 1 * 2   =   2    |    合并器方向（竖直向下）</span><br><span class="line">thread-2:   1 * 2 * 2   =   4    |         combiner</span><br><span class="line">thread-3:   1 * 3 * 2   =   6    |   因此最终的答案是2  *  4  *  6  =   48（没毛病）</span><br><span class="line">                                 ˇ</span><br><span class="line">注：水平方向最前面的1就是identity的值</span><br></pre></td></tr></table></figure>
+
+<p>此时，accumulator和combiner执行的操作是不是一定不能相同了。理解这些，对于理解并行流是非常重要的。</p>
+<p>如果此时的combiner还是和accumulator相同，那么结果是什么样的呢：请看：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">private static void reduce3th() &#123;</span><br><span class="line">    List&lt;Integer&gt; lists = new ArrayList&lt;&gt;();</span><br><span class="line">    lists.add(1);</span><br><span class="line">    lists.add(2);</span><br><span class="line">    lists.add(3);</span><br><span class="line"></span><br><span class="line">    Integer product = lists.parallelStream().reduce(1, (a, b) -&gt; a *  (b * 2),</span><br><span class="line">                                                       (a, b) -&gt; a * b * 2 );</span><br><span class="line">    System.out.println(&quot;product:&quot; + product);//192</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>192这个答案是怎么来的？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">    累加器部分（水平向右）</span><br><span class="line">        accumulator</span><br><span class="line">-----------------------------›</span><br><span class="line">thread-1:   1 * 1 * 2   =   2          |    合并器方向（竖直向下）</span><br><span class="line">thread-2:   1 * 2 * 2   =   4  *  2    |         combiner</span><br><span class="line">thread-3:   1 * 3 * 2   =   6  *  2    |   因此最终的答案是2  *  （ 4  *  2 ） *  （6  *  2）  =   192（没毛病）</span><br><span class="line">                                       ˇ</span><br><span class="line">注：水平方向最前面的1就是identity的值</span><br></pre></td></tr></table></figure>
+
+<h4 id="顺序流-并行流-无序流之间的切换操作"><a href="#顺序流-并行流-无序流之间的切换操作" class="headerlink" title="顺序流&amp;并行流&amp;无序流之间的切换操作"></a>顺序流&amp;并行流&amp;无序流之间的切换操作</h4><p>对于这三种流的切换，在BaseStream接口中提供了相应的方法，如果你还没有记住，回头再看一下第二篇文章吧。</p>
+<p>关于使用并行流的时候，还有一个点需要记住：如果集合中或者数组中的元素是有序的，那么对应的流也是有序的。但是在使用并行流时，有时候流是无序的就能获得性能上的提升。因为如果流是无序的，那么流的每个部分都可以被单独的操作，而不需要与其他部分协调，从而提升性能。（又是无状态，说好的退休了呢）。所以当流操作的顺序不重要的时候，可以通过BaseStream接口提供的unordered()方法把流转换成一个无序流之后，再进行各种操作。</p>
+<p>另外一点:forEach()方法不一定会保留并行流的顺序，如果在对并行流的每个元素执行操作时，也希望保留顺序，那么可以使用forEachOrdered()方法，它的用法和forEach()是一样的。因为在发布第一篇文章的时候，大家对forEach的反应比较大，很多人其实对forEach都有想法：比如调试难，等等。借这个机会，我谈一谈我对for&amp;forEach的看法。</p>
+<p>我们在访问一个数组元素的时候，最快的方式肯定是通过索引去访问的吧，而for循环遍历的时候就是通过下标进行的，所以效率那是相当的高，但是当我们的数据结构不是数组的时候，比如是链表的时候，可想而知，for循环的效率是有多低，但是forEach底层采用的是迭代器的方式，他对数据结构是没有要求的，不管上层的数据结构是什么，他都能保证高效地执行！</p>
+<p>因此我的最终答案:如果数据结构是ArrayList这种数据结构，那你可以采用for,但是你的数据结构如果是LinkList那你千万别再用for,应该果断采用forEach,因为数据一多起来的，for此时的效率低得可怜，说不定你的机器就瘫痪了。这也是优化的一个小技巧吧，希望能帮助大家。</p>
+<h4 id="小结一下"><a href="#小结一下" class="headerlink" title="小结一下"></a>小结一下</h4><p>并行流学会了，你的功力，真的就增长了。效率再也不是问题了，基本上关于并行流的方方面面，这篇文章都已经说提到了，但是Stream在JDK中的变化还是挺快的，我一旦发现有什么改动，会最快地更新这篇文章。下一篇我们继续探索新知识点。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java8/Stream/Java%208%20%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%20Stream%20%E6%B5%81%EF%BC%88%E5%9B%9B%EF%BC%89%E5%B9%B6%E8%A1%8C%E6%B5%81/" data-id="cmgrfxxdj004s30d4fnh8crqh" data-title="Java 8 新特性之 Stream 流（四）并行流" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-新特性/Java8/Stream/Java 8 新特性之Stream流" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java8/Stream/Java%208%20%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8BStream%E6%B5%81/" class="article-date">
+  <time class="dt-published" datetime="2025-10-15T03:36:33.000Z" itemprop="datePublished">2025-10-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java8/Stream/Java%208%20%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8BStream%E6%B5%81/">Java 8 新特性之Stream流</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="是什么是Stream流"><a href="#是什么是Stream流" class="headerlink" title="是什么是Stream流"></a>是什么是Stream流</h2><p><code>java.util.stream.Stream</code></p>
+<p>Stream流和传统的IO流，它们都叫流，却是两个完全不一样的概念和东西。</p>
+<p>流可以简单的说是处理数据集合的东西，可以申明式流式API来处理集合，而不是写一个逻辑实现。</p>
+<h2 id="流分类"><a href="#流分类" class="headerlink" title="流分类"></a>流分类</h2><p>流分为顺序流及并行流，顺序流即每个指令按顺序执行，并行流即集合里面的操作并行执行。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Integer&gt; numbers = Arrays.asList(1, 2, 3);</span><br><span class="line"></span><br><span class="line">//　顺序流</span><br><span class="line">numbers.stream().forEach(n -&gt; System.out.print(n));</span><br><span class="line"></span><br><span class="line">//并行流</span><br><span class="line">numbers.parallelStream().forEach(n -&gt; System.out.print(n));</span><br></pre></td></tr></table></figure>
+
+<p>以上例子，顺序流总是输出<code>123</code>，而并行流则每次结果都不一定，并行流使用了ForkJoinPool分而治之，所以明白了ForkJoinPool原理的同学就知道并行流的真面目了。</p>
+<h2 id="创建流"><a href="#创建流" class="headerlink" title="创建流"></a>创建流</h2><p>1、调用集合的stream()方法或者parallelStream()方法。</p>
+<p>2、Stream.of()方法，有针对int,long的专用流IntStream，LongStream。</p>
+<h2 id="使用流"><a href="#使用流" class="headerlink" title="使用流"></a>使用流</h2><p>以下举了流的一些常用的用法。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">public class StreamTest &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		System.out.println(&quot;过滤－找出年纪大于18岁的人&quot;);</span><br><span class="line">		List&lt;User&gt; list = initList();</span><br><span class="line">		list.stream().filter((User user) -&gt; user.getAge() &gt; 18).collect(Collectors.toList())</span><br><span class="line">				.forEach(System.out::println);</span><br><span class="line">		System.out.println();</span><br><span class="line"></span><br><span class="line">		System.out.println(&quot;最大值－找出最大年纪的人&quot;);</span><br><span class="line">		list = initList();</span><br><span class="line">		Optional&lt;User&gt; max = list.stream().max((u1, u2) -&gt; u1.getAge() - u2.getAge());</span><br><span class="line">		System.out.println(max.get());</span><br><span class="line">		System.out.println();</span><br><span class="line"></span><br><span class="line">		System.out.println(&quot;映射-规纳－求所有人的年纪总和&quot;);</span><br><span class="line">		list = initList();</span><br><span class="line">		Optional&lt;Integer&gt; reduce = list.stream().map(User::getAge).reduce(Integer::sum);</span><br><span class="line">		System.out.println(reduce.get());</span><br><span class="line">		System.out.println();</span><br><span class="line"></span><br><span class="line">		System.out.println(&quot;分组－按年纪分组&quot;);</span><br><span class="line">		list = initList();</span><br><span class="line">		Map&lt;Integer, List&lt;User&gt;&gt; userMap = list.stream()</span><br><span class="line">				.collect(Collectors.groupingBy(User::getAge));</span><br><span class="line">		MapUtils.verbosePrint(System.out, null, userMap);</span><br><span class="line">		System.out.println();</span><br><span class="line"></span><br><span class="line">		System.out.println(&quot;创建－去重－统计&quot;);</span><br><span class="line">		Stream&lt;User&gt; userStream = Stream</span><br><span class="line">				.of(new User(&quot;u1&quot;, 1), new User(&quot;u2&quot;, 21), new User(&quot;u2&quot;, 21));</span><br><span class="line">		System.out.println(userStream.distinct().count());</span><br><span class="line">		System.out.println();</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public static List&lt;User&gt; initList() &#123;</span><br><span class="line">		List&lt;User&gt; list = new ArrayList&lt;&gt;();</span><br><span class="line">		list.add(new User(&quot;oaby&quot;, 23));</span><br><span class="line">		list.add(new User(&quot;tom&quot;, 11));</span><br><span class="line">		list.add(new User(&quot;john&quot;, 16));</span><br><span class="line">		list.add(new User(&quot;jennis&quot;, 26));</span><br><span class="line">		list.add(new User(&quot;tin&quot;, 26));</span><br><span class="line">		list.add(new User(&quot;army&quot;, 26));</span><br><span class="line">		list.add(new User(&quot;mack&quot;, 19));</span><br><span class="line">		list.add(new User(&quot;jobs&quot;, 65));</span><br><span class="line">		list.add(new User(&quot;jordan&quot;, 23));</span><br><span class="line">		return list;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">过滤－找出年纪大于18岁的人</span><br><span class="line">User [username=oaby, age=23]</span><br><span class="line">User [username=jennis, age=26]</span><br><span class="line">User [username=tin, age=26]</span><br><span class="line">User [username=army, age=26]</span><br><span class="line">User [username=mack, age=19]</span><br><span class="line">User [username=jobs, age=65]</span><br><span class="line">User [username=jordan, age=23]</span><br><span class="line"></span><br><span class="line">最大值－找出最大年纪的人</span><br><span class="line">User [username=jobs, age=65]</span><br><span class="line"></span><br><span class="line">映射-规纳－求所有人的年纪总和</span><br><span class="line">235</span><br><span class="line"></span><br><span class="line">分组－按年纪分组</span><br><span class="line">&#123;</span><br><span class="line">    16 = [User [username=john, age=16]]</span><br><span class="line">    65 = [User [username=jobs, age=65]]</span><br><span class="line">    19 = [User [username=mack, age=19]]</span><br><span class="line">    23 = [User [username=oaby, age=23], User [username=jordan, age=23]]</span><br><span class="line">    26 = [User [username=jennis, age=26], User [username=tin, age=26], User [username=army, age=26]]</span><br><span class="line">    11 = [User [username=tom, age=11]]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">创建－去重－统计</span><br><span class="line">2</span><br></pre></td></tr></table></figure>
+
+<p>可以看出流操作数据集合很强大吧，但需要注意的是流只能执行一次，再次使用需要重要打开。</p>
+<p>更多的玩法可以自己去研究吧。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java8/Stream/Java%208%20%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8BStream%E6%B5%81/" data-id="cmgrfxxdk004u30d42ixsd0dq" data-title="Java 8 新特性之Stream流" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-基础/10 个深恶痛绝的 Java 异常" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/10/14/%E5%9F%BA%E7%A1%80/10%20%E4%B8%AA%E6%B7%B1%E6%81%B6%E7%97%9B%E7%BB%9D%E7%9A%84%20Java%20%E5%BC%82%E5%B8%B8/" class="article-date">
+  <time class="dt-published" datetime="2025-10-14T06:42:34.000Z" itemprop="datePublished">2025-10-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/10/14/%E5%9F%BA%E7%A1%80/10%20%E4%B8%AA%E6%B7%B1%E6%81%B6%E7%97%9B%E7%BB%9D%E7%9A%84%20Java%20%E5%BC%82%E5%B8%B8/">10 个深恶痛绝的 Java 异常</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>异常是 Java 程序中经常遇到的问题，我想每一个 Java 程序员都讨厌异常，一 个异常就是一个 BUG，就要花很多时间来定位异常问题。</p>
+<blockquote>
+<p>什么是异常及异常的分类请看这篇文章：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/xbopgxZ5BEDdSvwO9ad9Xg">一张图搞清楚 Java 异常机制</a>。</p>
+</blockquote>
+<p>今天，栈长来列一下 Java 中经常遇到的前 10 个异常，排名不分先后。</p>
+<h2 id="1、NullPointerException"><a href="#1、NullPointerException" class="headerlink" title="1、NullPointerException"></a>1、NullPointerException</h2><p>空指针异常，操作一个 null 对象的方法或属性时会抛出这个异常。具体看这篇文章：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/cmkKuhEZl1qx6TXPxvA5pw">Java 避免空指针的 5 个案例</a>。</p>
+<h2 id="2、OutOfMemoryError"><a href="#2、OutOfMemoryError" class="headerlink" title="2、OutOfMemoryError"></a>2、OutOfMemoryError</h2><p>内存异常异常，这不是程序能控制的，是指要分配的对象的内存超出了当前最大的堆内存，需要调整堆内存大小（-Xmx）以及优化程序。</p>
+<h2 id="3、IOException"><a href="#3、IOException" class="headerlink" title="3、IOException"></a>3、IOException</h2><p>IO，即：input, output，我们在读写磁盘文件、网络内容的时候经常会生的一种异常，这种异常是受检查异常，需要进行手工捕获。</p>
+<p>如文件读写会抛出 IOException：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">public int read() throws IOException</span><br><span class="line">public void write(int b) throws IOException</span><br></pre></td></tr></table></figure>
+
+<h2 id="4、FileNotFoundException"><a href="#4、FileNotFoundException" class="headerlink" title="4、FileNotFoundException"></a>4、FileNotFoundException</h2><p>文件找不到异常，如果文件不存在就会抛出这种异常。</p>
+<p>如定义输入输出文件流，文件不存在会报错：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">public FileInputStream(File file) throws FileNotFoundException</span><br><span class="line">public FileOutputStream(File file) throws FileNotFoundException</span><br></pre></td></tr></table></figure>
+
+<p>FileNotFoundException 其实是 IOException 的子类，同样是受检查异常，需要进行手工捕获。</p>
+<h2 id="5、ClassNotFoundException"><a href="#5、ClassNotFoundException" class="headerlink" title="5、ClassNotFoundException"></a>5、ClassNotFoundException</h2><p>类找不到异常，Java开发中经常遇到，是不是很绝望？这是在加载类的时候抛出来的，即在类路径下不能加载指定的类。</p>
+<p>看一个示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public static &lt;T&gt; Class&lt;T&gt; getExistingClass(ClassLoader classLoader, String className) &#123;</span><br><span class="line">  try &#123;</span><br><span class="line">     return (Class&lt;T&gt;) Class.forName(className, true, classLoader);</span><br><span class="line">  &#125;</span><br><span class="line">  catch (ClassNotFoundException e) &#123;</span><br><span class="line">     return null;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>它是受检查异常，需要进行手工捕获。</p>
+<h2 id="6、ClassCastException"><a href="#6、ClassCastException" class="headerlink" title="6、ClassCastException"></a>6、ClassCastException</h2><p>类转换异常，将一个不是该类的实例转换成这个类就会抛出这个异常。</p>
+<p>如将一个数字强制转换成字符串就会报这个异常：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Object x = new Integer(0);</span><br><span class="line">System.out.println((String)x);</span><br></pre></td></tr></table></figure>
+
+<p>这是运行时异常，不需要手工捕获。</p>
+<h2 id="7、NoSuchMethodException"><a href="#7、NoSuchMethodException" class="headerlink" title="7、NoSuchMethodException"></a>7、NoSuchMethodException</h2><p>没有这个方法异常，一般发生在反射调用方法的时候，如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public Method getMethod(String name, Class&lt;?&gt;... parameterTypes)</span><br><span class="line">    throws NoSuchMethodException, SecurityException &#123;</span><br><span class="line">    checkMemberAccess(Member.PUBLIC, Reflection.getCallerClass(), true);</span><br><span class="line">    Method method = getMethod0(name, parameterTypes, true);</span><br><span class="line">    if (method == null) &#123;</span><br><span class="line">        throw new NoSuchMethodException(getName() + &quot;.&quot; + name + argumentTypesToString(parameterTypes));</span><br><span class="line">    &#125;</span><br><span class="line">    return method;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>它是受检查异常，需要进行手工捕获。</p>
+<h2 id="8、IndexOutOfBoundsException"><a href="#8、IndexOutOfBoundsException" class="headerlink" title="8、IndexOutOfBoundsException"></a>8、IndexOutOfBoundsException</h2><p>索引越界异常，当操作一个字符串或者数组的时候经常遇到的异常。</p>
+<p><img src="http://qianniu.javastack.cn/18-12-12/80818264.jpg"></p>
+<p>如图所示，它是运行时异常，不需要手工捕获。</p>
+<h2 id="9、ArithmeticException"><a href="#9、ArithmeticException" class="headerlink" title="9、ArithmeticException"></a>9、ArithmeticException</h2><p>算术异常，发生在数字的算术运算时的异常，如一个数字除以 0 就会报这个错。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">double n = 3 / 0;</span><br></pre></td></tr></table></figure>
+
+<p>这个异常虽然是运行时异常，可以手工捕获抛出自定义的异常，如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public static Timestamp from(Instant instant) &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        Timestamp stamp = new Timestamp(instant.getEpochSecond() * MILLIS_PER_SECOND);</span><br><span class="line">        stamp.nanos = instant.getNano();</span><br><span class="line">        return stamp;</span><br><span class="line">    &#125; catch (ArithmeticException ex) &#123;</span><br><span class="line">        throw new IllegalArgumentException(ex);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="10、SQLException"><a href="#10、SQLException" class="headerlink" title="10、SQLException"></a>10、SQLException</h2><p>SQL异常，发生在操作数据库时的异常。</p>
+<p>如下面的获取连接：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public Connection getConnection() throws SQLException &#123;</span><br><span class="line">    if (getUser() == null) &#123;</span><br><span class="line">        return DriverManager.getConnection(url);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        return DriverManager.getConnection(url, getUser(), getPassword());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>又或者是获取下一条记录的时候：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">boolean next() throws SQLException;</span><br></pre></td></tr></table></figure>
+
+<p>它是受检查异常，需要进行手工捕获。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/10/14/%E5%9F%BA%E7%A1%80/10%20%E4%B8%AA%E6%B7%B1%E6%81%B6%E7%97%9B%E7%BB%9D%E7%9A%84%20Java%20%E5%BC%82%E5%B8%B8/" data-id="cmgrfxxco000130d4alcn2hfy" data-title="10 个深恶痛绝的 Java 异常" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-基础/Java Base64 编码解码方案总结" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/10/14/%E5%9F%BA%E7%A1%80/Java%20Base64%20%E7%BC%96%E7%A0%81%E8%A7%A3%E7%A0%81%E6%96%B9%E6%A1%88%E6%80%BB%E7%BB%93/" class="article-date">
+  <time class="dt-published" datetime="2025-10-14T06:42:34.000Z" itemprop="datePublished">2025-10-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/10/14/%E5%9F%BA%E7%A1%80/Java%20Base64%20%E7%BC%96%E7%A0%81%E8%A7%A3%E7%A0%81%E6%96%B9%E6%A1%88%E6%80%BB%E7%BB%93/">Java Base64 编码解码方案总结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Base64是一种能将任意Binary资料用64种字元组合成字串的方法，而这个Binary资料和字串资料彼此之间是可以互相转换的，十分方便。在实际应用上，Base64除了能将Binary资料可视化之外，也常用来表示字串加密过后的内容。如果要使用Java 程式语言来实作Base64的编码与解码功能，可以参考本篇文章的作法。</p>
+<h4 id="早期作法"><a href="#早期作法" class="headerlink" title="早期作法"></a>早期作法</h4><p>早期在Java上做Base64的编码与解码，会使用到JDK里sun.misc套件下的BASE64Encoder和BASE64Decoder这两个类别，用法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">final BASE64Encoder encoder = new BASE64Encoder();</span><br><span class="line">final BASE64Decoder decoder = new BASE64Decoder();</span><br><span class="line">final String text = &quot;Java技术&quot;;</span><br><span class="line">final byte[] textByte = text.getBytes(&quot;UTF-8&quot;);</span><br><span class="line"></span><br><span class="line">//编码</span><br><span class="line">final String encodedText = encoder.encode(textByte);</span><br><span class="line">System.out.println(encodedText);</span><br><span class="line"></span><br><span class="line">//解码</span><br><span class="line">System.out.println(new String(decoder.decodeBuffer(encodedText), &quot;UTF-8&quot;));</span><br><span class="line"></span><br><span class="line">final BASE64Encoder encoder = new BASE64Encoder();</span><br><span class="line">final BASE64Decoder decoder = new BASE64Decoder();</span><br><span class="line">final String text = &quot;Java技术&quot;;</span><br><span class="line">final byte[] textByte = text.getBytes(&quot;UTF-8&quot;);</span><br><span class="line"></span><br><span class="line">//编码</span><br><span class="line">final String encodedText = encoder.encode(textByte);</span><br><span class="line">System.out.println(encodedText);</span><br><span class="line"></span><br><span class="line">//解码</span><br><span class="line">System.out.println(new String(decoder.decodeBuffer(encodedText), &quot;UTF-8&quot;));</span><br></pre></td></tr></table></figure>
+
+
+<p>从以上程式可以发现，在Java用Base64一点都不难，不用几行程式码就解决了！只是这个sun.mis c套件所提供的Base64功能，编码和解码的效率并不太好，而且在以后的Java版本可能就不被支援了，完全不建议使用。</p>
+<h4 id="Apache-Commons-Codec作法"><a href="#Apache-Commons-Codec作法" class="headerlink" title="Apache Commons Codec作法"></a>Apache Commons Codec作法</h4><p>Apache Commons Codec有提供Base64的编码与解码功能，会使用到org.apache.commons.codec.binary套件下的Base64类别，用法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">final Base64 base64 = new Base64();</span><br><span class="line">final String text = &quot;Java技术&quot;;</span><br><span class="line">final byte[] textByte = text.getBytes(&quot;UTF-8&quot;);</span><br><span class="line"></span><br><span class="line">//编码</span><br><span class="line">final String encodedText = base64.encodeToString(textByte);</span><br><span class="line">System.out.println(encodedText);</span><br><span class="line"></span><br><span class="line">//解码</span><br><span class="line">System.out.println(new String(base64.decode(encodedText), &quot;UTF-8&quot;));</span><br><span class="line"></span><br><span class="line">final Base64 base64 = new Base64();</span><br><span class="line">final String text = &quot;Java技术&quot;;</span><br><span class="line">final byte[] textByte = text.getBytes(&quot;UTF-8&quot;);</span><br><span class="line"></span><br><span class="line">//编码</span><br><span class="line">final String encodedText = base64.encodeToString(textByte);</span><br><span class="line">System.out.println(encodedText);</span><br><span class="line"></span><br><span class="line">//解码</span><br><span class="line">System.out.println(new String(base64.decode(encodedText), &quot;UTF-8&quot;));</span><br></pre></td></tr></table></figure>
+
+<p>以上的程式码看起来又比早期用sun.mis c套件还要更精简，效能实际执行起来也快了不少。缺点是需要引用Apache Commons Codec，很麻烦。</p>
+<h4 id="Java-8之后的作法"><a href="#Java-8之后的作法" class="headerlink" title="Java 8之后的作法"></a>Java 8之后的作法</h4><p>Java 8的java.util套件中，新增了Base64的类别，可以用来处理Base64的编码与解码，用法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">final Base64.Decoder decoder = Base64.getDecoder();</span><br><span class="line">final Base64.Encoder encoder = Base64.getEncoder();</span><br><span class="line">final String text = &quot;Java技术&quot;;</span><br><span class="line">final byte[] textByte = text.getBytes(&quot;UTF-8&quot;);</span><br><span class="line"></span><br><span class="line">//编码</span><br><span class="line">final String encodedText = encoder.encodeToString(textByte);</span><br><span class="line">System.out.println(encodedText);</span><br><span class="line"></span><br><span class="line">//解码</span><br><span class="line">System.out.println(new String(decoder.decode(encodedText), &quot;UTF-8&quot;));</span><br><span class="line"></span><br><span class="line">final Base64.Decoder decoder = Base64.getDecoder();</span><br><span class="line">final Base64.Encoder encoder = Base64.getEncoder();</span><br><span class="line">final String text = &quot;Java技术&quot;;</span><br><span class="line">final byte[] textByte = text.getBytes(&quot;UTF-8&quot;);</span><br><span class="line"></span><br><span class="line">//编码</span><br><span class="line">final String encodedText = encoder.encodeToString(textByte);</span><br><span class="line">System.out.println(encodedText);</span><br><span class="line"></span><br><span class="line">//解码</span><br><span class="line">System.out.println(new String(decoder.decode(encodedText), &quot;UTF-8&quot;));</span><br></pre></td></tr></table></figure>
+
+
+<p>与sun.mis c套件和Apache Commons Codec所提供的Base64编解码器来比较的话，Java 8提供的Base64拥有更好的效能。实际测试编码与解码速度的话，Java 8提供的Base64，要比sun.mis c套件提供的还要快至少11倍，比Apache Commons Codec提供的还要快至少3倍。<strong>因此在Java上若要使用Base64，这个Java 8底下的java .util套件所提供的Base64类别绝对是首选！</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/10/14/%E5%9F%BA%E7%A1%80/Java%20Base64%20%E7%BC%96%E7%A0%81%E8%A7%A3%E7%A0%81%E6%96%B9%E6%A1%88%E6%80%BB%E7%BB%93/" data-id="cmgrfxxcq000430d4a26a4pl4" data-title="Java Base64 编码解码方案总结" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-基础/Java Jar包压缩、解压使用指南" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/10/14/%E5%9F%BA%E7%A1%80/Java%20Jar%E5%8C%85%E5%8E%8B%E7%BC%A9%E3%80%81%E8%A7%A3%E5%8E%8B%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" class="article-date">
+  <time class="dt-published" datetime="2025-10-14T06:42:34.000Z" itemprop="datePublished">2025-10-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/10/14/%E5%9F%BA%E7%A1%80/Java%20Jar%E5%8C%85%E5%8E%8B%E7%BC%A9%E3%80%81%E8%A7%A3%E5%8E%8B%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/">Java Jar包压缩、解压使用指南</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="http://img.javastack.cn/18-2-27/79692618.jpg"></p>
+<h4 id="什么是jar包"><a href="#什么是jar包" class="headerlink" title="什么是jar包"></a>什么是jar包</h4><p>JAR（Java Archive）是Java的归档文件，它是一种与平台无关的文件格式，它允许将许多文件组合成一个压缩文件。</p>
+<h4 id="如何打-解包"><a href="#如何打-解包" class="headerlink" title="如何打&#x2F;解包"></a>如何打&#x2F;解包</h4><p>使用jdk&#x2F;bin&#x2F;jar.exe工具，配置完环境变量后直接使得jar命令即可。</p>
+<h4 id="jar命令格式"><a href="#jar命令格式" class="headerlink" title="jar命令格式"></a>jar命令格式</h4><p>jar {c t x u f }[ v m e 0 M i ][-C 目录]文件名…</p>
+<p>{ctxu}，这四个参数必须选选其一。</p>
+<p>[v f m e 0 M i]，这几个是可选参数，文件名也是必须的。</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-c</td>
+<td>创建一个jar包</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>显示jar中的内容列表</td>
+</tr>
+<tr>
+<td>-x</td>
+<td>解压jar包</td>
+</tr>
+<tr>
+<td>-u</td>
+<td>添加文件到jar包中</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>指定jar包的文件名</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>输出详细报告</td>
+</tr>
+<tr>
+<td>-m</td>
+<td>指定MANIFEST.MF文件</td>
+</tr>
+<tr>
+<td>-0</td>
+<td>生成jar包时不压缩内容</td>
+</tr>
+<tr>
+<td>-M</td>
+<td>不生成清单文件MANIFEST.MF</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>为指定的jar文件创建索引文件</td>
+</tr>
+<tr>
+<td>-C</td>
+<td>可在相应的目录下执行命令</td>
+</tr>
+</tbody></table>
+<p>关于MANIFEST.MF定义：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/MANIFEST.MF">https://baike.baidu.com/item/MANIFEST.MF</a></p>
+</blockquote>
+<h4 id="演示"><a href="#演示" class="headerlink" title="演示"></a>演示</h4><p><strong>往jar包添加文件</strong></p>
+<blockquote>
+<p>jar uf xxx.jar BOOT-INF&#x2F;classes&#x2F;application.yml</p>
+</blockquote>
+<p><strong>解压jar包</strong></p>
+<blockquote>
+<p>jar -xvf xxx.jar</p>
+</blockquote>
+<p><strong>打jar包，不生成清单文件，不压缩</strong></p>
+<blockquote>
+<p>jar -cvfM0 xxx.jar BOOT-INF&#x2F; META-INF&#x2F; org&#x2F;</p>
+</blockquote>
+<p>或者</p>
+<blockquote>
+<p>jar -cvfM0 xxx.jar *</p>
+</blockquote>
+<p>如果要往线上jar包添加、更新部分文件到jar包，这些命令也许对你有用。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/10/14/%E5%9F%BA%E7%A1%80/Java%20Jar%E5%8C%85%E5%8E%8B%E7%BC%A9%E3%80%81%E8%A7%A3%E5%8E%8B%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" data-id="cmgrfxxcr000530d44xcn8ufb" data-title="Java Jar包压缩、解压使用指南" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-基础/Java 中的基本数据类型转换详解" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/10/14/%E5%9F%BA%E7%A1%80/Java%20%E4%B8%AD%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E8%AF%A6%E8%A7%A3/" class="article-date">
+  <time class="dt-published" datetime="2025-10-14T06:42:34.000Z" itemprop="datePublished">2025-10-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/10/14/%E5%9F%BA%E7%A1%80/Java%20%E4%B8%AD%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E8%AF%A6%E8%A7%A3/">Java 中的基本数据类型转换详解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="http://img.javastack.cn/18-4-3/88886519.jpg"></p>
+<p>说基本数据类型转换之前，先了解下 Java 中的 8 种基本数据类型，以及它们的占内存的容量大小和表示的范围，如下图所示。</p>
+<p><img src="http://img.javastack.cn/18-4-3/32808656.jpg"></p>
+<p>之前分享过《<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/uoNVT9IoRQmWnmy8w22UUQ">深入浅出 Java 中的包装类</a>》，现在重新温故了下原始数据类型，现在来解释下它们之间的转换关系。</p>
+<h4 id="自动类型转换"><a href="#自动类型转换" class="headerlink" title="自动类型转换"></a>自动类型转换</h4><p>自动类型转换是指：数字表示范围小的数据类型可以自动转换成范围大的数据类型。</p>
+<p>如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">long l = 100;</span><br><span class="line"></span><br><span class="line">int i = 200;</span><br><span class="line">long ll = i;</span><br></pre></td></tr></table></figure>
+
+<p>具体自动转换如如下图所示。</p>
+<p><img src="http://img.javastack.cn/18-4-3/42423859.jpg"></p>
+<p>实线表示自动转换时不会造成数据丢失，虚线则可能会出现数据丢失问题。</p>
+<p><strong>自动转换也要小心数据溢出问题，看下面的例子。</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int count = 100000000;</span><br><span class="line">int price = 1999;</span><br><span class="line">long totalPrice = count * price;</span><br></pre></td></tr></table></figure>
+
+<p>编译没任何问题，但结果却输出的是负数，这是因为两个 int 相乘得到的结果是 int, 相乘的结果超出了 int 的代表范围。这种情况，一般把第一个数据转换成范围大的数据类型再和其他的数据进行运算。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int count = 100000000;</span><br><span class="line">int price = 1999;</span><br><span class="line">long totalPrice = (long) count * price;</span><br></pre></td></tr></table></figure>
+
+<p>另外，向下转换时可以直接将 int 常量字面量赋值给 byte、short、char 等数据类型，而不需要强制转换，只要该常量值不超过该类型的表示范围都能自动转换。</p>
+<h4 id="强制类型转换"><a href="#强制类型转换" class="headerlink" title="强制类型转换"></a>强制类型转换</h4><p>强制类型转换我们再清楚不过了，即强制显示的把一个数据类型转换为另外一种数据类型。</p>
+<p>如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">short s = 199;</span><br><span class="line">int i = s;// 199</span><br><span class="line"></span><br><span class="line">double d = 10.24;</span><br><span class="line">long ll = (long) d;// 10</span><br></pre></td></tr></table></figure>
+
+<p>以上的转换结果都在我们的预期之内，属于正常的转换和丢失精度的情况，下面的例子就一样属于数据溢出的情况。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int ii = 300;</span><br><span class="line">byte b = (byte)ii;</span><br></pre></td></tr></table></figure>
+
+<p>300 已经超出了 byte 类型表示的范围，所以会转换成一个毫无意义的数字。</p>
+<h4 id="类型提升"><a href="#类型提升" class="headerlink" title="类型提升"></a>类型提升</h4><p>所谓类型提升就是指在多种不同数据类型的表达式中，类型会自动向范围表示大的值的数据类型提升。</p>
+<p>把上面的溢出的例子再改下。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">long count = 100000000;</span><br><span class="line">int price = 1999;</span><br><span class="line">long totalPrice = price * count;</span><br></pre></td></tr></table></figure>
+
+<p>price 为 int 型，count 为 long 型，运算结果为 long 型，运算结果正常，没有出现溢出的情况。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/10/14/%E5%9F%BA%E7%A1%80/Java%20%E4%B8%AD%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E8%AF%A6%E8%A7%A3/" data-id="cmgrfxxcr000630d4fqj58eyv" data-title="Java 中的基本数据类型转换详解" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-基础/Java 父类强制转换子类原则" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/10/14/%E5%9F%BA%E7%A1%80/Java%20%E7%88%B6%E7%B1%BB%E5%BC%BA%E5%88%B6%E8%BD%AC%E6%8D%A2%E5%AD%90%E7%B1%BB%E5%8E%9F%E5%88%99/" class="article-date">
+  <time class="dt-published" datetime="2025-10-14T06:42:34.000Z" itemprop="datePublished">2025-10-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/10/14/%E5%9F%BA%E7%A1%80/Java%20%E7%88%B6%E7%B1%BB%E5%BC%BA%E5%88%B6%E8%BD%AC%E6%8D%A2%E5%AD%90%E7%B1%BB%E5%8E%9F%E5%88%99/">Java 父类强制转换子类原则</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="http://img.javastack.cn/17-12-20/25802617.jpg" alt="image"></p>
+<p>最近，微信群友在讨论子类父类的转换问题，其实不难，给大家用实例来说明一下就很明了了。</p>
+<p>我们知道Java中子类转换成父类是没有任何问题的，那父类可以转换成子类吗？</p>
+<p>来看下面这段程序：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">public class TestObjectConvert &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		test1();</span><br><span class="line">		test2();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	private static void test1() &#123;</span><br><span class="line">		Fruit fruit1 = new Fruit();</span><br><span class="line">		Apple apple1 = new Apple();</span><br><span class="line">		apple1 = (Apple) fruit1; // java.lang.ClassCastException</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	private static void test2() &#123;</span><br><span class="line">		Fruit fruit1 = new Apple();</span><br><span class="line">		Apple apple1 = new Apple();</span><br><span class="line">		apple1 = (Apple) fruit1;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	static class Fruit &#123;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	static class Apple extends Fruit &#123;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">test1：报类转异常；</span><br><span class="line">test2：转换正常。</span><br></pre></td></tr></table></figure>
+
+<p><strong>所以，想让父类强制转换成子类，不是没有可能，除非父类是子类构造出来的实例，不然是不能强转的。</strong></p>
+<p>为什么呢？</p>
+<p>如上代码，如果父类实例出来的对象是Orange，Orange当然不能强制转成Apple，所以说父类只有该子类对应的实例才能强转。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/10/14/%E5%9F%BA%E7%A1%80/Java%20%E7%88%B6%E7%B1%BB%E5%BC%BA%E5%88%B6%E8%BD%AC%E6%8D%A2%E5%AD%90%E7%B1%BB%E5%8E%9F%E5%88%99/" data-id="cmgrfxxcs000930d4gsq5g29v" data-title="Java 父类强制转换子类原则" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 18px;">基础</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 16px;">多线程</a> <a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" style="font-size: 20px;">新特性</a> <a href="/tags/%E8%BF%9B%E9%98%B6/" style="font-size: 14px;">进阶</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 12px;">集合</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java%205%20~%2010%20%E6%96%B0%E7%89%B9%E6%80%A7%E5%80%BE%E6%83%85%E6%95%B4%E7%90%86%EF%BC%81/">Java 5 ~ 10 新特性倾情整理！</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%206%20%E9%A2%97%E8%AF%AD%E6%B3%95%E7%B3%96/">Java 中的 6 颗语法糖</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%20String%20%E7%9C%9F%E7%9A%84%E6%98%AF%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%90%97%EF%BC%9F/">Java 中的 String 真的是不可变吗？</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E4%BC%AA%E5%85%B1%E4%BA%AB%E8%AF%A6%E8%A7%A3%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">Java 中的伪共享详解及解决方案</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E5%AE%8F%E5%8F%98%E9%87%8F%EF%BC%8C%E5%AE%8F%E6%9B%BF%E6%8D%A2%E8%AF%A6%E8%A7%A3%E3%80%82/">Java 中的宏变量，宏替换详解。</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Java Base64 编码解码方案总结 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Base64是一种能将任意Binary资料用64种字元组合成字串的方法，而这个Binary资料和字串资料彼此之间是可以互相转换的，十分方便。在实际应用上，Base64除了能将Binary资料可视化之外，也常用来表示字串加密过后的内容。如果要使用Java 程式语言来实作Base64的编码与解码功能，可以参考本篇文章的作法。 早期作法早期在Java上做Base64的编码与解码，会使用到JDK里sun.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java Base64 编码解码方案总结">
+<meta property="og:url" content="http://example.com/2025/10/14/%E5%9F%BA%E7%A1%80/Java%20Base64%20%E7%BC%96%E7%A0%81%E8%A7%A3%E7%A0%81%E6%96%B9%E6%A1%88%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Base64是一种能将任意Binary资料用64种字元组合成字串的方法，而这个Binary资料和字串资料彼此之间是可以互相转换的，十分方便。在实际应用上，Base64除了能将Binary资料可视化之外，也常用来表示字串加密过后的内容。如果要使用Java 程式语言来实作Base64的编码与解码功能，可以参考本篇文章的作法。 早期作法早期在Java上做Base64的编码与解码，会使用到JDK里sun.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-10-14T06:42:34.000Z">
+<meta property="article:modified_time" content="2025-10-14T07:46:41.966Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="基础">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-基础/Java Base64 编码解码方案总结" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/10/14/%E5%9F%BA%E7%A1%80/Java%20Base64%20%E7%BC%96%E7%A0%81%E8%A7%A3%E7%A0%81%E6%96%B9%E6%A1%88%E6%80%BB%E7%BB%93/" class="article-date">
+  <time class="dt-published" datetime="2025-10-14T06:42:34.000Z" itemprop="datePublished">2025-10-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Java Base64 编码解码方案总结
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Base64是一种能将任意Binary资料用64种字元组合成字串的方法，而这个Binary资料和字串资料彼此之间是可以互相转换的，十分方便。在实际应用上，Base64除了能将Binary资料可视化之外，也常用来表示字串加密过后的内容。如果要使用Java 程式语言来实作Base64的编码与解码功能，可以参考本篇文章的作法。</p>
+<h4 id="早期作法"><a href="#早期作法" class="headerlink" title="早期作法"></a>早期作法</h4><p>早期在Java上做Base64的编码与解码，会使用到JDK里sun.misc套件下的BASE64Encoder和BASE64Decoder这两个类别，用法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">final BASE64Encoder encoder = new BASE64Encoder();</span><br><span class="line">final BASE64Decoder decoder = new BASE64Decoder();</span><br><span class="line">final String text = &quot;Java技术&quot;;</span><br><span class="line">final byte[] textByte = text.getBytes(&quot;UTF-8&quot;);</span><br><span class="line"></span><br><span class="line">//编码</span><br><span class="line">final String encodedText = encoder.encode(textByte);</span><br><span class="line">System.out.println(encodedText);</span><br><span class="line"></span><br><span class="line">//解码</span><br><span class="line">System.out.println(new String(decoder.decodeBuffer(encodedText), &quot;UTF-8&quot;));</span><br><span class="line"></span><br><span class="line">final BASE64Encoder encoder = new BASE64Encoder();</span><br><span class="line">final BASE64Decoder decoder = new BASE64Decoder();</span><br><span class="line">final String text = &quot;Java技术&quot;;</span><br><span class="line">final byte[] textByte = text.getBytes(&quot;UTF-8&quot;);</span><br><span class="line"></span><br><span class="line">//编码</span><br><span class="line">final String encodedText = encoder.encode(textByte);</span><br><span class="line">System.out.println(encodedText);</span><br><span class="line"></span><br><span class="line">//解码</span><br><span class="line">System.out.println(new String(decoder.decodeBuffer(encodedText), &quot;UTF-8&quot;));</span><br></pre></td></tr></table></figure>
+
+
+<p>从以上程式可以发现，在Java用Base64一点都不难，不用几行程式码就解决了！只是这个sun.mis c套件所提供的Base64功能，编码和解码的效率并不太好，而且在以后的Java版本可能就不被支援了，完全不建议使用。</p>
+<h4 id="Apache-Commons-Codec作法"><a href="#Apache-Commons-Codec作法" class="headerlink" title="Apache Commons Codec作法"></a>Apache Commons Codec作法</h4><p>Apache Commons Codec有提供Base64的编码与解码功能，会使用到org.apache.commons.codec.binary套件下的Base64类别，用法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">final Base64 base64 = new Base64();</span><br><span class="line">final String text = &quot;Java技术&quot;;</span><br><span class="line">final byte[] textByte = text.getBytes(&quot;UTF-8&quot;);</span><br><span class="line"></span><br><span class="line">//编码</span><br><span class="line">final String encodedText = base64.encodeToString(textByte);</span><br><span class="line">System.out.println(encodedText);</span><br><span class="line"></span><br><span class="line">//解码</span><br><span class="line">System.out.println(new String(base64.decode(encodedText), &quot;UTF-8&quot;));</span><br><span class="line"></span><br><span class="line">final Base64 base64 = new Base64();</span><br><span class="line">final String text = &quot;Java技术&quot;;</span><br><span class="line">final byte[] textByte = text.getBytes(&quot;UTF-8&quot;);</span><br><span class="line"></span><br><span class="line">//编码</span><br><span class="line">final String encodedText = base64.encodeToString(textByte);</span><br><span class="line">System.out.println(encodedText);</span><br><span class="line"></span><br><span class="line">//解码</span><br><span class="line">System.out.println(new String(base64.decode(encodedText), &quot;UTF-8&quot;));</span><br></pre></td></tr></table></figure>
+
+<p>以上的程式码看起来又比早期用sun.mis c套件还要更精简，效能实际执行起来也快了不少。缺点是需要引用Apache Commons Codec，很麻烦。</p>
+<h4 id="Java-8之后的作法"><a href="#Java-8之后的作法" class="headerlink" title="Java 8之后的作法"></a>Java 8之后的作法</h4><p>Java 8的java.util套件中，新增了Base64的类别，可以用来处理Base64的编码与解码，用法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">final Base64.Decoder decoder = Base64.getDecoder();</span><br><span class="line">final Base64.Encoder encoder = Base64.getEncoder();</span><br><span class="line">final String text = &quot;Java技术&quot;;</span><br><span class="line">final byte[] textByte = text.getBytes(&quot;UTF-8&quot;);</span><br><span class="line"></span><br><span class="line">//编码</span><br><span class="line">final String encodedText = encoder.encodeToString(textByte);</span><br><span class="line">System.out.println(encodedText);</span><br><span class="line"></span><br><span class="line">//解码</span><br><span class="line">System.out.println(new String(decoder.decode(encodedText), &quot;UTF-8&quot;));</span><br><span class="line"></span><br><span class="line">final Base64.Decoder decoder = Base64.getDecoder();</span><br><span class="line">final Base64.Encoder encoder = Base64.getEncoder();</span><br><span class="line">final String text = &quot;Java技术&quot;;</span><br><span class="line">final byte[] textByte = text.getBytes(&quot;UTF-8&quot;);</span><br><span class="line"></span><br><span class="line">//编码</span><br><span class="line">final String encodedText = encoder.encodeToString(textByte);</span><br><span class="line">System.out.println(encodedText);</span><br><span class="line"></span><br><span class="line">//解码</span><br><span class="line">System.out.println(new String(decoder.decode(encodedText), &quot;UTF-8&quot;));</span><br></pre></td></tr></table></figure>
+
+
+<p>与sun.mis c套件和Apache Commons Codec所提供的Base64编解码器来比较的话，Java 8提供的Base64拥有更好的效能。实际测试编码与解码速度的话，Java 8提供的Base64，要比sun.mis c套件提供的还要快至少11倍，比Apache Commons Codec提供的还要快至少3倍。<strong>因此在Java上若要使用Base64，这个Java 8底下的java .util套件所提供的Base64类别绝对是首选！</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/10/14/%E5%9F%BA%E7%A1%80/Java%20Base64%20%E7%BC%96%E7%A0%81%E8%A7%A3%E7%A0%81%E6%96%B9%E6%A1%88%E6%80%BB%E7%BB%93/" data-id="cmgrfxxcq000430d4a26a4pl4" data-title="Java Base64 编码解码方案总结" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/10/14/%E5%9F%BA%E7%A1%80/10%20%E4%B8%AA%E6%B7%B1%E6%81%B6%E7%97%9B%E7%BB%9D%E7%9A%84%20Java%20%E5%BC%82%E5%B8%B8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          10 个深恶痛绝的 Java 异常
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/10/14/%E5%9F%BA%E7%A1%80/Java%20Jar%E5%8C%85%E5%8E%8B%E7%BC%A9%E3%80%81%E8%A7%A3%E5%8E%8B%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java Jar包压缩、解压使用指南</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 18px;">基础</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 16px;">多线程</a> <a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" style="font-size: 20px;">新特性</a> <a href="/tags/%E8%BF%9B%E9%98%B6/" style="font-size: 14px;">进阶</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 12px;">集合</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java%205%20~%2010%20%E6%96%B0%E7%89%B9%E6%80%A7%E5%80%BE%E6%83%85%E6%95%B4%E7%90%86%EF%BC%81/">Java 5 ~ 10 新特性倾情整理！</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%206%20%E9%A2%97%E8%AF%AD%E6%B3%95%E7%B3%96/">Java 中的 6 颗语法糖</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%20String%20%E7%9C%9F%E7%9A%84%E6%98%AF%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%90%97%EF%BC%9F/">Java 中的 String 真的是不可变吗？</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E4%BC%AA%E5%85%B1%E4%BA%AB%E8%AF%A6%E8%A7%A3%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">Java 中的伪共享详解及解决方案</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E5%AE%8F%E5%8F%98%E9%87%8F%EF%BC%8C%E5%AE%8F%E6%9B%BF%E6%8D%A2%E8%AF%A6%E8%A7%A3%E3%80%82/">Java 中的宏变量，宏替换详解。</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

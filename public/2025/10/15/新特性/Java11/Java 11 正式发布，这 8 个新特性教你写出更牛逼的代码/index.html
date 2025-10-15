@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Java 11 正式发布，这 8 个新特性教你写出更牛逼的代码 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="美国时间 09 月 25 日，Oralce 正式发布了 Java 11，这是据 Java 8 以后支持的首个长期版本。 为什么说是长期版本，看下面的官方发布的支持路线图表。  可以看出 Java 8 扩展支持到 2025 年，而 Java 11 扩展支持到 2026 年。 现在大部分都在用 Java 8，Java 9 和 10 目前很少有人在用，至少我没有发现有公司在生产环境应用的，那就是找死。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 11 正式发布，这 8 个新特性教你写出更牛逼的代码">
+<meta property="og:url" content="http://example.com/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java11/Java%2011%20%E6%AD%A3%E5%BC%8F%E5%8F%91%E5%B8%83%EF%BC%8C%E8%BF%99%208%20%E4%B8%AA%E6%96%B0%E7%89%B9%E6%80%A7%E6%95%99%E4%BD%A0%E5%86%99%E5%87%BA%E6%9B%B4%E7%89%9B%E9%80%BC%E7%9A%84%E4%BB%A3%E7%A0%81/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="美国时间 09 月 25 日，Oralce 正式发布了 Java 11，这是据 Java 8 以后支持的首个长期版本。 为什么说是长期版本，看下面的官方发布的支持路线图表。  可以看出 Java 8 扩展支持到 2025 年，而 Java 11 扩展支持到 2026 年。 现在大部分都在用 Java 8，Java 9 和 10 目前很少有人在用，至少我没有发现有公司在生产环境应用的，那就是找死。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://qianniu.javastack.cn/18-9-26/91229065.jpg">
+<meta property="article:published_time" content="2025-10-15T03:36:33.000Z">
+<meta property="article:modified_time" content="2025-10-15T03:37:54.792Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="新特性">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://qianniu.javastack.cn/18-9-26/91229065.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-新特性/Java11/Java 11 正式发布，这 8 个新特性教你写出更牛逼的代码" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java11/Java%2011%20%E6%AD%A3%E5%BC%8F%E5%8F%91%E5%B8%83%EF%BC%8C%E8%BF%99%208%20%E4%B8%AA%E6%96%B0%E7%89%B9%E6%80%A7%E6%95%99%E4%BD%A0%E5%86%99%E5%87%BA%E6%9B%B4%E7%89%9B%E9%80%BC%E7%9A%84%E4%BB%A3%E7%A0%81/" class="article-date">
+  <time class="dt-published" datetime="2025-10-15T03:36:33.000Z" itemprop="datePublished">2025-10-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Java 11 正式发布，这 8 个新特性教你写出更牛逼的代码
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>美国时间 09 月 25 日，Oralce 正式发布了 Java 11，这是据 Java 8 以后支持的首个长期版本。</p>
+<p>为什么说是长期版本，看下面的官方发布的支持路线图表。</p>
+<p><img src="http://qianniu.javastack.cn/18-9-26/91229065.jpg"></p>
+<p>可以看出 Java 8 扩展支持到 2025 年，而 Java 11 扩展支持到 2026 年。</p>
+<p>现在大部分都在用 Java 8，Java 9 和 10 目前很少有人在用，至少我没有发现有公司在生产环境应用的，那就是找死。</p>
+<p>现在 Java 11 长期支持，也已经包含了 9 和 10 的全部功能，9 和 10 自然就活到头了。。</p>
+<p>那么我们来看下 从 Java 9 - 11 都有哪些重要的新特性呢？</p>
+<h4 id="1、本地变量类型推断"><a href="#1、本地变量类型推断" class="headerlink" title="1、本地变量类型推断"></a>1、本地变量类型推断</h4><p>这个博主已经写过一篇文章，详细的介绍了 Java 10 带来的这个新特性。</p>
+<p>什么是局部变量类型推断？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var javastack = &quot;javastack&quot;;</span><br><span class="line">System.out.println(javastack);</span><br></pre></td></tr></table></figure>
+
+<p>大家看出来了，局部变量类型推断就是左边的类型直接使用 <code>var</code> 定义，而不用写具体的类型，编译器能根据右边的表达式自动推断类型，如上面的 <code>String</code> 。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var javastack = &quot;javastack&quot;;</span><br></pre></td></tr></table></figure>
+
+<p>就等于：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String javastack = &quot;javastack&quot;;</span><br></pre></td></tr></table></figure>
+
+<p>更多使用详情请参考这篇文章《<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/4zUtQPUn5LYw43IRLm0Dwg">Java 10 实战第 1 篇：局部变量类型推断</a>》，这里不再重复了。</p>
+<h4 id="2、字符串加强"><a href="#2、字符串加强" class="headerlink" title="2、字符串加强"></a>2、字符串加强</h4><p>Java 11 增加了一系列的字符串处理方法，如以下所示。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// 判断字符串是否为空白</span><br><span class="line">&quot; &quot;.isBlank();                // true</span><br><span class="line"></span><br><span class="line">// 去除首尾空格</span><br><span class="line">&quot; Javastack &quot;.strip();          // &quot;Javastack&quot;</span><br><span class="line"></span><br><span class="line">// 去除尾部空格 </span><br><span class="line">&quot; Javastack &quot;.stripTrailing();  // &quot; Javastack&quot;</span><br><span class="line"></span><br><span class="line">// 去除首部空格 </span><br><span class="line">&quot; Javastack &quot;.stripLeading();   // &quot;Javastack &quot;</span><br><span class="line"></span><br><span class="line">// 复制字符串</span><br><span class="line">&quot;Java&quot;.repeat(3);             // &quot;JavaJavaJava&quot;</span><br><span class="line"></span><br><span class="line">// 行数统计</span><br><span class="line">&quot;A\nB\nC&quot;.lines().count();    // 3</span><br></pre></td></tr></table></figure>
+
+<h4 id="3、集合加强"><a href="#3、集合加强" class="headerlink" title="3、集合加强"></a>3、集合加强</h4><p>自 Java 9 开始，Jdk 里面为集合（List&#x2F; Set&#x2F; Map）都添加了 <code>of</code> 和 <code>copyOf</code> 方法，它们两个都用来创建不可变的集合，来看下它们的使用和区别。</p>
+<p><strong>示例1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var list = List.of(&quot;Java&quot;, &quot;Python&quot;, &quot;C&quot;);</span><br><span class="line">var copy = List.copyOf(list);</span><br><span class="line">System.out.println(list == copy);   // true</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var list = new ArrayList&lt;String&gt;();</span><br><span class="line">var copy = List.copyOf(list);</span><br><span class="line">System.out.println(list == copy);   // false</span><br></pre></td></tr></table></figure>
+
+<p>示例1和2代码差不多，为什么一个为true,一个为false?</p>
+<p>来看下它们的源码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">static &lt;E&gt; List&lt;E&gt; of(E... elements) &#123;</span><br><span class="line">    switch (elements.length) &#123; // implicit null check of elements</span><br><span class="line">        case 0:</span><br><span class="line">            return ImmutableCollections.emptyList();</span><br><span class="line">        case 1:</span><br><span class="line">            return new ImmutableCollections.List12&lt;&gt;(elements[0]);</span><br><span class="line">        case 2:</span><br><span class="line">            return new ImmutableCollections.List12&lt;&gt;(elements[0], elements[1]);</span><br><span class="line">        default:</span><br><span class="line">            return new ImmutableCollections.ListN&lt;&gt;(elements);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">static &lt;E&gt; List&lt;E&gt; copyOf(Collection&lt;? extends E&gt; coll) &#123;</span><br><span class="line">    return ImmutableCollections.listCopy(coll);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">static &lt;E&gt; List&lt;E&gt; listCopy(Collection&lt;? extends E&gt; coll) &#123;</span><br><span class="line">    if (coll instanceof AbstractImmutableList &amp;&amp; coll.getClass() != SubList.class) &#123;</span><br><span class="line">        return (List&lt;E&gt;)coll;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        return (List&lt;E&gt;)List.of(coll.toArray());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看出 <code>copyOf</code> 方法会先判断来源集合是不是 <code>AbstractImmutableList</code> 类型的，如果是，就直接返回，如果不是，则调用 <code>of</code> 创建一个新的集合。</p>
+<p>示例2因为用的 new 创建的集合，不属于不可变 <code>AbstractImmutableList</code> 类的子类，所以 <code>copyOf</code> 方法又创建了一个新的实例，所以为false.</p>
+<blockquote>
+<p>注意：使用 of 和 copyOf 创建的集合为不可变集合，不能进行添加、删除、替换、排序等操作，不然会报 <code>java.lang.UnsupportedOperationException</code> 异常。</p>
+</blockquote>
+<p>上面演示了 List 的 of 和 copyOf 方法，Set 和 Map 接口都有。</p>
+<h4 id="4、Stream-加强"><a href="#4、Stream-加强" class="headerlink" title="4、Stream 加强"></a>4、Stream 加强</h4><p>Stream 是 Java 8 中的新特性，Java 9 开始对 Stream 增加了以下 4 个新方法。</p>
+<ol>
+<li>增加单个参数构造方法，可为null</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Stream.ofNullable(null).count(); // 0</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>增加 takeWhile 和 dropWhile 方法</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Stream.of(1, 2, 3, 2, 1)</span><br><span class="line">    .takeWhile(n -&gt; n &lt; 3)</span><br><span class="line">    .collect(Collectors.toList());  // [1, 2]</span><br></pre></td></tr></table></figure>
+
+<p>从开始计算，当 n &lt; 3 时就截止。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Stream.of(1, 2, 3, 2, 1)</span><br><span class="line">    .dropWhile(n -&gt; n &lt; 3)</span><br><span class="line">    .collect(Collectors.toList());  // [3, 2, 1]</span><br></pre></td></tr></table></figure>
+
+<p>这个和上面的相反，一旦 n &lt; 3 不成立就开始计算。</p>
+<p>3）iterate重载</p>
+<p>这个 iterate 方法的新重载方法，可以让你提供一个 Predicate (判断条件)来指定什么时候结束迭代。</p>
+<p>如果你对 JDK 8 中的 Stream 还不熟悉，可以看之前分享的这一系列教程。</p>
+<h4 id="5、Optional-加强"><a href="#5、Optional-加强" class="headerlink" title="5、Optional 加强"></a>5、Optional 加强</h4><p>Opthonal 也增加了几个非常酷的方法，现在可以很方便的将一个 Optional 转换成一个 Stream, 或者当一个空 Optional 时给它一个替代的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Optional.of(&quot;javastack&quot;).orElseThrow();     // javastack</span><br><span class="line">Optional.of(&quot;javastack&quot;).stream().count();  // 1</span><br><span class="line">Optional.ofNullable(null)</span><br><span class="line">    .or(() -&gt; Optional.of(&quot;javastack&quot;))</span><br><span class="line">    .get();   // javastack</span><br></pre></td></tr></table></figure>
+
+<h4 id="6、InputStream-加强"><a href="#6、InputStream-加强" class="headerlink" title="6、InputStream 加强"></a>6、InputStream 加强</h4><p>InputStream 终于有了一个非常有用的方法：transferTo，可以用来将数据直接传输到 OutputStream，这是在处理原始数据流时非常常见的一种用法，如下示例。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var classLoader = ClassLoader.getSystemClassLoader();</span><br><span class="line">var inputStream = classLoader.getResourceAsStream(&quot;javastack.txt&quot;);</span><br><span class="line">var javastack = File.createTempFile(&quot;javastack2&quot;, &quot;txt&quot;);</span><br><span class="line">try (var outputStream = new FileOutputStream(javastack)) &#123;</span><br><span class="line">    inputStream.transferTo(outputStream);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="7、HTTP-Client-API"><a href="#7、HTTP-Client-API" class="headerlink" title="7、HTTP Client API"></a>7、HTTP Client API</h4><p>这是 Java 9 开始引入的一个处理 HTTP 请求的的孵化 HTTP Client  API，该 API 支持同步和异步，而在 Java 11 中已经为正式可用状态，你可以在 <code>java.net</code> 包中找到这个 API。</p>
+<p>来看一下 HTTP Client 的用法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">var request = HttpRequest.newBuilder()</span><br><span class="line">    .uri(URI.create(&quot;https://javastack.cn&quot;))</span><br><span class="line">    .GET()</span><br><span class="line">    .build();</span><br><span class="line">var client = HttpClient.newHttpClient();</span><br><span class="line"></span><br><span class="line">// 同步</span><br><span class="line">HttpResponse&lt;String&gt; response = client.send(request, HttpResponse.BodyHandlers.ofString());</span><br><span class="line">System.out.println(response.body());</span><br><span class="line"></span><br><span class="line">// 异步</span><br><span class="line">client.sendAsync(request, HttpResponse.BodyHandlers.ofString())</span><br><span class="line">    .thenApply(HttpResponse::body)</span><br><span class="line">    .thenAccept(System.out::println);</span><br></pre></td></tr></table></figure>
+
+<p>上面的 <code>.GET()</code> 可以省略，默认请求方式为 Get！</p>
+<p>更多使用示例可以看这个 API，后续有机会再做演示。</p>
+<p>现在 Java 自带了这个 HTTP Client API，我们以后还有必要用 Apache 的 HttpClient 工具包吗？</p>
+<h4 id="8、化繁为简，一个命令编译运行源代码"><a href="#8、化繁为简，一个命令编译运行源代码" class="headerlink" title="8、化繁为简，一个命令编译运行源代码"></a>8、化繁为简，一个命令编译运行源代码</h4><p>看下面的代码。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 编译</span><br><span class="line">javac Javastack.java</span><br><span class="line"></span><br><span class="line">// 运行</span><br><span class="line">java Javastack</span><br></pre></td></tr></table></figure>
+
+<p>在我们的认知里面，要运行一个 Java 源代码必须先编译，再运行，两步执行动作。而在未来的 Java 11 版本中，通过一个 <code>java</code> 命令就直接搞定了，如以下所示。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java Javastack.java</span><br></pre></td></tr></table></figure>
+
+<h4 id="更多新特性"><a href="#更多新特性" class="headerlink" title="更多新特性"></a>更多新特性</h4><ul>
+<li>Flow API for reactive programming</li>
+<li>Java Module System</li>
+<li>Application Class Data Sharing</li>
+<li>Dynamic Class-File Constants</li>
+<li>Java REPL (JShell)</li>
+<li>Flight Recorder</li>
+<li>Unicode 10</li>
+<li>G1: Full Parallel Garbage Collector</li>
+<li>ZGC: Scalable Low-Latency Garbage Collector</li>
+<li>Epsilon: No-Op Garbage Collector</li>
+<li>Deprecate the Nashorn JavaScript Engine</li>
+<li>…</li>
+</ul>
+<h4 id="历史新特性文章"><a href="#历史新特性文章" class="headerlink" title="历史新特性文章"></a>历史新特性文章</h4><ul>
+<li>Java 11 要来了，编译运行一个命令搞定</li>
+<li>JDK 11 发布计划来了，已确定 3个 新特性</li>
+<li>Java 10 实战第 1 篇：局部变量类型推断</li>
+<li>JDK 5 ~ 10 新特性倾情整理</li>
+<li>JDK 10 的 10 个新特性</li>
+<li>JDK 10 最重要的 5 个新特性</li>
+<li>JDK 9 的 9 个新特性</li>
+<li>JDK 9 新特性实战：简化流关闭新姿势</li>
+<li>JDK 8 的排序大法</li>
+<li>JDK 8 新特性之 Lambda 表达式</li>
+<li>JDK 8 新特性之函数式接口</li>
+<li>JDK 8 新特性之方法引用</li>
+<li>JDK 8 新特性之接口默认方法与静态方法</li>
+<li>JDK 8 新特性之 Optional</li>
+<li>JDK 8 新特性之重复注解</li>
+<li>JDK 8 新特性之 Stream 流</li>
+<li>JDK 8 新特性之 Stream 流（一）基础体验</li>
+<li>JDK 8 新特性之 Stream 流（二）关键知识点</li>
+<li>JDK 8 新特性之 Stream 流（三）缩减操作</li>
+<li>JDK 8 新特性之 Stream 流（四）并行流</li>
+<li>JDK 8 新特性之 Stream 流（五）映射</li>
+<li>JDK 8 新特性之 Stream 流（六）收集缩</li>
+<li>JDK 8 新特性之 Stream 流（七）流与迭代器</li>
+<li>JDK 8 新特性之扩展篇</li>
+</ul>
+<h4 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h4><p>现在许多人还在使用 Java 8 或者 7，不过 8 在 2019 年初就会结束免费更新。现在 11 是长期支持版本，正是学习和上手 11 的好时机，写这篇文章希望能对你有所启发。</p>
+<p>如果你喜欢的我的文章，对你有帮助，点赞转发支持一下吧~</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java11/Java%2011%20%E6%AD%A3%E5%BC%8F%E5%8F%91%E5%B8%83%EF%BC%8C%E8%BF%99%208%20%E4%B8%AA%E6%96%B0%E7%89%B9%E6%80%A7%E6%95%99%E4%BD%A0%E5%86%99%E5%87%BA%E6%9B%B4%E7%89%9B%E9%80%BC%E7%9A%84%E4%BB%A3%E7%A0%81/" data-id="cmgrfxxdd003m30d4awii4a0l" data-title="Java 11 正式发布，这 8 个新特性教你写出更牛逼的代码" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java11/Java%2011%20%E5%B7%B2%E5%8F%91%E5%B8%83%EF%BC%8CString%20%E8%BF%98%E8%83%BD%E8%BF%99%E6%A0%B7%E7%8E%A9/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Java 11 已发布，String 还能这样玩
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java12/Java%2012%20%E9%AA%9A%E6%93%8D%E4%BD%9C%EF%BC%8C%20String%E5%B1%85%E7%84%B6%E8%BF%98%E8%83%BD%E8%BF%99%E6%A0%B7%E7%8E%A9/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java 12 骚操作， String居然还能这样玩</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 18px;">基础</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 16px;">多线程</a> <a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" style="font-size: 20px;">新特性</a> <a href="/tags/%E8%BF%9B%E9%98%B6/" style="font-size: 14px;">进阶</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 12px;">集合</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java%205%20~%2010%20%E6%96%B0%E7%89%B9%E6%80%A7%E5%80%BE%E6%83%85%E6%95%B4%E7%90%86%EF%BC%81/">Java 5 ~ 10 新特性倾情整理！</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%206%20%E9%A2%97%E8%AF%AD%E6%B3%95%E7%B3%96/">Java 中的 6 颗语法糖</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%20String%20%E7%9C%9F%E7%9A%84%E6%98%AF%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%90%97%EF%BC%9F/">Java 中的 String 真的是不可变吗？</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E4%BC%AA%E5%85%B1%E4%BA%AB%E8%AF%A6%E8%A7%A3%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">Java 中的伪共享详解及解决方案</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E5%AE%8F%E5%8F%98%E9%87%8F%EF%BC%8C%E5%AE%8F%E6%9B%BF%E6%8D%A2%E8%AF%A6%E8%A7%A3%E3%80%82/">Java 中的宏变量，宏替换详解。</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Java9 简化流关闭新姿势 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="做Java开发的都知道，每个资源的打开都需要对应的关闭操作，不然就会使资源一直占用而造成资源浪费，从而降低系统性能。 关于资源的关闭操作，从JDK7-JDK9有了不少的提升及简化。 JDK6在JDK6及之前，每个资源都需要我们手动写代码关闭，如： 123456789101112131415161718FileInputStream fis &#x3D; null;byte[] buffer &#x3D; new b">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java9 简化流关闭新姿势">
+<meta property="og:url" content="http://example.com/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java9/Java9%20%E7%AE%80%E5%8C%96%E6%B5%81%E5%85%B3%E9%97%AD%E6%96%B0%E5%A7%BF%E5%8A%BF/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="做Java开发的都知道，每个资源的打开都需要对应的关闭操作，不然就会使资源一直占用而造成资源浪费，从而降低系统性能。 关于资源的关闭操作，从JDK7-JDK9有了不少的提升及简化。 JDK6在JDK6及之前，每个资源都需要我们手动写代码关闭，如： 123456789101112131415161718FileInputStream fis &#x3D; null;byte[] buffer &#x3D; new b">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://img.javastack.cn/18-2-27/87594869.jpg">
+<meta property="article:published_time" content="2025-10-15T03:36:33.000Z">
+<meta property="article:modified_time" content="2025-10-15T03:37:54.787Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="新特性">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://img.javastack.cn/18-2-27/87594869.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-新特性/Java9/Java9 简化流关闭新姿势" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java9/Java9%20%E7%AE%80%E5%8C%96%E6%B5%81%E5%85%B3%E9%97%AD%E6%96%B0%E5%A7%BF%E5%8A%BF/" class="article-date">
+  <time class="dt-published" datetime="2025-10-15T03:36:33.000Z" itemprop="datePublished">2025-10-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Java9 简化流关闭新姿势
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="http://img.javastack.cn/18-2-27/87594869.jpg"></p>
+<p>做Java开发的都知道，每个资源的打开都需要对应的关闭操作，不然就会使资源一直占用而造成资源浪费，从而降低系统性能。</p>
+<p>关于资源的关闭操作，从JDK7-JDK9有了不少的提升及简化。</p>
+<h4 id="JDK6"><a href="#JDK6" class="headerlink" title="JDK6"></a>JDK6</h4><p>在JDK6及之前，每个资源都需要我们手动写代码关闭，如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">FileInputStream fis = null;</span><br><span class="line">byte[] buffer = new byte[1024];</span><br><span class="line">try &#123;</span><br><span class="line">	fis = new FileInputStream(new File(&quot;E:\\Java技术.txt&quot;));</span><br><span class="line">	while (fis.read(buffer) &gt; 0) &#123;</span><br><span class="line">		System.out.println(new String(buffer));</span><br><span class="line">	&#125;</span><br><span class="line">&#125; catch (Exception e) &#123;</span><br><span class="line">	e.printStackTrace();</span><br><span class="line">&#125; finally &#123;</span><br><span class="line">	if (fis != null) &#123;</span><br><span class="line">		try &#123;</span><br><span class="line">			fis.close();</span><br><span class="line">		&#125; catch (IOException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>资源打开使用完后，必须在finally块中进行手动关闭！我们有的同事，做一个查询功能点，打开了连接查询完后没有手动关闭，最后造成连接池超出最大连接数而使系统功能堵塞。</p>
+<h4 id="JDK7"><a href="#JDK7" class="headerlink" title="JDK7"></a>JDK7</h4><p>JDK7发布后，添加了新特性：try-with-resources语句。所有需要关闭的资源只要实现了<code>java.lang.AutoCloseable</code>（java.io.Closeable就实现了这个接口）接口就在会程序结束后自动关闭。</p>
+<p>如上面的读取文件的流程序用JDK7来写：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">byte[] buffer = new byte[1024];</span><br><span class="line">try (FileInputStream fis = new FileInputStream(new File(&quot;E:\\Java技术.txt&quot;))) &#123;</span><br><span class="line">	while (fis.read(buffer) &gt; 0) &#123;</span><br><span class="line">		System.out.println(new String(buffer));</span><br><span class="line">	&#125;</span><br><span class="line">&#125; catch (Exception e) &#123;</span><br><span class="line">	e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>所有的资源在<code>try()</code>里面定义，并去掉了finally模块。</p>
+<p>下面我们来写一个自定义的流来看看是否自动关闭了。</p>
+<p><strong>定义一个自定义输入输出流</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class MyInputStream implements AutoCloseable &#123;</span><br><span class="line"></span><br><span class="line">	void read(String content) &#123;</span><br><span class="line">		System.out.println(&quot;read content &quot; + content);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public void close() throws Exception &#123;</span><br><span class="line">		System.out.println(&quot;input stream is closed.&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class MyOutputStream implements AutoCloseable &#123;</span><br><span class="line"></span><br><span class="line">	void write(String content) &#123;</span><br><span class="line">		System.out.println(&quot;write content &quot; + content);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public void close() throws Exception &#123;</span><br><span class="line">		System.out.println(&quot;out stream is closed.&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>单个资源自动关闭</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">try (MyInputStream mis = new MyInputStream()) &#123;</span><br><span class="line">	mis.read(&quot;7_2&quot;);</span><br><span class="line">&#125; catch (Exception e) &#123;</span><br><span class="line">	e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<blockquote>
+<p>read content 7_2<br>input stream is closed.</p>
+</blockquote>
+<p><strong>多个资源自动关闭</strong></p>
+<p><code>try()</code>里面可以定义多个资源，它们的关闭顺序是最后在<code>try()</code>定义的资源先关闭。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">try (MyInputStream mis = new MyInputStream(); MyOutputStream mos = new MyOutputStream()) &#123;</span><br><span class="line">	mis.read(&quot;7_3&quot;);</span><br><span class="line">	mos.write(&quot;7_3&quot;);</span><br><span class="line">&#125; catch (Exception e) &#123;</span><br><span class="line">	e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<blockquote>
+<p>read content 7_3<br>write content 7_3<br>out stream is closed.<br>input stream is closed.</p>
+</blockquote>
+<h4 id="JDK9"><a href="#JDK9" class="headerlink" title="JDK9"></a>JDK9</h4><p>JDK9发布后，又简化了try-with-resources语句的用法。</p>
+<p><code>try()</code>里面可以是一个变量，但必须是final的或者等同final才行。如下面的mis，mos定义成局部变量可以不用final，局部变量可以等同于final，但定义成成员变量就必须是用final修饰的，不然会编译错误。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">MyInputStream mis = new MyInputStream();</span><br><span class="line">MyOutputStream mos = new MyOutputStream();</span><br><span class="line">try (mis; mos) &#123;</span><br><span class="line">	mis.read(&quot;1.9&quot;);</span><br><span class="line">	mos.write(&quot;1.9&quot;);</span><br><span class="line">&#125; catch (Exception e) &#123;</span><br><span class="line">	e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<blockquote>
+<p>read content 1.9<br>write content 1.9<br>out stream is closed.<br>input stream is closed.</p>
+</blockquote>
+<p>再来看个例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Connection dbCon = DriverManager.getConnection(&quot;url&quot;, &quot;user&quot;, &quot;password&quot;);</span><br><span class="line">try (dbCon; ResultSet rs = dbCon.createStatement().executeQuery(&quot;select * from emp&quot;)) &#123;</span><br><span class="line">    while (rs.next()) &#123;</span><br><span class="line">        System.out.println(&quot;In loadDataFromDB() =====&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; &quot; + rs.getString(1));</span><br><span class="line">    &#125;</span><br><span class="line">&#125; catch (SQLException e) &#123;</span><br><span class="line">    System.out.println(&quot;Exception occurs while reading the data from DB -&gt;&quot; + e.getMessage());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>dbCon和rs都能被自动关闭。</p>
+<p>JKD9虽然简化了，但感觉还是没有什么质的变化，实际用途我们可能不希望关心资源的关闭，或者在方法结束之后如果是局部变量它就能自动关闭。或许是我站的高度不够，官方有其他的考量，但JDK9的这一点变化还是非常有用的。</p>
+<p>更多JDK9的新功能实战陆续更新，如果觉得有用，分享到朋友圈给更多的人吧！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java9/Java9%20%E7%AE%80%E5%8C%96%E6%B5%81%E5%85%B3%E9%97%AD%E6%96%B0%E5%A7%BF%E5%8A%BF/" data-id="cmgrfxxde003u30d435frc4y1" data-title="Java9 简化流关闭新姿势" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java12/Java%2012%20%E9%AA%9A%E6%93%8D%E4%BD%9C%EF%BC%8C%20%E6%96%87%E4%BB%B6%E6%AF%94%E5%AF%B9%E5%B1%85%E7%84%B6%E8%BF%98%E8%83%BD%E8%BF%99%E6%A0%B7%E7%8E%A9%EF%BC%81/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Java 12 骚操作， 文件比对居然还能这样玩！
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java8/Java8%20%E4%B9%8B%E6%96%B0%E7%89%B9%E6%80%A7%E6%89%A9%E5%B1%95%E7%AF%87/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java8 之新特性扩展篇</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 18px;">基础</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 16px;">多线程</a> <a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" style="font-size: 20px;">新特性</a> <a href="/tags/%E8%BF%9B%E9%98%B6/" style="font-size: 14px;">进阶</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 12px;">集合</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java%205%20~%2010%20%E6%96%B0%E7%89%B9%E6%80%A7%E5%80%BE%E6%83%85%E6%95%B4%E7%90%86%EF%BC%81/">Java 5 ~ 10 新特性倾情整理！</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%206%20%E9%A2%97%E8%AF%AD%E6%B3%95%E7%B3%96/">Java 中的 6 颗语法糖</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%20String%20%E7%9C%9F%E7%9A%84%E6%98%AF%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%90%97%EF%BC%9F/">Java 中的 String 真的是不可变吗？</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E4%BC%AA%E5%85%B1%E4%BA%AB%E8%AF%A6%E8%A7%A3%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">Java 中的伪共享详解及解决方案</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E5%AE%8F%E5%8F%98%E9%87%8F%EF%BC%8C%E5%AE%8F%E6%9B%BF%E6%8D%A2%E8%AF%A6%E8%A7%A3%E3%80%82/">Java 中的宏变量，宏替换详解。</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -71,10 +71,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-新特性/Java 5 ~ 10 新特性倾情整理！" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2025/10/13/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2025-10-13T09:36:44.695Z" itemprop="datePublished">2025-10-13</time>
+    <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java%205%20~%2010%20%E6%96%B0%E7%89%B9%E6%80%A7%E5%80%BE%E6%83%85%E6%95%B4%E7%90%86%EF%BC%81/" class="article-date">
+  <time class="dt-published" datetime="2025-10-15T03:36:33.000Z" itemprop="datePublished">2025-10-15</time>
 </a>
     
   </div>
@@ -85,7 +85,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/10/13/hello-world/">Hello World</a>
+      <a class="p-name article-title" href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java%205%20~%2010%20%E6%96%B0%E7%89%B9%E6%80%A7%E5%80%BE%E6%83%85%E6%95%B4%E7%90%86%EF%BC%81/">Java 5 ~ 10 新特性倾情整理！</a>
     </h1>
   
 
@@ -93,27 +93,709 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+        <p>最近连 JDK11都在准备发布的路上了，大家都整明白了吗？也许现在大部分人还在用6-8，8的新特性都没用熟，9刚出不久，10-11就不用说了。</p>
+<p>为了大家对JDK有一个全面的了解，下面我为大家整理了JDK5~10的所有关键新特性！</p>
+<p><strong>JDK5新特性</strong></p>
+<ul>
+<li>自动装箱与拆箱</li>
+<li>枚举</li>
+<li>静态导入</li>
+<li>可变参数（Varargs）</li>
+<li>内省（introspector）</li>
+<li>泛型（Generic）</li>
+<li>For-Each循环</li>
+</ul>
+<p><strong>JDK6新特性</strong></p>
+<ul>
+<li>Desktop类和SystemTray类</li>
+<li>使用JAXB2来实现对象与XML之间的映射</li>
+<li>理解STAX</li>
+<li>使用Compiler API</li>
+<li>轻量级 Http Server API</li>
+<li>插入式注解处理 API</li>
+<li>使用Console开发控制台程序</li>
+<li>对脚本语言的支持</li>
+<li>Common Annotations</li>
+<li>Java GUI界面的显示</li>
+<li>嵌入式数据库Derby</li>
+<li>Web服务元数据</li>
+<li>Jtable的排序和过滤</li>
+<li>更简单更强大的JAX-WS</li>
+</ul>
+<p><strong>JDK7新特性</strong></p>
+<ul>
+<li>switch中可以使用字符串了</li>
+<li>泛型实例化类型自动推断</li>
+<li>自定义自动关闭类</li>
+<li>新增一些读取环境信息的工具方法</li>
+<li>Boolean类型反转，空指针安全，参与位运算</li>
+<li>两个char之间的equals</li>
+<li>安全的加减乘除|sd</li>
+<li>对Java集合( Collections）的增强支持</li>
+<li>数值可加下划线</li>
+<li>支持二进制数字</li>
+<li>在try&#x2F;catch异常扑捉中，一个catch可以写多个异常类型用|隔开</li>
+<li>可以不必要写finally语句来关闭资源，只要你在try()的括号内部定义要使用的资源</li>
+</ul>
+<p><strong>JDK8新特性</strong></p>
+<ul>
+<li>接口的默认方法</li>
+<li>Lambda表达式</li>
+<li>函数式接口</li>
+<li>方法与构造函数引用</li>
+<li>扩展了集合类</li>
+<li>新的Date API</li>
+<li>Annotation多重注解</li>
+<li>streams（流）</li>
+<li>parallel streams(并行流)</li>
+<li>Map数据结构改进</li>
+</ul>
+<p><strong>JDK9新特性</strong></p>
+<ul>
+<li>Jigsaw模块化项目</li>
+<li>简化进程API</li>
+<li>轻量级JSON API</li>
+<li>钱和货币的API</li>
+<li>改善锁竞争机制</li>
+<li>代码分段缓存</li>
+<li>智能java编译</li>
+<li>http2.0客户端</li>
+<li>kulla计划</li>
+</ul>
+<p><strong>JDK10新特性</strong></p>
+<ul>
+<li>局部变量的类型推断</li>
+<li>GC改进和内存管理</li>
+<li>线程本地握手</li>
+<li>备用内存设备上的堆分配</li>
+<li>其他Unicode语言 - 标记扩展</li>
+<li>基于Java的实验性JIT编译器</li>
+<li>开源根证书</li>
+<li>根证书颁发认证（CA）</li>
+<li>将JDK生态整合单个存储库</li>
+<li>删除工具javah</li>
+</ul>
+<p>怎么样，这些新特性都知道多少？都用过多少？多学习这些新特性，对写代码的效率、逼格、技能成长、就业还是会很有帮助的。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/10/13/hello-world/" data-id="cmgpvvv4a0001ggd423pyht6o" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java%205%20~%2010%20%E6%96%B0%E7%89%B9%E6%80%A7%E5%80%BE%E6%83%85%E6%95%B4%E7%90%86%EF%BC%81/" data-id="cmgrfxxcy001230d4b55og1vm" data-title="Java 5 ~ 10 新特性倾情整理！" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-进阶/Java 中的 6 颗语法糖" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%206%20%E9%A2%97%E8%AF%AD%E6%B3%95%E7%B3%96/" class="article-date">
+  <time class="dt-published" datetime="2025-10-15T03:36:33.000Z" itemprop="datePublished">2025-10-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%206%20%E9%A2%97%E8%AF%AD%E6%B3%95%E7%B3%96/">Java 中的 6 颗语法糖</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="http://img.javastack.cn/18-1-23/39717542.jpg" alt="image"></p>
+<p>语法糖（Syntactic Sugar），也称糖衣语法，指在计算机语言中添加的某种语法，这种语法对语言本身功能来说没有什么影响，只是为了方便程序员的开发，提高开发效率。说白了，语法糖就是对现有语法的一个封装。</p>
+<p>Java作为一种与平台无关的高级语言，当然也含有语法糖，这些语法糖并不被虚拟机所支持，在编译成字节码阶段就自动转换成简单常用语法。</p>
+<p><strong>一般来说Java中的语法糖主要有以下几种：</strong> </p>
+<ol>
+<li>泛型与类型擦除 </li>
+<li>自动装箱与拆箱</li>
+<li>变长参数</li>
+<li>增强for循环 </li>
+<li>内部类</li>
+<li>枚举类</li>
+</ol>
+<p><strong>泛型与类型擦除</strong></p>
+<p>Java语言并不是一开始就支持泛型的。在早期的JDK中，只能通过Object类是所有类型的父类和强制类型转换来实现泛型的功能。强制类型转换的缺点就是把编译期间的问题延迟到运行时，JVM并不能为我们提供编译期间的检查。</p>
+<p>在JDK1.5中，Java语言引入了泛型机制。但是这种泛型机制是通过类型擦除来实现的，即Java中的泛型只在程序源代码中有效（源代码阶段提供类型检查），在编译后的字节码中自动用强制类型转换进行替代。也就是说，Java语言中的泛型机制其实就是一颗语法糖，相较与C++、C#相比，其泛型实现实在是不那么优雅。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* 在源代码中存在泛型</span><br><span class="line">*/</span><br><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    Map&lt;String,String&gt; map = new HashMap&lt;String,String&gt;();</span><br><span class="line">    map.put(&quot;hello&quot;,&quot;你好&quot;);</span><br><span class="line">    String hello = map.get(&quot;hello&quot;);</span><br><span class="line">    System.out.println(hello);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当上述源代码被编译为class文件后，泛型被擦除且引入强制类型转换</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    HashMap map = new HashMap(); //类型擦除</span><br><span class="line">    map.put(&quot;hello&quot;, &quot;你好&quot;);</span><br><span class="line">    String hello = (String)map.get(&quot;hello&quot;);//强制转换</span><br><span class="line">    System.out.println(hello);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>自动装箱与拆箱</strong></p>
+<p>Java中的自动装箱与拆箱指的是基本数据类型与他们的包装类型之间的相互转换。</p>
+<p>我们知道Java是一门面向对象的语言，在Java世界中有一句话是这么说的：“万物皆对象”。但是Java中的基本数据类型却不是对象，他们不需要进行new操作，也不能调用任何方法，这在使用的时候有诸多不便。因此Java为这些基本类型提供了包装类，并且为了使用方便，提供了自动装箱与拆箱功能。自动装箱与拆箱在使用的过程中，其实是一个语法糖，内部还是调用了相应的函数进行转换。</p>
+<p>下面代码演示了自动装箱和拆箱功能</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    Integer a = 1;</span><br><span class="line">    int b = 2;</span><br><span class="line">    int c = a + b;</span><br><span class="line">    System.out.println(c);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>经过编译后，代码如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    Integer a = Integer.valueOf(1); // 自动装箱</span><br><span class="line">    byte b = 2;</span><br><span class="line">    int c = a.intValue() + b;//自动拆箱</span><br><span class="line">    System.out.println(c);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>变长参数</strong></p>
+<p>所谓变长参数，就是方法可以接受长度不定确定的参数。变长参数特性是在JDK1.5中引入的，使用变长参数有两个条件，一是变长的那一部分参数具有相同的类型，二是变长参数必须位于方法参数列表的最后面。变长参数同样是Java中的语法糖，其内部实现是Java数组。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class Varargs &#123;</span><br><span class="line">    public static void print(String... args) &#123;</span><br><span class="line">        for(String str : args)&#123;</span><br><span class="line">            System.out.println(str);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        print(&quot;hello&quot;, &quot;world&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编译为class文件后如下，从中可以很明显的看出变长参数内部是通过数组实现的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public class Varargs &#123;</span><br><span class="line">    public Varargs() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void print(String... args) &#123;</span><br><span class="line">        String[] var1 = args;</span><br><span class="line">        int var2 = args.length;</span><br><span class="line">        //增强for循环的数组实现方式</span><br><span class="line">        for(int var3 = 0; var3 &lt; var2; ++var3) &#123;</span><br><span class="line">            String str = var1[var3];</span><br><span class="line">            System.out.println(str);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        //变长参数转换为数组</span><br><span class="line">        print(new String[]&#123;&quot;hello&quot;, &quot;world&quot;&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>增强for循环</strong></p>
+<p>增强for循环与普通for循环相比，功能更强并且代码更简洁。增强for循环的对象要么是一个数组，要么实现了Iterable接口。这个语法糖主要用来对数组或者集合进行遍历，其在循环过程中不能改变集合的大小。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    String[] params = new String[]&#123;&quot;hello&quot;,&quot;world&quot;&#125;;</span><br><span class="line">    //增强for循环对象为数组</span><br><span class="line">    for(String str : params)&#123;</span><br><span class="line">        System.out.println(str);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    List&lt;String&gt; lists = Arrays.asList(&quot;hello&quot;,&quot;world&quot;);</span><br><span class="line">    //增强for循环对象实现Iterable接口</span><br><span class="line">    for(String str : lists)&#123;</span><br><span class="line">        System.out.println(str);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编译后的class文件为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">   String[] params = new String[]&#123;&quot;hello&quot;, &quot;world&quot;&#125;;</span><br><span class="line">   String[] lists = params;</span><br><span class="line">   int var3 = params.length;</span><br><span class="line">   //数组形式的增强for退化为普通for</span><br><span class="line">   for(int str = 0; str &lt; var3; ++str) &#123;</span><br><span class="line">       String str1 = lists[str];</span><br><span class="line">       System.out.println(str1);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   List var6 = Arrays.asList(new String[]&#123;&quot;hello&quot;, &quot;world&quot;&#125;);</span><br><span class="line">   Iterator var7 = var6.iterator();</span><br><span class="line">   //实现Iterable接口的增强for使用iterator接口进行遍历</span><br><span class="line">   while(var7.hasNext()) &#123;</span><br><span class="line">       String var8 = (String)var7.next();</span><br><span class="line">       System.out.println(var8);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>内部类</strong></p>
+<p>内部类就是定义在一个类内部的类<br>Java语言中之所以引入内部类，是因为有些时候一个类只在另一个类中有用，我们不想让其在另外一个地方被使用。内部类之所以是语法糖，是因为其只是一个编译时的概念，一旦编译完成，编译器就会为内部类生成一个单独的class文件，名为outer$innter.class。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public class Outer &#123;</span><br><span class="line">    class Inner&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用javac编译后，生成两个class文件Outer.class和Outer$Inner.class，其中Outer$Inner.class的内容如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class Outer$Inner &#123;</span><br><span class="line">    Outer$Inner(Outer var1) &#123;</span><br><span class="line">        this.this$0 = var1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>内部类分为四种：成员内部类、局部内部类、匿名内部类、静态内部类，每一种都有其用法，这里就不介绍了</p>
+<p><strong>枚举类型</strong></p>
+<p>枚举类型就是一些具有相同特性的类常量<br>java中类的定义使用class，枚举类的定义使用enum。在Java的字节码结构中，其实并没有枚举类型，枚举类型只是一个语法糖，在编译完成后被编译成一个普通的类。这个类继承java.lang.Enum，并被final关键字修饰。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public enum Fruit &#123;</span><br><span class="line">    APPLE,ORINGE</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用jad对编译后的class文件进行反编译后得到：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">//继承java.lang.Enum并声明为final</span><br><span class="line">public final class Fruit extends Enum</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    public static Fruit[] values()</span><br><span class="line">    &#123;</span><br><span class="line">        return (Fruit[])$VALUES.clone();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static Fruit valueOf(String s)</span><br><span class="line">    &#123;</span><br><span class="line">        return (Fruit)Enum.valueOf(Fruit, s);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private Fruit(String s, int i)</span><br><span class="line">    &#123;</span><br><span class="line">        super(s, i);</span><br><span class="line">    &#125;</span><br><span class="line">    //枚举类型常量</span><br><span class="line">    public static final Fruit APPLE;</span><br><span class="line">    public static final Fruit ORANGE;</span><br><span class="line">    private static final Fruit $VALUES[];//使用数组进行维护</span><br><span class="line"></span><br><span class="line">    static</span><br><span class="line">    &#123;</span><br><span class="line">        APPLE = new Fruit(&quot;APPLE&quot;, 0);</span><br><span class="line">        ORANGE = new Fruit(&quot;ORANGE&quot;, 1);</span><br><span class="line">        $VALUES = (new Fruit[] &#123;</span><br><span class="line">            APPLE, ORANGE</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Java远不止这些语法糖，JDK7、JDK8添加的新特性都有很多高级的语法糖。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%206%20%E9%A2%97%E8%AF%AD%E6%B3%95%E7%B3%96/" data-id="cmgrfxxd4002630d4cg403arv" data-title="Java 中的 6 颗语法糖" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-进阶/Java 中的 String 真的是不可变吗？" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%20String%20%E7%9C%9F%E7%9A%84%E6%98%AF%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%90%97%EF%BC%9F/" class="article-date">
+  <time class="dt-published" datetime="2025-10-15T03:36:33.000Z" itemprop="datePublished">2025-10-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%20String%20%E7%9C%9F%E7%9A%84%E6%98%AF%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%90%97%EF%BC%9F/">Java 中的 String 真的是不可变吗？</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>我们都知道 Java 中的 String 类的设计是不可变的，来看下 String 类的源码。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public final class String</span><br><span class="line">    implements java.io.Serializable, Comparable&lt;String&gt;, CharSequence &#123;</span><br><span class="line">    </span><br><span class="line">    /** The value is used for character storage. */</span><br><span class="line">    private final char value[];</span><br><span class="line">    </span><br><span class="line">    /** Cache the hash code for the string */</span><br><span class="line">    private int hash; // Default to 0</span><br><span class="line">    </span><br><span class="line">    // ...</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看出 String 类是 final 类型的，String 不能被继承。其值 value 也就是对字符数组的封装，即 char[]，其值被定义成 private final 的，说明不能通过外界修改，即不可变。</p>
+<h3 id="String-真的-“不可变-“-吗？"><a href="#String-真的-“不可变-“-吗？" class="headerlink" title="String 真的 “不可变 “ 吗？"></a>String 真的 “不可变 “ 吗？</h3><p>来看下面这个例子。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">String str = &quot;Python&quot;;</span><br><span class="line">System.out.println(str); // Python</span><br><span class="line"></span><br><span class="line">str = &quot;Java&quot;;</span><br><span class="line">System.out.println(str); // Java</span><br><span class="line"></span><br><span class="line">str = str.substring(1);</span><br><span class="line">System.out.println(str); // ava</span><br></pre></td></tr></table></figure>
+
+<p><strong>你有可能会问：str 不是由 Python 变成 Java 了吗？然后通过 substring 方法变成 ava 了吗？</strong></p>
+<p>这其实是初学者的一个误区，从上面看 String 的结构可以得知字符串是由字符数组构成的，str 只是一个引用而已，第一次引用了 “Python”，后面变成了 “Java”，而 substring 也是用 Arrays.copyOfRange 方法重新复制字符数组构造了一个新的字符串。</p>
+<p><img src="http://img.javastack.cn/18-9-12/688492.jpg"></p>
+<p>所以说，这里的字符串并不是可变，只是变更了字符串引用。</p>
+<p>关于 substring 在 JDK 各个版本的差异可以看这篇文章《<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/3KrBept61jDAtheR27gFJA">注意：字符串substring方法在jkd6,7,8中的差异</a>》，也可以去看 substring 的各个版本的源码。</p>
+<h3 id="String-真的真的真的-“不可变-“-吗？"><a href="#String-真的真的真的-“不可变-“-吗？" class="headerlink" title="String 真的真的真的 “不可变 “ 吗？"></a>String 真的真的真的 “不可变 “ 吗？</h3><p>上面的例子肯定是不可变的，下面这个就尴尬了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">String str = &quot;Hello Python&quot;;</span><br><span class="line">System.out.println(str); // Hello Python</span><br><span class="line"></span><br><span class="line">Field field = String.class.getDeclaredField(&quot;value&quot;);</span><br><span class="line">field.setAccessible(true);</span><br><span class="line"></span><br><span class="line">char[] value = (char[])field.get(str);</span><br><span class="line">value[6] = &#x27;J&#x27;;</span><br><span class="line">value[7] = &#x27;a&#x27;;</span><br><span class="line">value[8] = &#x27;v&#x27;;</span><br><span class="line">value[9] = &#x27;a&#x27;;</span><br><span class="line">value[10] = &#x27;!&#x27;;</span><br><span class="line">value[11] = &#x27;!&#x27;;</span><br><span class="line">System.out.println(str); // Hello Java!!</span><br></pre></td></tr></table></figure>
+
+<p>通过反射，我们改变了底层的字符数组的值，实现了字符串的 “不可变” 性，这是一种骚操作，不建议这么使用，违反了 Java 对 String 类的不可变设计原则，会造成一些安全问题。</p>
+<p>是不是又涨姿势了？分享给你的朋友们吧！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%20String%20%E7%9C%9F%E7%9A%84%E6%98%AF%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%90%97%EF%BC%9F/" data-id="cmgrfxxd5002830d4bf7t4tvl" data-title="Java 中的 String 真的是不可变吗？" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-进阶/Java 中的伪共享详解及解决方案" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E4%BC%AA%E5%85%B1%E4%BA%AB%E8%AF%A6%E8%A7%A3%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" class="article-date">
+  <time class="dt-published" datetime="2025-10-15T03:36:33.000Z" itemprop="datePublished">2025-10-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E4%BC%AA%E5%85%B1%E4%BA%AB%E8%AF%A6%E8%A7%A3%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">Java 中的伪共享详解及解决方案</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h4 id="1-什么是伪共享"><a href="#1-什么是伪共享" class="headerlink" title="1. 什么是伪共享"></a>1. 什么是伪共享</h4><p>CPU 缓存系统中是以缓存行（cache line）为单位存储的。目前主流的 CPU Cache 的 Cache Line 大小都是 64 Bytes。在多线程情况下，如果需要修改“共享同一个缓存行的变量”，就会无意中影响彼此的性能，这就是伪共享（False Sharing）。</p>
+<h4 id="2-缓存行"><a href="#2-缓存行" class="headerlink" title="2. 缓存行"></a>2. 缓存行</h4><p>由于共享变量在 CPU 缓存中的存储是以缓存行为单位，一个缓存行可以存储多个变量（存满当前缓存行的字节数）；而CPU对缓存的修改又是以缓存行为最小单位的，那么就会出现上诉的伪共享问题。</p>
+<p>Cache Line 可以简单的理解为 CPU Cache 中的最小缓存单位，今天的 CPU 不再是按字节访问内存，而是以 64 字节为单位的块(chunk)拿取，称为一个缓存行(cache line)。当你读一个特定的内存地址，整个缓存行将从主存换入缓存，并且访问同一个缓存行内的其它值的开销是很小的。</p>
+<h4 id="3-CPU-的三级缓存"><a href="#3-CPU-的三级缓存" class="headerlink" title="3. CPU 的三级缓存"></a>3. CPU 的三级缓存</h4><p>由于 CPU 的速度远远大于内存速度，所以 CPU 设计者们就给 CPU 加上了缓存(CPU Cache)。 以免运算被内存速度拖累。（就像我们写代码把共享数据做Cache不想被DB存取速度拖累一样），CPU Cache 分成了三个级别：L1，L2，L3。越靠近CPU的缓存越快也越小。所 以L1 缓存很小但很快，并且紧靠着在使用它的 CPU 内核。L2 大一些，也慢一些，并且仍然只能被一个单独的 CPU 核使用。L3 在现代多核机器中更普遍，仍然更大，更慢，并且被单个插槽上的所有 CPU 核共享。最后，你拥有一块主存，由全部插槽上的所有 CPU 核共享。</p>
+<p>当 CPU 执行运算的时候，它先去L1查找所需的数据，再去L2，然后是L3，最后如果这些缓存中都没有，所需的数据就要去主内存拿。走得越远，运算耗费的时间就越长。所以如果你在做一些很频繁的事，你要确保数据在L1缓存中。</p>
+<p><img src="http://img.javastack.cn/18-5-31/91078691.jpg"></p>
+<h4 id="4-缓存关联性"><a href="#4-缓存关联性" class="headerlink" title="4. 缓存关联性"></a>4. 缓存关联性</h4><p>目前常用的缓存设计是N路组关联(N-Way Set Associative Cache)，他的原理是把一个缓存按照N个 Cache Line 作为一组（Set），缓存按组划为等分。每个内存块能够被映射到相对应的set中的任意一个缓存行中。比如一个16路缓存，16个 Cache Line 作为一个Set，每个内存块能够被映射到相对应的 Set 中的16个 CacheLine 中的任意一个。一般地，具有一定相同低bit位地址的内存块将共享同一个Set。 </p>
+<p>下图为一个2-Way的Cache。由图中可以看到 Main Memory 中的 Index 0,2,4 都映射在Way0的不同 CacheLine 中，Index 1,3,5都映射在Way1的不同 CacheLine 中。</p>
+<p><img src="http://img.javastack.cn/18-5-31/71458405.jpg"></p>
+<h4 id="5-MESI-协议"><a href="#5-MESI-协议" class="headerlink" title="5. MESI 协议"></a>5. MESI 协议</h4><p>多核 CPU 都有自己的专有缓存（一般为L1，L2），以及同一个 CPU 插槽之间的核共享的缓存（一般为L3）。不同核心的CPU缓存中难免会加载同样的数据，那么如何保证数据的一致性呢，就是 MESI 协议了。</p>
+<p>在 MESI 协议中，每个 Cache line 有4个状态，可用 2 个 bit 表示，它们分别是：<br>M(Modified)：这行数据有效，数据被修改了，和内存中的数据不一致，数据只存在于本 Cache 中；<br>E(Exclusive)：这行数据有效，数据和内存中的数据一致，数据只存在于本 Cache 中；<br>S(Shared)：这行数据有效，数据和内存中的数据一致，数据存在于很多 Cache 中；<br>I(Invalid)：这行数据无效。</p>
+<p>那么，假设有一个变量i&#x3D;3（应该是包括变量i的缓存块，块大小为缓存行大小）；已经加载到多核（a,b,c）的缓存中，此时该缓存行的状态为S；此时其中的一个核a改变了变量i的值，那么在核a中的当前缓存行的状态将变为M，b,c核中的当前缓存行状态将变为I。如下图：</p>
+<p><img src="http://img.javastack.cn/18-5-31/66429246.jpg"></p>
+<h4 id="6-解决原理"><a href="#6-解决原理" class="headerlink" title="6. 解决原理"></a>6. 解决原理</h4><p>为了避免由于 false sharing 导致 Cache Line 从 L1,L2,L3 到主存之间重复载入，我们可以使用数据填充的方式来避免，即单个数据填充满一个CacheLine。这本质是一种空间换时间的做法。</p>
+<h4 id="7-Java-对于伪共享的传统解决方案"><a href="#7-Java-对于伪共享的传统解决方案" class="headerlink" title="7. Java 对于伪共享的传统解决方案"></a>7. Java 对于伪共享的传统解决方案</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">/***</span><br><span class="line">* </span><br><span class="line">**/</span><br><span class="line">import java.util.concurrent.atomic.AtomicLong;</span><br><span class="line"></span><br><span class="line">public final class FalseSharing</span><br><span class="line">    implements Runnable</span><br><span class="line">&#123;</span><br><span class="line">    public final static int NUM_THREADS = 4; // change</span><br><span class="line">    public final static long ITERATIONS = 500L * 1000L * 1000L;</span><br><span class="line">    private final int arrayIndex;</span><br><span class="line"></span><br><span class="line">    private static VolatileLong[] longs = new VolatileLong[NUM_THREADS];</span><br><span class="line">    static</span><br><span class="line">    &#123;</span><br><span class="line">        for (int i = 0; i &lt; longs.length; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            longs[i] = new VolatileLong();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public FalseSharing(final int arrayIndex)</span><br><span class="line">    &#123;</span><br><span class="line">        this.arrayIndex = arrayIndex;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(final String[] args) throws Exception</span><br><span class="line">    &#123;</span><br><span class="line">        final long start = System.nanoTime();</span><br><span class="line">        runTest();</span><br><span class="line">        System.out.println(&quot;duration = &quot; + (System.nanoTime() - start));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static void runTest() throws InterruptedException</span><br><span class="line">    &#123;</span><br><span class="line">        Thread[] threads = new Thread[NUM_THREADS];</span><br><span class="line"></span><br><span class="line">        for (int i = 0; i &lt; threads.length; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            threads[i] = new Thread(new FalseSharing(i));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (Thread t : threads)</span><br><span class="line">        &#123;</span><br><span class="line">            t.start();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (Thread t : threads)</span><br><span class="line">        &#123;</span><br><span class="line">            t.join();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void run()</span><br><span class="line">    &#123;</span><br><span class="line">        long i = ITERATIONS + 1;</span><br><span class="line">        while (0 != --i)</span><br><span class="line">        &#123;</span><br><span class="line">            longs[arrayIndex].set(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static long sumPaddingToPreventOptimisation(final int index)</span><br><span class="line">    &#123;</span><br><span class="line">        VolatileLong v = longs[index];</span><br><span class="line">        return v.p1 + v.p2 + v.p3 + v.p4 + v.p5 + v.p6;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //jdk7以上使用此方法(jdk7的某个版本oracle对伪共享做了优化)</span><br><span class="line">    public final static class VolatileLong</span><br><span class="line">    &#123;</span><br><span class="line">        public volatile long value = 0L;</span><br><span class="line">        public long p1, p2, p3, p4, p5, p6;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // jdk7以下使用此方法</span><br><span class="line">    public final static class VolatileLong</span><br><span class="line">    &#123;</span><br><span class="line">        public long p1, p2, p3, p4, p5, p6, p7; // cache line padding</span><br><span class="line">        public volatile long value = 0L;</span><br><span class="line">        public long p8, p9, p10, p11, p12, p13, p14; // cache line padding</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="8-Java-8-中的解决方案"><a href="#8-Java-8-中的解决方案" class="headerlink" title="8. Java 8 中的解决方案"></a>8. Java 8 中的解决方案</h4><p>Java 8 中已经提供了官方的解决方案，Java 8 中新增了一个注解：<code>@sun.misc.Contended</code>。加上这个注解的类会自动补齐缓存行，需要注意的是此注解默认是无效的，需要在 jvm 启动时设置 <code>-XX:-RestrictContended</code> 才会生效。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@sun.misc.Contended</span><br><span class="line">public final static class VolatileLong &#123;</span><br><span class="line">    public volatile long value = 0L;</span><br><span class="line">    //public long p1, p2, p3, p4, p5, p6;</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h4><blockquote>
+<p><a target="_blank" rel="noopener" href="http://igoro.com/archive/gallery-of-processor-cache-effects/">http://igoro.com/archive/gallery-of-processor-cache-effects/</a><br><a target="_blank" rel="noopener" href="http://ifeve.com/false-sharing/">http://ifeve.com/false-sharing/</a><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/muxiqingyang/article/details/6615199">http://blog.csdn.net/muxiqingyang/article/details/6615199</a><br><a target="_blank" rel="noopener" href="https://yq.aliyun.com/articles/62865">https://yq.aliyun.com/articles/62865</a></p>
+</blockquote>
+<p>@码农们，你们是怎么理解和解决伪共享的？欢迎留言！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E4%BC%AA%E5%85%B1%E4%BA%AB%E8%AF%A6%E8%A7%A3%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" data-id="cmgrfxxd5002b30d43rs78qz0" data-title="Java 中的伪共享详解及解决方案" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-进阶/Java 中的宏变量，宏替换详解。" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E5%AE%8F%E5%8F%98%E9%87%8F%EF%BC%8C%E5%AE%8F%E6%9B%BF%E6%8D%A2%E8%AF%A6%E8%A7%A3%E3%80%82/" class="article-date">
+  <time class="dt-published" datetime="2025-10-15T03:36:33.000Z" itemprop="datePublished">2025-10-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E5%AE%8F%E5%8F%98%E9%87%8F%EF%BC%8C%E5%AE%8F%E6%9B%BF%E6%8D%A2%E8%AF%A6%E8%A7%A3%E3%80%82/">Java 中的宏变量，宏替换详解。</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>首先来看下面这段程序，和群友分享的大致一样。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    String hw = &quot;hello world&quot;;</span><br><span class="line">    </span><br><span class="line">    String hello = &quot;hello&quot;;</span><br><span class="line">    final String finalWorld2 = &quot;hello&quot;;</span><br><span class="line">    final String finalWorld3 = hello;</span><br><span class="line">    final String finalWorld4 = &quot;he&quot; + &quot;llo&quot;;</span><br><span class="line">    </span><br><span class="line">    String hw1 = hello + &quot; world&quot;;</span><br><span class="line">    String hw2 = finalWorld2 + &quot; world&quot;;</span><br><span class="line">    String hw3 = finalWorld3 + &quot; world&quot;;</span><br><span class="line">    String hw4 = finalWorld4 + &quot; world&quot;;</span><br><span class="line">    </span><br><span class="line">    System.out.println(hw == hw1);</span><br><span class="line">    System.out.println(hw == hw2);</span><br><span class="line">    System.out.println(hw == hw3);</span><br><span class="line">    System.out.println(hw == hw4);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>程序输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">false</span><br><span class="line">true</span><br><span class="line">false</span><br><span class="line">true</span><br></pre></td></tr></table></figure>
+
+<p>同样是字符串”hello”，为什么用final定义的，且个进行&#x3D;&#x3D;操作却是true有一个是false，而没用final的却是false?</p>
+<p><strong>首先来理解下宏变量：</strong></p>
+<p>Java中，一个用final定义的变量，不管它是类型的变量，只要用final定义了并同时指定了初始值，并且这个初始值是在编译时就被确定下来的，那么这个final变量就是一个宏变量。编译器会把程序所有用到该变量的地方直接替换成该变量的值，也就是说编译器能对宏变量进行宏替换。</p>
+<p>如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">final String a = &quot;hello&quot;;</span><br><span class="line">final String b = a;</span><br><span class="line">final String c = getHello();</span><br></pre></td></tr></table></figure>
+
+<p>a在编译期间就能确定下来，而b、c不行，所以a是宏变量，b、c不是。</p>
+<p>所以，再回到上面的程序，finalWorld2和finalWorld4是final定义的，也是在编译期间能确定下来的，所以它能被宏替换，编译器就会让finalWorld2和finalWorld4指向字符串池中缓存的字符串””hello world”，所以它们就是同一个对象。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E5%AE%8F%E5%8F%98%E9%87%8F%EF%BC%8C%E5%AE%8F%E6%9B%BF%E6%8D%A2%E8%AF%A6%E8%A7%A3%E3%80%82/" data-id="cmgrfxxd5002d30d49qtw6ami" data-title="Java 中的宏变量，宏替换详解。" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-进阶/Java 中获取类名的三种方法，你知道几种？" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E8%8E%B7%E5%8F%96%E7%B1%BB%E5%90%8D%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95%EF%BC%8C%E4%BD%A0%E7%9F%A5%E9%81%93%E5%87%A0%E7%A7%8D%EF%BC%9F/" class="article-date">
+  <time class="dt-published" datetime="2025-10-15T03:36:33.000Z" itemprop="datePublished">2025-10-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E8%8E%B7%E5%8F%96%E7%B1%BB%E5%90%8D%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95%EF%BC%8C%E4%BD%A0%E7%9F%A5%E9%81%93%E5%87%A0%E7%A7%8D%EF%BC%9F/">Java 中获取类名的三种方法，你知道几种？</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h4 id="获取类名的方法"><a href="#获取类名的方法" class="headerlink" title="获取类名的方法"></a>获取类名的方法</h4><p>Java 中获取类名的方式主要有以下三种。</p>
+<ul>
+<li><strong>getName()</strong></li>
+</ul>
+<p>返回的是虚拟机里面的class的类名表现形式。</p>
+<ul>
+<li><strong>getCanonicalName()</strong></li>
+</ul>
+<p>返回的是更容易理解的类名表示。</p>
+<ul>
+<li><strong>getSimpleName()</strong></li>
+</ul>
+<p>返回的是类的简称。</p>
+<h4 id="都有什么区别？"><a href="#都有什么区别？" class="headerlink" title="都有什么区别？"></a>都有什么区别？</h4><p>通过一个实例来看下它们主要的区别。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">public class TestClass &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		// 外部普通类</span><br><span class="line">		System.out.println(&quot;方法名             类名&quot;);</span><br><span class="line">		System.out.println(&quot;getName            &quot; + TestClass.class.getName());</span><br><span class="line">		System.out.println(&quot;getCanonicalName   &quot; + TestClass.class.getCanonicalName());</span><br><span class="line">		System.out.println(&quot;getSimpleName      &quot; + TestClass.class.getSimpleName());</span><br><span class="line">		System.out.println();</span><br><span class="line"></span><br><span class="line">		// 内部类</span><br><span class="line">		System.out.println(&quot;getName            &quot; + TestInnerClass.class.getName());</span><br><span class="line">		System.out.println(&quot;getCanonicalName   &quot; + TestInnerClass.class.getCanonicalName());</span><br><span class="line">		System.out.println(&quot;getSimpleName      &quot; + TestInnerClass.class.getSimpleName());</span><br><span class="line">		System.out.println();</span><br><span class="line"></span><br><span class="line">		// 数组类</span><br><span class="line">		TestInnerClass[] testInnerClasses = new TestInnerClass[]&#123;</span><br><span class="line">				new TestInnerClass(),</span><br><span class="line">				new TestInnerClass(),</span><br><span class="line">				new TestInnerClass()</span><br><span class="line">		&#125;;</span><br><span class="line">		System.out.println(&quot;getName            &quot; + testInnerClasses.getClass().getName());</span><br><span class="line">		System.out.println(&quot;getCanonicalName   &quot; + testInnerClasses.getClass().getCanonicalName());</span><br><span class="line">		System.out.println(&quot;getSimpleName      &quot; + testInnerClasses.getClass().getSimpleName());</span><br><span class="line">		System.out.println();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	static class TestInnerClass &#123;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>程序输出以下结果。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">方法名              类名</span><br><span class="line">getName            com.test.TestClass</span><br><span class="line">getCanonicalName   com.test.TestClass</span><br><span class="line">getSimpleName      TestClass</span><br><span class="line"></span><br><span class="line">getName            com.test.TestClass$TestInnerClass</span><br><span class="line">getCanonicalName   com.test.TestClass.TestInnerClass</span><br><span class="line">getSimpleName      TestInnerClass</span><br><span class="line"></span><br><span class="line">getName            [Lcom.test.TestClass$TestInnerClass;</span><br><span class="line">getCanonicalName   com.test.TestClass.TestInnerClass[]</span><br><span class="line">getSimpleName      TestInnerClass[]</span><br></pre></td></tr></table></figure>
+
+<p><code>[Lcom.test.TestClass$TestInnerClass;</code>值得说明一下。</p>
+<p>这是一种对函数返回值和参数的编码，叫做JNI字段描述符（JavaNative Interface FieldDescriptors)。</p>
+<p><code>[</code> 表示数组，一个代表一维数组，比如 <code>[[</code> 代表二维数组。之后 <code>L</code> 代表类描述符，最后<code>;</code>表示类名结束。</p>
+<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><p>1、从以上结果可以看出 getName() 和 getCanonicalName() 在获取普通类名的时候没有区别，在获取内部类和数组类有区别的。</p>
+<p>2、getSimpleName() 在获取普通类和内部类名的时候没区别，在获取数组类的时候有区别。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E8%8E%B7%E5%8F%96%E7%B1%BB%E5%90%8D%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95%EF%BC%8C%E4%BD%A0%E7%9F%A5%E9%81%93%E5%87%A0%E7%A7%8D%EF%BC%9F/" data-id="cmgrfxxd6002f30d45z5zdq2k" data-title="Java 中获取类名的三种方法，你知道几种？" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-进阶/Java 异常处理 10 个最佳实践" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%2010%20%E4%B8%AA%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/" class="article-date">
+  <time class="dt-published" datetime="2025-10-15T03:36:33.000Z" itemprop="datePublished">2025-10-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%2010%20%E4%B8%AA%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/">Java 异常处理 10 个最佳实践</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>异常处理是Java 开发中的一个重要部分。它是关乎每个应用的一个非功能性需求，是为了处理任何错误状况，比如资源不可访问，非法输入，空输入等等。Java提供了几个异常处理特性，以try，catch 和 finally 关键字的形式内建于语言自身之中。Java 编程语言也允许你创建新的异常，并通过使用 throw 和 throws关键字抛出它们。事实上，在Java编程中，Java的异常处理不单单是知道语法这么简单，它必须遵循标准的JDK库，和几个处理错误和异常的开源代码。这里我们将讨论一些关于异常处理的Java 最佳实践。</p>
+<h4 id="1-为可恢复的错误使用检查型异常，为编程错误使用非检查型错误。"><a href="#1-为可恢复的错误使用检查型异常，为编程错误使用非检查型错误。" class="headerlink" title="1) 为可恢复的错误使用检查型异常，为编程错误使用非检查型错误。"></a>1) 为可恢复的错误使用检查型异常，为编程错误使用非检查型错误。</h4><p>选择检查型还是非检查型异常，对于Java编程人员来说，总是让人感到困惑。检查型异常保证你对错误条件提供异常处理代码，这是一种从语言到强制你编写健壮的代码的一种方式，但同时会引入大量杂乱的代码并导致其不可读。当然，如果你有替代品和恢复策略的话，捕捉异常并做些什么看起来似乎也在理。在Java 编程中选择检查型异常还是运行时异常。</p>
+<h4 id="2-在finally程序块中关闭或者释放资源"><a href="#2-在finally程序块中关闭或者释放资源" class="headerlink" title="2) 在finally程序块中关闭或者释放资源"></a>2) 在finally程序块中关闭或者释放资源</h4><p>这在Java编程中，是一个广为人知的最佳实践，在处理网络和IO类的时候，相当于一个标准。在finally块中关闭资源， 在正常和异常执行的情况下，保证之前和稀缺资源的合理释放，这由finally块保证。从Java7开始，该语言有了一项更有趣的功能：资源管理自动化或者ARM块能实现这一功能。尽管如此，我们仍然要记住在finally块中关闭资源，这是对于释放像FileDescriptors这类，应用在socket和文件编程的情况下的有限资源很重要的。</p>
+<h4 id="3-在堆栈跟踪中包含引起异常的原因"><a href="#3-在堆栈跟踪中包含引起异常的原因" class="headerlink" title="3) 在堆栈跟踪中包含引起异常的原因"></a>3) 在堆栈跟踪中包含引起异常的原因</h4><p>很多时候，当一个由另一个异常导致的异常被抛出的时候，Java库和开放源代码会将一种异常包装成另一种异常。日志记录和打印根异常就变得非常重要。 Java异常类提供了 getCause()方法来检索导致异常的原因，这些(原因)可以对异常的根层次的原因提供更多的信息。该Java实践对在进行调试或排除故障大有帮助。时刻记住，如果你将一个异常包装成另一种异常时，构造一个新异常要传递源异常。</p>
+<h4 id="4-始终提供关于异常的有意义的完整的信息"><a href="#4-始终提供关于异常的有意义的完整的信息" class="headerlink" title="4) 始终提供关于异常的有意义的完整的信息"></a>4) 始终提供关于异常的有意义的完整的信息</h4><p>异常信息是最重要的地方，因为这是程序员首先看到的第一个地方，这里你能找到问题产生的根本原因。这里始终提供精确的真实的信息。</p>
+<h4 id="5-避免过度使用检查型异常"><a href="#5-避免过度使用检查型异常" class="headerlink" title="5) 避免过度使用检查型异常"></a>5) 避免过度使用检查型异常</h4><p>检查型异常在强制执行方面有一定的优势，但同时它也破坏了代码，通过掩盖业务逻辑使代码可读性降低。只要你不过度使用检查型异常，你可以最大限度的减少这类情况，这样做的结果是你会得到更清洁的代码。你同样可以使用Java7的新功能，以移除重复项。</p>
+<h4 id="6-将检查型异常转为运行时异常"><a href="#6-将检查型异常转为运行时异常" class="headerlink" title="6) 将检查型异常转为运行时异常"></a>6) 将检查型异常转为运行时异常</h4><p>这是在像Spring之类的多数框架中用来限制使用检查型异常的技术之一，大部分出自于JDBC的检查型异常，都被包装进 DataAccessException中，而(DataAccessException)异常是一种非检查型异常。这是Java最佳实践带来的好处，特定的异常限制到特定的模块，像 SQLException 放到DAO层，将意思明确的运行时异常抛到客户层。</p>
+<h4 id="7-记住对性能而言，异常代价高昂"><a href="#7-记住对性能而言，异常代价高昂" class="headerlink" title="7) 记住对性能而言，异常代价高昂"></a>7) 记住对性能而言，异常代价高昂</h4><p>需要记住的一件事是异常代价高昂，同时让你的代码运行缓慢。假如你有方法从ResultSet(结果集)中进行读取，这时常会抛出SQLException 异常而不会移到下一元素，这将会比不抛出异常的正常代码执行的慢的多。因此最大限度的减少不必要的异常捕捉和移动，那里没有什么固定的原因。不要仅仅是抛出和捕捉异常，如果你能使用boolean变量去表示执行结果，可能会得到更整洁，更高性能的解决方案。修正错误的根源，避免不必须要的异常捕捉。</p>
+<h4 id="8-避免catch块为空"><a href="#8-避免catch块为空" class="headerlink" title="8) 避免catch块为空"></a>8) 避免catch块为空</h4><p>没有什么比空的catch块更糟糕的了，因为它不仅隐藏了错误和异常，同时可能导致你的对象处于不可使用或者脏的状态。空的catch块只能变得无意义，如果你非常肯定异常不会继续以任何方式影响对象状态，但在程序执行期间，用日志记录错误依然是最好的(方法)。对于在Java编程中编写异常处理代码，这不仅仅是一个Java最佳实践，而是一个最通用的实践。</p>
+<h4 id="9-使用标准异常"><a href="#9-使用标准异常" class="headerlink" title="9) 使用标准异常"></a>9) 使用标准异常</h4><p>我们的第九条最佳实践建议使用标准和内置的Java异常。使用标准异常而不是每次创建我们自己的异常，对于维护性和一致性，不管是现在还是以后，都是最好的选择。重用标准异常使代码更具可读性，因为大部分Java开发人员对标准的像源自于JDK的RuntimeException 异常，IllegalStateException 异常，Illegal Argument Exception 异常或者NullPointerException异常，(开发者)他们能一眼就知道每种异常的目的，而不是在代码里查找或者在文档里查找用户定义的异常的目的。</p>
+<h4 id="10-记录任何方法抛出的异常"><a href="#10-记录任何方法抛出的异常" class="headerlink" title="10) 记录任何方法抛出的异常"></a>10) 记录任何方法抛出的异常</h4><p>Java提供了throw和throws关键字来抛出异常，在javadoc中用@throw记录任何方法可能会抛出的异常。如果你编写API或者公共接口，这就变得非常重要。任何方法抛出的异常都有相应的文档记录，这样你就能下意识的提醒任何使用(该方法)的人。</p>
+<p>这些就是所有在Java编程中在处理异常的时候需要遵循的最佳实践。让我们知道了什么是在Java编程中编写异常处理代码时需要遵循的实践。</p>
+<p>原文：<a target="_blank" rel="noopener" href="https://www.oschina.net/translate/10-exception-handling-best-practices-in-java-programming">https://www.oschina.net/translate/10-exception-handling-best-practices-in-java-programming</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%2010%20%E4%B8%AA%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/" data-id="cmgrfxxd6002i30d4a6uj3zib" data-title="Java 异常处理 10 个最佳实践" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-进阶/Java 类初始化顺序，3个示例带你躺坑。" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E7%B1%BB%E5%88%9D%E5%A7%8B%E5%8C%96%E9%A1%BA%E5%BA%8F%EF%BC%8C3%E4%B8%AA%E7%A4%BA%E4%BE%8B%E5%B8%A6%E4%BD%A0%E8%BA%BA%E5%9D%91%E3%80%82/" class="article-date">
+  <time class="dt-published" datetime="2025-10-15T03:36:33.000Z" itemprop="datePublished">2025-10-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E7%B1%BB%E5%88%9D%E5%A7%8B%E5%8C%96%E9%A1%BA%E5%BA%8F%EF%BC%8C3%E4%B8%AA%E7%A4%BA%E4%BE%8B%E5%B8%A6%E4%BD%A0%E8%BA%BA%E5%9D%91%E3%80%82/">Java 类初始化顺序，3个示例带你躺坑。</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>最近发现微信群里面有些群友在讨论类的初始化顺序，如类的静态变量、成员变量、静态代码块、非静态代码块、构造器，及继承父类时，它们的初始化顺序都是怎样的，下面我通过例子来说明这个情况，以免被人误导。</p>
+<h4 id="示例1：测试单类的初始化顺序"><a href="#示例1：测试单类的初始化顺序" class="headerlink" title="示例1：测试单类的初始化顺序"></a>示例1：测试单类的初始化顺序</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">public class ClassInitOrderTest &#123;</span><br><span class="line"></span><br><span class="line">	public static String staticField = &quot;static field&quot;;</span><br><span class="line"></span><br><span class="line">	static &#123;</span><br><span class="line">		System.out.println(staticField);</span><br><span class="line">		System.out.println(&quot;static block&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	private String field = &quot;member field&quot;;</span><br><span class="line"></span><br><span class="line">	&#123;</span><br><span class="line">		System.out.println(field);</span><br><span class="line">		System.out.println(&quot;non-static block&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public ClassInitOrderTest() &#123;</span><br><span class="line">		System.out.println(&quot;constructor&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		new ClassInitOrderTest();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>程序输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">static field</span><br><span class="line">static block</span><br><span class="line">member field</span><br><span class="line">non-static block</span><br><span class="line">constructor</span><br></pre></td></tr></table></figure>
+
+<p>可以得出以下结论，单类的初始化顺序为：</p>
+<blockquote>
+<p><strong>静态变量 &gt; 静态初始块 &gt; 成员变量 &gt; 非静态初始块 &gt; 构造器</strong></p>
+</blockquote>
+<h4 id="示例2：测试类继承的初始化顺序"><a href="#示例2：测试类继承的初始化顺序" class="headerlink" title="示例2：测试类继承的初始化顺序"></a>示例2：测试类继承的初始化顺序</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">class Parent &#123;</span><br><span class="line"></span><br><span class="line">	private static String parentStaticField = &quot;parent static field&quot;;</span><br><span class="line"></span><br><span class="line">	static &#123;</span><br><span class="line">		System.out.println(parentStaticField);</span><br><span class="line">		System.out.println(&quot;parent static block&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	private String parentField = &quot;parent member field&quot;;</span><br><span class="line"></span><br><span class="line">	&#123;</span><br><span class="line">		System.out.println(parentField);</span><br><span class="line">		System.out.println(&quot;parent non-static block&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public Parent() &#123;</span><br><span class="line">		System.out.println(&quot;parent constructor&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class Child extends Parent &#123;</span><br><span class="line"></span><br><span class="line">	private static String childStaticField = &quot;child static field&quot;;</span><br><span class="line"></span><br><span class="line">	static &#123;</span><br><span class="line">		System.out.println(childStaticField);</span><br><span class="line">		System.out.println(&quot;child static block&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	private String childField = &quot;child member field&quot;;</span><br><span class="line"></span><br><span class="line">	&#123;</span><br><span class="line">		System.out.println(childField);</span><br><span class="line">		System.out.println(&quot;child non-static block&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public Child() &#123;</span><br><span class="line">		System.out.println(&quot;child constructor&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		new Child();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>程序输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">parent static field</span><br><span class="line">parent static block</span><br><span class="line">child static field</span><br><span class="line">child static block</span><br><span class="line">parent member field</span><br><span class="line">parent non-static block</span><br><span class="line">parent constructor</span><br><span class="line">child member field</span><br><span class="line">child non-static block</span><br><span class="line">child constructor</span><br></pre></td></tr></table></figure>
+
+<p>可以得出以下结论，单类的初始化顺序为：</p>
+<blockquote>
+<p><strong>父类静态变量 &gt; 父类静态初始块 &gt; 子类静态变量 &gt; 子类静态初始块 &gt; 父类成员变量 &gt; 父类非静态初始块 &gt; 父类构造器 &gt; 子类成员变量 &gt; 子类非静态初始块 &gt; 子类构造器</strong></p>
+</blockquote>
+<h4 id="示例3：测试成员变量、初始块的初始化顺序"><a href="#示例3：测试成员变量、初始块的初始化顺序" class="headerlink" title="示例3：测试成员变量、初始块的初始化顺序"></a>示例3：测试成员变量、初始块的初始化顺序</h4><p>从上面两个例子可以看出，父类的静态变量和静态初始块肯定是先于子类加载的。但同一个类中的静态变量与静态初始块之间，成员变量与初始块之间的顺序一定是变量先于初始块吗？继续演示！</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public class TestOrder &#123;</span><br><span class="line"></span><br><span class="line">	private static A a = new A();</span><br><span class="line"></span><br><span class="line">	static &#123;</span><br><span class="line">		System.out.println(&quot;static block&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	private static B b = new B();</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		new TestOrder();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class A &#123;</span><br><span class="line">	public A() &#123;</span><br><span class="line">		System.out.println(&quot;static field A&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class B &#123;</span><br><span class="line">	public B() &#123;</span><br><span class="line">		System.out.println(&quot;static field B&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>程序输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">static field A</span><br><span class="line">static block</span><br><span class="line">static field B</span><br></pre></td></tr></table></figure>
+
+<p>可以得出以下结论，单类的初始化顺序为：</p>
+<blockquote>
+<p><strong>静态变量A &gt; 静态初始块 &gt; 静态变量B</strong></p>
+</blockquote>
+<p>所以，它们的在类中的顺序就决定了它们的初始化顺序，而不是变量一定会优先于初始块。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E7%B1%BB%E5%88%9D%E5%A7%8B%E5%8C%96%E9%A1%BA%E5%BA%8F%EF%BC%8C3%E4%B8%AA%E7%A4%BA%E4%BE%8B%E5%B8%A6%E4%BD%A0%E8%BA%BA%E5%9D%91%E3%80%82/" data-id="cmgrfxxd6002k30d4h5jhdepm" data-title="Java 类初始化顺序，3个示例带你躺坑。" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-进阶/Java 对象引用四个级别（强、软、弱、虚）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E5%AF%B9%E8%B1%A1%E5%BC%95%E7%94%A8%E5%9B%9B%E4%B8%AA%E7%BA%A7%E5%88%AB%EF%BC%88%E5%BC%BA%E3%80%81%E8%BD%AF%E3%80%81%E5%BC%B1%E3%80%81%E8%99%9A%EF%BC%89/" class="article-date">
+  <time class="dt-published" datetime="2025-10-15T03:36:33.000Z" itemprop="datePublished">2025-10-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E5%AF%B9%E8%B1%A1%E5%BC%95%E7%94%A8%E5%9B%9B%E4%B8%AA%E7%BA%A7%E5%88%AB%EF%BC%88%E5%BC%BA%E3%80%81%E8%BD%AF%E3%80%81%E5%BC%B1%E3%80%81%E8%99%9A%EF%BC%89/">Java 对象引用四个级别（强、软、弱、虚）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="http://img.javastack.cn/17-12-27/5366993.jpg" alt="image"></p>
+<p>为了使程序能更加灵活地控制对象的生命周期，从JDK1.2版本开始，JDK把对象的引用级别分为了以下四种。</p>
+<p><strong>这4种级别由高到低依次为：</strong></p>
+<ul>
+<li>强引用（StrongReference）</li>
+</ul>
+<p>强引用就是我们平常最基本的对象引用，如果是强引用，那回收器不会回收带有强引用的对象。即使内存不足抛出OutOfMemoryError异常也不会回收强引用对象，存在即合理吧。</p>
+<p>如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">User user = new User(&quot;Java技术&quot;);</span><br></pre></td></tr></table></figure>
+<p>这就是强引用，user持有了这个对象的存储地址的引用。</p>
+<ul>
+<li>软引用（SoftReference）</li>
+</ul>
+<p>一个对象只有软引用，如果内存空间足够情况下垃圾回收器就不会回收它，如果内存空间不够了就会对这些只有软引用的对象进行回收。只要垃圾回收器没有回收，该软引用对象就可以继续被程序使用。</p>
+<p>所以软引用一般用来实现一些内存敏感的缓存，只要内存空间足够，对象就会保持不被回收掉。</p>
+<ul>
+<li>弱引用（WeakReference）</li>
+</ul>
+<p>弱引用的对象具有更短暂的生命周期，在垃圾回收器线程扫描它所管辖的内存区域的过程中，一旦发现了只具有弱引用的对象，不管当前内存空间足够与否，都会回收它的内存。不过，由于垃圾回收器是一个优先级很低的线程，因此不一定会很快发现那些只具有弱引用的对象。</p>
+<p>弱引用可以用来实现一些规范化映射，如WeakHashMap，当key或者value不再被引用时可以自动被回收。</p>
+<ul>
+<li>虚引用（PhantomReference）</li>
+</ul>
+<p>虚引用顾名思义就是形同虚设，虚引用并不决定对象的生命周期，如果一个对象仅持有虚引用，那么它就和没有任何引用一样，在任何时候都可能被垃圾回收器回收。</p>
+<p>虚引用主要用来跟踪对象被垃圾回收器回收的活动，虚引用必须和引用队列（ReferenceQueue）联合使用，当垃圾回收器准备回收一个对象时，如果发现它还有虚引用，就会在回收对象的内存之前，把这个虚引用加入到与之关联的引用队列中。</p>
+<p><strong>下面通过一张表格来说明它们的回收时间、用途。</strong></p>
+<table>
+<thead>
+<tr>
+<th>引用类型</th>
+<th>回收时间</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>强引用</td>
+<td>永不回收</td>
+<td>普通对象引用</td>
+</tr>
+<tr>
+<td>软引用</td>
+<td>内在不足回收</td>
+<td>缓存对象</td>
+</tr>
+<tr>
+<td>弱引用</td>
+<td>垃圾回收时</td>
+<td>缓存对象</td>
+</tr>
+<tr>
+<td>虚引用</td>
+<td>不确定</td>
+<td>不确定</td>
+</tr>
+</tbody></table>
+<p>不管这些东西平时有没有用到，我们都必须了解这些机制，这对个人的知识面及拓展是非常有帮助的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E5%AF%B9%E8%B1%A1%E5%BC%95%E7%94%A8%E5%9B%9B%E4%B8%AA%E7%BA%A7%E5%88%AB%EF%BC%88%E5%BC%BA%E3%80%81%E8%BD%AF%E3%80%81%E5%BC%B1%E3%80%81%E8%99%9A%EF%BC%89/" data-id="cmgrfxxd7002n30d45gfwdhdk" data-title="Java 对象引用四个级别（强、软、弱、虚）" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-进阶/Java 自定义 ClassLoader 实战" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E8%87%AA%E5%AE%9A%E4%B9%89%20ClassLoader%20%E5%AE%9E%E6%88%98/" class="article-date">
+  <time class="dt-published" datetime="2025-10-15T03:36:33.000Z" itemprop="datePublished">2025-10-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E8%87%AA%E5%AE%9A%E4%B9%89%20ClassLoader%20%E5%AE%9E%E6%88%98/">Java 自定义 ClassLoader 实战</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>假如我们的类不在classpath下，而我们又想读取一个自定义的目录下的class，如果做呢？</p>
+<h2 id="读取自定义目录的类"><a href="#读取自定义目录的类" class="headerlink" title="读取自定义目录的类"></a>读取自定义目录的类</h2><p>示例读取c:&#x2F;test&#x2F;com&#x2F;test.jdk&#x2F;Key.class这个类。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">package com.test.jdk;</span><br><span class="line"></span><br><span class="line">public class Key &#123;</span><br><span class="line">    private String key = &quot;111111&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="自定义ClassLoader"><a href="#自定义ClassLoader" class="headerlink" title="自定义ClassLoader"></a>自定义ClassLoader</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.commons.io.IOUtils;</span><br><span class="line"></span><br><span class="line">import java.io.FileInputStream;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.io.InputStream;</span><br><span class="line"></span><br><span class="line">public class LocalClassLoader extends ClassLoader &#123;</span><br><span class="line"></span><br><span class="line">    private String path = &quot;c:/test/&quot;;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected Class&lt;?&gt; findClass(String name) throws ClassNotFoundException &#123;</span><br><span class="line">        Class&lt;?&gt; cls = findLoadedClass(name);</span><br><span class="line">        if (cls != null) &#123;</span><br><span class="line">            return cls;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if (!name.endsWith(&quot;.Key&quot;)) &#123;</span><br><span class="line">            return super.loadClass(name);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            InputStream is = new FileInputStream(path + name.replace(&quot;.&quot;, &quot;/&quot;) + &quot;.class&quot;);</span><br><span class="line">            byte[] bytes = IOUtils.toByteArray(is);</span><br><span class="line">            return defineClass(name, bytes, 0, bytes.length);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return super.loadClass(name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="开始读取类"><a href="#开始读取类" class="headerlink" title="开始读取类"></a>开始读取类</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        LocalClassLoader lcl = new LocalClassLoader();</span><br><span class="line">        Class&lt;?&gt; cls = lcl.loadClass(&quot;com.test.jdk.Key&quot;);</span><br><span class="line">        Field field = FieldUtils.getField(cls, &quot;key&quot;, true);</span><br><span class="line">        Object value = field.get(cls.newInstance());</span><br><span class="line">        System.out.println(value);</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>自定义类加载器正常加载到类，程序最后输出：111111</p>
+<h2 id="URLClassLoader"><a href="#URLClassLoader" class="headerlink" title="URLClassLoader"></a>URLClassLoader</h2><p>上面自定义一个类加载器来读取自定义的目录，其实可以直接使用URLClassLoader就能读取，它已经实现了路径下类的读取逻辑。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        URLClassLoader ucl = new URLClassLoader(new URL[]&#123;new URL(&quot;c:/test/&quot;)&#125;);</span><br><span class="line">        Class&lt;?&gt; cls = ucl.loadClass(&quot;com.test.jdk.Key&quot;);</span><br><span class="line">        Field field = FieldUtils.getField(cls, &quot;key&quot;, true);</span><br><span class="line">        Object value = field.get(cls.newInstance());</span><br><span class="line">        System.out.println(value);</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E8%87%AA%E5%AE%9A%E4%B9%89%20ClassLoader%20%E5%AE%9E%E6%88%98/" data-id="cmgrfxxd7002p30d4g45i2bcp" data-title="Java 自定义 ClassLoader 实战" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li></ul>
+
     </footer>
   </div>
   
@@ -124,6 +806,11 @@
   
 
 
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+  </nav>
+
 </section>
         
           <aside id="sidebar">
@@ -132,9 +819,23 @@
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 18px;">基础</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 16px;">多线程</a> <a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" style="font-size: 20px;">新特性</a> <a href="/tags/%E8%BF%9B%E9%98%B6/" style="font-size: 14px;">进阶</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 12px;">集合</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
@@ -153,7 +854,23 @@
       <ul>
         
           <li>
-            <a href="/2025/10/13/hello-world/">Hello World</a>
+            <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java%205%20~%2010%20%E6%96%B0%E7%89%B9%E6%80%A7%E5%80%BE%E6%83%85%E6%95%B4%E7%90%86%EF%BC%81/">Java 5 ~ 10 新特性倾情整理！</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%206%20%E9%A2%97%E8%AF%AD%E6%B3%95%E7%B3%96/">Java 中的 6 颗语法糖</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%20String%20%E7%9C%9F%E7%9A%84%E6%98%AF%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%90%97%EF%BC%9F/">Java 中的 String 真的是不可变吗？</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E4%BC%AA%E5%85%B1%E4%BA%AB%E8%AF%A6%E8%A7%A3%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">Java 中的伪共享详解及解决方案</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E5%AE%8F%E5%8F%98%E9%87%8F%EF%BC%8C%E5%AE%8F%E6%9B%BF%E6%8D%A2%E8%AF%A6%E8%A7%A3%E3%80%82/">Java 中的宏变量，宏替换详解。</a>
           </li>
         
       </ul>

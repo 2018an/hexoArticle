@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>别再写 bug 了，避免空指针的 5 个案例！ | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="空指针是我们 Java 开发人员经常遇到的一个基本异常，这是一个极其普遍但似乎又无法根治的问题。 本文，栈长将带你了解什么是空指针，还有如何有效的避免空指针。 什么是空指针？当一个变量的值为 null 时，在 Java 里面表示一个不存在的空对象，没有实际内容，没有给它分配内存，null 也是对象成员变量的默认值。 所以，一个对象如果没有进行初始化操作，这时候，如果你调用这个对象的方法或者变量，就">
+<meta property="og:type" content="article">
+<meta property="og:title" content="别再写 bug 了，避免空指针的 5 个案例！">
+<meta property="og:url" content="http://example.com/2025/10/15/%E8%BF%9B%E9%98%B6/%E5%88%AB%E5%86%8D%E5%86%99%20bug%20%E4%BA%86%EF%BC%8C%E9%81%BF%E5%85%8D%E7%A9%BA%E6%8C%87%E9%92%88%E7%9A%84%205%20%E4%B8%AA%E6%A1%88%E4%BE%8B%EF%BC%81/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="空指针是我们 Java 开发人员经常遇到的一个基本异常，这是一个极其普遍但似乎又无法根治的问题。 本文，栈长将带你了解什么是空指针，还有如何有效的避免空指针。 什么是空指针？当一个变量的值为 null 时，在 Java 里面表示一个不存在的空对象，没有实际内容，没有给它分配内存，null 也是对象成员变量的默认值。 所以，一个对象如果没有进行初始化操作，这时候，如果你调用这个对象的方法或者变量，就">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://qianniu.javastack.cn/18-12-12/46377586.jpg">
+<meta property="article:published_time" content="2025-10-15T03:36:33.000Z">
+<meta property="article:modified_time" content="2025-10-15T03:37:54.782Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="进阶">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://qianniu.javastack.cn/18-12-12/46377586.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-进阶/别再写 bug 了，避免空指针的 5 个案例！" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/%E5%88%AB%E5%86%8D%E5%86%99%20bug%20%E4%BA%86%EF%BC%8C%E9%81%BF%E5%85%8D%E7%A9%BA%E6%8C%87%E9%92%88%E7%9A%84%205%20%E4%B8%AA%E6%A1%88%E4%BE%8B%EF%BC%81/" class="article-date">
+  <time class="dt-published" datetime="2025-10-15T03:36:33.000Z" itemprop="datePublished">2025-10-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      别再写 bug 了，避免空指针的 5 个案例！
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>空指针是我们 Java 开发人员经常遇到的一个基本异常，这是一个极其普遍但似乎又无法根治的问题。</p>
+<p>本文，栈长将带你了解什么是空指针，还有如何有效的避免空指针。</p>
+<h2 id="什么是空指针？"><a href="#什么是空指针？" class="headerlink" title="什么是空指针？"></a>什么是空指针？</h2><p>当一个变量的值为 null 时，在 Java 里面表示一个不存在的空对象，没有实际内容，没有给它分配内存，null 也是对象成员变量的默认值。</p>
+<p>所以，一个对象如果没有进行初始化操作，这时候，如果你调用这个对象的方法或者变量，就会出现空指针异常。</p>
+<p>如下面示例会发生空指针异常：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Object object = null;</span><br><span class="line">String string = object.toString();</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://qianniu.javastack.cn/18-12-12/46377586.jpg"></p>
+<p>从类结构图来看，空指针它是属于运行时异常 <code>RuntimeException</code> 的子类，它不是捕获型的，只有在程序运行时才可能报出来，而且会造成程序中断。</p>
+<blockquote>
+<p>什么是运行时异常及异常的分类请看这篇文章：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/xbopgxZ5BEDdSvwO9ad9Xg">一张图搞清楚 Java 异常机制</a>。</p>
+</blockquote>
+<h2 id="如何避免空指针？"><a href="#如何避免空指针？" class="headerlink" title="如何避免空指针？"></a>如何避免空指针？</h2><p>下面说几个空指针的几个最常见的案例及解决之道。</p>
+<h4 id="1、字符串比较，常量放前面"><a href="#1、字符串比较，常量放前面" class="headerlink" title="1、字符串比较，常量放前面"></a>1、字符串比较，常量放前面</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if(status.equals(SUCCESS))&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个时候 status 可能为 null 造成空指针异常，应该把常量放前面，就能避免空指针异常。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if(SUCCESS.equals(status))&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个应该在各种开发规范里面都会提到，也是最基础的。</p>
+<h4 id="2、初始化默认值"><a href="#2、初始化默认值" class="headerlink" title="2、初始化默认值"></a>2、初始化默认值</h4><p>在对象初始化的时候给它一个默认值或者默认构造实现，如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">User user = new User();</span><br><span class="line">String name = StringUtils.EMPTY;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3、返回空集合"><a href="#3、返回空集合" class="headerlink" title="3、返回空集合"></a>3、返回空集合</h4><p>在返回一个集合的话，默认会是 null，统一规范返回一个空集合。</p>
+<p>举个 List 例子，如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public List getUserList()&#123;</span><br><span class="line">    List list = userMapper.gerUserList();</span><br><span class="line">    return list == null ? new ArrayList() : list;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样接收方就不用担心空指针异常了，也不会影响业务。</p>
+<h4 id="4、断言"><a href="#4、断言" class="headerlink" title="4、断言"></a>4、断言</h4><p>断言是用来检查程序的安全性的，在使用之前进行检查条件，如果不符合条件就报异常，符合就继续。</p>
+<p>Java 中自带的断言关键字：assert，如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assert name == null : &quot;名称不能为空&quot;;</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread &quot;main&quot; java.lang.AssertionError: 名称不正确</span><br></pre></td></tr></table></figure>
+
+<p>不过默认是不启动断言检查的，需要要带上 JVM 参数：-enableassertions 才能生效。</p>
+<p>Java 中这个用的很少，建议使用 Spring 中的，更强大，更方便好用。</p>
+<p>Spring中的用法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Assert.notNull(name,&quot;名称不能为空&quot;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="5、Optional"><a href="#5、Optional" class="headerlink" title="5、Optional"></a>5、Optional</h4><p>Optional 是 JDK 8 新增的新特性，再也不用 !&#x3D; null 来判断了，这个在一个对象里面的多个子对象连续判断的时候非常有用。</p>
+<p>这里不再详细介绍了，具体看这篇文章：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/uXw4eTZqLfj871FlciPh6Q">JDK8新特性之Optional</a>。</p>
+<p>大家都有什么高见，欢迎留言分享！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/10/15/%E8%BF%9B%E9%98%B6/%E5%88%AB%E5%86%8D%E5%86%99%20bug%20%E4%BA%86%EF%BC%8C%E9%81%BF%E5%85%8D%E7%A9%BA%E6%8C%87%E9%92%88%E7%9A%84%205%20%E4%B8%AA%E6%A1%88%E4%BE%8B%EF%BC%81/" data-id="cmgrfxxd8002v30d4dzza9hji" data-title="别再写 bug 了，避免空指针的 5 个案例！" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/%E4%B8%8D%E8%83%BD%E7%94%A8%20+%20%E6%8B%BC%E6%8E%A5%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%9F%20%E8%BF%99%E6%AC%A1%E6%88%91%E8%A6%81%E5%90%8A%E6%89%93%E9%9D%A2%E8%AF%95%E5%AE%98%EF%BC%81/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          不能用 + 拼接字符串？ 这次我要吊打面试官！
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/%E5%AD%97%E7%AC%A6%E4%B8%B2%20substring%20%E6%96%B9%E6%B3%95%E5%9C%A8%20JDK%206,7,8%20%E4%B8%AD%E7%9A%84%E5%B7%AE%E5%BC%82%E3%80%82/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">字符串 substring 方法在 JDK 6,7,8 中的差异。</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 18px;">基础</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 16px;">多线程</a> <a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" style="font-size: 20px;">新特性</a> <a href="/tags/%E8%BF%9B%E9%98%B6/" style="font-size: 14px;">进阶</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 12px;">集合</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java%205%20~%2010%20%E6%96%B0%E7%89%B9%E6%80%A7%E5%80%BE%E6%83%85%E6%95%B4%E7%90%86%EF%BC%81/">Java 5 ~ 10 新特性倾情整理！</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%206%20%E9%A2%97%E8%AF%AD%E6%B3%95%E7%B3%96/">Java 中的 6 颗语法糖</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%20String%20%E7%9C%9F%E7%9A%84%E6%98%AF%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%90%97%EF%BC%9F/">Java 中的 String 真的是不可变吗？</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E4%BC%AA%E5%85%B1%E4%BA%AB%E8%AF%A6%E8%A7%A3%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">Java 中的伪共享详解及解决方案</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E5%AE%8F%E5%8F%98%E9%87%8F%EF%BC%8C%E5%AE%8F%E6%9B%BF%E6%8D%A2%E8%AF%A6%E8%A7%A3%E3%80%82/">Java 中的宏变量，宏替换详解。</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

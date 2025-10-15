@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>面试官问线程安全的List，看完再也不怕了！ | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="最近在Java技术知识星球里面有球友问到了线程安全的 List：  扫码查看答案或加入知识星球 栈长在之前的文章《出场率比较高的一道多线程安全面试题》里面讲过 ArrayList 的不安全性。 那么面试官会问你，既然 ArrayList 是线程不安全的，怎么保证它的线程安全性呢？或者有什么替代方案？ 往下看，看我如何碾压他！ 大部分人会脱口而出：用Vector，这样只会让面试官鄙视！除了Vecto">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面试官问线程安全的List，看完再也不怕了！">
+<meta property="og:url" content="http://example.com/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E9%9D%A2%E8%AF%95%E5%AE%98%E9%97%AE%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84List%EF%BC%8C%E7%9C%8B%E5%AE%8C%E5%86%8D%E4%B9%9F%E4%B8%8D%E6%80%95%E4%BA%86%EF%BC%81/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="最近在Java技术知识星球里面有球友问到了线程安全的 List：  扫码查看答案或加入知识星球 栈长在之前的文章《出场率比较高的一道多线程安全面试题》里面讲过 ArrayList 的不安全性。 那么面试官会问你，既然 ArrayList 是线程不安全的，怎么保证它的线程安全性呢？或者有什么替代方案？ 往下看，看我如何碾压他！ 大部分人会脱口而出：用Vector，这样只会让面试官鄙视！除了Vecto">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://img.javastack.cn/20190927184141.png">
+<meta property="article:published_time" content="2025-10-14T06:42:34.000Z">
+<meta property="article:modified_time" content="2025-10-14T07:46:53.362Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="多线程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://img.javastack.cn/20190927184141.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-多线程/面试官问线程安全的List，看完再也不怕了！" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E9%9D%A2%E8%AF%95%E5%AE%98%E9%97%AE%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84List%EF%BC%8C%E7%9C%8B%E5%AE%8C%E5%86%8D%E4%B9%9F%E4%B8%8D%E6%80%95%E4%BA%86%EF%BC%81/" class="article-date">
+  <time class="dt-published" datetime="2025-10-14T06:42:34.000Z" itemprop="datePublished">2025-10-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      面试官问线程安全的List，看完再也不怕了！
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>最近在Java技术知识星球里面有球友问到了线程安全的 List：</p>
+<p><img src="http://img.javastack.cn/20190927184141.png"></p>
+<p>扫码查看答案或加入知识星球</p>
+<p>栈长在之前的文章《<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/oA-uEbzNYA4KYwLtRWXRVw">出场率比较高的一道多线程安全面试题</a>》里面讲过 ArrayList 的不安全性。</p>
+<p>那么面试官会问你，既然 ArrayList 是线程不安全的，怎么保证它的线程安全性呢？或者有什么替代方案？</p>
+<p>往下看，看我如何碾压他！</p>
+<p>大部分人会脱口而出：用Vector，这样只会让面试官鄙视！除了Vector，你还会别的吗？</p>
+<p>你至少还得说得上这种：</p>
+<blockquote>
+<p>java.util.Collections.SynchronizedList</p>
+</blockquote>
+<p>它能把所有 List 接口的实现类转换成线程安全的List，比 Vector 有更好的扩展性和兼容性，SynchronizedList的构造方法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">final List&lt;E&gt; list;</span><br><span class="line"></span><br><span class="line">SynchronizedList(List&lt;E&gt; list) &#123;</span><br><span class="line">    super(list);</span><br><span class="line">    this.list = list;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>SynchronizedList的部分方法源码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public E get(int index) &#123;</span><br><span class="line">    synchronized (mutex) &#123;return list.get(index);&#125;</span><br><span class="line">&#125;</span><br><span class="line">public E set(int index, E element) &#123;</span><br><span class="line">    synchronized (mutex) &#123;return list.set(index, element);&#125;</span><br><span class="line">&#125;</span><br><span class="line">public void add(int index, E element) &#123;</span><br><span class="line">    synchronized (mutex) &#123;list.add(index, element);&#125;</span><br><span class="line">&#125;</span><br><span class="line">public E remove(int index) &#123;</span><br><span class="line">    synchronized (mutex) &#123;return list.remove(index);&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>很可惜，它所有方法都是带同步对象锁的，和 Vector 一样，它不是性能最优的。即使你能说到这里，面试官还会继续往下追问，比如在读多写少的情况，SynchronizedList这种集合性能非常差，还有没有更合适的方案？</p>
+<p>介绍两个并发包里面的并发集合类：</p>
+<blockquote>
+<p>java.util.concurrent.CopyOnWriteArrayList<br>java.util.concurrent.CopyOnWriteArraySet</p>
+</blockquote>
+<p>CopyOnWrite集合类也就这两个，Java 1.5 开始加入，你要能说得上这两个才能让面试官信服。</p>
+<h4 id="CopyOnWriteArrayList"><a href="#CopyOnWriteArrayList" class="headerlink" title="CopyOnWriteArrayList"></a>CopyOnWriteArrayList</h4><p>CopyOnWrite（简称：COW）：即复制再写入，就是在添加元素的时候，先把原 List 列表复制一份，再添加新的元素。</p>
+<p>先来看下它的 add 方法源码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public boolean add(E e) &#123;</span><br><span class="line">    // 加锁</span><br><span class="line">    final ReentrantLock lock = this.lock;</span><br><span class="line">    lock.lock();</span><br><span class="line">    try &#123;</span><br><span class="line">        // 获取原始集合</span><br><span class="line">        Object[] elements = getArray();</span><br><span class="line">        int len = elements.length;</span><br><span class="line">        </span><br><span class="line">        // 复制一个新集合</span><br><span class="line">        Object[] newElements = Arrays.copyOf(elements, len + 1);</span><br><span class="line">        newElements[len] = e;</span><br><span class="line">        </span><br><span class="line">        // 替换原始集合为新集合</span><br><span class="line">        setArray(newElements);</span><br><span class="line">        return true;</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        // 释放锁</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>添加元素时，先加锁，再进行复制替换操作，最后再释放锁。</p>
+<p>再来看下它的 get 方法源码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">private E get(Object[] a, int index) &#123;</span><br><span class="line">    return (E) a[index];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public E get(int index) &#123;</span><br><span class="line">    return get(getArray(), index);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，获取元素并没有加锁。</p>
+<p>这样做的好处是，在高并发情况下，读取元素时就不用加锁，写数据时才加锁，大大提升了读取性能。</p>
+<h4 id="CopyOnWriteArraySet"><a href="#CopyOnWriteArraySet" class="headerlink" title="CopyOnWriteArraySet"></a>CopyOnWriteArraySet</h4><p>CopyOnWriteArraySet逻辑就更简单了，就是使用 CopyOnWriteArrayList 的 addIfAbsent 方法来去重的，添加元素的时候判断对象是否已经存在，不存在才添加进集合。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Appends the element, if not present.</span><br><span class="line"> *</span><br><span class="line"> * @param e element to be added to this list, if absent</span><br><span class="line"> * @return &#123;@code true&#125; if the element was added</span><br><span class="line"> */</span><br><span class="line">public boolean addIfAbsent(E e) &#123;</span><br><span class="line">    Object[] snapshot = getArray();</span><br><span class="line">    return indexOf(e, snapshot, 0, snapshot.length) &gt;= 0 ? false :</span><br><span class="line">        addIfAbsent(e, snapshot);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这两种并发集合，虽然牛逼，但只适合于读多写少的情况，如果写多读少，使用这个就没意义了，因为每次写操作都要进行集合内存复制，性能开销很大，如果集合较大，很容易造成内存溢出。</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>下次面试官问你线程安全的 List，你可以从 Vector &gt; SynchronizedList &gt; CopyOnWriteArrayList 这样的顺序依次说上来，这样才有带入感，也能体现你对知识点的掌握程度。</p>
+<p>看完有没有收获呢？下次面试应该能秒杀面试官了吧！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E9%9D%A2%E8%AF%95%E5%AE%98%E9%97%AE%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84List%EF%BC%8C%E7%9C%8B%E5%AE%8C%E5%86%8D%E4%B9%9F%E4%B8%8D%E6%80%95%E4%BA%86%EF%BC%81/" data-id="cmgrfxxd4002430d437uibzyp" data-title="面试官问线程安全的List，看完再也不怕了！" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E7%BA%BF%E7%A8%8B%E4%BC%91%E7%9C%A0%E5%8F%AA%E4%BC%9A%E7%94%A8Thread.sleep%EF%BC%9F%E9%82%A3%E5%B0%B1%E5%BC%B1%E7%88%86%E4%BA%86%EF%BC%81/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          线程休眠只会用Thread.sleep？那就弱爆了！
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%8F%AF%E4%BB%A5%E5%88%86%E7%BB%84%E8%BF%98%E8%83%BD%E8%BF%99%E6%A0%B7%E7%8E%A9/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java多线程可以分组还能这样玩</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 18px;">基础</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 16px;">多线程</a> <a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" style="font-size: 20px;">新特性</a> <a href="/tags/%E8%BF%9B%E9%98%B6/" style="font-size: 14px;">进阶</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 12px;">集合</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java%205%20~%2010%20%E6%96%B0%E7%89%B9%E6%80%A7%E5%80%BE%E6%83%85%E6%95%B4%E7%90%86%EF%BC%81/">Java 5 ~ 10 新特性倾情整理！</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%206%20%E9%A2%97%E8%AF%AD%E6%B3%95%E7%B3%96/">Java 中的 6 颗语法糖</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%20String%20%E7%9C%9F%E7%9A%84%E6%98%AF%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%90%97%EF%BC%9F/">Java 中的 String 真的是不可变吗？</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E4%BC%AA%E5%85%B1%E4%BA%AB%E8%AF%A6%E8%A7%A3%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">Java 中的伪共享详解及解决方案</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E5%AE%8F%E5%8F%98%E9%87%8F%EF%BC%8C%E5%AE%8F%E6%9B%BF%E6%8D%A2%E8%AF%A6%E8%A7%A3%E3%80%82/">Java 中的宏变量，宏替换详解。</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
