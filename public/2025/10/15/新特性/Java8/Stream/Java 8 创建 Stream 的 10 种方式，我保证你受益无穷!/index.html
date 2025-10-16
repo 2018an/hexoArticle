@@ -1,319 +1,355 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  
-  
-  <title>Java 8 创建 Stream 的 10 种方式，我保证你受益无穷! | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="今天来分享下在 Java 8 中创建 Stream 的 10 种方式，我就整理了 10 种，其实还有更多，仅供大家参考学习下。 1、Stream.of 可变参数12Stream&lt;String&gt; stream1 &#x3D; Stream.of(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;);System.out.println(&quot;stream">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Java 8 创建 Stream 的 10 种方式，我保证你受益无穷!">
-<meta property="og:url" content="http://example.com/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java8/Stream/Java%208%20%E5%88%9B%E5%BB%BA%20Stream%20%E7%9A%84%2010%20%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%8C%E6%88%91%E4%BF%9D%E8%AF%81%E4%BD%A0%E5%8F%97%E7%9B%8A%E6%97%A0%E7%A9%B7!/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="今天来分享下在 Java 8 中创建 Stream 的 10 种方式，我就整理了 10 种，其实还有更多，仅供大家参考学习下。 1、Stream.of 可变参数12Stream&lt;String&gt; stream1 &#x3D; Stream.of(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;);System.out.println(&quot;stream">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://img.javastack.cn/20190613135450.png">
-<meta property="og:image" content="http://img.javastack.cn/20190613135537.png">
-<meta property="article:published_time" content="2025-10-15T03:36:33.000Z">
-<meta property="article:modified_time" content="2025-10-15T03:22:08.947Z">
-<meta property="article:author" content="John Doe">
-<meta property="article:tag" content="新特性">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://img.javastack.cn/20190613135450.png">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
-
-  
+    <title>只有那年胜过年年</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/favicon/site.webmanifest">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css">
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
     
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+<link rel="stylesheet" href="/css/prism.css">
+ 
+    
+<link rel="stylesheet" href="/css/markdown.css">
+ 
+    
+<script src="/js/prism.js"></script>
 
-  
-  
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+    
+<link rel="stylesheet" href="/css/index.css">
+ 
+    
+<script src="/js/search.js"></script>
 
+
+     
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+        </script>
+     
+
+     
+        <script src="//lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js"> </script>
+        
+<script src="/js/fancybox.js"></script>
+
+    
+
+    <script type="text/javascript">
+
+        var search_path = "/search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+        var path = search_path;
+        searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
 <meta name="generator" content="Hexo 7.3.0"></head>
-
+ 
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
+    <!-- 导航栏 -->
+    <!-- 导航栏 -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4 pt-2 pb-2">
+    <div class="container">
+        <!-- 标题 --> 
+        <a class="navbar-brand navbar-expand-sm" href="/">
+            <img class="nofancybox" src="/logo.png" style="width: 75px;"  alt="笑颜网">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-      <div class="outer">
-        <section id="main"><article id="post-新特性/Java8/Stream/Java 8 创建 Stream 的 10 种方式，我保证你受益无穷!" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java8/Stream/Java%208%20%E5%88%9B%E5%BB%BA%20Stream%20%E7%9A%84%2010%20%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%8C%E6%88%91%E4%BF%9D%E8%AF%81%E4%BD%A0%E5%8F%97%E7%9B%8A%E6%97%A0%E7%A9%B7!/" class="article-date">
-  <time class="dt-published" datetime="2025-10-15T03:36:33.000Z" itemprop="datePublished">2025-10-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      Java 8 创建 Stream 的 10 种方式，我保证你受益无穷!
-    </h1>
-  
+        <!-- 左边右边导航按钮 --> 
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto">
+                <!-- 左右两侧的导航栏 -->
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p><img src="http://img.javastack.cn/20190613135450.png"><br><img src="http://img.javastack.cn/20190613135537.png"></p>
+ 
+ 
+
+    <li class="nav-item">
+        <a class="nav-link" href="/">
+           <big> <i class="fa fa-home ps-1" ></i> 主页</big>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="/archives">
+           <big> <i class="fa fa-archive ps-1" ></i> 归档</big>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="/about">
+           <big> <i class="fa fa-user ps-1" ></i> 关于</big>
+        </a>
+    </li>
+ 
+ 
+            </ul>
+
+            
+            <form class="">
+                <div class="d-flex">
+                    <button class="btn text-muted fa fa-search d-none d-md-block d-lg-block" disabled></button>
+                    <input id="local-search-input" class="form-control me-2 pe-4" type="search"
+                            placeholder="搜索 " aria-label="Search">
+                </div>
+                <div id="local-search-result" style="position:absolute; padding-top: 8px; max-height: 960px; width: 480px;overflow-y: scroll; z-index: 1050;"></div>
+            </form>
+            
+            <ul class="navbar-nav">
+                <!-- 左右两侧的导航栏 -->
+
+ 
+ 
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+    <main class="container">
+        
+<div class="container-fluid markdown-section">
+<div class="row pb-3">
+    <div class="col-md-8 col-sm-12">
+        <!-- 博客详情 -->
+        <div class="">
+            <p class="h2">
+                <span class="post-title">
+                    Java 8 创建 Stream 的 10 种方式，我保证你受益无穷!
+                </span>   
+            </p>
+
+            <div class="pb-3 pt-1 pe-3">
+                <i class="fa fa-calendar p-1"></i>
+                2025/10/15 11:36:33 
+                
+                    <i class="fa fa-folder-open p-1"> </i> 
+                    <span class="tag-hover">
+                        
+                            <a href="/categories/%E5%90%8E%E7%AB%AF/ " class="link-dark text-decoration-none"> 
+                                后端 
+                            </a>
+                         
+                    </span>
+                
+
+                
+                    <i class="fa fa-tag p-1"> </i>
+                    <span class="tag-hover">
+                        
+                            <a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" class="link-dark text-decoration-none"> 
+                                新特性 
+                            </a>
+                        
+                    </span>
+                
+            </div>
+
+            <div class="border-bottom pb-2">
+                <p><img src="http://img.javastack.cn/20190613135450.png"><br><img src="http://img.javastack.cn/20190613135537.png"></p>
 <p>今天来分享下在 Java 8 中创建 Stream 的 10 种方式，我就整理了 10 种，其实还有更多，仅供大家参考学习下。</p>
-<h2 id="1、Stream-of-可变参数"><a href="#1、Stream-of-可变参数" class="headerlink" title="1、Stream.of 可变参数"></a>1、Stream.of 可变参数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Stream&lt;String&gt; stream1 = Stream.of(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;);</span><br><span class="line">System.out.println(&quot;stream1:&quot; + stream1.collect(joining()));</span><br></pre></td></tr></table></figure>
+<h2 id="1、Stream-of-可变参数"><a href="#1、Stream-of-可变参数" class="headerlink" title="1、Stream.of 可变参数"></a>1、Stream.of 可变参数</h2><pre class="line-numbers language-none"><code class="language-none">Stream&lt;String&gt; stream1 &#x3D; Stream.of(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;);
+System.out.println(&quot;stream1:&quot; + stream1.collect(joining()));<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>程序输出：</p>
 <blockquote>
 <p>stream1:ABC</p>
 </blockquote>
-<h2 id="2、Stream-of-数组"><a href="#2、Stream-of-数组" class="headerlink" title="2、Stream.of 数组"></a>2、Stream.of 数组</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String[] values = new String[]&#123;&quot;A&quot;, &quot;B&quot;, &quot;C&quot;&#125;;</span><br><span class="line">Stream&lt;String&gt; stream2 = Stream.of(values);</span><br><span class="line">System.out.println(&quot;stream2:&quot; + stream2.collect(joining()));</span><br></pre></td></tr></table></figure>
+<h2 id="2、Stream-of-数组"><a href="#2、Stream-of-数组" class="headerlink" title="2、Stream.of 数组"></a>2、Stream.of 数组</h2><pre class="line-numbers language-none"><code class="language-none">String[] values &#x3D; new String[]&#123;&quot;A&quot;, &quot;B&quot;, &quot;C&quot;&#125;;
+Stream&lt;String&gt; stream2 &#x3D; Stream.of(values);
+System.out.println(&quot;stream2:&quot; + stream2.collect(joining()));<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>程序输出：</p>
 <blockquote>
 <p>stream2:ABC</p>
 </blockquote>
 <p>看 Stream.of 源码，上面这两种方式其实就是第三种方式的包装版。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public static&lt;T&gt; Stream&lt;T&gt; of(T... values) &#123;</span><br><span class="line">    return Arrays.stream(values);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">public static&lt;T&gt; Stream&lt;T&gt; of(T... values) &#123;
+    return Arrays.stream(values);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>我们直接使用源码中的方式也是一样的。</p>
-<h2 id="3、Arrays-stream"><a href="#3、Arrays-stream" class="headerlink" title="3、Arrays.stream"></a>3、Arrays.stream</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String[] values = new String[]&#123;&quot;A&quot;, &quot;B&quot;, &quot;C&quot;&#125;;</span><br><span class="line">Stream&lt;String&gt; stream3 = Arrays.stream(values);</span><br><span class="line">System.out.println(&quot;stream3:&quot; + stream3.collect(joining()));</span><br></pre></td></tr></table></figure>
+<h2 id="3、Arrays-stream"><a href="#3、Arrays-stream" class="headerlink" title="3、Arrays.stream"></a>3、Arrays.stream</h2><pre class="line-numbers language-none"><code class="language-none">String[] values &#x3D; new String[]&#123;&quot;A&quot;, &quot;B&quot;, &quot;C&quot;&#125;;
+Stream&lt;String&gt; stream3 &#x3D; Arrays.stream(values);
+System.out.println(&quot;stream3:&quot; + stream3.collect(joining()));<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>程序输出：</p>
 <blockquote>
 <p>stream3:ABC</p>
 </blockquote>
-<h2 id="4、List"><a href="#4、List" class="headerlink" title="4、List"></a>4、List</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list = Arrays.asList(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;);</span><br><span class="line">Stream&lt;String&gt; stream4 = list.stream();</span><br><span class="line">System.out.println(&quot;stream4:&quot; + stream4.collect(joining()));</span><br></pre></td></tr></table></figure>
+<h2 id="4、List"><a href="#4、List" class="headerlink" title="4、List"></a>4、List</h2><pre class="line-numbers language-none"><code class="language-none">List&lt;String&gt; list &#x3D; Arrays.asList(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;);
+Stream&lt;String&gt; stream4 &#x3D; list.stream();
+System.out.println(&quot;stream4:&quot; + stream4.collect(joining()));<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>程序输出：</p>
 <blockquote>
 <p>stream4:ABC</p>
 </blockquote>
-<h2 id="5、Set"><a href="#5、Set" class="headerlink" title="5、Set"></a>5、Set</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Set&lt;String&gt; set = new HashSet&lt;&gt;(Arrays.asList(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;));</span><br><span class="line">Stream&lt;String&gt; stream5 = set.stream();</span><br><span class="line">System.out.println(&quot;stream5:&quot; + stream5.collect(joining()));</span><br></pre></td></tr></table></figure>
+<h2 id="5、Set"><a href="#5、Set" class="headerlink" title="5、Set"></a>5、Set</h2><pre class="line-numbers language-none"><code class="language-none">Set&lt;String&gt; set &#x3D; new HashSet&lt;&gt;(Arrays.asList(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;));
+Stream&lt;String&gt; stream5 &#x3D; set.stream();
+System.out.println(&quot;stream5:&quot; + stream5.collect(joining()));<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>程序输出：</p>
 <blockquote>
 <p>stream5:ABC</p>
 </blockquote>
-<h2 id="6、Map"><a href="#6、Map" class="headerlink" title="6、Map"></a>6、Map</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, String&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">map.put(&quot;1&quot;, &quot;A&quot;);</span><br><span class="line">map.put(&quot;2&quot;, &quot;B&quot;);</span><br><span class="line">map.put(&quot;3&quot;, &quot;C&quot;);</span><br><span class="line">Stream&lt;String&gt; stream6 = map.values().stream();</span><br><span class="line">System.out.println(&quot;stream6:&quot; + stream6.collect(joining()));</span><br></pre></td></tr></table></figure>
+<h2 id="6、Map"><a href="#6、Map" class="headerlink" title="6、Map"></a>6、Map</h2><pre class="line-numbers language-none"><code class="language-none">Map&lt;String, String&gt; map &#x3D; new HashMap&lt;&gt;();
+map.put(&quot;1&quot;, &quot;A&quot;);
+map.put(&quot;2&quot;, &quot;B&quot;);
+map.put(&quot;3&quot;, &quot;C&quot;);
+Stream&lt;String&gt; stream6 &#x3D; map.values().stream();
+System.out.println(&quot;stream6:&quot; + stream6.collect(joining()));<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>程序输出：</p>
 <blockquote>
 <p>stream6:ABC</p>
 </blockquote>
-<h2 id="7、Stream-iterate"><a href="#7、Stream-iterate" class="headerlink" title="7、Stream.iterate"></a>7、Stream.iterate</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Stream&lt;String&gt; stream7 = Stream.iterate(&quot;A&quot;, e -&gt; String.valueOf((char) (e.charAt(0) + 1))).limit(3);</span><br><span class="line">System.out.println(&quot;stream7:&quot; + stream7.collect(joining()));</span><br></pre></td></tr></table></figure>
+<h2 id="7、Stream-iterate"><a href="#7、Stream-iterate" class="headerlink" title="7、Stream.iterate"></a>7、Stream.iterate</h2><pre class="line-numbers language-none"><code class="language-none">Stream&lt;String&gt; stream7 &#x3D; Stream.iterate(&quot;A&quot;, e -&gt; String.valueOf((char) (e.charAt(0) + 1))).limit(3);
+System.out.println(&quot;stream7:&quot; + stream7.collect(joining()));<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>程序输出：</p>
 <blockquote>
 <p>stream7:ABC</p>
 </blockquote>
-<h2 id="8、Pattern"><a href="#8、Pattern" class="headerlink" title="8、Pattern"></a>8、Pattern</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String value = &quot;A B C&quot;;</span><br><span class="line">Stream&lt;String&gt; stream8 = Pattern.compile(&quot;\\W&quot;).splitAsStream(value);</span><br><span class="line">System.out.println(&quot;stream8:&quot; + stream8.collect(joining()));</span><br></pre></td></tr></table></figure>
+<h2 id="8、Pattern"><a href="#8、Pattern" class="headerlink" title="8、Pattern"></a>8、Pattern</h2><pre class="line-numbers language-none"><code class="language-none">String value &#x3D; &quot;A B C&quot;;
+Stream&lt;String&gt; stream8 &#x3D; Pattern.compile(&quot;\\W&quot;).splitAsStream(value);
+System.out.println(&quot;stream8:&quot; + stream8.collect(joining()));<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>程序输出：</p>
 <blockquote>
 <p>stream8:ABC</p>
 </blockquote>
-<h2 id="9、Files-lines"><a href="#9、Files-lines" class="headerlink" title="9、Files.lines"></a>9、Files.lines</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">    Stream&lt;String&gt; stream9 = Files.lines(Paths.get(&quot;d:/data.txt&quot;));</span><br><span class="line">    System.out.println(&quot;stream9:&quot; + stream9.collect(joining()));</span><br><span class="line">&#125; catch (IOException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="9、Files-lines"><a href="#9、Files-lines" class="headerlink" title="9、Files.lines"></a>9、Files.lines</h2><pre class="line-numbers language-none"><code class="language-none">try &#123;
+    Stream&lt;String&gt; stream9 &#x3D; Files.lines(Paths.get(&quot;d:&#x2F;data.txt&quot;));
+    System.out.println(&quot;stream9:&quot; + stream9.collect(joining()));
+&#125; catch (IOException e) &#123;
+    e.printStackTrace();
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>data.txt文件内容如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">A</span><br><span class="line">B</span><br><span class="line">C</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">A
+B
+C<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>程序输出：</p>
 <blockquote>
 <p>stream9:ABC</p>
 </blockquote>
-<h2 id="10、Stream-generate"><a href="#10、Stream-generate" class="headerlink" title="10、Stream.generate"></a>10、Stream.generate</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Stream&lt;String&gt; stream10 = Stream.generate(() -&gt; &quot;A&quot;).limit(3);</span><br><span class="line">System.out.println(&quot;stream10:&quot; + stream10.collect(joining()));</span><br></pre></td></tr></table></figure>
+<h2 id="10、Stream-generate"><a href="#10、Stream-generate" class="headerlink" title="10、Stream.generate"></a>10、Stream.generate</h2><pre class="line-numbers language-none"><code class="language-none">Stream&lt;String&gt; stream10 &#x3D; Stream.generate(() -&gt; &quot;A&quot;).limit(3);
+System.out.println(&quot;stream10:&quot; + stream10.collect(joining()));<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>程序输出：</p>
 <blockquote>
 <p>stream10:AAA</p>
 </blockquote>
 <p>好了，这是栈长整理的 10 种创建 Stream 的方式，是不是很骚？如果你还知道其他的骚操作，可以留言告诉大家，让大家记住你的头像和ID。</p>
-
-      
+ 
+            </div>
+        </div>
+        
+            <div class="mt-3">
+                <!-- 前一页后一页 -->
+<div class="previous-next-links">
+     
+    <div class="previous-design-link">
+        <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java9/Java9%20%E7%AE%80%E5%8C%96%E6%B5%81%E5%85%B3%E9%97%AD%E6%96%B0%E5%A7%BF%E5%8A%BF/">
+            <i style="font-size:16px;" class="fa fa-arrow-left" aria-hidden="true"></i>
+            Java9 简化流关闭新姿势
+        </a>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java8/Stream/Java%208%20%E5%88%9B%E5%BB%BA%20Stream%20%E7%9A%84%2010%20%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%8C%E6%88%91%E4%BF%9D%E8%AF%81%E4%BD%A0%E5%8F%97%E7%9B%8A%E6%97%A0%E7%A9%B7!/" data-id="cmgrfxxdg004a30d49fkxe3yl" data-title="Java 8 创建 Stream 的 10 种方式，我保证你受益无穷!" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li></ul>
+     
 
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java8/Java8%20%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%E9%87%8D%E5%A4%8D%E6%B3%A8%E8%A7%A3/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Java8 新特性之重复注解
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java8/Stream/Java%208%20%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%20Stream%20%E6%B5%81%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E7%A1%80%E4%BD%93%E9%AA%8C/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Java 8 新特性之 Stream 流（一）基础体验</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li></ul>
+     
+    <div class="next-design-link">
+        <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java8/Stream/Java%208%20%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%20Stream%20%E6%B5%81%EF%BC%88%E4%B8%83%EF%BC%89%E6%B5%81%E4%B8%8E%E8%BF%AD%E4%BB%A3%E5%99%A8%EF%BC%8C%E6%B5%81%E7%B3%BB%E5%88%97%E5%A4%A7%E7%BB%93%E5%B1%80%EF%BC%81/">
+            Java 8 新特性之 Stream 流（七）流与迭代器，流系列大结局！
+            <i style="font-size:16px;" class="fa fa-arrow-right" aria-hidden="true"></i>
+        </a>
     </div>
-  </div>
+ 
+</div> 
+             
+            </div>
+        
 
-
-  
+    </div>
+    <div class="col-4 pe-0">
+        <div class="d-none d-sm-none d-md-block sticky-top border-start">
+             
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 18px;">基础</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 16px;">多线程</a> <a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" style="font-size: 20px;">新特性</a> <a href="/tags/%E8%BF%9B%E9%98%B6/" style="font-size: 14px;">进阶</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 12px;">集合</a>
-    </div>
-  </div>
-
-  
+        <div class="toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81Stream-of-%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0"><span class="toc-number">1.</span> <span class="toc-text">1、Stream.of 可变参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81Stream-of-%E6%95%B0%E7%BB%84"><span class="toc-number">2.</span> <span class="toc-text">2、Stream.of 数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81Arrays-stream"><span class="toc-number">3.</span> <span class="toc-text">3、Arrays.stream</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81List"><span class="toc-number">4.</span> <span class="toc-text">4、List</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%E3%80%81Set"><span class="toc-number">5.</span> <span class="toc-text">5、Set</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6%E3%80%81Map"><span class="toc-number">6.</span> <span class="toc-text">6、Map</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7%E3%80%81Stream-iterate"><span class="toc-number">7.</span> <span class="toc-text">7、Stream.iterate</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8%E3%80%81Pattern"><span class="toc-number">8.</span> <span class="toc-text">8、Pattern</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9%E3%80%81Files-lines"><span class="toc-number">9.</span> <span class="toc-text">9、Files.lines</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10%E3%80%81Stream-generate"><span class="toc-number">10.</span> <span class="toc-text">10、Stream.generate</span></a></li></ol> 
+        </div>
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li></ul>
-    </div>
-  </div>
+ 
 
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java%205%20~%2010%20%E6%96%B0%E7%89%B9%E6%80%A7%E5%80%BE%E6%83%85%E6%95%B4%E7%90%86%EF%BC%81/">Java 5 ~ 10 新特性倾情整理！</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%206%20%E9%A2%97%E8%AF%AD%E6%B3%95%E7%B3%96/">Java 中的 6 颗语法糖</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%20String%20%E7%9C%9F%E7%9A%84%E6%98%AF%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%90%97%EF%BC%9F/">Java 中的 String 真的是不可变吗？</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E4%BC%AA%E5%85%B1%E4%BA%AB%E8%AF%A6%E8%A7%A3%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">Java 中的伪共享详解及解决方案</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E5%AE%8F%E5%8F%98%E9%87%8F%EF%BC%8C%E5%AE%8F%E6%9B%BF%E6%8D%A2%E8%AF%A6%E8%A7%A3%E3%80%82/">Java 中的宏变量，宏替换详解。</a>
-          </li>
-        
-      </ul>
+        </div>
     </div>
-  </div>
+</div>
+</div>
+ 
+    </main>
 
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2025 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    <!-- 底部栏 -->
+    <footer class="bg-dark pt-3 pb-0 mt-5 fixed-bottom" id="flex_bottom">
+    <div class="container pb-3 pt-3 text-center">
+        <p class="text-muted tag-hover">
+            All Rights Reserved <i class="fa fa-copyright"></i> by2025  <br>
+<!--             Powered by  -->
+<!--              <a class="link-secondary text-decoration-none" target="_blank" rel="noopener" href="https://hexo.io"> -->
+<!--                  Hexo.io -->
+<!--             </a> &  <a class="link-secondary text-decoration-none" target="_blank" rel="noopener" href="https://github.com/smile-yan/hexo-theme-heyan"> -->
+<!--                heyan -->
+<!--             </a> -->
+            <br>
+<!--             <a class="link-secondary text-decoration-none" target="_blank" rel="noopener" href="https://beian.miit.gov.cn/#/Integrated/index"> -->
+<!--                 <img src="/police.png" style="width: 18px; height: 18px; margin-top: -4px" class="nofancybox"> -->
+<!--                   -->
+<!--             </a> -->
+        </p>
     </div>
-  </div>
 </footer>
 
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.6.4.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
 </body>
+
+<script>
+    // 检查页面内容高度是否小于窗口高度
+    function checkContentHeight() {
+        const contentHeight = document.body.scrollHeight;
+        const windowHeight = window.innerHeight;
+
+        if (contentHeight < windowHeight) {
+            // 内容高度不足以填充整个窗口，固定底部导航栏
+            document.getElementById('flex_bottom').classList.add('fixed-bottom');
+        } else {
+            // 内容高度足够多，不固定底部导航栏
+            document.getElementById('flex_bottom').classList.remove('fixed-bottom');
+        }
+    }
+
+    // 页面加载时和窗口大小变化时检查内容高度
+    window.addEventListener('load', checkContentHeight);
+    window.addEventListener('resize', checkContentHeight);
+</script>
 </html>

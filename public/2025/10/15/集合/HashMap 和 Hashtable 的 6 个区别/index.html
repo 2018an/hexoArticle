@@ -1,289 +1,367 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  
-  
-  <title>HashMap 和 Hashtable 的 6 个区别 | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="HashMap 和 Hashtable 是 Java 开发程序员必须要掌握的，也是在各种 Java 面试场合中必须会问到的。 但你对这两者的区别了解有多少呢？ 现在，栈长我给大家总结一下，或许有你不明朗的地方，在栈长的指点下都会拨开迷雾见晴天。 1、线程安全Hashtable 是线程安全的，HashMap 不是线程安全的。 为什么说 HashTable 是线程安全的？ 来看下 Hashtable">
-<meta property="og:type" content="article">
-<meta property="og:title" content="HashMap 和 Hashtable 的 6 个区别">
-<meta property="og:url" content="http://example.com/2025/10/15/%E9%9B%86%E5%90%88/HashMap%20%E5%92%8C%20Hashtable%20%E7%9A%84%206%20%E4%B8%AA%E5%8C%BA%E5%88%AB/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="HashMap 和 Hashtable 是 Java 开发程序员必须要掌握的，也是在各种 Java 面试场合中必须会问到的。 但你对这两者的区别了解有多少呢？ 现在，栈长我给大家总结一下，或许有你不明朗的地方，在栈长的指点下都会拨开迷雾见晴天。 1、线程安全Hashtable 是线程安全的，HashMap 不是线程安全的。 为什么说 HashTable 是线程安全的？ 来看下 Hashtable">
-<meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-10-15T03:36:33.000Z">
-<meta property="article:modified_time" content="2025-10-15T03:35:36.413Z">
-<meta property="article:author" content="John Doe">
-<meta property="article:tag" content="集合">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
-
-  
+    <title>只有那年胜过年年</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/favicon/site.webmanifest">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css">
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
     
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+<link rel="stylesheet" href="/css/prism.css">
+ 
+    
+<link rel="stylesheet" href="/css/markdown.css">
+ 
+    
+<script src="/js/prism.js"></script>
 
-  
-  
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+    
+<link rel="stylesheet" href="/css/index.css">
+ 
+    
+<script src="/js/search.js"></script>
 
+
+     
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+        </script>
+     
+
+     
+        <script src="//lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js"> </script>
+        
+<script src="/js/fancybox.js"></script>
+
+    
+
+    <script type="text/javascript">
+
+        var search_path = "/search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+        var path = search_path;
+        searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
 <meta name="generator" content="Hexo 7.3.0"></head>
-
+ 
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
+    <!-- 导航栏 -->
+    <!-- 导航栏 -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4 pt-2 pb-2">
+    <div class="container">
+        <!-- 标题 --> 
+        <a class="navbar-brand navbar-expand-sm" href="/">
+            <img class="nofancybox" src="/logo.png" style="width: 75px;"  alt="笑颜网">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-      <div class="outer">
-        <section id="main"><article id="post-集合/HashMap 和 Hashtable 的 6 个区别" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/10/15/%E9%9B%86%E5%90%88/HashMap%20%E5%92%8C%20Hashtable%20%E7%9A%84%206%20%E4%B8%AA%E5%8C%BA%E5%88%AB/" class="article-date">
-  <time class="dt-published" datetime="2025-10-15T03:36:33.000Z" itemprop="datePublished">2025-10-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      HashMap 和 Hashtable 的 6 个区别
-    </h1>
-  
+        <!-- 左边右边导航按钮 --> 
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto">
+                <!-- 左右两侧的导航栏 -->
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>HashMap 和 Hashtable 是 Java 开发程序员必须要掌握的，也是在各种 Java 面试场合中必须会问到的。</p>
+ 
+ 
+
+    <li class="nav-item">
+        <a class="nav-link" href="/">
+           <big> <i class="fa fa-home ps-1" ></i> 主页</big>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="/archives">
+           <big> <i class="fa fa-archive ps-1" ></i> 归档</big>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="/about">
+           <big> <i class="fa fa-user ps-1" ></i> 关于</big>
+        </a>
+    </li>
+ 
+ 
+            </ul>
+
+            
+            <form class="">
+                <div class="d-flex">
+                    <button class="btn text-muted fa fa-search d-none d-md-block d-lg-block" disabled></button>
+                    <input id="local-search-input" class="form-control me-2 pe-4" type="search"
+                            placeholder="搜索 " aria-label="Search">
+                </div>
+                <div id="local-search-result" style="position:absolute; padding-top: 8px; max-height: 960px; width: 480px;overflow-y: scroll; z-index: 1050;"></div>
+            </form>
+            
+            <ul class="navbar-nav">
+                <!-- 左右两侧的导航栏 -->
+
+ 
+ 
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+    <main class="container">
+        
+<div class="container-fluid markdown-section">
+<div class="row pb-3">
+    <div class="col-md-8 col-sm-12">
+        <!-- 博客详情 -->
+        <div class="">
+            <p class="h2">
+                <span class="post-title">
+                    HashMap 和 Hashtable 的 6 个区别
+                </span>   
+            </p>
+
+            <div class="pb-3 pt-1 pe-3">
+                <i class="fa fa-calendar p-1"></i>
+                2025/10/15 11:36:33 
+                
+                    <i class="fa fa-folder-open p-1"> </i> 
+                    <span class="tag-hover">
+                        
+                            <a href="/categories/%E5%90%8E%E7%AB%AF/ " class="link-dark text-decoration-none"> 
+                                后端 
+                            </a>
+                         
+                    </span>
+                
+
+                
+                    <i class="fa fa-tag p-1"> </i>
+                    <span class="tag-hover">
+                        
+                            <a href="/tags/%E9%9B%86%E5%90%88/" class="link-dark text-decoration-none"> 
+                                集合 
+                            </a>
+                        
+                    </span>
+                
+            </div>
+
+            <div class="border-bottom pb-2">
+                <p>HashMap 和 Hashtable 是 Java 开发程序员必须要掌握的，也是在各种 Java 面试场合中必须会问到的。</p>
 <p>但你对这两者的区别了解有多少呢？</p>
 <p>现在，栈长我给大家总结一下，或许有你不明朗的地方，在栈长的指点下都会拨开迷雾见晴天。</p>
 <h2 id="1、线程安全"><a href="#1、线程安全" class="headerlink" title="1、线程安全"></a>1、线程安全</h2><p>Hashtable 是线程安全的，HashMap 不是线程安全的。</p>
 <p>为什么说 HashTable 是线程安全的？</p>
 <p>来看下 Hashtable 的源码，Hashtable 所有的元素操作都是 synchronized 修饰的，而 HashMap 并没有。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public synchronized V put(K key, V value);</span><br><span class="line">public synchronized V get(Object key);</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">public synchronized V put(K key, V value);
+public synchronized V get(Object key);
+...<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="2、性能优劣"><a href="#2、性能优劣" class="headerlink" title="2、性能优劣"></a>2、性能优劣</h2><p>既然 Hashtable 是线程安全的，每个方法都要阻塞其他线程，所以 Hashtable 性能较差，HashMap 性能较好，使用更广。</p>
 <p>如果要线程安全又要保证性能，建议使用 JUC 包下的 ConcurrentHashMap。</p>
 <h2 id="3、NULL"><a href="#3、NULL" class="headerlink" title="3、NULL"></a>3、NULL</h2><p>Hashtable 是不允许键或值为 null 的，HashMap 的键值则都可以为 null。</p>
 <p>那么问题来了，为什么 Hashtable 是不允许 KEY 和 VALUE 为 null, 而 HashMap 则可以？</p>
 <p><strong>Hashtable put 方法逻辑：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> public synchronized V put(K key, V value) &#123;</span><br><span class="line">        // Make sure the value is not null</span><br><span class="line">        if (value == null) &#123;</span><br><span class="line">            throw new NullPointerException();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // Makes sure the key is not already in the hashtable.</span><br><span class="line">        Entry&lt;?,?&gt; tab[] = table;</span><br><span class="line">        int hash = key.hashCode();</span><br><span class="line">        </span><br><span class="line">        ...</span><br><span class="line">    </span><br><span class="line">&#125;        </span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none"> public synchronized V put(K key, V value) &#123;
+        &#x2F;&#x2F; Make sure the value is not null
+        if (value &#x3D;&#x3D; null) &#123;
+            throw new NullPointerException();
+        &#125;
+
+        &#x2F;&#x2F; Makes sure the key is not already in the hashtable.
+        Entry&lt;?,?&gt; tab[] &#x3D; table;
+        int hash &#x3D; key.hashCode();
+        
+        ...
+    
+&#125;        <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>HashMap hash 方法逻辑：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">static final int hash(Object key) &#123;</span><br><span class="line">    int h;</span><br><span class="line">    return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">static final int hash(Object key) &#123;
+    int h;
+    return (key &#x3D;&#x3D; null) ? 0 : (h &#x3D; key.hashCode()) ^ (h &gt;&gt;&gt; 16);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>可以看出 Hashtable key 为 null 会直接抛出空指针异常，value 为 null 手动抛出空指针异常，而 HashMap 的逻辑对 null 作了特殊处理。</p>
 <h2 id="4、实现方式"><a href="#4、实现方式" class="headerlink" title="4、实现方式"></a>4、实现方式</h2><p>Hashtable 的继承源码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public class Hashtable&lt;K,V&gt;</span><br><span class="line">    extends Dictionary&lt;K,V&gt;</span><br><span class="line">    implements Map&lt;K,V&gt;, Cloneable, java.io.Serializable</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">public class Hashtable&lt;K,V&gt;
+    extends Dictionary&lt;K,V&gt;
+    implements Map&lt;K,V&gt;, Cloneable, java.io.Serializable<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>HashMap 的继承源码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">public class HashMap&lt;K,V&gt; extends AbstractMap&lt;K,V&gt;</span><br><span class="line">    implements Map&lt;K,V&gt;, Cloneable, Serializable</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">public class HashMap&lt;K,V&gt; extends AbstractMap&lt;K,V&gt;
+    implements Map&lt;K,V&gt;, Cloneable, Serializable<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>可以看出两者继承的类不一样，Hashtable 继承了 Dictionary类，而 HashMap 继承的是 AbstractMap 类。</p>
 <p>Dictionary 是 JDK 1.0 添加的，貌似没人用过这个，栈长我也没用过。。</p>
 <h2 id="5、容量扩容"><a href="#5、容量扩容" class="headerlink" title="5、容量扩容"></a>5、容量扩容</h2><p>HashMap 的初始容量为：16，Hashtable 初始容量为：11，两者的负载因子默认都是：0.75。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Constructs a new, empty hashtable with a default initial capacity (11)</span><br><span class="line"> * and load factor (0.75).</span><br><span class="line"> */</span><br><span class="line">public Hashtable() &#123;</span><br><span class="line">    this(11, 0.75f);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Constructs an empty &lt;tt&gt;HashMap&lt;/tt&gt; with the default initial capacity</span><br><span class="line"> * (16) and the default load factor (0.75).</span><br><span class="line"> */</span><br><span class="line">public HashMap() &#123;</span><br><span class="line">    this.loadFactor = DEFAULT_LOAD_FACTOR; // all other fields defaulted</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;**
+ * Constructs a new, empty hashtable with a default initial capacity (11)
+ * and load factor (0.75).
+ *&#x2F;
+public Hashtable() &#123;
+    this(11, 0.75f);
+&#125;
+
+&#x2F;**
+ * Constructs an empty &lt;tt&gt;HashMap&lt;&#x2F;tt&gt; with the default initial capacity
+ * (16) and the default load factor (0.75).
+ *&#x2F;
+public HashMap() &#123;
+    this.loadFactor &#x3D; DEFAULT_LOAD_FACTOR; &#x2F;&#x2F; all other fields defaulted
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>当现有容量大于总容量 * 负载因子时，HashMap 扩容规则为当前容量翻倍，Hashtable 扩容规则为当前容量翻倍 + 1。</p>
 <h2 id="6、迭代器"><a href="#6、迭代器" class="headerlink" title="6、迭代器"></a>6、迭代器</h2><p>HashMap 中的 Iterator 迭代器是 fail-fast 的，而 Hashtable 的 Enumerator 不是 fail-fast 的。</p>
 <p>所以，当其他线程改变了HashMap 的结构，如：增加、删除元素，将会抛出 ConcurrentModificationException 异常，而 Hashtable 则不会。</p>
 <p><strong>可以来看下这个区别的演示：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* </span><br><span class="line">**/</span><br><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    Map&lt;String, String&gt; hashtable = new Hashtable&lt;&gt;();</span><br><span class="line">    hashtable.put(&quot;t1&quot;, &quot;1&quot;);</span><br><span class="line">    hashtable.put(&quot;t2&quot;, &quot;2&quot;);</span><br><span class="line">    hashtable.put(&quot;t3&quot;, &quot;3&quot;);</span><br><span class="line"></span><br><span class="line">    Enumeration&lt;Map.Entry&lt;String, String&gt;&gt; iterator1 = (Enumeration&lt;Map.Entry&lt;String, String&gt;&gt;) hashtable.entrySet().iterator();</span><br><span class="line">    hashtable.remove(iterator1.nextElement().getKey());</span><br><span class="line">    while (iterator1.hasMoreElements()) &#123;</span><br><span class="line">        System.out.println(iterator1.nextElement());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Map&lt;String, String&gt; hashMap = new HashMap&lt;&gt;();</span><br><span class="line">    hashMap.put(&quot;h1&quot;, &quot;1&quot;);</span><br><span class="line">    hashMap.put(&quot;h2&quot;, &quot;2&quot;);</span><br><span class="line">    hashMap.put(&quot;h3&quot;, &quot;3&quot;);</span><br><span class="line"></span><br><span class="line">    Iterator&lt;Map.Entry&lt;String, String&gt;&gt; iterator2 = hashMap.entrySet().iterator();</span><br><span class="line">    hashMap.remove(iterator2.next().getKey());</span><br><span class="line">    while (iterator2.hasNext()) &#123;</span><br><span class="line">        System.out.println(iterator2.next());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;**
+* 
+**&#x2F;
+public static void main(String[] args) &#123;
+    Map&lt;String, String&gt; hashtable &#x3D; new Hashtable&lt;&gt;();
+    hashtable.put(&quot;t1&quot;, &quot;1&quot;);
+    hashtable.put(&quot;t2&quot;, &quot;2&quot;);
+    hashtable.put(&quot;t3&quot;, &quot;3&quot;);
+
+    Enumeration&lt;Map.Entry&lt;String, String&gt;&gt; iterator1 &#x3D; (Enumeration&lt;Map.Entry&lt;String, String&gt;&gt;) hashtable.entrySet().iterator();
+    hashtable.remove(iterator1.nextElement().getKey());
+    while (iterator1.hasMoreElements()) &#123;
+        System.out.println(iterator1.nextElement());
+    &#125;
+
+    Map&lt;String, String&gt; hashMap &#x3D; new HashMap&lt;&gt;();
+    hashMap.put(&quot;h1&quot;, &quot;1&quot;);
+    hashMap.put(&quot;h2&quot;, &quot;2&quot;);
+    hashMap.put(&quot;h3&quot;, &quot;3&quot;);
+
+    Iterator&lt;Map.Entry&lt;String, String&gt;&gt; iterator2 &#x3D; hashMap.entrySet().iterator();
+    hashMap.remove(iterator2.next().getKey());
+    while (iterator2.hasNext()) &#123;
+        System.out.println(iterator2.next());
+    &#125;
+
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>输出信息：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">t2=2</span><br><span class="line">t1=1</span><br><span class="line">Exception in thread &quot;main&quot; java.util.ConcurrentModificationException</span><br><span class="line">	at java.util.HashMap$HashIterator.nextNode(HashMap.java:1442)</span><br><span class="line">	at java.util.HashMap$EntryIterator.next(HashMap.java:1476)</span><br><span class="line">	at java.util.HashMap$EntryIterator.next(HashMap.java:1474)</span><br><span class="line">	at cn.javastack.Test.main(Test.java:37)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">t2&#x3D;2
+t1&#x3D;1
+Exception in thread &quot;main&quot; java.util.ConcurrentModificationException
+	at java.util.HashMap$HashIterator.nextNode(HashMap.java:1442)
+	at java.util.HashMap$EntryIterator.next(HashMap.java:1476)
+	at java.util.HashMap$EntryIterator.next(HashMap.java:1474)
+	at cn.javastack.Test.main(Test.java:37)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>看到了吧？</p>
 <p>所以，这条同样也是 Enumeration 和 Iterator 的区别。 </p>
 <p>最后一点有几个人知道？知道的给栈长点个赞回应一下，不知道的有收获的也点一个赞支持一下吧。</p>
 <p>有收获？转发给更多的人吧！</p>
-
-      
+ 
+            </div>
+        </div>
+        
+            <div class="mt-3">
+                <!-- 前一页后一页 -->
+<div class="previous-next-links">
+     
+    <div class="previous-design-link">
+        <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/%E9%9D%A2%E8%AF%95%E9%97%AE%E6%88%91%20Java%20%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90%EF%BC%8C%E7%9E%AC%E9%97%B4%E8%A2%AB%E7%A7%92%E6%9D%80%E4%BA%86%E3%80%82/">
+            <i style="font-size:16px;" class="fa fa-arrow-left" aria-hidden="true"></i>
+            面试问我 Java 逃逸分析，瞬间被秒杀了。
+        </a>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/10/15/%E9%9B%86%E5%90%88/HashMap%20%E5%92%8C%20Hashtable%20%E7%9A%84%206%20%E4%B8%AA%E5%8C%BA%E5%88%AB/" data-id="cmgrfxxda003530d41061cmuk" data-title="HashMap 和 Hashtable 的 6 个区别" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li></ul>
+     
 
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/%E9%9D%A2%E8%AF%95%E9%97%AE%E6%88%91%20Java%20%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90%EF%BC%8C%E7%9E%AC%E9%97%B4%E8%A2%AB%E7%A7%92%E6%9D%80%E4%BA%86%E3%80%82/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          面试问我 Java 逃逸分析，瞬间被秒杀了。
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2025/10/15/%E9%9B%86%E5%90%88/Hashtable%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E5%8F%AB%20HashTable%EF%BC%9F/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Hashtable 为什么不叫 HashTable？</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li></ul>
+     
+    <div class="next-design-link">
+        <a href="/2025/10/15/%E9%9B%86%E5%90%88/Hashtable%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E5%8F%AB%20HashTable%EF%BC%9F/">
+            Hashtable 为什么不叫 HashTable？
+            <i style="font-size:16px;" class="fa fa-arrow-right" aria-hidden="true"></i>
+        </a>
     </div>
-  </div>
+ 
+</div> 
+             
+            </div>
+        
 
-
-  
+    </div>
+    <div class="col-4 pe-0">
+        <div class="d-none d-sm-none d-md-block sticky-top border-start">
+             
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 18px;">基础</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 16px;">多线程</a> <a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" style="font-size: 20px;">新特性</a> <a href="/tags/%E8%BF%9B%E9%98%B6/" style="font-size: 14px;">进阶</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 12px;">集合</a>
-    </div>
-  </div>
-
-  
+        <div class="toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8"><span class="toc-number">1.</span> <span class="toc-text">1、线程安全</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E6%80%A7%E8%83%BD%E4%BC%98%E5%8A%A3"><span class="toc-number">2.</span> <span class="toc-text">2、性能优劣</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81NULL"><span class="toc-number">3.</span> <span class="toc-text">3、NULL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="toc-number">4.</span> <span class="toc-text">4、实现方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%E3%80%81%E5%AE%B9%E9%87%8F%E6%89%A9%E5%AE%B9"><span class="toc-number">5.</span> <span class="toc-text">5、容量扩容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6%E3%80%81%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="toc-number">6.</span> <span class="toc-text">6、迭代器</span></a></li></ol> 
+        </div>
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li></ul>
-    </div>
-  </div>
+ 
 
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java%205%20~%2010%20%E6%96%B0%E7%89%B9%E6%80%A7%E5%80%BE%E6%83%85%E6%95%B4%E7%90%86%EF%BC%81/">Java 5 ~ 10 新特性倾情整理！</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%206%20%E9%A2%97%E8%AF%AD%E6%B3%95%E7%B3%96/">Java 中的 6 颗语法糖</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%20String%20%E7%9C%9F%E7%9A%84%E6%98%AF%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%90%97%EF%BC%9F/">Java 中的 String 真的是不可变吗？</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E4%BC%AA%E5%85%B1%E4%BA%AB%E8%AF%A6%E8%A7%A3%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">Java 中的伪共享详解及解决方案</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E5%AE%8F%E5%8F%98%E9%87%8F%EF%BC%8C%E5%AE%8F%E6%9B%BF%E6%8D%A2%E8%AF%A6%E8%A7%A3%E3%80%82/">Java 中的宏变量，宏替换详解。</a>
-          </li>
-        
-      </ul>
+        </div>
     </div>
-  </div>
+</div>
+</div>
+ 
+    </main>
 
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2025 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    <!-- 底部栏 -->
+    <footer class="bg-dark pt-3 pb-0 mt-5 fixed-bottom" id="flex_bottom">
+    <div class="container pb-3 pt-3 text-center">
+        <p class="text-muted tag-hover">
+            All Rights Reserved <i class="fa fa-copyright"></i> by2025  <br>
+<!--             Powered by  -->
+<!--              <a class="link-secondary text-decoration-none" target="_blank" rel="noopener" href="https://hexo.io"> -->
+<!--                  Hexo.io -->
+<!--             </a> &  <a class="link-secondary text-decoration-none" target="_blank" rel="noopener" href="https://github.com/smile-yan/hexo-theme-heyan"> -->
+<!--                heyan -->
+<!--             </a> -->
+            <br>
+<!--             <a class="link-secondary text-decoration-none" target="_blank" rel="noopener" href="https://beian.miit.gov.cn/#/Integrated/index"> -->
+<!--                 <img src="/police.png" style="width: 18px; height: 18px; margin-top: -4px" class="nofancybox"> -->
+<!--                   -->
+<!--             </a> -->
+        </p>
     </div>
-  </div>
 </footer>
 
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.6.4.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
 </body>
+
+<script>
+    // 检查页面内容高度是否小于窗口高度
+    function checkContentHeight() {
+        const contentHeight = document.body.scrollHeight;
+        const windowHeight = window.innerHeight;
+
+        if (contentHeight < windowHeight) {
+            // 内容高度不足以填充整个窗口，固定底部导航栏
+            document.getElementById('flex_bottom').classList.add('fixed-bottom');
+        } else {
+            // 内容高度足够多，不固定底部导航栏
+            document.getElementById('flex_bottom').classList.remove('fixed-bottom');
+        }
+    }
+
+    // 页面加载时和窗口大小变化时检查内容高度
+    window.addEventListener('load', checkContentHeight);
+    window.addEventListener('resize', checkContentHeight);
+</script>
 </html>

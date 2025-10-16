@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title><%= page.title %> | <%= config.title %></title>
+    <style>
+        :root {
+            --primary-color: #007cba;
+            --secondary-color: #6c757d;
+            --background-color: #f8f9fa;
+            --border-color: #e9ecef;
+            --text-color: #333;
+            --text-light: #6c757d;
+        }
+
+        .archive-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* 头部统计信息 */
+        .archive-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .archive-title {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            font-weight: 300;
+        }
+
+        .archive-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* 控制栏 */
+        .archive-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .view-options {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border: 1px solid var(--border-color);
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--background-color);
+        }
+
+        .btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .search-box {
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            min-width: 200px;
+        }
+
+        /* 年份部分 */
+        .year-section {
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .year-header {
+            padding: 20px 25px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .year-title {
+            font-size: 1.5rem;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .year-count {
+            background: rgba(255,255,255,0.2);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+        }
+
+        .year-toggle {
+            transition: transform 0.3s;
+        }
+
+        .year-toggle.collapsed {
+            transform: rotate(-90deg);
+        }
+
+        /* 月份部分 */
+        .month-section {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .month-section:last-child {
+            border-bottom: none;
+        }
+
+        .month-header {
+            padding: 15px 25px;
+            background: var(--background-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .month-header:hover {
+            background: #e9ecef;
+        }
+
+        .month-title {
+            font-size: 1.1rem;
+            margin: 0;
+            color: var(--text-color);
+        }
+
+        .month-count {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .month-toggle {
+            transition: transform 0.3s;
+            color: var(--text-light);
+        }
+
+        .month-toggle.collapsed {
+            transform: rotate(-90deg);
+        }
+
+        /* 文章列表 */
+        .post-list {
+            padding: 0;
+            margin: 0;
+            max-height: 1000px;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+
+        .post-list.collapsed {
+            max-height: 0;
+        }
+
+        .post-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 15px 25px;
+            border-bottom: 1px solid var(--border-color);
+            transition: background-color 0.3s;
+        }
+
+        .post-item:last-child {
+            border-bottom: none;
+        }
+
+        .post-item:hover {
+            background: var(--background-color);
+        }
+
+        .post-date {
+            color: var(--text-light);
+            min-width: 80px;
+            font-size: 0.9rem;
+            margin-top: 2px;
+        }
+
+        .post-content {
+            flex-grow: 1;
+            margin-left: 15px;
+        }
+
+        .post-title {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .post-title:hover {
+            color: var(--primary-color);
+        }
+
+        .post-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .post-categories, .post-tags {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .category-link, .tag-link {
+            color: var(--text-light);
+            text-decoration: none;
+            padding: 2px 6px;
+            background: var(--background-color);
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        .category-link:hover, .tag-link:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* 空状态 */
+        .no-posts {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-light);
+        }
+
+        /* 回到顶部 */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .archive-container {
+                padding: 10px;
+            }
+
+            .archive-header {
+                padding: 25px 20px;
+            }
+
+            .archive-title {
+                font-size: 2rem;
+            }
+
+            .archive-stats {
+                gap: 20px;
+            }
+
+            .archive-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .view-options {
+                justify-content: center;
+            }
+
+            .post-item {
+                flex-direction: column;
+            }
+
+            .post-content {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+
+            .post-meta {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="archive-container">
+    <!-- 头部统计信息 -->
+    <header class="archive-header">
+        <h1 class="archive-title"><%= page.title %></h1>
+        <p>记录点滴，汇聚成河</p>
+        <div class="archive-stats">
+            <div class="stat-item">
+                <span class="stat-number" id="total-posts"><%= site.posts.length %></span>
+                <span class="stat-label">总文章数</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" id="total-categories"><%= site.categories.length %></span>
+                <span class="stat-label">分类数量</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" id="total-tags"><%= site.tags.length %></span>
+                <span class="stat-label">标签数量</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" id="total-years">0</span>
+                <span class="stat-label">归档年份</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- 控制栏 -->
+    <div class="archive-controls">
+        <div class="view-options">
+            <button class="btn active" id="expand-all">展开全部</button>
+            <button class="btn" id="collapse-all">折叠全部</button>
+            <button class="btn" id="expand-years">仅展开年份</button>
+        </div>
+        <div class="search-container">
+            <input type="text" class="search-box" id="search-input" placeholder="搜索文章标题...">
+        </div>
+    </div>
+
+    <!-- 归档内容 -->
+    <main class="archive-content">
+        <%
+        // 获取所有文章
+        const posts = page.posts.toArray();
+
+        if (posts.length === 0) {
+        %>
+            <div class="no-posts">
+                <h3>暂无文章</h3>
+                <p>还没有发布任何文章，快去写一篇吧！</p>
+            </div>
+        <%
+        } else {
+            // 创建年份-月份映射
+            const yearMap = new Map();
+
+            // 按年份和月份分组
+            posts.forEach(post => {
+                const year = post.date.year();
+                const month = post.date.month() + 1; // 月份从0开始，需要+1
+
+                if (!yearMap.has(year)) {
+                    yearMap.set(year, new Map());
+                }
+
+                const monthMap = yearMap.get(year);
+                if (!monthMap.has(month)) {
+                    monthMap.set(month, []);
+                }
+
+                monthMap.get(month).push(post);
+            });
+
+            // 按年份倒序排列
+            const sortedYears = Array.from(yearMap.keys()).sort((a, b) => b - a);
+
+            // 更新年份统计
+        %>
+        <script>
+            document.getElementById('total-years').textContent = <%= sortedYears.length %>;
+        </script>
+        <%
+
+            // 渲染每一年份
+        sortedYears.forEach(year => {
+            const monthMap = yearMap.get(year);
+            // 按月份倒序排列
+            const sortedMonths = Array.from(monthMap.keys()).sort((a, b) => b - a);
+
+            // 计算该年份的文章总数
+            let yearPostCount = 0;
+            sortedMonths.forEach(month => {
+                yearPostCount += monthMap.get(month).length;
+            });
+        %>
+        <section class="year-section" data-year="<%= year %>">
+            <div class="year-header">
+                <h2 class="year-title">
+                    <span class="year-toggle">▶</span>
+                    <%= year %> 年
+                    <span class="year-count"><%= yearPostCount %> 篇</span>
+                </h2>
+            </div>
+
+            <div class="year-content">
+                <%
+                sortedMonths.forEach(month => {
+                    const monthPosts = monthMap.get(month);
+                    // 按日期倒序排列当月文章
+                    monthPosts.sort((a, b) => b.date - a.date);
+
+                    // 获取月份名称
+                    const monthNames = ['一月', '二月', '三月', '四月', '五月', '六月',
+                        '七月', '八月', '九月', '十月', '十一月', '十二月'];
+                    const monthName = monthNames[month - 1];
+                %>
+                <div class="month-section" data-month="<%= year %>-<%= month %>">
+                    <div class="month-header">
+                        <h3 class="month-title"><%= monthName %></h3>
+                        <div class="month-info">
+                            <span class="month-count"><%= monthPosts.length %> 篇</span>
+                            <span class="month-toggle">▶</span>
+                        </div>
+                    </div>
+
+                    <div class="post-list">
+                        <% monthPosts.forEach(post => { %>
+                            <article class="post-item" data-title="<%= post.title.toLowerCase() %>">
+                                <time class="post-date" datetime="<%= post.date.format() %>">
+                                    <%= post.date.format('MM-DD') %>
+                                </time>
+                                <div class="post-content">
+                                    <a class="post-title" href="<%- url_for(post.path) %>">
+                                        <%= post.title %>
+                                    </a>
+                                    <div class="post-meta">
+                                        <% if (post.categories && post.categories.length > 0) { %>
+                                            <div class="post-categories">
+                                                <span>分类:</span>
+                                                <% post.categories.forEach((category, index) => { %>
+                                                    <a class="category-link" href="<%- url_for(category.path) %>">
+                                                        <%= category.name %>
+                                                    </a>
+                                                    <% if (index < post.categories.length - 1) { %>, <% } %>
+                                                <% }) %>
+                                            </div>
+                                        <% } %>
+
+                                        <% if (post.tags && post.tags.length > 0) { %>
+                                            <div class="post-tags">
+                                                <span>标签:</span>
+                                                <% post.tags.forEach((tag, index) => { %>
+                                                    <a class="tag-link" href="<%- url_for(tag.path) %>">
+                                                        #<%= tag.name %>
+                                                    </a>
+                                                    <% if (index < post.tags.length - 1) { %> <% } %>
+                                                <% }) %>
+                                            </div>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </article>
+                        <% }) %>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+        </section>
+        <%
+        });
+        }
+        %>
+    </main>
+
+    <!-- 回到顶部按钮 -->
+    <div class="back-to-top" id="back-to-top">↑</div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // 年份折叠功能
+        const yearHeaders = document.querySelectorAll('.year-header');
+
+        yearHeaders.forEach(header => {
+            header.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                const toggle = this.querySelector('.year-toggle');
+
+                content.classList.toggle('collapsed');
+                toggle.classList.toggle('collapsed');
+            });
+        });
+
+        // 月份折叠功能
+        const monthHeaders = document.querySelectorAll('.month-header');
+
+        monthHeaders.forEach(header => {
+            header.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                const toggle = this.querySelector('.month-toggle');
+
+                content.classList.toggle('collapsed');
+                toggle.classList.toggle('collapsed');
+            });
+        });
+
+        // 展开全部
+        document.getElementById('expand-all').addEventListener('click', function() {
+            document.querySelectorAll('.year-content').forEach(content => {
+                content.classList.remove('collapsed');
+            });
+            document.querySelectorAll('.year-toggle').forEach(toggle => {
+                toggle.classList.remove('collapsed');
+            });
+            document.querySelectorAll('.post-list').forEach(list => {
+                list.classList.remove('collapsed');
+            });
+            document.querySelectorAll('.month-toggle').forEach(toggle => {
+                toggle.classList.remove('collapsed');
+            });
+        });
+
+        // 折叠全部
+        document.getElementById('collapse-all').addEventListener('click', function() {
+            document.querySelectorAll('.year-content').forEach(content => {
+                content.classList.add('collapsed');
+            });
+            document.querySelectorAll('.year-toggle').forEach(toggle => {
+                toggle.classList.add('collapsed');
+            });
+            document.querySelectorAll('.post-list').forEach(list => {
+                list.classList.add('collapsed');
+            });
+            document.querySelectorAll('.month-toggle').forEach(toggle => {
+                toggle.classList.add('collapsed');
+            });
+        });
+
+        // 仅展开年份
+        document.getElementById('expand-years').addEventListener('click', function() {
+            document.querySelectorAll('.year-content').forEach(content => {
+                content.classList.remove('collapsed');
+            });
+            document.querySelectorAll('.year-toggle').forEach(toggle => {
+                toggle.classList.remove('collapsed');
+            });
+            document.querySelectorAll('.post-list').forEach(list => {
+                list.classList.add('collapsed');
+            });
+            document.querySelectorAll('.month-toggle').forEach(toggle => {
+                toggle.classList.add('collapsed');
+            });
+        });
+
+        // 搜索功能
+        const searchInput = document.getElementById('search-input');
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const postItems = document.querySelectorAll('.post-item');
+
+            postItems.forEach(item => {
+                const title = item.getAttribute('data-title');
+                if (title.includes(searchTerm)) {
+                    item.style.display = 'flex';
+
+                    // 显示父级月份和年份
+                    let monthSection = item.closest('.month-section');
+                    let yearSection = item.closest('.year-section');
+
+                    if (monthSection) {
+                        monthSection.querySelector('.post-list').classList.remove('collapsed');
+                        monthSection.querySelector('.month-toggle').classList.remove('collapsed');
+                    }
+
+                    if (yearSection) {
+                        yearSection.querySelector('.year-content').classList.remove('collapsed');
+                        yearSection.querySelector('.year-toggle').classList.remove('collapsed');
+                    }
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+
+        // 回到顶部功能
+        const backToTop = document.getElementById('back-to-top');
+
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        backToTop.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // 初始化：默认只展开年份
+        document.getElementById('expand-years').click();
+    });
+</script>
+</body>
+</html>

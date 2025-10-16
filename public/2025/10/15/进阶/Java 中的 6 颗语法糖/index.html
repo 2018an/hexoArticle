@@ -1,105 +1,173 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  
-  
-  <title>Java 中的 6 颗语法糖 | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="语法糖（Syntactic Sugar），也称糖衣语法，指在计算机语言中添加的某种语法，这种语法对语言本身功能来说没有什么影响，只是为了方便程序员的开发，提高开发效率。说白了，语法糖就是对现有语法的一个封装。 Java作为一种与平台无关的高级语言，当然也含有语法糖，这些语法糖并不被虚拟机所支持，在编译成字节码阶段就自动转换成简单常用语法。 一般来说Java中的语法糖主要有以下几种：   泛型与类">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Java 中的 6 颗语法糖">
-<meta property="og:url" content="http://example.com/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%206%20%E9%A2%97%E8%AF%AD%E6%B3%95%E7%B3%96/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="语法糖（Syntactic Sugar），也称糖衣语法，指在计算机语言中添加的某种语法，这种语法对语言本身功能来说没有什么影响，只是为了方便程序员的开发，提高开发效率。说白了，语法糖就是对现有语法的一个封装。 Java作为一种与平台无关的高级语言，当然也含有语法糖，这些语法糖并不被虚拟机所支持，在编译成字节码阶段就自动转换成简单常用语法。 一般来说Java中的语法糖主要有以下几种：   泛型与类">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://img.javastack.cn/18-1-23/39717542.jpg">
-<meta property="article:published_time" content="2025-10-15T03:36:33.000Z">
-<meta property="article:modified_time" content="2025-10-15T03:34:21.957Z">
-<meta property="article:author" content="John Doe">
-<meta property="article:tag" content="进阶">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://img.javastack.cn/18-1-23/39717542.jpg">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
-
-  
+    <title>只有那年胜过年年</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/favicon/site.webmanifest">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css">
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
     
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+<link rel="stylesheet" href="/css/prism.css">
+ 
+    
+<link rel="stylesheet" href="/css/markdown.css">
+ 
+    
+<script src="/js/prism.js"></script>
 
-  
-  
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+    
+<link rel="stylesheet" href="/css/index.css">
+ 
+    
+<script src="/js/search.js"></script>
 
+
+     
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+        </script>
+     
+
+     
+        <script src="//lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js"> </script>
+        
+<script src="/js/fancybox.js"></script>
+
+    
+
+    <script type="text/javascript">
+
+        var search_path = "/search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+        var path = search_path;
+        searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
 <meta name="generator" content="Hexo 7.3.0"></head>
-
+ 
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
+    <!-- 导航栏 -->
+    <!-- 导航栏 -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4 pt-2 pb-2">
+    <div class="container">
+        <!-- 标题 --> 
+        <a class="navbar-brand navbar-expand-sm" href="/">
+            <img class="nofancybox" src="/logo.png" style="width: 75px;"  alt="笑颜网">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-      <div class="outer">
-        <section id="main"><article id="post-进阶/Java 中的 6 颗语法糖" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%206%20%E9%A2%97%E8%AF%AD%E6%B3%95%E7%B3%96/" class="article-date">
-  <time class="dt-published" datetime="2025-10-15T03:36:33.000Z" itemprop="datePublished">2025-10-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      Java 中的 6 颗语法糖
-    </h1>
-  
+        <!-- 左边右边导航按钮 --> 
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto">
+                <!-- 左右两侧的导航栏 -->
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p><img src="http://img.javastack.cn/18-1-23/39717542.jpg" alt="image"></p>
-<p>语法糖（Syntactic Sugar），也称糖衣语法，指在计算机语言中添加的某种语法，这种语法对语言本身功能来说没有什么影响，只是为了方便程序员的开发，提高开发效率。说白了，语法糖就是对现有语法的一个封装。</p>
+ 
+ 
+
+    <li class="nav-item">
+        <a class="nav-link" href="/">
+           <big> <i class="fa fa-home ps-1" ></i> 主页</big>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="/archives">
+           <big> <i class="fa fa-archive ps-1" ></i> 归档</big>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="/about">
+           <big> <i class="fa fa-user ps-1" ></i> 关于</big>
+        </a>
+    </li>
+ 
+ 
+            </ul>
+
+            
+            <form class="">
+                <div class="d-flex">
+                    <button class="btn text-muted fa fa-search d-none d-md-block d-lg-block" disabled></button>
+                    <input id="local-search-input" class="form-control me-2 pe-4" type="search"
+                            placeholder="搜索 " aria-label="Search">
+                </div>
+                <div id="local-search-result" style="position:absolute; padding-top: 8px; max-height: 960px; width: 480px;overflow-y: scroll; z-index: 1050;"></div>
+            </form>
+            
+            <ul class="navbar-nav">
+                <!-- 左右两侧的导航栏 -->
+
+ 
+ 
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+    <main class="container">
+        
+<div class="container-fluid markdown-section">
+<div class="row pb-3">
+    <div class="col-md-8 col-sm-12">
+        <!-- 博客详情 -->
+        <div class="">
+            <p class="h2">
+                <span class="post-title">
+                    Java 中的 6 颗语法糖
+                </span>   
+            </p>
+
+            <div class="pb-3 pt-1 pe-3">
+                <i class="fa fa-calendar p-1"></i>
+                2025/10/15 11:36:33 
+                
+                    <i class="fa fa-folder-open p-1"> </i> 
+                    <span class="tag-hover">
+                        
+                            <a href="/categories/%E5%90%8E%E7%AB%AF/ " class="link-dark text-decoration-none"> 
+                                后端 
+                            </a>
+                         
+                    </span>
+                
+
+                
+                    <i class="fa fa-tag p-1"> </i>
+                    <span class="tag-hover">
+                        
+                            <a href="/tags/%E8%BF%9B%E9%98%B6/" class="link-dark text-decoration-none"> 
+                                进阶 
+                            </a>
+                        
+                    </span>
+                
+            </div>
+
+            <div class="border-bottom pb-2">
+                <p>语法糖（Syntactic Sugar），也称糖衣语法，指在计算机语言中添加的某种语法，这种语法对语言本身功能来说没有什么影响，只是为了方便程序员的开发，提高开发效率。说白了，语法糖就是对现有语法的一个封装。</p>
 <p>Java作为一种与平台无关的高级语言，当然也含有语法糖，这些语法糖并不被虚拟机所支持，在编译成字节码阶段就自动转换成简单常用语法。</p>
 <p><strong>一般来说Java中的语法糖主要有以下几种：</strong> </p>
 <ol>
@@ -113,196 +181,255 @@
 <p><strong>泛型与类型擦除</strong></p>
 <p>Java语言并不是一开始就支持泛型的。在早期的JDK中，只能通过Object类是所有类型的父类和强制类型转换来实现泛型的功能。强制类型转换的缺点就是把编译期间的问题延迟到运行时，JVM并不能为我们提供编译期间的检查。</p>
 <p>在JDK1.5中，Java语言引入了泛型机制。但是这种泛型机制是通过类型擦除来实现的，即Java中的泛型只在程序源代码中有效（源代码阶段提供类型检查），在编译后的字节码中自动用强制类型转换进行替代。也就是说，Java语言中的泛型机制其实就是一颗语法糖，相较与C++、C#相比，其泛型实现实在是不那么优雅。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* 在源代码中存在泛型</span><br><span class="line">*/</span><br><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    Map&lt;String,String&gt; map = new HashMap&lt;String,String&gt;();</span><br><span class="line">    map.put(&quot;hello&quot;,&quot;你好&quot;);</span><br><span class="line">    String hello = map.get(&quot;hello&quot;);</span><br><span class="line">    System.out.println(hello);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;**
+* 在源代码中存在泛型
+*&#x2F;
+public static void main(String[] args) &#123;
+    Map&lt;String,String&gt; map &#x3D; new HashMap&lt;String,String&gt;();
+    map.put(&quot;hello&quot;,&quot;你好&quot;);
+    String hello &#x3D; map.get(&quot;hello&quot;);
+    System.out.println(hello);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>当上述源代码被编译为class文件后，泛型被擦除且引入强制类型转换</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    HashMap map = new HashMap(); //类型擦除</span><br><span class="line">    map.put(&quot;hello&quot;, &quot;你好&quot;);</span><br><span class="line">    String hello = (String)map.get(&quot;hello&quot;);//强制转换</span><br><span class="line">    System.out.println(hello);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">public static void main(String[] args) &#123;
+    HashMap map &#x3D; new HashMap(); &#x2F;&#x2F;类型擦除
+    map.put(&quot;hello&quot;, &quot;你好&quot;);
+    String hello &#x3D; (String)map.get(&quot;hello&quot;);&#x2F;&#x2F;强制转换
+    System.out.println(hello);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
 <p><strong>自动装箱与拆箱</strong></p>
 <p>Java中的自动装箱与拆箱指的是基本数据类型与他们的包装类型之间的相互转换。</p>
 <p>我们知道Java是一门面向对象的语言，在Java世界中有一句话是这么说的：“万物皆对象”。但是Java中的基本数据类型却不是对象，他们不需要进行new操作，也不能调用任何方法，这在使用的时候有诸多不便。因此Java为这些基本类型提供了包装类，并且为了使用方便，提供了自动装箱与拆箱功能。自动装箱与拆箱在使用的过程中，其实是一个语法糖，内部还是调用了相应的函数进行转换。</p>
 <p>下面代码演示了自动装箱和拆箱功能</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    Integer a = 1;</span><br><span class="line">    int b = 2;</span><br><span class="line">    int c = a + b;</span><br><span class="line">    System.out.println(c);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">public static void main(String[] args) &#123;
+    Integer a &#x3D; 1;
+    int b &#x3D; 2;
+    int c &#x3D; a + b;
+    System.out.println(c);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>经过编译后，代码如下</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    Integer a = Integer.valueOf(1); // 自动装箱</span><br><span class="line">    byte b = 2;</span><br><span class="line">    int c = a.intValue() + b;//自动拆箱</span><br><span class="line">    System.out.println(c);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">public static void main(String[] args) &#123;
+    Integer a &#x3D; Integer.valueOf(1); &#x2F;&#x2F; 自动装箱
+    byte b &#x3D; 2;
+    int c &#x3D; a.intValue() + b;&#x2F;&#x2F;自动拆箱
+    System.out.println(c);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>变长参数</strong></p>
 <p>所谓变长参数，就是方法可以接受长度不定确定的参数。变长参数特性是在JDK1.5中引入的，使用变长参数有两个条件，一是变长的那一部分参数具有相同的类型，二是变长参数必须位于方法参数列表的最后面。变长参数同样是Java中的语法糖，其内部实现是Java数组。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class Varargs &#123;</span><br><span class="line">    public static void print(String... args) &#123;</span><br><span class="line">        for(String str : args)&#123;</span><br><span class="line">            System.out.println(str);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        print(&quot;hello&quot;, &quot;world&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">public class Varargs &#123;
+    public static void print(String... args) &#123;
+        for(String str : args)&#123;
+            System.out.println(str);
+        &#125;
+    &#125;
+
+    public static void main(String[] args) &#123;
+        print(&quot;hello&quot;, &quot;world&quot;);
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>编译为class文件后如下，从中可以很明显的看出变长参数内部是通过数组实现的</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public class Varargs &#123;</span><br><span class="line">    public Varargs() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void print(String... args) &#123;</span><br><span class="line">        String[] var1 = args;</span><br><span class="line">        int var2 = args.length;</span><br><span class="line">        //增强for循环的数组实现方式</span><br><span class="line">        for(int var3 = 0; var3 &lt; var2; ++var3) &#123;</span><br><span class="line">            String str = var1[var3];</span><br><span class="line">            System.out.println(str);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        //变长参数转换为数组</span><br><span class="line">        print(new String[]&#123;&quot;hello&quot;, &quot;world&quot;&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">public class Varargs &#123;
+    public Varargs() &#123;
+    &#125;
+
+    public static void print(String... args) &#123;
+        String[] var1 &#x3D; args;
+        int var2 &#x3D; args.length;
+        &#x2F;&#x2F;增强for循环的数组实现方式
+        for(int var3 &#x3D; 0; var3 &lt; var2; ++var3) &#123;
+            String str &#x3D; var1[var3];
+            System.out.println(str);
+        &#125;
+
+    &#125;
+
+    public static void main(String[] args) &#123;
+        &#x2F;&#x2F;变长参数转换为数组
+        print(new String[]&#123;&quot;hello&quot;, &quot;world&quot;&#125;);
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>增强for循环</strong></p>
 <p>增强for循环与普通for循环相比，功能更强并且代码更简洁。增强for循环的对象要么是一个数组，要么实现了Iterable接口。这个语法糖主要用来对数组或者集合进行遍历，其在循环过程中不能改变集合的大小。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    String[] params = new String[]&#123;&quot;hello&quot;,&quot;world&quot;&#125;;</span><br><span class="line">    //增强for循环对象为数组</span><br><span class="line">    for(String str : params)&#123;</span><br><span class="line">        System.out.println(str);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    List&lt;String&gt; lists = Arrays.asList(&quot;hello&quot;,&quot;world&quot;);</span><br><span class="line">    //增强for循环对象实现Iterable接口</span><br><span class="line">    for(String str : lists)&#123;</span><br><span class="line">        System.out.println(str);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">public static void main(String[] args) &#123;
+    String[] params &#x3D; new String[]&#123;&quot;hello&quot;,&quot;world&quot;&#125;;
+    &#x2F;&#x2F;增强for循环对象为数组
+    for(String str : params)&#123;
+        System.out.println(str);
+    &#125;
+
+    List&lt;String&gt; lists &#x3D; Arrays.asList(&quot;hello&quot;,&quot;world&quot;);
+    &#x2F;&#x2F;增强for循环对象实现Iterable接口
+    for(String str : lists)&#123;
+        System.out.println(str);
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>编译后的class文件为</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">   String[] params = new String[]&#123;&quot;hello&quot;, &quot;world&quot;&#125;;</span><br><span class="line">   String[] lists = params;</span><br><span class="line">   int var3 = params.length;</span><br><span class="line">   //数组形式的增强for退化为普通for</span><br><span class="line">   for(int str = 0; str &lt; var3; ++str) &#123;</span><br><span class="line">       String str1 = lists[str];</span><br><span class="line">       System.out.println(str1);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   List var6 = Arrays.asList(new String[]&#123;&quot;hello&quot;, &quot;world&quot;&#125;);</span><br><span class="line">   Iterator var7 = var6.iterator();</span><br><span class="line">   //实现Iterable接口的增强for使用iterator接口进行遍历</span><br><span class="line">   while(var7.hasNext()) &#123;</span><br><span class="line">       String var8 = (String)var7.next();</span><br><span class="line">       System.out.println(var8);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">public static void main(String[] args) &#123;
+   String[] params &#x3D; new String[]&#123;&quot;hello&quot;, &quot;world&quot;&#125;;
+   String[] lists &#x3D; params;
+   int var3 &#x3D; params.length;
+   &#x2F;&#x2F;数组形式的增强for退化为普通for
+   for(int str &#x3D; 0; str &lt; var3; ++str) &#123;
+       String str1 &#x3D; lists[str];
+       System.out.println(str1);
+   &#125;
+
+   List var6 &#x3D; Arrays.asList(new String[]&#123;&quot;hello&quot;, &quot;world&quot;&#125;);
+   Iterator var7 &#x3D; var6.iterator();
+   &#x2F;&#x2F;实现Iterable接口的增强for使用iterator接口进行遍历
+   while(var7.hasNext()) &#123;
+       String var8 &#x3D; (String)var7.next();
+       System.out.println(var8);
+   &#125;
+
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>内部类</strong></p>
 <p>内部类就是定义在一个类内部的类<br>Java语言中之所以引入内部类，是因为有些时候一个类只在另一个类中有用，我们不想让其在另外一个地方被使用。内部类之所以是语法糖，是因为其只是一个编译时的概念，一旦编译完成，编译器就会为内部类生成一个单独的class文件，名为outer$innter.class。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public class Outer &#123;</span><br><span class="line">    class Inner&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">public class Outer &#123;
+    class Inner&#123;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>使用javac编译后，生成两个class文件Outer.class和Outer$Inner.class，其中Outer$Inner.class的内容如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class Outer$Inner &#123;</span><br><span class="line">    Outer$Inner(Outer var1) &#123;</span><br><span class="line">        this.this$0 = var1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">class Outer$Inner &#123;
+    Outer$Inner(Outer var1) &#123;
+        this.this$0 &#x3D; var1;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>内部类分为四种：成员内部类、局部内部类、匿名内部类、静态内部类，每一种都有其用法，这里就不介绍了</p>
 <p><strong>枚举类型</strong></p>
 <p>枚举类型就是一些具有相同特性的类常量<br>java中类的定义使用class，枚举类的定义使用enum。在Java的字节码结构中，其实并没有枚举类型，枚举类型只是一个语法糖，在编译完成后被编译成一个普通的类。这个类继承java.lang.Enum，并被final关键字修饰。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public enum Fruit &#123;</span><br><span class="line">    APPLE,ORINGE</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">public enum Fruit &#123;
+    APPLE,ORINGE
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>使用jad对编译后的class文件进行反编译后得到：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">//继承java.lang.Enum并声明为final</span><br><span class="line">public final class Fruit extends Enum</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    public static Fruit[] values()</span><br><span class="line">    &#123;</span><br><span class="line">        return (Fruit[])$VALUES.clone();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static Fruit valueOf(String s)</span><br><span class="line">    &#123;</span><br><span class="line">        return (Fruit)Enum.valueOf(Fruit, s);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private Fruit(String s, int i)</span><br><span class="line">    &#123;</span><br><span class="line">        super(s, i);</span><br><span class="line">    &#125;</span><br><span class="line">    //枚举类型常量</span><br><span class="line">    public static final Fruit APPLE;</span><br><span class="line">    public static final Fruit ORANGE;</span><br><span class="line">    private static final Fruit $VALUES[];//使用数组进行维护</span><br><span class="line"></span><br><span class="line">    static</span><br><span class="line">    &#123;</span><br><span class="line">        APPLE = new Fruit(&quot;APPLE&quot;, 0);</span><br><span class="line">        ORANGE = new Fruit(&quot;ORANGE&quot;, 1);</span><br><span class="line">        $VALUES = (new Fruit[] &#123;</span><br><span class="line">            APPLE, ORANGE</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;继承java.lang.Enum并声明为final
+public final class Fruit extends Enum
+&#123;
+
+    public static Fruit[] values()
+    &#123;
+        return (Fruit[])$VALUES.clone();
+    &#125;
+
+    public static Fruit valueOf(String s)
+    &#123;
+        return (Fruit)Enum.valueOf(Fruit, s);
+    &#125;
+
+    private Fruit(String s, int i)
+    &#123;
+        super(s, i);
+    &#125;
+    &#x2F;&#x2F;枚举类型常量
+    public static final Fruit APPLE;
+    public static final Fruit ORANGE;
+    private static final Fruit $VALUES[];&#x2F;&#x2F;使用数组进行维护
+
+    static
+    &#123;
+        APPLE &#x3D; new Fruit(&quot;APPLE&quot;, 0);
+        ORANGE &#x3D; new Fruit(&quot;ORANGE&quot;, 1);
+        $VALUES &#x3D; (new Fruit[] &#123;
+            APPLE, ORANGE
+        &#125;);
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>Java远不止这些语法糖，JDK7、JDK8添加的新特性都有很多高级的语法糖。</p>
-
-      
+ 
+            </div>
+        </div>
+        
+            <div class="mt-3">
+                <!-- 前一页后一页 -->
+<div class="previous-next-links">
+     
+    <div class="previous-design-link">
+        <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%20String%20%E7%9C%9F%E7%9A%84%E6%98%AF%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%90%97%EF%BC%9F/">
+            <i style="font-size:16px;" class="fa fa-arrow-left" aria-hidden="true"></i>
+            Java 中的 String 真的是不可变吗？
+        </a>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%206%20%E9%A2%97%E8%AF%AD%E6%B3%95%E7%B3%96/" data-id="cmgrfxxd4002630d4cg403arv" data-title="Java 中的 6 颗语法糖" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li></ul>
+     
 
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java%205%20~%2010%20%E6%96%B0%E7%89%B9%E6%80%A7%E5%80%BE%E6%83%85%E6%95%B4%E7%90%86%EF%BC%81/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Java 5 ~ 10 新特性倾情整理！
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%20String%20%E7%9C%9F%E7%9A%84%E6%98%AF%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%90%97%EF%BC%9F/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Java 中的 String 真的是不可变吗？</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li></ul>
+     
+    <div class="next-design-link">
+        <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E4%BC%AA%E5%85%B1%E4%BA%AB%E8%AF%A6%E8%A7%A3%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">
+            Java 中的伪共享详解及解决方案
+            <i style="font-size:16px;" class="fa fa-arrow-right" aria-hidden="true"></i>
+        </a>
     </div>
-  </div>
+ 
+</div> 
+             
+            </div>
+        
 
-
-  
+    </div>
+    <div class="col-4 pe-0">
+        <div class="d-none d-sm-none d-md-block sticky-top border-start">
+             
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 18px;">基础</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 16px;">多线程</a> <a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" style="font-size: 20px;">新特性</a> <a href="/tags/%E8%BF%9B%E9%98%B6/" style="font-size: 14px;">进阶</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 12px;">集合</a>
-    </div>
-  </div>
+ 
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li></ul>
+        </div>
     </div>
-  </div>
+</div>
+</div>
+ 
+    </main>
 
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java%205%20~%2010%20%E6%96%B0%E7%89%B9%E6%80%A7%E5%80%BE%E6%83%85%E6%95%B4%E7%90%86%EF%BC%81/">Java 5 ~ 10 新特性倾情整理！</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%206%20%E9%A2%97%E8%AF%AD%E6%B3%95%E7%B3%96/">Java 中的 6 颗语法糖</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%20String%20%E7%9C%9F%E7%9A%84%E6%98%AF%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%90%97%EF%BC%9F/">Java 中的 String 真的是不可变吗？</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E4%BC%AA%E5%85%B1%E4%BA%AB%E8%AF%A6%E8%A7%A3%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">Java 中的伪共享详解及解决方案</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E5%AE%8F%E5%8F%98%E9%87%8F%EF%BC%8C%E5%AE%8F%E6%9B%BF%E6%8D%A2%E8%AF%A6%E8%A7%A3%E3%80%82/">Java 中的宏变量，宏替换详解。</a>
-          </li>
-        
-      </ul>
+    <!-- 底部栏 -->
+    <footer class="bg-dark pt-3 pb-0 mt-5 fixed-bottom" id="flex_bottom">
+    <div class="container pb-3 pt-3 text-center">
+        <p class="text-muted tag-hover">
+            All Rights Reserved <i class="fa fa-copyright"></i> by2025  <br>
+<!--             Powered by  -->
+<!--              <a class="link-secondary text-decoration-none" target="_blank" rel="noopener" href="https://hexo.io"> -->
+<!--                  Hexo.io -->
+<!--             </a> &  <a class="link-secondary text-decoration-none" target="_blank" rel="noopener" href="https://github.com/smile-yan/hexo-theme-heyan"> -->
+<!--                heyan -->
+<!--             </a> -->
+            <br>
+<!--             <a class="link-secondary text-decoration-none" target="_blank" rel="noopener" href="https://beian.miit.gov.cn/#/Integrated/index"> -->
+<!--                 <img src="/police.png" style="width: 18px; height: 18px; margin-top: -4px" class="nofancybox"> -->
+<!--                   -->
+<!--             </a> -->
+        </p>
     </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2025 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
 </footer>
 
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.6.4.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
 </body>
+
+<script>
+    // 检查页面内容高度是否小于窗口高度
+    function checkContentHeight() {
+        const contentHeight = document.body.scrollHeight;
+        const windowHeight = window.innerHeight;
+
+        if (contentHeight < windowHeight) {
+            // 内容高度不足以填充整个窗口，固定底部导航栏
+            document.getElementById('flex_bottom').classList.add('fixed-bottom');
+        } else {
+            // 内容高度足够多，不固定底部导航栏
+            document.getElementById('flex_bottom').classList.remove('fixed-bottom');
+        }
+    }
+
+    // 页面加载时和窗口大小变化时检查内容高度
+    window.addEventListener('load', checkContentHeight);
+    window.addEventListener('resize', checkContentHeight);
+</script>
 </html>

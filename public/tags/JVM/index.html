@@ -1,217 +1,480 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  
-  
-  <title>Tag: JVM | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/tags/JVM/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
-
-  
+    <title>只有那年胜过年年</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/favicon/site.webmanifest">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css">
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
     
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+<link rel="stylesheet" href="/css/prism.css">
+ 
+    
+<link rel="stylesheet" href="/css/markdown.css">
+ 
+    
+<script src="/js/prism.js"></script>
 
-  
-  
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+    
+<link rel="stylesheet" href="/css/index.css">
+ 
+    
+<script src="/js/search.js"></script>
 
+
+     
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+        </script>
+     
+
+     
+        <script src="//lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js"> </script>
+        
+<script src="/js/fancybox.js"></script>
+
+    
+
+    <script type="text/javascript">
+
+        var search_path = "/search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+        var path = search_path;
+        searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
 <meta name="generator" content="Hexo 7.3.0"></head>
-
+ 
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
+    <!-- 导航栏 -->
+    <!-- 导航栏 -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4 pt-2 pb-2">
+    <div class="container">
+        <!-- 标题 --> 
+        <a class="navbar-brand navbar-expand-sm" href="/">
+            <img class="nofancybox" src="/logo.png" style="width: 75px;"  alt="笑颜网">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-      <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2025" class="archive-year">2025</a>
+        <!-- 左边右边导航按钮 --> 
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto">
+                <!-- 左右两侧的导航栏 -->
+
+ 
+ 
+
+    <li class="nav-item">
+        <a class="nav-link" href="/">
+           <big> <i class="fa fa-home ps-1" ></i> 主页</big>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="/archives">
+           <big> <i class="fa fa-archive ps-1" ></i> 归档</big>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="/about">
+           <big> <i class="fa fa-user ps-1" ></i> 关于</big>
+        </a>
+    </li>
+ 
+ 
+            </ul>
+
+            
+            <form class="">
+                <div class="d-flex">
+                    <button class="btn text-muted fa fa-search d-none d-md-block d-lg-block" disabled></button>
+                    <input id="local-search-input" class="form-control me-2 pe-4" type="search"
+                            placeholder="搜索 " aria-label="Search">
+                </div>
+                <div id="local-search-result" style="position:absolute; padding-top: 8px; max-height: 960px; width: 480px;overflow-y: scroll; z-index: 1050;"></div>
+            </form>
+            
+            <ul class="navbar-nav">
+                <!-- 左右两侧的导航栏 -->
+
+ 
+ 
+            </ul>
         </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2025/10/14/JVM/JVM%E8%BF%90%E8%A1%8C%E6%97%B6%E5%8C%BA%E5%9F%9F%E8%AF%A6%E8%A7%A3/" class="archive-article-date">
-  <time class="dt-published" datetime="2025-10-14T01:30:25.000Z" itemprop="datePublished">Oct 14</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/10/14/JVM/JVM%E8%BF%90%E8%A1%8C%E6%97%B6%E5%8C%BA%E5%9F%9F%E8%AF%A6%E8%A7%A3/">JVM运行时区域详解</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li></ul>
     </div>
-  </div>
+</nav>
 
 
-  
+    <main class="container">
+        <!-- 某标签对应的所有post -->
+<div class="row pt-1">
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 18px;">基础</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 16px;">多线程</a> <a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" style="font-size: 20px;">新特性</a> <a href="/tags/%E8%BF%9B%E9%98%B6/" style="font-size: 14px;">进阶</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 12px;">集合</a>
-    </div>
-  </div>
+    <!-- 文章 -->
+    <div id="blog-content" class="col-md-8 col-sm-12">
+        <p class="h3 border-bottom pb-2"><i class="p-1 fa fa-tag"></i>
+            JVM
+        </p> 
+        <div class="markdown-section">
+            <div class="">
+                <!-- 主页 -->
 
-  
+
+
+    <!-- 标题 -->
+    <div class="pb-4 tag-hover", style="border-bottom: 1px solid #eaeaea;">
+        <p class="tag-hover h3">
+            <a href="/2025/09/14/JVM/JVM%E8%BF%90%E8%A1%8C%E6%97%B6%E5%8C%BA%E5%9F%9F%E8%AF%A6%E8%A7%A3/" class="link-dark text-decoration-none title">
+                JVM运行时区域详解
+            </a>
+        </p>
+
+        <div class="pb-0">
+            <i class="fa fa-calendar p-1"></i>
+            2025/09/14 09:30:25
+            
+                <i class="fa fa-folder-open p-1"> </i>
+                <span class="tag-hover">
+                    
+                        <a href="/categories/%E5%90%8E%E7%AB%AF/ " class="link-dark text-decoration-none title">
+                            后端
+                        </a>
+                    
+                </span>
+            
+
+            
+                <i class="fa fa-tag p-1"> </i>
+                <span class="tag-hover">
+                    
+                        <a href="/tags/JVM/" class="link-dark text-decoration-none title">
+                            JVM
+                        </a>
+                    
+                </span>
+            
+
+        </div>
+
+        <div class="pt-3 pe-1">
+            <!-- 如果有摘要则显示摘要，没有就自己截取 -->
+            
+                <p>我们知道的JVM内存区域有：堆和栈，这是一种泛的分法，也是按运行时区域的一种分法，堆是所有线程共享的一块区域，而栈是线程隔离的，每个线程互不共享。</p>
+            
+        </div>
+    </div>
+
+
+
+            </div>
+            <!--  页码 -->
+<nav class="pt-1 mt-1">
+    <ul class="pagination justify-content-center new-pagination">
+        <span class="page-number current">1</span>
+    </ul>
+</nav>
+
+
+ 
+        </div>
+    </div>
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li></ul>
+    <!-- 侧边栏 -->
+    <div class="col-md-4 d-none d-md-block ps-0 " id='blog-siderbar'>
+        <div class="markdown-section ps-3 pb-3 pt-3 border-start">
+            <!-- 侧边栏 分类 -->
+
+    <div class="card mb-3">
+        <div class="card-header card-header-dark">
+            <i class="fa fa-folder-open pe-2"></i> 分类
+        </div>
+        <nav class="nav flex-column">
+            
+            
+                
+                    <a class="nav-link ps-3 border-bottom" aria-current="page" href="/categories/%E5%90%8E%E7%AB%AF/">
+                        后端
+                        <span class="badge bg-secondary float-end me-2">81</span>
+                    </a>
+                
+            
+                
+                    <a class="nav-link ps-3 border-bottom" aria-current="page" href="/categories/%E6%95%99%E7%A8%8B/">
+                        教程
+                        <span class="badge bg-secondary float-end me-2">1</span>
+                    </a>
+                
+            
+        </nav>
     </div>
-  </div>
+
+ 
+            <!-- 侧边栏 标签 -->
+
+    <div class="card mb-3">
+        <div class="card-header card-header-dark">
+            <i class="fa fa-tag pe-2"></i> 标签
+        </div>
+        <div class="p-2">
+            
+            
+                <!-- 
+                    <a class="nav-link ps-3 border-bottom" aria-current="page" href="/tags/%E9%9B%86%E5%90%88/">
+                        集合
+                        <span class="badge bg-secondary float-end me-2">4</span>
+                    </a>
+                 -->
+                <a class="" href="/tags/%E9%9B%86%E5%90%88/">集合</a>
+            
+                <!-- 
+                    <a class="nav-link ps-3 border-bottom" aria-current="page" href="/tags/%E8%BF%9B%E9%98%B6/">
+                        进阶
+                        <span class="badge bg-secondary float-end me-2">16</span>
+                    </a>
+                 -->
+                <a class="" href="/tags/%E8%BF%9B%E9%98%B6/">进阶</a>
+            
+                <!-- 
+                    <a class="nav-link ps-3 border-bottom" aria-current="page" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/">
+                        新特性
+                        <span class="badge bg-secondary float-end me-2">25</span>
+                    </a>
+                 -->
+                <a class="" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/">新特性</a>
+            
+                <!-- 
+                    <a class="nav-link ps-3 border-bottom" aria-current="page" href="/tags/%E6%96%87%E7%AB%A0/">
+                        文章
+                        <span class="badge bg-secondary float-end me-2">1</span>
+                    </a>
+                 -->
+                <a class="" href="/tags/%E6%96%87%E7%AB%A0/">文章</a>
+            
+                <!-- 
+                    <a class="nav-link ps-3 border-bottom" aria-current="page" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
+                        多线程
+                        <span class="badge bg-secondary float-end me-2">17</span>
+                    </a>
+                 -->
+                <a class="" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">多线程</a>
+            
+                <!-- 
+                    <a class="nav-link ps-3 border-bottom" aria-current="page" href="/tags/%E5%9F%BA%E7%A1%80/">
+                        基础
+                        <span class="badge bg-secondary float-end me-2">17</span>
+                    </a>
+                 -->
+                <a class="" href="/tags/%E5%9F%BA%E7%A1%80/">基础</a>
+            
+                <!-- 
+                    <a class="nav-link ps-3 border-bottom active-post" aria-current="page" href="/tags/JVM/">
+                        JVM
+                        <span class="badge bg-secondary float-end me-2">1</span>
+                    </a>
+                 -->
+                <a class="" href="/tags/JVM/">JVM</a>
+            
+        </div>
+    </div>
+ 
+            <div class="card mb-3">
+    <div class="card-header card-header-dark">
+        <i class="fa fa-clock-o pe-2"></i> 最近文章
+    </div>
+    <div class="p-2 tag-hover">
+        <ul class="list-group border-0">
+            
+            
+                <a class="list-group-item border-0 pt-0 pb-0 ps-1 fs-6" href="/2024/12/15/hello-world/ ">
+                    <small> Hello World </small>
+                </a>
+            
+            
+                <a class="list-group-item border-0 pt-0 pb-0 ps-1 fs-6" href="/2025/09/14/JVM/JVM%E8%BF%90%E8%A1%8C%E6%97%B6%E5%8C%BA%E5%9F%9F%E8%AF%A6%E8%A7%A3/ ">
+                    <small> JVM运行时区域详解 </small>
+                </a>
+            
+            
+                <a class="list-group-item border-0 pt-0 pb-0 ps-1 fs-6" href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java%205%20~%2010%20%E6%96%B0%E7%89%B9%E6%80%A7%E5%80%BE%E6%83%85%E6%95%B4%E7%90%86%EF%BC%81/ ">
+                    <small> Java 5 ~ 10 新特性倾情整理！ </small>
+                </a>
+            
+            
+                <a class="list-group-item border-0 pt-0 pb-0 ps-1 fs-6" href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%20String%20%E7%9C%9F%E7%9A%84%E6%98%AF%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%90%97%EF%BC%9F/ ">
+                    <small> Java 中的 String 真的是不可变吗？ </small>
+                </a>
+            
+            
+                <a class="list-group-item border-0 pt-0 pb-0 ps-1 fs-6" href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%206%20%E9%A2%97%E8%AF%AD%E6%B3%95%E7%B3%96/ ">
+                    <small> Java 中的 6 颗语法糖 </small>
+                </a>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+             
+        </ul>
+    </div>
+</div>
 
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java%205%20~%2010%20%E6%96%B0%E7%89%B9%E6%80%A7%E5%80%BE%E6%83%85%E6%95%B4%E7%90%86%EF%BC%81/">Java 5 ~ 10 新特性倾情整理！</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%206%20%E9%A2%97%E8%AF%AD%E6%B3%95%E7%B3%96/">Java 中的 6 颗语法糖</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%20String%20%E7%9C%9F%E7%9A%84%E6%98%AF%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%90%97%EF%BC%9F/">Java 中的 String 真的是不可变吗？</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E4%BC%AA%E5%85%B1%E4%BA%AB%E8%AF%A6%E8%A7%A3%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">Java 中的伪共享详解及解决方案</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E5%AE%8F%E5%8F%98%E9%87%8F%EF%BC%8C%E5%AE%8F%E6%9B%BF%E6%8D%A2%E8%AF%A6%E8%A7%A3%E3%80%82/">Java 中的宏变量，宏替换详解。</a>
-          </li>
-        
-      </ul>
+ 
+            <!-- 友情链接 -->
+<div class="card">
+    <div class="card-header card-header-dark">
+        <i class="fa fa-link pe-2"></i> 友情链接
     </div>
-  </div>
+    <div class="p-2 tag-hover">
+        <ul class="list-group border-0">
+            
+                <a class="list-group-item border-0 pt-0 pb-0 ps-1" href=" ">
+                    <small> 只有那年胜过年年 </small>
+                </a>
+             
+        </ul>
+    </div>
+</div>
 
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2025 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+
+ 
+        </div>
+    </div>  
+</div> 
+    </main>
+
+    <!-- 底部栏 -->
+    <footer class="bg-dark pt-3 pb-0 mt-5 fixed-bottom" id="flex_bottom">
+    <div class="container pb-3 pt-3 text-center">
+        <p class="text-muted tag-hover">
+            All Rights Reserved <i class="fa fa-copyright"></i> by2025  <br>
+<!--             Powered by  -->
+<!--              <a class="link-secondary text-decoration-none" target="_blank" rel="noopener" href="https://hexo.io"> -->
+<!--                  Hexo.io -->
+<!--             </a> &  <a class="link-secondary text-decoration-none" target="_blank" rel="noopener" href="https://github.com/smile-yan/hexo-theme-heyan"> -->
+<!--                heyan -->
+<!--             </a> -->
+            <br>
+<!--             <a class="link-secondary text-decoration-none" target="_blank" rel="noopener" href="https://beian.miit.gov.cn/#/Integrated/index"> -->
+<!--                 <img src="/police.png" style="width: 18px; height: 18px; margin-top: -4px" class="nofancybox"> -->
+<!--                   -->
+<!--             </a> -->
+        </p>
     </div>
-  </div>
 </footer>
 
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.6.4.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
 </body>
+
+<script>
+    // 检查页面内容高度是否小于窗口高度
+    function checkContentHeight() {
+        const contentHeight = document.body.scrollHeight;
+        const windowHeight = window.innerHeight;
+
+        if (contentHeight < windowHeight) {
+            // 内容高度不足以填充整个窗口，固定底部导航栏
+            document.getElementById('flex_bottom').classList.add('fixed-bottom');
+        } else {
+            // 内容高度足够多，不固定底部导航栏
+            document.getElementById('flex_bottom').classList.remove('fixed-bottom');
+        }
+    }
+
+    // 页面加载时和窗口大小变化时检查内容高度
+    window.addEventListener('load', checkContentHeight);
+    window.addEventListener('resize', checkContentHeight);
+</script>
 </html>

@@ -1,6 +1,7 @@
 ---
 title: 常见的 3 种 Class 级别的错误
 date: 2025-10-14 14:42:34
+category: 后端
 tags: 基础
 ---
 

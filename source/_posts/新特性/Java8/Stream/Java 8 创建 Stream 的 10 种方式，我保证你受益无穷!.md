@@ -1,6 +1,7 @@
 ---
 title: Java 8 创建 Stream 的 10 种方式，我保证你受益无穷!
 date: 2025-10-15 11:36:33
+category: 后端
 tags: 新特性
 ---
 

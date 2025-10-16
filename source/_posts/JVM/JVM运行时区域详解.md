@@ -1,6 +1,7 @@
 ---
 title: JVM运行时区域详解
-date: 2025-10-14 09:30:25
+date: 2025-09-14 09:30:25
+category: 后端
 tags: JVM
 ---
 

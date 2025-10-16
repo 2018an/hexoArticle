@@ -1,112 +1,250 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  
-  
-  <title>你真的搞懂 transient  关键字了吗？ | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="先解释下什么是序列化我们的对象并不只是存在内存中，还需要传输网络，或者保存起来下次再加载出来用，所以需要Java序列化技术。 Java序列化技术正是将对象转变成一串由二进制字节组成的数组，可以通过将二进制数据保存到磁盘或者传输网络，磁盘或者网络接收者可以在对象的属类的模板上来反序列化类的对象，达到对象持久化的目的。 更多序列化请参考：《关于Java序列化你应该知道的一切》这篇文章。 什么是 tra">
-<meta property="og:type" content="article">
-<meta property="og:title" content="你真的搞懂 transient  关键字了吗？">
-<meta property="og:url" content="http://example.com/2025/10/14/%E5%9F%BA%E7%A1%80/%E4%BD%A0%E7%9C%9F%E7%9A%84%E6%90%9E%E6%87%82%20transient%20%20%E5%85%B3%E9%94%AE%E5%AD%97%E4%BA%86%E5%90%97%EF%BC%9F/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="先解释下什么是序列化我们的对象并不只是存在内存中，还需要传输网络，或者保存起来下次再加载出来用，所以需要Java序列化技术。 Java序列化技术正是将对象转变成一串由二进制字节组成的数组，可以通过将二进制数据保存到磁盘或者传输网络，磁盘或者网络接收者可以在对象的属类的模板上来反序列化类的对象，达到对象持久化的目的。 更多序列化请参考：《关于Java序列化你应该知道的一切》这篇文章。 什么是 tra">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://img.javastack.cn/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20190214162351.png">
-<meta property="article:published_time" content="2025-10-14T06:42:34.000Z">
-<meta property="article:modified_time" content="2025-10-14T07:47:29.121Z">
-<meta property="article:author" content="John Doe">
-<meta property="article:tag" content="基础">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://img.javastack.cn/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20190214162351.png">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
-
-  
+    <title>只有那年胜过年年</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/favicon/site.webmanifest">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css">
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
     
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+<link rel="stylesheet" href="/css/prism.css">
+ 
+    
+<link rel="stylesheet" href="/css/markdown.css">
+ 
+    
+<script src="/js/prism.js"></script>
 
-  
-  
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+    
+<link rel="stylesheet" href="/css/index.css">
+ 
+    
+<script src="/js/search.js"></script>
 
+
+     
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+        </script>
+     
+
+     
+        <script src="//lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js"> </script>
+        
+<script src="/js/fancybox.js"></script>
+
+    
+
+    <script type="text/javascript">
+
+        var search_path = "/search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+        var path = search_path;
+        searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
 <meta name="generator" content="Hexo 7.3.0"></head>
-
+ 
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
+    <!-- 导航栏 -->
+    <!-- 导航栏 -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4 pt-2 pb-2">
+    <div class="container">
+        <!-- 标题 --> 
+        <a class="navbar-brand navbar-expand-sm" href="/">
+            <img class="nofancybox" src="/logo.png" style="width: 75px;"  alt="笑颜网">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-      <div class="outer">
-        <section id="main"><article id="post-基础/你真的搞懂 transient  关键字了吗？" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/10/14/%E5%9F%BA%E7%A1%80/%E4%BD%A0%E7%9C%9F%E7%9A%84%E6%90%9E%E6%87%82%20transient%20%20%E5%85%B3%E9%94%AE%E5%AD%97%E4%BA%86%E5%90%97%EF%BC%9F/" class="article-date">
-  <time class="dt-published" datetime="2025-10-14T06:42:34.000Z" itemprop="datePublished">2025-10-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      你真的搞懂 transient  关键字了吗？
-    </h1>
-  
+        <!-- 左边右边导航按钮 --> 
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto">
+                <!-- 左右两侧的导航栏 -->
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="先解释下什么是序列化"><a href="#先解释下什么是序列化" class="headerlink" title="先解释下什么是序列化"></a>先解释下什么是序列化</h2><p>我们的对象并不只是存在内存中，还需要传输网络，或者保存起来下次再加载出来用，所以需要Java序列化技术。</p>
+ 
+ 
+
+    <li class="nav-item">
+        <a class="nav-link" href="/">
+           <big> <i class="fa fa-home ps-1" ></i> 主页</big>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="/archives">
+           <big> <i class="fa fa-archive ps-1" ></i> 归档</big>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="/about">
+           <big> <i class="fa fa-user ps-1" ></i> 关于</big>
+        </a>
+    </li>
+ 
+ 
+            </ul>
+
+            
+            <form class="">
+                <div class="d-flex">
+                    <button class="btn text-muted fa fa-search d-none d-md-block d-lg-block" disabled></button>
+                    <input id="local-search-input" class="form-control me-2 pe-4" type="search"
+                            placeholder="搜索 " aria-label="Search">
+                </div>
+                <div id="local-search-result" style="position:absolute; padding-top: 8px; max-height: 960px; width: 480px;overflow-y: scroll; z-index: 1050;"></div>
+            </form>
+            
+            <ul class="navbar-nav">
+                <!-- 左右两侧的导航栏 -->
+
+ 
+ 
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+    <main class="container">
+        
+<div class="container-fluid markdown-section">
+<div class="row pb-3">
+    <div class="col-md-8 col-sm-12">
+        <!-- 博客详情 -->
+        <div class="">
+            <p class="h2">
+                <span class="post-title">
+                    你真的搞懂 transient  关键字了吗？
+                </span>   
+            </p>
+
+            <div class="pb-3 pt-1 pe-3">
+                <i class="fa fa-calendar p-1"></i>
+                2025/10/14 14:42:34 
+                
+                    <i class="fa fa-folder-open p-1"> </i> 
+                    <span class="tag-hover">
+                        
+                            <a href="/categories/%E5%90%8E%E7%AB%AF/ " class="link-dark text-decoration-none"> 
+                                后端 
+                            </a>
+                         
+                    </span>
+                
+
+                
+                    <i class="fa fa-tag p-1"> </i>
+                    <span class="tag-hover">
+                        
+                            <a href="/tags/%E5%9F%BA%E7%A1%80/" class="link-dark text-decoration-none"> 
+                                基础 
+                            </a>
+                        
+                    </span>
+                
+            </div>
+
+            <div class="border-bottom pb-2">
+                <h2 id="先解释下什么是序列化"><a href="#先解释下什么是序列化" class="headerlink" title="先解释下什么是序列化"></a>先解释下什么是序列化</h2><p>我们的对象并不只是存在内存中，还需要传输网络，或者保存起来下次再加载出来用，所以需要Java序列化技术。</p>
 <p>Java序列化技术正是将对象转变成一串由二进制字节组成的数组，可以通过将二进制数据保存到磁盘或者传输网络，磁盘或者网络接收者可以在对象的属类的模板上来反序列化类的对象，达到对象持久化的目的。</p>
 <p>更多序列化请参考：《<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/wHmK1kKyne6gCkIxt0NERQ">关于Java序列化你应该知道的一切</a>》这篇文章。</p>
 <h2 id="什么是-transient？"><a href="#什么是-transient？" class="headerlink" title="什么是 transient？"></a>什么是 transient？</h2><p>简单来说就是，被 transient 修饰的变量不能被序列化。</p>
 <p><strong>具体来看下面的示例1</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">import java.io.FileInputStream;</span><br><span class="line">import java.io.FileOutputStream;</span><br><span class="line">import java.io.ObjectInputStream;</span><br><span class="line">import java.io.ObjectOutputStream;</span><br><span class="line">import java.io.Serializable;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author </span><br><span class="line"> */</span><br><span class="line">public class TransientTest &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) throws Exception &#123;</span><br><span class="line"></span><br><span class="line">		User user = new User();</span><br><span class="line">		user.setUsername(&quot;Java技术&quot;);</span><br><span class="line">		user.setId(&quot;javastack&quot;);</span><br><span class="line"></span><br><span class="line">		System.out.println(&quot;\n序列化之前&quot;);</span><br><span class="line">		System.out.println(&quot;username: &quot; + user.getUsername());</span><br><span class="line">		System.out.println(&quot;id: &quot; + user.getId());</span><br><span class="line"></span><br><span class="line">		ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(&quot;d:/user.txt&quot;));</span><br><span class="line">		os.writeObject(user);</span><br><span class="line">		os.flush();</span><br><span class="line">		os.close();</span><br><span class="line"></span><br><span class="line">		ObjectInputStream is = new ObjectInputStream(new FileInputStream(&quot;d:/user.txt&quot;));</span><br><span class="line">		user = (User) is.readObject();</span><br><span class="line">		is.close();</span><br><span class="line"></span><br><span class="line">		System.out.println(&quot;\n序列化之后&quot;);</span><br><span class="line">		System.out.println(&quot;username: &quot; + user.getUsername());</span><br><span class="line">		System.out.println(&quot;id: &quot; + user.getId());</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author </span><br><span class="line"> */</span><br><span class="line">class User implements Serializable &#123;</span><br><span class="line"></span><br><span class="line">	private static final long serialVersionUID = 1L;</span><br><span class="line"></span><br><span class="line">	private String username;</span><br><span class="line">	private transient String id;</span><br><span class="line"></span><br><span class="line">	public String getUsername() &#123;</span><br><span class="line">		return username;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public void setUsername(String username) &#123;</span><br><span class="line">		this.username = username;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public String getId() &#123;</span><br><span class="line">		return id;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public void setId(String id) &#123;</span><br><span class="line">		this.id = id;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+&#x2F;**
+ * @author 
+ *&#x2F;
+public class TransientTest &#123;
+
+	public static void main(String[] args) throws Exception &#123;
+
+		User user &#x3D; new User();
+		user.setUsername(&quot;Java技术&quot;);
+		user.setId(&quot;javastack&quot;);
+
+		System.out.println(&quot;\n序列化之前&quot;);
+		System.out.println(&quot;username: &quot; + user.getUsername());
+		System.out.println(&quot;id: &quot; + user.getId());
+
+		ObjectOutputStream os &#x3D; new ObjectOutputStream(new FileOutputStream(&quot;d:&#x2F;user.txt&quot;));
+		os.writeObject(user);
+		os.flush();
+		os.close();
+
+		ObjectInputStream is &#x3D; new ObjectInputStream(new FileInputStream(&quot;d:&#x2F;user.txt&quot;));
+		user &#x3D; (User) is.readObject();
+		is.close();
+
+		System.out.println(&quot;\n序列化之后&quot;);
+		System.out.println(&quot;username: &quot; + user.getUsername());
+		System.out.println(&quot;id: &quot; + user.getId());
+
+	&#125;
+&#125;
+
+&#x2F;**
+ * @author 
+ *&#x2F;
+class User implements Serializable &#123;
+
+	private static final long serialVersionUID &#x3D; 1L;
+
+	private String username;
+	private transient String id;
+
+	public String getUsername() &#123;
+		return username;
+	&#125;
+
+	public void setUsername(String username) &#123;
+		this.username &#x3D; username;
+	&#125;
+
+	public String getId() &#123;
+		return id;
+	&#125;
+
+	public void setId(String id) &#123;
+		this.id &#x3D; id;
+	&#125;
+
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>输出结果：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">序列化之前</span><br><span class="line">username: Java技术</span><br><span class="line">id: javastack</span><br><span class="line"></span><br><span class="line">序列化之后</span><br><span class="line">username: Java技术</span><br><span class="line">id: null</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">序列化之前
+username: Java技术
+id: javastack
+
+序列化之后
+username: Java技术
+id: null<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>示例1在 id 字段上加了 transient 关键字修饰，反序列化出来之后值为 null，说明了被 transient 修饰的变量不能被序列化。</p>
 <h2 id="静态变量能被序列化吗？"><a href="#静态变量能被序列化吗？" class="headerlink" title="静态变量能被序列化吗？"></a>静态变量能被序列化吗？</h2><p>这个话题也是最近栈长的Java技术vip群里面讨论的，大家对这个知识点比较模糊，我就写了这篇文章测试总结一下。</p>
@@ -116,18 +254,162 @@
 </blockquote>
 <p>那么，到底静态变量能被序列化吗？废话少说，先动手测试下吧！</p>
 <p>示例2：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">import java.io.FileInputStream;</span><br><span class="line">import java.io.FileOutputStream;</span><br><span class="line">import java.io.ObjectInputStream;</span><br><span class="line">import java.io.ObjectOutputStream;</span><br><span class="line">import java.io.Serializable;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author </span><br><span class="line"> */</span><br><span class="line">public class TransientStaticTest &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) throws Exception &#123;</span><br><span class="line"></span><br><span class="line">		User2 user = new User2();</span><br><span class="line">		User2.username = &quot;Java技术1&quot;;</span><br><span class="line">		user.setId(&quot;javastack&quot;);</span><br><span class="line"></span><br><span class="line">		System.out.println(&quot;\n序列化之前&quot;);</span><br><span class="line">		System.out.println(&quot;username: &quot; + user.getUsername());</span><br><span class="line">		System.out.println(&quot;id: &quot; + user.getId());</span><br><span class="line"></span><br><span class="line">		ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(&quot;d:/user.txt&quot;));</span><br><span class="line">		os.writeObject(user);</span><br><span class="line">		os.flush();</span><br><span class="line">		os.close();</span><br><span class="line">		</span><br><span class="line">		// 在反序列化出来之前，改变静态变量的值</span><br><span class="line">		User2.username = &quot;Java技术2&quot;;</span><br><span class="line"></span><br><span class="line">		ObjectInputStream is = new ObjectInputStream(new FileInputStream(&quot;d:/user.txt&quot;));</span><br><span class="line">		user = (User2) is.readObject();</span><br><span class="line">		is.close();</span><br><span class="line"></span><br><span class="line">		System.out.println(&quot;\n序列化之后&quot;);</span><br><span class="line">		System.out.println(&quot;username: &quot; + user.getUsername());</span><br><span class="line">		System.out.println(&quot;id: &quot; + user.getId());</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author </span><br><span class="line"> */</span><br><span class="line">class User2 implements Serializable &#123;</span><br><span class="line"></span><br><span class="line">	private static final long serialVersionUID = 1L;</span><br><span class="line"></span><br><span class="line">	public static String username;</span><br><span class="line">	private transient String id;</span><br><span class="line"></span><br><span class="line">	public String getUsername() &#123;</span><br><span class="line">		return username;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public String getId() &#123;</span><br><span class="line">		return id;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public void setId(String id) &#123;</span><br><span class="line">		this.id = id;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+&#x2F;**
+ * @author 
+ *&#x2F;
+public class TransientStaticTest &#123;
+
+	public static void main(String[] args) throws Exception &#123;
+
+		User2 user &#x3D; new User2();
+		User2.username &#x3D; &quot;Java技术1&quot;;
+		user.setId(&quot;javastack&quot;);
+
+		System.out.println(&quot;\n序列化之前&quot;);
+		System.out.println(&quot;username: &quot; + user.getUsername());
+		System.out.println(&quot;id: &quot; + user.getId());
+
+		ObjectOutputStream os &#x3D; new ObjectOutputStream(new FileOutputStream(&quot;d:&#x2F;user.txt&quot;));
+		os.writeObject(user);
+		os.flush();
+		os.close();
+		
+		&#x2F;&#x2F; 在反序列化出来之前，改变静态变量的值
+		User2.username &#x3D; &quot;Java技术2&quot;;
+
+		ObjectInputStream is &#x3D; new ObjectInputStream(new FileInputStream(&quot;d:&#x2F;user.txt&quot;));
+		user &#x3D; (User2) is.readObject();
+		is.close();
+
+		System.out.println(&quot;\n序列化之后&quot;);
+		System.out.println(&quot;username: &quot; + user.getUsername());
+		System.out.println(&quot;id: &quot; + user.getId());
+
+	&#125;
+&#125;
+
+&#x2F;**
+ * @author 
+ *&#x2F;
+class User2 implements Serializable &#123;
+
+	private static final long serialVersionUID &#x3D; 1L;
+
+	public static String username;
+	private transient String id;
+
+	public String getUsername() &#123;
+		return username;
+	&#125;
+
+	public String getId() &#123;
+		return id;
+	&#125;
+
+	public void setId(String id) &#123;
+		this.id &#x3D; id;
+	&#125;
+
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>输出结果：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">序列化之前</span><br><span class="line">username: Java技术1</span><br><span class="line">id: javastack</span><br><span class="line"></span><br><span class="line">序列化之后</span><br><span class="line">username: Java技术2</span><br><span class="line">id: null</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">序列化之前
+username: Java技术1
+id: javastack
+
+序列化之后
+username: Java技术2
+id: null<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>示例2把 username 改为了 public static, 并在反序列化出来之前改变了静态变量的值，结果可以看出序列化之后的值并非序列化进去时的值。</p>
 <p>由以上结果分析可知，静态变量不能被序列化，示例2读取出来的是 username 在 JVM 内存中存储的值。</p>
 <h2 id="transient-真不能被序列化吗？"><a href="#transient-真不能被序列化吗？" class="headerlink" title="transient 真不能被序列化吗？"></a>transient 真不能被序列化吗？</h2><p>继续来看示例3：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line">import java.io.Externalizable;</span><br><span class="line">import java.io.File;</span><br><span class="line">import java.io.FileInputStream;</span><br><span class="line">import java.io.FileOutputStream;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.io.ObjectInput;</span><br><span class="line">import java.io.ObjectInputStream;</span><br><span class="line">import java.io.ObjectOutput;</span><br><span class="line">import java.io.ObjectOutputStream;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author </span><br><span class="line"> */</span><br><span class="line">public class ExternalizableTest &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) throws Exception &#123;</span><br><span class="line"></span><br><span class="line">		User3 user = new User3();</span><br><span class="line">		user.setUsername(&quot;Java技术&quot;);</span><br><span class="line">		user.setId(&quot;javastack&quot;);</span><br><span class="line">		ObjectOutput objectOutput = new ObjectOutputStream(new FileOutputStream(new File(&quot;javastack&quot;)));</span><br><span class="line">		objectOutput.writeObject(user);</span><br><span class="line"></span><br><span class="line">		ObjectInput objectInput = new ObjectInputStream(new FileInputStream(new File(&quot;javastack&quot;)));</span><br><span class="line">		user = (User3) objectInput.readObject();</span><br><span class="line"></span><br><span class="line">		System.out.println(user.getUsername());</span><br><span class="line">		System.out.println(user.getId());</span><br><span class="line"></span><br><span class="line">		objectOutput.close();</span><br><span class="line">		objectInput.close();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author </span><br><span class="line"> */</span><br><span class="line">class User3 implements Externalizable &#123;</span><br><span class="line"></span><br><span class="line">	private static final long serialVersionUID = 1L;</span><br><span class="line"></span><br><span class="line">	public User3() &#123;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	private String username;</span><br><span class="line">	private transient String id;</span><br><span class="line"></span><br><span class="line">	public String getUsername() &#123;</span><br><span class="line">		return username;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public void setUsername(String username) &#123;</span><br><span class="line">		this.username = username;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public String getId() &#123;</span><br><span class="line">		return id;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public void setId(String id) &#123;</span><br><span class="line">		this.id = id;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public void writeExternal(ObjectOutput objectOutput) throws IOException &#123;</span><br><span class="line">		objectOutput.writeObject(id);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public void readExternal(ObjectInput objectInput) throws IOException, ClassNotFoundException &#123;</span><br><span class="line">		id = (String) objectInput.readObject();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">import java.io.Externalizable;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
+
+&#x2F;**
+ * @author 
+ *&#x2F;
+public class ExternalizableTest &#123;
+
+	public static void main(String[] args) throws Exception &#123;
+
+		User3 user &#x3D; new User3();
+		user.setUsername(&quot;Java技术&quot;);
+		user.setId(&quot;javastack&quot;);
+		ObjectOutput objectOutput &#x3D; new ObjectOutputStream(new FileOutputStream(new File(&quot;javastack&quot;)));
+		objectOutput.writeObject(user);
+
+		ObjectInput objectInput &#x3D; new ObjectInputStream(new FileInputStream(new File(&quot;javastack&quot;)));
+		user &#x3D; (User3) objectInput.readObject();
+
+		System.out.println(user.getUsername());
+		System.out.println(user.getId());
+
+		objectOutput.close();
+		objectInput.close();
+	&#125;
+
+&#125;
+
+&#x2F;**
+ * @author 
+ *&#x2F;
+class User3 implements Externalizable &#123;
+
+	private static final long serialVersionUID &#x3D; 1L;
+
+	public User3() &#123;
+
+	&#125;
+
+	private String username;
+	private transient String id;
+
+	public String getUsername() &#123;
+		return username;
+	&#125;
+
+	public void setUsername(String username) &#123;
+		this.username &#x3D; username;
+	&#125;
+
+	public String getId() &#123;
+		return id;
+	&#125;
+
+	public void setId(String id) &#123;
+		this.id &#x3D; id;
+	&#125;
+
+	@Override
+	public void writeExternal(ObjectOutput objectOutput) throws IOException &#123;
+		objectOutput.writeObject(id);
+	&#125;
+
+	@Override
+	public void readExternal(ObjectInput objectInput) throws IOException, ClassNotFoundException &#123;
+		id &#x3D; (String) objectInput.readObject();
+	&#125;
+
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>输出结果：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">null</span><br><span class="line">javastack</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">null
+javastack<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>示例3的 id 被 transient 修改了，为什么还能序列化出来？那是因为 User3 实现了接口 Externalizable，而不是 Serializable。</p>
 <p>在 Java 中有两种实现序列化的方式，Serializable 和 Externalizable，可能大部分人只知道 Serializable 而不知道 Externalizable。</p>
@@ -136,151 +418,92 @@
 <p>2）transient只作用于实现 Serializable 接口；</p>
 <p>3）transient只能用来修饰普通成员变量字段；</p>
 <p>4）不管有没有 transient 修饰，静态变量都不能被序列化；</p>
-
-      
+ 
+            </div>
+        </div>
+        
+            <div class="mt-3">
+                <!-- 前一页后一页 -->
+<div class="previous-next-links">
+     
+    <div class="previous-design-link">
+        <a href="/2025/10/14/%E5%9F%BA%E7%A1%80/%E4%B8%80%E5%BC%A0%E5%9B%BE%E6%90%9E%E6%B8%85%E6%A5%9AJava%E5%BC%82%E5%B8%B8%E6%9C%BA%E5%88%B6/">
+            <i style="font-size:16px;" class="fa fa-arrow-left" aria-hidden="true"></i>
+            一张图搞清楚Java异常机制
+        </a>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/10/14/%E5%9F%BA%E7%A1%80/%E4%BD%A0%E7%9C%9F%E7%9A%84%E6%90%9E%E6%87%82%20transient%20%20%E5%85%B3%E9%94%AE%E5%AD%97%E4%BA%86%E5%90%97%EF%BC%9F/" data-id="cmgrfxxcv000k30d445e09cq4" data-title="你真的搞懂 transient  关键字了吗？" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li></ul>
+     
 
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2025/10/14/%E5%9F%BA%E7%A1%80/%E4%B8%80%E5%BC%A0%E5%9B%BE%E6%90%9E%E6%B8%85%E6%A5%9AJava%E5%BC%82%E5%B8%B8%E6%9C%BA%E5%88%B6/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          一张图搞清楚Java异常机制
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2025/10/14/%E5%9F%BA%E7%A1%80/%E4%BD%A0%E7%9C%9F%E7%9A%84%E6%90%9E%E6%87%82%20transient%20%E5%85%B3%E9%94%AE%E5%AD%97%E4%BA%86%E5%90%97%EF%BC%9F/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">你真的搞懂 transient 关键字了吗？</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li></ul>
+     
+    <div class="next-design-link">
+        <a href="/2025/10/14/%E5%9F%BA%E7%A1%80/%E4%BD%A0%E7%9C%9F%E7%9A%84%E6%90%9E%E6%87%82%20transient%20%E5%85%B3%E9%94%AE%E5%AD%97%E4%BA%86%E5%90%97%EF%BC%9F/">
+            你真的搞懂 transient 关键字了吗？
+            <i style="font-size:16px;" class="fa fa-arrow-right" aria-hidden="true"></i>
+        </a>
     </div>
-  </div>
+ 
+</div> 
+             
+            </div>
+        
 
-
-  
+    </div>
+    <div class="col-4 pe-0">
+        <div class="d-none d-sm-none d-md-block sticky-top border-start">
+             
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 18px;">基础</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 16px;">多线程</a> <a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" style="font-size: 20px;">新特性</a> <a href="/tags/%E8%BF%9B%E9%98%B6/" style="font-size: 14px;">进阶</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 12px;">集合</a>
-    </div>
-  </div>
-
-  
+        <div class="toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%88%E8%A7%A3%E9%87%8A%E4%B8%8B%E4%BB%80%E4%B9%88%E6%98%AF%E5%BA%8F%E5%88%97%E5%8C%96"><span class="toc-number">1.</span> <span class="toc-text">先解释下什么是序列化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-transient%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">什么是 transient？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F%E8%83%BD%E8%A2%AB%E5%BA%8F%E5%88%97%E5%8C%96%E5%90%97%EF%BC%9F"><span class="toc-number">3.</span> <span class="toc-text">静态变量能被序列化吗？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#transient-%E7%9C%9F%E4%B8%8D%E8%83%BD%E8%A2%AB%E5%BA%8F%E5%88%97%E5%8C%96%E5%90%97%EF%BC%9F"><span class="toc-number">4.</span> <span class="toc-text">transient 真不能被序列化吗？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#transient-%E5%85%B3%E9%94%AE%E5%AD%97%E6%80%BB%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">transient 关键字总结</span></a></li></ol> 
+        </div>
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li></ul>
-    </div>
-  </div>
+ 
 
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java%205%20~%2010%20%E6%96%B0%E7%89%B9%E6%80%A7%E5%80%BE%E6%83%85%E6%95%B4%E7%90%86%EF%BC%81/">Java 5 ~ 10 新特性倾情整理！</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%206%20%E9%A2%97%E8%AF%AD%E6%B3%95%E7%B3%96/">Java 中的 6 颗语法糖</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%20String%20%E7%9C%9F%E7%9A%84%E6%98%AF%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%90%97%EF%BC%9F/">Java 中的 String 真的是不可变吗？</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E4%BC%AA%E5%85%B1%E4%BA%AB%E8%AF%A6%E8%A7%A3%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">Java 中的伪共享详解及解决方案</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E5%AE%8F%E5%8F%98%E9%87%8F%EF%BC%8C%E5%AE%8F%E6%9B%BF%E6%8D%A2%E8%AF%A6%E8%A7%A3%E3%80%82/">Java 中的宏变量，宏替换详解。</a>
-          </li>
-        
-      </ul>
+        </div>
     </div>
-  </div>
+</div>
+</div>
+ 
+    </main>
 
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2025 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    <!-- 底部栏 -->
+    <footer class="bg-dark pt-3 pb-0 mt-5 fixed-bottom" id="flex_bottom">
+    <div class="container pb-3 pt-3 text-center">
+        <p class="text-muted tag-hover">
+            All Rights Reserved <i class="fa fa-copyright"></i> by2025  <br>
+<!--             Powered by  -->
+<!--              <a class="link-secondary text-decoration-none" target="_blank" rel="noopener" href="https://hexo.io"> -->
+<!--                  Hexo.io -->
+<!--             </a> &  <a class="link-secondary text-decoration-none" target="_blank" rel="noopener" href="https://github.com/smile-yan/hexo-theme-heyan"> -->
+<!--                heyan -->
+<!--             </a> -->
+            <br>
+<!--             <a class="link-secondary text-decoration-none" target="_blank" rel="noopener" href="https://beian.miit.gov.cn/#/Integrated/index"> -->
+<!--                 <img src="/police.png" style="width: 18px; height: 18px; margin-top: -4px" class="nofancybox"> -->
+<!--                   -->
+<!--             </a> -->
+        </p>
     </div>
-  </div>
 </footer>
 
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.6.4.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
 </body>
+
+<script>
+    // 检查页面内容高度是否小于窗口高度
+    function checkContentHeight() {
+        const contentHeight = document.body.scrollHeight;
+        const windowHeight = window.innerHeight;
+
+        if (contentHeight < windowHeight) {
+            // 内容高度不足以填充整个窗口，固定底部导航栏
+            document.getElementById('flex_bottom').classList.add('fixed-bottom');
+        } else {
+            // 内容高度足够多，不固定底部导航栏
+            document.getElementById('flex_bottom').classList.remove('fixed-bottom');
+        }
+    }
+
+    // 页面加载时和窗口大小变化时检查内容高度
+    window.addEventListener('load', checkContentHeight);
+    window.addEventListener('resize', checkContentHeight);
+</script>
 </html>

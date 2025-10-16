@@ -1,6 +1,7 @@
 ---
 title: 你真的搞懂 transient  关键字了吗？
 date: 2025-10-14 14:42:34
+category: 后端
 tags: 基础
 ---
 

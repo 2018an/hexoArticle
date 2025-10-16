@@ -1,975 +1,863 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  
-  
-  <title>Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/page/2/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
-
-  
+    <title>只有那年胜过年年</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/favicon/site.webmanifest">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css">
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
     
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+<link rel="stylesheet" href="/css/prism.css">
+ 
+    
+<link rel="stylesheet" href="/css/markdown.css">
+ 
+    
+<script src="/js/prism.js"></script>
 
-  
-  
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+    
+<link rel="stylesheet" href="/css/index.css">
+ 
+    
+<script src="/js/search.js"></script>
 
+
+     
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+        </script>
+     
+
+     
+        <script src="//lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js"> </script>
+        
+<script src="/js/fancybox.js"></script>
+
+    
+
+    <script type="text/javascript">
+
+        var search_path = "/search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+        var path = search_path;
+        searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
 <meta name="generator" content="Hexo 7.3.0"></head>
-
+ 
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
+    <!-- 导航栏 -->
+    <!-- 导航栏 -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4 pt-2 pb-2">
+    <div class="container">
+        <!-- 标题 --> 
+        <a class="navbar-brand navbar-expand-sm" href="/">
+            <img class="nofancybox" src="/logo.png" style="width: 75px;"  alt="笑颜网">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- 左边右边导航按钮 --> 
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto">
+                <!-- 左右两侧的导航栏 -->
+
+ 
+ 
+
+    <li class="nav-item">
+        <a class="nav-link" href="/">
+           <big> <i class="fa fa-home ps-1" ></i> 主页</big>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="/archives">
+           <big> <i class="fa fa-archive ps-1" ></i> 归档</big>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="/about">
+           <big> <i class="fa fa-user ps-1" ></i> 关于</big>
+        </a>
+    </li>
+ 
+ 
+            </ul>
+
+            
+            <form class="">
+                <div class="d-flex">
+                    <button class="btn text-muted fa fa-search d-none d-md-block d-lg-block" disabled></button>
+                    <input id="local-search-input" class="form-control me-2 pe-4" type="search"
+                            placeholder="搜索 " aria-label="Search">
+                </div>
+                <div id="local-search-result" style="position:absolute; padding-top: 8px; max-height: 960px; width: 480px;overflow-y: scroll; z-index: 1050;"></div>
+            </form>
+            
+            <ul class="navbar-nav">
+                <!-- 左右两侧的导航栏 -->
+
+ 
+ 
+            </ul>
+        </div>
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
+</nav>
+
+
+    <main class="container">
+        <!-- 主页 -->
+<div class="row pt-1">
+    <!-- 文章 -->
+    <div id="blog-content" class="col-md-8 col-sm-12" >
+        <div class="markdown-section pt-3">
+            <!-- 主页 -->
+
+
+
+    <!-- 标题 -->
+    <div class="pb-4 tag-hover", style="border-bottom: 1px solid #eaeaea;">
+        <p class="tag-hover h3">
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/hashCode%20%E5%92%8C%20identityHashCode%20%E7%9A%84%E5%8C%BA%E5%88%AB%E4%BD%A0%E7%9F%A5%E9%81%93%E5%90%97%EF%BC%9F/" class="link-dark text-decoration-none title">
+                hashCode 和 identityHashCode 的区别你知道吗？
+            </a>
+        </p>
+
+        <div class="pb-0">
+            <i class="fa fa-calendar p-1"></i>
+            2025/10/15 11:36:33
+            
+                <i class="fa fa-folder-open p-1"> </i>
+                <span class="tag-hover">
+                    
+                        <a href="/categories/%E5%90%8E%E7%AB%AF/ " class="link-dark text-decoration-none title">
+                            后端
+                        </a>
+                    
+                </span>
+            
+
+            
+                <i class="fa fa-tag p-1"> </i>
+                <span class="tag-hover">
+                    
+                        <a href="/tags/%E8%BF%9B%E9%98%B6/" class="link-dark text-decoration-none title">
+                            进阶
+                        </a>
+                    
+                </span>
+            
+
+        </div>
+
+        <div class="pt-3 pe-1">
+            <!-- 如果有摘要则显示摘要，没有就自己截取 -->
+            
+                <h2 id="hashCode"><a href="#hashCode" class="headerlink" title="hashCode"></a>hashCode</h2><p>关于hashCode参考之前的文章，<a href="https://mp.weixin.qq.com/s?__...
+            
+        </div>
     </div>
-  </div>
-</header>
 
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-进阶/hashCode 和 identityHashCode 的区别你知道吗？" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/hashCode%20%E5%92%8C%20identityHashCode%20%E7%9A%84%E5%8C%BA%E5%88%AB%E4%BD%A0%E7%9F%A5%E9%81%93%E5%90%97%EF%BC%9F/" class="article-date">
-  <time class="dt-published" datetime="2025-10-15T03:36:33.000Z" itemprop="datePublished">2025-10-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/10/15/%E8%BF%9B%E9%98%B6/hashCode%20%E5%92%8C%20identityHashCode%20%E7%9A%84%E5%8C%BA%E5%88%AB%E4%BD%A0%E7%9F%A5%E9%81%93%E5%90%97%EF%BC%9F/">hashCode 和 identityHashCode 的区别你知道吗？</a>
-    </h1>
-  
+    <!-- 标题 -->
+    <div class="pb-4 tag-hover", style="border-bottom: 1px solid #eaeaea;">
+        <p class="tag-hover h3">
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/%E4%B8%8D%E8%83%BD%E7%94%A8%20+%20%E6%8B%BC%E6%8E%A5%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%9F%20%E8%BF%99%E6%AC%A1%E6%88%91%E8%A6%81%E5%90%8A%E6%89%93%E9%9D%A2%E8%AF%95%E5%AE%98%EF%BC%81/" class="link-dark text-decoration-none title">
+                不能用 + 拼接字符串？ 这次我要吊打面试官！
+            </a>
+        </p>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="hashCode"><a href="#hashCode" class="headerlink" title="hashCode"></a>hashCode</h2><p>关于hashCode参考之前的文章，<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI3ODcxMzQzMw==&mid=2247483797&idx=1&sn=e3bb47b13d0c3f25341470a0ce598752&chksm=eb5384a3dc240db5e6378dc5160fa01fd10569ffb5f95f5d5daa4589c3308515139b29e2b314#rd">点击</a>参考之前文章。</p>
-<h2 id="identityHashCode"><a href="#identityHashCode" class="headerlink" title="identityHashCode"></a>identityHashCode</h2><p>identityHashCode是System里面提供的本地方法，java.lang.System#identityHashCode。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Returns the same hash code for the given object as</span><br><span class="line"> * would be returned by the default method hashCode(),</span><br><span class="line"> * whether or not the given object&#x27;s class overrides</span><br><span class="line"> * hashCode().</span><br><span class="line"> * The hash code for the null reference is zero.</span><br><span class="line"> *</span><br><span class="line"> * @param x object for which the hashCode is to be calculated</span><br><span class="line"> * @return  the hashCode</span><br><span class="line"> * @since   JDK1.1</span><br><span class="line"> */</span><br><span class="line">public static native int identityHashCode(Object x);</span><br></pre></td></tr></table></figure>
+        <div class="pb-0">
+            <i class="fa fa-calendar p-1"></i>
+            2025/10/15 11:36:33
+            
+                <i class="fa fa-folder-open p-1"> </i>
+                <span class="tag-hover">
+                    
+                        <a href="/categories/%E5%90%8E%E7%AB%AF/ " class="link-dark text-decoration-none title">
+                            后端
+                        </a>
+                    
+                </span>
+            
 
-<p>identityHashCode和hashCode的区别是，identityHashCode会返回对象的hashCode，而不管对象是否重写了hashCode方法。</p>
-<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">	String str1 = new String(&quot;abc&quot;);</span><br><span class="line">	String str2 = new String(&quot;abc&quot;);</span><br><span class="line">	System.out.println(&quot;str1 hashCode: &quot; + str1.hashCode());</span><br><span class="line">	System.out.println(&quot;str2 hashCode: &quot; + str2.hashCode());</span><br><span class="line">	System.out.println(&quot;str1 identityHashCode: &quot; + System.identityHashCode(str1));</span><br><span class="line">	System.out.println(&quot;str2 identityHashCode: &quot; + System.identityHashCode(str2));</span><br><span class="line"></span><br><span class="line">	User user = new User(&quot;test&quot;, 1);</span><br><span class="line">	System.out.println(&quot;user hashCode: &quot; + user.hashCode());</span><br><span class="line">	System.out.println(&quot;user identityHashCode: &quot; + System.identityHashCode(user));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            
+                <i class="fa fa-tag p-1"> </i>
+                <span class="tag-hover">
+                    
+                        <a href="/tags/%E8%BF%9B%E9%98%B6/" class="link-dark text-decoration-none title">
+                            进阶
+                        </a>
+                    
+                </span>
+            
 
-<p>输出结果：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">str1 hashCode: 96354</span><br><span class="line">str2 hashCode: 96354</span><br><span class="line">str1 identityHashCode: 1173230247</span><br><span class="line">str2 identityHashCode: 856419764</span><br><span class="line">user hashCode: 621009875</span><br><span class="line">user identityHashCode: 621009875</span><br></pre></td></tr></table></figure>
+        </div>
 
-<p>结果分析：</p>
-<p>1、str1和str2的hashCode是相同的，是因为String类重写了hashCode方法，它根据String的值来确定hashCode的值，所以只要值一样，hashCode就会一样。</p>
-<p>2、str1和str2的identityHashCode不一样，虽然String重写了hashCode方法，identityHashCode永远返回根据对象物理内存地址产生的hash值，所以每个String对象的物理地址不一样，identityHashCode也会不一样。</p>
-<p>3、User对象没重写hashCode方法，所以hashCode和identityHashCode返回的值一样。</p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>hashCode方法可以被重写并返回重写后的值，identityHashCode会返回对象的hash值而不管对象是否重写了hashCode方法。</p>
-
-      
+        <div class="pt-3 pe-1">
+            <!-- 如果有摘要则显示摘要，没有就自己截取 -->
+            
+                <p>我们做 Java 程序员以来，不管是工作当中，还是面试过程中，都知道：字符串拼接不能用 String，要用 <code>StringBuilder</code> 或者是 <code>StringBuffer</code>，以至于它们都被滥用了。</p>
+            
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/10/15/%E8%BF%9B%E9%98%B6/hashCode%20%E5%92%8C%20identityHashCode%20%E7%9A%84%E5%8C%BA%E5%88%AB%E4%BD%A0%E7%9F%A5%E9%81%93%E5%90%97%EF%BC%9F/" data-id="cmgrfxxd7002r30d48am22l5o" data-title="hashCode 和 identityHashCode 的区别你知道吗？" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
+    <!-- 标题 -->
+    <div class="pb-4 tag-hover", style="border-bottom: 1px solid #eaeaea;">
+        <p class="tag-hover h3">
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/%E5%88%AB%E5%86%8D%E5%86%99%20bug%20%E4%BA%86%EF%BC%8C%E9%81%BF%E5%85%8D%E7%A9%BA%E6%8C%87%E9%92%88%E7%9A%84%205%20%E4%B8%AA%E6%A1%88%E4%BE%8B%EF%BC%81/" class="link-dark text-decoration-none title">
+                别再写 bug 了，避免空指针的 5 个案例！
+            </a>
+        </p>
 
+        <div class="pb-0">
+            <i class="fa fa-calendar p-1"></i>
+            2025/10/15 11:36:33
+            
+                <i class="fa fa-folder-open p-1"> </i>
+                <span class="tag-hover">
+                    
+                        <a href="/categories/%E5%90%8E%E7%AB%AF/ " class="link-dark text-decoration-none title">
+                            后端
+                        </a>
+                    
+                </span>
+            
 
+            
+                <i class="fa fa-tag p-1"> </i>
+                <span class="tag-hover">
+                    
+                        <a href="/tags/%E8%BF%9B%E9%98%B6/" class="link-dark text-decoration-none title">
+                            进阶
+                        </a>
+                    
+                </span>
+            
 
-  
-    <article id="post-进阶/不能用 + 拼接字符串？ 这次我要吊打面试官！" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/%E4%B8%8D%E8%83%BD%E7%94%A8%20+%20%E6%8B%BC%E6%8E%A5%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%9F%20%E8%BF%99%E6%AC%A1%E6%88%91%E8%A6%81%E5%90%8A%E6%89%93%E9%9D%A2%E8%AF%95%E5%AE%98%EF%BC%81/" class="article-date">
-  <time class="dt-published" datetime="2025-10-15T03:36:33.000Z" itemprop="datePublished">2025-10-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/10/15/%E8%BF%9B%E9%98%B6/%E4%B8%8D%E8%83%BD%E7%94%A8%20+%20%E6%8B%BC%E6%8E%A5%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%9F%20%E8%BF%99%E6%AC%A1%E6%88%91%E8%A6%81%E5%90%8A%E6%89%93%E9%9D%A2%E8%AF%95%E5%AE%98%EF%BC%81/">不能用 + 拼接字符串？ 这次我要吊打面试官！</a>
-    </h1>
-  
+        </div>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>我们做 Java 程序员以来，不管是工作当中，还是面试过程中，都知道：字符串拼接不能用 String，要用 <code>StringBuilder</code> 或者是 <code>StringBuffer</code>，以至于它们都被滥用了。</p>
-<p>StringBuilder、StringBuffer 简称：SB，下文统一用 <code>SB</code> 代替。</p>
-<p><code>SB</code>它们都是可变的字符串，它们之间的区别也是 Java 初中级面试战场上出现几率十分高的一道题，上场率没有 90% 也有 80% 吧。</p>
-<p>这两个的具体区别请看这篇文章：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Eeb9wa0DfUs9U5snahAJZQ">StringBuffer 和 StringBuilder 的 3 个区别</a>。</p>
-<p>我们反过来想下，String真的是不可变的么？不一定，看下这篇：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/sLsCZ7T-GnkI6ZZXn22o-w">Java 中的 String 真的是不可变的吗？</a></p>
-<p>当然，本文不是讨论字符串可变与不可变的问题，而是讨论：字符串拼接一定要用 <code>SB</code> 吗？为什么不能用 <code>+</code> ？能不能用 <code>+</code> ？什么时候可以用 <code>+</code> ？</p>
-<p>为什么不能用 + 号拼接字符串？我不服，接下来我要吊打面试官！</p>
-<h4 id="什么时候不能用"><a href="#什么时候不能用" class="headerlink" title="什么时候不能用 +"></a>什么时候不能用 <code>+</code></h4><p>通过多个表达式完成一个字符串拼接操作。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">private void test1() &#123;</span><br><span class="line">    String www = &quot;www.&quot;;</span><br><span class="line">    String str = www;</span><br><span class="line">    str += &quot;javastack.&quot;;</span><br><span class="line">    str += &quot;com&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>字节码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">// access flags 0xA</span><br><span class="line">private static test2()V</span><br><span class="line">L0</span><br><span class="line">LINENUMBER 14 L0</span><br><span class="line">LDC &quot;www.&quot;</span><br><span class="line">ASTORE 0</span><br><span class="line">L1</span><br><span class="line">LINENUMBER 15 L1</span><br><span class="line">ALOAD 0</span><br><span class="line">ASTORE 1</span><br><span class="line">L2</span><br><span class="line">LINENUMBER 16 L2</span><br><span class="line">NEW java/lang/StringBuilder</span><br><span class="line">DUP</span><br><span class="line">INVOKESPECIAL java/lang/StringBuilder.&lt;init&gt; ()V</span><br><span class="line">ALOAD 1</span><br><span class="line">INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;</span><br><span class="line">LDC &quot;javastack.&quot;</span><br><span class="line">INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;</span><br><span class="line">INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;</span><br><span class="line">ASTORE 1</span><br><span class="line">L3</span><br><span class="line">LINENUMBER 17 L3</span><br><span class="line">NEW java/lang/StringBuilder</span><br><span class="line">DUP</span><br><span class="line">INVOKESPECIAL java/lang/StringBuilder.&lt;init&gt; ()V</span><br><span class="line">ALOAD 1</span><br><span class="line">INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;</span><br><span class="line">LDC &quot;com&quot;</span><br><span class="line">INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;</span><br><span class="line">INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;</span><br><span class="line">ASTORE 1</span><br><span class="line">L4</span><br><span class="line">LINENUMBER 18 L4</span><br><span class="line">RETURN</span><br><span class="line">L5</span><br><span class="line">LOCALVARIABLE www Ljava/lang/String; L1 L5 0</span><br><span class="line">LOCALVARIABLE str Ljava/lang/String; L2 L5 1</span><br><span class="line">MAXSTACK = 2</span><br><span class="line">MAXLOCALS = 2</span><br></pre></td></tr></table></figure>
-
-<p>不会查看字节码的，看这里：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/bEEQf7bNik-rBPgK0uhjWg">3种骚操作，教你查看 Java 字节码</a>，看这一篇就会了。</p>
-<p>观察下，<code>NEW java/lang/StringBuilder</code> 出现了两次，是因为我们在代码中拼接了两次，也就是说每一次拼接操作都会创建一次 <code>StringBuilder</code>。</p>
-<p>如果我们是在一个循环中进行字符串拼接，那是不是一次拼接就要创建一个 <code>StringBuilder</code>？</p>
-<p>wtf……这哪能接受！频繁创建对象是有性能开销的，这也是为什么我们常说的字符串不能用 <code>+</code> 拼接，而要用那两个 <code>SB</code>  拼接了。</p>
-<h4 id="什么时候可以用"><a href="#什么时候可以用" class="headerlink" title="什么时候可以用 +"></a>什么时候可以用 <code>+</code></h4><p>直接将三个字面量的字符串拼接成一个字符串。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">private static void test2() &#123;</span><br><span class="line">    String str = &quot;www.&quot; + &quot;javastack.&quot; + &quot;com&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>字节码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// access flags 0x2</span><br><span class="line">private test2()V</span><br><span class="line">L0</span><br><span class="line">LINENUMBER 13 L0</span><br><span class="line">LDC &quot;www.javastack.com&quot;</span><br><span class="line">ASTORE 1</span><br><span class="line">L1</span><br><span class="line">LINENUMBER 14 L1</span><br><span class="line">RETURN</span><br><span class="line">L2</span><br><span class="line">LOCALVARIABLE this Lcom/test/jdk/TestSB; L0 L2 0</span><br><span class="line">LOCALVARIABLE str Ljava/lang/String; L1 L2 1</span><br><span class="line">MAXSTACK = 1</span><br><span class="line">MAXLOCALS = 2</span><br></pre></td></tr></table></figure>
-
-<p>从字节码看出，没有任何创建 <code>StringBuilder</code> 的指令，直接从常量池进行取出一个完整的字符串：<a target="_blank" rel="noopener" href="http://www.javastack.com.很明显,这是/">www.javastack.com。很明显，这是</a> Java 编译器对代码进行了优化。</p>
-<p>所以，通过这个示例告诉你，在这种情况下是可以用 <code>+</code> 号进行字符串拼接的。</p>
-<p>这个示例可以演变成我们实际工作当中的某个 SQL 语句拼接的案例，如：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String sql = &quot;select name, sex, age, address&quot;</span><br><span class="line">        + &quot;from t_user&quot;</span><br><span class="line">        + &quot;where age &gt; 18&quot;;</span><br></pre></td></tr></table></figure>
-
-<p>别说这样不行，这样是行的。</p>
-<p>但你要是换成这样就不行了：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String sql = &quot;select name, sex, age, address&quot;;</span><br><span class="line">sql += &quot;from t_user&quot;;</span><br><span class="line">sql += &quot;where age &gt; 18&quot;;</span><br></pre></td></tr></table></figure>
-
-<p>这样又回到创建多个 <code>StringBuilder</code> 的时候了。</p>
-<p>也就是说，在一个表达式中完成字符串拼接是可以用 <code>+</code> 号完成的，因为编译器已经做了优化。</p>
-<h4 id="小结一下"><a href="#小结一下" class="headerlink" title="小结一下"></a>小结一下</h4><p>你只需要记住这两点：</p>
-<p>1、在循环和多个表达式中不能 <code>+</code>，频繁创建 <code>SB</code> 性能影响；</p>
-<p>2、在单个表达式中可以用 <code>+</code>，编译器直接做了优化；</p>
-<p>老铁们，都搞清楚了？</p>
-<p>这个观点有没有被误解很久？</p>
-<p>下次面试，把这篇内容亮出来，吊打面试官，没问题的。</p>
-<p>有收获的朋友一定要点个在看，这样我写原创更带劲了，谢了，老铁们。</p>
-
-      
+        <div class="pt-3 pe-1">
+            <!-- 如果有摘要则显示摘要，没有就自己截取 -->
+            
+                <p>空指针是我们 Java 开发人员经常遇到的一个基本异常，这是一个极其普遍但似乎又无法根治的问题。</p>
+            
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/10/15/%E8%BF%9B%E9%98%B6/%E4%B8%8D%E8%83%BD%E7%94%A8%20+%20%E6%8B%BC%E6%8E%A5%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%9F%20%E8%BF%99%E6%AC%A1%E6%88%91%E8%A6%81%E5%90%8A%E6%89%93%E9%9D%A2%E8%AF%95%E5%AE%98%EF%BC%81/" data-id="cmgrfxxd8002t30d4a42p76g0" data-title="不能用 + 拼接字符串？ 这次我要吊打面试官！" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
+    <!-- 标题 -->
+    <div class="pb-4 tag-hover", style="border-bottom: 1px solid #eaeaea;">
+        <p class="tag-hover h3">
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/%E5%AD%97%E7%AC%A6%E4%B8%B2%20substring%20%E6%96%B9%E6%B3%95%E5%9C%A8%20JDK%206,7,8%20%E4%B8%AD%E7%9A%84%E5%B7%AE%E5%BC%82%E3%80%82/" class="link-dark text-decoration-none title">
+                字符串 substring 方法在 JDK 6,7,8 中的差异。
+            </a>
+        </p>
 
+        <div class="pb-0">
+            <i class="fa fa-calendar p-1"></i>
+            2025/10/15 11:36:33
+            
+                <i class="fa fa-folder-open p-1"> </i>
+                <span class="tag-hover">
+                    
+                        <a href="/categories/%E5%90%8E%E7%AB%AF/ " class="link-dark text-decoration-none title">
+                            后端
+                        </a>
+                    
+                </span>
+            
 
+            
+                <i class="fa fa-tag p-1"> </i>
+                <span class="tag-hover">
+                    
+                        <a href="/tags/%E8%BF%9B%E9%98%B6/" class="link-dark text-decoration-none title">
+                            进阶
+                        </a>
+                    
+                </span>
+            
 
-  
-    <article id="post-进阶/别再写 bug 了，避免空指针的 5 个案例！" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/%E5%88%AB%E5%86%8D%E5%86%99%20bug%20%E4%BA%86%EF%BC%8C%E9%81%BF%E5%85%8D%E7%A9%BA%E6%8C%87%E9%92%88%E7%9A%84%205%20%E4%B8%AA%E6%A1%88%E4%BE%8B%EF%BC%81/" class="article-date">
-  <time class="dt-published" datetime="2025-10-15T03:36:33.000Z" itemprop="datePublished">2025-10-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/10/15/%E8%BF%9B%E9%98%B6/%E5%88%AB%E5%86%8D%E5%86%99%20bug%20%E4%BA%86%EF%BC%8C%E9%81%BF%E5%85%8D%E7%A9%BA%E6%8C%87%E9%92%88%E7%9A%84%205%20%E4%B8%AA%E6%A1%88%E4%BE%8B%EF%BC%81/">别再写 bug 了，避免空指针的 5 个案例！</a>
-    </h1>
-  
+        </div>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>空指针是我们 Java 开发人员经常遇到的一个基本异常，这是一个极其普遍但似乎又无法根治的问题。</p>
-<p>本文，栈长将带你了解什么是空指针，还有如何有效的避免空指针。</p>
-<h2 id="什么是空指针？"><a href="#什么是空指针？" class="headerlink" title="什么是空指针？"></a>什么是空指针？</h2><p>当一个变量的值为 null 时，在 Java 里面表示一个不存在的空对象，没有实际内容，没有给它分配内存，null 也是对象成员变量的默认值。</p>
-<p>所以，一个对象如果没有进行初始化操作，这时候，如果你调用这个对象的方法或者变量，就会出现空指针异常。</p>
-<p>如下面示例会发生空指针异常：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Object object = null;</span><br><span class="line">String string = object.toString();</span><br></pre></td></tr></table></figure>
-
-<p><img src="http://qianniu.javastack.cn/18-12-12/46377586.jpg"></p>
-<p>从类结构图来看，空指针它是属于运行时异常 <code>RuntimeException</code> 的子类，它不是捕获型的，只有在程序运行时才可能报出来，而且会造成程序中断。</p>
-<blockquote>
-<p>什么是运行时异常及异常的分类请看这篇文章：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/xbopgxZ5BEDdSvwO9ad9Xg">一张图搞清楚 Java 异常机制</a>。</p>
-</blockquote>
-<h2 id="如何避免空指针？"><a href="#如何避免空指针？" class="headerlink" title="如何避免空指针？"></a>如何避免空指针？</h2><p>下面说几个空指针的几个最常见的案例及解决之道。</p>
-<h4 id="1、字符串比较，常量放前面"><a href="#1、字符串比较，常量放前面" class="headerlink" title="1、字符串比较，常量放前面"></a>1、字符串比较，常量放前面</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if(status.equals(SUCCESS))&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这个时候 status 可能为 null 造成空指针异常，应该把常量放前面，就能避免空指针异常。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if(SUCCESS.equals(status))&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这个应该在各种开发规范里面都会提到，也是最基础的。</p>
-<h4 id="2、初始化默认值"><a href="#2、初始化默认值" class="headerlink" title="2、初始化默认值"></a>2、初始化默认值</h4><p>在对象初始化的时候给它一个默认值或者默认构造实现，如：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">User user = new User();</span><br><span class="line">String name = StringUtils.EMPTY;</span><br></pre></td></tr></table></figure>
-
-<h4 id="3、返回空集合"><a href="#3、返回空集合" class="headerlink" title="3、返回空集合"></a>3、返回空集合</h4><p>在返回一个集合的话，默认会是 null，统一规范返回一个空集合。</p>
-<p>举个 List 例子，如：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public List getUserList()&#123;</span><br><span class="line">    List list = userMapper.gerUserList();</span><br><span class="line">    return list == null ? new ArrayList() : list;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这样接收方就不用担心空指针异常了，也不会影响业务。</p>
-<h4 id="4、断言"><a href="#4、断言" class="headerlink" title="4、断言"></a>4、断言</h4><p>断言是用来检查程序的安全性的，在使用之前进行检查条件，如果不符合条件就报异常，符合就继续。</p>
-<p>Java 中自带的断言关键字：assert，如：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assert name == null : &quot;名称不能为空&quot;;</span><br></pre></td></tr></table></figure>
-
-<p>输出：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread &quot;main&quot; java.lang.AssertionError: 名称不正确</span><br></pre></td></tr></table></figure>
-
-<p>不过默认是不启动断言检查的，需要要带上 JVM 参数：-enableassertions 才能生效。</p>
-<p>Java 中这个用的很少，建议使用 Spring 中的，更强大，更方便好用。</p>
-<p>Spring中的用法：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Assert.notNull(name,&quot;名称不能为空&quot;);</span><br></pre></td></tr></table></figure>
-
-<h4 id="5、Optional"><a href="#5、Optional" class="headerlink" title="5、Optional"></a>5、Optional</h4><p>Optional 是 JDK 8 新增的新特性，再也不用 !&#x3D; null 来判断了，这个在一个对象里面的多个子对象连续判断的时候非常有用。</p>
-<p>这里不再详细介绍了，具体看这篇文章：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/uXw4eTZqLfj871FlciPh6Q">JDK8新特性之Optional</a>。</p>
-<p>大家都有什么高见，欢迎留言分享！</p>
-
-      
+        <div class="pt-3 pe-1">
+            <!-- 如果有摘要则显示摘要，没有就自己截取 -->
+            
+                <p>标题中的substring方法指的是字符串的substring(int beginIndex, int endIndex)方法，这个方法在jdk6,7是有差异的。</p>
+            
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/10/15/%E8%BF%9B%E9%98%B6/%E5%88%AB%E5%86%8D%E5%86%99%20bug%20%E4%BA%86%EF%BC%8C%E9%81%BF%E5%85%8D%E7%A9%BA%E6%8C%87%E9%92%88%E7%9A%84%205%20%E4%B8%AA%E6%A1%88%E4%BE%8B%EF%BC%81/" data-id="cmgrfxxd8002v30d4dzza9hji" data-title="别再写 bug 了，避免空指针的 5 个案例！" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
+    <!-- 标题 -->
+    <div class="pb-4 tag-hover", style="border-bottom: 1px solid #eaeaea;">
+        <p class="tag-hover h3">
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/%E7%A5%9E%E5%A5%87%EF%BC%8C%E6%95%99%E4%BD%A0%E7%94%A8%E9%9A%8F%E6%9C%BA%E6%95%B0%E6%89%93%E5%8D%B0hello%20world/" class="link-dark text-decoration-none title">
+                神奇，教你用随机数打印hello world
+            </a>
+        </p>
 
+        <div class="pb-0">
+            <i class="fa fa-calendar p-1"></i>
+            2025/10/15 11:36:33
+            
+                <i class="fa fa-folder-open p-1"> </i>
+                <span class="tag-hover">
+                    
+                        <a href="/categories/%E5%90%8E%E7%AB%AF/ " class="link-dark text-decoration-none title">
+                            后端
+                        </a>
+                    
+                </span>
+            
 
+            
+                <i class="fa fa-tag p-1"> </i>
+                <span class="tag-hover">
+                    
+                        <a href="/tags/%E8%BF%9B%E9%98%B6/" class="link-dark text-decoration-none title">
+                            进阶
+                        </a>
+                    
+                </span>
+            
 
-  
-    <article id="post-进阶/字符串 substring 方法在 JDK 6,7,8 中的差异。" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/%E5%AD%97%E7%AC%A6%E4%B8%B2%20substring%20%E6%96%B9%E6%B3%95%E5%9C%A8%20JDK%206,7,8%20%E4%B8%AD%E7%9A%84%E5%B7%AE%E5%BC%82%E3%80%82/" class="article-date">
-  <time class="dt-published" datetime="2025-10-15T03:36:33.000Z" itemprop="datePublished">2025-10-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/10/15/%E8%BF%9B%E9%98%B6/%E5%AD%97%E7%AC%A6%E4%B8%B2%20substring%20%E6%96%B9%E6%B3%95%E5%9C%A8%20JDK%206,7,8%20%E4%B8%AD%E7%9A%84%E5%B7%AE%E5%BC%82%E3%80%82/">字符串 substring 方法在 JDK 6,7,8 中的差异。</a>
-    </h1>
-  
+        </div>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>标题中的substring方法指的是字符串的substring(int beginIndex, int endIndex)方法，这个方法在jdk6,7是有差异的。</p>
-<h2 id="substring有什么用？"><a href="#substring有什么用？" class="headerlink" title="substring有什么用？"></a>substring有什么用？</h2><p>substring返回的是字符串索引位置beginIndex开始，endIndex-1结束的字符串。</p>
-<p>来看这个例子：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String x = &quot;abcdef&quot;;</span><br><span class="line">x = x.substring(1,3);</span><br><span class="line">System.out.println(x);</span><br></pre></td></tr></table></figure>
-<p>输出：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bc</span><br></pre></td></tr></table></figure>
-
-<p>下面看看在JDK之间，它们的实现原理有什么不一样，及值得注意的地方。</p>
-<h4 id="JDK-6"><a href="#JDK-6" class="headerlink" title="JDK 6"></a>JDK 6</h4><p>String背后是由char数组构成的，在JDK6中，String包含三个字段：char value[], int offset, int count，意思很简单。</p>
-<p>substring被调用时，它会创建一个新的字符串，但字符串的值还指向堆中同样的字符数组。它们的区别只是数量和下标引用不一样，如图所示。</p>
-<p><img src="https://www.programcreek.com/wp-content/uploads/2013/09/string-substring-jdk6-650x389.jpeg" alt="image"></p>
-<p>JDK6中的部分源码可以说明这个问题。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//JDK 6</span><br><span class="line">String(int offset, int count, char value[]) &#123;</span><br><span class="line">	this.value = value;</span><br><span class="line">	this.offset = offset;</span><br><span class="line">	this.count = count;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">public String substring(int beginIndex, int endIndex) &#123;</span><br><span class="line">	//check boundary</span><br><span class="line">	return  new String(offset + beginIndex, endIndex - beginIndex, value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>会有什么问题？</strong></p>
-<p>如果一个很长的字符串，但是每次使用substring()，你只需要很小的一部分。这将会导致性能问题，因为只需要一小部分，却引用了整个字符数组内容。对于JDK 6，解决方案是使用以下内容：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x = x.substring(x, y) + &quot;&quot;</span><br></pre></td></tr></table></figure>
-
-<h4 id="JDK-7-8"><a href="#JDK-7-8" class="headerlink" title="JDK 7,8"></a>JDK 7,8</h4><p>JDK6这种问题在JDK7+中已经改善了，JDK7+中实际是重新创建了一个字符数组，如图。</p>
-<p><img src="https://www.programcreek.com/wp-content/uploads/2013/09/string-substring-jdk71-650x389.jpeg" alt="image"></p>
-<p>JDK7中的部分源码，JDK8类似。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//JDK 7</span><br><span class="line">public String(char value[], int offset, int count) &#123;</span><br><span class="line">	//check boundary</span><br><span class="line">	this.value = Arrays.copyOfRange(value, offset, offset + count);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">public String substring(int beginIndex, int endIndex) &#123;</span><br><span class="line">	//check boundary</span><br><span class="line">	int subLen = endIndex - beginIndex;</span><br><span class="line">	return new String(value, beginIndex, subLen);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>对于JDK的这种差异，我们知道就好，现在应该都是JDK7及8了吧，其实对于小字符串的这种操作性能也是可以忽略不计的。</p>
-
-      
+        <div class="pt-3 pe-1">
+            <!-- 如果有摘要则显示摘要，没有就自己截取 -->
+            
+                <p>下面是一段随机数程序。</p>
+            
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/10/15/%E8%BF%9B%E9%98%B6/%E5%AD%97%E7%AC%A6%E4%B8%B2%20substring%20%E6%96%B9%E6%B3%95%E5%9C%A8%20JDK%206,7,8%20%E4%B8%AD%E7%9A%84%E5%B7%AE%E5%BC%82%E3%80%82/" data-id="cmgrfxxd8002x30d4ayyp4au6" data-title="字符串 substring 方法在 JDK 6,7,8 中的差异。" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
+    <!-- 标题 -->
+    <div class="pb-4 tag-hover", style="border-bottom: 1px solid #eaeaea;">
+        <p class="tag-hover h3">
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/%E9%87%91%E8%9E%8D%E7%B3%BB%E7%BB%9F%E4%B8%AD%E6%AD%A3%E7%A1%AE%E7%9A%84%E9%87%91%E9%A2%9D%E8%AE%A1%E7%AE%97%E5%8F%8A%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F/" class="link-dark text-decoration-none title">
+                金融系统中正确的金额计算及存储方式
+            </a>
+        </p>
 
+        <div class="pb-0">
+            <i class="fa fa-calendar p-1"></i>
+            2025/10/15 11:36:33
+            
+                <i class="fa fa-folder-open p-1"> </i>
+                <span class="tag-hover">
+                    
+                        <a href="/categories/%E5%90%8E%E7%AB%AF/ " class="link-dark text-decoration-none title">
+                            后端
+                        </a>
+                    
+                </span>
+            
 
+            
+                <i class="fa fa-tag p-1"> </i>
+                <span class="tag-hover">
+                    
+                        <a href="/tags/%E8%BF%9B%E9%98%B6/" class="link-dark text-decoration-none title">
+                            进阶
+                        </a>
+                    
+                </span>
+            
 
-  
-    <article id="post-进阶/神奇，教你用随机数打印hello world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/%E7%A5%9E%E5%A5%87%EF%BC%8C%E6%95%99%E4%BD%A0%E7%94%A8%E9%9A%8F%E6%9C%BA%E6%95%B0%E6%89%93%E5%8D%B0hello%20world/" class="article-date">
-  <time class="dt-published" datetime="2025-10-15T03:36:33.000Z" itemprop="datePublished">2025-10-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/10/15/%E8%BF%9B%E9%98%B6/%E7%A5%9E%E5%A5%87%EF%BC%8C%E6%95%99%E4%BD%A0%E7%94%A8%E9%9A%8F%E6%9C%BA%E6%95%B0%E6%89%93%E5%8D%B0hello%20world/">神奇，教你用随机数打印hello world</a>
-    </h1>
-  
+        </div>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>下面是一段随机数程序。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">	System.out.println(randomString(-229985452) + &quot; &quot; + randomString(-147909649));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static String randomString(int seed) &#123;</span><br><span class="line">	Random ran = new Random(seed);</span><br><span class="line">	StringBuilder sb = new StringBuilder();</span><br><span class="line">	while (true) &#123;</span><br><span class="line">		int k = ran.nextInt(27);</span><br><span class="line">		if (k == 0) &#123;</span><br><span class="line">			break;</span><br><span class="line">		&#125;</span><br><span class="line">		sb.append((char) (&#x27;`&#x27; + k));</span><br><span class="line">	&#125;</span><br><span class="line">	return sb.toString();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>每次都会输出：hello world，这是为什么呢？？</strong></p>
-<p>Random构造函数，参数seed是初始种子，相同的种子每次产生的随机数都一样，所以无论怎么随机，构造出来的随机数都一样。</p>
-<p><strong>Random r &#x3D; new Random(-229985452)</strong></p>
-<p>会产生以下5位不为0的随机数：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">8</span><br><span class="line">5</span><br><span class="line">12</span><br><span class="line">12</span><br><span class="line">15</span><br></pre></td></tr></table></figure>
-
-<p><strong>Random r &#x3D; new Random(-147909649)</strong></p>
-<p>会产生以下5位不为0的随机数：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">23</span><br><span class="line">15</span><br><span class="line">18</span><br><span class="line">12</span><br><span class="line">4</span><br></pre></td></tr></table></figure>
-
-<p>程序里面用`符号相加，`代表96.</p>
-<p>所以，有下面的结果：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">8  + 96 = 104 --&gt; h</span><br><span class="line">5  + 96 = 101 --&gt; e</span><br><span class="line">12 + 96 = 108 --&gt; l</span><br><span class="line">12 + 96 = 108 --&gt; l</span><br><span class="line">15 + 96 = 111 --&gt; o</span><br><span class="line"></span><br><span class="line">23 + 96 = 119 --&gt; w</span><br><span class="line">15 + 96 = 111 --&gt; o</span><br><span class="line">18 + 96 = 114 --&gt; r</span><br><span class="line">12 + 96 = 108 --&gt; l</span><br><span class="line">4  + 96 = 100 --&gt; d</span><br></pre></td></tr></table></figure>
-
-<p>一段很简单的程序却如此神奇，分享给别人，看他知道不？</p>
-
-      
+        <div class="pt-3 pe-1">
+            <!-- 如果有摘要则显示摘要，没有就自己截取 -->
+            
+                <h4 id="经典的精度丢失问题"><a href="#经典的精度丢失问题" class="headerlink" title="经典的精度丢失问题"></a>经典的精度丢失问题</h4><p> Java中的类型float、double用来做计算会有精度丢失问题，下面来看下面的示例。</p>
+            
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/10/15/%E8%BF%9B%E9%98%B6/%E7%A5%9E%E5%A5%87%EF%BC%8C%E6%95%99%E4%BD%A0%E7%94%A8%E9%9A%8F%E6%9C%BA%E6%95%B0%E6%89%93%E5%8D%B0hello%20world/" data-id="cmgrfxxd9002z30d4ahco2pfa" data-title="神奇，教你用随机数打印hello world" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
+    <!-- 标题 -->
+    <div class="pb-4 tag-hover", style="border-bottom: 1px solid #eaeaea;">
+        <p class="tag-hover h3">
+            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/%E9%9D%A2%E8%AF%95%E9%97%AE%E6%88%91%20Java%20%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90%EF%BC%8C%E7%9E%AC%E9%97%B4%E8%A2%AB%E7%A7%92%E6%9D%80%E4%BA%86%E3%80%82/" class="link-dark text-decoration-none title">
+                面试问我 Java 逃逸分析，瞬间被秒杀了。
+            </a>
+        </p>
 
+        <div class="pb-0">
+            <i class="fa fa-calendar p-1"></i>
+            2025/10/15 11:36:33
+            
+                <i class="fa fa-folder-open p-1"> </i>
+                <span class="tag-hover">
+                    
+                        <a href="/categories/%E5%90%8E%E7%AB%AF/ " class="link-dark text-decoration-none title">
+                            后端
+                        </a>
+                    
+                </span>
+            
 
+            
+                <i class="fa fa-tag p-1"> </i>
+                <span class="tag-hover">
+                    
+                        <a href="/tags/%E8%BF%9B%E9%98%B6/" class="link-dark text-decoration-none title">
+                            进阶
+                        </a>
+                    
+                </span>
+            
 
-  
-    <article id="post-进阶/金融系统中正确的金额计算及存储方式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/%E9%87%91%E8%9E%8D%E7%B3%BB%E7%BB%9F%E4%B8%AD%E6%AD%A3%E7%A1%AE%E7%9A%84%E9%87%91%E9%A2%9D%E8%AE%A1%E7%AE%97%E5%8F%8A%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F/" class="article-date">
-  <time class="dt-published" datetime="2025-10-15T03:36:33.000Z" itemprop="datePublished">2025-10-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/10/15/%E8%BF%9B%E9%98%B6/%E9%87%91%E8%9E%8D%E7%B3%BB%E7%BB%9F%E4%B8%AD%E6%AD%A3%E7%A1%AE%E7%9A%84%E9%87%91%E9%A2%9D%E8%AE%A1%E7%AE%97%E5%8F%8A%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F/">金融系统中正确的金额计算及存储方式</a>
-    </h1>
-  
+        </div>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h4 id="经典的精度丢失问题"><a href="#经典的精度丢失问题" class="headerlink" title="经典的精度丢失问题"></a>经典的精度丢失问题</h4><p> Java中的类型float、double用来做计算会有精度丢失问题，下面来看下面的示例。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">	test1();</span><br><span class="line">	test2();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private static void test1() &#123;</span><br><span class="line">	double totalAmount = 0.09;</span><br><span class="line">	double feeAmount = 0.02;</span><br><span class="line">	double tradeAmount = totalAmount - feeAmount;</span><br><span class="line">	System.out.println(tradeAmount);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上面的程序输出结果是多少？</p>
-<p>0.07？非也！</p>
-<p>正确的结果是：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0.06999999999999999</span><br></pre></td></tr></table></figure>
-
-<p>为什么是这样？</p>
-<p>浮点数可能丢失精度，浮点十进制数通常没有完全相同的二进制的表示形式，这是CPU所采用的浮点数据表示形式的副作用。为此，可能会有一些精度丢失，并且一些浮点运算可能会产生未知的结果。</p>
-<p>浮点运算很少是精确的，只要是超过精度能表示的范围就会产生误差。所以，在使用float、double作精确运算的时候一定要特别小心，除非能容忍精度丢失，不然产生的误差也是会造成双方对账不一致的结果。</p>
-<h4 id="怎么解决"><a href="#怎么解决" class="headerlink" title="怎么解决"></a>怎么解决</h4><blockquote>
-<p>在《Effective Java》这本书中也提到这个原则，float和double只能用来做科学计算或者是工程计算，在商业计算中我们要用 java.math.BigDecimal。</p>
-</blockquote>
-<p>BigDecimal适合更精度的运算，也提供了丰富的操作符类型，小数位控制，四舍五入规则等。</p>
-<p>不过，使用BigDecimal不当也有精度丢失的情况，如double的构造方法：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BigDecimal(double val)</span><br></pre></td></tr></table></figure>
-
-<p>再来看这个示例：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">private static void test2() &#123;</span><br><span class="line">	double totalAmount = 0.09;</span><br><span class="line">	double feeAmount = 0.02;</span><br><span class="line">	BigDecimal tradeAmount = new BigDecimal(totalAmount).subtract(new BigDecimal(feeAmount));</span><br><span class="line">	System.out.println(tradeAmount);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>输出：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0.0699999999999999962529972918900966760702431201934814453125</span><br></pre></td></tr></table></figure>
-
-<p>这个精度就更恐怖了。。</p>
-<p>所以，一定要使用String的构造方法：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BigDecimal(String val)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">private static void test3() &#123;</span><br><span class="line">	double totalAmount = 0.09;</span><br><span class="line">	double feeAmount = 0.02;</span><br><span class="line">	BigDecimal tradeAmount = new BigDecimal(String.valueOf(totalAmount))</span><br><span class="line">			.subtract(new BigDecimal(String.valueOf(feeAmount)));</span><br><span class="line">	System.out.println(tradeAmount);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ol>
-<li><p>金额运算尽量使用BigDecimal(String val)进行运算。</p>
-</li>
-<li><p>数据库存储金额，一般有整型和浮点型两种存储方式。如果是有汇率转换的，建议使用浮点数decimal进行存储，可以灵活的控制精度，decimal直接对应java类型BigDecimal。当然，用整数存储分这种形式也可以，转账的时候单位为元而如果忘了转换分为元，那就悲剧了。</p>
-</li>
-</ol>
-
-      
+        <div class="pt-3 pe-1">
+            <!-- 如果有摘要则显示摘要，没有就自己截取 -->
+            
+                <p>记得几年前有一次栈长去面试，问到了这么一个问题:</p>
+            
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/10/15/%E8%BF%9B%E9%98%B6/%E9%87%91%E8%9E%8D%E7%B3%BB%E7%BB%9F%E4%B8%AD%E6%AD%A3%E7%A1%AE%E7%9A%84%E9%87%91%E9%A2%9D%E8%AE%A1%E7%AE%97%E5%8F%8A%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F/" data-id="cmgrfxxd9003130d4hkc8fkzt" data-title="金融系统中正确的金额计算及存储方式" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
+    <!-- 标题 -->
+    <div class="pb-4 tag-hover", style="border-bottom: 1px solid #eaeaea;">
+        <p class="tag-hover h3">
+            <a href="/2025/10/15/%E9%9B%86%E5%90%88/HashMap%20%E5%92%8C%20Hashtable%20%E7%9A%84%206%20%E4%B8%AA%E5%8C%BA%E5%88%AB/" class="link-dark text-decoration-none title">
+                HashMap 和 Hashtable 的 6 个区别
+            </a>
+        </p>
 
+        <div class="pb-0">
+            <i class="fa fa-calendar p-1"></i>
+            2025/10/15 11:36:33
+            
+                <i class="fa fa-folder-open p-1"> </i>
+                <span class="tag-hover">
+                    
+                        <a href="/categories/%E5%90%8E%E7%AB%AF/ " class="link-dark text-decoration-none title">
+                            后端
+                        </a>
+                    
+                </span>
+            
 
+            
+                <i class="fa fa-tag p-1"> </i>
+                <span class="tag-hover">
+                    
+                        <a href="/tags/%E9%9B%86%E5%90%88/" class="link-dark text-decoration-none title">
+                            集合
+                        </a>
+                    
+                </span>
+            
 
-  
-    <article id="post-进阶/面试问我 Java 逃逸分析，瞬间被秒杀了。" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/%E9%9D%A2%E8%AF%95%E9%97%AE%E6%88%91%20Java%20%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90%EF%BC%8C%E7%9E%AC%E9%97%B4%E8%A2%AB%E7%A7%92%E6%9D%80%E4%BA%86%E3%80%82/" class="article-date">
-  <time class="dt-published" datetime="2025-10-15T03:36:33.000Z" itemprop="datePublished">2025-10-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/10/15/%E8%BF%9B%E9%98%B6/%E9%9D%A2%E8%AF%95%E9%97%AE%E6%88%91%20Java%20%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90%EF%BC%8C%E7%9E%AC%E9%97%B4%E8%A2%AB%E7%A7%92%E6%9D%80%E4%BA%86%E3%80%82/">面试问我 Java 逃逸分析，瞬间被秒杀了。</a>
-    </h1>
-  
+        </div>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>记得几年前有一次栈长去面试，问到了这么一个问题:</p>
-<blockquote>
-<p>Java中的对象都是在堆中分配吗？说明为什么！</p>
-</blockquote>
-<p>当时我被问得一脸蒙逼，瞬间被秒杀得体无完肤，当时我压根就不知道他在考什么知识点，难道对象不是在堆中分配吗？最后就没然后了，回去等通知了。。</p>
-<p>这个面试题很经典，我最近也分享到了知识星球上面：</p>
-<p><img src="http://img.javastack.cn/20190527134034.png"></p>
-<p>回答很精彩，大家可以加入一起搞技术，我现在将答案总结一下给大家。</p>
-<h2 id="什么是逃逸分析？"><a href="#什么是逃逸分析？" class="headerlink" title="什么是逃逸分析？"></a>什么是逃逸分析？</h2><p>关于 Java 逃逸分析的定义：</p>
-<p>逃逸分析（Escape Analysis）简单来讲就是，Java Hotspot 虚拟机可以分析新创建对象的使用范围，并决定是否在 Java 堆上分配内存的一项技术。</p>
-<p>逃逸分析的 JVM 参数如下：</p>
-<ul>
-<li>开启逃逸分析：-XX:+DoEscapeAnalysis</li>
-<li>关闭逃逸分析：-XX:-DoEscapeAnalysis</li>
-<li>显示分析结果：-XX:+PrintEscapeAnalysis</li>
-</ul>
-<p>逃逸分析技术在 Java SE 6u23+ 开始支持，并默认设置为启用状态，可以不用额外加这个参数。</p>
-<h2 id="逃逸分析算法"><a href="#逃逸分析算法" class="headerlink" title="逃逸分析算法"></a>逃逸分析算法</h2><p>Java Hotspot 编译器实现下面论文中描述的逃逸算法：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[Choi99] Jong-Deok Choi, Manish Gupta, Mauricio Seffano,</span><br><span class="line">          Vugranam C. Sreedhar, Sam Midkiff,</span><br><span class="line">          &quot;Escape Analysis for Java&quot;, Procedings of ACM SIGPLAN</span><br><span class="line">          OOPSLA  Conference, November 1, 1999</span><br></pre></td></tr></table></figure>
-
-<p>根据 Jong-Deok Choi, Manish Gupta, Mauricio Seffano,Vugranam C. Sreedhar, Sam Midkiff 等大牛在论文《<strong>Escape Analysis for Java</strong>》中描述的算法进行逃逸分析的。</p>
-<p>该算法引入了连通图，用连通图来构建对象和对象引用之间的可达性关系，并在次基础上，提出一种组合数据流分析法。</p>
-<p>由于算法是上下文相关和流敏感的，并且模拟了对象任意层次的嵌套关系，所以分析精度较高，只是运行时间和内存消耗相对较大。 </p>
-<h2 id="对象逃逸状态"><a href="#对象逃逸状态" class="headerlink" title="对象逃逸状态"></a>对象逃逸状态</h2><p>我们了解了 Java 中的逃逸分析技术，再来了解下一个对象的逃逸状态。</p>
-<h4 id="1、全局逃逸（GlobalEscape）"><a href="#1、全局逃逸（GlobalEscape）" class="headerlink" title="1、全局逃逸（GlobalEscape）"></a>1、全局逃逸（GlobalEscape）</h4><p>即一个对象的作用范围逃出了当前方法或者当前线程，有以下几种场景：</p>
-<ul>
-<li>对象是一个静态变量</li>
-<li>对象是一个已经发生逃逸的对象</li>
-<li>对象作为当前方法的返回值</li>
-</ul>
-<h4 id="2、参数逃逸（ArgEscape）"><a href="#2、参数逃逸（ArgEscape）" class="headerlink" title="2、参数逃逸（ArgEscape）"></a>2、参数逃逸（ArgEscape）</h4><p>即一个对象被作为方法参数传递或者被参数引用，但在调用过程中不会发生全局逃逸，这个状态是通过被调方法的字节码确定的。</p>
-<h4 id="3、没有逃逸"><a href="#3、没有逃逸" class="headerlink" title="3、没有逃逸"></a>3、没有逃逸</h4><p>即方法中的对象没有发生逃逸。</p>
-<h2 id="逃逸分析优化"><a href="#逃逸分析优化" class="headerlink" title="逃逸分析优化"></a>逃逸分析优化</h2><p>针对上面第三点，当一个对象没有逃逸时，可以得到以下几个虚拟机的优化。</p>
-<p><strong>1) 锁消除</strong></p>
-<p>我们知道线程同步锁是非常牺牲性能的，当编译器确定当前对象只有当前线程使用，那么就会移除该对象的同步锁。</p>
-<p>例如，StringBuffer 和 Vector 都是用 synchronized 修饰线程安全的，但大部分情况下，它们都只是在当前线程中用到，这样编译器就会优化移除掉这些锁操作。</p>
-<p>锁消除的 JVM 参数如下：</p>
-<ul>
-<li>开启锁消除：-XX:+EliminateLocks</li>
-<li>关闭锁消除：-XX:-EliminateLocks</li>
-</ul>
-<p>锁消除在 JDK8 中都是默认开启的，并且锁消除都要建立在逃逸分析的基础上。</p>
-<p><strong>2) 标量替换</strong></p>
-<p>首先要明白标量和聚合量，基础类型和对象的引用可以理解为标量，它们不能被进一步分解。而能被进一步分解的量就是聚合量，比如：对象。</p>
-<p>对象是聚合量，它又可以被进一步分解成标量，将其成员变量分解为分散的变量，这就叫做标量替换。</p>
-<p>这样，如果一个对象没有发生逃逸，那压根就不用创建它，只会在栈或者寄存器上创建它用到的成员标量，节省了内存空间，也提升了应用程序性能。</p>
-<p>标量替换的 JVM 参数如下：</p>
-<ul>
-<li>开启标量替换：-XX:+EliminateAllocations</li>
-<li>关闭标量替换：-XX:-EliminateAllocations</li>
-<li>显示标量替换详情：-XX:+PrintEliminateAllocations</li>
-</ul>
-<p>标量替换同样在 JDK8 中都是默认开启的，并且都要建立在逃逸分析的基础上。</p>
-<p><strong>3) 栈上分配</strong></p>
-<p>当对象没有发生逃逸时，该对象就可以通过标量替换分解成成员标量分配在栈内存中，和方法的生命周期一致，随着栈帧出栈时销毁，减少了 GC 压力，提高了应用程序性能。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>逃逸分析讲完了，总结了不少时间，我们也应该大概知道逃逸分析是为了优化 JVM 内存和提升程序性能的。</p>
-<p>我们知道这点后，在平时开发过程中就要可尽可能的控制变量的作用范围了，变量范围越小越好，让虚拟机尽可能有优化的空间。</p>
-<p>简单举一个例子吧，如：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">return sb;</span><br></pre></td></tr></table></figure>
-
-<p>可以改为：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">return sb.toString();</span><br></pre></td></tr></table></figure>
-
-<p>这是一种优化案例，把 StringBuilder 变量控制在了当前方法之内，没有逃出当前方法作用域。</p>
-<p>大家还有没有别的优化经验，欢迎分享~</p>
-<p>参考资料：</p>
-<ul>
-<li><p><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/technotes/guides/vm/performance-enhancements-7.html#escapeAnalysis">https://docs.oracle.com/javase/8/docs/technotes/guides/vm/performance-enhancements-7.html#escapeAnalysis</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/rickiyeat/article/details/76802085">https://blog.csdn.net/rickiyeat/article/details/76802085</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/baichoufei90/article/details/85180478">https://blog.csdn.net/baichoufei90/article/details/85180478</a></p>
-</li>
-<li><p>你真的搞懂 transient 关键字了吗？</p>
-</li>
-<li><p>面试常考：Synchronized 有几种用法？</p>
-</li>
-<li><p>Java 11 已发布，String 还能这样玩！</p>
-</li>
-<li><p>Java 中的 String 真的是不可变吗？</p>
-</li>
-<li><p>sleep( ) 和 wait( ) 的这 5 个区别</p>
-</li>
-<li><p>……</p>
-</li>
-</ul>
-
-      
+        <div class="pt-3 pe-1">
+            <!-- 如果有摘要则显示摘要，没有就自己截取 -->
+            
+                <p>HashMap 和 Hashtable 是 Java 开发程序员必须要掌握的，也是在各种 Java 面试场合中必须会问到的。</p>
+            
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/10/15/%E8%BF%9B%E9%98%B6/%E9%9D%A2%E8%AF%95%E9%97%AE%E6%88%91%20Java%20%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90%EF%BC%8C%E7%9E%AC%E9%97%B4%E8%A2%AB%E7%A7%92%E6%9D%80%E4%BA%86%E3%80%82/" data-id="cmgrfxxda003330d4a6vb3oiv" data-title="面试问我 Java 逃逸分析，瞬间被秒杀了。" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
+    <!-- 标题 -->
+    <div class="pb-4 tag-hover", style="border-bottom: 1px solid #eaeaea;">
+        <p class="tag-hover h3">
+            <a href="/2025/10/15/%E9%9B%86%E5%90%88/Hashtable%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E5%8F%AB%20HashTable%EF%BC%9F/" class="link-dark text-decoration-none title">
+                Hashtable 为什么不叫 HashTable？
+            </a>
+        </p>
 
+        <div class="pb-0">
+            <i class="fa fa-calendar p-1"></i>
+            2025/10/15 11:36:33
+            
+                <i class="fa fa-folder-open p-1"> </i>
+                <span class="tag-hover">
+                    
+                        <a href="/categories/%E5%90%8E%E7%AB%AF/ " class="link-dark text-decoration-none title">
+                            后端
+                        </a>
+                    
+                </span>
+            
 
+            
+                <i class="fa fa-tag p-1"> </i>
+                <span class="tag-hover">
+                    
+                        <a href="/tags/%E9%9B%86%E5%90%88/" class="link-dark text-decoration-none title">
+                            集合
+                        </a>
+                    
+                </span>
+            
 
-  
-    <article id="post-集合/HashMap 和 Hashtable 的 6 个区别" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/10/15/%E9%9B%86%E5%90%88/HashMap%20%E5%92%8C%20Hashtable%20%E7%9A%84%206%20%E4%B8%AA%E5%8C%BA%E5%88%AB/" class="article-date">
-  <time class="dt-published" datetime="2025-10-15T03:36:33.000Z" itemprop="datePublished">2025-10-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/10/15/%E9%9B%86%E5%90%88/HashMap%20%E5%92%8C%20Hashtable%20%E7%9A%84%206%20%E4%B8%AA%E5%8C%BA%E5%88%AB/">HashMap 和 Hashtable 的 6 个区别</a>
-    </h1>
-  
+        </div>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>HashMap 和 Hashtable 是 Java 开发程序员必须要掌握的，也是在各种 Java 面试场合中必须会问到的。</p>
-<p>但你对这两者的区别了解有多少呢？</p>
-<p>现在，栈长我给大家总结一下，或许有你不明朗的地方，在栈长的指点下都会拨开迷雾见晴天。</p>
-<h2 id="1、线程安全"><a href="#1、线程安全" class="headerlink" title="1、线程安全"></a>1、线程安全</h2><p>Hashtable 是线程安全的，HashMap 不是线程安全的。</p>
-<p>为什么说 HashTable 是线程安全的？</p>
-<p>来看下 Hashtable 的源码，Hashtable 所有的元素操作都是 synchronized 修饰的，而 HashMap 并没有。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public synchronized V put(K key, V value);</span><br><span class="line">public synchronized V get(Object key);</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<h2 id="2、性能优劣"><a href="#2、性能优劣" class="headerlink" title="2、性能优劣"></a>2、性能优劣</h2><p>既然 Hashtable 是线程安全的，每个方法都要阻塞其他线程，所以 Hashtable 性能较差，HashMap 性能较好，使用更广。</p>
-<p>如果要线程安全又要保证性能，建议使用 JUC 包下的 ConcurrentHashMap。</p>
-<h2 id="3、NULL"><a href="#3、NULL" class="headerlink" title="3、NULL"></a>3、NULL</h2><p>Hashtable 是不允许键或值为 null 的，HashMap 的键值则都可以为 null。</p>
-<p>那么问题来了，为什么 Hashtable 是不允许 KEY 和 VALUE 为 null, 而 HashMap 则可以？</p>
-<p><strong>Hashtable put 方法逻辑：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> public synchronized V put(K key, V value) &#123;</span><br><span class="line">        // Make sure the value is not null</span><br><span class="line">        if (value == null) &#123;</span><br><span class="line">            throw new NullPointerException();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // Makes sure the key is not already in the hashtable.</span><br><span class="line">        Entry&lt;?,?&gt; tab[] = table;</span><br><span class="line">        int hash = key.hashCode();</span><br><span class="line">        </span><br><span class="line">        ...</span><br><span class="line">    </span><br><span class="line">&#125;        </span><br></pre></td></tr></table></figure>
-
-<p><strong>HashMap hash 方法逻辑：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">static final int hash(Object key) &#123;</span><br><span class="line">    int h;</span><br><span class="line">    return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>可以看出 Hashtable key 为 null 会直接抛出空指针异常，value 为 null 手动抛出空指针异常，而 HashMap 的逻辑对 null 作了特殊处理。</p>
-<h2 id="4、实现方式"><a href="#4、实现方式" class="headerlink" title="4、实现方式"></a>4、实现方式</h2><p>Hashtable 的继承源码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public class Hashtable&lt;K,V&gt;</span><br><span class="line">    extends Dictionary&lt;K,V&gt;</span><br><span class="line">    implements Map&lt;K,V&gt;, Cloneable, java.io.Serializable</span><br></pre></td></tr></table></figure>
-
-<p>HashMap 的继承源码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">public class HashMap&lt;K,V&gt; extends AbstractMap&lt;K,V&gt;</span><br><span class="line">    implements Map&lt;K,V&gt;, Cloneable, Serializable</span><br></pre></td></tr></table></figure>
-
-<p>可以看出两者继承的类不一样，Hashtable 继承了 Dictionary类，而 HashMap 继承的是 AbstractMap 类。</p>
-<p>Dictionary 是 JDK 1.0 添加的，貌似没人用过这个，栈长我也没用过。。</p>
-<h2 id="5、容量扩容"><a href="#5、容量扩容" class="headerlink" title="5、容量扩容"></a>5、容量扩容</h2><p>HashMap 的初始容量为：16，Hashtable 初始容量为：11，两者的负载因子默认都是：0.75。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Constructs a new, empty hashtable with a default initial capacity (11)</span><br><span class="line"> * and load factor (0.75).</span><br><span class="line"> */</span><br><span class="line">public Hashtable() &#123;</span><br><span class="line">    this(11, 0.75f);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Constructs an empty &lt;tt&gt;HashMap&lt;/tt&gt; with the default initial capacity</span><br><span class="line"> * (16) and the default load factor (0.75).</span><br><span class="line"> */</span><br><span class="line">public HashMap() &#123;</span><br><span class="line">    this.loadFactor = DEFAULT_LOAD_FACTOR; // all other fields defaulted</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>当现有容量大于总容量 * 负载因子时，HashMap 扩容规则为当前容量翻倍，Hashtable 扩容规则为当前容量翻倍 + 1。</p>
-<h2 id="6、迭代器"><a href="#6、迭代器" class="headerlink" title="6、迭代器"></a>6、迭代器</h2><p>HashMap 中的 Iterator 迭代器是 fail-fast 的，而 Hashtable 的 Enumerator 不是 fail-fast 的。</p>
-<p>所以，当其他线程改变了HashMap 的结构，如：增加、删除元素，将会抛出 ConcurrentModificationException 异常，而 Hashtable 则不会。</p>
-<p><strong>可以来看下这个区别的演示：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* </span><br><span class="line">**/</span><br><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    Map&lt;String, String&gt; hashtable = new Hashtable&lt;&gt;();</span><br><span class="line">    hashtable.put(&quot;t1&quot;, &quot;1&quot;);</span><br><span class="line">    hashtable.put(&quot;t2&quot;, &quot;2&quot;);</span><br><span class="line">    hashtable.put(&quot;t3&quot;, &quot;3&quot;);</span><br><span class="line"></span><br><span class="line">    Enumeration&lt;Map.Entry&lt;String, String&gt;&gt; iterator1 = (Enumeration&lt;Map.Entry&lt;String, String&gt;&gt;) hashtable.entrySet().iterator();</span><br><span class="line">    hashtable.remove(iterator1.nextElement().getKey());</span><br><span class="line">    while (iterator1.hasMoreElements()) &#123;</span><br><span class="line">        System.out.println(iterator1.nextElement());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Map&lt;String, String&gt; hashMap = new HashMap&lt;&gt;();</span><br><span class="line">    hashMap.put(&quot;h1&quot;, &quot;1&quot;);</span><br><span class="line">    hashMap.put(&quot;h2&quot;, &quot;2&quot;);</span><br><span class="line">    hashMap.put(&quot;h3&quot;, &quot;3&quot;);</span><br><span class="line"></span><br><span class="line">    Iterator&lt;Map.Entry&lt;String, String&gt;&gt; iterator2 = hashMap.entrySet().iterator();</span><br><span class="line">    hashMap.remove(iterator2.next().getKey());</span><br><span class="line">    while (iterator2.hasNext()) &#123;</span><br><span class="line">        System.out.println(iterator2.next());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>输出信息：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">t2=2</span><br><span class="line">t1=1</span><br><span class="line">Exception in thread &quot;main&quot; java.util.ConcurrentModificationException</span><br><span class="line">	at java.util.HashMap$HashIterator.nextNode(HashMap.java:1442)</span><br><span class="line">	at java.util.HashMap$EntryIterator.next(HashMap.java:1476)</span><br><span class="line">	at java.util.HashMap$EntryIterator.next(HashMap.java:1474)</span><br><span class="line">	at cn.javastack.Test.main(Test.java:37)</span><br></pre></td></tr></table></figure>
-
-<p>看到了吧？</p>
-<p>所以，这条同样也是 Enumeration 和 Iterator 的区别。 </p>
-<p>最后一点有几个人知道？知道的给栈长点个赞回应一下，不知道的有收获的也点一个赞支持一下吧。</p>
-<p>有收获？转发给更多的人吧！</p>
-
-      
+        <div class="pt-3 pe-1">
+            <!-- 如果有摘要则显示摘要，没有就自己截取 -->
+            
+                <blockquote>
+            
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/10/15/%E9%9B%86%E5%90%88/HashMap%20%E5%92%8C%20Hashtable%20%E7%9A%84%206%20%E4%B8%AA%E5%8C%BA%E5%88%AB/" data-id="cmgrfxxda003530d41061cmuk" data-title="HashMap 和 Hashtable 的 6 个区别" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
+    <!-- 标题 -->
+    <div class="pb-4 tag-hover", style="border-bottom: 1px solid #eaeaea;">
+        <p class="tag-hover h3">
+            <a href="/2025/10/15/%E9%9B%86%E5%90%88/Java%20%E4%B8%AD%E5%88%9D%E5%A7%8B%E5%8C%96%20List%20%E9%9B%86%E5%90%88%E7%9A%84%206%20%E7%A7%8D%E6%96%B9%E5%BC%8F!/" class="link-dark text-decoration-none title">
+                Java 中初始化 List 集合的 6 种方式!
+            </a>
+        </p>
 
+        <div class="pb-0">
+            <i class="fa fa-calendar p-1"></i>
+            2025/10/15 11:36:33
+            
+                <i class="fa fa-folder-open p-1"> </i>
+                <span class="tag-hover">
+                    
+                        <a href="/categories/%E5%90%8E%E7%AB%AF/ " class="link-dark text-decoration-none title">
+                            后端
+                        </a>
+                    
+                </span>
+            
 
+            
+                <i class="fa fa-tag p-1"> </i>
+                <span class="tag-hover">
+                    
+                        <a href="/tags/%E9%9B%86%E5%90%88/" class="link-dark text-decoration-none title">
+                            集合
+                        </a>
+                    
+                </span>
+            
 
-  
-    <article id="post-集合/Hashtable 为什么不叫 HashTable？" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/10/15/%E9%9B%86%E5%90%88/Hashtable%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E5%8F%AB%20HashTable%EF%BC%9F/" class="article-date">
-  <time class="dt-published" datetime="2025-10-15T03:36:33.000Z" itemprop="datePublished">2025-10-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/10/15/%E9%9B%86%E5%90%88/Hashtable%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E5%8F%AB%20HashTable%EF%BC%9F/">Hashtable 为什么不叫 HashTable？</a>
-    </h1>
-  
+        </div>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>什么是驼峰命名规则，来看下面的关键字：</p>
-<ul>
-<li>HashMap</li>
-<li>ArrayList</li>
-<li>ConcurrentHashMap</li>
-</ul>
-<p>简单来说就是，标识符的每个单词首字母必须大写，看起来像是驼峰的形状。</p>
-</blockquote>
-<p>当时就很好奇，Hashtable 为什么不是 HashTable 呢？作为一名初级的 Java 程序员都应该知道的基本的驼峰命名规则，为什么 JDK 代码里面还有这种不规范的命名呢？</p>
-<p>我想大家应该都比较好奇，我特意去查了下资料，没有查到官方的说法，不过在 stackoverflow 上看到了同样的这个问题。</p>
-<p>原贴如下：</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/12506706/why-is-the-t-in-hash-tablehashtable-in-java-not-capitalized">https://stackoverflow.com/questions/12506706/why-is-the-t-in-hash-tablehashtable-in-java-not-capitalized</a></p>
-</blockquote>
-<p><img src="http://qianniu.javastack.cn/18-12-6/56236009.jpg"></p>
-<p>最佳答案是：</p>
-<blockquote>
-<p>Hashtable was created in Java v1. The consistent naming conventions for collections were established later, in Java2, when the other classes were published as part of the brand new Java Collection Framework.</p>
-<p>Which btw made Hashtable obsolete, so it should not be used in new code.</p>
-<p>Hope that helps.</p>
-</blockquote>
-<p>意思就是：</p>
-<blockquote>
-<p>Hashtable 是在 Java 1.0 的时候创建的，而集合的统一规范命名是在后来的 Java 2 开始约定的，当时其他一部分集合类的发布构成了新的集合框架。</p>
-<p>顺便说一下，这样就使得 Hashtable 过时了，所以不应该在新代码中继续使用它。</p>
-</blockquote>
-<p>栈长看了下，Hashtable 确实是 JDK1.0 添加的，最早的一个集合类，这样也说得过去。那为什么不在后面的 JDK 版本中修复它呢？可能是为了考虑兼容使用 JDK 老版本的系统吧。所以就将错就错封存在了 JDK，直到现在 JDK 11 了也还没有修复或者考虑删除它。</p>
-<p>另外，关于《<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/EGqKMndXiJDIMeRQwxBd_w">HashMap 和 Hashtable 的 6 个区别</a>》，有人留言说可以使用 currenthashtable。</p>
-<p><img src="http://qianniu.javastack.cn/18-12-6/79250944.jpg"></p>
-<p>栈长又去证实了下，没有 currenthashtable 和 concurrenthashtable 这个类，所有 concurrent* 开头的并发类和接口都在这里了。</p>
-<p><img src="http://qianniu.javastack.cn/18-12-6/49796932.jpg"></p>
-<p>好了，关于 Hashtable 的迷惑就此全都解开了。</p>
-<p>有收获？转发给更多的人吧！</p>
-
-      
+        <div class="pt-3 pe-1">
+            <!-- 如果有摘要则显示摘要，没有就自己截取 -->
+            
+                <p>List 是 Java 开发中经常会使用的集合，你们知道有哪些方式可以初始化一个 List 吗？这其中不缺乏一些坑，今天栈长我给大家一一普及一下。</p>
+            
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/10/15/%E9%9B%86%E5%90%88/Hashtable%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E5%8F%AB%20HashTable%EF%BC%9F/" data-id="cmgrfxxda003730d45ou4ehph" data-title="Hashtable 为什么不叫 HashTable？" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
 
 
 
-  
-    <article id="post-集合/Java 中初始化 List 集合的 6 种方式!" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/10/15/%E9%9B%86%E5%90%88/Java%20%E4%B8%AD%E5%88%9D%E5%A7%8B%E5%8C%96%20List%20%E9%9B%86%E5%90%88%E7%9A%84%206%20%E7%A7%8D%E6%96%B9%E5%BC%8F!/" class="article-date">
-  <time class="dt-published" datetime="2025-10-15T03:36:33.000Z" itemprop="datePublished">2025-10-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/10/15/%E9%9B%86%E5%90%88/Java%20%E4%B8%AD%E5%88%9D%E5%A7%8B%E5%8C%96%20List%20%E9%9B%86%E5%90%88%E7%9A%84%206%20%E7%A7%8D%E6%96%B9%E5%BC%8F!/">Java 中初始化 List 集合的 6 种方式!</a>
-    </h1>
-  
+            <!--  页码 -->
+<nav class="pt-1 mt-1">
+    <ul class="pagination justify-content-center new-pagination">
+        <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-double-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-double-right"></i></a>
+    </ul>
+</nav>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>List 是 Java 开发中经常会使用的集合，你们知道有哪些方式可以初始化一个 List 吗？这其中不缺乏一些坑，今天栈长我给大家一一普及一下。</p>
-<h2 id="1、常规方式"><a href="#1、常规方式" class="headerlink" title="1、常规方式"></a>1、常规方式</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; languages = new ArrayList&lt;&gt;();</span><br><span class="line">languages.add(&quot;Java&quot;);</span><br><span class="line">languages.add(&quot;PHP&quot;);</span><br><span class="line">languages.add(&quot;Python&quot;);</span><br><span class="line">System.out.println(languages);</span><br></pre></td></tr></table></figure>
 
-<p>这种就是我们平常用的最多最平常的方式了，没什么好说的，后面缺失的泛型类型在 JDK 7 之后就可以不用写具体的类型了，改进后会自动推断类型。</p>
-<h2 id="2、Arrays-工具类"><a href="#2、Arrays-工具类" class="headerlink" title="2、Arrays 工具类"></a>2、Arrays 工具类</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; jdks = asList(&quot;JDK6&quot;, &quot;JDK8&quot;, &quot;JDK10&quot;);</span><br><span class="line">System.out.println(jdks);</span><br></pre></td></tr></table></figure>
 
-<p>注意，上面的 asList 是 Arrays 的静态方法，这里使用了静态导入。这种方式添加的是不可变的 List, 即不能添加、删除等操作，需要警惕。。</p>
-<blockquote>
-<p>import static java.util.Arrays.asList;</p>
-</blockquote>
-<p>如果要可变，那就使用 ArrayList 再包装一下，如下面所示。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; numbers = new ArrayList&lt;&gt;(Arrays.asList(&quot;1&quot;, &quot;2&quot;, &quot;3&quot;));</span><br><span class="line">numbers.add(&quot;4&quot;);</span><br><span class="line">System.out.println(numbers);</span><br></pre></td></tr></table></figure>
-
-<p>包装一下，这就是可变的 ArrayList 了。</p>
-<h2 id="3、Collections-工具类"><a href="#3、Collections-工具类" class="headerlink" title="3、Collections 工具类"></a>3、Collections 工具类</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; apples = Collections.nCopies(3, &quot;apple&quot;);</span><br><span class="line">System.out.println(apples);</span><br></pre></td></tr></table></figure>
-
-<p>这种方式添加的是不可变的、复制某个元素N遍的工具类，以上程序输出：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[apple, apple, apple]</span><br></pre></td></tr></table></figure>
-
-<p>老规则，如果要可变，使用 ArrayList 包装一遍。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; dogs = new ArrayList&lt;&gt;(Collections.nCopies(3, &quot;dog&quot;));</span><br><span class="line">dogs.add(&quot;dog&quot;);</span><br><span class="line">System.out.println(dogs);</span><br></pre></td></tr></table></figure>
-
-<p>还有初始化单个对象的 List 工具类，这种方式也是不可变的，集合内只能有一个元素，这种也用得很少啊。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; cat = Collections.singletonList(&quot;cat&quot;);</span><br><span class="line">System.out.println(cat);</span><br></pre></td></tr></table></figure>
-
-<p>还有一个创建空 List 的工具类，没有默认容量，节省空间，但不知道实际工作中有什么鸟用。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; cat = Collections.emptyList(&quot;cat&quot;);</span><br></pre></td></tr></table></figure>
-
-<h2 id="4、匿名内部类"><a href="#4、匿名内部类" class="headerlink" title="4、匿名内部类"></a>4、匿名内部类</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; names = new ArrayList&lt;&gt;() &#123;&#123;</span><br><span class="line">    add(&quot;Tom&quot;);</span><br><span class="line">    add(&quot;Sally&quot;);</span><br><span class="line">    add(&quot;John&quot;);</span><br><span class="line">&#125;&#125;;</span><br><span class="line">System.out.println(names);</span><br></pre></td></tr></table></figure>
-
-<p>这种使用了匿名内部类的方式，一气喝成，是不是很高大上？栈长我曾经也使用过这种方式，不过我觉得这种看似高级，实现也没什么卵用。</p>
-<h2 id="5、JDK8-Stream"><a href="#5、JDK8-Stream" class="headerlink" title="5、JDK8 Stream"></a>5、JDK8 Stream</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; colors = Stream.of(&quot;blue&quot;, &quot;red&quot;, &quot;yellow&quot;).collect(toList());</span><br><span class="line">System.out.println(colors);</span><br></pre></td></tr></table></figure>
-
-<p>Stream 是 JDK 8 推出来的新概念，比集合还要更强大，还可以和集合互相转换。</p>
-<p>上面同样使用了静态导入：</p>
-<blockquote>
-<p>import static java.util.stream.Collectors.toList;</p>
-</blockquote>
-<h2 id="6、JDK-9-List-of"><a href="#6、JDK-9-List-of" class="headerlink" title="6、JDK 9 List.of"></a>6、JDK 9 List.of</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; cups = List.of(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;);</span><br><span class="line">System.out.println(cups);</span><br></pre></td></tr></table></figure>
-
-<p>这是 JDK 9 里面新增的 List 接口里面的静态方法，同样也是不可变的。</p>
-<p>在接口中实现静态方法和默认方法是 JDK 8 中添加的新特性，具体看这篇文章《<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/_V6oyDle4PrpzL65x_8K5w">JDK 8 新特性之接口默认方法与静态方法
-</a>》。</p>
-<p>好了，今天栈长就给大家介绍到这里了，这 6 种，你知道几种？另外，Map, Set 也有类似的初始化的方法，大家有兴趣的可以试一下。</p>
-<p>你还知道哪些绝招呢？欢迎留言分享一下。。。</p>
-
-      
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/10/15/%E9%9B%86%E5%90%88/Java%20%E4%B8%AD%E5%88%9D%E5%A7%8B%E5%8C%96%20List%20%E9%9B%86%E5%90%88%E7%9A%84%206%20%E7%A7%8D%E6%96%B9%E5%BC%8F!/" data-id="cmgrfxxdb003a30d4eozjcsik" data-title="Java 中初始化 List 集合的 6 种方式!" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li></ul>
+    <!-- 侧边栏 -->
+    <div class="col-md-4 d-none d-md-block ps-0 " id='blog-siderbar'>
+        <div class="markdown-section ps-3 pb-3 pt-3 border-start">
+            <!-- 侧边栏 分类 -->
 
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
-
-  <nav id="page-nav">
-    
-    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
-  </nav>
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li></ul>
+    <div class="card mb-3">
+        <div class="card-header card-header-dark">
+            <i class="fa fa-folder-open pe-2"></i> 分类
+        </div>
+        <nav class="nav flex-column">
+            
+            
+                
+                    <a class="nav-link ps-3 border-bottom" aria-current="page" href="/categories/%E5%90%8E%E7%AB%AF/">
+                        后端
+                        <span class="badge bg-secondary float-end me-2">81</span>
+                    </a>
+                
+            
+                
+                    <a class="nav-link ps-3 border-bottom" aria-current="page" href="/categories/%E6%95%99%E7%A8%8B/">
+                        教程
+                        <span class="badge bg-secondary float-end me-2">1</span>
+                    </a>
+                
+            
+        </nav>
     </div>
-  </div>
 
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 18px;">基础</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 16px;">多线程</a> <a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" style="font-size: 20px;">新特性</a> <a href="/tags/%E8%BF%9B%E9%98%B6/" style="font-size: 14px;">进阶</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 12px;">集合</a>
+            <!-- 侧边栏 标签 -->
+
+    <div class="card mb-3">
+        <div class="card-header card-header-dark">
+            <i class="fa fa-tag pe-2"></i> 标签
+        </div>
+        <div class="p-2">
+            
+            
+                <!-- 
+                    <a class="nav-link ps-3 border-bottom" aria-current="page" href="/tags/%E9%9B%86%E5%90%88/">
+                        集合
+                        <span class="badge bg-secondary float-end me-2">4</span>
+                    </a>
+                 -->
+                <a class="" href="/tags/%E9%9B%86%E5%90%88/">集合</a>
+            
+                <!-- 
+                    <a class="nav-link ps-3 border-bottom" aria-current="page" href="/tags/%E8%BF%9B%E9%98%B6/">
+                        进阶
+                        <span class="badge bg-secondary float-end me-2">16</span>
+                    </a>
+                 -->
+                <a class="" href="/tags/%E8%BF%9B%E9%98%B6/">进阶</a>
+            
+                <!-- 
+                    <a class="nav-link ps-3 border-bottom" aria-current="page" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/">
+                        新特性
+                        <span class="badge bg-secondary float-end me-2">25</span>
+                    </a>
+                 -->
+                <a class="" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/">新特性</a>
+            
+                <!-- 
+                    <a class="nav-link ps-3 border-bottom" aria-current="page" href="/tags/%E6%96%87%E7%AB%A0/">
+                        文章
+                        <span class="badge bg-secondary float-end me-2">1</span>
+                    </a>
+                 -->
+                <a class="" href="/tags/%E6%96%87%E7%AB%A0/">文章</a>
+            
+                <!-- 
+                    <a class="nav-link ps-3 border-bottom" aria-current="page" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
+                        多线程
+                        <span class="badge bg-secondary float-end me-2">17</span>
+                    </a>
+                 -->
+                <a class="" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">多线程</a>
+            
+                <!-- 
+                    <a class="nav-link ps-3 border-bottom" aria-current="page" href="/tags/%E5%9F%BA%E7%A1%80/">
+                        基础
+                        <span class="badge bg-secondary float-end me-2">17</span>
+                    </a>
+                 -->
+                <a class="" href="/tags/%E5%9F%BA%E7%A1%80/">基础</a>
+            
+                <!-- 
+                    <a class="nav-link ps-3 border-bottom" aria-current="page" href="/tags/JVM/">
+                        JVM
+                        <span class="badge bg-secondary float-end me-2">1</span>
+                    </a>
+                 -->
+                <a class="" href="/tags/JVM/">JVM</a>
+            
+        </div>
     </div>
-  </div>
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li></ul>
+            <div class="card mb-3">
+    <div class="card-header card-header-dark">
+        <i class="fa fa-clock-o pe-2"></i> 最近文章
     </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java%205%20~%2010%20%E6%96%B0%E7%89%B9%E6%80%A7%E5%80%BE%E6%83%85%E6%95%B4%E7%90%86%EF%BC%81/">Java 5 ~ 10 新特性倾情整理！</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%206%20%E9%A2%97%E8%AF%AD%E6%B3%95%E7%B3%96/">Java 中的 6 颗语法糖</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%20String%20%E7%9C%9F%E7%9A%84%E6%98%AF%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%90%97%EF%BC%9F/">Java 中的 String 真的是不可变吗？</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E4%BC%AA%E5%85%B1%E4%BA%AB%E8%AF%A6%E8%A7%A3%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">Java 中的伪共享详解及解决方案</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E5%AE%8F%E5%8F%98%E9%87%8F%EF%BC%8C%E5%AE%8F%E6%9B%BF%E6%8D%A2%E8%AF%A6%E8%A7%A3%E3%80%82/">Java 中的宏变量，宏替换详解。</a>
-          </li>
-        
-      </ul>
+    <div class="p-2 tag-hover">
+        <ul class="list-group border-0">
+            
+            
+                <a class="list-group-item border-0 pt-0 pb-0 ps-1 fs-6" href="/2024/12/15/hello-world/ ">
+                    <small> Hello World </small>
+                </a>
+            
+            
+                <a class="list-group-item border-0 pt-0 pb-0 ps-1 fs-6" href="/2025/09/14/JVM/JVM%E8%BF%90%E8%A1%8C%E6%97%B6%E5%8C%BA%E5%9F%9F%E8%AF%A6%E8%A7%A3/ ">
+                    <small> JVM运行时区域详解 </small>
+                </a>
+            
+            
+                <a class="list-group-item border-0 pt-0 pb-0 ps-1 fs-6" href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java%205%20~%2010%20%E6%96%B0%E7%89%B9%E6%80%A7%E5%80%BE%E6%83%85%E6%95%B4%E7%90%86%EF%BC%81/ ">
+                    <small> Java 5 ~ 10 新特性倾情整理！ </small>
+                </a>
+            
+            
+                <a class="list-group-item border-0 pt-0 pb-0 ps-1 fs-6" href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%20String%20%E7%9C%9F%E7%9A%84%E6%98%AF%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%90%97%EF%BC%9F/ ">
+                    <small> Java 中的 String 真的是不可变吗？ </small>
+                </a>
+            
+            
+                <a class="list-group-item border-0 pt-0 pb-0 ps-1 fs-6" href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%206%20%E9%A2%97%E8%AF%AD%E6%B3%95%E7%B3%96/ ">
+                    <small> Java 中的 6 颗语法糖 </small>
+                </a>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+             
+        </ul>
     </div>
-  </div>
+</div>
 
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2025 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+
+
+            <!-- 友情链接 -->
+<div class="card">
+    <div class="card-header card-header-dark">
+        <i class="fa fa-link pe-2"></i> 友情链接
     </div>
-  </div>
+    <div class="p-2 tag-hover">
+        <ul class="list-group border-0">
+            
+                <a class="list-group-item border-0 pt-0 pb-0 ps-1" href=" ">
+                    <small> 只有那年胜过年年 </small>
+                </a>
+             
+        </ul>
+    </div>
+</div>
+
+
+
+        </div>
+    </div>
+</div>
+
+
+ 
+    </main>
+
+    <!-- 底部栏 -->
+    <footer class="bg-dark pt-3 pb-0 mt-5 fixed-bottom" id="flex_bottom">
+    <div class="container pb-3 pt-3 text-center">
+        <p class="text-muted tag-hover">
+            All Rights Reserved <i class="fa fa-copyright"></i> by2025  <br>
+<!--             Powered by  -->
+<!--              <a class="link-secondary text-decoration-none" target="_blank" rel="noopener" href="https://hexo.io"> -->
+<!--                  Hexo.io -->
+<!--             </a> &  <a class="link-secondary text-decoration-none" target="_blank" rel="noopener" href="https://github.com/smile-yan/hexo-theme-heyan"> -->
+<!--                heyan -->
+<!--             </a> -->
+            <br>
+<!--             <a class="link-secondary text-decoration-none" target="_blank" rel="noopener" href="https://beian.miit.gov.cn/#/Integrated/index"> -->
+<!--                 <img src="/police.png" style="width: 18px; height: 18px; margin-top: -4px" class="nofancybox"> -->
+<!--                   -->
+<!--             </a> -->
+        </p>
+    </div>
 </footer>
 
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.6.4.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
 </body>
+
+<script>
+    // 检查页面内容高度是否小于窗口高度
+    function checkContentHeight() {
+        const contentHeight = document.body.scrollHeight;
+        const windowHeight = window.innerHeight;
+
+        if (contentHeight < windowHeight) {
+            // 内容高度不足以填充整个窗口，固定底部导航栏
+            document.getElementById('flex_bottom').classList.add('fixed-bottom');
+        } else {
+            // 内容高度足够多，不固定底部导航栏
+            document.getElementById('flex_bottom').classList.remove('fixed-bottom');
+        }
+    }
+
+    // 页面加载时和窗口大小变化时检查内容高度
+    window.addEventListener('load', checkContentHeight);
+    window.addEventListener('resize', checkContentHeight);
+</script>
 </html>

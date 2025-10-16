@@ -1,6 +1,7 @@
 ---
 title: Synchronized 有几种用法？
 date: 2025-10-14 14:42:34
+category: 后端
 tags: 多线程
 ---
 

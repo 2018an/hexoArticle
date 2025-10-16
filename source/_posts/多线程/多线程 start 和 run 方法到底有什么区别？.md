@@ -1,6 +1,7 @@
 ---
 title: 多线程 start 和 run 方法到底有什么区别？
 date: 2025-10-14 14:42:34
+category: 后端
 tags: 多线程
 ---
 

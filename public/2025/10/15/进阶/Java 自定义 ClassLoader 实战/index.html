@@ -1,257 +1,324 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  
-  
-  <title>Java 自定义 ClassLoader 实战 | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="假如我们的类不在classpath下，而我们又想读取一个自定义的目录下的class，如果做呢？ 读取自定义目录的类示例读取c:&#x2F;test&#x2F;com&#x2F;test.jdk&#x2F;Key.class这个类。 12345package com.test.jdk;public class Key &#123;    private String key &#x3D; &quot;1111">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Java 自定义 ClassLoader 实战">
-<meta property="og:url" content="http://example.com/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E8%87%AA%E5%AE%9A%E4%B9%89%20ClassLoader%20%E5%AE%9E%E6%88%98/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="假如我们的类不在classpath下，而我们又想读取一个自定义的目录下的class，如果做呢？ 读取自定义目录的类示例读取c:&#x2F;test&#x2F;com&#x2F;test.jdk&#x2F;Key.class这个类。 12345package com.test.jdk;public class Key &#123;    private String key &#x3D; &quot;1111">
-<meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-10-15T03:36:33.000Z">
-<meta property="article:modified_time" content="2025-10-15T03:34:22.025Z">
-<meta property="article:author" content="John Doe">
-<meta property="article:tag" content="进阶">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
-
-  
+    <title>只有那年胜过年年</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/favicon/site.webmanifest">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css">
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
     
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+<link rel="stylesheet" href="/css/prism.css">
+ 
+    
+<link rel="stylesheet" href="/css/markdown.css">
+ 
+    
+<script src="/js/prism.js"></script>
 
-  
-  
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+    
+<link rel="stylesheet" href="/css/index.css">
+ 
+    
+<script src="/js/search.js"></script>
 
+
+     
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+        </script>
+     
+
+     
+        <script src="//lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js"> </script>
+        
+<script src="/js/fancybox.js"></script>
+
+    
+
+    <script type="text/javascript">
+
+        var search_path = "/search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+        var path = search_path;
+        searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
 <meta name="generator" content="Hexo 7.3.0"></head>
-
+ 
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
+    <!-- 导航栏 -->
+    <!-- 导航栏 -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4 pt-2 pb-2">
+    <div class="container">
+        <!-- 标题 --> 
+        <a class="navbar-brand navbar-expand-sm" href="/">
+            <img class="nofancybox" src="/logo.png" style="width: 75px;"  alt="笑颜网">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-      <div class="outer">
-        <section id="main"><article id="post-进阶/Java 自定义 ClassLoader 实战" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E8%87%AA%E5%AE%9A%E4%B9%89%20ClassLoader%20%E5%AE%9E%E6%88%98/" class="article-date">
-  <time class="dt-published" datetime="2025-10-15T03:36:33.000Z" itemprop="datePublished">2025-10-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      Java 自定义 ClassLoader 实战
-    </h1>
-  
+        <!-- 左边右边导航按钮 --> 
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto">
+                <!-- 左右两侧的导航栏 -->
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>假如我们的类不在classpath下，而我们又想读取一个自定义的目录下的class，如果做呢？</p>
+ 
+ 
+
+    <li class="nav-item">
+        <a class="nav-link" href="/">
+           <big> <i class="fa fa-home ps-1" ></i> 主页</big>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="/archives">
+           <big> <i class="fa fa-archive ps-1" ></i> 归档</big>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="/about">
+           <big> <i class="fa fa-user ps-1" ></i> 关于</big>
+        </a>
+    </li>
+ 
+ 
+            </ul>
+
+            
+            <form class="">
+                <div class="d-flex">
+                    <button class="btn text-muted fa fa-search d-none d-md-block d-lg-block" disabled></button>
+                    <input id="local-search-input" class="form-control me-2 pe-4" type="search"
+                            placeholder="搜索 " aria-label="Search">
+                </div>
+                <div id="local-search-result" style="position:absolute; padding-top: 8px; max-height: 960px; width: 480px;overflow-y: scroll; z-index: 1050;"></div>
+            </form>
+            
+            <ul class="navbar-nav">
+                <!-- 左右两侧的导航栏 -->
+
+ 
+ 
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+    <main class="container">
+        
+<div class="container-fluid markdown-section">
+<div class="row pb-3">
+    <div class="col-md-8 col-sm-12">
+        <!-- 博客详情 -->
+        <div class="">
+            <p class="h2">
+                <span class="post-title">
+                    Java 自定义 ClassLoader 实战
+                </span>   
+            </p>
+
+            <div class="pb-3 pt-1 pe-3">
+                <i class="fa fa-calendar p-1"></i>
+                2025/10/15 11:36:33 
+                
+                    <i class="fa fa-folder-open p-1"> </i> 
+                    <span class="tag-hover">
+                        
+                            <a href="/categories/%E5%90%8E%E7%AB%AF/ " class="link-dark text-decoration-none"> 
+                                后端 
+                            </a>
+                         
+                    </span>
+                
+
+                
+                    <i class="fa fa-tag p-1"> </i>
+                    <span class="tag-hover">
+                        
+                            <a href="/tags/%E8%BF%9B%E9%98%B6/" class="link-dark text-decoration-none"> 
+                                进阶 
+                            </a>
+                        
+                    </span>
+                
+            </div>
+
+            <div class="border-bottom pb-2">
+                <p>假如我们的类不在classpath下，而我们又想读取一个自定义的目录下的class，如果做呢？</p>
 <h2 id="读取自定义目录的类"><a href="#读取自定义目录的类" class="headerlink" title="读取自定义目录的类"></a>读取自定义目录的类</h2><p>示例读取c:&#x2F;test&#x2F;com&#x2F;test.jdk&#x2F;Key.class这个类。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">package com.test.jdk;</span><br><span class="line"></span><br><span class="line">public class Key &#123;</span><br><span class="line">    private String key = &quot;111111&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">package com.test.jdk;
 
-<h2 id="自定义ClassLoader"><a href="#自定义ClassLoader" class="headerlink" title="自定义ClassLoader"></a>自定义ClassLoader</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.commons.io.IOUtils;</span><br><span class="line"></span><br><span class="line">import java.io.FileInputStream;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.io.InputStream;</span><br><span class="line"></span><br><span class="line">public class LocalClassLoader extends ClassLoader &#123;</span><br><span class="line"></span><br><span class="line">    private String path = &quot;c:/test/&quot;;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected Class&lt;?&gt; findClass(String name) throws ClassNotFoundException &#123;</span><br><span class="line">        Class&lt;?&gt; cls = findLoadedClass(name);</span><br><span class="line">        if (cls != null) &#123;</span><br><span class="line">            return cls;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if (!name.endsWith(&quot;.Key&quot;)) &#123;</span><br><span class="line">            return super.loadClass(name);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            InputStream is = new FileInputStream(path + name.replace(&quot;.&quot;, &quot;/&quot;) + &quot;.class&quot;);</span><br><span class="line">            byte[] bytes = IOUtils.toByteArray(is);</span><br><span class="line">            return defineClass(name, bytes, 0, bytes.length);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return super.loadClass(name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+public class Key &#123;
+    private String key &#x3D; &quot;111111&quot;;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="开始读取类"><a href="#开始读取类" class="headerlink" title="开始读取类"></a>开始读取类</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        LocalClassLoader lcl = new LocalClassLoader();</span><br><span class="line">        Class&lt;?&gt; cls = lcl.loadClass(&quot;com.test.jdk.Key&quot;);</span><br><span class="line">        Field field = FieldUtils.getField(cls, &quot;key&quot;, true);</span><br><span class="line">        Object value = field.get(cls.newInstance());</span><br><span class="line">        System.out.println(value);</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="自定义ClassLoader"><a href="#自定义ClassLoader" class="headerlink" title="自定义ClassLoader"></a>自定义ClassLoader</h2><pre class="line-numbers language-none"><code class="language-none">import org.apache.commons.io.IOUtils;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
+public class LocalClassLoader extends ClassLoader &#123;
+
+    private String path &#x3D; &quot;c:&#x2F;test&#x2F;&quot;;
+
+    @Override
+    protected Class&lt;?&gt; findClass(String name) throws ClassNotFoundException &#123;
+        Class&lt;?&gt; cls &#x3D; findLoadedClass(name);
+        if (cls !&#x3D; null) &#123;
+            return cls;
+        &#125;
+
+        if (!name.endsWith(&quot;.Key&quot;)) &#123;
+            return super.loadClass(name);
+        &#125;
+
+        try &#123;
+            InputStream is &#x3D; new FileInputStream(path + name.replace(&quot;.&quot;, &quot;&#x2F;&quot;) + &quot;.class&quot;);
+            byte[] bytes &#x3D; IOUtils.toByteArray(is);
+            return defineClass(name, bytes, 0, bytes.length);
+        &#125; catch (IOException e) &#123;
+            e.printStackTrace();
+        &#125;
+
+        return super.loadClass(name);
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="开始读取类"><a href="#开始读取类" class="headerlink" title="开始读取类"></a>开始读取类</h2><pre class="line-numbers language-none"><code class="language-none">public static void main(String[] args) &#123;
+    try &#123;
+        LocalClassLoader lcl &#x3D; new LocalClassLoader();
+        Class&lt;?&gt; cls &#x3D; lcl.loadClass(&quot;com.test.jdk.Key&quot;);
+        Field field &#x3D; FieldUtils.getField(cls, &quot;key&quot;, true);
+        Object value &#x3D; field.get(cls.newInstance());
+        System.out.println(value);
+    &#125; catch (Exception e) &#123;
+        e.printStackTrace();
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>自定义类加载器正常加载到类，程序最后输出：111111</p>
 <h2 id="URLClassLoader"><a href="#URLClassLoader" class="headerlink" title="URLClassLoader"></a>URLClassLoader</h2><p>上面自定义一个类加载器来读取自定义的目录，其实可以直接使用URLClassLoader就能读取，它已经实现了路径下类的读取逻辑。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        URLClassLoader ucl = new URLClassLoader(new URL[]&#123;new URL(&quot;c:/test/&quot;)&#125;);</span><br><span class="line">        Class&lt;?&gt; cls = ucl.loadClass(&quot;com.test.jdk.Key&quot;);</span><br><span class="line">        Field field = FieldUtils.getField(cls, &quot;key&quot;, true);</span><br><span class="line">        Object value = field.get(cls.newInstance());</span><br><span class="line">        System.out.println(value);</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">public static void main(String[] args) &#123;
+    try &#123;
+        URLClassLoader ucl &#x3D; new URLClassLoader(new URL[]&#123;new URL(&quot;c:&#x2F;test&#x2F;&quot;)&#125;);
+        Class&lt;?&gt; cls &#x3D; ucl.loadClass(&quot;com.test.jdk.Key&quot;);
+        Field field &#x3D; FieldUtils.getField(cls, &quot;key&quot;, true);
+        Object value &#x3D; field.get(cls.newInstance());
+        System.out.println(value);
+    &#125; catch (Exception e) &#123;
+        e.printStackTrace();
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-
-      
+ 
+            </div>
+        </div>
+        
+            <div class="mt-3">
+                <!-- 前一页后一页 -->
+<div class="previous-next-links">
+     
+    <div class="previous-design-link">
+        <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E7%B1%BB%E5%88%9D%E5%A7%8B%E5%8C%96%E9%A1%BA%E5%BA%8F%EF%BC%8C3%E4%B8%AA%E7%A4%BA%E4%BE%8B%E5%B8%A6%E4%BD%A0%E8%BA%BA%E5%9D%91%E3%80%82/">
+            <i style="font-size:16px;" class="fa fa-arrow-left" aria-hidden="true"></i>
+            Java 类初始化顺序，3个示例带你躺坑。
+        </a>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E8%87%AA%E5%AE%9A%E4%B9%89%20ClassLoader%20%E5%AE%9E%E6%88%98/" data-id="cmgrfxxd7002p30d4g45i2bcp" data-title="Java 自定义 ClassLoader 实战" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li></ul>
+     
 
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E5%AF%B9%E8%B1%A1%E5%BC%95%E7%94%A8%E5%9B%9B%E4%B8%AA%E7%BA%A7%E5%88%AB%EF%BC%88%E5%BC%BA%E3%80%81%E8%BD%AF%E3%80%81%E5%BC%B1%E3%80%81%E8%99%9A%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Java 对象引用四个级别（强、软、弱、虚）
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/hashCode%20%E5%92%8C%20identityHashCode%20%E7%9A%84%E5%8C%BA%E5%88%AB%E4%BD%A0%E7%9F%A5%E9%81%93%E5%90%97%EF%BC%9F/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">hashCode 和 identityHashCode 的区别你知道吗？</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li></ul>
+     
+    <div class="next-design-link">
+        <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/hashCode%20%E5%92%8C%20identityHashCode%20%E7%9A%84%E5%8C%BA%E5%88%AB%E4%BD%A0%E7%9F%A5%E9%81%93%E5%90%97%EF%BC%9F/">
+            hashCode 和 identityHashCode 的区别你知道吗？
+            <i style="font-size:16px;" class="fa fa-arrow-right" aria-hidden="true"></i>
+        </a>
     </div>
-  </div>
+ 
+</div> 
+             
+            </div>
+        
 
-
-  
+    </div>
+    <div class="col-4 pe-0">
+        <div class="d-none d-sm-none d-md-block sticky-top border-start">
+             
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 18px;">基础</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 16px;">多线程</a> <a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" style="font-size: 20px;">新特性</a> <a href="/tags/%E8%BF%9B%E9%98%B6/" style="font-size: 14px;">进阶</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 12px;">集合</a>
-    </div>
-  </div>
-
-  
+        <div class="toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BB%E5%8F%96%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9B%AE%E5%BD%95%E7%9A%84%E7%B1%BB"><span class="toc-number">1.</span> <span class="toc-text">读取自定义目录的类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89ClassLoader"><span class="toc-number">2.</span> <span class="toc-text">自定义ClassLoader</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E5%A7%8B%E8%AF%BB%E5%8F%96%E7%B1%BB"><span class="toc-number">3.</span> <span class="toc-text">开始读取类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#URLClassLoader"><span class="toc-number">4.</span> <span class="toc-text">URLClassLoader</span></a></li></ol> 
+        </div>
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li></ul>
-    </div>
-  </div>
+ 
 
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java%205%20~%2010%20%E6%96%B0%E7%89%B9%E6%80%A7%E5%80%BE%E6%83%85%E6%95%B4%E7%90%86%EF%BC%81/">Java 5 ~ 10 新特性倾情整理！</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%206%20%E9%A2%97%E8%AF%AD%E6%B3%95%E7%B3%96/">Java 中的 6 颗语法糖</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%20String%20%E7%9C%9F%E7%9A%84%E6%98%AF%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%90%97%EF%BC%9F/">Java 中的 String 真的是不可变吗？</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E4%BC%AA%E5%85%B1%E4%BA%AB%E8%AF%A6%E8%A7%A3%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">Java 中的伪共享详解及解决方案</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E5%AE%8F%E5%8F%98%E9%87%8F%EF%BC%8C%E5%AE%8F%E6%9B%BF%E6%8D%A2%E8%AF%A6%E8%A7%A3%E3%80%82/">Java 中的宏变量，宏替换详解。</a>
-          </li>
-        
-      </ul>
+        </div>
     </div>
-  </div>
+</div>
+</div>
+ 
+    </main>
 
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2025 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    <!-- 底部栏 -->
+    <footer class="bg-dark pt-3 pb-0 mt-5 fixed-bottom" id="flex_bottom">
+    <div class="container pb-3 pt-3 text-center">
+        <p class="text-muted tag-hover">
+            All Rights Reserved <i class="fa fa-copyright"></i> by2025  <br>
+<!--             Powered by  -->
+<!--              <a class="link-secondary text-decoration-none" target="_blank" rel="noopener" href="https://hexo.io"> -->
+<!--                  Hexo.io -->
+<!--             </a> &  <a class="link-secondary text-decoration-none" target="_blank" rel="noopener" href="https://github.com/smile-yan/hexo-theme-heyan"> -->
+<!--                heyan -->
+<!--             </a> -->
+            <br>
+<!--             <a class="link-secondary text-decoration-none" target="_blank" rel="noopener" href="https://beian.miit.gov.cn/#/Integrated/index"> -->
+<!--                 <img src="/police.png" style="width: 18px; height: 18px; margin-top: -4px" class="nofancybox"> -->
+<!--                   -->
+<!--             </a> -->
+        </p>
     </div>
-  </div>
 </footer>
 
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.6.4.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
 </body>
+
+<script>
+    // 检查页面内容高度是否小于窗口高度
+    function checkContentHeight() {
+        const contentHeight = document.body.scrollHeight;
+        const windowHeight = window.innerHeight;
+
+        if (contentHeight < windowHeight) {
+            // 内容高度不足以填充整个窗口，固定底部导航栏
+            document.getElementById('flex_bottom').classList.add('fixed-bottom');
+        } else {
+            // 内容高度足够多，不固定底部导航栏
+            document.getElementById('flex_bottom').classList.remove('fixed-bottom');
+        }
+    }
+
+    // 页面加载时和窗口大小变化时检查内容高度
+    window.addEventListener('load', checkContentHeight);
+    window.addEventListener('resize', checkContentHeight);
+</script>
 </html>

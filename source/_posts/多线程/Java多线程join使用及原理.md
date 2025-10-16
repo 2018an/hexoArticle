@@ -1,6 +1,7 @@
 ---
 title: Java多线程join使用及原理
 date: 2025-10-14 09:53:44
+category: 后端
 tags: 多线程
 ---
 

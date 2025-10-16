@@ -1,6 +1,7 @@
 ---
 title: Java 中初始化 List 集合的 6 种方式!
 date: 2025-10-15 11:36:33
+category: 后端
 tags: 集合
 ---
 

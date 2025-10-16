@@ -1,7 +1,7 @@
 ---
 title: Java Jar包压缩、解压使用指南
 date: 2025-10-14 14:42:34
-tags: 基础
+category: 后端
 ---
 
 ![](http://img.javastack.cn/18-2-27/79692618.jpg)

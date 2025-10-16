@@ -1,6 +1,7 @@
 ---
 title: Java 12 骚操作， switch居然还能这样玩！
 date: 2025-10-15 11:36:33
+category: 后端
 tags: 新特性
 ---
 

@@ -1,6 +1,7 @@
 ---
 title: 字符串 substring 方法在 JDK 6,7,8 中的差异。
 date: 2025-10-15 11:36:33
+category: 后端
 tags: 进阶
 ---
 

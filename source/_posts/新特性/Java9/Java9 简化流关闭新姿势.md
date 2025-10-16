@@ -1,6 +1,7 @@
 ---
 title: Java9 简化流关闭新姿势
 date: 2025-10-15 11:36:33
+category: 后端
 tags: 新特性
 ---
 ![](http://img.javastack.cn/18-2-27/87594869.jpg)

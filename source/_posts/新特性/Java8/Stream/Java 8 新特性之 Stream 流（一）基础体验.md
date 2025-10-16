@@ -1,6 +1,7 @@
 ---
 title: Java 8 新特性之 Stream 流（一）基础体验
 date: 2025-10-15 11:36:33
+category: 后端
 tags: 新特性
 ---
 #### 什么是流API? 它能做一些什么?

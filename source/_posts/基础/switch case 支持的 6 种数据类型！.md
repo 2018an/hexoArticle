@@ -1,6 +1,7 @@
 ---
 title: switch case 支持的 6 种数据类型！
 date: 2025-10-14 14:42:34
+category: 后端
 tags: 基础
 ---
 

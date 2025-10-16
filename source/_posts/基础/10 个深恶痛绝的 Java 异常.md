@@ -1,6 +1,7 @@
 ---
 title: 10 个深恶痛绝的 Java 异常
 date: 2025-10-14 14:42:34
+category: 后端
 tags: 基础
 ---
 

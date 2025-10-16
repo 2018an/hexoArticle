@@ -1,6 +1,7 @@
 ---
 title: HashMap, ConcurrentHashMap 原理及源码
 date: 2025-10-15 11:36:33
+category: 后端
 tags: 集合
 ---
 

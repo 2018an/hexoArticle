@@ -1,102 +1,173 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  
-  
-  <title>不能用 + 拼接字符串？ 这次我要吊打面试官！ | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="我们做 Java 程序员以来，不管是工作当中，还是面试过程中，都知道：字符串拼接不能用 String，要用 StringBuilder 或者是 StringBuffer，以至于它们都被滥用了。 StringBuilder、StringBuffer 简称：SB，下文统一用 SB 代替。 SB它们都是可变的字符串，它们之间的区别也是 Java 初中级面试战场上出现几率十分高的一道题，上场率没有 90%">
-<meta property="og:type" content="article">
-<meta property="og:title" content="不能用 + 拼接字符串？ 这次我要吊打面试官！">
-<meta property="og:url" content="http://example.com/2025/10/15/%E8%BF%9B%E9%98%B6/%E4%B8%8D%E8%83%BD%E7%94%A8%20+%20%E6%8B%BC%E6%8E%A5%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%9F%20%E8%BF%99%E6%AC%A1%E6%88%91%E8%A6%81%E5%90%8A%E6%89%93%E9%9D%A2%E8%AF%95%E5%AE%98%EF%BC%81/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="我们做 Java 程序员以来，不管是工作当中，还是面试过程中，都知道：字符串拼接不能用 String，要用 StringBuilder 或者是 StringBuffer，以至于它们都被滥用了。 StringBuilder、StringBuffer 简称：SB，下文统一用 SB 代替。 SB它们都是可变的字符串，它们之间的区别也是 Java 初中级面试战场上出现几率十分高的一道题，上场率没有 90%">
-<meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-10-15T03:36:33.000Z">
-<meta property="article:modified_time" content="2025-10-15T03:37:54.768Z">
-<meta property="article:author" content="John Doe">
-<meta property="article:tag" content="进阶">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
-
-  
+    <title>只有那年胜过年年</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/favicon/site.webmanifest">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css">
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
     
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+<link rel="stylesheet" href="/css/prism.css">
+ 
+    
+<link rel="stylesheet" href="/css/markdown.css">
+ 
+    
+<script src="/js/prism.js"></script>
 
-  
-  
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+    
+<link rel="stylesheet" href="/css/index.css">
+ 
+    
+<script src="/js/search.js"></script>
 
+
+     
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+        </script>
+     
+
+     
+        <script src="//lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js"> </script>
+        
+<script src="/js/fancybox.js"></script>
+
+    
+
+    <script type="text/javascript">
+
+        var search_path = "/search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+        var path = search_path;
+        searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
 <meta name="generator" content="Hexo 7.3.0"></head>
-
+ 
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
+    <!-- 导航栏 -->
+    <!-- 导航栏 -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4 pt-2 pb-2">
+    <div class="container">
+        <!-- 标题 --> 
+        <a class="navbar-brand navbar-expand-sm" href="/">
+            <img class="nofancybox" src="/logo.png" style="width: 75px;"  alt="笑颜网">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-      <div class="outer">
-        <section id="main"><article id="post-进阶/不能用 + 拼接字符串？ 这次我要吊打面试官！" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/%E4%B8%8D%E8%83%BD%E7%94%A8%20+%20%E6%8B%BC%E6%8E%A5%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%9F%20%E8%BF%99%E6%AC%A1%E6%88%91%E8%A6%81%E5%90%8A%E6%89%93%E9%9D%A2%E8%AF%95%E5%AE%98%EF%BC%81/" class="article-date">
-  <time class="dt-published" datetime="2025-10-15T03:36:33.000Z" itemprop="datePublished">2025-10-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      不能用 + 拼接字符串？ 这次我要吊打面试官！
-    </h1>
-  
+        <!-- 左边右边导航按钮 --> 
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto">
+                <!-- 左右两侧的导航栏 -->
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>我们做 Java 程序员以来，不管是工作当中，还是面试过程中，都知道：字符串拼接不能用 String，要用 <code>StringBuilder</code> 或者是 <code>StringBuffer</code>，以至于它们都被滥用了。</p>
+ 
+ 
+
+    <li class="nav-item">
+        <a class="nav-link" href="/">
+           <big> <i class="fa fa-home ps-1" ></i> 主页</big>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="/archives">
+           <big> <i class="fa fa-archive ps-1" ></i> 归档</big>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="/about">
+           <big> <i class="fa fa-user ps-1" ></i> 关于</big>
+        </a>
+    </li>
+ 
+ 
+            </ul>
+
+            
+            <form class="">
+                <div class="d-flex">
+                    <button class="btn text-muted fa fa-search d-none d-md-block d-lg-block" disabled></button>
+                    <input id="local-search-input" class="form-control me-2 pe-4" type="search"
+                            placeholder="搜索 " aria-label="Search">
+                </div>
+                <div id="local-search-result" style="position:absolute; padding-top: 8px; max-height: 960px; width: 480px;overflow-y: scroll; z-index: 1050;"></div>
+            </form>
+            
+            <ul class="navbar-nav">
+                <!-- 左右两侧的导航栏 -->
+
+ 
+ 
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+    <main class="container">
+        
+<div class="container-fluid markdown-section">
+<div class="row pb-3">
+    <div class="col-md-8 col-sm-12">
+        <!-- 博客详情 -->
+        <div class="">
+            <p class="h2">
+                <span class="post-title">
+                    不能用 + 拼接字符串？ 这次我要吊打面试官！
+                </span>   
+            </p>
+
+            <div class="pb-3 pt-1 pe-3">
+                <i class="fa fa-calendar p-1"></i>
+                2025/10/15 11:36:33 
+                
+                    <i class="fa fa-folder-open p-1"> </i> 
+                    <span class="tag-hover">
+                        
+                            <a href="/categories/%E5%90%8E%E7%AB%AF/ " class="link-dark text-decoration-none"> 
+                                后端 
+                            </a>
+                         
+                    </span>
+                
+
+                
+                    <i class="fa fa-tag p-1"> </i>
+                    <span class="tag-hover">
+                        
+                            <a href="/tags/%E8%BF%9B%E9%98%B6/" class="link-dark text-decoration-none"> 
+                                进阶 
+                            </a>
+                        
+                    </span>
+                
+            </div>
+
+            <div class="border-bottom pb-2">
+                <p>我们做 Java 程序员以来，不管是工作当中，还是面试过程中，都知道：字符串拼接不能用 String，要用 <code>StringBuilder</code> 或者是 <code>StringBuffer</code>，以至于它们都被滥用了。</p>
 <p>StringBuilder、StringBuffer 简称：SB，下文统一用 <code>SB</code> 代替。</p>
 <p><code>SB</code>它们都是可变的字符串，它们之间的区别也是 Java 初中级面试战场上出现几率十分高的一道题，上场率没有 90% 也有 80% 吧。</p>
 <p>这两个的具体区别请看这篇文章：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Eeb9wa0DfUs9U5snahAJZQ">StringBuffer 和 StringBuilder 的 3 个区别</a>。</p>
@@ -104,29 +175,92 @@
 <p>当然，本文不是讨论字符串可变与不可变的问题，而是讨论：字符串拼接一定要用 <code>SB</code> 吗？为什么不能用 <code>+</code> ？能不能用 <code>+</code> ？什么时候可以用 <code>+</code> ？</p>
 <p>为什么不能用 + 号拼接字符串？我不服，接下来我要吊打面试官！</p>
 <h4 id="什么时候不能用"><a href="#什么时候不能用" class="headerlink" title="什么时候不能用 +"></a>什么时候不能用 <code>+</code></h4><p>通过多个表达式完成一个字符串拼接操作。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">private void test1() &#123;</span><br><span class="line">    String www = &quot;www.&quot;;</span><br><span class="line">    String str = www;</span><br><span class="line">    str += &quot;javastack.&quot;;</span><br><span class="line">    str += &quot;com&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">private void test1() &#123;
+    String www &#x3D; &quot;www.&quot;;
+    String str &#x3D; www;
+    str +&#x3D; &quot;javastack.&quot;;
+    str +&#x3D; &quot;com&quot;;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>字节码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">// access flags 0xA</span><br><span class="line">private static test2()V</span><br><span class="line">L0</span><br><span class="line">LINENUMBER 14 L0</span><br><span class="line">LDC &quot;www.&quot;</span><br><span class="line">ASTORE 0</span><br><span class="line">L1</span><br><span class="line">LINENUMBER 15 L1</span><br><span class="line">ALOAD 0</span><br><span class="line">ASTORE 1</span><br><span class="line">L2</span><br><span class="line">LINENUMBER 16 L2</span><br><span class="line">NEW java/lang/StringBuilder</span><br><span class="line">DUP</span><br><span class="line">INVOKESPECIAL java/lang/StringBuilder.&lt;init&gt; ()V</span><br><span class="line">ALOAD 1</span><br><span class="line">INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;</span><br><span class="line">LDC &quot;javastack.&quot;</span><br><span class="line">INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;</span><br><span class="line">INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;</span><br><span class="line">ASTORE 1</span><br><span class="line">L3</span><br><span class="line">LINENUMBER 17 L3</span><br><span class="line">NEW java/lang/StringBuilder</span><br><span class="line">DUP</span><br><span class="line">INVOKESPECIAL java/lang/StringBuilder.&lt;init&gt; ()V</span><br><span class="line">ALOAD 1</span><br><span class="line">INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;</span><br><span class="line">LDC &quot;com&quot;</span><br><span class="line">INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;</span><br><span class="line">INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;</span><br><span class="line">ASTORE 1</span><br><span class="line">L4</span><br><span class="line">LINENUMBER 18 L4</span><br><span class="line">RETURN</span><br><span class="line">L5</span><br><span class="line">LOCALVARIABLE www Ljava/lang/String; L1 L5 0</span><br><span class="line">LOCALVARIABLE str Ljava/lang/String; L2 L5 1</span><br><span class="line">MAXSTACK = 2</span><br><span class="line">MAXLOCALS = 2</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; access flags 0xA
+private static test2()V
+L0
+LINENUMBER 14 L0
+LDC &quot;www.&quot;
+ASTORE 0
+L1
+LINENUMBER 15 L1
+ALOAD 0
+ASTORE 1
+L2
+LINENUMBER 16 L2
+NEW java&#x2F;lang&#x2F;StringBuilder
+DUP
+INVOKESPECIAL java&#x2F;lang&#x2F;StringBuilder.&lt;init&gt; ()V
+ALOAD 1
+INVOKEVIRTUAL java&#x2F;lang&#x2F;StringBuilder.append (Ljava&#x2F;lang&#x2F;String;)Ljava&#x2F;lang&#x2F;StringBuilder;
+LDC &quot;javastack.&quot;
+INVOKEVIRTUAL java&#x2F;lang&#x2F;StringBuilder.append (Ljava&#x2F;lang&#x2F;String;)Ljava&#x2F;lang&#x2F;StringBuilder;
+INVOKEVIRTUAL java&#x2F;lang&#x2F;StringBuilder.toString ()Ljava&#x2F;lang&#x2F;String;
+ASTORE 1
+L3
+LINENUMBER 17 L3
+NEW java&#x2F;lang&#x2F;StringBuilder
+DUP
+INVOKESPECIAL java&#x2F;lang&#x2F;StringBuilder.&lt;init&gt; ()V
+ALOAD 1
+INVOKEVIRTUAL java&#x2F;lang&#x2F;StringBuilder.append (Ljava&#x2F;lang&#x2F;String;)Ljava&#x2F;lang&#x2F;StringBuilder;
+LDC &quot;com&quot;
+INVOKEVIRTUAL java&#x2F;lang&#x2F;StringBuilder.append (Ljava&#x2F;lang&#x2F;String;)Ljava&#x2F;lang&#x2F;StringBuilder;
+INVOKEVIRTUAL java&#x2F;lang&#x2F;StringBuilder.toString ()Ljava&#x2F;lang&#x2F;String;
+ASTORE 1
+L4
+LINENUMBER 18 L4
+RETURN
+L5
+LOCALVARIABLE www Ljava&#x2F;lang&#x2F;String; L1 L5 0
+LOCALVARIABLE str Ljava&#x2F;lang&#x2F;String; L2 L5 1
+MAXSTACK &#x3D; 2
+MAXLOCALS &#x3D; 2<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>不会查看字节码的，看这里：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/bEEQf7bNik-rBPgK0uhjWg">3种骚操作，教你查看 Java 字节码</a>，看这一篇就会了。</p>
 <p>观察下，<code>NEW java/lang/StringBuilder</code> 出现了两次，是因为我们在代码中拼接了两次，也就是说每一次拼接操作都会创建一次 <code>StringBuilder</code>。</p>
 <p>如果我们是在一个循环中进行字符串拼接，那是不是一次拼接就要创建一个 <code>StringBuilder</code>？</p>
 <p>wtf……这哪能接受！频繁创建对象是有性能开销的，这也是为什么我们常说的字符串不能用 <code>+</code> 拼接，而要用那两个 <code>SB</code>  拼接了。</p>
 <h4 id="什么时候可以用"><a href="#什么时候可以用" class="headerlink" title="什么时候可以用 +"></a>什么时候可以用 <code>+</code></h4><p>直接将三个字面量的字符串拼接成一个字符串。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">private static void test2() &#123;</span><br><span class="line">    String str = &quot;www.&quot; + &quot;javastack.&quot; + &quot;com&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">private static void test2() &#123;
+    String str &#x3D; &quot;www.&quot; + &quot;javastack.&quot; + &quot;com&quot;;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>字节码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// access flags 0x2</span><br><span class="line">private test2()V</span><br><span class="line">L0</span><br><span class="line">LINENUMBER 13 L0</span><br><span class="line">LDC &quot;www.javastack.com&quot;</span><br><span class="line">ASTORE 1</span><br><span class="line">L1</span><br><span class="line">LINENUMBER 14 L1</span><br><span class="line">RETURN</span><br><span class="line">L2</span><br><span class="line">LOCALVARIABLE this Lcom/test/jdk/TestSB; L0 L2 0</span><br><span class="line">LOCALVARIABLE str Ljava/lang/String; L1 L2 1</span><br><span class="line">MAXSTACK = 1</span><br><span class="line">MAXLOCALS = 2</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; access flags 0x2
+private test2()V
+L0
+LINENUMBER 13 L0
+LDC &quot;www.javastack.com&quot;
+ASTORE 1
+L1
+LINENUMBER 14 L1
+RETURN
+L2
+LOCALVARIABLE this Lcom&#x2F;test&#x2F;jdk&#x2F;TestSB; L0 L2 0
+LOCALVARIABLE str Ljava&#x2F;lang&#x2F;String; L1 L2 1
+MAXSTACK &#x3D; 1
+MAXLOCALS &#x3D; 2<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>从字节码看出，没有任何创建 <code>StringBuilder</code> 的指令，直接从常量池进行取出一个完整的字符串：<a target="_blank" rel="noopener" href="http://www.javastack.com.很明显,这是/">www.javastack.com。很明显，这是</a> Java 编译器对代码进行了优化。</p>
 <p>所以，通过这个示例告诉你，在这种情况下是可以用 <code>+</code> 号进行字符串拼接的。</p>
 <p>这个示例可以演变成我们实际工作当中的某个 SQL 语句拼接的案例，如：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String sql = &quot;select name, sex, age, address&quot;</span><br><span class="line">        + &quot;from t_user&quot;</span><br><span class="line">        + &quot;where age &gt; 18&quot;;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">String sql &#x3D; &quot;select name, sex, age, address&quot;
+        + &quot;from t_user&quot;
+        + &quot;where age &gt; 18&quot;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>别说这样不行，这样是行的。</p>
 <p>但你要是换成这样就不行了：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String sql = &quot;select name, sex, age, address&quot;;</span><br><span class="line">sql += &quot;from t_user&quot;;</span><br><span class="line">sql += &quot;where age &gt; 18&quot;;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">String sql &#x3D; &quot;select name, sex, age, address&quot;;
+sql +&#x3D; &quot;from t_user&quot;;
+sql +&#x3D; &quot;where age &gt; 18&quot;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>这样又回到创建多个 <code>StringBuilder</code> 的时候了。</p>
 <p>也就是说，在一个表达式中完成字符串拼接是可以用 <code>+</code> 号完成的，因为编译器已经做了优化。</p>
@@ -137,151 +271,92 @@
 <p>这个观点有没有被误解很久？</p>
 <p>下次面试，把这篇内容亮出来，吊打面试官，没问题的。</p>
 <p>有收获的朋友一定要点个在看，这样我写原创更带劲了，谢了，老铁们。</p>
-
-      
+ 
+            </div>
+        </div>
+        
+            <div class="mt-3">
+                <!-- 前一页后一页 -->
+<div class="previous-next-links">
+     
+    <div class="previous-design-link">
+        <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/hashCode%20%E5%92%8C%20identityHashCode%20%E7%9A%84%E5%8C%BA%E5%88%AB%E4%BD%A0%E7%9F%A5%E9%81%93%E5%90%97%EF%BC%9F/">
+            <i style="font-size:16px;" class="fa fa-arrow-left" aria-hidden="true"></i>
+            hashCode 和 identityHashCode 的区别你知道吗？
+        </a>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/10/15/%E8%BF%9B%E9%98%B6/%E4%B8%8D%E8%83%BD%E7%94%A8%20+%20%E6%8B%BC%E6%8E%A5%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%9F%20%E8%BF%99%E6%AC%A1%E6%88%91%E8%A6%81%E5%90%8A%E6%89%93%E9%9D%A2%E8%AF%95%E5%AE%98%EF%BC%81/" data-id="cmgrfxxd8002t30d4a42p76g0" data-title="不能用 + 拼接字符串？ 这次我要吊打面试官！" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li></ul>
+     
 
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/hashCode%20%E5%92%8C%20identityHashCode%20%E7%9A%84%E5%8C%BA%E5%88%AB%E4%BD%A0%E7%9F%A5%E9%81%93%E5%90%97%EF%BC%9F/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          hashCode 和 identityHashCode 的区别你知道吗？
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/%E5%88%AB%E5%86%8D%E5%86%99%20bug%20%E4%BA%86%EF%BC%8C%E9%81%BF%E5%85%8D%E7%A9%BA%E6%8C%87%E9%92%88%E7%9A%84%205%20%E4%B8%AA%E6%A1%88%E4%BE%8B%EF%BC%81/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">别再写 bug 了，避免空指针的 5 个案例！</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li></ul>
+     
+    <div class="next-design-link">
+        <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/%E5%88%AB%E5%86%8D%E5%86%99%20bug%20%E4%BA%86%EF%BC%8C%E9%81%BF%E5%85%8D%E7%A9%BA%E6%8C%87%E9%92%88%E7%9A%84%205%20%E4%B8%AA%E6%A1%88%E4%BE%8B%EF%BC%81/">
+            别再写 bug 了，避免空指针的 5 个案例！
+            <i style="font-size:16px;" class="fa fa-arrow-right" aria-hidden="true"></i>
+        </a>
     </div>
-  </div>
+ 
+</div> 
+             
+            </div>
+        
 
-
-  
+    </div>
+    <div class="col-4 pe-0">
+        <div class="d-none d-sm-none d-md-block sticky-top border-start">
+             
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 18px;">基础</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 16px;">多线程</a> <a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" style="font-size: 20px;">新特性</a> <a href="/tags/%E8%BF%9B%E9%98%B6/" style="font-size: 14px;">进阶</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 12px;">集合</a>
-    </div>
-  </div>
-
-  
+        <div class="toc">
+             
+        </div>
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li></ul>
-    </div>
-  </div>
+ 
 
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java%205%20~%2010%20%E6%96%B0%E7%89%B9%E6%80%A7%E5%80%BE%E6%83%85%E6%95%B4%E7%90%86%EF%BC%81/">Java 5 ~ 10 新特性倾情整理！</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%206%20%E9%A2%97%E8%AF%AD%E6%B3%95%E7%B3%96/">Java 中的 6 颗语法糖</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%20String%20%E7%9C%9F%E7%9A%84%E6%98%AF%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%90%97%EF%BC%9F/">Java 中的 String 真的是不可变吗？</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E4%BC%AA%E5%85%B1%E4%BA%AB%E8%AF%A6%E8%A7%A3%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">Java 中的伪共享详解及解决方案</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E5%AE%8F%E5%8F%98%E9%87%8F%EF%BC%8C%E5%AE%8F%E6%9B%BF%E6%8D%A2%E8%AF%A6%E8%A7%A3%E3%80%82/">Java 中的宏变量，宏替换详解。</a>
-          </li>
-        
-      </ul>
+        </div>
     </div>
-  </div>
+</div>
+</div>
+ 
+    </main>
 
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2025 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    <!-- 底部栏 -->
+    <footer class="bg-dark pt-3 pb-0 mt-5 fixed-bottom" id="flex_bottom">
+    <div class="container pb-3 pt-3 text-center">
+        <p class="text-muted tag-hover">
+            All Rights Reserved <i class="fa fa-copyright"></i> by2025  <br>
+<!--             Powered by  -->
+<!--              <a class="link-secondary text-decoration-none" target="_blank" rel="noopener" href="https://hexo.io"> -->
+<!--                  Hexo.io -->
+<!--             </a> &  <a class="link-secondary text-decoration-none" target="_blank" rel="noopener" href="https://github.com/smile-yan/hexo-theme-heyan"> -->
+<!--                heyan -->
+<!--             </a> -->
+            <br>
+<!--             <a class="link-secondary text-decoration-none" target="_blank" rel="noopener" href="https://beian.miit.gov.cn/#/Integrated/index"> -->
+<!--                 <img src="/police.png" style="width: 18px; height: 18px; margin-top: -4px" class="nofancybox"> -->
+<!--                   -->
+<!--             </a> -->
+        </p>
     </div>
-  </div>
 </footer>
 
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.6.4.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
 </body>
+
+<script>
+    // 检查页面内容高度是否小于窗口高度
+    function checkContentHeight() {
+        const contentHeight = document.body.scrollHeight;
+        const windowHeight = window.innerHeight;
+
+        if (contentHeight < windowHeight) {
+            // 内容高度不足以填充整个窗口，固定底部导航栏
+            document.getElementById('flex_bottom').classList.add('fixed-bottom');
+        } else {
+            // 内容高度足够多，不固定底部导航栏
+            document.getElementById('flex_bottom').classList.remove('fixed-bottom');
+        }
+    }
+
+    // 页面加载时和窗口大小变化时检查内容高度
+    window.addEventListener('load', checkContentHeight);
+    window.addEventListener('resize', checkContentHeight);
+</script>
 </html>

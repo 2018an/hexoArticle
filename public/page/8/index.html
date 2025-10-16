@@ -1,840 +1,863 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  
-  
-  <title>Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/page/8/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
-
-  
+    <title>只有那年胜过年年</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/favicon/site.webmanifest">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css">
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
     
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+<link rel="stylesheet" href="/css/prism.css">
+ 
+    
+<link rel="stylesheet" href="/css/markdown.css">
+ 
+    
+<script src="/js/prism.js"></script>
 
-  
-  
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+    
+<link rel="stylesheet" href="/css/index.css">
+ 
+    
+<script src="/js/search.js"></script>
 
+
+     
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+        </script>
+     
+
+     
+        <script src="//lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js"> </script>
+        
+<script src="/js/fancybox.js"></script>
+
+    
+
+    <script type="text/javascript">
+
+        var search_path = "/search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+        var path = search_path;
+        searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
 <meta name="generator" content="Hexo 7.3.0"></head>
-
+ 
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
+    <!-- 导航栏 -->
+    <!-- 导航栏 -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4 pt-2 pb-2">
+    <div class="container">
+        <!-- 标题 --> 
+        <a class="navbar-brand navbar-expand-sm" href="/">
+            <img class="nofancybox" src="/logo.png" style="width: 75px;"  alt="笑颜网">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- 左边右边导航按钮 --> 
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto">
+                <!-- 左右两侧的导航栏 -->
+
+ 
+ 
+
+    <li class="nav-item">
+        <a class="nav-link" href="/">
+           <big> <i class="fa fa-home ps-1" ></i> 主页</big>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="/archives">
+           <big> <i class="fa fa-archive ps-1" ></i> 归档</big>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="/about">
+           <big> <i class="fa fa-user ps-1" ></i> 关于</big>
+        </a>
+    </li>
+ 
+ 
+            </ul>
+
+            
+            <form class="">
+                <div class="d-flex">
+                    <button class="btn text-muted fa fa-search d-none d-md-block d-lg-block" disabled></button>
+                    <input id="local-search-input" class="form-control me-2 pe-4" type="search"
+                            placeholder="搜索 " aria-label="Search">
+                </div>
+                <div id="local-search-result" style="position:absolute; padding-top: 8px; max-height: 960px; width: 480px;overflow-y: scroll; z-index: 1050;"></div>
+            </form>
+            
+            <ul class="navbar-nav">
+                <!-- 左右两侧的导航栏 -->
+
+ 
+ 
+            </ul>
+        </div>
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
+</nav>
+
+
+    <main class="container">
+        <!-- 主页 -->
+<div class="row pt-1">
+    <!-- 文章 -->
+    <div id="blog-content" class="col-md-8 col-sm-12" >
+        <div class="markdown-section pt-3">
+            <!-- 主页 -->
+
+
+
+    <!-- 标题 -->
+    <div class="pb-4 tag-hover", style="border-bottom: 1px solid #eaeaea;">
+        <p class="tag-hover h3">
+            <a href="/2025/10/14/%E5%9F%BA%E7%A1%80/%E5%85%B3%E4%BA%8E%20Java%20%E5%BA%8F%E5%88%97%E5%8C%96%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84%205%20%E4%BB%B6%E4%BA%8B/" class="link-dark text-decoration-none title">
+                关于 Java 序列化你不知道的 5 件事
+            </a>
+        </p>
+
+        <div class="pb-0">
+            <i class="fa fa-calendar p-1"></i>
+            2025/10/14 14:42:34
+            
+                <i class="fa fa-folder-open p-1"> </i>
+                <span class="tag-hover">
+                    
+                        <a href="/categories/%E5%90%8E%E7%AB%AF/ " class="link-dark text-decoration-none title">
+                            后端
+                        </a>
+                    
+                </span>
+            
+
+            
+                <i class="fa fa-tag p-1"> </i>
+                <span class="tag-hover">
+                    
+                        <a href="/tags/%E5%9F%BA%E7%A1%80/" class="link-dark text-decoration-none title">
+                            基础
+                        </a>
+                    
+                </span>
+            
+
+        </div>
+
+        <div class="pt-3 pe-1">
+            <!-- 如果有摘要则显示摘要，没有就自己截取 -->
+            
+                <h3 id="关于本系列"><a href="#关于本系列" class="headerlink" title="关于本系列"></a>关于本系列</h3><p>大约一年前，一个负责管理应用程序所有用户设置的开发人员，决定将用户设置存储在一个 Hashtable中，然后将这个 Hashtable ...
+            
+        </div>
     </div>
-  </div>
-</header>
 
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-多线程/多线程 Thread.yield 方法到底有什么用？" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E5%A4%9A%E7%BA%BF%E7%A8%8B%20Thread.yield%20%E6%96%B9%E6%B3%95%E5%88%B0%E5%BA%95%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8%EF%BC%9F/" class="article-date">
-  <time class="dt-published" datetime="2025-10-14T06:42:34.000Z" itemprop="datePublished">2025-10-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E5%A4%9A%E7%BA%BF%E7%A8%8B%20Thread.yield%20%E6%96%B9%E6%B3%95%E5%88%B0%E5%BA%95%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8%EF%BC%9F/">多线程 Thread.yield 方法到底有什么用？</a>
-    </h1>
-  
+    <!-- 标题 -->
+    <div class="pb-4 tag-hover", style="border-bottom: 1px solid #eaeaea;">
+        <p class="tag-hover h3">
+            <a href="/2025/10/14/%E5%9F%BA%E7%A1%80/%E5%85%B3%E4%BA%8EJava%E5%BA%8F%E5%88%97%E5%8C%96%E4%BD%A0%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84%E4%B8%80%E5%88%87/" class="link-dark text-decoration-none title">
+                关于Java序列化你应该知道的一切
+            </a>
+        </p>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>我们知道 start() 方法是启动线程，让线程变成就绪状态等待 CPU 调度后执行。</p>
-<p>那 yield() 方法是干什么用的呢？来看下源码。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * A hint to the scheduler that the current thread is willing to yield</span><br><span class="line"> * its current use of a processor. The scheduler is free to ignore this</span><br><span class="line"> * hint.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt; Yield is a heuristic attempt to improve relative progression</span><br><span class="line"> * between threads that would otherwise over-utilise a CPU. Its use</span><br><span class="line"> * should be combined with detailed profiling and benchmarking to</span><br><span class="line"> * ensure that it actually has the desired effect.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt; It is rarely appropriate to use this method. It may be useful</span><br><span class="line"> * for debugging or testing purposes, where it may help to reproduce</span><br><span class="line"> * bugs due to race conditions. It may also be useful when designing</span><br><span class="line"> * concurrency control constructs such as the ones in the</span><br><span class="line"> * &#123;@link java.util.concurrent.locks&#125; package.</span><br><span class="line"> */</span><br><span class="line">public static native void yield();</span><br></pre></td></tr></table></figure>
+        <div class="pb-0">
+            <i class="fa fa-calendar p-1"></i>
+            2025/10/14 14:42:34
+            
+                <i class="fa fa-folder-open p-1"> </i>
+                <span class="tag-hover">
+                    
+                        <a href="/categories/%E5%90%8E%E7%AB%AF/ " class="link-dark text-decoration-none title">
+                            后端
+                        </a>
+                    
+                </span>
+            
 
-<p>yield 即 “谦让”，也是 Thread 类的方法。它让掉当前线程 CPU 的时间片，使正在运行中的线程重新变成就绪状态，并重新竞争 CPU 的调度权。它可能会获取到，也有可能被其他线程获取到。</p>
-<h2 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h2><p>下面是一个使用示例。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * </span><br><span class="line"> */</span><br><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">	Runnable runnable = () -&gt; &#123;</span><br><span class="line">		for (int i = 0; i &lt;= 100; i++) &#123;</span><br><span class="line">			System.out.println(Thread.currentThread().getName() + &quot;-----&quot; + i);</span><br><span class="line">			if (i % 20 == 0) &#123;</span><br><span class="line">				Thread.yield();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;;</span><br><span class="line">	new Thread(runnable, &quot;栈长&quot;).start();</span><br><span class="line">    new Thread(runnable, &quot;小蜜&quot;).start();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            
+                <i class="fa fa-tag p-1"> </i>
+                <span class="tag-hover">
+                    
+                        <a href="/tags/%E5%9F%BA%E7%A1%80/" class="link-dark text-decoration-none title">
+                            基础
+                        </a>
+                    
+                </span>
+            
 
-<p>这个示例每当执行完 20 个之后就让出 CPU，每次谦让后就会马上获取到调度权继续执行。</p>
-<p><strong>运行以上程序，可以有以下两种结果。</strong></p>
-<p>结果1：栈长让出了 CPU 资源，小蜜成功上位。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">栈长-----29</span><br><span class="line">栈长-----30</span><br><span class="line">小蜜-----26</span><br><span class="line">栈长-----31</span><br></pre></td></tr></table></figure>
+        </div>
 
-<p>结果2：栈长让出了 CPU 资源，栈长继续运行。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">栈长-----28</span><br><span class="line">栈长-----29</span><br><span class="line">栈长-----30</span><br><span class="line">栈长-----31</span><br></pre></td></tr></table></figure>
-
-<p>而如果我们把两个线程加上线程优先级，那输出的结果又不一样。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">thread1.setPriority(Thread.MIN_PRIORITY);</span><br><span class="line">thread2.setPriority(Thread.MAX_PRIORITY);</span><br></pre></td></tr></table></figure>
-
-<p>因为给小蜜加了最高优先权，栈长加了最低优先权，即使栈长先启动，那小蜜还是有很大的概率比栈长先会输出完的，大家可以试一下。</p>
-<h2 id="yield-和-sleep-的异同"><a href="#yield-和-sleep-的异同" class="headerlink" title="yield 和 sleep 的异同"></a>yield 和 sleep 的异同</h2><p>1）yield, sleep 都能暂停当前线程，sleep 可以指定具体休眠的时间，而 yield 则依赖 CPU 的时间片划分。</p>
-<p>2）yield, sleep 两个在暂停过程中，如已经持有锁，则都不会释放锁资源。</p>
-<p>3）yield 不能被中断，而 sleep 则可以接受中断。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>栈长没用过 yield，感觉没什么鸟用。</p>
-<p>如果一定要用它的话，一句话解释就是：yield 方法可以很好的控制多线程，如执行某项复杂的任务时，如果担心占用资源过多，可以在完成某个重要的工作后使用 yield 方法让掉当前 CPU 的调度权，等下次获取到再继续执行，这样不但能完成自己的重要工作，也能给其他线程一些运行的机会，避免一个线程长时间占有 CPU 资源。</p>
-
-      
+        <div class="pt-3 pe-1">
+            <!-- 如果有摘要则显示摘要，没有就自己截取 -->
+            
+                <h2 id="什么是序列化"><a href="#什么是序列化" class="headerlink" title="什么是序列化"></a>什么是序列化</h2><p>我们的对象并不只是存在内存中，还需要传输网络，或者保存起来下次再加载出来用，所以需要Java序列化技术。</p>
+            
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E5%A4%9A%E7%BA%BF%E7%A8%8B%20Thread.yield%20%E6%96%B9%E6%B3%95%E5%88%B0%E5%BA%95%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8%EF%BC%9F/" data-id="cmgrfxxd2001s30d46ijs9jht" data-title="多线程 Thread.yield 方法到底有什么用？" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
+    <!-- 标题 -->
+    <div class="pb-4 tag-hover", style="border-bottom: 1px solid #eaeaea;">
+        <p class="tag-hover h3">
+            <a href="/2025/10/14/%E5%9F%BA%E7%A1%80/%E5%9D%91%E7%88%B9%E7%9A%84%20Java%20%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%EF%BC%8C%E6%8A%8A%E6%88%91%E6%95%B4%E5%BE%97%E5%A4%9F%E6%83%A8%E3%80%82/" class="link-dark text-decoration-none title">
+                坑爹的 Java 可变参数，把我整得够惨。
+            </a>
+        </p>
 
+        <div class="pb-0">
+            <i class="fa fa-calendar p-1"></i>
+            2025/10/14 14:42:34
+            
+                <i class="fa fa-folder-open p-1"> </i>
+                <span class="tag-hover">
+                    
+                        <a href="/categories/%E5%90%8E%E7%AB%AF/ " class="link-dark text-decoration-none title">
+                            后端
+                        </a>
+                    
+                </span>
+            
 
+            
+                <i class="fa fa-tag p-1"> </i>
+                <span class="tag-hover">
+                    
+                        <a href="/tags/%E5%9F%BA%E7%A1%80/" class="link-dark text-decoration-none title">
+                            基础
+                        </a>
+                    
+                </span>
+            
 
-  
-    <article id="post-多线程/多线程 start 和 run 方法到底有什么区别？" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E5%A4%9A%E7%BA%BF%E7%A8%8B%20start%20%E5%92%8C%20run%20%E6%96%B9%E6%B3%95%E5%88%B0%E5%BA%95%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F/" class="article-date">
-  <time class="dt-published" datetime="2025-10-14T06:42:34.000Z" itemprop="datePublished">2025-10-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E5%A4%9A%E7%BA%BF%E7%A8%8B%20start%20%E5%92%8C%20run%20%E6%96%B9%E6%B3%95%E5%88%B0%E5%BA%95%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F/">多线程 start 和 run 方法到底有什么区别？</a>
-    </h1>
-  
+        </div>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p><strong>首先要知道实现多线程最基本的两种方式：</strong></p>
-<p>1、继承 <code>java.lang.Thread</code> 类；</p>
-<p>2、实现 <code>java.lang.Runnable</code>接口；</p>
-<p>其中 Thread 类也是实现了 Runnable 接口，而 Runnable 接口定义了唯一的一个 run() 方法，所以基于 Thread 和 Runnable 创建多线程都需要实现 run() 方法，是多线程真正运行的主方法。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@FunctionalInterface</span><br><span class="line">public interface Runnable &#123;</span><br><span class="line">    public abstract void run();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>而 start() 方法则是 Thread 类的方法，用来异步启动一个线程，然后主线程立刻返回。该启动的线程不会马上运行，会放到等待队列中等待 CPU 调度，只有线程真正被 CPU 调度时才会调用 run() 方法执行。</p>
-<p>所以 start() 方法只是标识线程为就绪状态的一个附加方法，以下 start() 方法的源码，其中 start0() 是一个本地 native 方法。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public synchronized void start() &#123;</span><br><span class="line">    if (threadStatus != 0)</span><br><span class="line">        throw new IllegalThreadStateException();</span><br><span class="line"></span><br><span class="line">    group.add(this);</span><br><span class="line"></span><br><span class="line">    boolean started = false;</span><br><span class="line">    try &#123;</span><br><span class="line">        start0();</span><br><span class="line">        started = true;</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            if (!started) &#123;</span><br><span class="line">                group.threadStartFailed(this);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (Throwable ignore) &#123;</span><br><span class="line">            /* do nothing. If start0 threw a Throwable then</span><br><span class="line">              it will be passed up the call stack */</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>请注意，start() 方法被标识为 synchronized 的，即为了防止被多次启动的一个同步操作。</p>
-<p><strong>那么你会问了，为什么要有两个方法，直接用一个 run() 方法不就行了吗！？</strong> 还真不行，如果直接调用 run() 方法，那就等于调用了一个普通的同步方法，达不到多线程运行的异步执行，来看下面的例子。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * </span><br><span class="line"> */</span><br><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">	Thread thread = new Thread(() -&gt; &#123;</span><br><span class="line">		try &#123;</span><br><span class="line">			Thread.sleep(3000);</span><br><span class="line">		&#125; catch (InterruptedException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(&quot;Java技术&quot;);</span><br><span class="line">	&#125;);</span><br><span class="line"></span><br><span class="line">	long start = System.currentTimeMillis();</span><br><span class="line">	thread.start();</span><br><span class="line">	System.out.println(System.currentTimeMillis() - start);</span><br><span class="line"></span><br><span class="line">	start = System.currentTimeMillis();</span><br><span class="line">	thread.run();</span><br><span class="line">	System.out.println(System.currentTimeMillis() - start);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>程序输出：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0</span><br><span class="line">Java技术</span><br><span class="line">3000</span><br><span class="line">Java技术</span><br></pre></td></tr></table></figure>
-
-<p>从程序输出结果可以看出，启动 start 方法前后只用了 0 毫秒，而启动 run 方法则阻塞了 3000 毫秒等程序执行完再继续执行，这就是同步与异步的一个最重要的区别。</p>
-<p>看完这篇，你应该对 start 和 run 方法有了一个大概的掌握吧，再也不怕面试官问你这两个的区别了吧！</p>
-<p>动手转发给更多的朋友吧！</p>
-
-      
+        <div class="pt-3 pe-1">
+            <!-- 如果有摘要则显示摘要，没有就自己截取 -->
+            
+                <p><strong>什么是可变参数？</strong></p>
+            
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E5%A4%9A%E7%BA%BF%E7%A8%8B%20start%20%E5%92%8C%20run%20%E6%96%B9%E6%B3%95%E5%88%B0%E5%BA%95%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F/" data-id="cmgrfxxd2001u30d4cpnt8awr" data-title="多线程 start 和 run 方法到底有什么区别？" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
+    <!-- 标题 -->
+    <div class="pb-4 tag-hover", style="border-bottom: 1px solid #eaeaea;">
+        <p class="tag-hover h3">
+            <a href="/2025/10/14/%E5%9F%BA%E7%A1%80/%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8B%BC%E6%8E%A5%20+%20%E5%92%8C%20concat%20%E7%9A%84%E5%8C%BA%E5%88%AB/" class="link-dark text-decoration-none title">
+                字符串拼接 + 和 concat 的区别
+            </a>
+        </p>
 
+        <div class="pb-0">
+            <i class="fa fa-calendar p-1"></i>
+            2025/10/14 14:42:34
+            
+                <i class="fa fa-folder-open p-1"> </i>
+                <span class="tag-hover">
+                    
+                        <a href="/categories/%E5%90%8E%E7%AB%AF/ " class="link-dark text-decoration-none title">
+                            后端
+                        </a>
+                    
+                </span>
+            
 
+            
+                <i class="fa fa-tag p-1"> </i>
+                <span class="tag-hover">
+                    
+                        <a href="/tags/%E5%9F%BA%E7%A1%80/" class="link-dark text-decoration-none title">
+                            基础
+                        </a>
+                    
+                </span>
+            
 
-  
-    <article id="post-多线程/多线程通信的三大法器，你真的会用吗？" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%80%9A%E4%BF%A1%E7%9A%84%E4%B8%89%E5%A4%A7%E6%B3%95%E5%99%A8%EF%BC%8C%E4%BD%A0%E7%9C%9F%E7%9A%84%E4%BC%9A%E7%94%A8%E5%90%97%EF%BC%9F/" class="article-date">
-  <time class="dt-published" datetime="2025-10-14T06:42:34.000Z" itemprop="datePublished">2025-10-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%80%9A%E4%BF%A1%E7%9A%84%E4%B8%89%E5%A4%A7%E6%B3%95%E5%99%A8%EF%BC%8C%E4%BD%A0%E7%9C%9F%E7%9A%84%E4%BC%9A%E7%94%A8%E5%90%97%EF%BC%9F/">多线程通信的三大法器，你真的会用吗？</a>
-    </h1>
-  
+        </div>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>wait, notify, notifyAll 是多线程之间通信最重要的 3 个方法，今天，栈长给大家普及一下它们的知识要点及应用实战。</p>
-<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>wait：让持有该对象锁的线程等待；</p>
-<p>notify: 唤醒任何一个持有该对象锁的线程；</p>
-<p>notify: 唤醒所有持有该对象锁的线程；</p>
-<p>它们 3 个的关系是，调用对象的 wait 方法使线程暂停运行，通过 notify&#x2F; notifyAll 方法唤醒调用 wait 暂时的线程。</p>
-<p><strong>然而，它们并不是 Thread 类中的方法，而是 Object 类中的，为什么呢！？</strong> 因为每个对象都有监视锁，线程要操作某个对象当然是要获取某个对象的锁了，而不是线程的锁。</p>
-<p><img src="http://qianniu.javastack.cn/18-6-1/82637503.jpg"></p>
-<p>如图所示，wait 带时间表示最大超时时间，过了时间还不唤醒就会自动唤醒线程重新竞争对象锁。</p>
-<h2 id="几个重要的点"><a href="#几个重要的点" class="headerlink" title="几个重要的点"></a>几个重要的点</h2><p>1、调用对象的 wait, notify, notifyAll 方法需要拥有对象的监视器锁，即它们只能在同步方法（块）中使用；</p>
-<p>2、调用 wait 方法会使用线程暂停并让出 CPU 资源，同时释放持有的对象的锁；</p>
-<p>3、多线程使用 notify 容易发生死锁，一般使用 notifyAll；</p>
-<p>4、关于 wait 和 sleep 的详细区别请翻阅 《<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/gvaksKy2ss90bsybCnajpQ">多线程 sleep 和 wait 的 5 个区别</a>》这篇文章。</p>
-<h2 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * </span><br><span class="line"> */</span><br><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">	Object lock = new Object();</span><br><span class="line">	Thread t1 = new Thread(() -&gt; &#123;</span><br><span class="line">		synchronized (lock) &#123;</span><br><span class="line">			for (int i = 0; i &lt; 20; i++) &#123;</span><br><span class="line">				System.out.print(i);</span><br><span class="line">				if (i == 10) &#123;</span><br><span class="line">					try &#123;</span><br><span class="line">						lock.wait();</span><br><span class="line">					&#125; catch (InterruptedException e) &#123;</span><br><span class="line">						e.printStackTrace();</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;);</span><br><span class="line"></span><br><span class="line">	Thread t2 = new Thread(() -&gt; &#123;</span><br><span class="line">		synchronized (lock) &#123;</span><br><span class="line">			try &#123;</span><br><span class="line">				Thread.sleep(5000);</span><br><span class="line">			&#125; catch (InterruptedException e) &#123;</span><br><span class="line">				e.printStackTrace();</span><br><span class="line">			&#125;</span><br><span class="line">			System.out.print(&quot;Java技术&quot;);</span><br><span class="line">			lock.notifyAll();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;);</span><br><span class="line"></span><br><span class="line">	t1.start();</span><br><span class="line">	t2.start();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上面的例子结合 wait&#x2F; notifyAll 来演示了它们的相互作用。</p>
-<p>线程 t1 首先输出 <code>012345678910</code>，5秒后继续输出 <code>Java技术111213141516171819</code>。</p>
-
-      
+        <div class="pt-3 pe-1">
+            <!-- 如果有摘要则显示摘要，没有就自己截取 -->
+            
+                <p>+和concat都可以用来拼接字符串，但在使用上有什么区别呢，先来看看这个例子。</p>
+            
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%80%9A%E4%BF%A1%E7%9A%84%E4%B8%89%E5%A4%A7%E6%B3%95%E5%99%A8%EF%BC%8C%E4%BD%A0%E7%9C%9F%E7%9A%84%E4%BC%9A%E7%94%A8%E5%90%97%EF%BC%9F/" data-id="cmgrfxxd3001w30d4d9x10lzu" data-title="多线程通信的三大法器，你真的会用吗？" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
+    <!-- 标题 -->
+    <div class="pb-4 tag-hover", style="border-bottom: 1px solid #eaeaea;">
+        <p class="tag-hover h3">
+            <a href="/2025/10/14/%E5%9F%BA%E7%A1%80/%E5%B8%B8%E8%A7%81%E7%9A%84%203%20%E7%A7%8D%20Class%20%E7%BA%A7%E5%88%AB%E7%9A%84%E9%94%99%E8%AF%AF/" class="link-dark text-decoration-none title">
+                常见的 3 种 Class 级别的错误
+            </a>
+        </p>
 
+        <div class="pb-0">
+            <i class="fa fa-calendar p-1"></i>
+            2025/10/14 14:42:34
+            
+                <i class="fa fa-folder-open p-1"> </i>
+                <span class="tag-hover">
+                    
+                        <a href="/categories/%E5%90%8E%E7%AB%AF/ " class="link-dark text-decoration-none title">
+                            后端
+                        </a>
+                    
+                </span>
+            
 
+            
+                <i class="fa fa-tag p-1"> </i>
+                <span class="tag-hover">
+                    
+                        <a href="/tags/%E5%9F%BA%E7%A1%80/" class="link-dark text-decoration-none title">
+                            基础
+                        </a>
+                    
+                </span>
+            
 
-  
-    <article id="post-多线程/并行任务执行神器 Fork &amp; Join 实战" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E5%B9%B6%E8%A1%8C%E4%BB%BB%E5%8A%A1%E6%89%A7%E8%A1%8C%E7%A5%9E%E5%99%A8%20Fork%20&%20Join%20%E5%AE%9E%E6%88%98/" class="article-date">
-  <time class="dt-published" datetime="2025-10-14T06:42:34.000Z" itemprop="datePublished">2025-10-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E5%B9%B6%E8%A1%8C%E4%BB%BB%E5%8A%A1%E6%89%A7%E8%A1%8C%E7%A5%9E%E5%99%A8%20Fork%20&%20Join%20%E5%AE%9E%E6%88%98/">并行任务执行神器 Fork &amp; Join 实战</a>
-    </h1>
-  
+        </div>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h4 id="Fork-Join是什么？"><a href="#Fork-Join是什么？" class="headerlink" title="Fork&#x2F;Join是什么？"></a>Fork&#x2F;Join是什么？</h4><p>Fork&#x2F;Join框架是Java7提供的并行执行任务框架，思想是将大任务分解成小任务，然后小任务又可以继续分解，然后每个小任务分别计算出结果再合并起来，最后将汇总的结果作为大任务结果。其思想和MapReduce的思想非常类似。对于任务的分割，要求各个子任务之间相互独立，能够并行独立地执行任务，互相之间不影响。</p>
-<p><strong>Fork&#x2F;Join的运行流程图如下：</strong></p>
-<p><img src="https://res.infoq.com/articles/fork-join-introduction/zh/resources/21.png" alt="image"></p>
-<p>我们可以通过Fork&#x2F;Join单词字面上的意思去理解这个框架。Fork是叉子分叉的意思，即将大任务分解成并行的小任务，Join是连接结合的意思，即将所有并行的小任务的执行结果汇总起来。</p>
-<p><img src="http://java.boot.by/ocpjp7-upgrade/images/040501.gif" alt="image"></p>
-<h4 id="工作窃取算法"><a href="#工作窃取算法" class="headerlink" title="工作窃取算法"></a>工作窃取算法</h4><p>ForkJoin采用了工作窃取（work-stealing）算法，若一个工作线程的任务队列为空没有任务执行时，便从其他工作线程中获取任务主动执行。为了实现工作窃取，在工作线程中维护了双端队列，窃取任务线程从队尾获取任务，被窃取任务线程从队头获取任务。这种机制充分利用线程进行并行计算，减少了线程竞争。但是当队列中只存在一个任务了时，两个线程去取反而会造成资源浪费。</p>
-<p><strong>工作窃取的运行流程图如下：</strong></p>
-<p><img src="https://res.infoq.com/articles/fork-join-introduction/zh/resources/image3.png" alt="image"></p>
-<h4 id="Fork-Join核心类"><a href="#Fork-Join核心类" class="headerlink" title="Fork&#x2F;Join核心类"></a>Fork&#x2F;Join核心类</h4><p>Fork&#x2F;Join框架主要由子任务、任务调度两部分组成，类层次图如下。</p>
-<p><img src="http://img.blog.csdn.net/20160720172854109" alt="image"></p>
-<ul>
-<li><strong>ForkJoinPool</strong></li>
-</ul>
-<p>ForkJoinPool是ForkJoin框架中的任务调度器，和ThreadPoolExecutor一样实现了自己的线程池，提供了三种调度子任务的方法：</p>
-<ol>
-<li>execute：异步执行指定任务，无返回结果；</li>
-<li>invoke、invokeAll：异步执行指定任务，等待完成才返回结果；</li>
-<li>submit：异步执行指定任务，并立即返回一个Future对象；</li>
-</ol>
-<ul>
-<li><strong>ForkJoinTask</strong></li>
-</ul>
-<p>Fork&#x2F;Join框架中的实际的执行任务类，有以下两种实现，一般继承这两种实现类即可。</p>
-<ol>
-<li>RecursiveAction：用于无结果返回的子任务；</li>
-<li>RecursiveTask：用于有结果返回的子任务；</li>
-</ol>
-<h4 id="Fork-Join框架实战"><a href="#Fork-Join框架实战" class="headerlink" title="Fork&#x2F;Join框架实战"></a>Fork&#x2F;Join框架实战</h4><p>下面实现一个Fork&#x2F;Join小例子，从1+2+…10亿，每个任务只能处理1000个数相加，超过1000个的自动分解成小任务并行处理；并展示了通过不使用Fork&#x2F;Join和使用时的时间损耗对比。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">import java.util.concurrent.ForkJoinPool;</span><br><span class="line">import java.util.concurrent.RecursiveTask;</span><br><span class="line"></span><br><span class="line">public class ForkJoinTask extends RecursiveTask&lt;Long&gt; &#123;</span><br><span class="line"></span><br><span class="line">	private static final long MAX = 1000000000L;</span><br><span class="line">	private static final long THRESHOLD = 1000L;</span><br><span class="line">	private long start;</span><br><span class="line">	private long end;</span><br><span class="line"></span><br><span class="line">	public ForkJoinTask(long start, long end) &#123;</span><br><span class="line">		this.start = start;</span><br><span class="line">		this.end = end;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		test();</span><br><span class="line">		System.out.println(&quot;--------------------&quot;);</span><br><span class="line">		testForkJoin();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	private static void test() &#123;</span><br><span class="line">		System.out.println(&quot;test&quot;);</span><br><span class="line">		long start = System.currentTimeMillis();</span><br><span class="line">		Long sum = 0L;</span><br><span class="line">		for (long i = 0L; i &lt;= MAX; i++) &#123;</span><br><span class="line">			sum += i;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(sum);</span><br><span class="line">		System.out.println(System.currentTimeMillis() - start + &quot;ms&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	private static void testForkJoin() &#123;</span><br><span class="line">		System.out.println(&quot;testForkJoin&quot;);</span><br><span class="line">		long start = System.currentTimeMillis();</span><br><span class="line">		ForkJoinPool forkJoinPool = new ForkJoinPool();</span><br><span class="line">		Long sum = forkJoinPool.invoke(new ForkJoinTask(1, MAX));</span><br><span class="line">		System.out.println(sum);</span><br><span class="line">		System.out.println(System.currentTimeMillis() - start + &quot;ms&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	protected Long compute() &#123;</span><br><span class="line">		long sum = 0;</span><br><span class="line">		if (end - start &lt;= THRESHOLD) &#123;</span><br><span class="line">			for (long i = start; i &lt;= end; i++) &#123;</span><br><span class="line">				sum += i;</span><br><span class="line">			&#125;</span><br><span class="line">			return sum;</span><br><span class="line">		&#125; else &#123;</span><br><span class="line">			long mid = (start + end) / 2;</span><br><span class="line"></span><br><span class="line">			ForkJoinTask task1 = new ForkJoinTask(start, mid);</span><br><span class="line">			task1.fork();</span><br><span class="line"></span><br><span class="line">			ForkJoinTask task2 = new ForkJoinTask(mid + 1, end);</span><br><span class="line">			task2.fork();</span><br><span class="line"></span><br><span class="line">			return task1.join() + task2.join();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这里需要计算结果，所以任务继承的是RecursiveTask类。ForkJoinTask需要实现compute方法，在这个方法里首先需要判断任务是否小于等于阈值1000，如果是就直接执行任务。否则分割成两个子任务，每个子任务在调用fork方法时，又会进入compute方法，看看当前子任务是否需要继续分割成孙任务，如果不需要继续分割，则执行当前子任务并返回结果。使用join方法会阻塞并等待子任务执行完并得到其结果。</p>
-<p>程序输出：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">test</span><br><span class="line">500000000500000000</span><br><span class="line">4992ms</span><br><span class="line">--------------------</span><br><span class="line">testForkJoin</span><br><span class="line">500000000500000000</span><br><span class="line">508ms</span><br></pre></td></tr></table></figure>
-<p>从结果看出，并行的时间损耗明显要少于串行的，这就是并行任务的好处。</p>
-<p>尽管如此，在使用Fork&#x2F;Join时也得注意，不要盲目使用。</p>
-<ol>
-<li>如果任务拆解的很深，系统内的线程数量堆积，导致系统性能性能严重下降；</li>
-<li>如果函数的调用栈很深，会导致栈内存溢出；</li>
-</ol>
-
-      
+        <div class="pt-3 pe-1">
+            <!-- 如果有摘要则显示摘要，没有就自己截取 -->
+            
+                <h2 id="ClassNotFoundException"><a href="#ClassNotFoundException" class="headerlink" title="ClassNotFoundException"></a>ClassNotFoundException</h2><p>...
+            
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E5%B9%B6%E8%A1%8C%E4%BB%BB%E5%8A%A1%E6%89%A7%E8%A1%8C%E7%A5%9E%E5%99%A8%20Fork%20&%20Join%20%E5%AE%9E%E6%88%98/" data-id="cmgrfxxd3001y30d4h7433mkq" data-title="并行任务执行神器 Fork &amp; Join 实战" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
+    <!-- 标题 -->
+    <div class="pb-4 tag-hover", style="border-bottom: 1px solid #eaeaea;">
+        <p class="tag-hover h3">
+            <a href="/2025/10/14/%E5%9F%BA%E7%A1%80/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E4%B8%AD%E7%9A%84%E5%8C%85%E8%A3%85%E7%B1%BB/" class="link-dark text-decoration-none title">
+                深入浅出 Java 中的包装类
+            </a>
+        </p>
 
+        <div class="pb-0">
+            <i class="fa fa-calendar p-1"></i>
+            2025/10/14 14:42:34
+            
+                <i class="fa fa-folder-open p-1"> </i>
+                <span class="tag-hover">
+                    
+                        <a href="/categories/%E5%90%8E%E7%AB%AF/ " class="link-dark text-decoration-none title">
+                            后端
+                        </a>
+                    
+                </span>
+            
 
+            
+                <i class="fa fa-tag p-1"> </i>
+                <span class="tag-hover">
+                    
+                        <a href="/tags/%E5%9F%BA%E7%A1%80/" class="link-dark text-decoration-none title">
+                            基础
+                        </a>
+                    
+                </span>
+            
 
-  
-    <article id="post-多线程/教你如何监控 Java 线程池运行状态" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E6%95%99%E4%BD%A0%E5%A6%82%E4%BD%95%E7%9B%91%E6%8E%A7%20Java%20%E7%BA%BF%E7%A8%8B%E6%B1%A0%E8%BF%90%E8%A1%8C%E7%8A%B6%E6%80%81/" class="article-date">
-  <time class="dt-published" datetime="2025-10-14T06:42:34.000Z" itemprop="datePublished">2025-10-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E6%95%99%E4%BD%A0%E5%A6%82%E4%BD%95%E7%9B%91%E6%8E%A7%20Java%20%E7%BA%BF%E7%A8%8B%E6%B1%A0%E8%BF%90%E8%A1%8C%E7%8A%B6%E6%80%81/">教你如何监控 Java 线程池运行状态</a>
-    </h1>
-  
+        </div>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>如果你想监控某一个线程池的执行状态，线程池执行类 <code>ThreadPoolExecutor </code> 也给出了相关的 API, 能实时获取线程池的当前活动线程数、正在排队中的线程数、已经执行完成的线程数、总线程数等。</p>
-<blockquote>
-<p>总线程数 &#x3D; 排队线程数 + 活动线程数 +  执行完成的线程数。</p>
-</blockquote>
-<p>下面给出一个线程池使用示例，及教你获取线程池状态。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">private static ExecutorService es = new ThreadPoolExecutor(50, 100, 0L, TimeUnit.MILLISECONDS,</span><br><span class="line">			new LinkedBlockingQueue&lt;Runnable&gt;(100000));</span><br><span class="line"></span><br><span class="line">public static void main(String[] args) throws Exception &#123;</span><br><span class="line">	for (int i = 0; i &lt; 100000; i++) &#123;</span><br><span class="line">		es.execute(() -&gt; &#123;</span><br><span class="line">			System.out.print(1);</span><br><span class="line">			try &#123;</span><br><span class="line">				Thread.sleep(1000);</span><br><span class="line">			&#125; catch (InterruptedException e) &#123;</span><br><span class="line">				e.printStackTrace();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	ThreadPoolExecutor tpe = ((ThreadPoolExecutor) es);</span><br><span class="line"></span><br><span class="line">	while (true) &#123;</span><br><span class="line">		System.out.println();</span><br><span class="line"></span><br><span class="line">		int queueSize = tpe.getQueue().size();</span><br><span class="line">		System.out.println(&quot;当前排队线程数：&quot; + queueSize);</span><br><span class="line"></span><br><span class="line">		int activeCount = tpe.getActiveCount();</span><br><span class="line">		System.out.println(&quot;当前活动线程数：&quot; + activeCount);</span><br><span class="line"></span><br><span class="line">		long completedTaskCount = tpe.getCompletedTaskCount();</span><br><span class="line">		System.out.println(&quot;执行完成线程数：&quot; + completedTaskCount);</span><br><span class="line"></span><br><span class="line">		long taskCount = tpe.getTaskCount();</span><br><span class="line">		System.out.println(&quot;总线程数：&quot; + taskCount);</span><br><span class="line"></span><br><span class="line">		Thread.sleep(3000);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>线程池提交了 100000 个任务，但同时只有 50 个线程在执行工作，我们每陋 3 秒来获取当前线程池的运行状态。</p>
-<p>第一次程序输出：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">当前排队线程数：99950</span><br><span class="line">当前活动线程数：50</span><br><span class="line">执行完成线程数：0</span><br><span class="line">总线程数（排队线程数 + 活动线程数 +  执行完成线程数）：100000</span><br></pre></td></tr></table></figure>
-
-<p>第二次程序输出：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">当前排队线程数：99800</span><br><span class="line">当前活动线程数：50</span><br><span class="line">执行完成线程数：150</span><br><span class="line">总线程数（排队线程数 + 活动线程数 +  执行完成线程数）：100000</span><br></pre></td></tr></table></figure>
-
-<p>活动线程数和总线程数是不变的，排队中的线程数和执行完成的线程数不断在变化，直到所有任务执行完毕，最后输出：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">当前排队线程数：0</span><br><span class="line">当前活动线程数：0</span><br><span class="line">执行完成线程数：100000</span><br><span class="line">总线程数（排队线程数 + 活动线程数 +  执行完成线程数）：100000</span><br></pre></td></tr></table></figure>
-
-<p>这样，你了解了这些 API 的使用方法，你想监控线程池的状态就非常方便了。</p>
-
-      
+        <div class="pt-3 pe-1">
+            <!-- 如果有摘要则显示摘要，没有就自己截取 -->
+            
+                <p><img src="http://img.javastack.cn/18-6-5/61544442.jpg"></p>
+            
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E6%95%99%E4%BD%A0%E5%A6%82%E4%BD%95%E7%9B%91%E6%8E%A7%20Java%20%E7%BA%BF%E7%A8%8B%E6%B1%A0%E8%BF%90%E8%A1%8C%E7%8A%B6%E6%80%81/" data-id="cmgrfxxd3002030d4gscd9siv" data-title="教你如何监控 Java 线程池运行状态" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
+    <!-- 标题 -->
+    <div class="pb-4 tag-hover", style="border-bottom: 1px solid #eaeaea;">
+        <p class="tag-hover h3">
+            <a href="/2025/10/14/%E5%9F%BA%E7%A1%80/%E9%80%9A%E7%94%A8%E5%94%AF%E4%B8%80%E6%A0%87%E8%AF%86%E7%A0%81%20UUID%20%E7%9A%84%E4%BB%8B%E7%BB%8D%E5%8F%8A%E4%BD%BF%E7%94%A8%E3%80%82/" class="link-dark text-decoration-none title">
+                通用唯一标识码 UUID 的介绍及使用。
+            </a>
+        </p>
 
+        <div class="pb-0">
+            <i class="fa fa-calendar p-1"></i>
+            2025/10/14 14:42:34
+            
+                <i class="fa fa-folder-open p-1"> </i>
+                <span class="tag-hover">
+                    
+                        <a href="/categories/%E5%90%8E%E7%AB%AF/ " class="link-dark text-decoration-none title">
+                            后端
+                        </a>
+                    
+                </span>
+            
 
+            
+                <i class="fa fa-tag p-1"> </i>
+                <span class="tag-hover">
+                    
+                        <a href="/tags/%E5%9F%BA%E7%A1%80/" class="link-dark text-decoration-none title">
+                            基础
+                        </a>
+                    
+                </span>
+            
 
-  
-    <article id="post-多线程/线程休眠只会用Thread.sleep？那就弱爆了！" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E7%BA%BF%E7%A8%8B%E4%BC%91%E7%9C%A0%E5%8F%AA%E4%BC%9A%E7%94%A8Thread.sleep%EF%BC%9F%E9%82%A3%E5%B0%B1%E5%BC%B1%E7%88%86%E4%BA%86%EF%BC%81/" class="article-date">
-  <time class="dt-published" datetime="2025-10-14T06:42:34.000Z" itemprop="datePublished">2025-10-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E7%BA%BF%E7%A8%8B%E4%BC%91%E7%9C%A0%E5%8F%AA%E4%BC%9A%E7%94%A8Thread.sleep%EF%BC%9F%E9%82%A3%E5%B0%B1%E5%BC%B1%E7%88%86%E4%BA%86%EF%BC%81/">线程休眠只会用Thread.sleep？那就弱爆了！</a>
-    </h1>
-  
+        </div>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>线程休眠是 Java 开发经常会用到的一个手段，就是让当前线程睡一会儿，睡醒之后再继续运行。</p>
-<p>咱大多数程序员，多线程虽然学得不好，但线程休眠，无人不知，无人不晓，也都会用，不就是用 Thread.sleep 方法嘛！而且还将它用到那么绝，之前不是还有人写过休眠排序算法和休眠取时间的算法，再来回味下这么脑洞大开的两个算法：</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Or3q3souk1GGVNB2qvEY2Q">休眠排序算法</a></li>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Or3q3souk1GGVNB2qvEY2Q">休眠取时间算法</a></li>
-</ul>
-<p>笑过之后，当然，这不是咋今天要讲的主题，栈长今天要讲的是如何更优雅的让线程休眠。</p>
-<p><strong>来看下面的休眠程序：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Thread.sleep(87000000);</span><br></pre></td></tr></table></figure>
-
-<p>你知道休眠多久吗？</p>
-<p>醉了……</p>
-<p><strong>再把上面的稍微改装下：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Thread.sleep(24 * 60 * 60 * 1000 + 10 * 60 * 1000);</span><br></pre></td></tr></table></figure>
-
-<p>现在你估计大概能知道休眠多久了，但还是很茫然，很无助，不写注释，谁知道休眠多久？单位还是毫秒。。</p>
-<p>其实就是休眠 24 小时 10 分钟，何必整这么麻烦呢？</p>
-<p><strong>优雅又简单的方式来了：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">TimeUnit.DAYS.sleep(1);</span><br><span class="line">TimeUnit.MINUTES.sleep(10);</span><br><span class="line"></span><br><span class="line">或者 </span><br><span class="line"></span><br><span class="line">TimeUnit.HOURS.sleep(24);</span><br><span class="line">TimeUnit.MINUTES.sleep(10);</span><br></pre></td></tr></table></figure>
-
-<p>使用 <code>java.util.concurrent.TimeUnit</code> 类就可以优雅的搞定，不需要过多的单位运算及修饰，是不是很优雅，很简单？</p>
-<p>上面演示了 HOURS、MINUTES，还有更多的枚举可以用。</p>
-<p><strong>来看下 TimeUnit 的详细方法和枚举值：</strong></p>
-<p><img src="http://img.javastack.cn/TimeUnit.png"></p>
-<p>其实 TimeUnit 还可以用来做时间单位转换，TimeUnit 提供了各种丰富的时间单位转换方法。</p>
-<p>我们随便来看一个枚举值：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">MINUTES &#123;</span><br><span class="line">    public long toNanos(long d)   &#123; return x(d, C4/C0, MAX/(C4/C0)); &#125;</span><br><span class="line">    public long toMicros(long d)  &#123; return x(d, C4/C1, MAX/(C4/C1)); &#125;</span><br><span class="line">    public long toMillis(long d)  &#123; return x(d, C4/C2, MAX/(C4/C2)); &#125;</span><br><span class="line">    public long toSeconds(long d) &#123; return x(d, C4/C3, MAX/(C4/C3)); &#125;</span><br><span class="line">    public long toMinutes(long d) &#123; return d; &#125;</span><br><span class="line">    public long toHours(long d)   &#123; return d/(C5/C4); &#125;</span><br><span class="line">    public long toDays(long d)    &#123; return d/(C6/C4); &#125;</span><br><span class="line">    public long convert(long d, TimeUnit u) &#123; return u.toMinutes(d); &#125;</span><br><span class="line">    int excessNanos(long d, long m) &#123; return 0; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>可以很方便的把分钟转换成各种单位的值。</p>
-<p><strong>再来看一下 TimeUnit 休眠的原理：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public void sleep(long timeout) throws InterruptedException &#123;</span><br><span class="line">    if (timeout &gt; 0) &#123;</span><br><span class="line">        long ms = toMillis(timeout);</span><br><span class="line">        int ns = excessNanos(timeout, ms);</span><br><span class="line">        Thread.sleep(ms, ns);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>其实 TimeUnit 的休眠就是调用了 Thread.sleep 休眠方法，哈哈，只是把 Thread.sleep 封装了，这样，用起来很简单方便，也提高了可读性。</p>
-
-      
+        <div class="pt-3 pe-1">
+            <!-- 如果有摘要则显示摘要，没有就自己截取 -->
+            
+                <h4 id="什么是UUID？"><a href="#什么是UUID？" class="headerlink" title="什么是UUID？"></a>什么是UUID？</h4><p>UUID全称：Universally Unique Identifier，即通用唯一识别码。</p>
+            
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E7%BA%BF%E7%A8%8B%E4%BC%91%E7%9C%A0%E5%8F%AA%E4%BC%9A%E7%94%A8Thread.sleep%EF%BC%9F%E9%82%A3%E5%B0%B1%E5%BC%B1%E7%88%86%E4%BA%86%EF%BC%81/" data-id="cmgrfxxd4002230d44jr67ojz" data-title="线程休眠只会用Thread.sleep？那就弱爆了！" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
+    <!-- 标题 -->
+    <div class="pb-4 tag-hover", style="border-bottom: 1px solid #eaeaea;">
+        <p class="tag-hover h3">
+            <a href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%8F%AF%E4%BB%A5%E5%88%86%E7%BB%84%E8%BF%98%E8%83%BD%E8%BF%99%E6%A0%B7%E7%8E%A9/" class="link-dark text-decoration-none title">
+                Java多线程可以分组还能这样玩
+            </a>
+        </p>
 
+        <div class="pb-0">
+            <i class="fa fa-calendar p-1"></i>
+            2025/10/14 09:56:28
+            
+                <i class="fa fa-folder-open p-1"> </i>
+                <span class="tag-hover">
+                    
+                        <a href="/categories/%E5%90%8E%E7%AB%AF/ " class="link-dark text-decoration-none title">
+                            后端
+                        </a>
+                    
+                </span>
+            
 
+            
+                <i class="fa fa-tag p-1"> </i>
+                <span class="tag-hover">
+                    
+                        <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="link-dark text-decoration-none title">
+                            多线程
+                        </a>
+                    
+                </span>
+            
 
-  
-    <article id="post-多线程/面试官问线程安全的List，看完再也不怕了！" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E9%9D%A2%E8%AF%95%E5%AE%98%E9%97%AE%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84List%EF%BC%8C%E7%9C%8B%E5%AE%8C%E5%86%8D%E4%B9%9F%E4%B8%8D%E6%80%95%E4%BA%86%EF%BC%81/" class="article-date">
-  <time class="dt-published" datetime="2025-10-14T06:42:34.000Z" itemprop="datePublished">2025-10-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E9%9D%A2%E8%AF%95%E5%AE%98%E9%97%AE%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84List%EF%BC%8C%E7%9C%8B%E5%AE%8C%E5%86%8D%E4%B9%9F%E4%B8%8D%E6%80%95%E4%BA%86%EF%BC%81/">面试官问线程安全的List，看完再也不怕了！</a>
-    </h1>
-  
+        </div>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>最近在Java技术知识星球里面有球友问到了线程安全的 List：</p>
-<p><img src="http://img.javastack.cn/20190927184141.png"></p>
-<p>扫码查看答案或加入知识星球</p>
-<p>栈长在之前的文章《<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/oA-uEbzNYA4KYwLtRWXRVw">出场率比较高的一道多线程安全面试题</a>》里面讲过 ArrayList 的不安全性。</p>
-<p>那么面试官会问你，既然 ArrayList 是线程不安全的，怎么保证它的线程安全性呢？或者有什么替代方案？</p>
-<p>往下看，看我如何碾压他！</p>
-<p>大部分人会脱口而出：用Vector，这样只会让面试官鄙视！除了Vector，你还会别的吗？</p>
-<p>你至少还得说得上这种：</p>
-<blockquote>
-<p>java.util.Collections.SynchronizedList</p>
-</blockquote>
-<p>它能把所有 List 接口的实现类转换成线程安全的List，比 Vector 有更好的扩展性和兼容性，SynchronizedList的构造方法如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">final List&lt;E&gt; list;</span><br><span class="line"></span><br><span class="line">SynchronizedList(List&lt;E&gt; list) &#123;</span><br><span class="line">    super(list);</span><br><span class="line">    this.list = list;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>SynchronizedList的部分方法源码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public E get(int index) &#123;</span><br><span class="line">    synchronized (mutex) &#123;return list.get(index);&#125;</span><br><span class="line">&#125;</span><br><span class="line">public E set(int index, E element) &#123;</span><br><span class="line">    synchronized (mutex) &#123;return list.set(index, element);&#125;</span><br><span class="line">&#125;</span><br><span class="line">public void add(int index, E element) &#123;</span><br><span class="line">    synchronized (mutex) &#123;list.add(index, element);&#125;</span><br><span class="line">&#125;</span><br><span class="line">public E remove(int index) &#123;</span><br><span class="line">    synchronized (mutex) &#123;return list.remove(index);&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>很可惜，它所有方法都是带同步对象锁的，和 Vector 一样，它不是性能最优的。即使你能说到这里，面试官还会继续往下追问，比如在读多写少的情况，SynchronizedList这种集合性能非常差，还有没有更合适的方案？</p>
-<p>介绍两个并发包里面的并发集合类：</p>
-<blockquote>
-<p>java.util.concurrent.CopyOnWriteArrayList<br>java.util.concurrent.CopyOnWriteArraySet</p>
-</blockquote>
-<p>CopyOnWrite集合类也就这两个，Java 1.5 开始加入，你要能说得上这两个才能让面试官信服。</p>
-<h4 id="CopyOnWriteArrayList"><a href="#CopyOnWriteArrayList" class="headerlink" title="CopyOnWriteArrayList"></a>CopyOnWriteArrayList</h4><p>CopyOnWrite（简称：COW）：即复制再写入，就是在添加元素的时候，先把原 List 列表复制一份，再添加新的元素。</p>
-<p>先来看下它的 add 方法源码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public boolean add(E e) &#123;</span><br><span class="line">    // 加锁</span><br><span class="line">    final ReentrantLock lock = this.lock;</span><br><span class="line">    lock.lock();</span><br><span class="line">    try &#123;</span><br><span class="line">        // 获取原始集合</span><br><span class="line">        Object[] elements = getArray();</span><br><span class="line">        int len = elements.length;</span><br><span class="line">        </span><br><span class="line">        // 复制一个新集合</span><br><span class="line">        Object[] newElements = Arrays.copyOf(elements, len + 1);</span><br><span class="line">        newElements[len] = e;</span><br><span class="line">        </span><br><span class="line">        // 替换原始集合为新集合</span><br><span class="line">        setArray(newElements);</span><br><span class="line">        return true;</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        // 释放锁</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>添加元素时，先加锁，再进行复制替换操作，最后再释放锁。</p>
-<p>再来看下它的 get 方法源码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">private E get(Object[] a, int index) &#123;</span><br><span class="line">    return (E) a[index];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public E get(int index) &#123;</span><br><span class="line">    return get(getArray(), index);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>可以看到，获取元素并没有加锁。</p>
-<p>这样做的好处是，在高并发情况下，读取元素时就不用加锁，写数据时才加锁，大大提升了读取性能。</p>
-<h4 id="CopyOnWriteArraySet"><a href="#CopyOnWriteArraySet" class="headerlink" title="CopyOnWriteArraySet"></a>CopyOnWriteArraySet</h4><p>CopyOnWriteArraySet逻辑就更简单了，就是使用 CopyOnWriteArrayList 的 addIfAbsent 方法来去重的，添加元素的时候判断对象是否已经存在，不存在才添加进集合。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Appends the element, if not present.</span><br><span class="line"> *</span><br><span class="line"> * @param e element to be added to this list, if absent</span><br><span class="line"> * @return &#123;@code true&#125; if the element was added</span><br><span class="line"> */</span><br><span class="line">public boolean addIfAbsent(E e) &#123;</span><br><span class="line">    Object[] snapshot = getArray();</span><br><span class="line">    return indexOf(e, snapshot, 0, snapshot.length) &gt;= 0 ? false :</span><br><span class="line">        addIfAbsent(e, snapshot);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这两种并发集合，虽然牛逼，但只适合于读多写少的情况，如果写多读少，使用这个就没意义了，因为每次写操作都要进行集合内存复制，性能开销很大，如果集合较大，很容易造成内存溢出。</p>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>下次面试官问你线程安全的 List，你可以从 Vector &gt; SynchronizedList &gt; CopyOnWriteArrayList 这样的顺序依次说上来，这样才有带入感，也能体现你对知识点的掌握程度。</p>
-<p>看完有没有收获呢？下次面试应该能秒杀面试官了吧！</p>
-
-      
+        <div class="pt-3 pe-1">
+            <!-- 如果有摘要则显示摘要，没有就自己截取 -->
+            
+                <p>但如果线程很多的情况下，你知道如何对它们进行分组吗？</p>
+            
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E9%9D%A2%E8%AF%95%E5%AE%98%E9%97%AE%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84List%EF%BC%8C%E7%9C%8B%E5%AE%8C%E5%86%8D%E4%B9%9F%E4%B8%8D%E6%80%95%E4%BA%86%EF%BC%81/" data-id="cmgrfxxd4002430d437uibzyp" data-title="面试官问线程安全的List，看完再也不怕了！" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
+    <!-- 标题 -->
+    <div class="pb-4 tag-hover", style="border-bottom: 1px solid #eaeaea;">
+        <p class="tag-hover h3">
+            <a href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/Java%E5%A4%9A%E7%BA%BF%E7%A8%8Bjoin%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%8E%9F%E7%90%86/" class="link-dark text-decoration-none title">
+                Java多线程join使用及原理
+            </a>
+        </p>
 
+        <div class="pb-0">
+            <i class="fa fa-calendar p-1"></i>
+            2025/10/14 09:53:44
+            
+                <i class="fa fa-folder-open p-1"> </i>
+                <span class="tag-hover">
+                    
+                        <a href="/categories/%E5%90%8E%E7%AB%AF/ " class="link-dark text-decoration-none title">
+                            后端
+                        </a>
+                    
+                </span>
+            
 
+            
+                <i class="fa fa-tag p-1"> </i>
+                <span class="tag-hover">
+                    
+                        <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="link-dark text-decoration-none title">
+                            多线程
+                        </a>
+                    
+                </span>
+            
 
-  
-    <article id="post-多线程/Java多线程可以分组还能这样玩" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%8F%AF%E4%BB%A5%E5%88%86%E7%BB%84%E8%BF%98%E8%83%BD%E8%BF%99%E6%A0%B7%E7%8E%A9/" class="article-date">
-  <time class="dt-published" datetime="2025-10-14T01:56:28.000Z" itemprop="datePublished">2025-10-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%8F%AF%E4%BB%A5%E5%88%86%E7%BB%84%E8%BF%98%E8%83%BD%E8%BF%99%E6%A0%B7%E7%8E%A9/">Java多线程可以分组还能这样玩</a>
-    </h1>
-  
+        </div>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>但如果线程很多的情况下，你知道如何对它们进行分组吗？</p>
-<p>和 Dubbo 的服务分组一样，Java 可以对相同性质的线程进行分组。</p>
-<p>来看下线程类 Thread 的所有构造方法。</p>
-<p><img src="http://qianniu.javastack.cn/18-6-3/9061041.jpg"></p>
-<p>如图所示，带有 ThreadGroup 的所有线程构造方法都可以定义线程组的。</p>
-<p>线程组使用 java.lang.ThreadGroup 类定义，它有两个构造方法，第二个构造方法允许线程组有父类线程组，也就是说一个线程组可以多个子线程组。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">java.lang.ThreadGroup#ThreadGroup(java.lang.String)</span><br><span class="line">java.lang.ThreadGroup#ThreadGroup(java.lang.ThreadGroup, java.lang.String)</span><br></pre></td></tr></table></figure>
-
-<p><img src="http://qianniu.javastack.cn/18-6-4/38415499.jpg"></p>
-<p>线程组中比较有用的几个方法。</p>
-<blockquote>
-<p>&#x2F;&#x2F; 获取当前线程组内的运行线程数<br>java.lang.ThreadGroup#activeCount</p>
-<p>&#x2F;&#x2F; 中断线程组内的所有线程<br>java.lang.ThreadGroup#interrupt</p>
-<p>&#x2F;&#x2F; 使用 System.out 打印出所有线程信息<br>java.lang.ThreadGroup#list()</p>
-</blockquote>
-<p>我们来简单使用下线程组吧！</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * </span><br><span class="line"> */</span><br><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">	Runnable runnable = () -&gt; &#123;</span><br><span class="line">		System.out.println(&quot;Java技术线程线程组名称：&quot; + Thread.currentThread().getThreadGroup());</span><br><span class="line">		System.out.println(&quot;Java技术线程线程名称：&quot; + Thread.currentThread().getName());</span><br><span class="line">		try &#123;</span><br><span class="line">			Thread.sleep(3000);</span><br><span class="line">		&#125; catch (InterruptedException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">	ThreadGroup userGroup = new ThreadGroup(&quot;user&quot;);</span><br><span class="line">    userGroup.setMaxPriority(Thread.MIN_PRIORITY);</span><br><span class="line">    </span><br><span class="line">	Thread userTask1 = new Thread(userGroup, runnable, &quot;user-task1&quot;);</span><br><span class="line">	Thread userTask2 = new Thread(userGroup, runnable, &quot;user-task2&quot;);</span><br><span class="line"></span><br><span class="line">	userTask1.start();</span><br><span class="line">	userTask2.start();</span><br><span class="line"></span><br><span class="line">	System.out.println(&quot;Java技术线程线程组活跃线程数：&quot; + userGroup.activeCount());</span><br><span class="line">	userGroup.list();</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>程序输出以下结果。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Java技术线程线程组名称：java.lang.ThreadGroup[name=user,maxpri=1]</span><br><span class="line">Java技术线程线程名称：user-task1</span><br><span class="line">Java技术线程线程组活跃线程数：2</span><br><span class="line">Java技术线程线程组名称：java.lang.ThreadGroup[name=user,maxpri=1]</span><br><span class="line">Java技术线程线程名称：user-task2</span><br><span class="line">java.lang.ThreadGroup[name=user,maxpri=1]</span><br><span class="line">    Thread[user-task1,1,user]</span><br><span class="line">    Thread[user-task2,1,user]</span><br></pre></td></tr></table></figure>
-
-<p>根据示例代码和程序输出结果应该对线程组有了一个大概的了解吧。</p>
-<p>线程组还能统一设置组内所有线程的最高优先级，线程单独设置的优先级不会高于线程组设置的最大优先级。</p>
-<p>另外，线程组中有一个 stop 方法用来终止组内所有的线程，但这个方法和 Thread 中的 stop 方法一样会带来很多问题，所以它们两个现在都已经被废弃了，官方也是不建议使用了，建议使用线程中断功能进行优雅终止线程。</p>
-<hr>
-
-      
+        <div class="pt-3 pe-1">
+            <!-- 如果有摘要则显示摘要，没有就自己截取 -->
+            
+                <h2 id="join"><a href="#join" class="headerlink" title="join()"></a>join()</h2><p>join()是线程类<code>Thread</code>的方法，官方的说明是：</p>
+            
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%8F%AF%E4%BB%A5%E5%88%86%E7%BB%84%E8%BF%98%E8%83%BD%E8%BF%99%E6%A0%B7%E7%8E%A9/" data-id="cmgrfxxcz001730d47j1y97pe" data-title="Java多线程可以分组还能这样玩" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
+    <!-- 标题 -->
+    <div class="pb-4 tag-hover", style="border-bottom: 1px solid #eaeaea;">
+        <p class="tag-hover h3">
+            <a href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/i++%E6%98%AF%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E5%90%97%EF%BC%9F/" class="link-dark text-decoration-none title">
+                i++是线程安全的吗?
+            </a>
+        </p>
 
+        <div class="pb-0">
+            <i class="fa fa-calendar p-1"></i>
+            2025/10/14 09:33:33
+            
+                <i class="fa fa-folder-open p-1"> </i>
+                <span class="tag-hover">
+                    
+                        <a href="/categories/%E5%90%8E%E7%AB%AF/ " class="link-dark text-decoration-none title">
+                            后端
+                        </a>
+                    
+                </span>
+            
 
+            
+                <i class="fa fa-tag p-1"> </i>
+                <span class="tag-hover">
+                    
+                        <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="link-dark text-decoration-none title">
+                            多线程
+                        </a>
+                    
+                </span>
+            
 
-  
-    <article id="post-多线程/Java多线程join使用及原理" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/Java%E5%A4%9A%E7%BA%BF%E7%A8%8Bjoin%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%8E%9F%E7%90%86/" class="article-date">
-  <time class="dt-published" datetime="2025-10-14T01:53:44.000Z" itemprop="datePublished">2025-10-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/Java%E5%A4%9A%E7%BA%BF%E7%A8%8Bjoin%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%8E%9F%E7%90%86/">Java多线程join使用及原理</a>
-    </h1>
-  
+        </div>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="join"><a href="#join" class="headerlink" title="join()"></a>join()</h2><p>join()是线程类<code>Thread</code>的方法，官方的说明是：</p>
-<blockquote>
-<p>Waits for this thread to die.</p>
-</blockquote>
-<p>等待这个线程结束，也就是说当前线程等待这个线程结束后再继续执行，下面来看这个示例就明白了。</p>
-<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) throws Exception &#123;</span><br><span class="line">	System.out.println(&quot;start&quot;);</span><br><span class="line"></span><br><span class="line">	Thread t = new Thread(() -&gt; &#123;</span><br><span class="line">		for (int i = 0; i &lt; 5; i++) &#123;</span><br><span class="line">			System.out.println(i);</span><br><span class="line">			try &#123;</span><br><span class="line">				Thread.sleep(500);</span><br><span class="line">			&#125; catch (InterruptedException e) &#123;</span><br><span class="line">				e.printStackTrace();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;);</span><br><span class="line">	t.start();</span><br><span class="line">	t.join();</span><br><span class="line"></span><br><span class="line">	System.out.println(&quot;end&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>结果输出：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">start</span><br><span class="line">0</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
-
-<p>线程t开始后，接着加入t.join()方法，t线程里面程序在主线程end输出之前全部执行完了，说明t.join()阻塞了主线程直到t线程执行完毕。</p>
-<p>如果没有t.join()，end可能会在0~5之间输出。</p>
-<h2 id="join-原理"><a href="#join-原理" class="headerlink" title="join()原理"></a>join()原理</h2><p>下面是join()的源码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">public final synchronized void join(long millis)</span><br><span class="line">    throws InterruptedException &#123;</span><br><span class="line">    long base = System.currentTimeMillis();</span><br><span class="line">    long now = 0;</span><br><span class="line"></span><br><span class="line">    if (millis &lt; 0) &#123;</span><br><span class="line">        throw new IllegalArgumentException(&quot;timeout value is negative&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (millis == 0) &#123;</span><br><span class="line">        while (isAlive()) &#123;</span><br><span class="line">            wait(0);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        while (isAlive()) &#123;</span><br><span class="line">            long delay = millis - now;</span><br><span class="line">            if (delay &lt;= 0) &#123;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">            wait(delay);</span><br><span class="line">            now = System.currentTimeMillis() - base;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>可以看出它是利用wait方法来实现的，上面的例子当main方法主线程调用线程t的时候，main方法获取到了t的对象锁，而t调用自身wait方法进行阻塞，只要当t结束或者到时间后才会退出，接着唤醒主线程继续执行。millis为主线程等待t线程最长执行多久，0为永久直到t线程执行结束。</p>
-
-      
+        <div class="pt-3 pe-1">
+            <!-- 如果有摘要则显示摘要，没有就自己截取 -->
+            
+                <p><img src="http://img.javastack.cn/18-6-8/12258861.jpg"></p>
+            
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/Java%E5%A4%9A%E7%BA%BF%E7%A8%8Bjoin%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%8E%9F%E7%90%86/" data-id="cmgrfxxcy001430d47qy55zvt" data-title="Java多线程join使用及原理" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
 
 
 
-  
-    <article id="post-多线程/i++是线程安全的吗？" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/i++%E6%98%AF%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E5%90%97%EF%BC%9F/" class="article-date">
-  <time class="dt-published" datetime="2025-10-14T01:33:33.000Z" itemprop="datePublished">2025-10-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/i++%E6%98%AF%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E5%90%97%EF%BC%9F/">i++是线程安全的吗?</a>
-    </h1>
-  
+            <!--  页码 -->
+<nav class="pt-1 mt-1">
+    <ul class="pagination justify-content-center new-pagination">
+        <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-double-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-double-right"></i></a>
+    </ul>
+</nav>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p><img src="http://img.javastack.cn/18-6-8/12258861.jpg"></p>
-<p><strong>i++ 是线程安全的吗？</strong></p>
-<p>相信很多中高级的 Java 面试者都遇到过这个问题，很多对这个不是很清楚的肯定是一脸蒙逼。内心肯定还在质疑，i++ 居然还有线程安全问题？只能说自己了解的不够多，自己的水平有限。</p>
-<p>先来看下面的示例来验证下 i++ 到底是不是线程安全的。</p>
-<p><strong>1000个线程，每个线程对共享变量 count 进行 1000 次 ++ 操作。</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">static int count = 0;</span><br><span class="line"></span><br><span class="line">static CountDownLatch cdl = new CountDownLatch(1000);</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">* </span><br><span class="line">*/</span><br><span class="line">public static void main(String[] args) throws Exception &#123;</span><br><span class="line">	CountRunnable countRunnable = new CountRunnable();</span><br><span class="line">	for (int i = 0; i &lt; 1000; i++) &#123;</span><br><span class="line">		new Thread(countRunnable).start();</span><br><span class="line">	&#125;</span><br><span class="line">	cdl.await();</span><br><span class="line">	System.out.println(count);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">static class CountRunnable implements Runnable &#123;</span><br><span class="line"></span><br><span class="line">	private void count() &#123;</span><br><span class="line">		for (int i = 0; i &lt; 1000; i++) &#123;</span><br><span class="line">			count++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public void run() &#123;</span><br><span class="line">		count();</span><br><span class="line">		cdl.countDown();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>上面的例子我们期望的结果应该是 1000000，但运行 N 遍，你会发现总是不为 1000000，至少你现在知道了 i++ 操作它不是线程安全的了。</p>
-<p>先来看 JMM 模型中对共享变量的读写原理吧。</p>
-<p><img src="http://img.javastack.cn/18-6-8/60972585.jpg"></p>
-<p>每个线程都有自己的工作内存，每个线程需要对共享变量操作时必须先把共享变量从主内存 load 到自己的工作内存，等完成对共享变量的操作时再 save 到主内存。</p>
-<p>问题就出在这了，如果一个线程运算完后还没刷到主内存，此时这个共享变量的值被另外一个线程从主内存读取到了，这个时候读取的数据就是脏数据了，它会覆盖其他线程计算完的值。。。</p>
-<p><strong>这也是经典的内存不可见问题，那么把 count 加上 volatile 让内存可见是否能解决这个问题呢？</strong> 答案是：不能。因为 volatile 只能保证可见性，不能保证原子性。多个线程同时读取这个共享变量的值，就算保证其他线程修改的可见性，也不能保证线程之间读取到同样的值然后相互覆盖对方的值的情况。</p>
-<p>关于多线程的几种关键概念请翻阅《<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/DWaxnysIQ8NSWN1NME_HvA">多线程之原子性、可见性、有序性详解</a>》这篇文章。</p>
-<h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><p>说了这么多，对于 i++ 这种线程不安全问题有没有其他解决方案呢？当然有，请参考以下几种解决方案。</p>
-<p>1、对 i++ 操作的方法加同步锁，同时只能有一个线程执行 i++ 操作；</p>
-<p>2、使用支持原子性操作的类，如 <code>java.util.concurrent.atomic.AtomicInteger</code>，它使用的是 CAS 算法，效率优于第 1 种；</p>
-<p>如果对你有帮助，点个赞分享下给个鼓励吧！</p>
 
-      
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/i++%E6%98%AF%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E5%90%97%EF%BC%9F/" data-id="cmgrfxxd0001f30d46yzigz43" data-title="i++是线程安全的吗?" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li></ul>
+    <!-- 侧边栏 -->
+    <div class="col-md-4 d-none d-md-block ps-0 " id='blog-siderbar'>
+        <div class="markdown-section ps-3 pb-3 pt-3 border-start">
+            <!-- 侧边栏 分类 -->
 
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
-
-  <nav id="page-nav">
-    
-    <a class="extend prev" rel="prev" href="/page/7/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/9/">Next &raquo;</a>
-  </nav>
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li></ul>
+    <div class="card mb-3">
+        <div class="card-header card-header-dark">
+            <i class="fa fa-folder-open pe-2"></i> 分类
+        </div>
+        <nav class="nav flex-column">
+            
+            
+                
+                    <a class="nav-link ps-3 border-bottom" aria-current="page" href="/categories/%E5%90%8E%E7%AB%AF/">
+                        后端
+                        <span class="badge bg-secondary float-end me-2">81</span>
+                    </a>
+                
+            
+                
+                    <a class="nav-link ps-3 border-bottom" aria-current="page" href="/categories/%E6%95%99%E7%A8%8B/">
+                        教程
+                        <span class="badge bg-secondary float-end me-2">1</span>
+                    </a>
+                
+            
+        </nav>
     </div>
-  </div>
 
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 18px;">基础</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 16px;">多线程</a> <a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" style="font-size: 20px;">新特性</a> <a href="/tags/%E8%BF%9B%E9%98%B6/" style="font-size: 14px;">进阶</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 12px;">集合</a>
+            <!-- 侧边栏 标签 -->
+
+    <div class="card mb-3">
+        <div class="card-header card-header-dark">
+            <i class="fa fa-tag pe-2"></i> 标签
+        </div>
+        <div class="p-2">
+            
+            
+                <!-- 
+                    <a class="nav-link ps-3 border-bottom" aria-current="page" href="/tags/%E9%9B%86%E5%90%88/">
+                        集合
+                        <span class="badge bg-secondary float-end me-2">4</span>
+                    </a>
+                 -->
+                <a class="" href="/tags/%E9%9B%86%E5%90%88/">集合</a>
+            
+                <!-- 
+                    <a class="nav-link ps-3 border-bottom" aria-current="page" href="/tags/%E8%BF%9B%E9%98%B6/">
+                        进阶
+                        <span class="badge bg-secondary float-end me-2">16</span>
+                    </a>
+                 -->
+                <a class="" href="/tags/%E8%BF%9B%E9%98%B6/">进阶</a>
+            
+                <!-- 
+                    <a class="nav-link ps-3 border-bottom" aria-current="page" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/">
+                        新特性
+                        <span class="badge bg-secondary float-end me-2">25</span>
+                    </a>
+                 -->
+                <a class="" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/">新特性</a>
+            
+                <!-- 
+                    <a class="nav-link ps-3 border-bottom" aria-current="page" href="/tags/%E6%96%87%E7%AB%A0/">
+                        文章
+                        <span class="badge bg-secondary float-end me-2">1</span>
+                    </a>
+                 -->
+                <a class="" href="/tags/%E6%96%87%E7%AB%A0/">文章</a>
+            
+                <!-- 
+                    <a class="nav-link ps-3 border-bottom" aria-current="page" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
+                        多线程
+                        <span class="badge bg-secondary float-end me-2">17</span>
+                    </a>
+                 -->
+                <a class="" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">多线程</a>
+            
+                <!-- 
+                    <a class="nav-link ps-3 border-bottom" aria-current="page" href="/tags/%E5%9F%BA%E7%A1%80/">
+                        基础
+                        <span class="badge bg-secondary float-end me-2">17</span>
+                    </a>
+                 -->
+                <a class="" href="/tags/%E5%9F%BA%E7%A1%80/">基础</a>
+            
+                <!-- 
+                    <a class="nav-link ps-3 border-bottom" aria-current="page" href="/tags/JVM/">
+                        JVM
+                        <span class="badge bg-secondary float-end me-2">1</span>
+                    </a>
+                 -->
+                <a class="" href="/tags/JVM/">JVM</a>
+            
+        </div>
     </div>
-  </div>
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li></ul>
+            <div class="card mb-3">
+    <div class="card-header card-header-dark">
+        <i class="fa fa-clock-o pe-2"></i> 最近文章
     </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java%205%20~%2010%20%E6%96%B0%E7%89%B9%E6%80%A7%E5%80%BE%E6%83%85%E6%95%B4%E7%90%86%EF%BC%81/">Java 5 ~ 10 新特性倾情整理！</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%206%20%E9%A2%97%E8%AF%AD%E6%B3%95%E7%B3%96/">Java 中的 6 颗语法糖</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%20String%20%E7%9C%9F%E7%9A%84%E6%98%AF%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%90%97%EF%BC%9F/">Java 中的 String 真的是不可变吗？</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E4%BC%AA%E5%85%B1%E4%BA%AB%E8%AF%A6%E8%A7%A3%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">Java 中的伪共享详解及解决方案</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E5%AE%8F%E5%8F%98%E9%87%8F%EF%BC%8C%E5%AE%8F%E6%9B%BF%E6%8D%A2%E8%AF%A6%E8%A7%A3%E3%80%82/">Java 中的宏变量，宏替换详解。</a>
-          </li>
-        
-      </ul>
+    <div class="p-2 tag-hover">
+        <ul class="list-group border-0">
+            
+            
+                <a class="list-group-item border-0 pt-0 pb-0 ps-1 fs-6" href="/2024/12/15/hello-world/ ">
+                    <small> Hello World </small>
+                </a>
+            
+            
+                <a class="list-group-item border-0 pt-0 pb-0 ps-1 fs-6" href="/2025/09/14/JVM/JVM%E8%BF%90%E8%A1%8C%E6%97%B6%E5%8C%BA%E5%9F%9F%E8%AF%A6%E8%A7%A3/ ">
+                    <small> JVM运行时区域详解 </small>
+                </a>
+            
+            
+                <a class="list-group-item border-0 pt-0 pb-0 ps-1 fs-6" href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java%205%20~%2010%20%E6%96%B0%E7%89%B9%E6%80%A7%E5%80%BE%E6%83%85%E6%95%B4%E7%90%86%EF%BC%81/ ">
+                    <small> Java 5 ~ 10 新特性倾情整理！ </small>
+                </a>
+            
+            
+                <a class="list-group-item border-0 pt-0 pb-0 ps-1 fs-6" href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%20String%20%E7%9C%9F%E7%9A%84%E6%98%AF%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%90%97%EF%BC%9F/ ">
+                    <small> Java 中的 String 真的是不可变吗？ </small>
+                </a>
+            
+            
+                <a class="list-group-item border-0 pt-0 pb-0 ps-1 fs-6" href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%206%20%E9%A2%97%E8%AF%AD%E6%B3%95%E7%B3%96/ ">
+                    <small> Java 中的 6 颗语法糖 </small>
+                </a>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+             
+        </ul>
     </div>
-  </div>
+</div>
 
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2025 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+
+
+            <!-- 友情链接 -->
+<div class="card">
+    <div class="card-header card-header-dark">
+        <i class="fa fa-link pe-2"></i> 友情链接
     </div>
-  </div>
+    <div class="p-2 tag-hover">
+        <ul class="list-group border-0">
+            
+                <a class="list-group-item border-0 pt-0 pb-0 ps-1" href=" ">
+                    <small> 只有那年胜过年年 </small>
+                </a>
+             
+        </ul>
+    </div>
+</div>
+
+
+
+        </div>
+    </div>
+</div>
+
+
+ 
+    </main>
+
+    <!-- 底部栏 -->
+    <footer class="bg-dark pt-3 pb-0 mt-5 fixed-bottom" id="flex_bottom">
+    <div class="container pb-3 pt-3 text-center">
+        <p class="text-muted tag-hover">
+            All Rights Reserved <i class="fa fa-copyright"></i> by2025  <br>
+<!--             Powered by  -->
+<!--              <a class="link-secondary text-decoration-none" target="_blank" rel="noopener" href="https://hexo.io"> -->
+<!--                  Hexo.io -->
+<!--             </a> &  <a class="link-secondary text-decoration-none" target="_blank" rel="noopener" href="https://github.com/smile-yan/hexo-theme-heyan"> -->
+<!--                heyan -->
+<!--             </a> -->
+            <br>
+<!--             <a class="link-secondary text-decoration-none" target="_blank" rel="noopener" href="https://beian.miit.gov.cn/#/Integrated/index"> -->
+<!--                 <img src="/police.png" style="width: 18px; height: 18px; margin-top: -4px" class="nofancybox"> -->
+<!--                   -->
+<!--             </a> -->
+        </p>
+    </div>
 </footer>
 
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.6.4.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
 </body>
+
+<script>
+    // 检查页面内容高度是否小于窗口高度
+    function checkContentHeight() {
+        const contentHeight = document.body.scrollHeight;
+        const windowHeight = window.innerHeight;
+
+        if (contentHeight < windowHeight) {
+            // 内容高度不足以填充整个窗口，固定底部导航栏
+            document.getElementById('flex_bottom').classList.add('fixed-bottom');
+        } else {
+            // 内容高度足够多，不固定底部导航栏
+            document.getElementById('flex_bottom').classList.remove('fixed-bottom');
+        }
+    }
+
+    // 页面加载时和窗口大小变化时检查内容高度
+    window.addEventListener('load', checkContentHeight);
+    window.addEventListener('resize', checkContentHeight);
+</script>
 </html>

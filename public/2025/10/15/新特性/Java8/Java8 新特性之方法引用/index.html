@@ -1,104 +1,177 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  
-  
-  <title>Java8 新特性之方法引用 | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="什么是方法引用方法引用是只需要使用方法的名字，而具体调用交给函数式接口，需要和Lambda表达式配合使用。 如： 123List&lt;String&gt; list &#x3D; Arrays.asList(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;);list.forEach(str -&gt; System.out.print(str));list.forEac">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Java8 新特性之方法引用">
-<meta property="og:url" content="http://example.com/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java8/Java8%20%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%E6%96%B9%E6%B3%95%E5%BC%95%E7%94%A8/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="什么是方法引用方法引用是只需要使用方法的名字，而具体调用交给函数式接口，需要和Lambda表达式配合使用。 如： 123List&lt;String&gt; list &#x3D; Arrays.asList(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;);list.forEach(str -&gt; System.out.print(str));list.forEac">
-<meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-10-15T03:36:33.000Z">
-<meta property="article:modified_time" content="2025-10-15T03:27:06.665Z">
-<meta property="article:author" content="John Doe">
-<meta property="article:tag" content="新特性">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
-
-  
+    <title>只有那年胜过年年</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/favicon/site.webmanifest">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css">
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
     
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+<link rel="stylesheet" href="/css/prism.css">
+ 
+    
+<link rel="stylesheet" href="/css/markdown.css">
+ 
+    
+<script src="/js/prism.js"></script>
 
-  
-  
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+    
+<link rel="stylesheet" href="/css/index.css">
+ 
+    
+<script src="/js/search.js"></script>
 
+
+     
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+        </script>
+     
+
+     
+        <script src="//lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js"> </script>
+        
+<script src="/js/fancybox.js"></script>
+
+    
+
+    <script type="text/javascript">
+
+        var search_path = "/search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+        var path = search_path;
+        searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
 <meta name="generator" content="Hexo 7.3.0"></head>
-
+ 
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
+    <!-- 导航栏 -->
+    <!-- 导航栏 -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4 pt-2 pb-2">
+    <div class="container">
+        <!-- 标题 --> 
+        <a class="navbar-brand navbar-expand-sm" href="/">
+            <img class="nofancybox" src="/logo.png" style="width: 75px;"  alt="笑颜网">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-      <div class="outer">
-        <section id="main"><article id="post-新特性/Java8/Java8 新特性之方法引用" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java8/Java8%20%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%E6%96%B9%E6%B3%95%E5%BC%95%E7%94%A8/" class="article-date">
-  <time class="dt-published" datetime="2025-10-15T03:36:33.000Z" itemprop="datePublished">2025-10-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      Java8 新特性之方法引用
-    </h1>
-  
+        <!-- 左边右边导航按钮 --> 
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto">
+                <!-- 左右两侧的导航栏 -->
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="什么是方法引用"><a href="#什么是方法引用" class="headerlink" title="什么是方法引用"></a>什么是方法引用</h2><p>方法引用是只需要使用方法的名字，而具体调用交给函数式接口，需要和Lambda表达式配合使用。</p>
+ 
+ 
+
+    <li class="nav-item">
+        <a class="nav-link" href="/">
+           <big> <i class="fa fa-home ps-1" ></i> 主页</big>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="/archives">
+           <big> <i class="fa fa-archive ps-1" ></i> 归档</big>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="/about">
+           <big> <i class="fa fa-user ps-1" ></i> 关于</big>
+        </a>
+    </li>
+ 
+ 
+            </ul>
+
+            
+            <form class="">
+                <div class="d-flex">
+                    <button class="btn text-muted fa fa-search d-none d-md-block d-lg-block" disabled></button>
+                    <input id="local-search-input" class="form-control me-2 pe-4" type="search"
+                            placeholder="搜索 " aria-label="Search">
+                </div>
+                <div id="local-search-result" style="position:absolute; padding-top: 8px; max-height: 960px; width: 480px;overflow-y: scroll; z-index: 1050;"></div>
+            </form>
+            
+            <ul class="navbar-nav">
+                <!-- 左右两侧的导航栏 -->
+
+ 
+ 
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+    <main class="container">
+        
+<div class="container-fluid markdown-section">
+<div class="row pb-3">
+    <div class="col-md-8 col-sm-12">
+        <!-- 博客详情 -->
+        <div class="">
+            <p class="h2">
+                <span class="post-title">
+                    Java8 新特性之方法引用
+                </span>   
+            </p>
+
+            <div class="pb-3 pt-1 pe-3">
+                <i class="fa fa-calendar p-1"></i>
+                2025/10/15 11:36:33 
+                
+                    <i class="fa fa-folder-open p-1"> </i> 
+                    <span class="tag-hover">
+                        
+                            <a href="/categories/%E5%90%8E%E7%AB%AF/ " class="link-dark text-decoration-none"> 
+                                后端 
+                            </a>
+                         
+                    </span>
+                
+
+                
+                    <i class="fa fa-tag p-1"> </i>
+                    <span class="tag-hover">
+                        
+                            <a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" class="link-dark text-decoration-none"> 
+                                新特性 
+                            </a>
+                        
+                    </span>
+                
+            </div>
+
+            <div class="border-bottom pb-2">
+                <h2 id="什么是方法引用"><a href="#什么是方法引用" class="headerlink" title="什么是方法引用"></a>什么是方法引用</h2><p>方法引用是只需要使用方法的名字，而具体调用交给函数式接口，需要和Lambda表达式配合使用。</p>
 <p>如：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list = Arrays.asList(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;);</span><br><span class="line">list.forEach(str -&gt; System.out.print(str));</span><br><span class="line">list.forEach(System.out::print);</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">List&lt;String&gt; list &#x3D; Arrays.asList(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;);
+list.forEach(str -&gt; System.out.print(str));
+list.forEach(System.out::print);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>上面两种写法是等价的。</p>
 <h2 id="方法引用分类"><a href="#方法引用分类" class="headerlink" title="方法引用分类"></a>方法引用分类</h2><h3 id="1、构造器方法引用"><a href="#1、构造器方法引用" class="headerlink" title="1、构造器方法引用"></a>1、构造器方法引用</h3><p>格式：<code>Class::new</code>，调用默认构造器。</p>
@@ -106,159 +179,157 @@
 <h3 id="3、类普通方法引用"><a href="#3、类普通方法引用" class="headerlink" title="3、类普通方法引用"></a>3、类普通方法引用</h3><p>格式：<code>Class::method</code>，方法不能带参数。</p>
 <h3 id="4、实例方法引用"><a href="#4、实例方法引用" class="headerlink" title="4、实例方法引用"></a>4、实例方法引用</h3><p>格式：<code>instance::method</code></p>
 <h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>往User类添加方法引用方法：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public static User create(Supplier&lt;User&gt; supplier)&#123;</span><br><span class="line">	return supplier.get();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static void updateUsername(User user)&#123;</span><br><span class="line">	user.setUsername(user.getUsername() + &quot; updated.&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public void updateAge()&#123;</span><br><span class="line">	this.setAge(this.getAge() + 10);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public void changeAge(User user)&#123;</span><br><span class="line">	user.setAge(user.getAge() + 10);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">public static User create(Supplier&lt;User&gt; supplier)&#123;
+	return supplier.get();
+&#125;
+
+public static void updateUsername(User user)&#123;
+	user.setUsername(user.getUsername() + &quot; updated.&quot;);
+&#125;
+
+public void updateAge()&#123;
+	this.setAge(this.getAge() + 10);
+&#125;
+
+public void changeAge(User user)&#123;
+	user.setAge(user.getAge() + 10);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>方法引用测试：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">	List&lt;User&gt; list = initList();</span><br><span class="line"></span><br><span class="line">	// 1、构造器方法引用</span><br><span class="line">	User newUser = User.create(User::new);</span><br><span class="line">	newUser.setAge(1);</span><br><span class="line">	newUser.setUsername(&quot;new&quot;);</span><br><span class="line">	System.out.println(newUser);</span><br><span class="line"></span><br><span class="line">	// 2、类静态方法引用</span><br><span class="line">	list.forEach(User::updateUsername);</span><br><span class="line"></span><br><span class="line">	// 3、类普通方法引用</span><br><span class="line">	list.forEach(User::updateAge);</span><br><span class="line"></span><br><span class="line">	// 4、实例方法引用</span><br><span class="line">	User user = new User();</span><br><span class="line">	list.forEach(user::changeAge);</span><br><span class="line"></span><br><span class="line">	list.forEach(System.out::println);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private static List&lt;User&gt; initList() &#123;</span><br><span class="line">	List&lt;User&gt; list = new ArrayList&lt;&gt;();</span><br><span class="line">	list.add(new User(&quot;oaby&quot;, 23));</span><br><span class="line">	list.add(new User(&quot;tom&quot;, 11));</span><br><span class="line">	list.add(new User(&quot;john&quot;, 16));</span><br><span class="line">	list.add(new User(&quot;jennis&quot;, 26));</span><br><span class="line">	list.add(new User(&quot;tin&quot;, 26));</span><br><span class="line">	list.add(new User(&quot;army&quot;, 26));</span><br><span class="line">	list.add(new User(&quot;mack&quot;, 19));</span><br><span class="line">	list.add(new User(&quot;jobs&quot;, 65));</span><br><span class="line">	list.add(new User(&quot;jordan&quot;, 23));</span><br><span class="line">	return list;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">public static void main(String[] args) &#123;
+	List&lt;User&gt; list &#x3D; initList();
+
+	&#x2F;&#x2F; 1、构造器方法引用
+	User newUser &#x3D; User.create(User::new);
+	newUser.setAge(1);
+	newUser.setUsername(&quot;new&quot;);
+	System.out.println(newUser);
+
+	&#x2F;&#x2F; 2、类静态方法引用
+	list.forEach(User::updateUsername);
+
+	&#x2F;&#x2F; 3、类普通方法引用
+	list.forEach(User::updateAge);
+
+	&#x2F;&#x2F; 4、实例方法引用
+	User user &#x3D; new User();
+	list.forEach(user::changeAge);
+
+	list.forEach(System.out::println);
+&#125;
+
+private static List&lt;User&gt; initList() &#123;
+	List&lt;User&gt; list &#x3D; new ArrayList&lt;&gt;();
+	list.add(new User(&quot;oaby&quot;, 23));
+	list.add(new User(&quot;tom&quot;, 11));
+	list.add(new User(&quot;john&quot;, 16));
+	list.add(new User(&quot;jennis&quot;, 26));
+	list.add(new User(&quot;tin&quot;, 26));
+	list.add(new User(&quot;army&quot;, 26));
+	list.add(new User(&quot;mack&quot;, 19));
+	list.add(new User(&quot;jobs&quot;, 65));
+	list.add(new User(&quot;jordan&quot;, 23));
+	return list;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>输出结果：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">User [username=new, age=1]</span><br><span class="line">User [username=oaby updated., age=43]</span><br><span class="line">User [username=tom updated., age=31]</span><br><span class="line">User [username=john updated., age=36]</span><br><span class="line">User [username=jennis updated., age=46]</span><br><span class="line">User [username=tin updated., age=46]</span><br><span class="line">User [username=army updated., age=46]</span><br><span class="line">User [username=mack updated., age=39]</span><br><span class="line">User [username=jobs updated., age=85]</span><br><span class="line">User [username=jordan updated., age=43]</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">User [username&#x3D;new, age&#x3D;1]
+User [username&#x3D;oaby updated., age&#x3D;43]
+User [username&#x3D;tom updated., age&#x3D;31]
+User [username&#x3D;john updated., age&#x3D;36]
+User [username&#x3D;jennis updated., age&#x3D;46]
+User [username&#x3D;tin updated., age&#x3D;46]
+User [username&#x3D;army updated., age&#x3D;46]
+User [username&#x3D;mack updated., age&#x3D;39]
+User [username&#x3D;jobs updated., age&#x3D;85]
+User [username&#x3D;jordan updated., age&#x3D;43]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>可以看出方法引用都生效了，username和age都相应更新了。</p>
-
-      
+ 
+            </div>
+        </div>
+        
+            <div class="mt-3">
+                <!-- 前一页后一页 -->
+<div class="previous-next-links">
+     
+    <div class="previous-design-link">
+        <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java8/Java8%20%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3/">
+            <i style="font-size:16px;" class="fa fa-arrow-left" aria-hidden="true"></i>
+            Java8 新特性之函数式接口
+        </a>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java8/Java8%20%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%E6%96%B9%E6%B3%95%E5%BC%95%E7%94%A8/" data-id="cmgrfxxdf004430d4026sg312" data-title="Java8 新特性之方法引用" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li></ul>
+     
 
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java8/Java8%20%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%E6%8E%A5%E5%8F%A3%E9%BB%98%E8%AE%A4%E6%96%B9%E6%B3%95%E4%B8%8E%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Java8 新特性之接口默认方法与静态方法
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java8/Java8%20%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8BLambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Java8 新特性之Lambda表达式</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li></ul>
+     
+    <div class="next-design-link">
+        <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java8/Java8%20%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%E6%8E%A5%E5%8F%A3%E9%BB%98%E8%AE%A4%E6%96%B9%E6%B3%95%E4%B8%8E%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95/">
+            Java8 新特性之接口默认方法与静态方法
+            <i style="font-size:16px;" class="fa fa-arrow-right" aria-hidden="true"></i>
+        </a>
     </div>
-  </div>
+ 
+</div> 
+             
+            </div>
+        
 
-
-  
+    </div>
+    <div class="col-4 pe-0">
+        <div class="d-none d-sm-none d-md-block sticky-top border-start">
+             
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 18px;">基础</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 16px;">多线程</a> <a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" style="font-size: 20px;">新特性</a> <a href="/tags/%E8%BF%9B%E9%98%B6/" style="font-size: 14px;">进阶</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 12px;">集合</a>
-    </div>
-  </div>
-
-  
+        <div class="toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%96%B9%E6%B3%95%E5%BC%95%E7%94%A8"><span class="toc-number">1.</span> <span class="toc-text">什么是方法引用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E5%BC%95%E7%94%A8%E5%88%86%E7%B1%BB"><span class="toc-number">2.</span> <span class="toc-text">方法引用分类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E6%9E%84%E9%80%A0%E5%99%A8%E6%96%B9%E6%B3%95%E5%BC%95%E7%94%A8"><span class="toc-number">2.1.</span> <span class="toc-text">1、构造器方法引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E7%B1%BB%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95%E5%BC%95%E7%94%A8"><span class="toc-number">2.2.</span> <span class="toc-text">2、类静态方法引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E7%B1%BB%E6%99%AE%E9%80%9A%E6%96%B9%E6%B3%95%E5%BC%95%E7%94%A8"><span class="toc-number">2.3.</span> <span class="toc-text">3、类普通方法引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81%E5%AE%9E%E4%BE%8B%E6%96%B9%E6%B3%95%E5%BC%95%E7%94%A8"><span class="toc-number">2.4.</span> <span class="toc-text">4、实例方法引用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B"><span class="toc-number">3.</span> <span class="toc-text">示例</span></a></li></ol> 
+        </div>
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li></ul>
-    </div>
-  </div>
+ 
 
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java%205%20~%2010%20%E6%96%B0%E7%89%B9%E6%80%A7%E5%80%BE%E6%83%85%E6%95%B4%E7%90%86%EF%BC%81/">Java 5 ~ 10 新特性倾情整理！</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%206%20%E9%A2%97%E8%AF%AD%E6%B3%95%E7%B3%96/">Java 中的 6 颗语法糖</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%20String%20%E7%9C%9F%E7%9A%84%E6%98%AF%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%90%97%EF%BC%9F/">Java 中的 String 真的是不可变吗？</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E4%BC%AA%E5%85%B1%E4%BA%AB%E8%AF%A6%E8%A7%A3%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">Java 中的伪共享详解及解决方案</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E5%AE%8F%E5%8F%98%E9%87%8F%EF%BC%8C%E5%AE%8F%E6%9B%BF%E6%8D%A2%E8%AF%A6%E8%A7%A3%E3%80%82/">Java 中的宏变量，宏替换详解。</a>
-          </li>
-        
-      </ul>
+        </div>
     </div>
-  </div>
+</div>
+</div>
+ 
+    </main>
 
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2025 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    <!-- 底部栏 -->
+    <footer class="bg-dark pt-3 pb-0 mt-5 fixed-bottom" id="flex_bottom">
+    <div class="container pb-3 pt-3 text-center">
+        <p class="text-muted tag-hover">
+            All Rights Reserved <i class="fa fa-copyright"></i> by2025  <br>
+<!--             Powered by  -->
+<!--              <a class="link-secondary text-decoration-none" target="_blank" rel="noopener" href="https://hexo.io"> -->
+<!--                  Hexo.io -->
+<!--             </a> &  <a class="link-secondary text-decoration-none" target="_blank" rel="noopener" href="https://github.com/smile-yan/hexo-theme-heyan"> -->
+<!--                heyan -->
+<!--             </a> -->
+            <br>
+<!--             <a class="link-secondary text-decoration-none" target="_blank" rel="noopener" href="https://beian.miit.gov.cn/#/Integrated/index"> -->
+<!--                 <img src="/police.png" style="width: 18px; height: 18px; margin-top: -4px" class="nofancybox"> -->
+<!--                   -->
+<!--             </a> -->
+        </p>
     </div>
-  </div>
 </footer>
 
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.6.4.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
 </body>
+
+<script>
+    // 检查页面内容高度是否小于窗口高度
+    function checkContentHeight() {
+        const contentHeight = document.body.scrollHeight;
+        const windowHeight = window.innerHeight;
+
+        if (contentHeight < windowHeight) {
+            // 内容高度不足以填充整个窗口，固定底部导航栏
+            document.getElementById('flex_bottom').classList.add('fixed-bottom');
+        } else {
+            // 内容高度足够多，不固定底部导航栏
+            document.getElementById('flex_bottom').classList.remove('fixed-bottom');
+        }
+    }
+
+    // 页面加载时和窗口大小变化时检查内容高度
+    window.addEventListener('load', checkContentHeight);
+    window.addEventListener('resize', checkContentHeight);
+</script>
 </html>

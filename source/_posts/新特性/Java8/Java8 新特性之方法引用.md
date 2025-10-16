@@ -1,6 +1,7 @@
 ---
 title: Java8 新特性之方法引用
 date: 2025-10-15 11:36:33
+category: 后端
 tags: 新特性
 ---
 

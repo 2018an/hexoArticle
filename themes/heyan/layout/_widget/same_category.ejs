@@ -1,0 +1,20 @@
+<!-- 同一类型的文件 -->
+<% if (page.categories.length > 0) { %>
+    <% page.categories.forEach(category=> { %>
+        <div class="card mb-3">
+            <div class="card-header card-header-dark">
+               <span class="lead fs-4 fw-bold"><i class="fa fa-folder-open pe-2"></i> <%- category.name %></span>       
+            </div>
+            <nav class="nav flex-column">
+                <% category.posts.forEach(post=> {%> 
+                    <!-- 只是添加具有相同层数的博客 -->
+                    <% if (is_current(post.path)) {%>
+                        <a class="nav-link ps-3 border-bottom small active-post " aria-current="page" href="<%- url_for(post.path) %>"><%- post.title %></a>
+                    <% } else { %>
+                        <a class="nav-link ps-3 border-bottom small" aria-current="page" href="<%- url_for(post.path) %>"><%- post.title %></a>
+                    <% }%>
+                <% }) %>
+            </nav>
+        </div>
+    <% }) %>
+<% } %>

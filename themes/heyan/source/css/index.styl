@@ -1,0 +1,79 @@
+.tag-hover > a:hover, 
+.tag-hover li > a:hover,
+.tag-hover > i:hover
+  color: #0a58ca;
+
+// 分页符
+.new-pagination > *
+  border: 1px solid;
+  border-color: #ccc;
+  text-align: center;
+  width: 30px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+
+.page-number:first-child,
+.new-pagination .extend:first-child
+  border-top-left-radius: 0.35rem;
+  border-bottom-left-radius: 0.35rem;
+
+.page-number:last-child
+.new-pagination .extend:last-child
+  border-top-right-radius: 0.35rem;
+  border-bottom-right-radius: 0.35rem;
+  border-right: 1px solid;
+  border-color: #ccc;   
+
+.new-pagination > span
+.new-pagination > a
+  text-decoration: none;
+  border-right: none;
+
+.new-pagination .current
+  background: #e1e1e1;
+
+// .new-pagination .current
+//   background: #777777;
+//   border: 1px solid;
+//   border-color: #777777; 
+//   color: #fff;
+
+// .extend .prev
+//   border-top-left-radius: 0.25rem;
+//   border-bottom-left-radius: 0.25rem;
+  
+
+// 搜索结果
+.search-result .search-keyword
+  color: red;
+
+.post-nav
+  overflow: hidden;
+  margin-top: 15px;
+  margin-bottom: 20px;
+  padding: 10px;
+  white-space: nowrap;
+  border-top: 1px solid #eee;
+
+
+.search-result-title
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 600;
+
+// 搜索关键字
+.search-keyword
+  color: red;
+
+.border-auto
+  @media (min-width: 100px) { 
+    margin-top: 30px;
+  }
+  @media (min-width: 768px) { 
+    border-left: 1px solid;
+    border-top: none;
+    margin-top: 0px;
+    border-color: #dee2e6;  
+  }
+
+@import 'markdown';

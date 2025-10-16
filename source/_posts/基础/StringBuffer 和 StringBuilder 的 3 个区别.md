@@ -1,6 +1,7 @@
 ---
 title: StringBuffer 和 StringBuilder 的 3 个区别
 date: 2025-10-14 14:42:34
+category: 后端
 tags: 基础
 ---
 

@@ -1,273 +1,304 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  
-  
-  <title>字符串 substring 方法在 JDK 6,7,8 中的差异。 | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="标题中的substring方法指的是字符串的substring(int beginIndex, int endIndex)方法，这个方法在jdk6,7是有差异的。 substring有什么用？substring返回的是字符串索引位置beginIndex开始，endIndex-1结束的字符串。 来看这个例子： 123String x &#x3D; &quot;abcdef&quot;;x &#x3D; x.substr">
-<meta property="og:type" content="article">
-<meta property="og:title" content="字符串 substring 方法在 JDK 6,7,8 中的差异。">
-<meta property="og:url" content="http://example.com/2025/10/15/%E8%BF%9B%E9%98%B6/%E5%AD%97%E7%AC%A6%E4%B8%B2%20substring%20%E6%96%B9%E6%B3%95%E5%9C%A8%20JDK%206,7,8%20%E4%B8%AD%E7%9A%84%E5%B7%AE%E5%BC%82%E3%80%82/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="标题中的substring方法指的是字符串的substring(int beginIndex, int endIndex)方法，这个方法在jdk6,7是有差异的。 substring有什么用？substring返回的是字符串索引位置beginIndex开始，endIndex-1结束的字符串。 来看这个例子： 123String x &#x3D; &quot;abcdef&quot;;x &#x3D; x.substr">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://www.programcreek.com/wp-content/uploads/2013/09/string-substring-jdk6-650x389.jpeg">
-<meta property="og:image" content="https://www.programcreek.com/wp-content/uploads/2013/09/string-substring-jdk71-650x389.jpeg">
-<meta property="article:published_time" content="2025-10-15T03:36:33.000Z">
-<meta property="article:modified_time" content="2025-10-15T03:34:21.985Z">
-<meta property="article:author" content="John Doe">
-<meta property="article:tag" content="进阶">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://www.programcreek.com/wp-content/uploads/2013/09/string-substring-jdk6-650x389.jpeg">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
-
-  
+    <title>只有那年胜过年年</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/favicon/site.webmanifest">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css">
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
     
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+<link rel="stylesheet" href="/css/prism.css">
+ 
+    
+<link rel="stylesheet" href="/css/markdown.css">
+ 
+    
+<script src="/js/prism.js"></script>
 
-  
-  
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+    
+<link rel="stylesheet" href="/css/index.css">
+ 
+    
+<script src="/js/search.js"></script>
 
+
+     
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+        </script>
+     
+
+     
+        <script src="//lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js"> </script>
+        
+<script src="/js/fancybox.js"></script>
+
+    
+
+    <script type="text/javascript">
+
+        var search_path = "/search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+        var path = search_path;
+        searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
 <meta name="generator" content="Hexo 7.3.0"></head>
-
+ 
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
+    <!-- 导航栏 -->
+    <!-- 导航栏 -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4 pt-2 pb-2">
+    <div class="container">
+        <!-- 标题 --> 
+        <a class="navbar-brand navbar-expand-sm" href="/">
+            <img class="nofancybox" src="/logo.png" style="width: 75px;"  alt="笑颜网">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-      <div class="outer">
-        <section id="main"><article id="post-进阶/字符串 substring 方法在 JDK 6,7,8 中的差异。" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/%E5%AD%97%E7%AC%A6%E4%B8%B2%20substring%20%E6%96%B9%E6%B3%95%E5%9C%A8%20JDK%206,7,8%20%E4%B8%AD%E7%9A%84%E5%B7%AE%E5%BC%82%E3%80%82/" class="article-date">
-  <time class="dt-published" datetime="2025-10-15T03:36:33.000Z" itemprop="datePublished">2025-10-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      字符串 substring 方法在 JDK 6,7,8 中的差异。
-    </h1>
-  
+        <!-- 左边右边导航按钮 --> 
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto">
+                <!-- 左右两侧的导航栏 -->
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>标题中的substring方法指的是字符串的substring(int beginIndex, int endIndex)方法，这个方法在jdk6,7是有差异的。</p>
+ 
+ 
+
+    <li class="nav-item">
+        <a class="nav-link" href="/">
+           <big> <i class="fa fa-home ps-1" ></i> 主页</big>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="/archives">
+           <big> <i class="fa fa-archive ps-1" ></i> 归档</big>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="/about">
+           <big> <i class="fa fa-user ps-1" ></i> 关于</big>
+        </a>
+    </li>
+ 
+ 
+            </ul>
+
+            
+            <form class="">
+                <div class="d-flex">
+                    <button class="btn text-muted fa fa-search d-none d-md-block d-lg-block" disabled></button>
+                    <input id="local-search-input" class="form-control me-2 pe-4" type="search"
+                            placeholder="搜索 " aria-label="Search">
+                </div>
+                <div id="local-search-result" style="position:absolute; padding-top: 8px; max-height: 960px; width: 480px;overflow-y: scroll; z-index: 1050;"></div>
+            </form>
+            
+            <ul class="navbar-nav">
+                <!-- 左右两侧的导航栏 -->
+
+ 
+ 
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+    <main class="container">
+        
+<div class="container-fluid markdown-section">
+<div class="row pb-3">
+    <div class="col-md-8 col-sm-12">
+        <!-- 博客详情 -->
+        <div class="">
+            <p class="h2">
+                <span class="post-title">
+                    字符串 substring 方法在 JDK 6,7,8 中的差异。
+                </span>   
+            </p>
+
+            <div class="pb-3 pt-1 pe-3">
+                <i class="fa fa-calendar p-1"></i>
+                2025/10/15 11:36:33 
+                
+                    <i class="fa fa-folder-open p-1"> </i> 
+                    <span class="tag-hover">
+                        
+                            <a href="/categories/%E5%90%8E%E7%AB%AF/ " class="link-dark text-decoration-none"> 
+                                后端 
+                            </a>
+                         
+                    </span>
+                
+
+                
+                    <i class="fa fa-tag p-1"> </i>
+                    <span class="tag-hover">
+                        
+                            <a href="/tags/%E8%BF%9B%E9%98%B6/" class="link-dark text-decoration-none"> 
+                                进阶 
+                            </a>
+                        
+                    </span>
+                
+            </div>
+
+            <div class="border-bottom pb-2">
+                <p>标题中的substring方法指的是字符串的substring(int beginIndex, int endIndex)方法，这个方法在jdk6,7是有差异的。</p>
 <h2 id="substring有什么用？"><a href="#substring有什么用？" class="headerlink" title="substring有什么用？"></a>substring有什么用？</h2><p>substring返回的是字符串索引位置beginIndex开始，endIndex-1结束的字符串。</p>
 <p>来看这个例子：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String x = &quot;abcdef&quot;;</span><br><span class="line">x = x.substring(1,3);</span><br><span class="line">System.out.println(x);</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">String x &#x3D; &quot;abcdef&quot;;
+x &#x3D; x.substring(1,3);
+System.out.println(x);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>输出：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bc</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">bc<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>下面看看在JDK之间，它们的实现原理有什么不一样，及值得注意的地方。</p>
 <h4 id="JDK-6"><a href="#JDK-6" class="headerlink" title="JDK 6"></a>JDK 6</h4><p>String背后是由char数组构成的，在JDK6中，String包含三个字段：char value[], int offset, int count，意思很简单。</p>
 <p>substring被调用时，它会创建一个新的字符串，但字符串的值还指向堆中同样的字符数组。它们的区别只是数量和下标引用不一样，如图所示。</p>
 <p><img src="https://www.programcreek.com/wp-content/uploads/2013/09/string-substring-jdk6-650x389.jpeg" alt="image"></p>
 <p>JDK6中的部分源码可以说明这个问题。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//JDK 6</span><br><span class="line">String(int offset, int count, char value[]) &#123;</span><br><span class="line">	this.value = value;</span><br><span class="line">	this.offset = offset;</span><br><span class="line">	this.count = count;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">public String substring(int beginIndex, int endIndex) &#123;</span><br><span class="line">	//check boundary</span><br><span class="line">	return  new String(offset + beginIndex, endIndex - beginIndex, value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;JDK 6
+String(int offset, int count, char value[]) &#123;
+	this.value &#x3D; value;
+	this.offset &#x3D; offset;
+	this.count &#x3D; count;
+&#125;
+ 
+public String substring(int beginIndex, int endIndex) &#123;
+	&#x2F;&#x2F;check boundary
+	return  new String(offset + beginIndex, endIndex - beginIndex, value);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>会有什么问题？</strong></p>
 <p>如果一个很长的字符串，但是每次使用substring()，你只需要很小的一部分。这将会导致性能问题，因为只需要一小部分，却引用了整个字符数组内容。对于JDK 6，解决方案是使用以下内容：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x = x.substring(x, y) + &quot;&quot;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">x &#x3D; x.substring(x, y) + &quot;&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h4 id="JDK-7-8"><a href="#JDK-7-8" class="headerlink" title="JDK 7,8"></a>JDK 7,8</h4><p>JDK6这种问题在JDK7+中已经改善了，JDK7+中实际是重新创建了一个字符数组，如图。</p>
 <p><img src="https://www.programcreek.com/wp-content/uploads/2013/09/string-substring-jdk71-650x389.jpeg" alt="image"></p>
 <p>JDK7中的部分源码，JDK8类似。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//JDK 7</span><br><span class="line">public String(char value[], int offset, int count) &#123;</span><br><span class="line">	//check boundary</span><br><span class="line">	this.value = Arrays.copyOfRange(value, offset, offset + count);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">public String substring(int beginIndex, int endIndex) &#123;</span><br><span class="line">	//check boundary</span><br><span class="line">	int subLen = endIndex - beginIndex;</span><br><span class="line">	return new String(value, beginIndex, subLen);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;JDK 7
+public String(char value[], int offset, int count) &#123;
+	&#x2F;&#x2F;check boundary
+	this.value &#x3D; Arrays.copyOfRange(value, offset, offset + count);
+&#125;
+ 
+public String substring(int beginIndex, int endIndex) &#123;
+	&#x2F;&#x2F;check boundary
+	int subLen &#x3D; endIndex - beginIndex;
+	return new String(value, beginIndex, subLen);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>对于JDK的这种差异，我们知道就好，现在应该都是JDK7及8了吧，其实对于小字符串的这种操作性能也是可以忽略不计的。</p>
-
-      
+ 
+            </div>
+        </div>
+        
+            <div class="mt-3">
+                <!-- 前一页后一页 -->
+<div class="previous-next-links">
+     
+    <div class="previous-design-link">
+        <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/%E5%88%AB%E5%86%8D%E5%86%99%20bug%20%E4%BA%86%EF%BC%8C%E9%81%BF%E5%85%8D%E7%A9%BA%E6%8C%87%E9%92%88%E7%9A%84%205%20%E4%B8%AA%E6%A1%88%E4%BE%8B%EF%BC%81/">
+            <i style="font-size:16px;" class="fa fa-arrow-left" aria-hidden="true"></i>
+            别再写 bug 了，避免空指针的 5 个案例！
+        </a>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/10/15/%E8%BF%9B%E9%98%B6/%E5%AD%97%E7%AC%A6%E4%B8%B2%20substring%20%E6%96%B9%E6%B3%95%E5%9C%A8%20JDK%206,7,8%20%E4%B8%AD%E7%9A%84%E5%B7%AE%E5%BC%82%E3%80%82/" data-id="cmgrfxxd8002x30d4ayyp4au6" data-title="字符串 substring 方法在 JDK 6,7,8 中的差异。" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li></ul>
+     
 
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/%E5%88%AB%E5%86%8D%E5%86%99%20bug%20%E4%BA%86%EF%BC%8C%E9%81%BF%E5%85%8D%E7%A9%BA%E6%8C%87%E9%92%88%E7%9A%84%205%20%E4%B8%AA%E6%A1%88%E4%BE%8B%EF%BC%81/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          别再写 bug 了，避免空指针的 5 个案例！
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/%E7%A5%9E%E5%A5%87%EF%BC%8C%E6%95%99%E4%BD%A0%E7%94%A8%E9%9A%8F%E6%9C%BA%E6%95%B0%E6%89%93%E5%8D%B0hello%20world/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">神奇，教你用随机数打印hello world</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag">新特性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9B%E9%98%B6/" rel="tag">进阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li></ul>
+     
+    <div class="next-design-link">
+        <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/%E7%A5%9E%E5%A5%87%EF%BC%8C%E6%95%99%E4%BD%A0%E7%94%A8%E9%9A%8F%E6%9C%BA%E6%95%B0%E6%89%93%E5%8D%B0hello%20world/">
+            神奇，教你用随机数打印hello world
+            <i style="font-size:16px;" class="fa fa-arrow-right" aria-hidden="true"></i>
+        </a>
     </div>
-  </div>
+ 
+</div> 
+             
+            </div>
+        
 
-
-  
+    </div>
+    <div class="col-4 pe-0">
+        <div class="d-none d-sm-none d-md-block sticky-top border-start">
+             
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 18px;">基础</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 16px;">多线程</a> <a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" style="font-size: 20px;">新特性</a> <a href="/tags/%E8%BF%9B%E9%98%B6/" style="font-size: 14px;">进阶</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 12px;">集合</a>
-    </div>
-  </div>
-
-  
+        <div class="toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#substring%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">substring有什么用？</span></a></li></ol> 
+        </div>
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li></ul>
-    </div>
-  </div>
+ 
 
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java%205%20~%2010%20%E6%96%B0%E7%89%B9%E6%80%A7%E5%80%BE%E6%83%85%E6%95%B4%E7%90%86%EF%BC%81/">Java 5 ~ 10 新特性倾情整理！</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%206%20%E9%A2%97%E8%AF%AD%E6%B3%95%E7%B3%96/">Java 中的 6 颗语法糖</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%20String%20%E7%9C%9F%E7%9A%84%E6%98%AF%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%90%97%EF%BC%9F/">Java 中的 String 真的是不可变吗？</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E4%BC%AA%E5%85%B1%E4%BA%AB%E8%AF%A6%E8%A7%A3%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">Java 中的伪共享详解及解决方案</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E5%AE%8F%E5%8F%98%E9%87%8F%EF%BC%8C%E5%AE%8F%E6%9B%BF%E6%8D%A2%E8%AF%A6%E8%A7%A3%E3%80%82/">Java 中的宏变量，宏替换详解。</a>
-          </li>
-        
-      </ul>
+        </div>
     </div>
-  </div>
+</div>
+</div>
+ 
+    </main>
 
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2025 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    <!-- 底部栏 -->
+    <footer class="bg-dark pt-3 pb-0 mt-5 fixed-bottom" id="flex_bottom">
+    <div class="container pb-3 pt-3 text-center">
+        <p class="text-muted tag-hover">
+            All Rights Reserved <i class="fa fa-copyright"></i> by2025  <br>
+<!--             Powered by  -->
+<!--              <a class="link-secondary text-decoration-none" target="_blank" rel="noopener" href="https://hexo.io"> -->
+<!--                  Hexo.io -->
+<!--             </a> &  <a class="link-secondary text-decoration-none" target="_blank" rel="noopener" href="https://github.com/smile-yan/hexo-theme-heyan"> -->
+<!--                heyan -->
+<!--             </a> -->
+            <br>
+<!--             <a class="link-secondary text-decoration-none" target="_blank" rel="noopener" href="https://beian.miit.gov.cn/#/Integrated/index"> -->
+<!--                 <img src="/police.png" style="width: 18px; height: 18px; margin-top: -4px" class="nofancybox"> -->
+<!--                   -->
+<!--             </a> -->
+        </p>
     </div>
-  </div>
 </footer>
 
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.6.4.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
 </body>
+
+<script>
+    // 检查页面内容高度是否小于窗口高度
+    function checkContentHeight() {
+        const contentHeight = document.body.scrollHeight;
+        const windowHeight = window.innerHeight;
+
+        if (contentHeight < windowHeight) {
+            // 内容高度不足以填充整个窗口，固定底部导航栏
+            document.getElementById('flex_bottom').classList.add('fixed-bottom');
+        } else {
+            // 内容高度足够多，不固定底部导航栏
+            document.getElementById('flex_bottom').classList.remove('fixed-bottom');
+        }
+    }
+
+    // 页面加载时和窗口大小变化时检查内容高度
+    window.addEventListener('load', checkContentHeight);
+    window.addEventListener('resize', checkContentHeight);
+</script>
 </html>

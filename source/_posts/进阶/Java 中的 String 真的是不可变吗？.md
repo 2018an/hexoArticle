@@ -1,6 +1,7 @@
 ---
 title: Java 中的 String 真的是不可变吗？
 date: 2025-10-15 11:36:33
+category: 后端
 tags: 进阶
 ---
 
