@@ -1,173 +1,165 @@
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>只有那年胜过年年</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/favicon/site.webmanifest">
-    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
-    <link href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css">
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
-    
-<link rel="stylesheet" href="/css/prism.css">
- 
-    
-<link rel="stylesheet" href="/css/markdown.css">
- 
-    
-<script src="/js/prism.js"></script>
-
-    
-<link rel="stylesheet" href="/css/index.css">
- 
-    
-<script src="/js/search.js"></script>
-
-
-     
-        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-        <script>
-        MathJax = {
-            tex: {
-                inlineMath: [['$', '$'], ['\\(', '\\)']]
-            },
-            svg: {
-                fontCache: 'global'
-            }
-        };
-        </script>
-     
-
-     
-        <script src="//lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js"> </script>
-        
-<script src="/js/fancybox.js"></script>
-
-    
-
-    <script type="text/javascript">
-
-        var search_path = "/search.xml";
-        if (search_path.length == 0) {
-            search_path = "search.xml";
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Java 8 新特性之 Stream 流（四）并行流 | 只有那年胜过年年</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#FC5531"><meta name="description" content="随着对流API认识的慢慢深入，本章我们要讨论的知识点是流API里面的并行流了。 在开始讨论并行流之前，我先引发一下大家的思考，就你看到这篇文章的时间，你们是不是经常听到，Intel i7 CPU什么8核16线程，什么Android手机8核4GB这种消息，既然我们是处于一个多核处理器的时代，你们有没有想过并行地操作数组和集合框架，从而高速地执行我们对数组或者集合的一些操作呢？ 或许你有想过这个问题，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 8 新特性之 Stream 流（四）并行流">
+<meta property="og:url" content="http://example.com/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java8/Stream/Java%208%20%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%20Stream%20%E6%B5%81%EF%BC%88%E5%9B%9B%EF%BC%89%E5%B9%B6%E8%A1%8C%E6%B5%81/index.html">
+<meta property="og:site_name" content="只有那年胜过年年">
+<meta property="og:description" content="随着对流API认识的慢慢深入，本章我们要讨论的知识点是流API里面的并行流了。 在开始讨论并行流之前，我先引发一下大家的思考，就你看到这篇文章的时间，你们是不是经常听到，Intel i7 CPU什么8核16线程，什么Android手机8核4GB这种消息，既然我们是处于一个多核处理器的时代，你们有没有想过并行地操作数组和集合框架，从而高速地执行我们对数组或者集合的一些操作呢？ 或许你有想过这个问题，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/logo.png">
+<meta property="article:published_time" content="2025-10-15T03:36:33.000Z">
+<meta property="article:modified_time" content="2025-10-15T07:20:51.506Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="新特性">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/logo.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Java 8 新特性之 Stream 流（四）并行流",
+  "url": "http://example.com/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java8/Stream/Java%208%20%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%20Stream%20%E6%B5%81%EF%BC%88%E5%9B%9B%EF%BC%89%E5%B9%B6%E8%A1%8C%E6%B5%81/",
+  "image": "http://example.com/img/logo.png",
+  "datePublished": "2025-10-15T03:36:33.000Z",
+  "dateModified": "2025-10-15T07:20:51.506Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "John Doe",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java8/Stream/Java%208%20%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%20Stream%20%E6%B5%81%EF%BC%88%E5%9B%9B%EF%BC%89%E5%B9%B6%E8%A1%8C%E6%B5%81/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
         }
-        var path = search_path;
-        searchFunc(path, 'local-search-input', 'local-search-result');
-    </script>
-<meta name="generator" content="Hexo 7.3.0"></head>
- 
-<body>
-    <!-- 导航栏 -->
-    <!-- 导航栏 -->
-<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4 pt-2 pb-2">
-    <div class="container">
-        <!-- 标题 --> 
-        <a class="navbar-brand navbar-expand-sm" href="/">
-            <img class="nofancybox" src="/logo.png" style="width: 75px;"  alt="笑颜网">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        return value
+      }
+    }
 
-        <!-- 左边右边导航按钮 --> 
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav me-auto">
-                <!-- 左右两侧的导航栏 -->
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FC5531')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FC5531')
+        }
+      }
 
- 
- 
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
 
-    <li class="nav-item">
-        <a class="nav-link" href="/">
-           <big> <i class="fa fa-home ps-1" ></i> 主页</big>
-        </a>
-    </li>
-
-    <li class="nav-item">
-        <a class="nav-link" href="/archives">
-           <big> <i class="fa fa-archive ps-1" ></i> 归档</big>
-        </a>
-    </li>
-
-    <li class="nav-item">
-        <a class="nav-link" href="/about">
-           <big> <i class="fa fa-user ps-1" ></i> 关于</big>
-        </a>
-    </li>
- 
- 
-            </ul>
-
-            
-            <form class="">
-                <div class="d-flex">
-                    <button class="btn text-muted fa fa-search d-none d-md-block d-lg-block" disabled></button>
-                    <input id="local-search-input" class="form-control me-2 pe-4" type="search"
-                            placeholder="搜索 " aria-label="Search">
-                </div>
-                <div id="local-search-result" style="position:absolute; padding-top: 8px; max-height: 960px; width: 480px;overflow-y: scroll; z-index: 1050;"></div>
-            </form>
-            
-            <ul class="navbar-nav">
-                <!-- 左右两侧的导航栏 -->
-
- 
- 
-            </ul>
-        </div>
-    </div>
-</nav>
-
-
-    <main class="container">
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
         
-<div class="container-fluid markdown-section">
-<div class="row pb-3">
-    <div class="col-md-8 col-sm-12">
-        <!-- 博客详情 -->
-        <div class="">
-            <p class="h2">
-                <span class="post-title">
-                    Java 8 新特性之 Stream 流（四）并行流
-                </span>   
-            </p>
-
-            <div class="pb-3 pt-1 pe-3">
-                <i class="fa fa-calendar p-1"></i>
-                2025/10/15 11:36:33 
-                
-                    <i class="fa fa-folder-open p-1"> </i> 
-                    <span class="tag-hover">
-                        
-                            <a href="/categories/%E5%90%8E%E7%AB%AF/ " class="link-dark text-decoration-none"> 
-                                后端 
-                            </a>
-                         
-                    </span>
-                
-
-                
-                    <i class="fa fa-tag p-1"> </i>
-                    <span class="tag-hover">
-                        
-                            <a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" class="link-dark text-decoration-none"> 
-                                新特性 
-                            </a>
-                        
-                    </span>
-                
-            </div>
-
-            <div class="border-bottom pb-2">
-                <p>随着对流API认识的慢慢深入，本章我们要讨论的知识点是流API里面的并行流了。</p>
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: John Doe","link":"链接: ","source":"来源: 只有那年胜过年年","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Java 8 新特性之 Stream 流（四）并行流',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/logo.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">82</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/logo.png" alt="Logo"><span class="site-name">只有那年胜过年年</span></a><a class="nav-page-title" href="/"><span class="site-name">Java 8 新特性之 Stream 流（四）并行流</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Java 8 新特性之 Stream 流（四）并行流</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-10-15T03:36:33.000Z" title="发表于 2025-10-15 11:36:33">2025-10-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-10-15T07:20:51.506Z" title="更新于 2025-10-15 15:20:51">2025-10-15</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><p>随着对流API认识的慢慢深入，本章我们要讨论的知识点是流API里面的并行流了。</p>
 <p>在开始讨论并行流之前，我先引发一下大家的思考，就你看到这篇文章的时间，你们是不是经常听到，Intel i7 CPU什么8核16线程，什么Android手机8核4GB这种消息，既然我们是处于一个多核处理器的时代，你们有没有想过并行地操作数组和集合框架，从而高速地执行我们对数组或者集合的一些操作呢？</p>
 <p>或许你有想过这个问题，但是因为并行编程比较复杂，所以这些想法还停留在你的脑海当中，又或者你已经在路上了，反正你们就是最棒的（我他妈都这么夸你们了，就不能点个喜欢？）。</p>
 <p>不管如何，在你看到这一篇文章的时候，我将带你走向并行地操作数组或者集合，当然是使用我们的并行流知识啦。</p>
@@ -285,92 +277,59 @@ thread-3:   1 * 3 * 2   &#x3D;   6  *  2    |   因此最终的答案是2  *  �
 <p>我们在访问一个数组元素的时候，最快的方式肯定是通过索引去访问的吧，而for循环遍历的时候就是通过下标进行的，所以效率那是相当的高，但是当我们的数据结构不是数组的时候，比如是链表的时候，可想而知，for循环的效率是有多低，但是forEach底层采用的是迭代器的方式，他对数据结构是没有要求的，不管上层的数据结构是什么，他都能保证高效地执行！</p>
 <p>因此我的最终答案:如果数据结构是ArrayList这种数据结构，那你可以采用for,但是你的数据结构如果是LinkList那你千万别再用for,应该果断采用forEach,因为数据一多起来的，for此时的效率低得可怜，说不定你的机器就瘫痪了。这也是优化的一个小技巧吧，希望能帮助大家。</p>
 <h4 id="小结一下"><a href="#小结一下" class="headerlink" title="小结一下"></a>小结一下</h4><p>并行流学会了，你的功力，真的就增长了。效率再也不是问题了，基本上关于并行流的方方面面，这篇文章都已经说提到了，但是Stream在JDK中的变化还是挺快的，我一旦发现有什么改动，会最快地更新这篇文章。下一篇我们继续探索新知识点。</p>
- 
-            </div>
-        </div>
-        
-            <div class="mt-3">
-                <!-- 前一页后一页 -->
-<div class="previous-next-links">
-     
-    <div class="previous-design-link">
-        <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java8/Stream/Java%208%20%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%20Stream%20%E6%B5%81%EF%BC%88%E4%BA%94%EF%BC%89%E6%98%A0%E5%B0%84/">
-            <i style="font-size:16px;" class="fa fa-arrow-left" aria-hidden="true"></i>
-            Java 8 新特性之 Stream 流（五）映射
-        </a>
-    </div>
-     
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">John Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java8/Stream/Java%208%20%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%20Stream%20%E6%B5%81%EF%BC%88%E5%9B%9B%EF%BC%89%E5%B9%B6%E8%A1%8C%E6%B5%81/">http://example.com/2025/10/15/新特性/Java8/Stream/Java 8 新特性之 Stream 流（四）并行流/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">只有那年胜过年年</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/">新特性</a></div><div class="post-share"><div class="social-share" data-image="/img/logo.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java8/Stream/Java%208%20%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%20Stream%20%E6%B5%81%EF%BC%88%E5%85%AD%EF%BC%89%E6%94%B6%E9%9B%86/" title="Java 8 新特性之 Stream 流（六）收集"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Java 8 新特性之 Stream 流（六）收集</div></div><div class="info-2"><div class="info-item-1">我们前面的五篇文章基本都是在说将一个集合转成一个流，然后对流进行操作，其实这种操作是最多的，但有时候我们也是需要从流中收集起一些元素，并以集合的方式返回，我们把这种反向操作称为收集。 流API也给我们提供了相应的方法。 如何在流中使用收集功能？我们先看一看流API给我们提供的方法： public interface Stream&lt;T&gt; extends BaseStream&lt;T, Stream&lt;T&gt;&gt; &#123; &#x2F;&#x2F;...忽略那些不重要的东西 &lt;R&gt; R collect(Supplier&lt;R&gt; supplier,                   BiConsumer&lt;R, ? super T&gt; accumulator,                   BiConsumer&lt;R, R&gt; combiner); &lt;R, A&gt; R collect(Collector&lt;? super T, A, R&gt; collector); ｝  流API中给我们提供了...</div></div></div></a><a class="pagination-related" href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java8/Stream/Java%208%20%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8BStream%E6%B5%81/" title="Java 8 新特性之Stream流"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Java 8 新特性之Stream流</div></div><div class="info-2"><div class="info-item-1">是什么是Stream流java.util.stream.Stream Stream流和传统的IO流，它们都叫流，却是两个完全不一样的概念和东西。 流可以简单的说是处理数据集合的东西，可以申明式流式API来处理集合，而不是写一个逻辑实现。 流分类流分为顺序流及并行流，顺序流即每个指令按顺序执行，并行流即集合里面的操作并行执行。 List&lt;Integer&gt; numbers &#x3D; Arrays.asList(1, 2, 3);  &#x2F;&#x2F;　顺序流 numbers.stream().forEach(n -&gt; System.out.print(n));  &#x2F;&#x2F;并行流 numbers.parallelStream().forEach(n -&gt; System.out.print(n));  以上例子，顺序流总是输出123，而并行流则每次结果都不一定，并行流使用了ForkJoinPool分而治之，所以明白了ForkJoinPool原理的同学就知道并行流的真面目了。 创建流1、调用集合的stream()方法或者parallelSt...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java%205%20~%2010%20%E6%96%B0%E7%89%B9%E6%80%A7%E5%80%BE%E6%83%85%E6%95%B4%E7%90%86%EF%BC%81/" title="Java 5 ~ 10 新特性倾情整理！"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-15</div><div class="info-item-2">Java 5 ~ 10 新特性倾情整理！</div></div><div class="info-2"><div class="info-item-1">最近连 JDK11都在准备发布的路上了，大家都整明白了吗？也许现在大部分人还在用6-8，8的新特性都没用熟，9刚出不久，10-11就不用说了。 为了大家对JDK有一个全面的了解，下面我为大家整理了JDK5~10的所有关键新特性！ JDK5新特性  自动装箱与拆箱 枚举 静态导入 可变参数（Varargs） 内省（introspector） 泛型（Generic） For-Each循环  JDK6新特性  Desktop类和SystemTray类 使用JAXB2来实现对象与XML之间的映射 理解STAX 使用Compiler API 轻量级 Http Server API 插入式注解处理 API 使用Console开发控制台程序 对脚本语言的支持 Common Annotations Java GUI界面的显示 嵌入式数据库Derby Web服务元数据 Jtable的排序和过滤 更简单更强大的JAX-WS  JDK7新特性  switch中可以使用字符串了 泛型实例化类型自动推断 自定义自动关闭类 新增一些读取环境信息的工具方法 Boolean类型反转，空指针安全，参与位运算 两个...</div></div></div></a><a class="pagination-related" href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java10/Java%2010%20%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E7%B1%BB%E5%9E%8B%E6%8E%A8%E6%96%AD%E4%BB%8B%E7%BB%8D%E5%8F%8A%E5%AE%9E%E6%88%98/" title="Java 10 局部变量类型推断介绍及实战"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-15</div><div class="info-item-2">Java 10 局部变量类型推断介绍及实战</div></div><div class="info-2"><div class="info-item-1">现在 Java 9 被遗弃了直接升级到了 Java 10，之前也发过 Java 10 新特性的文章，现在是开始实战 Java 10 的时候了。 今天要实战的是 Java 10 中最重要的特性：局部变量类型推断，大家都知道是 var 关键字，但具体怎么使用，及要注意什么要点呢？ 我们通过几个例子来讲解局部变量类型推断这个新特性！ 什么是局部变量类型推断var javastack &#x3D; &quot;javastack&quot;; System.out.println(javastack);  大家看出来了，局部变量类型推断就是左边的类型直接使用 var 定义，而不用写具体的类型，编译器能根据右边的表达式自动推断类型，如上面的 String 。 var javastack &#x3D; &quot;javastack&quot;;  就等于： String javastack &#x3D; &quot;javastack&quot;;  局部变量类型推断使用示例既然叫局部变量类型推断，以只能用在局部变量中，下面给出更多使用示例。 1、字面量定义局部变量 private sta...</div></div></div></a><a class="pagination-related" href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java10/Java%2010%20%E7%9A%84%2010%20%E4%B8%AA%E6%96%B0%E7%89%B9%E6%80%A7%EF%BC%8C%E5%B0%86%E5%BD%BB%E5%BA%95%E6%94%B9%E5%8F%98%E4%BD%A0%E5%86%99%E4%BB%A3%E7%A0%81%E7%9A%84%E6%96%B9%E5%BC%8F/" title="Java 10 的 10 个新特性，将彻底改变你写代码的方式"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-15</div><div class="info-item-2">Java 10 的 10 个新特性，将彻底改变你写代码的方式</div></div><div class="info-2"><div class="info-item-1"> Java 9才发布几个月，很多玩意都没整明白，现在Java 10又快要来了。。 这时候我真尼玛想说：线上用的JDK 7 甚至JDK 6，JDK 8 还没用熟，JDK 9 才发布不久不知道啥玩意，JDK 10…… 刚学Java的同学是不是感觉一脸蒙逼？！！！ 就连我这个老司机也同样感觉如此！ Java 更新越来越快，我们做技术的也要跟上步伐，不然总会慢别人一拍，这新东西从国外到国内应用一般要好几年的时间，如果我们提前了解并应用这些新技术对自己不是坏事。 Java 10的新特性说了这么多，看Java 10都会有哪些特性来改变我们写代码的方式呢？！ 1.局部变量类型推断局部变量类型推断可以说是Java 10中最值得注意的特性，这是Java语言开发人员为了简化Java应用程序的编写而采取的又一步，如下图所示。  这个新功能将为Java增加一些语法糖 - 简化它并改善开发者体验。新的语法将减少与编写Java相关的冗长度，同时保持对静态类型安全性的承诺。 局部变量类型推断将引入”var”关键字，也就是你可以随意定义变量而不必指定变量的类型，如： List &lt;String&gt; li...</div></div></div></a><a class="pagination-related" href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java12/Java%2012%20%E9%AA%9A%E6%93%8D%E4%BD%9C%EF%BC%8C%20String%E5%B1%85%E7%84%B6%E8%BF%98%E8%83%BD%E8%BF%99%E6%A0%B7%E7%8E%A9/" title="Java 12 骚操作， String居然还能这样玩"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-15</div><div class="info-item-2">Java 12 骚操作， String居然还能这样玩</div></div><div class="info-2"><div class="info-item-1">Java 13 都快要来了，12必须跟栈长学起！ Java 13 即将发布，新特性必须抢先看！ Java 12 已经发布数月了：Java 12 正式发布，8大新特性！，今天我再来分享下在 Java 12 中关于 String 的三个骚操作，绝逼有用。 更多关于 Java 的资讯、干货教程、以及好消息，请关注，第一时间推送。 坐稳了，准备起飞！ 1、transformtransform：即字符串转换，来看下 transform 的实现源码： public &lt;R&gt; R transform(Function&lt;? super String, ? extends R&gt; f) &#123;     return f.apply(this); &#125;  传入一个函数式接口 Function，接受一个值，返回一个值，参考：Java 8 新特性之函数式接口。 废话少说，直接上手就是干： private static void testTransform() &#123;     System.out.println(&quot;&#x3D;&#x3D;&#x3D;&#...</div></div></div></a><a class="pagination-related" href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java12/Java%2012%20%E9%AA%9A%E6%93%8D%E4%BD%9C%EF%BC%8C%20%E6%96%87%E4%BB%B6%E6%AF%94%E5%AF%B9%E5%B1%85%E7%84%B6%E8%BF%98%E8%83%BD%E8%BF%99%E6%A0%B7%E7%8E%A9%EF%BC%81/" title="Java 12 骚操作， 文件比对居然还能这样玩！"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-15</div><div class="info-item-2">Java 12 骚操作， 文件比对居然还能这样玩！</div></div><div class="info-2"><div class="info-item-1">Java 13 都快要来了，12必须跟栈长学起！ Java 13 即将发布，新特性必须抢先看！ 之前分享了一些 Java 12 的骚操作，今天继续，今天要分享的是 Java 12 中的文件比对骚操作。 我们或多或少会遇到这样的需求：怎么比对两个文件中的内容一样？ 你会把两个文件中的内容拉出来一个个字符对比，然后提交一大堆不怎么优雅的代码？ 这样你就太 OUT 了！ 在 Java 12 中，仅需要 1 行代码即可搞定！ 来看示例代码： public static void main(String[] args) throws IOException &#123;     Path dir &#x3D; Paths.get(&quot;d:&#x2F;&quot;);      Path path1 &#x3D; dir.resolve(&quot;javastack1.txt&quot;);      Path path2 &#x3D; dir.resolve(&quot;javastack2.txt&quot;);      long result &#x3D; Files.mi...</div></div></div></a><a class="pagination-related" href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java12/Java%2012%20%E9%AA%9A%E6%93%8D%E4%BD%9C%EF%BC%8C%20switch%E5%B1%85%E7%84%B6%E8%BF%98%E8%83%BD%E8%BF%99%E6%A0%B7%E7%8E%A9%EF%BC%81/" title="Java 12 骚操作， switch居然还能这样玩！"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-15</div><div class="info-item-2">Java 12 骚操作， switch居然还能这样玩！</div></div><div class="info-2"><div class="info-item-1">Java 13 都快要来了，12必须跟栈长学起！ Java 13 即将发布，新特性必须抢先看！ 那么在 Java 12 中可以怎样玩 switch? 先来定义一个枚举类： public enum Status &#123;     OPEN, INIT, PROCESS, PENDING, CLOSE; &#125;  Java 12 之前是这样用的： private static void testSwitch1(Status status) &#123;     int result &#x3D; 0;     switch (status) &#123;         case OPEN:             result &#x3D; 1;             break;         case PROCESS:             result &#x3D; 2;             break;         case PENDING:             result &#x3D; 2;             break;       ...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B9%B6%E8%A1%8C%E6%B5%81"><span class="toc-number">1.</span> <span class="toc-text">并行流</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E6%B5%81-%E5%B9%B6%E8%A1%8C%E6%B5%81-%E6%97%A0%E5%BA%8F%E6%B5%81%E4%B9%8B%E9%97%B4%E7%9A%84%E5%88%87%E6%8D%A2%E6%93%8D%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">顺序流&amp;并行流&amp;无序流之间的切换操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93%E4%B8%80%E4%B8%8B"><span class="toc-number">3.</span> <span class="toc-text">小结一下</span></a></li></ol></div></div></div></div></main><footer id="footer" style="background: transparent;"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By John Doe</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><div class="js-pjax"><script>(() => {
+  let initFn = window.walineFn || null
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
 
-     
-    <div class="next-design-link">
-        <a href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java8/Stream/Java%208%20%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8BStream%E6%B5%81/">
-            Java 8 新特性之Stream流
-            <i style="font-size:16px;" class="fa fa-arrow-right" aria-hidden="true"></i>
-        </a>
-    </div>
- 
-</div> 
-             
-            </div>
-        
+  const destroyWaline = ele => ele.destroy()
 
-    </div>
-    <div class="col-4 pe-0">
-        <div class="d-none d-sm-none d-md-block sticky-top border-start">
-             
-    
-        <div class="toc">
-             
-        </div>
-    
- 
+  const initWaline = (Fn, el = document, path = window.location.pathname) => {
+    const waline = Fn({
+      el: el.querySelector('#waline-wrap'),
+      serverURL: 'https://walinecomments-gxccu74d8-chens-projects-7c4f92c5.vercel.app',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      comment: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
 
-        </div>
-    </div>
-</div>
-</div>
- 
-    </main>
-
-    <!-- 底部栏 -->
-    <footer class="bg-dark pt-3 pb-0 mt-5 fixed-bottom" id="flex_bottom">
-    <div class="container pb-3 pt-3 text-center">
-        <p class="text-muted tag-hover">
-            All Rights Reserved <i class="fa fa-copyright"></i> by2025  <br>
-<!--             Powered by  -->
-<!--              <a class="link-secondary text-decoration-none" target="_blank" rel="noopener" href="https://hexo.io"> -->
-<!--                  Hexo.io -->
-<!--             </a> &  <a class="link-secondary text-decoration-none" target="_blank" rel="noopener" href="https://github.com/smile-yan/hexo-theme-heyan"> -->
-<!--                heyan -->
-<!--             </a> -->
-            <br>
-<!--             <a class="link-secondary text-decoration-none" target="_blank" rel="noopener" href="https://beian.miit.gov.cn/#/Integrated/index"> -->
-<!--                 <img src="/police.png" style="width: 18px; height: 18px; margin-top: -4px" class="nofancybox"> -->
-<!--                   -->
-<!--             </a> -->
-        </p>
-    </div>
-</footer>
-
-</body>
-
-<script>
-    // 检查页面内容高度是否小于窗口高度
-    function checkContentHeight() {
-        const contentHeight = document.body.scrollHeight;
-        const windowHeight = window.innerHeight;
-
-        if (contentHeight < windowHeight) {
-            // 内容高度不足以填充整个窗口，固定底部导航栏
-            document.getElementById('flex_bottom').classList.add('fixed-bottom');
-        } else {
-            // 内容高度足够多，不固定底部导航栏
-            document.getElementById('flex_bottom').classList.remove('fixed-bottom');
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyWaline = () => {
+        destroyWaline(waline)
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
         }
+      }
     }
+  }
 
-    // 页面加载时和窗口大小变化时检查内容高度
-    window.addEventListener('load', checkContentHeight);
-    window.addEventListener('resize', checkContentHeight);
-</script>
-</html>
+  const loadWaline = (el, path) => {
+    if (initFn) initWaline(initFn, el, path)
+    else {
+      btf.getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css')
+        .then(() => import('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js'))
+        .then(({ init }) => {
+          initFn = init || Waline.init
+          initWaline(initFn, el, path)
+          window.walineFn = initFn
+        })
+    }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Waline'
+      ? window.shuoshuoComment = { loadComment: loadWaline } 
+      : window.loadOtherComment = loadWaline
+    return
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

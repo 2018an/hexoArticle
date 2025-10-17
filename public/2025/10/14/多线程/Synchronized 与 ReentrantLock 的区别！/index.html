@@ -1,173 +1,165 @@
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>只有那年胜过年年</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/favicon/site.webmanifest">
-    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
-    <link href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css">
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
-    
-<link rel="stylesheet" href="/css/prism.css">
- 
-    
-<link rel="stylesheet" href="/css/markdown.css">
- 
-    
-<script src="/js/prism.js"></script>
-
-    
-<link rel="stylesheet" href="/css/index.css">
- 
-    
-<script src="/js/search.js"></script>
-
-
-     
-        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-        <script>
-        MathJax = {
-            tex: {
-                inlineMath: [['$', '$'], ['\\(', '\\)']]
-            },
-            svg: {
-                fontCache: 'global'
-            }
-        };
-        </script>
-     
-
-     
-        <script src="//lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js"> </script>
-        
-<script src="/js/fancybox.js"></script>
-
-    
-
-    <script type="text/javascript">
-
-        var search_path = "/search.xml";
-        if (search_path.length == 0) {
-            search_path = "search.xml";
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Synchronized 与 ReentrantLock 的区别！ | 只有那年胜过年年</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#FC5531"><meta name="description" content="可重入性： 从名字上理解，ReenTrantLock的字面意思就是再进入的锁，其实synchronized关键字所使用的锁也是可重入的，两者关于这个的区别不大。两者都是同一个线程没进入一次，锁的计数器都自增1，所以要等到锁的计数器下降为0时才能释放锁。 锁的实现： Synchronized是依赖于JVM实现的，而ReenTrantLock是JDK实现的，有什么区别，说白了就类似于操作系统来控制实现">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Synchronized 与 ReentrantLock 的区别！">
+<meta property="og:url" content="http://example.com/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/Synchronized%20%E4%B8%8E%20ReentrantLock%20%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%81/index.html">
+<meta property="og:site_name" content="只有那年胜过年年">
+<meta property="og:description" content="可重入性： 从名字上理解，ReenTrantLock的字面意思就是再进入的锁，其实synchronized关键字所使用的锁也是可重入的，两者关于这个的区别不大。两者都是同一个线程没进入一次，锁的计数器都自增1，所以要等到锁的计数器下降为0时才能释放锁。 锁的实现： Synchronized是依赖于JVM实现的，而ReenTrantLock是JDK实现的，有什么区别，说白了就类似于操作系统来控制实现">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/logo.png">
+<meta property="article:published_time" content="2025-10-14T06:42:34.000Z">
+<meta property="article:modified_time" content="2025-10-15T07:20:25.073Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="多线程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/logo.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Synchronized 与 ReentrantLock 的区别！",
+  "url": "http://example.com/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/Synchronized%20%E4%B8%8E%20ReentrantLock%20%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%81/",
+  "image": "http://example.com/img/logo.png",
+  "datePublished": "2025-10-14T06:42:34.000Z",
+  "dateModified": "2025-10-15T07:20:25.073Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "John Doe",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/Synchronized%20%E4%B8%8E%20ReentrantLock%20%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%81/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
         }
-        var path = search_path;
-        searchFunc(path, 'local-search-input', 'local-search-result');
-    </script>
-<meta name="generator" content="Hexo 7.3.0"></head>
- 
-<body>
-    <!-- 导航栏 -->
-    <!-- 导航栏 -->
-<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4 pt-2 pb-2">
-    <div class="container">
-        <!-- 标题 --> 
-        <a class="navbar-brand navbar-expand-sm" href="/">
-            <img class="nofancybox" src="/logo.png" style="width: 75px;"  alt="笑颜网">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        return value
+      }
+    }
 
-        <!-- 左边右边导航按钮 --> 
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav me-auto">
-                <!-- 左右两侧的导航栏 -->
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FC5531')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FC5531')
+        }
+      }
 
- 
- 
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
 
-    <li class="nav-item">
-        <a class="nav-link" href="/">
-           <big> <i class="fa fa-home ps-1" ></i> 主页</big>
-        </a>
-    </li>
-
-    <li class="nav-item">
-        <a class="nav-link" href="/archives">
-           <big> <i class="fa fa-archive ps-1" ></i> 归档</big>
-        </a>
-    </li>
-
-    <li class="nav-item">
-        <a class="nav-link" href="/about">
-           <big> <i class="fa fa-user ps-1" ></i> 关于</big>
-        </a>
-    </li>
- 
- 
-            </ul>
-
-            
-            <form class="">
-                <div class="d-flex">
-                    <button class="btn text-muted fa fa-search d-none d-md-block d-lg-block" disabled></button>
-                    <input id="local-search-input" class="form-control me-2 pe-4" type="search"
-                            placeholder="搜索 " aria-label="Search">
-                </div>
-                <div id="local-search-result" style="position:absolute; padding-top: 8px; max-height: 960px; width: 480px;overflow-y: scroll; z-index: 1050;"></div>
-            </form>
-            
-            <ul class="navbar-nav">
-                <!-- 左右两侧的导航栏 -->
-
- 
- 
-            </ul>
-        </div>
-    </div>
-</nav>
-
-
-    <main class="container">
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
         
-<div class="container-fluid markdown-section">
-<div class="row pb-3">
-    <div class="col-md-8 col-sm-12">
-        <!-- 博客详情 -->
-        <div class="">
-            <p class="h2">
-                <span class="post-title">
-                    Synchronized 与 ReentrantLock 的区别！
-                </span>   
-            </p>
-
-            <div class="pb-3 pt-1 pe-3">
-                <i class="fa fa-calendar p-1"></i>
-                2025/10/14 14:42:34 
-                
-                    <i class="fa fa-folder-open p-1"> </i> 
-                    <span class="tag-hover">
-                        
-                            <a href="/categories/%E5%90%8E%E7%AB%AF/ " class="link-dark text-decoration-none"> 
-                                后端 
-                            </a>
-                         
-                    </span>
-                
-
-                
-                    <i class="fa fa-tag p-1"> </i>
-                    <span class="tag-hover">
-                        
-                            <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="link-dark text-decoration-none"> 
-                                多线程 
-                            </a>
-                        
-                    </span>
-                
-            </div>
-
-            <div class="border-bottom pb-2">
-                <p><strong>可重入性：</strong></p>
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: John Doe","link":"链接: ","source":"来源: 只有那年胜过年年","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Synchronized 与 ReentrantLock 的区别！',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/logo.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">82</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/logo.png" alt="Logo"><span class="site-name">只有那年胜过年年</span></a><a class="nav-page-title" href="/"><span class="site-name">Synchronized 与 ReentrantLock 的区别！</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Synchronized 与 ReentrantLock 的区别！</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-10-14T06:42:34.000Z" title="发表于 2025-10-14 14:42:34">2025-10-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-10-15T07:20:25.073Z" title="更新于 2025-10-15 15:20:25">2025-10-15</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><p><strong>可重入性：</strong></p>
 <p>从名字上理解，ReenTrantLock的字面意思就是再进入的锁，其实synchronized关键字所使用的锁也是可重入的，两者关于这个的区别不大。两者都是同一个线程没进入一次，锁的计数器都自增1，所以要等到锁的计数器下降为0时才能释放锁。</p>
 <p><strong>锁的实现：</strong></p>
 <p>Synchronized是依赖于JVM实现的，而ReenTrantLock是JDK实现的，有什么区别，说白了就类似于操作系统来控制实现和用户自己敲代码实现的区别。前者的实现是比较难见到的，后者有直接的源码可供阅读。</p>
@@ -184,88 +176,59 @@
 <p>在网上看到相关的源码分析，本来这块应该是本文的核心，但是感觉比较复杂就不一一详解了，简单来说，ReenTrantLock的实现是一种自旋锁，通过循环调用CAS操作来实现加锁。它的性能比较好也是因为避免了使线程进入内核态的阻塞状态。想尽办法避免线程进入内核的阻塞状态是我们去分析和理解锁设计的关键钥匙。</p>
 <p><strong>什么情况下使用ReenTrantLock：</strong></p>
 <p>答案是，如果你需要实现ReenTrantLock的三个独有功能时。</p>
- 
-            </div>
-        </div>
-        
-            <div class="mt-3">
-                <!-- 前一页后一页 -->
-<div class="previous-next-links">
-     
-    <div class="previous-design-link">
-        <a href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AF%B9%E9%94%81%E4%BC%98%E5%8C%96%E6%89%80%E5%81%9A%E7%9A%84%E5%8A%AA%E5%8A%9B/">
-            <i style="font-size:16px;" class="fa fa-arrow-left" aria-hidden="true"></i>
-            Java虚拟机对锁优化所做的努力
-        </a>
-    </div>
-     
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">John Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/Synchronized%20%E4%B8%8E%20ReentrantLock%20%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%81/">http://example.com/2025/10/14/多线程/Synchronized 与 ReentrantLock 的区别！/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">只有那年胜过年年</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">多线程</a></div><div class="post-share"><div class="social-share" data-image="/img/logo.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AF%B9%E9%94%81%E4%BC%98%E5%8C%96%E6%89%80%E5%81%9A%E7%9A%84%E5%8A%AA%E5%8A%9B/" title="Java虚拟机对锁优化所做的努力"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Java虚拟机对锁优化所做的努力</div></div><div class="info-2"><div class="info-item-1"> 作为一款公用平台，JDK 本身也为并发程序的性能绞尽脑汁，在 JDK 内部也想尽一切办法提供并发时的系统吞吐量。这里，我将向大家简单介绍几种 JDK 内部的 “锁” 优化策略。 1、 锁偏向锁偏向是一种针对加锁操作的优化手段。 如果一个线程获得了锁，那么锁就进入偏向模式。当这个线程再次请求锁时，无须再做任何同步操作。这样就节省了大量有关锁申请的操作，从而提高了程序性能。因此，对于几乎没有锁竞争的场合，偏向锁有比较红啊的优化效果，因为连续多次极有可能是同一个线程请求相同的锁。而对于锁竞争比较激烈的场合，其效果不佳。因为在竞争激烈的场合，最有可能的情况是每次都是不同的线程来请求相同的锁。 2、 轻量级锁如果偏向锁失败，即上一个请求的锁的线程和这个线程不是同一个。偏向锁失败意味者不能避免做同步操作。此时，虚拟机并不会立即挂起线程。他会使用一种成为轻量级锁的优化手段。 轻量级锁的操作也很方便，它只是简单地将对象头部作为指针，指向蚩尤锁的线程堆栈的内部，来判断一个线程是否持有对象锁。 如果线程获得轻量级锁成功，则可以顺利进入临界区。如果轻量级锁失败，则表示其他线程抢先争夺了锁，那么当前线...</div></div></div></a><a class="pagination-related" href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/Synchronized%20%E6%9C%89%E5%87%A0%E7%A7%8D%E7%94%A8%E6%B3%95%EF%BC%9F/" title="Synchronized 有几种用法？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Synchronized 有几种用法？</div></div><div class="info-2"><div class="info-item-1">我们都知道 Synchronized 是线程安全同步用的，大部分程序可能只会用到同步方法上面。其实 Synchronized 可以用到更多的场合，栈长列举了以下几个用法。 1、同步普通方法这个也是我们用得最多的，只要涉及线程安全，上来就给方法来个同步锁。这种方法使用虽然最简单，但是只能作用在单例上面，如果不是单例，同步方法锁将失效。 &#x2F;**  * 用在普通方法  *&#x2F; private synchronized void synchronizedMethod() &#123; 	System.out.println(&quot;synchronizedMethod&quot;); 	try &#123; 		Thread.sleep(2000); 	&#125; catch (InterruptedException e) &#123; 		e.printStackTrace(); 	&#125; &#125;  此时，同一个实例只有一个线程能获取锁进入这个方法。 2、同步静态方法同步静态方法，不管你有多少个类实例，同时只有一个线程能获取锁进入这个方法。 &#x...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/Java%E5%A4%9A%E7%BA%BF%E7%A8%8Bjoin%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%8E%9F%E7%90%86/" title="Java多线程join使用及原理"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-15</div><div class="info-item-2">Java多线程join使用及原理</div></div><div class="info-2"><div class="info-item-1">join()join()是线程类Thread的方法，官方的说明是：  Waits for this thread to die.  等待这个线程结束，也就是说当前线程等待这个线程结束后再继续执行，下面来看这个示例就明白了。 示例public static void main(String[] args) throws Exception &#123; 	System.out.println(&quot;start&quot;);  	Thread t &#x3D; new Thread(() -&gt; &#123; 		for (int i &#x3D; 0; i &lt; 5; i++) &#123; 			System.out.println(i); 			try &#123; 				Thread.sleep(500); 			&#125; catch (InterruptedException e) &#123; 				e.printStackTrace(); 			&#125; 		&#125; 	&#125;); 	t.start(); 	t.join();  	...</div></div></div></a><a class="pagination-related" href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%8F%AF%E4%BB%A5%E5%88%86%E7%BB%84%E8%BF%98%E8%83%BD%E8%BF%99%E6%A0%B7%E7%8E%A9/" title="Java多线程可以分组还能这样玩"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-15</div><div class="info-item-2">Java多线程可以分组还能这样玩</div></div><div class="info-2"><div class="info-item-1">但如果线程很多的情况下，你知道如何对它们进行分组吗？ 和 Dubbo 的服务分组一样，Java 可以对相同性质的线程进行分组。 来看下线程类 Thread 的所有构造方法。  如图所示，带有 ThreadGroup 的所有线程构造方法都可以定义线程组的。 线程组使用 java.lang.ThreadGroup 类定义，它有两个构造方法，第二个构造方法允许线程组有父类线程组，也就是说一个线程组可以多个子线程组。 java.lang.ThreadGroup#ThreadGroup(java.lang.String) java.lang.ThreadGroup#ThreadGroup(java.lang.ThreadGroup, java.lang.String)   线程组中比较有用的几个方法。  &#x2F;&#x2F; 获取当前线程组内的运行线程数java.lang.ThreadGroup#activeCount &#x2F;&#x2F; 中断线程组内的所有线程java.lang.ThreadGroup#interrupt &#x2F;&#x2F; 使用 System.out 打...</div></div></div></a><a class="pagination-related" href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AF%B9%E9%94%81%E4%BC%98%E5%8C%96%E6%89%80%E5%81%9A%E7%9A%84%E5%8A%AA%E5%8A%9B/" title="Java虚拟机对锁优化所做的努力"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-15</div><div class="info-item-2">Java虚拟机对锁优化所做的努力</div></div><div class="info-2"><div class="info-item-1"> 作为一款公用平台，JDK 本身也为并发程序的性能绞尽脑汁，在 JDK 内部也想尽一切办法提供并发时的系统吞吐量。这里，我将向大家简单介绍几种 JDK 内部的 “锁” 优化策略。 1、 锁偏向锁偏向是一种针对加锁操作的优化手段。 如果一个线程获得了锁，那么锁就进入偏向模式。当这个线程再次请求锁时，无须再做任何同步操作。这样就节省了大量有关锁申请的操作，从而提高了程序性能。因此，对于几乎没有锁竞争的场合，偏向锁有比较红啊的优化效果，因为连续多次极有可能是同一个线程请求相同的锁。而对于锁竞争比较激烈的场合，其效果不佳。因为在竞争激烈的场合，最有可能的情况是每次都是不同的线程来请求相同的锁。 2、 轻量级锁如果偏向锁失败，即上一个请求的锁的线程和这个线程不是同一个。偏向锁失败意味者不能避免做同步操作。此时，虚拟机并不会立即挂起线程。他会使用一种成为轻量级锁的优化手段。 轻量级锁的操作也很方便，它只是简单地将对象头部作为指针，指向蚩尤锁的线程堆栈的内部，来判断一个线程是否持有对象锁。 如果线程获得轻量级锁成功，则可以顺利进入临界区。如果轻量级锁失败，则表示其他线程抢先争夺了锁，那么当前线...</div></div></div></a><a class="pagination-related" href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/Synchronized%20%E6%9C%89%E5%87%A0%E7%A7%8D%E7%94%A8%E6%B3%95%EF%BC%9F/" title="Synchronized 有几种用法？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-15</div><div class="info-item-2">Synchronized 有几种用法？</div></div><div class="info-2"><div class="info-item-1">我们都知道 Synchronized 是线程安全同步用的，大部分程序可能只会用到同步方法上面。其实 Synchronized 可以用到更多的场合，栈长列举了以下几个用法。 1、同步普通方法这个也是我们用得最多的，只要涉及线程安全，上来就给方法来个同步锁。这种方法使用虽然最简单，但是只能作用在单例上面，如果不是单例，同步方法锁将失效。 &#x2F;**  * 用在普通方法  *&#x2F; private synchronized void synchronizedMethod() &#123; 	System.out.println(&quot;synchronizedMethod&quot;); 	try &#123; 		Thread.sleep(2000); 	&#125; catch (InterruptedException e) &#123; 		e.printStackTrace(); 	&#125; &#125;  此时，同一个实例只有一个线程能获取锁进入这个方法。 2、同步静态方法同步静态方法，不管你有多少个类实例，同时只有一个线程能获取锁进入这个方法。 &#x...</div></div></div></a><a class="pagination-related" href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/i++%E6%98%AF%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E5%90%97%EF%BC%9F/" title="i++是线程安全的吗?"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-15</div><div class="info-item-2">i++是线程安全的吗?</div></div><div class="info-2"><div class="info-item-1"> i++ 是线程安全的吗？ 相信很多中高级的 Java 面试者都遇到过这个问题，很多对这个不是很清楚的肯定是一脸蒙逼。内心肯定还在质疑，i++ 居然还有线程安全问题？只能说自己了解的不够多，自己的水平有限。 先来看下面的示例来验证下 i++ 到底是不是线程安全的。 1000个线程，每个线程对共享变量 count 进行 1000 次 ++ 操作。 static int count &#x3D; 0;  static CountDownLatch cdl &#x3D; new CountDownLatch(1000);  &#x2F;** *  *&#x2F; public static void main(String[] args) throws Exception &#123; 	CountRunnable countRunnable &#x3D; new CountRunnable(); 	for (int i &#x3D; 0; i &lt; 1000; i++) &#123; 		new Thread(countRunnable).start(); 	&#125; 	cd...</div></div></div></a><a class="pagination-related" href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/sleep(%20)%E5%92%8Cwait(%20)%E7%9A%84%E8%BF%995%E4%B8%AA%E5%8C%BA%E5%88%AB%EF%BC%8C%E4%BD%A0%E7%9F%A5%E9%81%93%E5%87%A0%E4%B8%AA%EF%BC%9F/" title="sleep( )和wait( )的这5个区别，你知道几个？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-15</div><div class="info-item-2">sleep( )和wait( )的这5个区别，你知道几个？</div></div><div class="info-2"><div class="info-item-1">sleep(休眠) 和 wait(等待) 方法是 Java 多线程中常用的两个方法，它们有什么区别及一些该注意的地方有哪些呢？下面给大家一一分解。 在之前的文章《Java多线程神器：join使用及原理》介绍了，它其实用的是 wait 实现的线程等待。 区别1：使用限制使用 sleep 方法可以让让当前线程休眠，时间一到当前线程继续往下执行，在任何地方都能使用，但需要捕获 InterruptedException 异常。 try &#123; 	Thread.sleep(3000L); &#125; catch (InterruptedException e) &#123; 	e.printStackTrace(); &#125;  而使用 wait 方法则必须放在 synchronized 块里面，同样需要捕获 InterruptedException 异常，并且需要获取对象的锁。 synchronized (lock)&#123;     try &#123;         lock.wait();     &#125; catch (InterruptedException...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/logo.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">John Doe</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">82</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/xxxxx" target="_blank" title="Github"><i class="fab fa-github" style="color: #hdhfbb;"></i></a><a class="social-icon" href="mailto:xxxxxx@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #000000;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">🌸 春去秋来，花开花落  📚 桌上的日历又薄了几页  💭 记忆中的昨天还那么清晰</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%206%20%E9%A2%97%E8%AF%AD%E6%B3%95%E7%B3%96/" title="Java 中的 6 颗语法糖">Java 中的 6 颗语法糖</a><time datetime="2025-10-15T03:36:33.000Z" title="发表于 2025-10-15 11:36:33">2025-10-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%20String%20%E7%9C%9F%E7%9A%84%E6%98%AF%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%90%97%EF%BC%9F/" title="Java 中的 String 真的是不可变吗？">Java 中的 String 真的是不可变吗？</a><time datetime="2025-10-15T03:36:33.000Z" title="发表于 2025-10-15 11:36:33">2025-10-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E4%BC%AA%E5%85%B1%E4%BA%AB%E8%AF%A6%E8%A7%A3%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" title="Java 中的伪共享详解及解决方案">Java 中的伪共享详解及解决方案</a><time datetime="2025-10-15T03:36:33.000Z" title="发表于 2025-10-15 11:36:33">2025-10-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E5%AE%8F%E5%8F%98%E9%87%8F%EF%BC%8C%E5%AE%8F%E6%9B%BF%E6%8D%A2%E8%AF%A6%E8%A7%A3%E3%80%82/" title="Java 中的宏变量，宏替换详解。">Java 中的宏变量，宏替换详解。</a><time datetime="2025-10-15T03:36:33.000Z" title="发表于 2025-10-15 11:36:33">2025-10-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E8%8E%B7%E5%8F%96%E7%B1%BB%E5%90%8D%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95%EF%BC%8C%E4%BD%A0%E7%9F%A5%E9%81%93%E5%87%A0%E7%A7%8D%EF%BC%9F/" title="Java 中获取类名的三种方法，你知道几种？">Java 中获取类名的三种方法，你知道几种？</a><time datetime="2025-10-15T03:36:33.000Z" title="发表于 2025-10-15 11:36:33">2025-10-15</time></div></div></div></div></div></div></main><footer id="footer" style="background: transparent;"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By John Doe</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><div class="js-pjax"><script>(() => {
+  let initFn = window.walineFn || null
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
 
-     
-    <div class="next-design-link">
-        <a href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/Synchronized%20%E6%9C%89%E5%87%A0%E7%A7%8D%E7%94%A8%E6%B3%95%EF%BC%9F/">
-            Synchronized 有几种用法？
-            <i style="font-size:16px;" class="fa fa-arrow-right" aria-hidden="true"></i>
-        </a>
-    </div>
- 
-</div> 
-             
-            </div>
-        
+  const destroyWaline = ele => ele.destroy()
 
-    </div>
-    <div class="col-4 pe-0">
-        <div class="d-none d-sm-none d-md-block sticky-top border-start">
-             
-    
- 
+  const initWaline = (Fn, el = document, path = window.location.pathname) => {
+    const waline = Fn({
+      el: el.querySelector('#waline-wrap'),
+      serverURL: 'https://walinecomments-gxccu74d8-chens-projects-7c4f92c5.vercel.app',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      comment: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
 
-        </div>
-    </div>
-</div>
-</div>
- 
-    </main>
-
-    <!-- 底部栏 -->
-    <footer class="bg-dark pt-3 pb-0 mt-5 fixed-bottom" id="flex_bottom">
-    <div class="container pb-3 pt-3 text-center">
-        <p class="text-muted tag-hover">
-            All Rights Reserved <i class="fa fa-copyright"></i> by2025  <br>
-<!--             Powered by  -->
-<!--              <a class="link-secondary text-decoration-none" target="_blank" rel="noopener" href="https://hexo.io"> -->
-<!--                  Hexo.io -->
-<!--             </a> &  <a class="link-secondary text-decoration-none" target="_blank" rel="noopener" href="https://github.com/smile-yan/hexo-theme-heyan"> -->
-<!--                heyan -->
-<!--             </a> -->
-            <br>
-<!--             <a class="link-secondary text-decoration-none" target="_blank" rel="noopener" href="https://beian.miit.gov.cn/#/Integrated/index"> -->
-<!--                 <img src="/police.png" style="width: 18px; height: 18px; margin-top: -4px" class="nofancybox"> -->
-<!--                   -->
-<!--             </a> -->
-        </p>
-    </div>
-</footer>
-
-</body>
-
-<script>
-    // 检查页面内容高度是否小于窗口高度
-    function checkContentHeight() {
-        const contentHeight = document.body.scrollHeight;
-        const windowHeight = window.innerHeight;
-
-        if (contentHeight < windowHeight) {
-            // 内容高度不足以填充整个窗口，固定底部导航栏
-            document.getElementById('flex_bottom').classList.add('fixed-bottom');
-        } else {
-            // 内容高度足够多，不固定底部导航栏
-            document.getElementById('flex_bottom').classList.remove('fixed-bottom');
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyWaline = () => {
+        destroyWaline(waline)
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
         }
+      }
     }
+  }
 
-    // 页面加载时和窗口大小变化时检查内容高度
-    window.addEventListener('load', checkContentHeight);
-    window.addEventListener('resize', checkContentHeight);
-</script>
-</html>
+  const loadWaline = (el, path) => {
+    if (initFn) initWaline(initFn, el, path)
+    else {
+      btf.getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css')
+        .then(() => import('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js'))
+        .then(({ init }) => {
+          initFn = init || Waline.init
+          initWaline(initFn, el, path)
+          window.walineFn = initFn
+        })
+    }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Waline'
+      ? window.shuoshuoComment = { loadComment: loadWaline } 
+      : window.loadOtherComment = loadWaline
+    return
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

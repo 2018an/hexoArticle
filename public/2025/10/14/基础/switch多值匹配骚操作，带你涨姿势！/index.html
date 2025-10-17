@@ -1,173 +1,165 @@
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>只有那年胜过年年</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/favicon/site.webmanifest">
-    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
-    <link href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css">
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
-    
-<link rel="stylesheet" href="/css/prism.css">
- 
-    
-<link rel="stylesheet" href="/css/markdown.css">
- 
-    
-<script src="/js/prism.js"></script>
-
-    
-<link rel="stylesheet" href="/css/index.css">
- 
-    
-<script src="/js/search.js"></script>
-
-
-     
-        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-        <script>
-        MathJax = {
-            tex: {
-                inlineMath: [['$', '$'], ['\\(', '\\)']]
-            },
-            svg: {
-                fontCache: 'global'
-            }
-        };
-        </script>
-     
-
-     
-        <script src="//lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js"> </script>
-        
-<script src="/js/fancybox.js"></script>
-
-    
-
-    <script type="text/javascript">
-
-        var search_path = "/search.xml";
-        if (search_path.length == 0) {
-            search_path = "search.xml";
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>switch多值匹配骚操作，带你涨姿势！ | 只有那年胜过年年</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#FC5531"><meta name="description" content="我们都知道 switch 用来走流程分支，大多情况下用来匹配单个值，如下面的例子所示： &#x2F;**  * @from   * @author 栈长  *&#x2F; private static void test(int value) &#123;     switch (value) &#123;         case 1:             System.out.printl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="switch多值匹配骚操作，带你涨姿势！">
+<meta property="og:url" content="http://example.com/2025/10/14/%E5%9F%BA%E7%A1%80/switch%E5%A4%9A%E5%80%BC%E5%8C%B9%E9%85%8D%E9%AA%9A%E6%93%8D%E4%BD%9C%EF%BC%8C%E5%B8%A6%E4%BD%A0%E6%B6%A8%E5%A7%BF%E5%8A%BF%EF%BC%81/index.html">
+<meta property="og:site_name" content="只有那年胜过年年">
+<meta property="og:description" content="我们都知道 switch 用来走流程分支，大多情况下用来匹配单个值，如下面的例子所示： &#x2F;**  * @from   * @author 栈长  *&#x2F; private static void test(int value) &#123;     switch (value) &#123;         case 1:             System.out.printl">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/logo.png">
+<meta property="article:published_time" content="2025-10-14T06:42:34.000Z">
+<meta property="article:modified_time" content="2025-10-15T07:19:51.833Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="基础">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/logo.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "switch多值匹配骚操作，带你涨姿势！",
+  "url": "http://example.com/2025/10/14/%E5%9F%BA%E7%A1%80/switch%E5%A4%9A%E5%80%BC%E5%8C%B9%E9%85%8D%E9%AA%9A%E6%93%8D%E4%BD%9C%EF%BC%8C%E5%B8%A6%E4%BD%A0%E6%B6%A8%E5%A7%BF%E5%8A%BF%EF%BC%81/",
+  "image": "http://example.com/img/logo.png",
+  "datePublished": "2025-10-14T06:42:34.000Z",
+  "dateModified": "2025-10-15T07:19:51.833Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "John Doe",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/10/14/%E5%9F%BA%E7%A1%80/switch%E5%A4%9A%E5%80%BC%E5%8C%B9%E9%85%8D%E9%AA%9A%E6%93%8D%E4%BD%9C%EF%BC%8C%E5%B8%A6%E4%BD%A0%E6%B6%A8%E5%A7%BF%E5%8A%BF%EF%BC%81/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
         }
-        var path = search_path;
-        searchFunc(path, 'local-search-input', 'local-search-result');
-    </script>
-<meta name="generator" content="Hexo 7.3.0"></head>
- 
-<body>
-    <!-- 导航栏 -->
-    <!-- 导航栏 -->
-<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4 pt-2 pb-2">
-    <div class="container">
-        <!-- 标题 --> 
-        <a class="navbar-brand navbar-expand-sm" href="/">
-            <img class="nofancybox" src="/logo.png" style="width: 75px;"  alt="笑颜网">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        return value
+      }
+    }
 
-        <!-- 左边右边导航按钮 --> 
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav me-auto">
-                <!-- 左右两侧的导航栏 -->
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FC5531')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FC5531')
+        }
+      }
 
- 
- 
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
 
-    <li class="nav-item">
-        <a class="nav-link" href="/">
-           <big> <i class="fa fa-home ps-1" ></i> 主页</big>
-        </a>
-    </li>
-
-    <li class="nav-item">
-        <a class="nav-link" href="/archives">
-           <big> <i class="fa fa-archive ps-1" ></i> 归档</big>
-        </a>
-    </li>
-
-    <li class="nav-item">
-        <a class="nav-link" href="/about">
-           <big> <i class="fa fa-user ps-1" ></i> 关于</big>
-        </a>
-    </li>
- 
- 
-            </ul>
-
-            
-            <form class="">
-                <div class="d-flex">
-                    <button class="btn text-muted fa fa-search d-none d-md-block d-lg-block" disabled></button>
-                    <input id="local-search-input" class="form-control me-2 pe-4" type="search"
-                            placeholder="搜索 " aria-label="Search">
-                </div>
-                <div id="local-search-result" style="position:absolute; padding-top: 8px; max-height: 960px; width: 480px;overflow-y: scroll; z-index: 1050;"></div>
-            </form>
-            
-            <ul class="navbar-nav">
-                <!-- 左右两侧的导航栏 -->
-
- 
- 
-            </ul>
-        </div>
-    </div>
-</nav>
-
-
-    <main class="container">
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
         
-<div class="container-fluid markdown-section">
-<div class="row pb-3">
-    <div class="col-md-8 col-sm-12">
-        <!-- 博客详情 -->
-        <div class="">
-            <p class="h2">
-                <span class="post-title">
-                    switch多值匹配骚操作，带你涨姿势！
-                </span>   
-            </p>
-
-            <div class="pb-3 pt-1 pe-3">
-                <i class="fa fa-calendar p-1"></i>
-                2025/10/14 14:42:34 
-                
-                    <i class="fa fa-folder-open p-1"> </i> 
-                    <span class="tag-hover">
-                        
-                            <a href="/categories/%E5%90%8E%E7%AB%AF/ " class="link-dark text-decoration-none"> 
-                                后端 
-                            </a>
-                         
-                    </span>
-                
-
-                
-                    <i class="fa fa-tag p-1"> </i>
-                    <span class="tag-hover">
-                        
-                            <a href="/tags/%E5%9F%BA%E7%A1%80/" class="link-dark text-decoration-none"> 
-                                基础 
-                            </a>
-                        
-                    </span>
-                
-            </div>
-
-            <div class="border-bottom pb-2">
-                <p>我们都知道 <code>switch</code> 用来走流程分支，大多情况下用来匹配单个值，如下面的例子所示：</p>
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: John Doe","link":"链接: ","source":"来源: 只有那年胜过年年","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'switch多值匹配骚操作，带你涨姿势！',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/logo.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">82</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/logo.png" alt="Logo"><span class="site-name">只有那年胜过年年</span></a><a class="nav-page-title" href="/"><span class="site-name">switch多值匹配骚操作，带你涨姿势！</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">switch多值匹配骚操作，带你涨姿势！</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-10-14T06:42:34.000Z" title="发表于 2025-10-14 14:42:34">2025-10-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-10-15T07:19:51.833Z" title="更新于 2025-10-15 15:19:51">2025-10-15</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><p>我们都知道 <code>switch</code> 用来走流程分支，大多情况下用来匹配单个值，如下面的例子所示：</p>
 <pre class="line-numbers language-none"><code class="language-none">&#x2F;**
  * @from 
  * @author 栈长
@@ -250,88 +242,59 @@ private static void test(int value) &#123;
 <p>是不是很骚？</p>
 <p>其实这不是最合适的最好的写法，在 Java 12 中还可以更骚。</p>
 <p>在 Java 12 中可以用逗号来分开多个值，还能用 <code>lambda</code> 表达式，甚至还能省略 break，使用 <code>switch</code> 更方便。</p>
- 
-            </div>
-        </div>
-        
-            <div class="mt-3">
-                <!-- 前一页后一页 -->
-<div class="previous-next-links">
-     
-    <div class="previous-design-link">
-        <a href="/2025/10/14/%E5%9F%BA%E7%A1%80/switch%20case%20%E6%94%AF%E6%8C%81%E7%9A%84%206%20%E7%A7%8D%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%EF%BC%81/">
-            <i style="font-size:16px;" class="fa fa-arrow-left" aria-hidden="true"></i>
-            switch case 支持的 6 种数据类型！
-        </a>
-    </div>
-     
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">John Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/10/14/%E5%9F%BA%E7%A1%80/switch%E5%A4%9A%E5%80%BC%E5%8C%B9%E9%85%8D%E9%AA%9A%E6%93%8D%E4%BD%9C%EF%BC%8C%E5%B8%A6%E4%BD%A0%E6%B6%A8%E5%A7%BF%E5%8A%BF%EF%BC%81/">http://example.com/2025/10/14/基础/switch多值匹配骚操作，带你涨姿势！/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">只有那年胜过年年</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%9F%BA%E7%A1%80/">基础</a></div><div class="post-share"><div class="social-share" data-image="/img/logo.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/10/14/%E5%9F%BA%E7%A1%80/switch%20case%20%E6%94%AF%E6%8C%81%E7%9A%84%206%20%E7%A7%8D%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%EF%BC%81/" title="switch case 支持的 6 种数据类型！"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">switch case 支持的 6 种数据类型！</div></div><div class="info-2"><div class="info-item-1">Java 中 switch case 语句用来判断一个变量与一系列值中某个值是否相等，每个值称为一个分支。 语法格式如下： switch(expression)&#123;     case value :        &#x2F;&#x2F;语句        break; &#x2F;&#x2F;可选     case value :        &#x2F;&#x2F;语句        break; &#x2F;&#x2F;可选     &#x2F;&#x2F;你可以有任意数量的case语句     default : &#x2F;&#x2F;可选        &#x2F;&#x2F;语句 &#125;  这里的 expression 都支持哪些类型呢？  基本数据类型：byte, short, char, int  包装数据类型：Byte, Short, Character, Integer  枚举类型：Enum  字符串类型：String（Jdk 7+ 开始支持）   基本数据类型和字符串很简单不用说，下面举一个使用包装类型和枚举的，其实也不难，注意只能用在 s...</div></div></div></a><a class="pagination-related" href="/2025/10/14/%E5%9F%BA%E7%A1%80/%E4%B8%80%E5%BC%A0%E5%9B%BE%E6%90%9E%E6%B8%85%E6%A5%9AJava%E5%BC%82%E5%B8%B8%E6%9C%BA%E5%88%B6/" title="一张图搞清楚Java异常机制"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">一张图搞清楚Java异常机制</div></div><div class="info-2"><div class="info-item-1">下面是Java异常类的组织结构，红色区域的异常类表示是程序需要显示捕捉或者抛出的。  ThrowableThrowable是Java异常的顶级类，所有的异常都继承于这个类。 Error，Exception是异常类的两个大分类。 ErrorError是非程序异常，即程序不能捕获的异常，一般是编译或者系统性的错误，如OutOfMemorry内存溢出异常等。 ExceptionException是程序异常类，由程序内部产生。Exception又分为运行时异常、非运行时异常。 运行时异常运行时异常的特点是Java编译器不会检查它，也就是说，当程序中可能出现这类异常，即使没有用try-catch语句捕获它，也没有用throws子句声明抛出它，也会编译通过，运行时异常可处理或者不处理。运行时异常一般常出来定义系统的自定义异常，业务根据自定义异常做出不同的处理。 常见的运行时异常如NullPointException、ArrayIndexOutOfBoundsException等。 非运行时异常非运行时异常是程序必须进行处理的异常，捕获或者抛出，如果不处理程序就不能编译通过。如常见的IOExc...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/10/14/%E5%9F%BA%E7%A1%80/Java%20Base64%20%E7%BC%96%E7%A0%81%E8%A7%A3%E7%A0%81%E6%96%B9%E6%A1%88%E6%80%BB%E7%BB%93/" title="Java Base64 编码解码方案总结"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-15</div><div class="info-item-2">Java Base64 编码解码方案总结</div></div><div class="info-2"><div class="info-item-1">Base64是一种能将任意Binary资料用64种字元组合成字串的方法，而这个Binary资料和字串资料彼此之间是可以互相转换的，十分方便。在实际应用上，Base64除了能将Binary资料可视化之外，也常用来表示字串加密过后的内容。如果要使用Java 程式语言来实作Base64的编码与解码功能，可以参考本篇文章的作法。 早期作法早期在Java上做Base64的编码与解码，会使用到JDK里sun.misc套件下的BASE64Encoder和BASE64Decoder这两个类别，用法如下： final BASE64Encoder encoder &#x3D; new BASE64Encoder(); final BASE64Decoder decoder &#x3D; new BASE64Decoder(); final String text &#x3D; &quot;Java技术&quot;; final byte[] textByte &#x3D; text.getBytes(&quot;UTF-8&quot;);  &#x2F;&#x2F;编码 final String e...</div></div></div></a><a class="pagination-related" href="/2025/10/14/%E5%9F%BA%E7%A1%80/10%20%E4%B8%AA%E6%B7%B1%E6%81%B6%E7%97%9B%E7%BB%9D%E7%9A%84%20Java%20%E5%BC%82%E5%B8%B8/" title="10 个深恶痛绝的 Java 异常"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-15</div><div class="info-item-2">10 个深恶痛绝的 Java 异常</div></div><div class="info-2"><div class="info-item-1">异常是 Java 程序中经常遇到的问题，我想每一个 Java 程序员都讨厌异常，一 个异常就是一个 BUG，就要花很多时间来定位异常问题。  什么是异常及异常的分类请看这篇文章：一张图搞清楚 Java 异常机制。  今天，栈长来列一下 Java 中经常遇到的前 10 个异常，排名不分先后。 1、NullPointerException空指针异常，操作一个 null 对象的方法或属性时会抛出这个异常。具体看这篇文章：Java 避免空指针的 5 个案例。 2、OutOfMemoryError内存异常异常，这不是程序能控制的，是指要分配的对象的内存超出了当前最大的堆内存，需要调整堆内存大小（-Xmx）以及优化程序。 3、IOExceptionIO，即：input, output，我们在读写磁盘文件、网络内容的时候经常会生的一种异常，这种异常是受检查异常，需要进行手工捕获。 如文件读写会抛出 IOException： public int read() throws IOException public void write(int b) throws IOException  4、Fi...</div></div></div></a><a class="pagination-related" href="/2025/10/14/%E5%9F%BA%E7%A1%80/Java%20%E4%B8%AD%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E8%AF%A6%E8%A7%A3/" title="Java 中的基本数据类型转换详解"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-15</div><div class="info-item-2">Java 中的基本数据类型转换详解</div></div><div class="info-2"><div class="info-item-1"> 说基本数据类型转换之前，先了解下 Java 中的 8 种基本数据类型，以及它们的占内存的容量大小和表示的范围，如下图所示。  之前分享过《深入浅出 Java 中的包装类》，现在重新温故了下原始数据类型，现在来解释下它们之间的转换关系。 自动类型转换自动类型转换是指：数字表示范围小的数据类型可以自动转换成范围大的数据类型。 如： long l &#x3D; 100;  int i &#x3D; 200; long ll &#x3D; i;  具体自动转换如如下图所示。  实线表示自动转换时不会造成数据丢失，虚线则可能会出现数据丢失问题。 自动转换也要小心数据溢出问题，看下面的例子。 int count &#x3D; 100000000; int price &#x3D; 1999; long totalPrice &#x3D; count * price;  编译没任何问题，但结果却输出的是负数，这是因为两个 int 相乘得到的结果是 int, 相乘的结果超出了 int 的代表范围。这种情况，一般把第一个数据转换成范围大的数据类型再和其他的数据进行运算。 int count &#...</div></div></div></a><a class="pagination-related" href="/2025/10/14/%E5%9F%BA%E7%A1%80/Java%20%E7%88%B6%E7%B1%BB%E5%BC%BA%E5%88%B6%E8%BD%AC%E6%8D%A2%E5%AD%90%E7%B1%BB%E5%8E%9F%E5%88%99/" title="Java 父类强制转换子类原则"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-15</div><div class="info-item-2">Java 父类强制转换子类原则</div></div><div class="info-2"><div class="info-item-1"> 最近，微信群友在讨论子类父类的转换问题，其实不难，给大家用实例来说明一下就很明了了。 我们知道Java中子类转换成父类是没有任何问题的，那父类可以转换成子类吗？ 来看下面这段程序： public class TestObjectConvert &#123;  	public static void main(String[] args) &#123; 		test1(); 		test2(); 	&#125;  	private static void test1() &#123; 		Fruit fruit1 &#x3D; new Fruit(); 		Apple apple1 &#x3D; new Apple(); 		apple1 &#x3D; (Apple) fruit1; &#x2F;&#x2F; java.lang.ClassCastException 	&#125;  	private static void test2() &#123; 		Fruit fruit1 &#x3D; new Apple(); 		Apple apple1 &#x3D; new Ap...</div></div></div></a><a class="pagination-related" href="/2025/10/14/%E5%9F%BA%E7%A1%80/StringBuffer%20%E5%92%8C%20StringBuilder%20%E7%9A%84%203%20%E4%B8%AA%E5%8C%BA%E5%88%AB/" title="StringBuffer 和 StringBuilder 的 3 个区别"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-15</div><div class="info-item-2">StringBuffer 和 StringBuilder 的 3 个区别</div></div><div class="info-2"><div class="info-item-1">StringBuffer 和 StringBuilder 它们都是可变的字符串，不过它们之间的区别是 Java 初中级面试出现几率十分高的一道题。这么简单的一道题，栈长在最近的面试过程中，却经常遇到很多求职者说反，搞不清使用场景的情况。 今天，栈长我带大家彻底搞懂 StringBuffer 和 StringBuilder 的几个区别和它们的应用场景，如果你是大牛，请略过，如果你是菜鸟，或者对这两个不是很清楚，可以学习一下，也可以为年底的面试加油冲刺。 先看看 StringBuffer 和 StringBuilder 的类结构吧：  其实很简单，就是继承了一个抽象的字符串父类：AbstractStringBuilder。下面我们再来看看它们的三个区别。 区别1：线程安全StringBuffer：线程安全，StringBuilder：线程不安全。因为 StringBuffer 的所有公开方法都是 synchronized 修饰的，而 StringBuilder 并没有 StringBuilder 修饰。 StringBuffer 代码片段： @Override public sync...</div></div></div></a><a class="pagination-related" href="/2025/10/14/%E5%9F%BA%E7%A1%80/switch%20case%20%E6%94%AF%E6%8C%81%E7%9A%84%206%20%E7%A7%8D%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%EF%BC%81/" title="switch case 支持的 6 种数据类型！"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-15</div><div class="info-item-2">switch case 支持的 6 种数据类型！</div></div><div class="info-2"><div class="info-item-1">Java 中 switch case 语句用来判断一个变量与一系列值中某个值是否相等，每个值称为一个分支。 语法格式如下： switch(expression)&#123;     case value :        &#x2F;&#x2F;语句        break; &#x2F;&#x2F;可选     case value :        &#x2F;&#x2F;语句        break; &#x2F;&#x2F;可选     &#x2F;&#x2F;你可以有任意数量的case语句     default : &#x2F;&#x2F;可选        &#x2F;&#x2F;语句 &#125;  这里的 expression 都支持哪些类型呢？  基本数据类型：byte, short, char, int  包装数据类型：Byte, Short, Character, Integer  枚举类型：Enum  字符串类型：String（Jdk 7+ 开始支持）   基本数据类型和字符串很简单不用说，下面举一个使用包装类型和枚举的，其实也不难，注意只能用在 s...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/logo.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">John Doe</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">82</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/xxxxx" target="_blank" title="Github"><i class="fab fa-github" style="color: #hdhfbb;"></i></a><a class="social-icon" href="mailto:xxxxxx@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #000000;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">🌸 春去秋来，花开花落  📚 桌上的日历又薄了几页  💭 记忆中的昨天还那么清晰</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%206%20%E9%A2%97%E8%AF%AD%E6%B3%95%E7%B3%96/" title="Java 中的 6 颗语法糖">Java 中的 6 颗语法糖</a><time datetime="2025-10-15T03:36:33.000Z" title="发表于 2025-10-15 11:36:33">2025-10-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%20String%20%E7%9C%9F%E7%9A%84%E6%98%AF%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%90%97%EF%BC%9F/" title="Java 中的 String 真的是不可变吗？">Java 中的 String 真的是不可变吗？</a><time datetime="2025-10-15T03:36:33.000Z" title="发表于 2025-10-15 11:36:33">2025-10-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E4%BC%AA%E5%85%B1%E4%BA%AB%E8%AF%A6%E8%A7%A3%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" title="Java 中的伪共享详解及解决方案">Java 中的伪共享详解及解决方案</a><time datetime="2025-10-15T03:36:33.000Z" title="发表于 2025-10-15 11:36:33">2025-10-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E7%9A%84%E5%AE%8F%E5%8F%98%E9%87%8F%EF%BC%8C%E5%AE%8F%E6%9B%BF%E6%8D%A2%E8%AF%A6%E8%A7%A3%E3%80%82/" title="Java 中的宏变量，宏替换详解。">Java 中的宏变量，宏替换详解。</a><time datetime="2025-10-15T03:36:33.000Z" title="发表于 2025-10-15 11:36:33">2025-10-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/15/%E8%BF%9B%E9%98%B6/Java%20%E4%B8%AD%E8%8E%B7%E5%8F%96%E7%B1%BB%E5%90%8D%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95%EF%BC%8C%E4%BD%A0%E7%9F%A5%E9%81%93%E5%87%A0%E7%A7%8D%EF%BC%9F/" title="Java 中获取类名的三种方法，你知道几种？">Java 中获取类名的三种方法，你知道几种？</a><time datetime="2025-10-15T03:36:33.000Z" title="发表于 2025-10-15 11:36:33">2025-10-15</time></div></div></div></div></div></div></main><footer id="footer" style="background: transparent;"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By John Doe</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><div class="js-pjax"><script>(() => {
+  let initFn = window.walineFn || null
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
 
-     
-    <div class="next-design-link">
-        <a href="/2025/10/14/%E5%9F%BA%E7%A1%80/%E4%B8%80%E5%BC%A0%E5%9B%BE%E6%90%9E%E6%B8%85%E6%A5%9AJava%E5%BC%82%E5%B8%B8%E6%9C%BA%E5%88%B6/">
-            一张图搞清楚Java异常机制
-            <i style="font-size:16px;" class="fa fa-arrow-right" aria-hidden="true"></i>
-        </a>
-    </div>
- 
-</div> 
-             
-            </div>
-        
+  const destroyWaline = ele => ele.destroy()
 
-    </div>
-    <div class="col-4 pe-0">
-        <div class="d-none d-sm-none d-md-block sticky-top border-start">
-             
-    
- 
+  const initWaline = (Fn, el = document, path = window.location.pathname) => {
+    const waline = Fn({
+      el: el.querySelector('#waline-wrap'),
+      serverURL: 'https://walinecomments-gxccu74d8-chens-projects-7c4f92c5.vercel.app',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      comment: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
 
-        </div>
-    </div>
-</div>
-</div>
- 
-    </main>
-
-    <!-- 底部栏 -->
-    <footer class="bg-dark pt-3 pb-0 mt-5 fixed-bottom" id="flex_bottom">
-    <div class="container pb-3 pt-3 text-center">
-        <p class="text-muted tag-hover">
-            All Rights Reserved <i class="fa fa-copyright"></i> by2025  <br>
-<!--             Powered by  -->
-<!--              <a class="link-secondary text-decoration-none" target="_blank" rel="noopener" href="https://hexo.io"> -->
-<!--                  Hexo.io -->
-<!--             </a> &  <a class="link-secondary text-decoration-none" target="_blank" rel="noopener" href="https://github.com/smile-yan/hexo-theme-heyan"> -->
-<!--                heyan -->
-<!--             </a> -->
-            <br>
-<!--             <a class="link-secondary text-decoration-none" target="_blank" rel="noopener" href="https://beian.miit.gov.cn/#/Integrated/index"> -->
-<!--                 <img src="/police.png" style="width: 18px; height: 18px; margin-top: -4px" class="nofancybox"> -->
-<!--                   -->
-<!--             </a> -->
-        </p>
-    </div>
-</footer>
-
-</body>
-
-<script>
-    // 检查页面内容高度是否小于窗口高度
-    function checkContentHeight() {
-        const contentHeight = document.body.scrollHeight;
-        const windowHeight = window.innerHeight;
-
-        if (contentHeight < windowHeight) {
-            // 内容高度不足以填充整个窗口，固定底部导航栏
-            document.getElementById('flex_bottom').classList.add('fixed-bottom');
-        } else {
-            // 内容高度足够多，不固定底部导航栏
-            document.getElementById('flex_bottom').classList.remove('fixed-bottom');
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyWaline = () => {
+        destroyWaline(waline)
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
         }
+      }
     }
+  }
 
-    // 页面加载时和窗口大小变化时检查内容高度
-    window.addEventListener('load', checkContentHeight);
-    window.addEventListener('resize', checkContentHeight);
-</script>
-</html>
+  const loadWaline = (el, path) => {
+    if (initFn) initWaline(initFn, el, path)
+    else {
+      btf.getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css')
+        .then(() => import('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js'))
+        .then(({ init }) => {
+          initFn = init || Waline.init
+          initWaline(initFn, el, path)
+          window.walineFn = initFn
+        })
+    }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Waline'
+      ? window.shuoshuoComment = { loadComment: loadWaline } 
+      : window.loadOtherComment = loadWaline
+    return
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
