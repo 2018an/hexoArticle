@@ -120,3 +120,28 @@ theme: butterfly
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: ''
+
+## CORS 配置
+#cors:
+#  enable: true
+#  origins:
+#    - https://walinecomments-gxccu74d8-chens-projects-7c4f92c5.vercel.app
+#    - https://www.yourdomain.com
+#    - http://localhost:4000
+#  methods:
+#    - GET
+#    - POST
+#    - PUT
+#    - DELETE
+#    - OPTIONS
+#  headers:
+#    - Content-Type
+#    - Authorization
+#  credentials: true
+#
+## 在文件末尾添加
+#server:
+#  headers:
+#    Access-Control-Allow-Origin: "*"
+#    Access-Control-Allow-Methods: "GET, POST, PUT, DELETE, OPTIONS"
+#    Access-Control-Allow-Headers: "Content-Type, Authorization"

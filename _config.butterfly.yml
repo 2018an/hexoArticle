@@ -15,7 +15,7 @@ nav:
 menu:
   首頁: / || fas fa-home
   时间轴: /archives/ || fas fa-archive
-  标签: /tags/ || fas fa-tags
+#  标签: /tags/ || fas fa-tags
   分类: /categories/ || fas fa-folder-open
 # 列表||fas fa-list:
 #   音樂: /music/ || fas fa-music
