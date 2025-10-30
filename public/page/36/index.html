@@ -1,0 +1,186 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>只有那年胜过年年</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#FC5531"><meta property="og:type" content="website">
+<meta property="og:title" content="只有那年胜过年年">
+<meta property="og:url" content="http://example.com/page/36/index.html">
+<meta property="og:site_name" content="只有那年胜过年年">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/logo.png">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/logo.png"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/page/36/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FC5531')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FC5531')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: John Doe","link":"链接: ","source":"来源: 只有那年胜过年年","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '只有那年胜过年年',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><meta name="generator" content="Hexo 8.1.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/logo.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">357</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">49</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/logo.png" alt="Logo"><span class="site-name">只有那年胜过年年</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><h1 class="title-seo">只有那年胜过年年</h1></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E7%BA%BF%E7%A8%8B%E4%BC%91%E7%9C%A0%E5%8F%AA%E4%BC%9A%E7%94%A8Thread.sleep%EF%BC%9F%E9%82%A3%E5%B0%B1%E5%BC%B1%E7%88%86%E4%BA%86%EF%BC%81/" title="线程休眠只会用Thread.sleep？那就弱爆了！">线程休眠只会用Thread.sleep？那就弱爆了！</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-10-14T06:42:34.000Z" title="发表于 2025-10-14 14:42:34">2025-10-14</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></span></div><div class="content">线程休眠是 Java 开发经常会用到的一个手段，就是让当前线程睡一会儿，睡醒之后再继续运行。 咱大多数程序员，多线程虽然学得不好，但线程休眠，无人不知，无人不晓，也都会用，不就是用 Thread.sleep 方法嘛！而且还将它用到那么绝，之前不是还有人写过休眠排序算法和休眠取时间的算法，再来回味下这么脑洞大开的两个算法：  休眠排序算法 休眠取时间算法  笑过之后，当然，这不是咋今天要讲的主题，栈长今天要讲的是如何更优雅的让线程休眠。 来看下面的休眠程序： Thread.sleep(87000000);  你知道休眠多久吗？ 醉了…… 再把上面的稍微改装下： Thread.sleep(24 * 60 * 60 * 1000 + 10 * 60 * 1000);  现在你估计大概能知道休眠多久了，但还是很茫然，很无助，不写注释，谁知道休眠多久？单位还是毫秒。。 其实就是休眠 24 小时 10 分钟，何必整这么麻烦呢？ 优雅又简单的方式来了： TimeUnit.DAYS.sleep(1); TimeUnit.MINUTES.sleep(10);  或者   TimeUnit.HOUR...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E9%9D%A2%E8%AF%95%E5%AE%98%E9%97%AE%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84List%EF%BC%8C%E7%9C%8B%E5%AE%8C%E5%86%8D%E4%B9%9F%E4%B8%8D%E6%80%95%E4%BA%86%EF%BC%81/" title="面试官问线程安全的List，看完再也不怕了！">面试官问线程安全的List，看完再也不怕了！</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-10-14T06:42:34.000Z" title="发表于 2025-10-14 14:42:34">2025-10-14</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></span></div><div class="content">最近在Java技术知识星球里面有球友问到了线程安全的 List：  扫码查看答案或加入知识星球 栈长在之前的文章《出场率比较高的一道多线程安全面试题》里面讲过 ArrayList 的不安全性。 那么面试官会问你，既然 ArrayList 是线程不安全的，怎么保证它的线程安全性呢？或者有什么替代方案？ 往下看，看我如何碾压他！ 大部分人会脱口而出：用Vector，这样只会让面试官鄙视！除了Vector，你还会别的吗？ 你至少还得说得上这种：  java.util.Collections.SynchronizedList  它能把所有 List 接口的实现类转换成线程安全的List，比 Vector 有更好的扩展性和兼容性，SynchronizedList的构造方法如下： final List&lt;E&gt; list;  SynchronizedList(List&lt;E&gt; list) &#123;     super(list);     this.list &#x3D; list; &#125;  SynchronizedList的部分方法源码如下： public E...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%8F%AF%E4%BB%A5%E5%88%86%E7%BB%84%E8%BF%98%E8%83%BD%E8%BF%99%E6%A0%B7%E7%8E%A9/" title="Java多线程可以分组还能这样玩">Java多线程可以分组还能这样玩</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-10-14T01:56:28.000Z" title="发表于 2025-10-14 09:56:28">2025-10-14</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></span></div><div class="content">但如果线程很多的情况下，你知道如何对它们进行分组吗？ 和 Dubbo 的服务分组一样，Java 可以对相同性质的线程进行分组。 来看下线程类 Thread 的所有构造方法。  如图所示，带有 ThreadGroup 的所有线程构造方法都可以定义线程组的。 线程组使用 java.lang.ThreadGroup 类定义，它有两个构造方法，第二个构造方法允许线程组有父类线程组，也就是说一个线程组可以多个子线程组。 java.lang.ThreadGroup#ThreadGroup(java.lang.String) java.lang.ThreadGroup#ThreadGroup(java.lang.ThreadGroup, java.lang.String)   线程组中比较有用的几个方法。  &#x2F;&#x2F; 获取当前线程组内的运行线程数java.lang.ThreadGroup#activeCount &#x2F;&#x2F; 中断线程组内的所有线程java.lang.ThreadGroup#interrupt &#x2F;&#x2F; 使用 System.out 打...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/Java%E5%A4%9A%E7%BA%BF%E7%A8%8Bjoin%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%8E%9F%E7%90%86/" title="Java多线程join使用及原理">Java多线程join使用及原理</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-10-14T01:53:44.000Z" title="发表于 2025-10-14 09:53:44">2025-10-14</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></span></div><div class="content">join()join()是线程类Thread的方法，官方的说明是：  Waits for this thread to die.  等待这个线程结束，也就是说当前线程等待这个线程结束后再继续执行，下面来看这个示例就明白了。 示例public static void main(String[] args) throws Exception &#123; 	System.out.println(&quot;start&quot;);  	Thread t &#x3D; new Thread(() -&gt; &#123; 		for (int i &#x3D; 0; i &lt; 5; i++) &#123; 			System.out.println(i); 			try &#123; 				Thread.sleep(500); 			&#125; catch (InterruptedException e) &#123; 				e.printStackTrace(); 			&#125; 		&#125; 	&#125;); 	t.start(); 	t.join();  	...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/10/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B/i++%E6%98%AF%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E5%90%97%EF%BC%9F/" title="i++是线程安全的吗?">i++是线程安全的吗?</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-10-14T01:33:33.000Z" title="发表于 2025-10-14 09:33:33">2025-10-14</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></span></div><div class="content"> i++ 是线程安全的吗？ 相信很多中高级的 Java 面试者都遇到过这个问题，很多对这个不是很清楚的肯定是一脸蒙逼。内心肯定还在质疑，i++ 居然还有线程安全问题？只能说自己了解的不够多，自己的水平有限。 先来看下面的示例来验证下 i++ 到底是不是线程安全的。 1000个线程，每个线程对共享变量 count 进行 1000 次 ++ 操作。 static int count &#x3D; 0;  static CountDownLatch cdl &#x3D; new CountDownLatch(1000);  &#x2F;** *  *&#x2F; public static void main(String[] args) throws Exception &#123; 	CountRunnable countRunnable &#x3D; new CountRunnable(); 	for (int i &#x3D; 0; i &lt; 1000; i++) &#123; 		new Thread(countRunnable).start(); 	&#125; 	cd...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/09/14/JVM/JVM%E8%BF%90%E8%A1%8C%E6%97%B6%E5%8C%BA%E5%9F%9F%E8%AF%A6%E8%A7%A3/" title="JVM运行时区域详解">JVM运行时区域详解</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-09-14T01:30:25.000Z" title="发表于 2025-09-14 09:30:25">2025-09-14</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></span></div><div class="content">我们知道的JVM内存区域有：堆和栈，这是一种泛的分法，也是按运行时区域的一种分法，堆是所有线程共享的一块区域，而栈是线程隔离的，每个线程互不共享。 线程不共享区域每个线程的数据区域包括程序计数器、虚拟机栈和本地方法栈，它们都是在新线程创建时才创建的。 程序计数器（Program Counter Rerister）程序计数器区域一块内存较小的区域，它用于存储线程的每个执行指令，每个线程都有自己的程序计数器，此区域不会有内存溢出的情况。 虚拟机栈（VM Stack）虚拟机栈描述的是Java方法执行的内存模型，每个方法被执行的时候都会同时创建一个栈帧（Stack Frame）用于存储局部变量表、操作数栈、动态链接、方法出口等信息。每一个方法被调用直至执行完成的过程就对应着一个栈帧在虚拟机栈中从入栈到出栈的过程。 本地方法栈（Native Method Stack）本地方法栈用于支持本地方法（native标识的方法，即非Java语言实现的方法）。 　 虚拟机栈和本地方法栈，当线程请求分配的栈容量超过JVM允许的最大容量时抛出StackOverflowError异常。 线程不共享区域如下图...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/12/15/hello-world/" title="Hello World">Hello World</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-12-15T03:36:33.000Z" title="发表于 2024-12-15 11:36:33">2024-12-15</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%95%99%E7%A8%8B/">教程</a></span></div><div class="content">Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post$ hexo new "My New Post"  More info: Writing Run server$ hexo server  More info: Server Generate static files$ hexo generate  More info: Generating Deploy to remote sites$ hexo deploy  More info: Deployment </div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/35/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/35/#content-inner">35</a><span class="page-number current">36</span></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/logo.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">John Doe</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">357</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">49</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/xxxxx" target="_blank" title="Github"><i class="fab fa-github" style="color: #hdhfbb;"></i></a><a class="social-icon" href="mailto:xxxxxx@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #000000;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">🌸 春去秋来，花开花落  📚 桌上的日历又薄了几页  💭 记忆中的昨天还那么清晰</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/30/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/JDK%20%E7%B4%A7%E6%80%A5%E6%BC%8F%E6%B4%9E%EF%BC%8CXMLDecoder%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%94%BB%E5%87%BB/" title="JDK 紧急漏洞，XMLDecoder反序列化攻击">JDK 紧急漏洞，XMLDecoder反序列化攻击</a><time datetime="2025-10-30T06:42:34.000Z" title="发表于 2025-10-30 14:42:34">2025-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/30/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/%E4%BC%9A%E8%AF%9D%E5%9B%BA%E5%AE%9A%E6%94%BB%E5%87%BB%E6%BC%8F%E6%B4%9E%EF%BC%88session%20fixation%20attack%EF%BC%89/" title="会话固定攻击漏洞">会话固定攻击漏洞</a><time datetime="2025-10-30T06:42:34.000Z" title="发表于 2025-10-30 14:42:34">2025-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/30/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/44%20%E4%B8%AA%20Java%20%E4%BB%A3%E7%A0%81%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%80%BB%E7%BB%93/" title="44 个 Java 代码性能优化总结">44 个 Java 代码性能优化总结</a><time datetime="2025-10-30T06:42:34.000Z" title="发表于 2025-10-30 14:42:34">2025-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/30/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/8%20%E6%9D%A1%E5%85%B3%E4%BA%8E%20Web%20%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E7%9A%84%E4%BC%98%E5%8C%96%E5%BB%BA%E8%AE%AE/" title="8 条关于 Web 前端性能的优化建议">8 条关于 Web 前端性能的优化建议</a><time datetime="2025-10-30T06:42:34.000Z" title="发表于 2025-10-30 14:42:34">2025-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/30/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E7%99%BE%E5%88%86%E4%B9%9D%E5%8D%81Java%E7%A8%8B%E5%BA%8F%E5%91%98%E8%A2%AB%E8%AF%AF%E5%AF%BC%E7%9A%84%E4%B8%80%E4%B8%AA%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%AD%96%E7%95%A5/" title="百分九十Java程序员被误导的一个性能优化策略">百分九十Java程序员被误导的一个性能优化策略</a><time datetime="2025-10-30T06:42:34.000Z" title="发表于 2025-10-30 14:42:34">2025-10-30</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%85%B6%E4%BB%96/"><span class="card-category-list-name">其他</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"><span class="card-category-list-name">区块链</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%90%8E%E7%AB%AF/"><span class="card-category-list-name">后端</span><span class="card-category-list-count">223</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/"><span class="card-category-list-name">安全漏洞</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/"><span class="card-category-list-name">工具</span><span class="card-category-list-count">30</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%80%A7%E8%83%BD/"><span class="card-category-list-name">性能</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%95%99%E7%A8%8B/"><span class="card-category-list-name">教程</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"><span class="card-category-list-name">数据库</span><span class="card-category-list-count">21</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%9E%B6%E6%9E%84/"><span class="card-category-list-name">架构</span><span class="card-category-list-count">15</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F/"><span class="card-category-list-name">程序人生</span><span class="card-category-list-count">53</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/%E6%96%87%E7%AB%A0/" style="font-size: 1.15em; color: rgb(50, 66, 173);">文章</a><a href="/tags/JVM/" style="font-size: 1.15em; color: rgb(129, 91, 101);">JVM</a><a href="/tags/%E5%85%B6%E4%BB%96/" style="font-size: 1.2em; color: rgb(121, 69, 86);">其他</a><a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF/" style="font-size: 1.24em; color: rgb(138, 50, 50);">分布式技术</a><a href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" style="font-size: 1.22em; color: rgb(61, 50, 50);">区块链</a><a href="/tags/Linux/" style="font-size: 1.15em; color: rgb(69, 63, 50);">Linux</a><a href="/tags/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/" style="font-size: 1.2em; color: rgb(50, 50, 50);">安全漏洞</a><a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 1.36em; color: rgb(89, 50, 189);">基础</a><a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 1.36em; color: rgb(144, 64, 154);">多线程</a><a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" style="font-size: 1.22em; color: rgb(153, 50, 160);">性能优化</a><a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" style="font-size: 1.43em; color: rgb(50, 181, 200);">新特性</a><a href="/tags/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F/" style="font-size: 1.31em; color: rgb(151, 191, 106);">程序人生</a><a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 1.22em; color: rgb(50, 155, 156);">算法</a><a href="/tags/%E8%A1%8C%E4%B8%9A%E5%8A%A8%E6%80%81/" style="font-size: 1.33em; color: rgb(200, 117, 104);">行业动态</a><a href="/tags/%E8%A7%84%E8%8C%83/" style="font-size: 1.17em; color: rgb(164, 50, 187);">规范</a><a href="/tags/%E8%B5%84%E6%96%99/" style="font-size: 1.15em; color: rgb(50, 122, 50);">资料</a><a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 1.22em; color: rgb(154, 132, 50);">集合</a><a href="/tags/%E8%BF%9B%E9%98%B6/" style="font-size: 1.33em; color: rgb(98, 93, 199);">进阶</a><a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 1.38em; color: rgb(105, 50, 173);">面试</a><a href="/tags/%E6%9E%B6%E6%9E%84/" style="font-size: 1.29em; color: rgb(50, 187, 71);">架构</a><a href="/tags/docker/" style="font-size: 1.15em; color: rgb(86, 153, 50);">docker</a><a href="/tags/Elastic-Job/" style="font-size: 1.2em; color: rgb(75, 195, 182);">Elastic Job</a><a href="/tags/JWT/" style="font-size: 1.17em; color: rgb(100, 50, 67);">JWT</a><a href="/tags/MyBatis/" style="font-size: 1.17em; color: rgb(50, 156, 50);">MyBatis</a><a href="/tags/Netty/" style="font-size: 1.15em; color: rgb(84, 106, 83);">Netty</a><a href="/tags/Shiro/" style="font-size: 1.22em; color: rgb(50, 50, 90);">Shiro</a><a href="/tags/Spring/" style="font-size: 1.27em; color: rgb(86, 59, 109);">Spring</a><a href="/tags/Spring-MVC/" style="font-size: 1.2em; color: rgb(123, 111, 61);">Spring MVC</a><a href="/tags/Spring-Cloud/" style="font-size: 1.4em; color: rgb(178, 50, 155);">Spring Cloud</a><a href="/tags/Spring-Boot/" style="font-size: 1.45em; color: rgb(83, 97, 186);">Spring Boot</a><a href="/tags/Tomcat/" style="font-size: 1.2em; color: rgb(177, 183, 173);">Tomcat</a><a href="/tags/Zookeeper/" style="font-size: 1.15em; color: rgb(50, 180, 85);">Zookeeper</a><a href="/tags/%E5%BC%80%E6%BA%90/" style="font-size: 1.22em; color: rgb(190, 50, 154);">开源</a><a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 1.22em; color: rgb(68, 50, 182);">日志</a><a href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" style="font-size: 1.17em; color: rgb(50, 148, 113);">消息队列</a><a href="/tags/%E7%BC%93%E5%AD%98/" style="font-size: 1.15em; color: rgb(107, 50, 82);">缓存</a><a href="/tags/%E7%BB%BC%E5%90%88%E6%8A%80%E6%9C%AF/" style="font-size: 1.29em; color: rgb(122, 87, 191);">综合技术</a><a href="/tags/%E8%BF%9E%E6%8E%A5%E6%B1%A0/" style="font-size: 1.22em; color: rgb(50, 67, 50);">连接池</a><a href="/tags/Eclipse/" style="font-size: 1.17em; color: rgb(64, 50, 50);">Eclipse</a><a href="/tags/Maven/" style="font-size: 1.22em; color: rgb(50, 106, 195);">Maven</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
+      
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/10/">
+            <span class="card-archive-list-date">
+              2025年10月
+            </span>
+            <span class="card-archive-list-count">355</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/09/">
+            <span class="card-archive-list-date">
+              2025年09月
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/12/">
+            <span class="card-archive-list-date">
+              2024年12月
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">357</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-10-30T09:02:56.218Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div><div class="card-widget user-map" id="user-map"><div class="item-headline"><i class="fas fa-heartbeat"></i><span>访客地图</span></div><div class="item-content"><script type="text/javascript" id="clstr_globe" src="//clustrmaps.com/globe.js?d=5V2tOKp8qAdRM-i8eu7ETTO9ugt5uKbbG-U7Yj8uMl8"></script></div></div></div></div></main><footer id="footer" style="background: transparent;"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By John Doe</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><div class="js-pjax"></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

@@ -1,0 +1,431 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>自从用了灰度发布，睡觉真香！ | 只有那年胜过年年</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#FC5531"><meta name="description" content="前言大家好，我是栈长。 最近，栈长又参加了腾讯云小伙伴邀请的Techo Day 技术开放日 2.0的线上活动，这一期又是干货满满，主要是云原生和微服务方面的，比如：云原生网关、容器、安全、云监控、灰度发布等等，这些内容都与我们现有的微服务系统息息相关。 令栈长印象最深刻的就是微服务灰度发布这个主题，腾讯开源的北极星让我大开眼界，不仅涵盖微服务多个解决方案，还包括市面上少有的、开源的一站式灰度发布解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自从用了灰度发布，睡觉真香！">
+<meta property="og:url" content="http://example.com/2025/10/30/%E6%9E%B6%E6%9E%84/%E8%87%AA%E4%BB%8E%E7%94%A8%E4%BA%86%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83%EF%BC%8C%E7%9D%A1%E8%A7%89%E7%9C%9F%E9%A6%99%EF%BC%81/index.html">
+<meta property="og:site_name" content="只有那年胜过年年">
+<meta property="og:description" content="前言大家好，我是栈长。 最近，栈长又参加了腾讯云小伙伴邀请的Techo Day 技术开放日 2.0的线上活动，这一期又是干货满满，主要是云原生和微服务方面的，比如：云原生网关、容器、安全、云监控、灰度发布等等，这些内容都与我们现有的微服务系统息息相关。 令栈长印象最深刻的就是微服务灰度发布这个主题，腾讯开源的北极星让我大开眼界，不仅涵盖微服务多个解决方案，还包括市面上少有的、开源的一站式灰度发布解">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/logo.png">
+<meta property="article:published_time" content="2025-10-30T06:42:34.000Z">
+<meta property="article:modified_time" content="2025-10-30T08:14:24.646Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="架构">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/logo.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "自从用了灰度发布，睡觉真香！",
+  "url": "http://example.com/2025/10/30/%E6%9E%B6%E6%9E%84/%E8%87%AA%E4%BB%8E%E7%94%A8%E4%BA%86%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83%EF%BC%8C%E7%9D%A1%E8%A7%89%E7%9C%9F%E9%A6%99%EF%BC%81/",
+  "image": "http://example.com/img/logo.png",
+  "datePublished": "2025-10-30T06:42:34.000Z",
+  "dateModified": "2025-10-30T08:14:24.646Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "John Doe",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/10/30/%E6%9E%B6%E6%9E%84/%E8%87%AA%E4%BB%8E%E7%94%A8%E4%BA%86%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83%EF%BC%8C%E7%9D%A1%E8%A7%89%E7%9C%9F%E9%A6%99%EF%BC%81/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FC5531')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FC5531')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: John Doe","link":"链接: ","source":"来源: 只有那年胜过年年","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '自从用了灰度发布，睡觉真香！',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/logo.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">357</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">49</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/logo.png" alt="Logo"><span class="site-name">只有那年胜过年年</span></a><a class="nav-page-title" href="/"><span class="site-name">自从用了灰度发布，睡觉真香！</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">自从用了灰度发布，睡觉真香！</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-10-30T06:42:34.000Z" title="发表于 2025-10-30 14:42:34">2025-10-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-10-30T08:14:24.646Z" title="更新于 2025-10-30 16:14:24">2025-10-30</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%9E%B6%E6%9E%84/">架构</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>大家好，我是栈长。</p>
+<p>最近，栈长又参加了腾讯云小伙伴邀请的<strong>Techo Day 技术开放日 2.0</strong>的线上活动，这一期又是干货满满，主要是云原生和微服务方面的，比如：<strong>云原生网关、容器、安全、云监控、灰度发布</strong>等等，这些内容都与我们现有的微服务系统息息相关。</p>
+<p>令栈长印象最深刻的就是微服务<strong>灰度发布</strong>这个主题，腾讯开源的<strong>北极星</strong>让我大开眼界，不仅涵盖微服务多个解决方案，还包括市面上少有的、开源的一站式<strong>灰度发布</strong>解决方案。</p>
+<p>看到这，大家心里可能会有以下问题：</p>
+<ul>
+<li>啥是灰度发布，对咱们业务能带来什么好处？</li>
+<li>我知道灰度发布，但是灰度发布实现方式那么多，我该怎么选？</li>
+<li>北极星是啥，和我现在使用的灰度发布框架有啥区别呢？</li>
+</ul>
+<p>针对大家这些问题，所以我想有必要给大家做个专题分享，包括灰度发布的基本认识、分类，特别是<strong>腾讯开源的北极星</strong>项目，看它是如何轻松解决灰度发布的。</p>
+<h2 id="什么是灰度发布？"><a href="#什么是灰度发布？" class="headerlink" title="什么是灰度发布？"></a>什么是灰度发布？</h2><p>说到灰度发布就不得不提 “<strong>全量发布</strong>“ ，全量发布就是所有系统都同时上线新版本，即对所有用户都同时使用新版本，这会带来什么问题？</p>
+<p><strong>全量发布的种种弊端：</strong></p>
+<ul>
+<li><strong>影响用户体验：</strong> 比如某系统在双 11 前上线了一个新功能，需要给符合条件的用户发放优惠券，结果程序出 bug 导致给所有用户都发放了……又或者是新版本系统出现问题，从而影响所有用户……</li>
+<li><strong>系统异常扩散风险：</strong> 比较某系统上线后不久出现了一个内存溢出的异常，流量接而转移到了系统其他实例，从而导致该系统所有实例都内存溢出，所有实例都处于不可用状态……</li>
+<li><strong>影响服务可用性：</strong> 全量发布一般都需要全部停机升级，从而保证要么是新版本，要么是老版本，这显然会导致业务中断，也影响了服务可用性（SLA），就是我们经常看到互联网公司喊口号，我们今年一定要做到 3 个 9、4 个 9，即 99.9%、99.99% 等等，SLA 就是衡量系统服务可用性的一个保证，9 越多代表全年服务可用时间越长服务更可靠，停机时间越短，反之亦然。</li>
+<li>……</li>
+</ul>
+<p>知道了全量发布的种种弊端，就不得不提灰度发布的重要性了，这里引出灰度发布的定义：</p>
+<blockquote>
+<p>灰度发布是针对 “<strong>全量发布</strong>“ 的改进，即按照一定的策略上线部分新版本，同时保留老版本，然后让部分用户体验新版本，通过一段时间新版本的反馈收集，比如：功能、性能、稳定性等指标，然后再决定是否逐步升级直至全量升级或全部回滚到老版本。</p>
+</blockquote>
+<p><strong>灰度发布的好处：</strong></p>
+<ul>
+<li><strong>降低发布影响面：</strong> 就算出问题，也只会影响部分用户，从而可以提前发现出新版本中的问题&#x2F; bug，然后在下一次灰度发布前提前修复，避免影响更多用户；</li>
+<li><strong>提升用户体验：</strong> 除了能提前发现 bug，还能很好的收集新版本中的使用反馈，从而提前优化系统，提升用户体验，也能给后续的产品演进带来参考价值。</li>
+</ul>
+<h2 id="灰度发布分类"><a href="#灰度发布分类" class="headerlink" title="灰度发布分类"></a>灰度发布分类</h2><p>灰度发布的主要分类：</p>
+<ul>
+<li>金丝雀发布</li>
+<li>滚动发布</li>
+<li>蓝绿发布</li>
+</ul>
+<p>相信大家都或多或少都听过这些术语的概念，但很多人并不清楚原理及背后的发布流程，下面栈长画了几张图，让大家对这些灰度发布可以有更深刻的认识。</p>
+<h3 id="1）金丝雀发布"><a href="#1）金丝雀发布" class="headerlink" title="1）金丝雀发布"></a>1）金丝雀发布</h3><blockquote>
+<p>据说以前有个典故，矿工开矿前，会先放一只金丝雀下去，看金丝雀是否能活下来，用来探测是否有毒气，金丝雀发布也是由此得名。</p>
+</blockquote>
+<p>这个典故用在金丝雀发布上面也是同样一个道理，即先升级服务一个实例，如果该实例没有问题，再全部升级剩余实例，如果有问题，再进行回滚。</p>
+<p><img src="http://img.javastack.cn/20221025095802.png"></p>
+<p>金丝雀发布成本较低，只需要一个实例即可降低新版本存在的风险，适合缺乏足够的发布工具研发能力及成长型的小公司。但是，金丝雀发布也有缺点，当升级全部剩余实例时，如果流量过多，可能会导致服务中断。</p>
+<h3 id="2）滚动发布"><a href="#2）滚动发布" class="headerlink" title="2）滚动发布"></a>2）滚动发布</h3><p>滚动发布则是在金丝雀发布的基础上进行的改进和优化，第一次也是使用金丝雀发布，后续则使用多批次的形式发布剩余实例，每次批次之间会进行观察，如果有问题，再进行回滚。</p>
+<p><img src="http://img.javastack.cn/20221025095656.png"></p>
+<p>滚动发布会比较平滑，可以将风险控制到最小程度。它虽然改进了金丝雀发布，但整体发布时间会比较长，回退时间也会更慢，整体流程也更为复杂，适合有一定发布工具研发能力的大公司。</p>
+<h3 id="3）蓝绿发布"><a href="#3）蓝绿发布" class="headerlink" title="3）蓝绿发布"></a>3）蓝绿发布</h3><p>蓝绿发布比较简单，只是对全量发布的一种优化而已，发布前不用全部停机，而是另外部署新版本全部实例，然后再把流量全部再切换到新版本。</p>
+<p><img src="http://img.javastack.cn/20221025095733.png"></p>
+<p>蓝绿发布虽然提升了服务可用性，但没有解决新版本中可能出现的问题，所以核心业务肯定是不建议用的，建议使用滚动发布结合金丝雀发布一起使用，从而降低发布风险。</p>
+<h3 id="4）如何选型"><a href="#4）如何选型" class="headerlink" title="4）如何选型"></a>4）如何选型</h3><p>上面介绍了 3 种灰度发布模式，那么企业应该怎么去根据自身的业务场景的诉求，去选型使用哪种模式来进行灰度发布呢？下面对各种发布模式做了一个对比，以及列举出常见的选型指引，供大家参考。</p>
+<table>
+<thead>
+<tr>
+<th>策略</th>
+<th>零停机</th>
+<th>生产流量测试</th>
+<th>针对特定用户</th>
+<th>机器资源成本</th>
+<th>回滚时长</th>
+<th>负面影响</th>
+<th>实现复杂度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>全量发布</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+<td>低</td>
+<td>慢</td>
+<td>高</td>
+<td>低</td>
+</tr>
+<tr>
+<td>蓝绿发布</td>
+<td>√</td>
+<td>×</td>
+<td>×</td>
+<td>高（双倍）</td>
+<td>快</td>
+<td>中</td>
+<td>中</td>
+</tr>
+<tr>
+<td>金丝雀发布</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>中（按需）</td>
+<td>快</td>
+<td>低</td>
+<td>中</td>
+</tr>
+<tr>
+<td>全链路灰度</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>中（按需）</td>
+<td>快</td>
+<td>低</td>
+<td>高</td>
+</tr>
+</tbody></table>
+<p><strong>全量发布：</strong>不建议使用，除非实在没有办法，比如初创公司什么都缺，老板又催。</p>
+<p><strong>蓝绿发布</strong>：适合于对于资源预算比较充足的业务，或者是比较简单的单体应用，可以快速实现系统的整体变更，适合传统企业使用。</p>
+<p><strong>金丝雀和全链路灰度</strong>：适合需要针对特定用户或者人群进行现网请求验证的业务，可以显著减低风险，建议成长型企业使用。</p>
+<h2 id="业界灰度发布的实现方案"><a href="#业界灰度发布的实现方案" class="headerlink" title="业界灰度发布的实现方案"></a>业界灰度发布的实现方案</h2><h3 id="Nacos-ZK-Spring-Cloud-dubbo"><a href="#Nacos-ZK-Spring-Cloud-dubbo" class="headerlink" title="Nacos&#x2F;ZK + Spring Cloud&#x2F;dubbo"></a>Nacos&#x2F;ZK + Spring Cloud&#x2F;dubbo</h3><p>Nacos 和 ZK 等组件提供的是纯注册中心的功能，不包括灰度发布的能力。用户如果需要实现灰度发布，则需要在框架层通过编码的方式进行扩展，比如实现 Spring Cloud Gateway&#x2F;Dubbo 的插件等，带来的问题主要有 2 个：</p>
+<ul>
+<li>不同的业务需要重复造轮子，带来不必要的工作量和质量风险</li>
+<li>不同框架实现方式和规则不一样，存在互通性的问题。</li>
+</ul>
+<h3 id="istio"><a href="#istio" class="headerlink" title="istio"></a>istio</h3><p>Istio 通过服务网格的方式提供了灰度发布能力，用户无需自己实现灰度发布逻辑，但是也存在以下问题：</p>
+<ul>
+<li>istio 的数据面不支持 Spring Cloud&#x2F;Dubbo 等常用的微服务框架接入。</li>
+<li>istio + envoy 的 Proxy 模式，运行时会带来额外的资源和网络开销。</li>
+</ul>
+<h2 id="腾讯云实现方案（北极星）"><a href="#腾讯云实现方案（北极星）" class="headerlink" title="腾讯云实现方案（北极星）"></a>腾讯云实现方案（北极星）</h2><h3 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h3><p>先简单介绍下腾讯云引擎（TSE）：</p>
+<blockquote>
+<p>微服务引擎（Tencent Cloud Service Engine）提供开箱即用的云上全场景微服务解决方案。支持开源增强的云原生注册配置中心（Zookeeper、Nacos、Etcd、Consul、Eureka 和Apollo），服务治理中心（腾讯自研并开源的 PolarisMesh）、云原生网关（Nginx Ingress、Kong）以及微服务应用托管的弹性微服务平台。微服务引擎完全兼容开源版本的使用方式，在功能、可用性和可运维性等多个方面进行增强，助力用户快速构建微服务架构。</p>
+</blockquote>
+<p><strong>北极星（PolarisMesh）</strong>是腾讯开源的服务发现和治理中心，以<strong>注册配置中心</strong>为基础，扩展了<strong>服务治理</strong>功能以及相应的控制面，各部分功能可单独使用，且<strong>支持无侵入的接入方案</strong>，用户<strong>无需改一行代码</strong>即可接入所有服务治理功能。</p>
+<ul>
+<li><strong>基础：</strong> 服务发现、服务注册、健康检查、配置管理；</li>
+<li><strong>扩展：</strong> 流量调度（动态路由、负载均衡）、熔断降级（实例、接口、服务三级熔断）、访问控制（限流、鉴权）、可观测（调用度量、链路跟踪）</li>
+</ul>
+<p>可以看到，北极星不仅仅是注册中心、配置中心，还是微服务架构中的故障容错、流量控制和安全问题的综合解决方案。虽然业界已经有些组件可以解决其中一部分问题，但是缺少一个标准的、多语言的、框架无关的实现，北极星应运而生。</p>
+<h3 id="实现方案"><a href="#实现方案" class="headerlink" title="实现方案"></a>实现方案</h3><p>通过北极星可以实现蓝绿、金丝雀或者滚动发布：</p>
+<p><img src="/Users/John/Desktop/20221025112944.svg"></p>
+<p><img src="http://img.javastack.cn/20221025095625.png"></p>
+<h4 id="阶段一：实例打标"><a href="#阶段一：实例打标" class="headerlink" title="阶段一：实例打标"></a>阶段一：实例打标</h4><p>实例打标，指的是发布前先将实例打入新版本标签，这样才能将新版本与稳定旧版本的应用区分开来。</p>
+<p>常用的实例打标方法有以下两种：</p>
+<ul>
+<li><p><strong>实例自注册：</strong> 标签配置在项目的配置文件中，一般是指 Spring Cloud 配置文件中，然后在应用时将标签自动注册到注册中心；</p>
+</li>
+<li><p><strong>k8s 部署标签同步：</strong> 把实例标签作为 k8s 的部署标签进行配置，然后随应用部署后自动同步到注册中心。</p>
+</li>
+</ul>
+<h4 id="阶段二：网关路由"><a href="#阶段二：网关路由" class="headerlink" title="阶段二：网关路由"></a>阶段二：网关路由</h4><p>服务网关，就是服务的网关，它是所有服务的单一访问点，并充当微服务最上层的代理。</p>
+<p>通俗地说，就是，外面的请求需要先经过服务网关，再到达微服务，服务网关实现统一接入，外面的请求不能直接访问微服务，一般的访问顺序是这样的：</p>
+<blockquote>
+<p>用户 &gt; Nginx（集群，Keepalive） &gt; 服务网关（集群） &gt; 微服务（集群）</p>
+</blockquote>
+<p>所以，要进行灰度发布就必须在网关层进行路由控制，在网关层可以按照一定的策略把流量分配到不同的实例版本，常用的灰度策略有百分比、用户属性、省市区域等等，比如：可以先把广东省深圳市 30% 的用户路由到新版本。</p>
+<p>一般的服务网关都需要自行配置路由规则，而且都是代码硬配置，配置项很多很复杂，不是专业的技术人员很难理解其配置的真正意义，也带来了出错的概率。</p>
+<p>而在腾讯云北极星方案中，使用的是云原生网关，<strong>支持图形化的云原生路由规则配置，支持直通注册中心，直接将流量拆分到不同版本的实例中</strong>，大大简化了配置难度，也提高了配置项可读性和易用性。</p>
+<h4 id="阶段三：微服务路由"><a href="#阶段三：微服务路由" class="headerlink" title="阶段三：微服务路由"></a>阶段三：微服务路由</h4><p>来看正常的一个路由流程图：</p>
+<p><img src="http://img.javastack.cn/20221025110237.png"></p>
+<p>流量经过服务网关后，就需要路由到具体的微服务，而灰度发布后各个微服务存在 V1 旧版本和 V2 新版本，所以就需要保证路由过去的多个微服务调用链也必须是同一个版本，不然就可能会带来灾难性故障。</p>
+<p>腾讯云北极星服务治理中心提供了自定义路由的能力，支持通过图形化配置规则的方式，支持自动托管，以及服务调用流量实时监控能力，准确掌握灰度发布的全流程，实现了微服务之间的灰度流量调度。</p>
+<h4 id="阶段四：标签透传"><a href="#阶段四：标签透传" class="headerlink" title="阶段四：标签透传"></a>阶段四：标签透传</h4><p>上一步，网关层会对灰度流量进行染色，在接下来的微服务调用过程中还需要进行标签透传，即将染色标签在每一个微服务之间进行传递，使得微服务可以识别到灰度流量并进行处理。</p>
+<p>使用 Spring Cloud 微服务框架，需要用户自己在项目中进行编码实现，而腾讯北极星方案可以配合腾讯的 Spring Cloud Tencent 微服务框架自动完成标签透传，支持跨线程的透传模式，无需用户感知。</p>
+<p><img src="http://img.javastack.cn/20221028155409.png"></p>
+<h4 id="阶段五：灰度完成"><a href="#阶段五：灰度完成" class="headerlink" title="阶段五：灰度完成"></a>阶段五：灰度完成</h4><p><strong>1）灰度发布验证</strong></p>
+<p>灰度发布后，如何验证灰度发布已经完成&#x2F;成功了呢？一般需要做以下确认操作：</p>
+<p>1）确认流量是否按计划切换到了灰度发布实例；</p>
+<p>2）确认灰度发布实例上的请求是否正常执行；</p>
+<p>腾讯云北极星方案提供了服务治理监控能力，支持可视化看到流量实时切换情况，以及流量的成功率时延等关键指标，大大简化了灰度发布的事后验证工作。</p>
+<p><strong>2）灰度完成后的处理事项</strong></p>
+<p>根据不同的灰度发布形式处理：</p>
+<p><strong>金丝雀发布：</strong> 将稳定版本服务分组全量升级成新版本。</p>
+<p><strong>滚动灰度</strong>： 将稳定版本分组中的多个服务按一定比例分批升级成新版本。</p>
+<p><strong>蓝绿发布：</strong> 流量已经全量切换到新版本分组，老版本分组的实例可以下线。</p>
+<h2 id="北极星开源版体验"><a href="#北极星开源版体验" class="headerlink" title="北极星开源版体验"></a>北极星开源版体验</h2><p>北极星（PolarisMesh）官方网址：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://polarismesh.cn/">https://polarismesh.cn/</a></p>
+</blockquote>
+<p><img src="http://img.javastack.cn/20221025150730.png"></p>
+<p>北极星（PolarisMesh）已经开源，点击主页右上角可以进入体验版：</p>
+<p><img src="http://img.javastack.cn/20221025150426.png"></p>
+<p>根据提供的默认用户名和密码登录进去，可以在 “<em><strong>服务网格 &gt; 动态路由 &gt; 灰度发布</strong></em>“ 找到灰度发布：</p>
+<p><img src="http://img.javastack.cn/20221025145242.png"></p>
+<p>我们来体验一下金丝雀发布吧，操作流程如下：</p>
+<p><img src="http://img.javastack.cn/20221025151909.png"></p>
+<h3 id="第一步：实例打标"><a href="#第一步：实例打标" class="headerlink" title="第一步：实例打标"></a>第一步：实例打标</h3><p>Spring Cloud Tencent 微服务集成北极星过程略，详细请参考下面接入文档：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://polarismesh.cn/zh/doc/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/SpringCloud%E5%BA%94%E7%94%A8%E6%8E%A5%E5%85%A5.html#springcloud%E5%BA%94%E7%94%A8%E6%8E%A5%E5%85%A5">https://polarismesh.cn/zh/doc/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/SpringCloud%E5%BA%94%E7%94%A8%E6%8E%A5%E5%85%A5.html#springcloud%E5%BA%94%E7%94%A8%E6%8E%A5%E5%85%A5</a></p>
+</blockquote>
+<p>然后在 bootstrap.yml 配置文件中指定版本标签：</p>
+<pre class="line-numbers language-none"><code class="language-none">spring:
+  cloud:
+    tencent:
+      metadata:
+        content:
+          version: 2.0.0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在服务实例所在的操作系统中添加环境变量也可进行打标，例如：<code>SCT_METADATA_CONTENT_version=2.0.0</code> 。</p>
+<p>由于 Spring Cloud 框架默认不会对所有的请求标签进行透传，因此需要增加 Spring Cloud 透传标识，可以通过添加环境变量（<code>SCT_PROTOCOL_CONTENT_TRANSITIVE_HEADER=gray</code>）的方式进行灰度标识（<code>gray:true</code>）的透传。</p>
+<h3 id="第二步：部署应用"><a href="#第二步：部署应用" class="headerlink" title="第二步：部署应用"></a>第二步：部署应用</h3><p>Spring Cloud Tencent 接入方式支持虚拟机、Docker Composer、K8S 等多种部署模式，注意需要保证业务进程与北极星服务的网络连通性。</p>
+<p>部署后，可以在北极星服务列表中看到成功注册的服务实例：</p>
+<p><img src="http://img.javastack.cn/20221025152838.png"></p>
+<h3 id="第三步：微服务路由"><a href="#第三步：微服务路由" class="headerlink" title="第三步：微服务路由"></a>第三步：微服务路由</h3><p>通过配置微服务路由，使进行灰度版本的流量的调用，都只在新版本的服务分组中进行。</p>
+<p>可以在 “<em><strong>服务网格 &gt; 动态路由 &gt; 自定义路由</strong></em>“ 新建路由规则，先配置灰度规则：</p>
+<p><img src="http://img.javastack.cn/20221025153402.png"></p>
+<p>该灰度规则只对 credit 服务生效，这样 header 中带有<code>gray:true</code>灰度标签的请求都只流向<code>version=2.0.0</code>的实例分组。</p>
+<p>再来配置兜底规则：</p>
+<p><img src="http://img.javastack.cn/20221025153411.png"></p>
+<p>该灰度规则只对 credit 服务生效，这样 header 中不带<code>gray:true</code>灰度标签的请求都只流向<code>version=1.0.0</code>的实例分组。</p>
+<h3 id="第四步：灰度发布观测"><a href="#第四步：灰度发布观测" class="headerlink" title="第四步：灰度发布观测"></a>第四步：灰度发布观测</h3><p>通过北极星的可观测性能力，可以准确看到不同分组的流量切换的过程，以及服务调用成功率，等到灰度分组相关指标没有问题，代表灰度验证完成。</p>
+<p>观测路径：“<em><strong>可观测性 &gt; 路由监控</strong></em>”</p>
+<p><img src="http://img.javastack.cn/20221026143806.png"></p>
+<h3 id="第五步：灰度发布收尾"><a href="#第五步：灰度发布收尾" class="headerlink" title="第五步：灰度发布收尾"></a>第五步：灰度发布收尾</h3><p>灰度验证完成后，需要进行收尾：</p>
+<ul>
+<li>灰度验证成功，则对老版本分组的实例进行滚动升级到新版本，否则进行回退；</li>
+<li>在北极星控制台删除自定义路由规则；</li>
+</ul>
+<p>可以看到，北极星提供了一整套的灰度发布解决方案，适用各种灰度发布流程，可视化轻松实现灰度规则配置，最重要的是还提供灰度可视化观测，这使得灰度发布更便利、可控性更好。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>看到这里，想必大家对<strong>灰度发布</strong>有了一定程序的认识了，特别是腾讯云提供的<strong>北极星一站式解决方案</strong>，通过其独特的架构理念和可视化平台解决了微服务应用过程中的种种难题，没有灰度发布的加持，全量发布带来的风险将变得举步维艰。</p>
+<p>因为用户体量，或者研发成本的问题，现在很多公司甚至都没用灰度发布，全量发布影响 SLA 不说，一旦造成损失都是不可估量的，所以，不管公司处于什么成长阶段，都必须上灰度发布，这是对用户负责，也是公司能持续发展的重要保障。</p>
+<p>这里贴上北极星的 Github 地址，欢迎大家到 Github 上面点个 Star：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/polarismesh">https://github.com/polarismesh</a></p>
+</blockquote>
+<p>作为微服务全面、综合的开源解决方案，北极星在腾讯内部也得到广泛运用：</p>
+<p><img src="http://img.javastack.cn/20221026111121.png"></p>
+<p>从数据可以看到北极星在腾讯内部使用之广，这几乎是覆盖所有业务了，经过这么多年的洗礼，北极星也是成熟稳定的项目了，所以，可靠性还是有保障的，可以闭眼使用，不管合适与否，都值得大家去体验一番。</p>
+<p>最后，通过参与这次腾讯云的 Techo Day 2.0 技术开放日活动，栈长最大的感触就是，在技术领域，腾讯云确实走在了前沿，真不是吹，Techo Day 2.0 活动分享了很多技术热点及解决方案，涵盖了我们平时开发的方方面面，不仅能学习、接触新兴技术，还能对技术有更多、更深入的认识，特别是栈长介绍的<strong>北极星灰度发布</strong>，真真正正的是帮助企业提升项目质量，避免发布风险。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">John Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/10/30/%E6%9E%B6%E6%9E%84/%E8%87%AA%E4%BB%8E%E7%94%A8%E4%BA%86%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83%EF%BC%8C%E7%9D%A1%E8%A7%89%E7%9C%9F%E9%A6%99%EF%BC%81/">http://example.com/2025/10/30/架构/自从用了灰度发布，睡觉真香！/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">只有那年胜过年年</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%9E%B6%E6%9E%84/">架构</a></div><div class="post-share"><div class="social-share" data-image="/img/logo.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/10/30/%E6%9E%B6%E6%9E%84/%E6%9E%B6%E6%9E%84%E5%B8%88%E5%BF%85%E9%A1%BB%E6%8E%8C%E6%8F%A1%E7%9A%84%2010%20%E6%9D%A1%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/" title="架构师必须掌握的 10 条设计原则"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">架构师必须掌握的 10 条设计原则</div></div><div class="info-2"><div class="info-item-1">01.遵循单一职责原则函数是程序员的工具中最重要的抽象形式。它们能更多地被重复使用，你需要编写的代码就越少，代码也因此变得更可靠。较小的函数遵循单一职责原则更有可能被重复使用。 02.尽量减少共享状态你应该尽量减少函数之间的隐式共享状态，无论它是文件作用域的变量还是对象的成员字段，这有利于明确要求把值作为参数。当能明确地显示函数需要什么才可以产生所需的结果时，代码会变得更容易理解和重用。 对此的一个推论是，在一个对象中，相对于成员变量，你更应该优先选择静态的无状态变量 (static stateless variables)。 03.将“副作用”局部化理想的副作用（例如：打印到控制台、日志记录、更改全局状态、文件系统操作等）应该被放置到单独的模块中，而不是散布在整个代码里面。函数中的一些“副作用”功能往往违反了单一职责原则。 04.优先使用不变的对象如果一个对象的状态在其构造函数中仅被设置一次，并且从不再次更改，则调试会变得更加容易，因为只要构造正确就能保持有效。这也是降低软件项目复杂性的最简单方法之一。 05.接口高于类接收接口的函数（或 C++ 中的模板参数和概念）比在类上运...</div></div></div></a><a class="pagination-related" href="/2025/10/30/%E5%B7%A5%E5%85%B7/Eclipse/10%20%E4%B8%AA%20Eclipse%20%E7%8F%8D%E8%97%8F%E6%8F%92%E4%BB%B6%E6%8E%A8%E8%8D%90/" title="10 个 Eclipse 珍藏插件推荐"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">10 个 Eclipse 珍藏插件推荐</div></div><div class="info-2"><div class="info-item-1">1、Open Explorer打开资源管理器插件，这是一个从Eclipse里面可以直接定位打开windows资源管理器文件的插件，这个版本的插件在最新的Eclipse版本中都能使用。  下载地址：https://github.com/samsonw/OpenExplorer/downloads  2、JadClipse反编译插件，能反编译Jar包中的class文件。  下载地址：https://sourceforge.net/projects/jadclipse/  3、SubclipseEclipse集成SVN插件，在Eclipse商店中可以直接搜索Subclipse安装。 4、EGITEclipse集成GIT插件，在Eclipse商店中可以直接搜索GIT安装。 5、JettyJetty容器插件，可以直接运行web项目，可以用来代替Tomcat，直接在商店安装即可。 6、Spring ToolsSpring的插件，可以很方便的管理和运行Spring项目，在商店可以直接安装。 7、FindBugs这个插件能找出Eclipse工程中的代码缺陷，很好用。  在线安装地址：http:/...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/10/30/%E6%9E%B6%E6%9E%84/SLA%20%E6%9C%8D%E5%8A%A1%E5%8F%AF%E7%94%A8%E6%80%A7%204%20%E4%B8%AA%209%20%E6%98%AF%E4%BB%80%E4%B9%88%E6%84%8F%E6%80%9D%EF%BC%9F%E6%80%8E%E4%B9%88%E8%BE%BE%E5%88%B0%EF%BC%9F/" title="SLA 服务可用性 4 个 9 是什么意思？怎么达到？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-30</div><div class="info-item-2">SLA 服务可用性 4 个 9 是什么意思？怎么达到？</div></div><div class="info-2"><div class="info-item-1"> SLA：服务等级协议（简称：SLA，全称：service level agreement）。是在一定开销下为保障服务的性能和可用性，服务提供商与用户间定义的一种双方认可的协定。通常这个开销是驱动提供服务质量的主要因素。 SLA的定义来源百度，这到底是什么意思呢？  我们平常经常看到互联网公司喊口号，我们今年一定要做到3个9、4个9，即99.9%、99.99%，甚至还有5个9，即99.999%。  这么多9代表什么意思呢？ 首先，SLA的概念，对互联网公司来说就是网站服务可用性的一个保证。9越多代表全年服务可用时间越长服务更可靠，停机时间越短，反之亦然。 这么多9是怎么计算的呢？ 全年拿365天做计算吧，看看几个9要停机多久时间做能才能达到！  1年 &#x3D; 365天 &#x3D; 8760小时 99.9 &#x3D; 8760 * 0.1% &#x3D; 8760 * 0.001 &#x3D; 8.76小时 99.99 &#x3D; 8760 * 0.0001 &#x3D; 0.876小时 &#x3D; 0.876 * 60 &#x3D; 52.6分钟 99.999 &#...</div></div></div></a><a class="pagination-related" href="/2025/10/30/%E6%9E%B6%E6%9E%84/%E4%B8%80%E5%BC%A0%E5%9B%BE%E5%91%8A%E8%AF%89%E4%BD%A0%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E6%9C%8D%E5%8A%A1%E7%BD%91%E5%85%B3/" title="一张图告诉你为什么是服务网关"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-30</div><div class="info-item-2">一张图告诉你为什么是服务网关</div></div><div class="info-2"><div class="info-item-1">网关服务是单一访问点，并充当多项服务的代理。服务网关启用了跨所有服务的路由转发、过滤和公共处理等。 在微服务实践中远不止这点功能，它可以做到统一接入、流量管控、安全防护、业务隔离等功能。 下面是服务网关的大概作用图。  看完这张图，或许你已经明白了服务网关的作用，及使用服务网关带来的诸多好处。 所以，既然服务网关有这么多作用，也是现在微服务套件中的必用组件，你还有什么理由不用服务网关呢？ 下图是使用了Spring Cloud的服务网关的套件图。  Spring Cloud使用了Zuul作为服务网关组件，图中Open Service即是服务网关，Service A,B是内部实际的业务服务，通过Open Service对外进行内部服务的请求的路由、过滤等操作。 对服务网关其他建设性的建议或想法都可以在微信公众号”Java技术栈“下方留言，一起研究讨论微服务的更多实践。 </div></div></div></a><a class="pagination-related" href="/2025/10/30/%E6%9E%B6%E6%9E%84/%E4%B8%80%E5%BC%A0%E5%9B%BE%E5%91%8A%E8%AF%89%E4%BD%A0%E4%BB%80%E4%B9%88%E6%98%AF%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%B8%88/" title="一张图告诉你什么是系统架构师"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-30</div><div class="info-item-2">一张图告诉你什么是系统架构师</div></div><div class="info-2"><div class="info-item-1"> 这张图从架构师的综合能力、岗位认识、岗位职责等方面，清楚的画出了作为一个架构的基本准则。人人都想成为架构师，可作为架构你达到了上面的要求了吗？ 系统架构师是个神奇的岗位。为什么这么说，在一个人数不多的小公司，你可能什么都需要做，身体力行，做总监兼架构师或者是主管&#x2F;高级开发兼架构师；在大公司，你可能只负责某个平台的架构，某些中间件的架构，你就是某一类的架构师。 无论怎么分，作为一个架构师，你必须具备以下几个特性。  技术能力  技术能力，不用置疑肯定是最重要的。技术能力弱的架构不是一个好架构。所以，你需要知道所有主流技术的基本原理、应用场景，及快速解决问题的能力。 所以，架构师必须要有见识，所需知识面肯定是要不断拓展的。你需要清楚在什么样的场景用什么样的技术比较合适，并知道可能存在什么样的风险。来了需求，你脑袋是空的，不知道用什么技术这是最可怕的。  架构能力  这个可以表现为抽象能力、整体规划能力、及设计能力。你需要照在业务的角度进行系统分解、技术选型、架构搭建，以及规范制定。架构出来了至少可以满足近几年的发展，或者可以很方便对现有架构进行扩容。 有人说架构不需要懂业...</div></div></div></a><a class="pagination-related" href="/2025/10/30/%E6%9E%B6%E6%9E%84/%E4%BB%80%E4%B9%88%E6%98%AF%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83%EF%BC%8C%E7%81%B0%E5%BA%A6%E6%B5%8B%E8%AF%95%E3%80%82/" title="什么是灰度发布，灰度测试。"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-30</div><div class="info-item-2">什么是灰度发布，灰度测试。</div></div><div class="info-2"><div class="info-item-1">什么是灰度发布？灰度发布，又名金丝雀发布，或者灰度测试，是指在黑与白之间能够平滑过渡的一种发布方式。在其上可以进行A&#x2F;B testing，即让一部分用户继续用产品特性A，一部分用户开始用产品特性B，如果用户对B没有什么反对意见，那么逐步扩大范围，把所有用户都迁移到B上面来。 灰度发布是对某一产品的发布逐步扩大使用群体范围，也叫灰度放量。灰度发布可以保证整体系统的稳定，在初始灰度的时候就可以发现、调整问题，以保证其影响度。 灰度期：灰度发布开始到结束期间的这一段时间，称为灰度期。 灰度发布的意义灰度发布能及早获得用户的意见反馈，完善产品功能，提升产品质量，让用户参与产品测试，加强与用户互动，降低产品升级所影响的用户范围。 灰度发布步骤 定义目标 选定策略：包括用户规模、发布频率、功能覆盖度、回滚策略、运营策略、新旧系统部署策略等 筛选用户：包括用户特征、用户数量、用户常用功能、用户范围等 部署系统：部署新系统、部署用户行为分析系统（web analytics）、设定分流规则、运营数据分析、分流规则微调 发布总结：用户行为分析报告、用户问卷调查、社会化媒体意见收集、形成产品...</div></div></div></a><a class="pagination-related" href="/2025/10/30/%E6%9E%B6%E6%9E%84/%E5%88%B0%E5%BA%95%E4%BB%80%E4%B9%88%E6%98%AF%E8%B7%A8%E5%9F%9F%EF%BC%9F%E9%99%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%EF%BC%81/" title="到底什么是跨域？附解决方案！"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-30</div><div class="info-item-2">到底什么是跨域？附解决方案！</div></div><div class="info-2"><div class="info-item-1">什么是跨域要了解跨域，先要说说同源策略。 同源策略是由 Netscape 公司提出的一个著名的安全策略，所有支持 JavaScript 的浏览器都会使用这个策略。 所谓同源是指，域名，协议，端口相同。当页面在执行一个脚本时会检查访问的资源是否同源，如果非同源，那么在请求数据时，浏览器会在控制台中报一个异常，提示拒绝访问。 同源策略一般又分为以下两种：  DOM同源策略：禁止对不同源页面DOM进行操作。这里主要场景是iframe跨域的情况，不同域名的iframe是限制互相访问的。  XmlHttpRequest同源策略：禁止使用XHR对象向不同源的服务器地址发起HTTP请求。   那么，到底什么是跨域？ 跨域，指的是从一个域名去请求另外一个域名的资源。即跨域名请求！跨域时，浏览器不能执行其他域名网站的脚本，是由浏览器的同源策略造成的，是浏览器施加的安全限制。 跨域的严格一点来说就是只要协议，域名，端口有任何一个的不同，就被当作是跨域。 为什么要跨域现实工作开发中经常会有跨域的情况，因为公司会有很多项目，也会有很多子域名，各个项目或者网站之间需要相互调用对方的资源，避免不了跨域请求。...</div></div></div></a><a class="pagination-related" href="/2025/10/30/%E6%9E%B6%E6%9E%84/%E6%9C%8D%E5%8A%A1%E9%AB%98%E5%8F%AF%E7%94%A8%EF%BC%9A%E5%B9%82%E7%AD%89%E6%80%A7%E8%AE%BE%E8%AE%A1/" title="服务高可用：幂等性设计"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-30</div><div class="info-item-2">服务高可用：幂等性设计</div></div><div class="info-2"><div class="info-item-1">什么是幂等性？一般在服务调用时，读服务如果调用失败了，会自动按配置次数转移到别的服务上去请求。而写服务就不能重复请求，如果因为超时或者网络故障等原因被调用服务并没有返回成功的响应，服务调用方就认为是失败了，但很有可能的是已经成功了，如果继续重复请求写服务，如转账类的服务，可能会造成严重的后果。所以，写服务失败不能设计成继续发重复请求，被调用服务也要设计幂等性，即使重复请求，也不会造成影响。 知道上面的背景，所以，幂等性就是同样的参数，重复请求相同的服务，必须得到相同的结果。 幂等性设计举一个支付的场景，请求一个第三方支付接口发起支付功能，同样的订单号，同样的金额信息，返回的都是成功。同样的订单号，不同的金额信息，返回的是订单号重复。这就是幂等性设计，第三方支付效验了请求参数和已有数据库的信息一致时直接返回已有的成功数据，如果数据不一致而又订单号重复直接报订单号重复。而如果不做幂等性设计，同样的订单号，同样的金额信息，重复支付，可能会造成金额累加。为了服务友好性，同样的订单号同样的金额信息返回订单号重复也是不友好的。 有些服务天生就具有幂等性，如修改用户邮箱、性别等，不管你重复请求...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">什么是灰度发布？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83%E5%88%86%E7%B1%BB"><span class="toc-number">3.</span> <span class="toc-text">灰度发布分类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%EF%BC%89%E9%87%91%E4%B8%9D%E9%9B%80%E5%8F%91%E5%B8%83"><span class="toc-number">3.1.</span> <span class="toc-text">1）金丝雀发布</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%EF%BC%89%E6%BB%9A%E5%8A%A8%E5%8F%91%E5%B8%83"><span class="toc-number">3.2.</span> <span class="toc-text">2）滚动发布</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%EF%BC%89%E8%93%9D%E7%BB%BF%E5%8F%91%E5%B8%83"><span class="toc-number">3.3.</span> <span class="toc-text">3）蓝绿发布</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%EF%BC%89%E5%A6%82%E4%BD%95%E9%80%89%E5%9E%8B"><span class="toc-number">3.4.</span> <span class="toc-text">4）如何选型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%9A%E7%95%8C%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88"><span class="toc-number">4.</span> <span class="toc-text">业界灰度发布的实现方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Nacos-ZK-Spring-Cloud-dubbo"><span class="toc-number">4.1.</span> <span class="toc-text">Nacos&#x2F;ZK + Spring Cloud&#x2F;dubbo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#istio"><span class="toc-number">4.2.</span> <span class="toc-text">istio</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%85%BE%E8%AE%AF%E4%BA%91%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88%EF%BC%88%E5%8C%97%E6%9E%81%E6%98%9F%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">腾讯云实现方案（北极星）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D"><span class="toc-number">5.1.</span> <span class="toc-text">基本介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88"><span class="toc-number">5.2.</span> <span class="toc-text">实现方案</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%B6%E6%AE%B5%E4%B8%80%EF%BC%9A%E5%AE%9E%E4%BE%8B%E6%89%93%E6%A0%87"><span class="toc-number">5.2.1.</span> <span class="toc-text">阶段一：实例打标</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%B6%E6%AE%B5%E4%BA%8C%EF%BC%9A%E7%BD%91%E5%85%B3%E8%B7%AF%E7%94%B1"><span class="toc-number">5.2.2.</span> <span class="toc-text">阶段二：网关路由</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%B6%E6%AE%B5%E4%B8%89%EF%BC%9A%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%B7%AF%E7%94%B1"><span class="toc-number">5.2.3.</span> <span class="toc-text">阶段三：微服务路由</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%B6%E6%AE%B5%E5%9B%9B%EF%BC%9A%E6%A0%87%E7%AD%BE%E9%80%8F%E4%BC%A0"><span class="toc-number">5.2.4.</span> <span class="toc-text">阶段四：标签透传</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%B6%E6%AE%B5%E4%BA%94%EF%BC%9A%E7%81%B0%E5%BA%A6%E5%AE%8C%E6%88%90"><span class="toc-number">5.2.5.</span> <span class="toc-text">阶段五：灰度完成</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%97%E6%9E%81%E6%98%9F%E5%BC%80%E6%BA%90%E7%89%88%E4%BD%93%E9%AA%8C"><span class="toc-number">6.</span> <span class="toc-text">北极星开源版体验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E5%AE%9E%E4%BE%8B%E6%89%93%E6%A0%87"><span class="toc-number">6.1.</span> <span class="toc-text">第一步：实例打标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E9%83%A8%E7%BD%B2%E5%BA%94%E7%94%A8"><span class="toc-number">6.2.</span> <span class="toc-text">第二步：部署应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%B7%AF%E7%94%B1"><span class="toc-number">6.3.</span> <span class="toc-text">第三步：微服务路由</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%EF%BC%9A%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83%E8%A7%82%E6%B5%8B"><span class="toc-number">6.4.</span> <span class="toc-text">第四步：灰度发布观测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E6%AD%A5%EF%BC%9A%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83%E6%94%B6%E5%B0%BE"><span class="toc-number">6.5.</span> <span class="toc-text">第五步：灰度发布收尾</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">7.</span> <span class="toc-text">总结</span></a></li></ol></div></div></div></div></main><footer id="footer" style="background: transparent;"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By John Doe</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><div class="js-pjax"><script>(() => {
+  let initFn = window.walineFn || null
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const destroyWaline = ele => ele.destroy()
+
+  const initWaline = (Fn, el = document, path = window.location.pathname) => {
+    const waline = Fn({
+      el: el.querySelector('#waline-wrap'),
+      serverURL: 'https://walinecomments-gxccu74d8-chens-projects-7c4f92c5.vercel.app',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      comment: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyWaline = () => {
+        destroyWaline(waline)
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const loadWaline = (el, path) => {
+    if (initFn) initWaline(initFn, el, path)
+    else {
+      btf.getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css')
+        .then(() => import('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js'))
+        .then(({ init }) => {
+          initFn = init || Waline.init
+          initWaline(initFn, el, path)
+          window.walineFn = initFn
+        })
+    }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Waline'
+      ? window.shuoshuoComment = { loadComment: loadWaline } 
+      : window.loadOtherComment = loadWaline
+    return
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

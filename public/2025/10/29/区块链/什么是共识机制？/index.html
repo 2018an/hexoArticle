@@ -1,0 +1,226 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>什么是共识机制？ | 只有那年胜过年年</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#FC5531"><meta name="description" content="共识机制共识机制的作用是为了确认区块链上的交易的有效性。 共识机制分类目前常见的共识机制有POW工作量证明、POS权益证明、DPOS股份授权证明、Ripple共识机制以及PooL验证池，这几类共识机制各有优劣，应用场景也各不相同，下表展示了从不同维度对这几类共识机制的分析比较。  1、POW（Proof of work）POW即工作量证明，就是众所周知的挖矿，它是一种竞争共识，通过工作量的证明来获">
+<meta property="og:type" content="article">
+<meta property="og:title" content="什么是共识机制？">
+<meta property="og:url" content="http://example.com/2025/10/29/%E5%8C%BA%E5%9D%97%E9%93%BE/%E4%BB%80%E4%B9%88%E6%98%AF%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6%EF%BC%9F/index.html">
+<meta property="og:site_name" content="只有那年胜过年年">
+<meta property="og:description" content="共识机制共识机制的作用是为了确认区块链上的交易的有效性。 共识机制分类目前常见的共识机制有POW工作量证明、POS权益证明、DPOS股份授权证明、Ripple共识机制以及PooL验证池，这几类共识机制各有优劣，应用场景也各不相同，下表展示了从不同维度对这几类共识机制的分析比较。  1、POW（Proof of work）POW即工作量证明，就是众所周知的挖矿，它是一种竞争共识，通过工作量的证明来获">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/logo.png">
+<meta property="article:published_time" content="2025-10-29T09:30:25.000Z">
+<meta property="article:modified_time" content="2025-10-29T09:02:40.857Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="区块链">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/logo.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "什么是共识机制？",
+  "url": "http://example.com/2025/10/29/%E5%8C%BA%E5%9D%97%E9%93%BE/%E4%BB%80%E4%B9%88%E6%98%AF%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6%EF%BC%9F/",
+  "image": "http://example.com/img/logo.png",
+  "datePublished": "2025-10-29T09:30:25.000Z",
+  "dateModified": "2025-10-29T09:02:40.857Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "John Doe",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/10/29/%E5%8C%BA%E5%9D%97%E9%93%BE/%E4%BB%80%E4%B9%88%E6%98%AF%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6%EF%BC%9F/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FC5531')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FC5531')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: John Doe","link":"链接: ","source":"来源: 只有那年胜过年年","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '什么是共识机制？',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/logo.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">357</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">49</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/logo.png" alt="Logo"><span class="site-name">只有那年胜过年年</span></a><a class="nav-page-title" href="/"><span class="site-name">什么是共识机制？</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">什么是共识机制？</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-10-29T09:30:25.000Z" title="发表于 2025-10-29 17:30:25">2025-10-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-10-29T09:02:40.857Z" title="更新于 2025-10-29 17:02:40">2025-10-29</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/">区块链</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><h2 id="共识机制"><a href="#共识机制" class="headerlink" title="共识机制"></a>共识机制</h2><p>共识机制的作用是为了确认区块链上的交易的有效性。</p>
+<h2 id="共识机制分类"><a href="#共识机制分类" class="headerlink" title="共识机制分类"></a>共识机制分类</h2><p>目前常见的共识机制有POW工作量证明、POS权益证明、DPOS股份授权证明、Ripple共识机制以及PooL验证池，这几类共识机制各有优劣，应用场景也各不相同，下表展示了从不同维度对这几类共识机制的分析比较。</p>
+<p><img src="https://pic2.zhimg.com/50/v2-73a9ad7bcae8aab0992487d9a8356659_hd.png" alt="image"></p>
+<h5 id="1、POW（Proof-of-work）"><a href="#1、POW（Proof-of-work）" class="headerlink" title="1、POW（Proof of work）"></a>1、POW（Proof of work）</h5><p>POW即工作量证明，就是众所周知的挖矿，它是一种竞争共识，通过工作量的证明来获得生成区块的权力。它的优点是完全的去中心化，各个节点完全平等，而且可以自由的进出；缺点则是POW会造成大量的挖矿资源浪费，达成共识的周期也比较长。</p>
+<h5 id="2、POS（Proof-of-Stake）"><a href="#2、POS（Proof-of-Stake）" class="headerlink" title="2、POS（Proof of Stake）"></a>2、POS（Proof of Stake）</h5><p>POS即权益证明，是POW的一种升级共识机制，它主要解决了POW工作量计算浪费的问题。当前POS已有很多不同的变种，但基本还是根据每个节点所占有代币的数量和时间（即权益）来决定其挖矿的难度。它的优点是缩短了各个节点之间达成共识的时间，缺点则是同POW一样仍然需要挖矿，并且POS会使得“富者更富”。</p>
+<h5 id="3、DPOS（Delegate-Proof-of-Stake）"><a href="#3、DPOS（Delegate-Proof-of-Stake）" class="headerlink" title="3、DPOS（Delegate Proof of Stake）"></a>3、DPOS（Delegate Proof of Stake）</h5><p>DPOS即股份授权证明机制，是POS的一个变种。它的原理是让每个持有代币的人进行投票，由此产生一定数量的“超级节点”，由这些节点来轮流产生区块。它的优点是不再需要通过挖矿来产生区块，从而可以大幅缩小交易确认的时间，能够达到秒级的共识验证，缺点则是DPOS还是得依赖于代币，不适用于一般的商业应用。</p>
+<h5 id="4、Ripple-Consensus（瑞波共识机制）"><a href="#4、Ripple-Consensus（瑞波共识机制）" class="headerlink" title="4、Ripple Consensus（瑞波共识机制）"></a>4、Ripple Consensus（瑞波共识机制）</h5><p>Ripple Consensus是一种数据正确性优先的网络交易同步机制，它是基于特殊节点列表达成的共识。在这种共识机制下，必须首先确定若干个初始特殊节点，如果要新接入一个节点，必须获得51%的初始节点的确认，并且只能由被确认的节点产生区块。因此，它区别于前面几类共识机制的主要因素是有一定的“中心化”。Ripple Consensus的优点是能保证任何时候都不会产生硬分叉，并且交易能被实时的验证；而缺点则是新加入节点要取得与其他节点的共识所需时间较长。</p>
+<h5 id="5、POOL验证池"><a href="#5、POOL验证池" class="headerlink" title="5、POOL验证池"></a>5、POOL验证池</h5><p>POOL验证池是基于传统分布式一致性算法加上数据验证的机制，也是目前行业链大范围在使用的共识机制。它的优点是无需建立代币，在成熟的分布式一致性算法（Pasox、Raft）的基础上，能够实现实时共识验证；缺点是性能会随着节点数的增加而变差，并且去中心化程度不够。除了常见的以上所述的几类共识机制，在区块链的实际应用过程中，还存在着五花八门的依据业务逻辑自定义的共识机制，如小蚁的“中性记账”、类似Ripple Consensus的Stellar共识机制、Factom等众多以“侧链”形式存在的共识机制等。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>因此，本文依据共识机制的特性及典型性将其划分为三大类：POW、非POW以及侧链。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">John Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/10/29/%E5%8C%BA%E5%9D%97%E9%93%BE/%E4%BB%80%E4%B9%88%E6%98%AF%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6%EF%BC%9F/">http://example.com/2025/10/29/区块链/什么是共识机制？/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">只有那年胜过年年</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/">区块链</a></div><div class="post-share"><div class="social-share" data-image="/img/logo.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/10/29/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF/%E5%88%B0%E5%BA%95%E4%BB%80%E4%B9%88%E6%98%AF%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%EF%BC%9F/" title="到底什么是分布式系统？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">到底什么是分布式系统？</div></div><div class="info-2"><div class="info-item-1">分布式系统背景说分布式系统必须要说集中式系统，集中式系统中整个项目就是一个独立的应用，整个应用也就是整个项目，所有的东西都在一个应用里面。 如下图所示  如一个网站就是一个应用，最后是多个增加多台服务器或者多个容器来达到负载均衡的避免单点故障的目的，当然，数据库是可以分开部署的。 集中式很明显的优点就是开发测试运维会比较方便，不用为考虑复杂的分布式环境。 集中式很明显的弊端就是不易扩展，每次更新都必须更新所有的应用。而且，一个有问题意味着所有的应用都有问题。当系统越来越大，集中式将是系统最大的瓶颈。 什么是分布式系统？ 分布式系统是若干独立计算机的集合，这计算机对用户来说就像单个相关系统。  以上定义摘自&lt;&lt;分布式系统原理与范型&gt;&gt;一书。 也就是说分布式系统背后是由一系列的计算机组成的，但用户感知不到背后的逻辑，就像访问单个计算机一样。 说的有点绕，我们可以来简单看下分布式系统图。  分布式系统利弊在分布式系统中： 1、应用可以按业务类型拆分成多个应用，再按结构分成接口层、服务层；我们也可以按访问入口分，如移动端、PC端等定义不同的接口应用； 2、数据库可...</div></div></div></a><a class="pagination-related" href="/2025/10/29/Linux/Java%20%E7%A8%8B%E5%BA%8F%E5%91%98%E5%BF%85%E9%A1%BB%E6%8E%8C%E6%8F%A1%E7%9A%84%E5%B8%B8%E7%94%A8%20Linux%20%E5%91%BD%E4%BB%A4/" title="Java 程序员必须掌握的常用 Linux 命令"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Java 程序员必须掌握的常用 Linux 命令</div></div><div class="info-2"><div class="info-item-1"> Java程序员也是半个运维了，在日常开发中经常会接触到Linux环境操作。小公司的开发人员甚至是兼了全运维的工作，下面整理了一些常用的Linux操作命令。 Linux常用指令 ls　　        显示文件或目录       -l       列出文件详细信息l(list)       -a       列出当前目录下所有文件及目录，包括隐藏的a(all)       mkdir         创建目录       -p       创建目录，若无父目录，则创建p(parent)  cd            切换目录  touch         创建空文件  vim &#x2F; vi      创建&#x2F;编辑文件       insert   编辑            :q       退出            :q!      强制退出            :wq      保存并退出            esc      退出编辑  echo          创建带有内容的文件  cat           查看文件内容  tar         ...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/10/29/%E5%8C%BA%E5%9D%97%E9%93%BE/%E4%BB%80%E4%B9%88%E6%98%AF%E4%BB%A5%E5%A4%AA%E5%9D%8A%EF%BC%9F/" title="什么是以太坊？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-29</div><div class="info-item-2">什么是以太坊？</div></div><div class="info-2"><div class="info-item-1">什么是以太坊以太坊是一个去中心化的区块链平台，这个项目是在2014年8月由世界各地的爱好者们在预售的时候进行的。它是由瑞士非营利组织Ethereum基金会开发的，他们都是来自世界各地的杰出人才。 以太坊允许任何人构建和使用区块链技术来运行去中心化的应用程序。像比特币一样，没有人完全控制或拥有以太坊，因为它是一个由世界各地许多人建立的开源项目。与比特币不同，以太坊设计更具有适应性和灵活性，在以太坊平台上创建应用程序很容易，并且随着Homestead版本的发行，任何人都可以安全地使用这些应用程序。 以太坊还能运行智能合同：应用程序完全按照程序运行，而不存在任何停机、审查、欺诈或第三方干预。 这些应用程序运行在一个定制的区块链上，这是一个非常强大的共享全球公共设施，它可以用来转移价值，并证明财产的所有权。 以太坊特点 单独为智能合约指定编程语言Solidity； 使用了内存需求较高的哈希函数：避免出现算力矿机； uncle块激励机制：降低矿池的优势，减少区块产生间隔为 15 秒； 难度调整算法：一定的自动反馈机制； gas 限制调整算法：限制代码执行指令数，避免循环攻击； 记录当前状态...</div></div></div></a><a class="pagination-related" href="/2025/10/29/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%80%8E%E4%B9%88%E5%AD%A6%E4%B9%A0%EF%BC%9F/" title="区块链怎么学习？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-29</div><div class="info-item-2">区块链怎么学习？</div></div><div class="info-2"><div class="info-item-1">区块链技术区块链最初是由一位化名中本聪的人为比特币（一种数字货币）而设计出的一种特殊的数据库技术。从数据的角度来看，区块链是一种把区块以链的方式组合在一起的数据结构，它能够使参与者对全网交易记录的事件顺序和当前状态建立共识。 区块链概括起来是指通过去中心化和去信任的方式集体维护一个可靠数据库的技术。区块链涉及的技术关键点包括：去中心化、去信任、集体维护、可靠数据库、时间戳、非对称加密等。 区块链重新定义了网络中信用的生成方式，在系统中，参与者无需了解其他人的背景资料，也不需要借助第三方机构的担保或保证，区块链保障了系统对价值转移的活动进行记录、传输、存储，其最后的结果一定是可信的。 区块链平台区块链使用方式分为开源项目、商业解决方案、区块链云服务、现有区块链四种方式。技术影响力按面积大小进行区分，面积越大影响力越大，技术成熟度按颜色深浅进行区分，颜色越深技术越成熟。  可以看出以比特币、以太坊、HyperLedger为代表的这三种区块链技术方案最为成熟，所以要学习区块链技术，就学习以太坊平台就可以了。 </div></div></div></a><a class="pagination-related" href="/2025/10/29/%E5%8C%BA%E5%9D%97%E9%93%BE/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E7%A7%81%E6%9C%89%E9%93%BE%E6%90%AD%E5%BB%BA/" title="以太坊私有链搭建"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-29</div><div class="info-item-2">以太坊私有链搭建</div></div><div class="info-2"><div class="info-item-1">操作系统：CentOS 6.5 安装依赖组件 sudo yum install git gcc gcc-c++ ntp epel-release nodejs -y  安装golang下载并解压：  wget https://studygolang.com/dl/golang/go1.13.4.linux-amd64.tar.gztar zxvf go1.13.4.linux-amd64.tar.gzmv go &#x2F;usr&#x2F;local&#x2F;  配置环境变量：  vi &#x2F;etc&#x2F;profile  添加： GOROOT&#x3D;&#x2F;usr&#x2F;local&#x2F;go PATH&#x3D;$GOROOT&#x2F;bin:$PATH  配置生效：  source &#x2F;etc&#x2F;profile  查看 golang 版本：  go version  编译go-ethereum下载并编译以太坊：  git clone https://github.com/ethereum/go-ethereum.gitcd g...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6"><span class="toc-number">1.</span> <span class="toc-text">共识机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6%E5%88%86%E7%B1%BB"><span class="toc-number">2.</span> <span class="toc-text">共识机制分类</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81POW%EF%BC%88Proof-of-work%EF%BC%89"><span class="toc-number">2.1.</span> <span class="toc-text">1、POW（Proof of work）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81POS%EF%BC%88Proof-of-Stake%EF%BC%89"><span class="toc-number">2.2.</span> <span class="toc-text">2、POS（Proof of Stake）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%E3%80%81DPOS%EF%BC%88Delegate-Proof-of-Stake%EF%BC%89"><span class="toc-number">2.3.</span> <span class="toc-text">3、DPOS（Delegate Proof of Stake）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4%E3%80%81Ripple-Consensus%EF%BC%88%E7%91%9E%E6%B3%A2%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6%EF%BC%89"><span class="toc-number">2.4.</span> <span class="toc-text">4、Ripple Consensus（瑞波共识机制）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5%E3%80%81POOL%E9%AA%8C%E8%AF%81%E6%B1%A0"><span class="toc-number">2.5.</span> <span class="toc-text">5、POOL验证池</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li></ol></div></div></div></div></main><footer id="footer" style="background: transparent;"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By John Doe</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><div class="js-pjax"><script>(() => {
+  let initFn = window.walineFn || null
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const destroyWaline = ele => ele.destroy()
+
+  const initWaline = (Fn, el = document, path = window.location.pathname) => {
+    const waline = Fn({
+      el: el.querySelector('#waline-wrap'),
+      serverURL: 'https://walinecomments-gxccu74d8-chens-projects-7c4f92c5.vercel.app',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      comment: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyWaline = () => {
+        destroyWaline(waline)
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const loadWaline = (el, path) => {
+    if (initFn) initWaline(initFn, el, path)
+    else {
+      btf.getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css')
+        .then(() => import('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js'))
+        .then(({ init }) => {
+          initFn = init || Waline.init
+          initWaline(initFn, el, path)
+          window.walineFn = initFn
+        })
+    }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Waline'
+      ? window.shuoshuoComment = { loadComment: loadWaline } 
+      : window.loadOtherComment = loadWaline
+    return
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

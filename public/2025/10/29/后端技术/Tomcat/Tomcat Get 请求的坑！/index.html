@@ -1,0 +1,277 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Tomcat Get 请求的坑！ | 只有那年胜过年年</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#FC5531"><meta name="description" content="Tomcat8.5，当Get请求中包含了未经编码的中文字符时，会报以下错误，请求未到应用程序在Tomcat层就被拦截了。 Tomcat报错：  java.lang.IllegalArgumentException: Invalid character found in the request target. The valid characters are defined in RFC 7230">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tomcat Get 请求的坑！">
+<meta property="og:url" content="http://example.com/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Tomcat/Tomcat%20Get%20%E8%AF%B7%E6%B1%82%E7%9A%84%E5%9D%91%EF%BC%81/index.html">
+<meta property="og:site_name" content="只有那年胜过年年">
+<meta property="og:description" content="Tomcat8.5，当Get请求中包含了未经编码的中文字符时，会报以下错误，请求未到应用程序在Tomcat层就被拦截了。 Tomcat报错：  java.lang.IllegalArgumentException: Invalid character found in the request target. The valid characters are defined in RFC 7230">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/logo.png">
+<meta property="article:published_time" content="2025-10-29T09:30:25.000Z">
+<meta property="article:modified_time" content="2025-10-29T09:33:56.684Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Tomcat">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/logo.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Tomcat Get 请求的坑！",
+  "url": "http://example.com/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Tomcat/Tomcat%20Get%20%E8%AF%B7%E6%B1%82%E7%9A%84%E5%9D%91%EF%BC%81/",
+  "image": "http://example.com/img/logo.png",
+  "datePublished": "2025-10-29T09:30:25.000Z",
+  "dateModified": "2025-10-29T09:33:56.684Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "John Doe",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Tomcat/Tomcat%20Get%20%E8%AF%B7%E6%B1%82%E7%9A%84%E5%9D%91%EF%BC%81/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FC5531')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FC5531')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: John Doe","link":"链接: ","source":"来源: 只有那年胜过年年","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Tomcat Get 请求的坑！',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/logo.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">357</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">49</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/logo.png" alt="Logo"><span class="site-name">只有那年胜过年年</span></a><a class="nav-page-title" href="/"><span class="site-name">Tomcat Get 请求的坑！</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Tomcat Get 请求的坑！</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-10-29T09:30:25.000Z" title="发表于 2025-10-29 17:30:25">2025-10-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-10-29T09:33:56.684Z" title="更新于 2025-10-29 17:33:56">2025-10-29</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><p><img src="http://img.javastack.cn/18-2-27/1096232.jpg"></p>
+<p><strong>Tomcat8.5，当Get请求中包含了未经编码的中文字符时，会报以下错误，请求未到应用程序在Tomcat层就被拦截了。</strong></p>
+<p>Tomcat报错：</p>
+<blockquote>
+<p>java.lang.IllegalArgumentException: Invalid character found in the request target. The valid characters are defined in RFC 7230 and RFC 3986</p>
+</blockquote>
+<p>返回400错误：</p>
+<blockquote>
+<p>Transfer-Encoding—&gt;[chunked]<br>null—&gt;[HTTP&#x2F;1.1 400 Bad Request]<br>Server—&gt;[Apache-Coyote&#x2F;1.1]<br>Connection—&gt;[close]<br>Date—&gt;[Wed, 07 Feb 2018 03:19:04 GMT]</p>
+</blockquote>
+<p>根据错误找到了Tomcat最新的源码：</p>
+<p>org&#x2F;apache&#x2F;coyote&#x2F;http11&#x2F;LocalStrings.properties</p>
+<pre class="line-numbers language-none"><code class="language-none">iib.invalidRequestTarget&#x3D;Invalid character found in the request target. The valid characters are defined in RFC 7230 and RFC 3986<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>org&#x2F;apache&#x2F;coyote&#x2F;http11&#x2F;Http11InputBuffer.java</p>
+<pre class="line-numbers language-none"><code class="language-none">boolean parseRequestLine(boolean keptAlive) throws IOException &#123;
+
+...
+ 
+    &#125; else if (HttpParser.isNotRequestTarget(chr)) &#123;
+        throw new IllegalArgumentException(sm.getString(&quot;iib.invalidRequestTarget&quot;));
+    &#125;
+
+...
+
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>java&#x2F;org&#x2F;apache&#x2F;tomcat&#x2F;util&#x2F;http&#x2F;parser&#x2F;HttpParser.java</p>
+<pre class="line-numbers language-none"><code class="language-none">public static boolean isNotRequestTarget(int c) &#123;
+    &#x2F;&#x2F; Fast for valid request target characters, slower for some incorrect
+    &#x2F;&#x2F; ones
+    try &#123;
+        return IS_NOT_REQUEST_TARGET[c];
+    &#125; catch (ArrayIndexOutOfBoundsException ex) &#123;
+        return true;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>查源码发现在Tomcat7.0.73就已经添加了RFC 3986这个规范。</strong></p>
+<p>RFC 3986文档对Url的编解码问题做出了详细的建议，指出了哪些字符需要被编码才不会引起Url语义的转变，以及对为什么这些字符需要编码做出了相应的解释。</p>
+<p>RFC 3986文档规定，Url中只允许包含英文字母（a-zA-Z）、数字（0-9）、-_.~4个特殊字符以及所有保留字符（! * ‘ ( ) ; : @ &amp; &#x3D; + $ , &#x2F; ? # [ ]）。</p>
+<p>还有一些字符当直接放在Url中的时候，可能会引起解析程序的歧义，这些字符被视为不安全字符。</p>
+<ul>
+<li>空格：Url在传输的过程，或者用户在排版的过程，或者文本处理程序在处理Url的过程，都有可能引入无关紧要的空格，或者将那些有意义的空格给去掉。</li>
+<li>引号以及&lt;&gt;：引号和尖括号通常用于在普通文本中起到分隔Url的作用</li>
+<li>#：通常用于表示书签或者锚点</li>
+<li>%：百分号本身用作对不安全字符进行编码时使用的特殊字符，因此本身需要编码</li>
+<li>{}|^[]&#96;~：某一些网关或者传输代理会篡改这些字符</li>
+</ul>
+<p><strong>对于此问题，有以下几种解决方案。</strong></p>
+<p>1、切换版本到7.0.73以下，这个不实际。</p>
+<p>2、修改Tomcat源码，这个也不实际。</p>
+<p>3、前端请求对URL编码。</p>
+<p>4、修改Get方法为Post方法。</p>
+<p>5、因{}是不安全字符，默认被 tomcat拦截。如果需要在URL中传输json数据，在catalina.properties中添加支持。</p>
+<blockquote>
+<p>tomcat.util.http.parser.HttpParser.requestTargetAllow&#x3D;|{}</p>
+</blockquote>
+<p><strong>总结</strong></p>
+<p>如果Get请求在合作方，而合作方不愿意修改代码，那1、2种方法可以尝试。如果Get请求在自己，可以尝试3、4种方法。仅需要在URL上传输json数据，使用第5种方法即可。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">John Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Tomcat/Tomcat%20Get%20%E8%AF%B7%E6%B1%82%E7%9A%84%E5%9D%91%EF%BC%81/">http://example.com/2025/10/29/后端技术/Tomcat/Tomcat Get 请求的坑！/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">只有那年胜过年年</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Tomcat/">Tomcat</a></div><div class="post-share"><div class="social-share" data-image="/img/logo.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Boot/%E5%B9%B4%E8%BD%BB%E4%BA%BA%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%20Spring%20Boot%20%E5%BA%94%E7%94%A8%EF%BC%8C%E5%A4%AA%E7%88%BD%E4%BA%86%EF%BC%81/" title="年轻人的第一个 Spring Boot 应用，太爽了！"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">年轻人的第一个 Spring Boot 应用，太爽了！</div></div><div class="info-2"><div class="info-item-1">Spring Boot 大家都知道是啥吧？ 还有不知道的来看这篇扫下盲：告诉你，Spring Boot 真是个牛逼货！。 顺便再往下看，栈长给你带来年轻人的第一个 Spring Boot 应用，撸码史无前例的轻松，那就一个字：爽！ 第一步打开这个网站，快速生成一个 Spring Boot 项目。  https://start.spring.io/  废话不说，看下图，几秒搞定！  第二步解压生成的 demo 项目，导入到 IDE 中。  来看下 pom.xml 文件内容： &lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt; &lt;project xmlns&#x3D;&quot;http:&#x2F;&#x2F;maven.apache.org&#x2F;POM&#x2F;4.0.0&quot; xmlns:xsi&#x3D;&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2001&#x2F;XMLSchema-instance&quot; 	xsi:...</div></div></div></a><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Tomcat/Tomcat%20%E9%9B%86%E7%BE%A4%20session%20%E5%A4%8D%E5%88%B6%E4%B8%8E%20Oracle%20%E7%9A%84%E5%9D%91%E3%80%82%E3%80%82/" title="Tomcat 集群 session 复制与 Oracle 的坑。。"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Tomcat 集群 session 复制与 Oracle 的坑。。</div></div><div class="info-2"><div class="info-item-1">问题描述公司某个系统使用了tomcat自带的集群session复制功能，然后后报了一个oracle驱动包里面的连接不能被序列化的异常。 01-Nov-2017 16:45:26.653 SEVERE [https-jsse-nio-8443-exec-2] org.apache.catalina.ha.session.DeltaManager.requestCompleted Unable to serialize delta request for sessionid [F825A52DD9E0E7F8FD6BB3E3F721F841]  java.io.NotSerializableException: oracle.jdbc.driver.T4CConnection     at java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1183)     at java.io.ObjectOutputStream.defaultWriteFields(ObjectOutputStream.java:15...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Tomcat/Tomcat%20%E9%9B%86%E7%BE%A4%20session%20%E5%A4%8D%E5%88%B6%E4%B8%8E%20Oracle%20%E7%9A%84%E5%9D%91%E3%80%82%E3%80%82/" title="Tomcat 集群 session 复制与 Oracle 的坑。。"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-29</div><div class="info-item-2">Tomcat 集群 session 复制与 Oracle 的坑。。</div></div><div class="info-2"><div class="info-item-1">问题描述公司某个系统使用了tomcat自带的集群session复制功能，然后后报了一个oracle驱动包里面的连接不能被序列化的异常。 01-Nov-2017 16:45:26.653 SEVERE [https-jsse-nio-8443-exec-2] org.apache.catalina.ha.session.DeltaManager.requestCompleted Unable to serialize delta request for sessionid [F825A52DD9E0E7F8FD6BB3E3F721F841]  java.io.NotSerializableException: oracle.jdbc.driver.T4CConnection     at java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1183)     at java.io.ObjectOutputStream.defaultWriteFields(ObjectOutputStream.java:15...</div></div></div></a><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Tomcat/%E4%B8%80%E5%88%86%E9%92%9F%E5%BC%80%E5%90%AF%20Tomcat%20https%20%E6%94%AF%E6%8C%81/" title="一分钟开启 Tomcat https 支持"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-29</div><div class="info-item-2">一分钟开启 Tomcat https 支持</div></div><div class="info-2"><div class="info-item-1">1、修改配置文件打开tomcat&#x2F;conf&#x2F;server.xml配置文件，把下面这段配置注释取消掉，keystorePass为证书密钥需要手动添加，创建证书时指定的。 &lt;Connector port&#x3D;&quot;8443&quot; protocol&#x3D;&quot;org.apache.coyote.http11.Http11Protocol&quot;                maxThreads&#x3D;&quot;150&quot;                 SSLEnabled&#x3D;&quot;true&quot;                 scheme&#x3D;&quot;https&quot;                 secure&#x3D;&quot;true&quot;                clientAuth&#x3D;&quot;false&quot;                 sslProtocol&#x3D;&quot;TLS&quot;            ...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/logo.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">John Doe</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">357</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">49</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/xxxxx" target="_blank" title="Github"><i class="fab fa-github" style="color: #hdhfbb;"></i></a><a class="social-icon" href="mailto:xxxxxx@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #000000;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">🌸 春去秋来，花开花落  📚 桌上的日历又薄了几页  💭 记忆中的昨天还那么清晰</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/30/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/JDK%20%E7%B4%A7%E6%80%A5%E6%BC%8F%E6%B4%9E%EF%BC%8CXMLDecoder%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%94%BB%E5%87%BB/" title="JDK 紧急漏洞，XMLDecoder反序列化攻击">JDK 紧急漏洞，XMLDecoder反序列化攻击</a><time datetime="2025-10-30T06:42:34.000Z" title="发表于 2025-10-30 14:42:34">2025-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/30/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/%E4%BC%9A%E8%AF%9D%E5%9B%BA%E5%AE%9A%E6%94%BB%E5%87%BB%E6%BC%8F%E6%B4%9E%EF%BC%88session%20fixation%20attack%EF%BC%89/" title="会话固定攻击漏洞">会话固定攻击漏洞</a><time datetime="2025-10-30T06:42:34.000Z" title="发表于 2025-10-30 14:42:34">2025-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/30/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/44%20%E4%B8%AA%20Java%20%E4%BB%A3%E7%A0%81%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%80%BB%E7%BB%93/" title="44 个 Java 代码性能优化总结">44 个 Java 代码性能优化总结</a><time datetime="2025-10-30T06:42:34.000Z" title="发表于 2025-10-30 14:42:34">2025-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/30/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/8%20%E6%9D%A1%E5%85%B3%E4%BA%8E%20Web%20%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E7%9A%84%E4%BC%98%E5%8C%96%E5%BB%BA%E8%AE%AE/" title="8 条关于 Web 前端性能的优化建议">8 条关于 Web 前端性能的优化建议</a><time datetime="2025-10-30T06:42:34.000Z" title="发表于 2025-10-30 14:42:34">2025-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/30/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E7%99%BE%E5%88%86%E4%B9%9D%E5%8D%81Java%E7%A8%8B%E5%BA%8F%E5%91%98%E8%A2%AB%E8%AF%AF%E5%AF%BC%E7%9A%84%E4%B8%80%E4%B8%AA%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%AD%96%E7%95%A5/" title="百分九十Java程序员被误导的一个性能优化策略">百分九十Java程序员被误导的一个性能优化策略</a><time datetime="2025-10-30T06:42:34.000Z" title="发表于 2025-10-30 14:42:34">2025-10-30</time></div></div></div></div></div></div></main><footer id="footer" style="background: transparent;"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By John Doe</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><div class="js-pjax"><script>(() => {
+  let initFn = window.walineFn || null
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const destroyWaline = ele => ele.destroy()
+
+  const initWaline = (Fn, el = document, path = window.location.pathname) => {
+    const waline = Fn({
+      el: el.querySelector('#waline-wrap'),
+      serverURL: 'https://walinecomments-gxccu74d8-chens-projects-7c4f92c5.vercel.app',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      comment: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyWaline = () => {
+        destroyWaline(waline)
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const loadWaline = (el, path) => {
+    if (initFn) initWaline(initFn, el, path)
+    else {
+      btf.getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css')
+        .then(() => import('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js'))
+        .then(({ init }) => {
+          initFn = init || Waline.init
+          initWaline(initFn, el, path)
+          window.walineFn = initFn
+        })
+    }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Waline'
+      ? window.shuoshuoComment = { loadComment: loadWaline } 
+      : window.loadOtherComment = loadWaline
+    return
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

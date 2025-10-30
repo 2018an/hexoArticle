@@ -1,0 +1,708 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Redis 常用操作命令，非常详细！ | 只有那年胜过年年</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#FC5531"><meta name="description" content="下面总结并演示了 Redis 的 常用管理命令、key 操作、字符串、集合、列表、散列类型的操作命令。 你需要掌握的 Redis 知识 史上最全 Redis 高可用解决方案总结 为什么分布式一定要有Redis? Spring Boot Redis Cluster 实战干货 Spring Data Redis 详解及实战 一个 Redis 命令，导致公司损失 400 万！  更多请在后台回复关键字：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis 常用操作命令，非常详细！">
+<meta property="og:url" content="http://example.com/2025/10/30/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis/Redis%20%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4%EF%BC%8C%E9%9D%9E%E5%B8%B8%E8%AF%A6%E7%BB%86%EF%BC%81/index.html">
+<meta property="og:site_name" content="只有那年胜过年年">
+<meta property="og:description" content="下面总结并演示了 Redis 的 常用管理命令、key 操作、字符串、集合、列表、散列类型的操作命令。 你需要掌握的 Redis 知识 史上最全 Redis 高可用解决方案总结 为什么分布式一定要有Redis? Spring Boot Redis Cluster 实战干货 Spring Data Redis 详解及实战 一个 Redis 命令，导致公司损失 400 万！  更多请在后台回复关键字：">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/logo.png">
+<meta property="article:published_time" content="2025-10-30T06:42:34.000Z">
+<meta property="article:modified_time" content="2025-10-30T08:14:24.690Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Redis">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/logo.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Redis 常用操作命令，非常详细！",
+  "url": "http://example.com/2025/10/30/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis/Redis%20%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4%EF%BC%8C%E9%9D%9E%E5%B8%B8%E8%AF%A6%E7%BB%86%EF%BC%81/",
+  "image": "http://example.com/img/logo.png",
+  "datePublished": "2025-10-30T06:42:34.000Z",
+  "dateModified": "2025-10-30T08:14:24.690Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "John Doe",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/10/30/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis/Redis%20%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4%EF%BC%8C%E9%9D%9E%E5%B8%B8%E8%AF%A6%E7%BB%86%EF%BC%81/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FC5531')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FC5531')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: John Doe","link":"链接: ","source":"来源: 只有那年胜过年年","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Redis 常用操作命令，非常详细！',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/logo.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">357</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">49</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/logo.png" alt="Logo"><span class="site-name">只有那年胜过年年</span></a><a class="nav-page-title" href="/"><span class="site-name">Redis 常用操作命令，非常详细！</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Redis 常用操作命令，非常详细！</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-10-30T06:42:34.000Z" title="发表于 2025-10-30 14:42:34">2025-10-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-10-30T08:14:24.690Z" title="更新于 2025-10-30 16:14:24">2025-10-30</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><p>下面总结并演示了 Redis 的 常用管理命令、key 操作、字符串、集合、列表、散列类型的操作命令。</p>
+<h2 id="你需要掌握的-Redis-知识"><a href="#你需要掌握的-Redis-知识" class="headerlink" title="你需要掌握的 Redis 知识"></a>你需要掌握的 Redis 知识</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/VjjEFyVOo2krICWBV3kEsg">史上最全 Redis 高可用解决方案总结</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/mmDo7_ogqxtoxwfKpe9cYg">为什么分布式一定要有Redis?</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/K0q8brB1ZAFz_bU50yu4NA">Spring Boot Redis Cluster 实战干货</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/dFnP3URKidfwwFU5gCYAHw">Spring Data Redis 详解及实战</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/MzkvQG2mFyvTNegFX52ztg">一个 Redis 命令，导致公司损失 400 万！</a></li>
+</ul>
+<p>更多请在后台回复关键字：Redis。</p>
+<h2 id="常用管理命令"><a href="#常用管理命令" class="headerlink" title="常用管理命令"></a>常用管理命令</h2><h4 id="1、启动Redis"><a href="#1、启动Redis" class="headerlink" title="1、启动Redis"></a>1、启动Redis</h4><pre class="line-numbers language-none"><code class="language-none">&gt; redis-server [--port 6379]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>如果命令参数过多，建议通过配置文件来启动Redis。</p>
+<pre class="line-numbers language-none"><code class="language-none">&gt; redis-server [xx&#x2F;xx&#x2F;redis.conf]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>6379是Redis默认端口号。</p>
+<h4 id="2、连接Redis"><a href="#2、连接Redis" class="headerlink" title="2、连接Redis"></a>2、连接Redis</h4><pre class="line-numbers language-none"><code class="language-none">&gt; .&#x2F;redis-cli [-h 127.0.0.1 -p 6379]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="3、停止Redis"><a href="#3、停止Redis" class="headerlink" title="3、停止Redis"></a>3、停止Redis</h4><pre class="line-numbers language-none"><code class="language-none">&gt; redis-cli shutdown
+
+&gt; kill redis-pid<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>以上两条停止Redis命令效果一样。</p>
+<h4 id="4、发送命令"><a href="#4、发送命令" class="headerlink" title="4、发送命令"></a>4、发送命令</h4><p>给Redis发送命令有两种方式：</p>
+<p>1、redis-cli带参数运行，如：</p>
+<pre class="line-numbers language-none"><code class="language-none">&gt; redis-cli shutdown
+not connected&gt; <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>这样默认是发送到本地的6379端口。</p>
+<p>2、redis-cli不带参数运行，如：</p>
+<pre class="line-numbers language-none"><code class="language-none">&gt; .&#x2F;redis-cli
+
+127.0.0.1:6379&gt; shutdown
+not connected&gt; <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="5、测试连通性"><a href="#5、测试连通性" class="headerlink" title="5、测试连通性"></a>5、测试连通性</h4><pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; ping
+PONG<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h2 id="key操作命令"><a href="#key操作命令" class="headerlink" title="key操作命令"></a>key操作命令</h2><h4 id="获取所有键"><a href="#获取所有键" class="headerlink" title="获取所有键"></a>获取所有键</h4><blockquote>
+<p>语法：keys pattern</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; keys *
+1) &quot;javastack&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<ul>
+<li>*表示通配符，表示任意字符，会遍历所有键显示所有的键列表，时间复杂度O(n)，在生产环境不建议使用。</li>
+</ul>
+<h4 id="获取键总数"><a href="#获取键总数" class="headerlink" title="获取键总数"></a>获取键总数</h4><blockquote>
+<p>语法：dbsize</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; dbsize
+(integer) 6<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>获取键总数时不会遍历所有的键，直接获取内部变量，时间复杂度O(1)。</p>
+<h4 id="查询键是否存在"><a href="#查询键是否存在" class="headerlink" title="查询键是否存在"></a>查询键是否存在</h4><blockquote>
+<p>语法：exists key [key …]</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; exists javastack java
+(integer) 2<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>查询查询多个，返回存在的个数。</p>
+<h4 id="删除键"><a href="#删除键" class="headerlink" title="删除键"></a>删除键</h4><blockquote>
+<p>语法：del key [key …]</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; del java javastack
+(integer) 1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>可以删除多个，返回删除成功的个数。</p>
+<h4 id="查询键类型"><a href="#查询键类型" class="headerlink" title="查询键类型"></a>查询键类型</h4><blockquote>
+<p>语法： type key</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; type javastack
+string<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="移动键"><a href="#移动键" class="headerlink" title="移动键"></a>移动键</h4><blockquote>
+<p>语法：move key db</p>
+</blockquote>
+<p>如把javastack移到2号数据库。</p>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; move javastack 2
+(integer) 1
+127.0.0.1:6379&gt; select 2
+OK
+127.0.0.1:6379[2]&gt; keys *
+1) &quot;javastack&quot;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="查询key的生命周期（秒）"><a href="#查询key的生命周期（秒）" class="headerlink" title="查询key的生命周期（秒）"></a>查询key的生命周期（秒）</h4><blockquote>
+<p>秒语法：ttl key</p>
+</blockquote>
+<blockquote>
+<p>毫秒语法：pttl key</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379[2]&gt; ttl javastack
+(integer) -1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>-1：永远不过期。</p>
+<h4 id="设置过期时间"><a href="#设置过期时间" class="headerlink" title="设置过期时间"></a>设置过期时间</h4><blockquote>
+<p>秒语法：expire key seconds</p>
+</blockquote>
+<blockquote>
+<p>毫秒语法：pexpire key milliseconds</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379[2]&gt; expire javastack 60
+(integer) 1
+127.0.0.1:6379[2]&gt; ttl javastack
+(integer) 55<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="设置永不过期"><a href="#设置永不过期" class="headerlink" title="设置永不过期"></a>设置永不过期</h4><blockquote>
+<p>语法：persist key</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379[2]&gt; persist javastack
+(integer) 1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="更改键名称"><a href="#更改键名称" class="headerlink" title="更改键名称"></a>更改键名称</h4><blockquote>
+<p>语法：rename key newkey</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379[2]&gt; rename javastack javastack123
+OK<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h2 id="字符串操作命令"><a href="#字符串操作命令" class="headerlink" title="字符串操作命令"></a>字符串操作命令</h2><p>字符串是Redis中最基本的数据类型，单个数据能存储的最大空间是512M。</p>
+<h4 id="存放键值"><a href="#存放键值" class="headerlink" title="存放键值"></a>存放键值</h4><blockquote>
+<p>语法：set key value [EX seconds] [PX milliseconds] [NX|XX]</p>
+</blockquote>
+<p>nx：如果key不存在则建立，xx：如果key存在则修改其值，也可以直接使用setnx&#x2F;setex命令。</p>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; set javastack 666
+OK<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="获取键值"><a href="#获取键值" class="headerlink" title="获取键值"></a>获取键值</h4><blockquote>
+<p>语法：get key</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379[2]&gt; get javastack
+&quot;666&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="值递增-递减"><a href="#值递增-递减" class="headerlink" title="值递增&#x2F;递减"></a>值递增&#x2F;递减</h4><p>如果字符串中的值是数字类型的，可以使用incr命令每次递增，不是数字类型则报错。</p>
+<blockquote>
+<p>语法：incr key</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379[2]&gt; incr javastack
+(integer) 667<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>一次想递增N用incrby命令，如果是浮点型数据可以用incrbyfloat命令递增。</p>
+<p>同样，递减使用decr、decrby命令。</p>
+<h4 id="批量存放键值"><a href="#批量存放键值" class="headerlink" title="批量存放键值"></a>批量存放键值</h4><blockquote>
+<p>语法：mset key value [key value …]</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379[2]&gt; mset java1 1 java2 2 java3 3
+OK<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="获取获取键值"><a href="#获取获取键值" class="headerlink" title="获取获取键值"></a>获取获取键值</h4><blockquote>
+<p>语法：mget key [key …]</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379[2]&gt; mget java1 java2
+1) &quot;1&quot;
+2) &quot;2&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>Redis接收的是UTF-8的编码，如果是中文一个汉字将占3位返回。</p>
+<h4 id="获取值长度"><a href="#获取值长度" class="headerlink" title="获取值长度"></a>获取值长度</h4><blockquote>
+<p>语法：strlen key</p>
+</blockquote>
+<blockquote>
+<p>127.0.0.1:6379[2]&gt; strlen javastack<br>(integer) 3</p>
+</blockquote>
+<h4 id="追加内容"><a href="#追加内容" class="headerlink" title="追加内容"></a>追加内容</h4><blockquote>
+<p>语法：append key value</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379[2]&gt; append javastack hi
+(integer) 5<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>向键值尾部添加，如上命令执行后由666变成666hi</p>
+<h4 id="获取部分字符"><a href="#获取部分字符" class="headerlink" title="获取部分字符"></a>获取部分字符</h4><blockquote>
+<p>语法：getrange key start end</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">&gt; 127.0.0.1:6379[2]&gt; getrange javastack 0 4
+&quot;javas&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h2 id="集合操作命令"><a href="#集合操作命令" class="headerlink" title="集合操作命令"></a>集合操作命令</h2><p>集合类型和列表类型相似，只不过是集合是无序且不可重复的。</p>
+<h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><h4 id="存储值"><a href="#存储值" class="headerlink" title="存储值"></a>存储值</h4><blockquote>
+<p>语法：sadd key member [member …]</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; 这里有8个值（2个java），只存了7个
+127.0.0.1:6379&gt; sadd langs java php c++ go ruby python kotlin java
+(integer) 7<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="获取元素"><a href="#获取元素" class="headerlink" title="获取元素"></a>获取元素</h4><blockquote>
+<p>获取所有元素语法：smembers key</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; smembers langs
+1) &quot;php&quot;
+2) &quot;kotlin&quot;
+3) &quot;c++&quot;
+4) &quot;go&quot;
+5) &quot;ruby&quot;
+6) &quot;python&quot;
+7) &quot;java&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>随机获取语法：srandmember langs count</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; srandmember langs 3
+1) &quot;c++&quot;
+2) &quot;java&quot;
+3) &quot;php&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="判断集合是否存在元素"><a href="#判断集合是否存在元素" class="headerlink" title="判断集合是否存在元素"></a>判断集合是否存在元素</h4><blockquote>
+<p>语法：sismember key member</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; sismember langs go
+(integer) 1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="获取集合元素个数"><a href="#获取集合元素个数" class="headerlink" title="获取集合元素个数"></a>获取集合元素个数</h4><blockquote>
+<p>语法：scard key</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; scard langs
+(integer) 7<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="删除集合元素"><a href="#删除集合元素" class="headerlink" title="删除集合元素"></a>删除集合元素</h4><blockquote>
+<p>语法：srem key member [member …]</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; srem langs ruby kotlin
+(integer) 2<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="弹出元素"><a href="#弹出元素" class="headerlink" title="弹出元素"></a>弹出元素</h4><blockquote>
+<p>语法：spop key [count]</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; spop langs 2
+1) &quot;go&quot;
+2) &quot;java&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="有序集合"><a href="#有序集合" class="headerlink" title="有序集合"></a>有序集合</h2><p>和列表的区别：</p>
+<p>1、列表使用链表实现，两头快，中间慢。有序集合是散列表和跳跃表实现的，即使读取中间的元素也比较快。</p>
+<p>2、列表不能调整元素位置，有序集合能。</p>
+<p>3、有序集合比列表更占内存。</p>
+<h4 id="存储值-1"><a href="#存储值-1" class="headerlink" title="存储值"></a>存储值</h4><blockquote>
+<p>语法：zadd key [NX|XX] [CH] [INCR] score member [score member …]</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; zadd footCounts 16011 tid 20082 huny 2893 nosy
+(integer) 3<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="获取元素分数"><a href="#获取元素分数" class="headerlink" title="获取元素分数"></a>获取元素分数</h4><blockquote>
+<p>语法：zscore key member</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; zscore footCounts tid
+&quot;16011&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>获取排名范围排名语法：zrange key start stop [WITHSCORES]</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; 获取所有，没有分数
+127.0.0.1:6379&gt; zrange footCounts 0 -1
+1) &quot;nosy&quot;
+2) &quot;tid&quot;
+3) &quot;huny&quot;
+
+&#x2F;&#x2F; 获取所有及分数
+127.0.0.1:6379&gt; zrange footCounts 0 -1 Withscores
+1) &quot;nosy&quot;
+2) &quot;2893&quot;
+3) &quot;tid&quot;
+4) &quot;16011&quot;
+5) &quot;huny&quot;
+6) &quot;20082&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>获取指定分数范围排名语法：zrangebyscore key min max [WITHSCORES] [LIMIT offset count]</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; zrangebyscore footCounts 3000 30000 withscores limit 0 1
+1) &quot;tid&quot;
+2) &quot;16011&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="增加指定元素分数"><a href="#增加指定元素分数" class="headerlink" title="增加指定元素分数"></a>增加指定元素分数</h4><blockquote>
+<p>语法：zincrby key increment member</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; zincrby footCounts 2000 tid
+&quot;18011&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="获取集合元素个数-1"><a href="#获取集合元素个数-1" class="headerlink" title="获取集合元素个数"></a>获取集合元素个数</h4><blockquote>
+<p>语法：zcard key</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; zcard footCounts
+(integer) 3<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="获取指定范围分数个数"><a href="#获取指定范围分数个数" class="headerlink" title="获取指定范围分数个数"></a>获取指定范围分数个数</h4><blockquote>
+<p>语法：zcount key min max</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; zcount footCounts 2000 20000
+(integer) 2<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="删除指定元素"><a href="#删除指定元素" class="headerlink" title="删除指定元素"></a>删除指定元素</h4><blockquote>
+<p>语法：zrem key member [member …]</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; zrem footCounts huny
+(integer) 1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="获取元素排名"><a href="#获取元素排名" class="headerlink" title="获取元素排名"></a>获取元素排名</h4><blockquote>
+<p>语法：zrank key member</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; zrank footCounts tid
+(integer) 1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h2 id="列表操作命令"><a href="#列表操作命令" class="headerlink" title="列表操作命令"></a>列表操作命令</h2><p>列表类型是一个有序的字段串列表，内部是使用双向链表实现，所有可以向两端操作元素，获取两端的数据速度快，通过索引到具体的行数比较慢。</p>
+<p>列表类型的元素是有序且可以重复的。</p>
+<h4 id="存储值-2"><a href="#存储值-2" class="headerlink" title="存储值"></a>存储值</h4><blockquote>
+<p>左端存值语法：lpush key value [value …]</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; lpush list lily sandy
+(integer) 2<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>右端存值语法：rpush key value [value …]</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; rpush list tom kitty
+(integer) 4<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>索引存值语法：lset key index value</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; lset list 3 uto
+OK<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="弹出元素-1"><a href="#弹出元素-1" class="headerlink" title="弹出元素"></a>弹出元素</h4><blockquote>
+<p>左端弹出语法：lpop key</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; lpop list
+&quot;sandy&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+<blockquote>
+<p>右端弹出语法：rpop key</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; rpop list
+&quot;kitty&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="获取元素个数"><a href="#获取元素个数" class="headerlink" title="获取元素个数"></a>获取元素个数</h4><blockquote>
+<p>语法：llen key</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; llen list
+(integer) 2<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="获取列表元素"><a href="#获取列表元素" class="headerlink" title="获取列表元素"></a>获取列表元素</h4><blockquote>
+<p>两边获取语法：lrange key start stop</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; lpush users tom kitty land pony jack maddy
+(integer) 6
+
+127.0.0.1:6379&gt; lrange users 0 3
+1) &quot;maddy&quot;
+2) &quot;jack&quot;
+3) &quot;pony&quot;
+4) &quot;land&quot;
+
+&#x2F;&#x2F; 获取所有
+127.0.0.1:6379&gt; lrange users 0 -1
+1) &quot;maddy&quot;
+2) &quot;jack&quot;
+3) &quot;pony&quot;
+4) &quot;land&quot;
+5) &quot;kitty&quot;
+6) &quot;tom&quot;
+
+&#x2F;&#x2F; 从右端索引
+127.0.0.1:6379&gt; lrange users -3 -1
+1) &quot;land&quot;
+2) &quot;kitty&quot;
+3) &quot;tom&quot;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>索引获取语法：lindex key index</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; lindex list 2
+&quot;ketty&quot;
+
+&#x2F;&#x2F; 从右端获取
+127.0.0.1:6379&gt; lindex list -5
+&quot;sady&quot;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h4><blockquote>
+<p>根据值删除语法：lrem key count value</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; lpush userids 111 222 111 222 222 333 222 222
+(integer) 8
+
+&#x2F;&#x2F; count&#x3D;0 删除所有
+127.0.0.1:6379&gt; lrem userids 0 111
+(integer) 2
+
+&#x2F;&#x2F; count &gt; 0 从左端删除前count个
+127.0.0.1:6379&gt; lrem userids 3 222
+(integer) 3
+
+&#x2F;&#x2F; count &lt; 0 从右端删除前count个
+127.0.0.1:6379&gt; lrem userids -3 222
+(integer) 2<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>范围删除语法：ltrim key start stop</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; 只保留2-4之间的元素
+127.0.0.1:6379&gt; ltrim list 2 4
+OK<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="散列操作命令"><a href="#散列操作命令" class="headerlink" title="散列操作命令"></a>散列操作命令</h2><p>redis字符串类型键和值是字典结构形式，这里的散列类型其值也可以是字典结构。</p>
+<h4 id="存放键值-1"><a href="#存放键值-1" class="headerlink" title="存放键值"></a>存放键值</h4><blockquote>
+<p>单个语法：hset key field value</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; hset user name javastack
+(integer) 1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>多个语法：hmset key field value [field value …]</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; hmset user name javastack age 20 address china
+OK<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>不存在时语法：hsetnx key field value</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; hsetnx user tall 180
+(integer) 0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="获取字段值"><a href="#获取字段值" class="headerlink" title="获取字段值"></a>获取字段值</h4><blockquote>
+<p>单个语法：hget key field</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; hget user age
+&quot;20&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>多个语法：hmget key field [field …]</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; hmget user name age address
+1) &quot;javastack&quot;
+2) &quot;20&quot;
+3) &quot;china&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>获取所有键与值语法：hgetall key</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; hgetall user
+1) &quot;name&quot;
+2) &quot;javastack&quot;
+3) &quot;age&quot;
+4) &quot;20&quot;
+5) &quot;address&quot;
+6) &quot;china&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>获取所有字段语法：hkeys key</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; hkeys user
+1) &quot;name&quot;
+2) &quot;address&quot;
+3) &quot;tall&quot;
+4) &quot;age&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>获取所有值语法：hvals key</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; hvals user
+1) &quot;javastack&quot;
+2) &quot;china&quot;
+3) &quot;170&quot;
+4) &quot;20&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="判断字段是否存在"><a href="#判断字段是否存在" class="headerlink" title="判断字段是否存在"></a>判断字段是否存在</h4><blockquote>
+<p>语法：hexists key field</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; hexists user address
+(integer) 1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="获取字段数量"><a href="#获取字段数量" class="headerlink" title="获取字段数量"></a>获取字段数量</h4><blockquote>
+<p>语法：hlen key</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; hlen user
+(integer) 4<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="递增-减"><a href="#递增-减" class="headerlink" title="递增&#x2F;减"></a>递增&#x2F;减</h4><blockquote>
+<p>语法：hincrby key field increment</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; hincrby user tall -10
+(integer) 170<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="删除字段"><a href="#删除字段" class="headerlink" title="删除字段"></a>删除字段</h4><blockquote>
+<p>语法：hdel key field [field …]</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; hdel user age
+(integer) 1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>都是基本的命令用法，不会用了就来翻一下吧！</p>
+<p>写了大半天，点赞转发支持一下吧，亲！</p>
+<blockquote>
+<p>本文原创首发于微信公众号：Java技术栈（id:javastack），关注公众号在后台回复 “redis” 可获取更多，转载请原样保留来源信息。</p>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">John Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/10/30/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis/Redis%20%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4%EF%BC%8C%E9%9D%9E%E5%B8%B8%E8%AF%A6%E7%BB%86%EF%BC%81/">http://example.com/2025/10/30/数据库/Redis/Redis 常用操作命令，非常详细！/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">只有那年胜过年年</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Redis/">Redis</a></div><div class="post-share"><div class="social-share" data-image="/img/logo.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/10/30/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis/Redis%20%E5%86%8D%E7%89%9B%E9%80%BC%EF%BC%8C%E4%B9%9F%E5%BE%97%E8%AE%BE%E7%BD%AE%E5%AF%86%E7%A0%81%EF%BC%81%EF%BC%81/" title="Redis 再牛逼，也得设置密码"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Redis 再牛逼，也得设置密码</div></div><div class="info-2"><div class="info-item-1">Redis 你再牛逼也得设置密码啊，不然会有安全漏洞，造成一些隐患。 还有，比如像出现下面这样的错，需要设置密码，或者关闭保护模式，所以还是设置密码比较安全。不然只能本地操作，不能远程连接。 DENIED Redis is running in protected mode because protected mode is enabled…  下面介绍几种设置密码的方式，及如何使用。 命令设置密码这种方式是临时的，重启后需要重新设置。  config set requirepass 123456  配置设置密码redis.conf中添加配置： requirepass 123456  授权密码：有两种方式：  auth 123456   $ .&#x2F;redis-cli -p 9001 -a 123456  </div></div></div></a><a class="pagination-related" href="/2025/10/30/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis/Redis%20%E7%9A%84%208%20%E5%A4%A7%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%EF%BC%81/" title="Redis 的 8 大应用场景！"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Redis 的 8 大应用场景！</div></div><div class="info-2"><div class="info-item-1">之前讲过Redis的介绍，及使用Redis带来的优势，这章整理了一下Redis的应用场景，也是非常重要的，学不学得好，能正常落地是关键。 下面一一来分析下Redis的应用场景都有哪些。 1、缓存缓存现在几乎是所有中大型网站都在用的必杀技，合理的利用缓存不仅能够提升网站访问速度，还能大大降低数据库的压力。Redis提供了键过期功能，也提供了灵活的键淘汰策略，所以，现在Redis用在缓存的场合非常多。 2、排行榜很多网站都有排行榜应用的，如京东的月度销量榜单、商品按时间的上新排行榜等。Redis提供的有序集合数据类构能实现各种复杂的排行榜应用。 3、计数器什么是计数器，如电商网站商品的浏览量、视频网站视频的播放数等。为了保证数据实时效，每次浏览都得给+1，并发量高时如果每次都请求数据库操作无疑是种挑战和压力。Redis提供的incr命令来实现计数器功能，内存操作，性能非常好，非常适用于这些计数场景。 4、分布式会话集群模式下，在应用不多的情况下一般使用容器自带的session复制功能就能满足，当应用增多相对复杂的系统中，一般都会搭建以Redis等内存数据库为中心的session服务，...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/10/30/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis/Redis%20Linux%20%E5%AE%89%E8%A3%85%E8%BF%90%E8%A1%8C%E5%AE%9E%E6%88%98%E5%85%A8%E8%AE%B0%E5%BD%95/" title="Redis Linux 安装运行实战全记录"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-30</div><div class="info-item-2">Redis Linux 安装运行实战全记录</div></div><div class="info-2"><div class="info-item-1">下载Redis去Redis官网下载最新的Linux包，Redis官方没有Windows版的下载。  https://redis.io/  下载后把包上传到Linux服务器。 安装Redis1、解压Redis包 &gt; tar -zxvf redis-4.0.2.tar.gz   2、切换到Redis解压目录 &gt; cd redis-4.0.2  3、编译Redis &gt; make  如报错按以下错误解决。  make: cc：命令未找到 make: *** [adlist.o] 错误 127  &gt; yum install gcc   collect2: ld returned 1 exit status make[1]: *** [redis-server] Error 1 make[1]: Leaving directory &#96;&#x2F;usr&#x2F;local&#x2F;redis&#x2F;src’ make: *** [all] Error 2  &gt; vi src&#x2F;.make-settings，修改OPT&#x3D;-O2 -...</div></div></div></a><a class="pagination-related" href="/2025/10/30/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis/Redis%20%E5%A6%82%E4%BD%95%E5%88%86%E6%9E%90%E6%85%A2%E6%9F%A5%E8%AF%A2%E6%93%8D%E4%BD%9C%EF%BC%9F/" title="Redis 如何分析慢查询操作？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-30</div><div class="info-item-2">Redis 如何分析慢查询操作？</div></div><div class="info-2"><div class="info-item-1">什么是慢查询和mysql的慢SQL日志分析一样，redis也有类似的功能，来帮助定位一些慢查询操作。 Redis slowlog是Redis用来记录查询执行时间的日志系统。 查询执行时间指的是不包括像客户端响应(talking)、发送回复等IO操作，而单单是执行一个查询命令所耗费的时间。 另外，slow log保存在内存里面，读写速度非常快，因此你可以放心地使用它，不必担心因为开启slow log而损害Redis的速度。 慢查询参数首先来关注下慢日志分析对应的两个参数： 1、slowlog-log-slower-than：预设阀值，即记录超过多少时间的记录，默认为10000微秒，即10毫秒。 2、slowlog-max-len：记录慢查询的条数，默认为128条，当超过设置的条数时最早进入队列的将被移除。线上建议增大数值，如：1000，这样可减少队列移除的频率。 127.0.0.1:6379&gt; config get slowlog-log-slower-than 1) &quot;slowlog-log-slower-than&quot; 2) &quot;10000&quo...</div></div></div></a><a class="pagination-related" href="/2025/10/30/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis/Redis%20%E5%86%8D%E7%89%9B%E9%80%BC%EF%BC%8C%E4%B9%9F%E5%BE%97%E8%AE%BE%E7%BD%AE%E5%AF%86%E7%A0%81%EF%BC%81%EF%BC%81/" title="Redis 再牛逼，也得设置密码"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-30</div><div class="info-item-2">Redis 再牛逼，也得设置密码</div></div><div class="info-2"><div class="info-item-1">Redis 你再牛逼也得设置密码啊，不然会有安全漏洞，造成一些隐患。 还有，比如像出现下面这样的错，需要设置密码，或者关闭保护模式，所以还是设置密码比较安全。不然只能本地操作，不能远程连接。 DENIED Redis is running in protected mode because protected mode is enabled…  下面介绍几种设置密码的方式，及如何使用。 命令设置密码这种方式是临时的，重启后需要重新设置。  config set requirepass 123456  配置设置密码redis.conf中添加配置： requirepass 123456  授权密码：有两种方式：  auth 123456   $ .&#x2F;redis-cli -p 9001 -a 123456  </div></div></div></a><a class="pagination-related" href="/2025/10/30/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis/Redis%20%E7%9A%84%208%20%E5%A4%A7%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%EF%BC%81/" title="Redis 的 8 大应用场景！"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-30</div><div class="info-item-2">Redis 的 8 大应用场景！</div></div><div class="info-2"><div class="info-item-1">之前讲过Redis的介绍，及使用Redis带来的优势，这章整理了一下Redis的应用场景，也是非常重要的，学不学得好，能正常落地是关键。 下面一一来分析下Redis的应用场景都有哪些。 1、缓存缓存现在几乎是所有中大型网站都在用的必杀技，合理的利用缓存不仅能够提升网站访问速度，还能大大降低数据库的压力。Redis提供了键过期功能，也提供了灵活的键淘汰策略，所以，现在Redis用在缓存的场合非常多。 2、排行榜很多网站都有排行榜应用的，如京东的月度销量榜单、商品按时间的上新排行榜等。Redis提供的有序集合数据类构能实现各种复杂的排行榜应用。 3、计数器什么是计数器，如电商网站商品的浏览量、视频网站视频的播放数等。为了保证数据实时效，每次浏览都得给+1，并发量高时如果每次都请求数据库操作无疑是种挑战和压力。Redis提供的incr命令来实现计数器功能，内存操作，性能非常好，非常适用于这些计数场景。 4、分布式会话集群模式下，在应用不多的情况下一般使用容器自带的session复制功能就能满足，当应用增多相对复杂的系统中，一般都会搭建以Redis等内存数据库为中心的session服务，...</div></div></div></a><a class="pagination-related" href="/2025/10/30/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis/Redisson%20-%20Redis%E5%AE%98%E6%96%B9%E6%8E%A8%E8%8D%90%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E5%8D%8F%E8%B0%83%E5%AE%A2%E6%9C%8D%E7%AB%AF/" title="Redisson - Redis官方推荐的分布式协调客服端"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-30</div><div class="info-item-2">Redisson - Redis官方推荐的分布式协调客服端</div></div><div class="info-2"><div class="info-item-1">什么是RedissonRedisson是Redis官方推荐的一个高级的分布式协调Redis客服端， Redisson在基于NIO的Netty框架上，充分的利用了Redis键值数据库提供的一系列优势，在Java实用工具包中常用接口的基础上，为使用者提供了一系列具有分布式特性的常用工具类。使得原本作为协调单机多线程并发程序的工具包获得了协调分布式多机多线程并发系统的能力，大大降低了设计和研发大规模分布式系统的难度。同时结合各富特色的分布式服务，更进一步简化了分布式环境中程序相互之间的协作。 兼容 Redis 2.6+ and JDK 1.6+，使用Apache License 2.0授权协议.  官网：https://redisson.org/\Github：https://github.com/redisson/redisson  适用场景分布式应用，缓存，分布式会话，分布式任务&#x2F;服务&#x2F;延迟执行服务，Redis客户端等。 主要特性云Redis管理、多样Redis配置支持、丰富连接方式、分布式对象、分布式集合、分布式锁、分布式服务、多种序列化方式、三方框架整合、完...</div></div></div></a><a class="pagination-related" href="/2025/10/30/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis/Redis%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F4%E5%A4%A7%E4%BC%98%E5%8A%BF%EF%BC%8C%E5%BF%85%E5%AD%A6%E4%B8%AD%E9%97%B4%E4%BB%B6%EF%BC%81/" title="Redis是什么？4大优势，必学中间件！"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-30</div><div class="info-item-2">Redis是什么？4大优势，必学中间件！</div></div><div class="info-2"><div class="info-item-1"> Redis是什么？ 全称：REmote DIctionary Server  Redis是一种key-value形式的NoSQL内存数据库，由ANSI C编写，遵守BSD协议、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库，并提供多种语言的API。 Redis最大的特性是它会将所有数据都放在内存中，所以读写速度性能非常好。当然，它也支持将内存中的数据以快照和日志的形式持久化到硬盘，这样即使在断电、机器故障等异常情况发生时数据也不会丢失，Redis能从硬盘中恢复快照数据到内存中。  官网：https://redis.io/\中文：http://www.redis.cn/\Github：https://github.com/antirez/redis  Redis有什么优势？1、性能高，速度快 Redis命令执行速度非常快，官方给出的读写性能可以达到10W&#x2F;秒。为什么会如此之快呢？有以下几个因素：  数据存储在内存中，直接与内存连接。 由相对底层的C语言实现，离操作系统更近。 实现源码很精湛，仅仅几万行代码，简单稳定。 使用了单线程模型，无多线程竞争、锁...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%A0%E9%9C%80%E8%A6%81%E6%8E%8C%E6%8F%A1%E7%9A%84-Redis-%E7%9F%A5%E8%AF%86"><span class="toc-number">1.</span> <span class="toc-text">你需要掌握的 Redis 知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4"><span class="toc-number">2.</span> <span class="toc-text">常用管理命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E5%90%AF%E5%8A%A8Redis"><span class="toc-number">2.1.</span> <span class="toc-text">1、启动Redis</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E8%BF%9E%E6%8E%A5Redis"><span class="toc-number">2.2.</span> <span class="toc-text">2、连接Redis</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E5%81%9C%E6%AD%A2Redis"><span class="toc-number">2.3.</span> <span class="toc-text">3、停止Redis</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81%E5%8F%91%E9%80%81%E5%91%BD%E4%BB%A4"><span class="toc-number">2.4.</span> <span class="toc-text">4、发送命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81%E6%B5%8B%E8%AF%95%E8%BF%9E%E9%80%9A%E6%80%A7"><span class="toc-number">2.5.</span> <span class="toc-text">5、测试连通性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#key%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4"><span class="toc-number">3.</span> <span class="toc-text">key操作命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E9%94%AE"><span class="toc-number">3.1.</span> <span class="toc-text">获取所有键</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E9%94%AE%E6%80%BB%E6%95%B0"><span class="toc-number">3.2.</span> <span class="toc-text">获取键总数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E9%94%AE%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8"><span class="toc-number">3.3.</span> <span class="toc-text">查询键是否存在</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E9%94%AE"><span class="toc-number">3.4.</span> <span class="toc-text">删除键</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E9%94%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">3.5.</span> <span class="toc-text">查询键类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A7%BB%E5%8A%A8%E9%94%AE"><span class="toc-number">3.6.</span> <span class="toc-text">移动键</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2key%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E7%A7%92%EF%BC%89"><span class="toc-number">3.7.</span> <span class="toc-text">查询key的生命周期（秒）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E8%BF%87%E6%9C%9F%E6%97%B6%E9%97%B4"><span class="toc-number">3.8.</span> <span class="toc-text">设置过期时间</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E6%B0%B8%E4%B8%8D%E8%BF%87%E6%9C%9F"><span class="toc-number">3.9.</span> <span class="toc-text">设置永不过期</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9B%B4%E6%94%B9%E9%94%AE%E5%90%8D%E7%A7%B0"><span class="toc-number">3.10.</span> <span class="toc-text">更改键名称</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4"><span class="toc-number">4.</span> <span class="toc-text">字符串操作命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%98%E6%94%BE%E9%94%AE%E5%80%BC"><span class="toc-number">4.1.</span> <span class="toc-text">存放键值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E9%94%AE%E5%80%BC"><span class="toc-number">4.2.</span> <span class="toc-text">获取键值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%80%BC%E9%80%92%E5%A2%9E-%E9%80%92%E5%87%8F"><span class="toc-number">4.3.</span> <span class="toc-text">值递增&#x2F;递减</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%B9%E9%87%8F%E5%AD%98%E6%94%BE%E9%94%AE%E5%80%BC"><span class="toc-number">4.4.</span> <span class="toc-text">批量存放键值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E8%8E%B7%E5%8F%96%E9%94%AE%E5%80%BC"><span class="toc-number">4.5.</span> <span class="toc-text">获取获取键值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E5%80%BC%E9%95%BF%E5%BA%A6"><span class="toc-number">4.6.</span> <span class="toc-text">获取值长度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%BD%E5%8A%A0%E5%86%85%E5%AE%B9"><span class="toc-number">4.7.</span> <span class="toc-text">追加内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E9%83%A8%E5%88%86%E5%AD%97%E7%AC%A6"><span class="toc-number">4.8.</span> <span class="toc-text">获取部分字符</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9B%86%E5%90%88%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4"><span class="toc-number">5.</span> <span class="toc-text">集合操作命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9B%86%E5%90%88"><span class="toc-number">6.</span> <span class="toc-text">集合</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%80%BC"><span class="toc-number">6.1.</span> <span class="toc-text">存储值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0"><span class="toc-number">6.2.</span> <span class="toc-text">获取元素</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E9%9B%86%E5%90%88%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8%E5%85%83%E7%B4%A0"><span class="toc-number">6.3.</span> <span class="toc-text">判断集合是否存在元素</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E9%9B%86%E5%90%88%E5%85%83%E7%B4%A0%E4%B8%AA%E6%95%B0"><span class="toc-number">6.4.</span> <span class="toc-text">获取集合元素个数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E9%9B%86%E5%90%88%E5%85%83%E7%B4%A0"><span class="toc-number">6.5.</span> <span class="toc-text">删除集合元素</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%B9%E5%87%BA%E5%85%83%E7%B4%A0"><span class="toc-number">6.6.</span> <span class="toc-text">弹出元素</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%89%E5%BA%8F%E9%9B%86%E5%90%88"><span class="toc-number">7.</span> <span class="toc-text">有序集合</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%80%BC-1"><span class="toc-number">7.1.</span> <span class="toc-text">存储值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0%E5%88%86%E6%95%B0"><span class="toc-number">7.2.</span> <span class="toc-text">获取元素分数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A2%9E%E5%8A%A0%E6%8C%87%E5%AE%9A%E5%85%83%E7%B4%A0%E5%88%86%E6%95%B0"><span class="toc-number">7.3.</span> <span class="toc-text">增加指定元素分数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E9%9B%86%E5%90%88%E5%85%83%E7%B4%A0%E4%B8%AA%E6%95%B0-1"><span class="toc-number">7.4.</span> <span class="toc-text">获取集合元素个数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%8C%87%E5%AE%9A%E8%8C%83%E5%9B%B4%E5%88%86%E6%95%B0%E4%B8%AA%E6%95%B0"><span class="toc-number">7.5.</span> <span class="toc-text">获取指定范围分数个数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E6%8C%87%E5%AE%9A%E5%85%83%E7%B4%A0"><span class="toc-number">7.6.</span> <span class="toc-text">删除指定元素</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0%E6%8E%92%E5%90%8D"><span class="toc-number">7.7.</span> <span class="toc-text">获取元素排名</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%97%E8%A1%A8%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4"><span class="toc-number">8.</span> <span class="toc-text">列表操作命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%80%BC-2"><span class="toc-number">8.1.</span> <span class="toc-text">存储值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%B9%E5%87%BA%E5%85%83%E7%B4%A0-1"><span class="toc-number">8.2.</span> <span class="toc-text">弹出元素</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0%E4%B8%AA%E6%95%B0"><span class="toc-number">8.3.</span> <span class="toc-text">获取元素个数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E5%88%97%E8%A1%A8%E5%85%83%E7%B4%A0"><span class="toc-number">8.4.</span> <span class="toc-text">获取列表元素</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E5%85%83%E7%B4%A0"><span class="toc-number">8.5.</span> <span class="toc-text">删除元素</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%A3%E5%88%97%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4"><span class="toc-number">9.</span> <span class="toc-text">散列操作命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%98%E6%94%BE%E9%94%AE%E5%80%BC-1"><span class="toc-number">9.1.</span> <span class="toc-text">存放键值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E5%AD%97%E6%AE%B5%E5%80%BC"><span class="toc-number">9.2.</span> <span class="toc-text">获取字段值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E5%AD%97%E6%AE%B5%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8"><span class="toc-number">9.3.</span> <span class="toc-text">判断字段是否存在</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E5%AD%97%E6%AE%B5%E6%95%B0%E9%87%8F"><span class="toc-number">9.4.</span> <span class="toc-text">获取字段数量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%92%E5%A2%9E-%E5%87%8F"><span class="toc-number">9.5.</span> <span class="toc-text">递增&#x2F;减</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E5%AD%97%E6%AE%B5"><span class="toc-number">9.6.</span> <span class="toc-text">删除字段</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer" style="background: transparent;"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By John Doe</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><div class="js-pjax"><script>(() => {
+  let initFn = window.walineFn || null
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const destroyWaline = ele => ele.destroy()
+
+  const initWaline = (Fn, el = document, path = window.location.pathname) => {
+    const waline = Fn({
+      el: el.querySelector('#waline-wrap'),
+      serverURL: 'https://walinecomments-gxccu74d8-chens-projects-7c4f92c5.vercel.app',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      comment: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyWaline = () => {
+        destroyWaline(waline)
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const loadWaline = (el, path) => {
+    if (initFn) initWaline(initFn, el, path)
+    else {
+      btf.getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css')
+        .then(() => import('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js'))
+        .then(({ init }) => {
+          initFn = init || Waline.init
+          initWaline(initFn, el, path)
+          window.walineFn = initFn
+        })
+    }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Waline'
+      ? window.shuoshuoComment = { loadComment: loadWaline } 
+      : window.loadOtherComment = loadWaline
+    return
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

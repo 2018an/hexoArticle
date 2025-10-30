@@ -1,0 +1,283 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Spring Cloud Eureka 自我保护机制实战分析 | 只有那年胜过年年</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#FC5531"><meta name="description" content="前些天栈长在Java技术栈微信公众号分享过 Spring Cloud Eureka 的系列文章：  Spring Cloud Eureka 自我保护机制  Spring Cloud Eureka 常用配置详解  其中，可能大家关于自我机制的具体保护逻辑还不是特别清楚，今天栈长就具体分析和实战一下，自我保护机制到底是怎么工作的。 现在我们把保护机制开启：  关注右上角的两个重要参数：    参数 说">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring Cloud Eureka 自我保护机制实战分析">
+<meta property="og:url" content="http://example.com/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Cloud/Spring%20Cloud%20Eureka%20%E8%87%AA%E6%88%91%E4%BF%9D%E6%8A%A4%E6%9C%BA%E5%88%B6%E5%AE%9E%E6%88%98%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="只有那年胜过年年">
+<meta property="og:description" content="前些天栈长在Java技术栈微信公众号分享过 Spring Cloud Eureka 的系列文章：  Spring Cloud Eureka 自我保护机制  Spring Cloud Eureka 常用配置详解  其中，可能大家关于自我机制的具体保护逻辑还不是特别清楚，今天栈长就具体分析和实战一下，自我保护机制到底是怎么工作的。 现在我们把保护机制开启：  关注右上角的两个重要参数：    参数 说">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/logo.png">
+<meta property="article:published_time" content="2025-10-29T09:30:25.000Z">
+<meta property="article:modified_time" content="2025-10-29T09:33:56.702Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Spring Cloud">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/logo.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Spring Cloud Eureka 自我保护机制实战分析",
+  "url": "http://example.com/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Cloud/Spring%20Cloud%20Eureka%20%E8%87%AA%E6%88%91%E4%BF%9D%E6%8A%A4%E6%9C%BA%E5%88%B6%E5%AE%9E%E6%88%98%E5%88%86%E6%9E%90/",
+  "image": "http://example.com/img/logo.png",
+  "datePublished": "2025-10-29T09:30:25.000Z",
+  "dateModified": "2025-10-29T09:33:56.702Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "John Doe",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Cloud/Spring%20Cloud%20Eureka%20%E8%87%AA%E6%88%91%E4%BF%9D%E6%8A%A4%E6%9C%BA%E5%88%B6%E5%AE%9E%E6%88%98%E5%88%86%E6%9E%90/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FC5531')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FC5531')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: John Doe","link":"链接: ","source":"来源: 只有那年胜过年年","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Spring Cloud Eureka 自我保护机制实战分析',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/logo.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">357</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">49</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/logo.png" alt="Logo"><span class="site-name">只有那年胜过年年</span></a><a class="nav-page-title" href="/"><span class="site-name">Spring Cloud Eureka 自我保护机制实战分析</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Spring Cloud Eureka 自我保护机制实战分析</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-10-29T09:30:25.000Z" title="发表于 2025-10-29 17:30:25">2025-10-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-10-29T09:33:56.702Z" title="更新于 2025-10-29 17:33:56">2025-10-29</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><p>前些天栈长在Java技术栈微信公众号分享过 Spring Cloud Eureka 的系列文章：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/vwPstQ0R0s_PsEhZnALP9Q">Spring Cloud Eureka 自我保护机制
+</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/5lUJE_pHZJcvk_gHMhoX2Q">Spring Cloud Eureka 常用配置详解</a></li>
+</ul>
+<p>其中，可能大家关于自我机制的具体保护逻辑还不是特别清楚，今天栈长就具体分析和实战一下，自我保护机制到底是怎么工作的。</p>
+<p>现在我们把保护机制开启：</p>
+<p><img src="http://img.javastack.cn/20190514114125.png"></p>
+<p>关注右上角的两个重要参数：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Renews threshold</td>
+<td>Eureka Server 期望每分钟收到客户端实例的总心跳数</td>
+</tr>
+<tr>
+<td>Renews (last min)</td>
+<td>Eureka Server 最后一分钟收到的总心跳数</td>
+</tr>
+</tbody></table>
+<p>我这里显示的数值如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">Renews threshold	6
+Renews (last min)	8<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>这个 6 和 8 分别是怎么算出来的？</p>
+<p>先来看这两个参数的默认设置，摘自《<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/5lUJE_pHZJcvk_gHMhoX2Q">Spring Cloud Eureka 常用配置详解</a>》一文：</p>
+<blockquote>
+<p>eureka.server.renewal-percent-threshold：<br>表示 Eureka Server 开启自我保护的系数，默认：0.85。</p>
+</blockquote>
+<blockquote>
+<p>eureka.instance.lease-renewal-interval-in-seconds：<br>表示 Eureka Client 向 Eureka Server 发送心跳的频率（默认 30 秒），如果在 lease-expiration-duration-in-seconds 指定的时间内未收到心跳，则移除该实例。</p>
+</blockquote>
+<p>这里有 4 个注册实例，保护系数：0.85，心跳频率：30秒（每分钟两次），计算公式如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">Renews threshold &#x3D; 4 * 2 * 0.85 &#x3D; 6.8（取整为：6）
+Renews (last min) &#x3D; 4 * 2 &#x3D; 8<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>现在删除一个配置中心实例测试一下：</p>
+<p><img src="http://img.javastack.cn/20190514113747.png"></p>
+<p>出现警告：</p>
+<blockquote>
+<p>EMERGENCY! EUREKA MAY BE INCORRECTLY CLAIMING INSTANCES ARE UP WHEN THEY’RE NOT. RENEWALS ARE LESSER THAN THRESHOLD AND HENCE THE INSTANCES ARE NOT BEING EXPIRED JUST TO BE SAFE.</p>
+</blockquote>
+<p>说明现在 Eureka Server 已经进行保护模式了，并且我删除的那个实例并不会从注册列表中移除，保护机制生效成功。</p>
+<p>由此可知：Eureka Server 在一分钟内如果没有收到 6 个以上的心跳，即：Renews threshold &gt;&#x3D; Renews (last min)，如果保护机制已开启的情况下，则会开启保护机制。</p>
+<p>为什么移除一个实例后，Renews threshold 还是 6 呢，算出来应该是 5，这是因为 Eureka Server 还没刷新这个值，默认 15 分钟刷新一次，可以通过设计以下值进行调整：</p>
+<blockquote>
+<p>eureka.server.renewal-threshold-update-interval-ms&#x3D;900000</p>
+</blockquote>
+<p>了解了心跳策略和保护机制后，对注册中心的日常维护就会有很多帮助。</p>
+<p>好了，今天的分享就到这里了，建议转发收藏，不再迷路。</p>
+<p>后续会分享更多 Eureka 高级玩法，栈长正在拼命撰写中……关注Java技术栈微信公众号可获取及时推送。在公众号后台回复：cloud，获取栈长整理的更多的 Spring Cloud 教程，都是实战干货，以下仅为部分预览。</p>
+<ul>
+<li>Spring Cloud 配置中心高可用搭建</li>
+<li>Spring Cloud 多版本如何选择</li>
+<li>Spring Cloud 是什么，和 Dubbo 对比</li>
+<li>Spring Cloud 注册中心高可用搭建</li>
+<li>Spring Cloud Eureka 自我保护机制</li>
+<li>……</li>
+</ul>
+<p>本文原创首发于微信公众号：Java技术栈（id:javastack），关注公众号在后台回复 “cloud” 可获取更多 Spring Cloud 教程，转载请原样保留本信息。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">John Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Cloud/Spring%20Cloud%20Eureka%20%E8%87%AA%E6%88%91%E4%BF%9D%E6%8A%A4%E6%9C%BA%E5%88%B6%E5%AE%9E%E6%88%98%E5%88%86%E6%9E%90/">http://example.com/2025/10/29/后端技术/Spring Cloud/Spring Cloud Eureka 自我保护机制实战分析/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">只有那年胜过年年</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Spring-Cloud/">Spring Cloud</a></div><div class="post-share"><div class="social-share" data-image="/img/logo.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Cloud/Spring%20Cloud%20Eureka%20%E8%87%AA%E6%88%91%E4%BF%9D%E6%8A%A4%E6%9C%BA%E5%88%B6/" title="Spring Cloud Eureka 自我保护机制"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Spring Cloud Eureka 自我保护机制</div></div><div class="info-2"><div class="info-item-1">自我保护背景首先对Eureka注册中心需要了解的是Eureka各个节点都是平等的，没有ZK中角色的概念， 即使N-1个节点挂掉也不会影响其他节点的正常运行。 默认情况下，如果Eureka Server在一定时间内（默认90秒）没有接收到某个微服务实例的心跳，Eureka Server将会移除该实例。但是当网络分区故障发生时，微服务与Eureka Server之间无法正常通信，而微服务本身是正常运行的，此时不应该移除这个微服务，所以引入了自我保护机制。 自我保护机制官方对于自我保护机制的定义：  https://github.com/Netflix/eureka/wiki/Understanding-Eureka-Peer-to-Peer-Communication  自我保护模式正是一种针对网络异常波动的安全保护措施，使用自我保护模式能使Eureka集群更加的健壮、稳定的运行。 自我保护机制的工作机制是如果在15分钟内超过85%的客户端节点都没有正常的心跳，那么Eureka就认为客户端与注册中心出现了网络故障，Eureka Server自动进入自我保护机制，此时会出现以下几种情况...</div></div></div></a><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Cloud/Spring%20Cloud%20Finchley%20%E6%AD%A3%E5%BC%8F%E5%8F%91%E5%B8%83%EF%BC%8C%E5%8C%85%E5%90%AB%204%20%E4%B8%AA%E9%87%8D%E5%A4%A7%E6%9B%B4%E6%96%B0%EF%BC%81/" title="Spring Cloud Finchley 正式发布，包含 4 个重大更新！"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Spring Cloud Finchley 正式发布，包含 4 个重大更新！</div></div><div class="info-2"><div class="info-item-1"> 在 Spring 的官方博客上已经看到 Spring Cloud Finchley 在 06 月 19 日这一天正式发布了，我们在 Maven 中央仓库也看到了最新版的更新。  Finchley 正式版的发布貌似经历了相当长的时间，果然是闷声发大财，这次的重大发布主要带来了以下 4 项重大更新。 重大更新1、新增 Spring Cloud Gateway 组件Spring Cloud Gateway 是一个基于 Spring Webflux 和响应式 Netty 的下一代 API 网关，用来替换 Spring Cloud Netflix Zuul。它提供了更加简单的动态路由，以及针对每个路由的过滤器（如地址重写、断路器、添加&#x2F;删除请求头、限流和安全等）。 2、新增 Spring Cloud Function 组件Spring Cloud Function 的主要功能如下：  通过一系列函数推进业务逻辑的实现； 将业务逻辑的开发生命周期从任何特定运行目标中分离，以便相同的代码可以作为一个 Web 端点、一个流处理器或一个任务来运行； 支持一个跨 serverless p...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Cloud/Spring%20Cloud%20Alibaba%20Sentinel%20%E6%95%B4%E5%90%88%20Feign%20%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%AE%9E%E7%8E%B0/" title="Spring Cloud Alibaba Sentinel 整合 Feign 的设计实现"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-29</div><div class="info-item-2">Spring Cloud Alibaba Sentinel 整合 Feign 的设计实现</div></div><div class="info-2"><div class="info-item-1">  作者 | Spring Cloud Alibaba 高级开发工程师洛夜来自公众号阿里巴巴中间件投稿   前段时间 Hystrix 宣布不再维护之后（Hystrix 停止开发。。。Spring Cloud 何去何从？），Feign 作为一个跟 Hystrix 强依赖的组件，必然会有所担心后续的使用。 作为 Spring Cloud Alibaba 体系中的熔断器 Sentinel，Sentinel 目前整合了 Feign，本文对整合过程做一次总结，欢迎大家讨论和使用。 Feign 是什么？Feign 是一个 Java 实现的 Http 客户端，用于简化 Restful 调用。 Feign 跟 OkHttp、HttpClient 这种客户端实现理念不一样。Feign 强调接口的定义，接口中的一个方法对应一个 Http 请求，调用方法即发送一个 Http 请求；OkHttp 或 HttpClient 以过程式的方式发送 Http 请求。Feign 底层发送请求的实现可以跟 OkHttp 或 HttpClient 整合。 要想整合 Feign，首先要了解 Feign 的使用以及执行过...</div></div></div></a><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Cloud/Spring%20Cloud%20@RefreshScope%20%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F/" title="Spring Cloud @RefreshScope 原理是什么？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-29</div><div class="info-item-2">Spring Cloud @RefreshScope 原理是什么？</div></div><div class="info-2"><div class="info-item-1">要清楚RefreshScope,先要了解ScopeScope(org.springframework.beans.factory.config.Scope)是Spring 2.0开始就有的核心的概念 RefreshScope(org.springframework.cloud.context.scope.refresh)是spring cloud提供的一种特殊的scope实现，用来实现配置、实例热加载。 Scope -&gt; GenericScope -&gt; RefreshScope  Scope与ApplicationContext生命周期 AbstractBeanFactory#doGetBean创建Bean实例 protected &lt;T&gt; T doGetBean(...)&#123;     final RootBeanDefinition mbd &#x3D; ...     if (mbd.isSingleton()) &#123;         ...     &#125; else if (mbd.isPrototype())        .....</div></div></div></a><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Cloud/Spring%20Cloud%20Eureka%20%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3%EF%BC%8C%E5%BB%BA%E8%AE%AE%E6%94%B6%E8%97%8F%EF%BC%81/" title="Spring Cloud Eureka 常用配置详解，建议收藏！"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-29</div><div class="info-item-2">Spring Cloud Eureka 常用配置详解，建议收藏！</div></div><div class="info-2"><div class="info-item-1">前几天，栈长分享了 《Spring Cloud Eureka 注册中心集群搭建，Greenwich 最新版！》，今天来分享下 Spring Cloud Eureka 常用的一些参数配置及说明。 Spring Boot 的配置参考Java技术栈微信公众号往期 Spring Boot 系列文章，在公众号后台回复：boot。这篇只针对 Spring Cloud Eureka 常用到的配置进行解释。 Spring Cloud Eureka 主要分为下面三个模块的参数：  Eureka Server Eureka Client Eureka Instance  Eureka ServerEureka Server 的配置参数格式：eureka.server.xxx。 enable-self-preservation表示注册中心是否开启服务的自我保护能力。 什么是自我保护？看这篇文章：SpringCloud Eureka自我保护机制，或者关注Java技术栈微信公众号，在后台回复：cloud。 renewal-percent-threshold表示 Eureka Server 开启自我保护的系...</div></div></div></a><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Cloud/Spring%20Cloud%20Eureka%20%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA%EF%BC%8CGreenwich%20%E6%9C%80%E6%96%B0%E7%89%88%EF%BC%81/" title="Spring Cloud Eureka 注册中心集群搭建，Greenwich 最新版！"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-29</div><div class="info-item-2">Spring Cloud Eureka 注册中心集群搭建，Greenwich 最新版！</div></div><div class="info-2"><div class="info-item-1">Spring Cloud 的注册中心可以由 Eureka、Consul、Zookeeper、ETCD 等来实现，这里推荐使用 Spring Cloud Eureka 来实现注册中心，它基于 Netflix 的 Eureka 做了二次封装，完成分布式服务中服务治理的功能，微服务系统中的服务注册与发现都通过这个注册中心来进行管理。 今天栈长就来分享一个 Eureka 注册中心玩法，从 0 到分布式集群一步到位，单机版的咱就不玩了，没意义。 本文基于最新的 Spring Cloud Greenwich.SR1 以及 Spring Boot 2.1.3 版本进行分享。 快速构建一个 Eureka Server 项目打开 Spring 的快速构建网址，如下图所示，选择对应的参数，最后选择 Eureka Server 依赖，生成项目示例代码即可。  https://start.spring.io/    栈长这里是生成了一个 Maven 示例项目。 &lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&g...</div></div></div></a><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Cloud/Spring%20Cloud%20Eureka%20%E6%B3%A8%E5%86%8C%E5%AE%89%E5%85%A8%E4%B8%80%E5%AE%9A%E8%A6%81%E5%81%9A%E5%88%B0%E4%BD%8D%EF%BC%81/" title="Spring Cloud Eureka 注册安全一定要做到位！"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-29</div><div class="info-item-2">Spring Cloud Eureka 注册安全一定要做到位！</div></div><div class="info-2"><div class="info-item-1">前些天栈长在微信公众号Java技术栈分享了 Spring Cloud Eureka 最新版 实现注册中心的实战教程：Spring Cloud Eureka 注册中心集群搭建，Greenwich 最新版！，成功进入 Eureka 控制台页面。 但控制台首页默认是没有登录认证保护的，打开就能访问，而且你的微服务也能随意注册进去，这样是不安全的，本章栈长将加入登录认证功能，把你的 Eureka 注册中心保护起来。 本文基于最新的 Spring Cloud Greenwich.SR1 以及 Spring Boot 2.1.3 版本进行分享。 1、加入 Spring Security 依赖 &lt;dependency&gt; 	&lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt; 	&lt;artifactId&gt;spring-boot-starter-security&lt;&#x2F;artifactId&gt; &lt;&#x2F;dependency&gt;  2、添加安全配置 在 application.y...</div></div></div></a><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Cloud/Spring%20Cloud%20Eureka%20%E8%87%AA%E6%88%91%E4%BF%9D%E6%8A%A4%E6%9C%BA%E5%88%B6/" title="Spring Cloud Eureka 自我保护机制"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-29</div><div class="info-item-2">Spring Cloud Eureka 自我保护机制</div></div><div class="info-2"><div class="info-item-1">自我保护背景首先对Eureka注册中心需要了解的是Eureka各个节点都是平等的，没有ZK中角色的概念， 即使N-1个节点挂掉也不会影响其他节点的正常运行。 默认情况下，如果Eureka Server在一定时间内（默认90秒）没有接收到某个微服务实例的心跳，Eureka Server将会移除该实例。但是当网络分区故障发生时，微服务与Eureka Server之间无法正常通信，而微服务本身是正常运行的，此时不应该移除这个微服务，所以引入了自我保护机制。 自我保护机制官方对于自我保护机制的定义：  https://github.com/Netflix/eureka/wiki/Understanding-Eureka-Peer-to-Peer-Communication  自我保护模式正是一种针对网络异常波动的安全保护措施，使用自我保护模式能使Eureka集群更加的健壮、稳定的运行。 自我保护机制的工作机制是如果在15分钟内超过85%的客户端节点都没有正常的心跳，那么Eureka就认为客户端与注册中心出现了网络故障，Eureka Server自动进入自我保护机制，此时会出现以下几种情况...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/logo.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">John Doe</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">357</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">49</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/xxxxx" target="_blank" title="Github"><i class="fab fa-github" style="color: #hdhfbb;"></i></a><a class="social-icon" href="mailto:xxxxxx@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #000000;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">🌸 春去秋来，花开花落  📚 桌上的日历又薄了几页  💭 记忆中的昨天还那么清晰</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/30/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/JDK%20%E7%B4%A7%E6%80%A5%E6%BC%8F%E6%B4%9E%EF%BC%8CXMLDecoder%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%94%BB%E5%87%BB/" title="JDK 紧急漏洞，XMLDecoder反序列化攻击">JDK 紧急漏洞，XMLDecoder反序列化攻击</a><time datetime="2025-10-30T06:42:34.000Z" title="发表于 2025-10-30 14:42:34">2025-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/30/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/%E4%BC%9A%E8%AF%9D%E5%9B%BA%E5%AE%9A%E6%94%BB%E5%87%BB%E6%BC%8F%E6%B4%9E%EF%BC%88session%20fixation%20attack%EF%BC%89/" title="会话固定攻击漏洞">会话固定攻击漏洞</a><time datetime="2025-10-30T06:42:34.000Z" title="发表于 2025-10-30 14:42:34">2025-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/30/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/44%20%E4%B8%AA%20Java%20%E4%BB%A3%E7%A0%81%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%80%BB%E7%BB%93/" title="44 个 Java 代码性能优化总结">44 个 Java 代码性能优化总结</a><time datetime="2025-10-30T06:42:34.000Z" title="发表于 2025-10-30 14:42:34">2025-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/30/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/8%20%E6%9D%A1%E5%85%B3%E4%BA%8E%20Web%20%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E7%9A%84%E4%BC%98%E5%8C%96%E5%BB%BA%E8%AE%AE/" title="8 条关于 Web 前端性能的优化建议">8 条关于 Web 前端性能的优化建议</a><time datetime="2025-10-30T06:42:34.000Z" title="发表于 2025-10-30 14:42:34">2025-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/30/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E7%99%BE%E5%88%86%E4%B9%9D%E5%8D%81Java%E7%A8%8B%E5%BA%8F%E5%91%98%E8%A2%AB%E8%AF%AF%E5%AF%BC%E7%9A%84%E4%B8%80%E4%B8%AA%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%AD%96%E7%95%A5/" title="百分九十Java程序员被误导的一个性能优化策略">百分九十Java程序员被误导的一个性能优化策略</a><time datetime="2025-10-30T06:42:34.000Z" title="发表于 2025-10-30 14:42:34">2025-10-30</time></div></div></div></div></div></div></main><footer id="footer" style="background: transparent;"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By John Doe</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><div class="js-pjax"><script>(() => {
+  let initFn = window.walineFn || null
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const destroyWaline = ele => ele.destroy()
+
+  const initWaline = (Fn, el = document, path = window.location.pathname) => {
+    const waline = Fn({
+      el: el.querySelector('#waline-wrap'),
+      serverURL: 'https://walinecomments-gxccu74d8-chens-projects-7c4f92c5.vercel.app',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      comment: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyWaline = () => {
+        destroyWaline(waline)
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const loadWaline = (el, path) => {
+    if (initFn) initWaline(initFn, el, path)
+    else {
+      btf.getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css')
+        .then(() => import('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js'))
+        .then(({ init }) => {
+          initFn = init || Waline.init
+          initWaline(initFn, el, path)
+          window.walineFn = initFn
+        })
+    }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Waline'
+      ? window.shuoshuoComment = { loadComment: loadWaline } 
+      : window.loadOtherComment = loadWaline
+    return
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Spring MVC 表单验证器 | 只有那年胜过年年</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#FC5531"><meta name="description" content="本章讲解SpringMVC中怎么通过注解对表单参数进行验证。 SpringBoot配置使用springboot，spring-boot-starter-web会自动引入hiberante-validator,validation-api依赖。 在WebMvcConfigurerAdapter实现类里面添加验证器及国际化指定资源文件。 @Override public Validator getVa">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring MVC 表单验证器">
+<meta property="og:url" content="http://example.com/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20MVC/Spring%20MVC%20%E8%A1%A8%E5%8D%95%E9%AA%8C%E8%AF%81%E5%99%A8/index.html">
+<meta property="og:site_name" content="只有那年胜过年年">
+<meta property="og:description" content="本章讲解SpringMVC中怎么通过注解对表单参数进行验证。 SpringBoot配置使用springboot，spring-boot-starter-web会自动引入hiberante-validator,validation-api依赖。 在WebMvcConfigurerAdapter实现类里面添加验证器及国际化指定资源文件。 @Override public Validator getVa">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/logo.png">
+<meta property="article:published_time" content="2025-10-29T09:30:25.000Z">
+<meta property="article:modified_time" content="2025-10-29T09:33:56.631Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Spring MVC">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/logo.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Spring MVC 表单验证器",
+  "url": "http://example.com/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20MVC/Spring%20MVC%20%E8%A1%A8%E5%8D%95%E9%AA%8C%E8%AF%81%E5%99%A8/",
+  "image": "http://example.com/img/logo.png",
+  "datePublished": "2025-10-29T09:30:25.000Z",
+  "dateModified": "2025-10-29T09:33:56.631Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "John Doe",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20MVC/Spring%20MVC%20%E8%A1%A8%E5%8D%95%E9%AA%8C%E8%AF%81%E5%99%A8/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FC5531')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FC5531')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: John Doe","link":"链接: ","source":"来源: 只有那年胜过年年","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Spring MVC 表单验证器',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/logo.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">357</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">49</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/logo.png" alt="Logo"><span class="site-name">只有那年胜过年年</span></a><a class="nav-page-title" href="/"><span class="site-name">Spring MVC 表单验证器</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Spring MVC 表单验证器</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-10-29T09:30:25.000Z" title="发表于 2025-10-29 17:30:25">2025-10-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-10-29T09:33:56.631Z" title="更新于 2025-10-29 17:33:56">2025-10-29</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><p>本章讲解SpringMVC中怎么通过注解对表单参数进行验证。</p>
+<h2 id="SpringBoot配置"><a href="#SpringBoot配置" class="headerlink" title="SpringBoot配置"></a>SpringBoot配置</h2><p>使用springboot，<code>spring-boot-starter-web</code>会自动引入<code>hiberante-validator</code>,<code>validation-api</code>依赖。</p>
+<p>在<code>WebMvcConfigurerAdapter</code>实现类里面添加验证器及国际化指定资源文件。</p>
+<pre class="line-numbers language-none"><code class="language-none">@Override
+public Validator getValidator() &#123;
+	LocalValidatorFactoryBean validator &#x3D; new LocalValidatorFactoryBean();
+	validator.setValidationMessageSource(messageSource());
+	return validator;
+&#125;
+
+@Bean
+public MessageSource messageSource() &#123;
+	ResourceBundleMessageSource messageSource &#x3D; new ResourceBundleMessageSource();
+	messageSource.setBasename(&quot;i18n&#x2F;ValidationMessages&quot;);
+	messageSource.setDefaultEncoding(StandardCharsets.US_ASCII.name());
+	return messageSource;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="验证器使用"><a href="#验证器使用" class="headerlink" title="验证器使用"></a>验证器使用</h2><p>接收参数的表单类：</p>
+<pre class="line-numbers language-none"><code class="language-none">public class LoginForm &#123;
+
+	@NotNull(message &#x3D; &quot;&#123;login.loginName.length&#125;&quot;)
+	@Size(min &#x3D; 4, max &#x3D; 20, message &#x3D; &quot;&#123;login.loginName.length&#125;&quot;)
+	private String loginName;
+
+	@NotNull(message &#x3D; &quot;&#123;login.loginPassword.length&#125;&quot;)
+	@Size(min &#x3D; 8, max &#x3D; 20, message &#x3D; &quot;&#123;login.loginPassword.length&#125;&quot;)
+	private String loginPassword;
+
+	public String getLoginName() &#123;
+		return loginName;
+	&#125;
+
+	public void setLoginName(String loginName) &#123;
+		this.loginName &#x3D; loginName;
+	&#125;
+
+	public String getLoginPassword() &#123;
+		return loginPassword;
+	&#125;
+
+	public void setLoginPassword(String loginPassword) &#123;
+		this.loginPassword &#x3D; loginPassword;
+	&#125;
+
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在要验证的字段上面加入验证注解，更多参考<code>validation-api</code>jar包下的<code>javax.validation.constraints</code>包。</p>
+<p>SpringMVC控制器：</p>
+<pre class="line-numbers language-none"><code class="language-none">@PostMapping(value &#x3D; &quot;&#x2F;login&quot;)
+public String login(@Validated LoginForm form) &#123;
+...
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>使用<code>@Validated</code>注解表示该参数需要验证。</p>
+<h2 id="国际化"><a href="#国际化" class="headerlink" title="国际化"></a>国际化</h2><p>message里面<code>{}</code>引用的是国际化的资源。</p>
+<p>添加国际化资源文件：</p>
+<p>ValidationMessages.properties<br>ValidationMessages_zh_CN.properties</p>
+<p>需要指定编码为<code>ASCII</code>，不然会乱码。</p>
+<h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><p>异常全局处理时进行处理：</p>
+<pre class="line-numbers language-none"><code class="language-none">@ControllerAdvice
+public class ExceptionResolver &#123;
+
+	@ExceptionHandler(Throwable.class)
+	@ResponseBody
+	Object handleEntityException(HttpServletRequest request, Throwable ex) &#123;
+	    ...
+		if (ex instanceof BindException) &#123;
+			BindException c &#x3D; (BindException) ex;
+			List&lt;ObjectError&gt; errors &#x3D; c.getBindingResult().getAllErrors();
+			StringBuilder errorMsg &#x3D; new StringBuilder();
+			errors.forEach(x -&gt; errorMsg.append(x.getDefaultMessage()).append(&quot;,&quot;));
+			
+		&#125;
+		...
+	&#125;
+
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>或者在验证的类后面加<code>BindingResult</code>，错误信息都会放在该对象里面，而不会抛出异常。如：</p>
+<pre class="line-numbers language-none"><code class="language-none">@PostMapping(value &#x3D; &quot;&#x2F;login&quot;)
+public String login(@Validated LoginForm form, BindingResult bindingResult) &#123;
+...
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">John Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20MVC/Spring%20MVC%20%E8%A1%A8%E5%8D%95%E9%AA%8C%E8%AF%81%E5%99%A8/">http://example.com/2025/10/29/后端技术/Spring MVC/Spring MVC 表单验证器/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">只有那年胜过年年</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Spring-MVC/">Spring MVC</a></div><div class="post-share"><div class="social-share" data-image="/img/logo.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20MVC/Spring%20MVC%20%E8%A1%A8%E5%8D%95%E9%98%B2%E9%87%8D%E5%A4%8D%E6%8F%90%E4%BA%A4/" title="Spring MVC 表单防重复提交"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Spring MVC 表单防重复提交</div></div><div class="info-2"><div class="info-item-1">利用Spring MVC的过滤器及token传递验证来实现表单防重复提交。 创建注解@Target(ElementType.METHOD) @Retention(RetentionPolicy.RUNTIME) @Documented public @interface Token &#123;  	boolean create() default false;  	boolean remove() default false;  &#125;  在跳转页面的方法上加上：@Token(create &#x3D; true)在提交的action方法上加上：@Token(remove &#x3D; true) 创建过滤器public class TokenInterceptor extends HandlerInterceptorAdapter &#123;  	private Logger logger &#x3D; Logger.getLogger(TokenInterceptor.class);  	private static final String TOKEN &#x3D...</div></div></div></a><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Cloud/Spring%20Cloud%20Alibaba%20Sentinel%20%E6%95%B4%E5%90%88%20Feign%20%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%AE%9E%E7%8E%B0/" title="Spring Cloud Alibaba Sentinel 整合 Feign 的设计实现"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Spring Cloud Alibaba Sentinel 整合 Feign 的设计实现</div></div><div class="info-2"><div class="info-item-1">  作者 | Spring Cloud Alibaba 高级开发工程师洛夜来自公众号阿里巴巴中间件投稿   前段时间 Hystrix 宣布不再维护之后（Hystrix 停止开发。。。Spring Cloud 何去何从？），Feign 作为一个跟 Hystrix 强依赖的组件，必然会有所担心后续的使用。 作为 Spring Cloud Alibaba 体系中的熔断器 Sentinel，Sentinel 目前整合了 Feign，本文对整合过程做一次总结，欢迎大家讨论和使用。 Feign 是什么？Feign 是一个 Java 实现的 Http 客户端，用于简化 Restful 调用。 Feign 跟 OkHttp、HttpClient 这种客户端实现理念不一样。Feign 强调接口的定义，接口中的一个方法对应一个 Http 请求，调用方法即发送一个 Http 请求；OkHttp 或 HttpClient 以过程式的方式发送 Http 请求。Feign 底层发送请求的实现可以跟 OkHttp 或 HttpClient 整合。 要想整合 Feign，首先要了解 Feign 的使用以及执行过...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20MVC/Spring%20MVC%20%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/" title="Spring MVC 常用注解"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-29</div><div class="info-item-2">Spring MVC 常用注解</div></div><div class="info-2"><div class="info-item-1">常用注解 Controller  注解一个类表示控制器，Spring MVC会自动扫描标注了这个注解的类。  RequestMapping  请求路径映射，可以标注类，也可以是方法，可以指定请求类型，默认不指定为全部接收。  RequestParam  放在参数前，表示只能接收参数a&#x3D;b格式的数据，即Content-Type为application/x-www-form-urlencoded类型的内容。  RequestBody  放在参数前，表示参数从request body中获取，而不是从地址栏获取，所以这肯定是接收一个POST请求的非a&#x3D;b格式的数据，即Content-Type不为application/x-www-form-urlencoded类型的内容。  ResponseBody  放在方法上或者返回类型前，表示此方法返回的数据放在response body里面，而不是跳转页面。一般用于ajax请求，返回json数据。  RestController  这个是Controller和ResponseBody的组合注解，表示@Controller标识的...</div></div></div></a><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20MVC/Spring%20MVC%20%E8%A1%A8%E5%8D%95%E9%98%B2%E9%87%8D%E5%A4%8D%E6%8F%90%E4%BA%A4/" title="Spring MVC 表单防重复提交"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-29</div><div class="info-item-2">Spring MVC 表单防重复提交</div></div><div class="info-2"><div class="info-item-1">利用Spring MVC的过滤器及token传递验证来实现表单防重复提交。 创建注解@Target(ElementType.METHOD) @Retention(RetentionPolicy.RUNTIME) @Documented public @interface Token &#123;  	boolean create() default false;  	boolean remove() default false;  &#125;  在跳转页面的方法上加上：@Token(create &#x3D; true)在提交的action方法上加上：@Token(remove &#x3D; true) 创建过滤器public class TokenInterceptor extends HandlerInterceptorAdapter &#123;  	private Logger logger &#x3D; Logger.getLogger(TokenInterceptor.class);  	private static final String TOKEN &#x3D...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#SpringBoot%E9%85%8D%E7%BD%AE"><span class="toc-number">1.</span> <span class="toc-text">SpringBoot配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81%E5%99%A8%E4%BD%BF%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">验证器使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BD%E9%99%85%E5%8C%96"><span class="toc-number">3.</span> <span class="toc-text">国际化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="toc-number">4.</span> <span class="toc-text">异常处理</span></a></li></ol></div></div></div></div></main><footer id="footer" style="background: transparent;"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By John Doe</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><div class="js-pjax"><script>(() => {
+  let initFn = window.walineFn || null
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const destroyWaline = ele => ele.destroy()
+
+  const initWaline = (Fn, el = document, path = window.location.pathname) => {
+    const waline = Fn({
+      el: el.querySelector('#waline-wrap'),
+      serverURL: 'https://walinecomments-gxccu74d8-chens-projects-7c4f92c5.vercel.app',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      comment: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyWaline = () => {
+        destroyWaline(waline)
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const loadWaline = (el, path) => {
+    if (initFn) initWaline(initFn, el, path)
+    else {
+      btf.getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css')
+        .then(() => import('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js'))
+        .then(({ init }) => {
+          initFn = init || Waline.init
+          initWaline(initFn, el, path)
+          window.walineFn = initFn
+        })
+    }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Waline'
+      ? window.shuoshuoComment = { loadComment: loadWaline } 
+      : window.loadOtherComment = loadWaline
+    return
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

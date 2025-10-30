@@ -1,0 +1,186 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>只有那年胜过年年</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#FC5531"><meta property="og:type" content="website">
+<meta property="og:title" content="只有那年胜过年年">
+<meta property="og:url" content="http://example.com/page/28/index.html">
+<meta property="og:site_name" content="只有那年胜过年年">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/logo.png">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/logo.png"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/page/28/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FC5531')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FC5531')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: John Doe","link":"链接: ","source":"来源: 只有那年胜过年年","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '只有那年胜过年年',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><meta name="generator" content="Hexo 8.1.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/logo.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">357</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">49</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/logo.png" alt="Logo"><span class="site-name">只有那年胜过年年</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><h1 class="title-seo">只有那年胜过年年</h1></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Dubbo/%E9%87%8D%E5%A4%A7%E5%88%A9%E5%A5%BD%EF%BC%8CDubbo%203.0%E8%A6%81%E6%9D%A5%E4%BA%86/" title="重大利好，Dubbo 3.0要来了">重大利好，Dubbo 3.0要来了</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-10-29T09:30:25.000Z" title="发表于 2025-10-29 17:30:25">2025-10-29</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></span></div><div class="content">关于Dubbo的好消息，2018年1月8日，Dubbo创始人之一梁飞在Dubbo交流群里透露了Dubbo 3.0正在开工的重大消息。  Dubbo是阿里开源的分布式框架，已经多年停止更新处于半死不活状态，又于2017年又开始更新满血复活重新得到关注。Dubbo在复活后，一直保持着小步快跑的阶段，现在又带来这样一个3.0的重大变革，让大家更加关注Dubbo的发展，希望Dubbo真正完成涅磐重生！  据网上可靠消息，目前Dubbo　3.0已正式投入全职开发梯队，初步Runtime已在验证，3月底将在线上应用投入使用。  Dubbo 3.0新特性前瞻 据消息，Dubbo 3.0内核与Dubbo 2.0完全不同，但它会兼容2.0。 Dubbo 3.0将以Streaming为内核，而不再是2.0时代的RPC，但是RPC会在 3.0中变成远程Streaming对接的一种可选形态。Dubbo 3.0给出了一个内核接口：Streaming　docking(Streaming），一切服务治理将围绕这个内核接口进行扩展。而Streaming通道与gRPC类似，支持HTTP&#x2F;2，同时REST...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/Kafka/Spring%20Boot%20&amp;%20Kafka%20%E5%AE%9E%E6%88%98/" title="Spring Boot &amp; Kafka 实战">Spring Boot &amp; Kafka 实战</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-10-29T09:30:25.000Z" title="发表于 2025-10-29 17:30:25">2025-10-29</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></span></div><div class="content">Kafka集群安装、配置和启动Kafka需要依赖zookeeper，并且自身集成了zookeeper，zookeeper至少需要3个节点保证集群高可用，下面是在单机linux下创建kafka3个节点伪集群模式。 1、下载包  下载地址：http://kafka.apache.org/downloads  2、解压包  tar -zxvf kafka_2.11-1.0.0.tgzmv kafka_2.11-1.0.0 kafka1mv kafka_2.11-1.0.0 kafka2mv kafka_2.11-1.0.0 kafka3  3、创建ZK集群 修改ZK配置文件：kafka1-3&#x2F;config&#x2F;zookeeper.properties分别修改对应的参数。 dataDir&#x3D;&#x2F;usr&#x2F;local&#x2F;kafka&#x2F;zookeeper1 dataLogDir&#x3D;&#x2F;usr&#x2F;local&#x2F;kafka&#x2F;zookeeper&#x2F;log clientPort&#x3D;218...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/Kafka/%E5%91%8A%E8%AF%89%E4%BD%A0%EF%BC%8CKafka%20%E6%98%AF%E4%B8%AA%E7%89%9B%E9%80%BC%E8%B4%A7%EF%BC%81/" title="告诉你，Kafka 是个牛逼货！">告诉你，Kafka 是个牛逼货！</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-10-29T09:30:25.000Z" title="发表于 2025-10-29 17:30:25">2025-10-29</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></span></div><div class="content"> Kafka简介 Kafka是一种高吞吐量的分布式发布订阅消息系统，是消息中间件的一种。它可以处理消费者规模的网站中的所有动作流数据，它是由Apache软件基金会开发的一个开源流处理平台，由Scala和Java编写。 kafka可用于构建实时数据管道和流应用程序，具有横向扩展、容错、wicked fast（变态快）等优点，并已在成千上万家公司运行。  官网：kafka.apache.org&#x2F;  Kafka相关术语  Broker  Kafka集群包含一个或多个服务器，这种服务器被称为broker。  Topic  每条发布到Kafka集群的消息都有一个类别，这个类别被称为Topic。  Partition  Partition是物理上的概念，每个Topic包含一个或多个Partition。  Producer  负责发布消息到Kafka broker。  Consumer  消息消费者，向Kafka broker读取消息的客户端。  Consumer Group  每个Consumer属于一个特定的Consumer Group（可为每个Consumer指定group n...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/10/29/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%A4%84%E7%90%86%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE%E7%9A%84%204%20%E7%A7%8D%E6%96%B9%E6%A1%88/" title="分布式系统中处理参数配置的 4 种方案">分布式系统中处理参数配置的 4 种方案</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-10-29T09:30:25.000Z" title="发表于 2025-10-29 17:30:25">2025-10-29</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%9E%B6%E6%9E%84/">架构</a></span></div><div class="content">一个系统中包含有各种各样的配置信息，如一个日志文件需要配置以下几个信息。  日志文件生成主目录 日志文件名称，不同的日志级别对应不同的文件 当前日志级别  还有其他各种业务参数、系统参数等，大多单一系统是直接把这些配置写死在配置文件中，当部署到测试、生产环境就再修改下配置文件，这样很容易出错，也不能灵活修改。还有就是系统变成分布式系统后，子系统越来越多，你要维护这些配置就变得越来越困难。 我觉得至少要能解决以下几个问题才能算优秀！ 1）能在线灵活修改配置 2）能在线动态刷新配置 3）能根据不同环境配置 4）能统一管理维护配置 那么如何灵活维护这些配置呢？我给大家总结了一下几类方法，根据不同的应用场大家参考一下。 1、数据库法把所有参数存储到数据库，系统启动的时候加载到内存。 这种实现方式比较简单，但需要占用数据库资源，系统简单压力较小时可以选用此种方式。 2、打包处理法利用 Maven 的 maven-resources-plugin 插件，然后根据不同的环境（Profile）提供不同环境的配置文件，这样，不同环境的配置信息在打包阶段就决定好了。 这样只能解决了不同操作系统上面的...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/10/29/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%B8%B8%E8%AF%86%EF%BC%9ACAP%E7%90%86%E8%AE%BA%E3%80%82/" title="分布式系统架构常识：CAP理论">分布式系统架构常识：CAP理论</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-10-29T09:30:25.000Z" title="发表于 2025-10-29 17:30:25">2025-10-29</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%9E%B6%E6%9E%84/">架构</a></span></div><div class="content">什么是CAP理论？2000年7月，加州大学伯克利分校的Eric Brewer教授在ACM PODC会议上提出CAP猜想。2年后麻省理工学院的Seth Gilbert和NancyLynch从理论上证明了CAP，之后CAP理论正式成为分布式计算领域的公认定理。 CAP理论是由下面三个概念组成的，且在分布式系统中三者不能兼得，只能同时满足两种条件。 一致性（C）  All nodes see the same data at the same time  所有数据库集群节点在同一时间点看到的数据完全一致，即所有节点能实时保持数据同步。 可用性（A）  Reads and writes always succeed  读写操作永远是成功的。即服务一直是可用的，即使集群一部分节点故障，集群整体还能正常响应客户端的读写请求。 分区容错性（P）  The system continues to operate despite arbitrary message loss or failure of part of the system  尽管系统中有任意的信息丢失或故障，系统仍在继续运行。以实...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/10/15/%E6%96%B0%E7%89%B9%E6%80%A7/Java%205%20~%2010%20%E6%96%B0%E7%89%B9%E6%80%A7%E5%80%BE%E6%83%85%E6%95%B4%E7%90%86%EF%BC%81/" title="Java 5 ~ 10 新特性倾情整理！">Java 5 ~ 10 新特性倾情整理！</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-10-15T03:36:33.000Z" title="发表于 2025-10-15 11:36:33">2025-10-15</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></span></div><div class="content">最近连 JDK11都在准备发布的路上了，大家都整明白了吗？也许现在大部分人还在用6-8，8的新特性都没用熟，9刚出不久，10-11就不用说了。 为了大家对JDK有一个全面的了解，下面我为大家整理了JDK5~10的所有关键新特性！ JDK5新特性  自动装箱与拆箱 枚举 静态导入 可变参数（Varargs） 内省（introspector） 泛型（Generic） For-Each循环  JDK6新特性  Desktop类和SystemTray类 使用JAXB2来实现对象与XML之间的映射 理解STAX 使用Compiler API 轻量级 Http Server API 插入式注解处理 API 使用Console开发控制台程序 对脚本语言的支持 Common Annotations Java GUI界面的显示 嵌入式数据库Derby Web服务元数据 Jtable的排序和过滤 更简单更强大的JAX-WS  JDK7新特性  switch中可以使用字符串了 泛型实例化类型自动推断 自定义自动关闭类 新增一些读取环境信息的工具方法 Boolean类型反转，空指针安全，参与位运算 两个...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/10/15/%E9%9B%86%E5%90%88/HashMap%20%E5%92%8C%20Hashtable%20%E7%9A%84%206%20%E4%B8%AA%E5%8C%BA%E5%88%AB/" title="HashMap 和 Hashtable 的 6 个区别">HashMap 和 Hashtable 的 6 个区别</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-10-15T03:36:33.000Z" title="发表于 2025-10-15 11:36:33">2025-10-15</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></span></div><div class="content">HashMap 和 Hashtable 是 Java 开发程序员必须要掌握的，也是在各种 Java 面试场合中必须会问到的。 但你对这两者的区别了解有多少呢？ 现在，栈长我给大家总结一下，或许有你不明朗的地方，在栈长的指点下都会拨开迷雾见晴天。 1、线程安全Hashtable 是线程安全的，HashMap 不是线程安全的。 为什么说 HashTable 是线程安全的？ 来看下 Hashtable 的源码，Hashtable 所有的元素操作都是 synchronized 修饰的，而 HashMap 并没有。 public synchronized V put(K key, V value); public synchronized V get(Object key); ...  2、性能优劣既然 Hashtable 是线程安全的，每个方法都要阻塞其他线程，所以 Hashtable 性能较差，HashMap 性能较好，使用更广。 如果要线程安全又要保证性能，建议使用 JUC 包下的 ConcurrentHashMap。 3、NULLHashtable 是不允许键或值为 null 的，...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/10/15/%E9%9B%86%E5%90%88/HashMap,%20ConcurrentHashMap%20%E5%8E%9F%E7%90%86%E5%8F%8A%E6%BA%90%E7%A0%81/" title="HashMap, ConcurrentHashMap 原理及源码">HashMap, ConcurrentHashMap 原理及源码</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-10-15T03:36:33.000Z" title="发表于 2025-10-15 11:36:33">2025-10-15</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></span></div><div class="content">网上关于 HashMap 和 ConcurrentHashMap 的文章确实不少，不过缺斤少两的文章比较多，所以才想自己也写一篇，把细节说清楚说透，尤其像 Java8 中的 ConcurrentHashMap，大部分文章都说不清楚。终归是希望能降低大家学习的成本，不希望大家到处找各种不是很靠谱的文章，看完一篇又一篇，可是还是模模糊糊。 阅读建议： 四节基本上可以进行独立阅读，建议初学者可按照以下顺序进行阅读，可适当降低阅读门槛。  Java7 HashMap -&gt; Java7 ConcurrentHashMap -&gt; Java8 HashMap -&gt; Java8 ConcurrentHashMap   阅读前提： 本文分析的是源码，所以至少读者要熟悉它们的接口使用，同时，对于并发，读者至少要知道 CAS、ReentrantLock、UNSAFE 操作这几个基本的知识，文中不会对这些知识进行介绍。Java8 用到了红黑树，不过本文不会进行展开，感兴趣的读者请自行查找相关资料。 Java7 HashMapHashMap 是最简单的，一来我们非常熟悉，二来就是它不支持...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/10/15/%E9%9B%86%E5%90%88/Hashtable%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E5%8F%AB%20HashTable%EF%BC%9F/" title="Hashtable 为什么不叫 HashTable？">Hashtable 为什么不叫 HashTable？</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-10-15T03:36:33.000Z" title="发表于 2025-10-15 11:36:33">2025-10-15</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></span></div><div class="content"> 什么是驼峰命名规则，来看下面的关键字：  HashMap ArrayList ConcurrentHashMap  简单来说就是，标识符的每个单词首字母必须大写，看起来像是驼峰的形状。  当时就很好奇，Hashtable 为什么不是 HashTable 呢？作为一名初级的 Java 程序员都应该知道的基本的驼峰命名规则，为什么 JDK 代码里面还有这种不规范的命名呢？ 我想大家应该都比较好奇，我特意去查了下资料，没有查到官方的说法，不过在 stackoverflow 上看到了同样的这个问题。 原贴如下：  https://stackoverflow.com/questions/12506706/why-is-the-t-in-hash-tablehashtable-in-java-not-capitalized   最佳答案是：  Hashtable was created in Java v1. The consistent naming conventions for collections were established later, in Java2, when th...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/10/15/%E9%9B%86%E5%90%88/Java%20%E4%B8%AD%E5%88%9D%E5%A7%8B%E5%8C%96%20List%20%E9%9B%86%E5%90%88%E7%9A%84%206%20%E7%A7%8D%E6%96%B9%E5%BC%8F!/" title="Java 中初始化 List 集合的 6 种方式!">Java 中初始化 List 集合的 6 种方式!</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-10-15T03:36:33.000Z" title="发表于 2025-10-15 11:36:33">2025-10-15</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></span></div><div class="content">List 是 Java 开发中经常会使用的集合，你们知道有哪些方式可以初始化一个 List 吗？这其中不缺乏一些坑，今天栈长我给大家一一普及一下。 1、常规方式List&lt;String&gt; languages &#x3D; new ArrayList&lt;&gt;(); languages.add(&quot;Java&quot;); languages.add(&quot;PHP&quot;); languages.add(&quot;Python&quot;); System.out.println(languages);  这种就是我们平常用的最多最平常的方式了，没什么好说的，后面缺失的泛型类型在 JDK 7 之后就可以不用写具体的类型了，改进后会自动推断类型。 2、Arrays 工具类List&lt;String&gt; jdks &#x3D; asList(&quot;JDK6&quot;, &quot;JDK8&quot;, &quot;JDK10&quot;); System.out.println(jdks);  注意，上面的 asList 是 Arra...</div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/27/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/#content-inner">27</a><span class="page-number current">28</span><a class="page-number" href="/page/29/#content-inner">29</a><span class="space">&hellip;</span><a class="page-number" href="/page/36/#content-inner">36</a><a class="extend next" rel="next" href="/page/29/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/logo.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">John Doe</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">357</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">49</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/xxxxx" target="_blank" title="Github"><i class="fab fa-github" style="color: #hdhfbb;"></i></a><a class="social-icon" href="mailto:xxxxxx@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #000000;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">🌸 春去秋来，花开花落  📚 桌上的日历又薄了几页  💭 记忆中的昨天还那么清晰</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/30/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/JDK%20%E7%B4%A7%E6%80%A5%E6%BC%8F%E6%B4%9E%EF%BC%8CXMLDecoder%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%94%BB%E5%87%BB/" title="JDK 紧急漏洞，XMLDecoder反序列化攻击">JDK 紧急漏洞，XMLDecoder反序列化攻击</a><time datetime="2025-10-30T06:42:34.000Z" title="发表于 2025-10-30 14:42:34">2025-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/30/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/%E4%BC%9A%E8%AF%9D%E5%9B%BA%E5%AE%9A%E6%94%BB%E5%87%BB%E6%BC%8F%E6%B4%9E%EF%BC%88session%20fixation%20attack%EF%BC%89/" title="会话固定攻击漏洞">会话固定攻击漏洞</a><time datetime="2025-10-30T06:42:34.000Z" title="发表于 2025-10-30 14:42:34">2025-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/30/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/44%20%E4%B8%AA%20Java%20%E4%BB%A3%E7%A0%81%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%80%BB%E7%BB%93/" title="44 个 Java 代码性能优化总结">44 个 Java 代码性能优化总结</a><time datetime="2025-10-30T06:42:34.000Z" title="发表于 2025-10-30 14:42:34">2025-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/30/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/8%20%E6%9D%A1%E5%85%B3%E4%BA%8E%20Web%20%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E7%9A%84%E4%BC%98%E5%8C%96%E5%BB%BA%E8%AE%AE/" title="8 条关于 Web 前端性能的优化建议">8 条关于 Web 前端性能的优化建议</a><time datetime="2025-10-30T06:42:34.000Z" title="发表于 2025-10-30 14:42:34">2025-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/30/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E7%99%BE%E5%88%86%E4%B9%9D%E5%8D%81Java%E7%A8%8B%E5%BA%8F%E5%91%98%E8%A2%AB%E8%AF%AF%E5%AF%BC%E7%9A%84%E4%B8%80%E4%B8%AA%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%AD%96%E7%95%A5/" title="百分九十Java程序员被误导的一个性能优化策略">百分九十Java程序员被误导的一个性能优化策略</a><time datetime="2025-10-30T06:42:34.000Z" title="发表于 2025-10-30 14:42:34">2025-10-30</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%85%B6%E4%BB%96/"><span class="card-category-list-name">其他</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"><span class="card-category-list-name">区块链</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%90%8E%E7%AB%AF/"><span class="card-category-list-name">后端</span><span class="card-category-list-count">223</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/"><span class="card-category-list-name">安全漏洞</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/"><span class="card-category-list-name">工具</span><span class="card-category-list-count">30</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%80%A7%E8%83%BD/"><span class="card-category-list-name">性能</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%95%99%E7%A8%8B/"><span class="card-category-list-name">教程</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"><span class="card-category-list-name">数据库</span><span class="card-category-list-count">21</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%9E%B6%E6%9E%84/"><span class="card-category-list-name">架构</span><span class="card-category-list-count">15</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F/"><span class="card-category-list-name">程序人生</span><span class="card-category-list-count">53</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/%E6%96%87%E7%AB%A0/" style="font-size: 1.15em; color: rgb(50, 66, 173);">文章</a><a href="/tags/JVM/" style="font-size: 1.15em; color: rgb(129, 91, 101);">JVM</a><a href="/tags/%E5%85%B6%E4%BB%96/" style="font-size: 1.2em; color: rgb(121, 69, 86);">其他</a><a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF/" style="font-size: 1.24em; color: rgb(138, 50, 50);">分布式技术</a><a href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" style="font-size: 1.22em; color: rgb(61, 50, 50);">区块链</a><a href="/tags/Linux/" style="font-size: 1.15em; color: rgb(69, 63, 50);">Linux</a><a href="/tags/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/" style="font-size: 1.2em; color: rgb(50, 50, 50);">安全漏洞</a><a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 1.36em; color: rgb(89, 50, 189);">基础</a><a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 1.36em; color: rgb(144, 64, 154);">多线程</a><a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" style="font-size: 1.22em; color: rgb(153, 50, 160);">性能优化</a><a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" style="font-size: 1.43em; color: rgb(50, 181, 200);">新特性</a><a href="/tags/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F/" style="font-size: 1.31em; color: rgb(151, 191, 106);">程序人生</a><a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 1.22em; color: rgb(50, 155, 156);">算法</a><a href="/tags/%E8%A1%8C%E4%B8%9A%E5%8A%A8%E6%80%81/" style="font-size: 1.33em; color: rgb(200, 117, 104);">行业动态</a><a href="/tags/%E8%A7%84%E8%8C%83/" style="font-size: 1.17em; color: rgb(164, 50, 187);">规范</a><a href="/tags/%E8%B5%84%E6%96%99/" style="font-size: 1.15em; color: rgb(50, 122, 50);">资料</a><a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 1.22em; color: rgb(154, 132, 50);">集合</a><a href="/tags/%E8%BF%9B%E9%98%B6/" style="font-size: 1.33em; color: rgb(98, 93, 199);">进阶</a><a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 1.38em; color: rgb(105, 50, 173);">面试</a><a href="/tags/%E6%9E%B6%E6%9E%84/" style="font-size: 1.29em; color: rgb(50, 187, 71);">架构</a><a href="/tags/docker/" style="font-size: 1.15em; color: rgb(86, 153, 50);">docker</a><a href="/tags/Elastic-Job/" style="font-size: 1.2em; color: rgb(75, 195, 182);">Elastic Job</a><a href="/tags/JWT/" style="font-size: 1.17em; color: rgb(100, 50, 67);">JWT</a><a href="/tags/MyBatis/" style="font-size: 1.17em; color: rgb(50, 156, 50);">MyBatis</a><a href="/tags/Netty/" style="font-size: 1.15em; color: rgb(84, 106, 83);">Netty</a><a href="/tags/Shiro/" style="font-size: 1.22em; color: rgb(50, 50, 90);">Shiro</a><a href="/tags/Spring/" style="font-size: 1.27em; color: rgb(86, 59, 109);">Spring</a><a href="/tags/Spring-MVC/" style="font-size: 1.2em; color: rgb(123, 111, 61);">Spring MVC</a><a href="/tags/Spring-Cloud/" style="font-size: 1.4em; color: rgb(178, 50, 155);">Spring Cloud</a><a href="/tags/Spring-Boot/" style="font-size: 1.45em; color: rgb(83, 97, 186);">Spring Boot</a><a href="/tags/Tomcat/" style="font-size: 1.2em; color: rgb(177, 183, 173);">Tomcat</a><a href="/tags/Zookeeper/" style="font-size: 1.15em; color: rgb(50, 180, 85);">Zookeeper</a><a href="/tags/%E5%BC%80%E6%BA%90/" style="font-size: 1.22em; color: rgb(190, 50, 154);">开源</a><a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 1.22em; color: rgb(68, 50, 182);">日志</a><a href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" style="font-size: 1.17em; color: rgb(50, 148, 113);">消息队列</a><a href="/tags/%E7%BC%93%E5%AD%98/" style="font-size: 1.15em; color: rgb(107, 50, 82);">缓存</a><a href="/tags/%E7%BB%BC%E5%90%88%E6%8A%80%E6%9C%AF/" style="font-size: 1.29em; color: rgb(122, 87, 191);">综合技术</a><a href="/tags/%E8%BF%9E%E6%8E%A5%E6%B1%A0/" style="font-size: 1.22em; color: rgb(50, 67, 50);">连接池</a><a href="/tags/Eclipse/" style="font-size: 1.17em; color: rgb(64, 50, 50);">Eclipse</a><a href="/tags/Maven/" style="font-size: 1.22em; color: rgb(50, 106, 195);">Maven</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
+      
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/10/">
+            <span class="card-archive-list-date">
+              2025年10月
+            </span>
+            <span class="card-archive-list-count">355</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/09/">
+            <span class="card-archive-list-date">
+              2025年09月
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/12/">
+            <span class="card-archive-list-date">
+              2024年12月
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">357</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-10-30T09:02:56.218Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div><div class="card-widget user-map" id="user-map"><div class="item-headline"><i class="fas fa-heartbeat"></i><span>访客地图</span></div><div class="item-content"><script type="text/javascript" id="clstr_globe" src="//clustrmaps.com/globe.js?d=5V2tOKp8qAdRM-i8eu7ETTO9ugt5uKbbG-U7Yj8uMl8"></script></div></div></div></div></main><footer id="footer" style="background: transparent;"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By John Doe</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><div class="js-pjax"></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

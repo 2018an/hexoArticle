@@ -1,0 +1,246 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>阿里巴巴制定了这 16 条设计规约！ | 只有那年胜过年年</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#FC5531"><meta name="description" content="本文内容整理自《阿里巴巴Java开发手册》，获取完整版请在微信公众号 Java技术栈 后台回复关键字：手册。   1、【强制】存储方案和底层数据结构的设计获得评审一致通过，并沉淀成为文档。说明：有缺陷的底层数据结构容易导致系统风险上升，可扩展性下降，重构成本也会因历史数据迁移和系统平滑过渡而陡然增加，所以，存储方案和数据结构需要认真地进行设计和评审，生产环境提交执行后，需要进行 double ch">
+<meta property="og:type" content="article">
+<meta property="og:title" content="阿里巴巴制定了这 16 条设计规约！">
+<meta property="og:url" content="http://example.com/2025/10/30/%E8%A7%84%E8%8C%83/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E5%88%B6%E5%AE%9A%E4%BA%86%E8%BF%99%2016%20%E6%9D%A1%E8%AE%BE%E8%AE%A1%E8%A7%84%E7%BA%A6%EF%BC%81/index.html">
+<meta property="og:site_name" content="只有那年胜过年年">
+<meta property="og:description" content="本文内容整理自《阿里巴巴Java开发手册》，获取完整版请在微信公众号 Java技术栈 后台回复关键字：手册。   1、【强制】存储方案和底层数据结构的设计获得评审一致通过，并沉淀成为文档。说明：有缺陷的底层数据结构容易导致系统风险上升，可扩展性下降，重构成本也会因历史数据迁移和系统平滑过渡而陡然增加，所以，存储方案和数据结构需要认真地进行设计和评审，生产环境提交执行后，需要进行 double ch">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/logo.png">
+<meta property="article:published_time" content="2025-10-30T06:42:34.000Z">
+<meta property="article:modified_time" content="2025-10-30T08:56:29.385Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="规范">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/logo.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "阿里巴巴制定了这 16 条设计规约！",
+  "url": "http://example.com/2025/10/30/%E8%A7%84%E8%8C%83/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E5%88%B6%E5%AE%9A%E4%BA%86%E8%BF%99%2016%20%E6%9D%A1%E8%AE%BE%E8%AE%A1%E8%A7%84%E7%BA%A6%EF%BC%81/",
+  "image": "http://example.com/img/logo.png",
+  "datePublished": "2025-10-30T06:42:34.000Z",
+  "dateModified": "2025-10-30T08:56:29.385Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "John Doe",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/10/30/%E8%A7%84%E8%8C%83/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E5%88%B6%E5%AE%9A%E4%BA%86%E8%BF%99%2016%20%E6%9D%A1%E8%AE%BE%E8%AE%A1%E8%A7%84%E7%BA%A6%EF%BC%81/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FC5531')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FC5531')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: John Doe","link":"链接: ","source":"来源: 只有那年胜过年年","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '阿里巴巴制定了这 16 条设计规约！',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/logo.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">357</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">49</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/logo.png" alt="Logo"><span class="site-name">只有那年胜过年年</span></a><a class="nav-page-title" href="/"><span class="site-name">阿里巴巴制定了这 16 条设计规约！</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">阿里巴巴制定了这 16 条设计规约！</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-10-30T06:42:34.000Z" title="发表于 2025-10-30 14:42:34">2025-10-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-10-30T08:56:29.385Z" title="更新于 2025-10-30 16:56:29">2025-10-30</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F/">程序人生</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><p>本文内容整理自《阿里巴巴Java开发手册》，获取完整版请在微信公众号 <strong>Java技术栈</strong> 后台回复关键字：手册。</p>
+<p><img src="http://img.javastack.cn/18-7-26/30485615.jpg"></p>
+<hr>
+<h5 id="1、【强制】存储方案和底层数据结构的设计获得评审一致通过，并沉淀成为文档。"><a href="#1、【强制】存储方案和底层数据结构的设计获得评审一致通过，并沉淀成为文档。" class="headerlink" title="1、【强制】存储方案和底层数据结构的设计获得评审一致通过，并沉淀成为文档。"></a>1、【强制】存储方案和底层数据结构的设计获得评审一致通过，并沉淀成为文档。</h5><p>说明：有缺陷的底层数据结构容易导致系统风险上升，可扩展性下降，重构成本也会因历史数据迁移和系统平滑过渡而陡然增加，所以，存储方案和数据结构需要认真地进行设计和评审，生产环境提交执行后，需要进行 double check。</p>
+<p>正例：评审内容包括存储介质选型、表结构设计能否满足技术方案、存取性能和存储空间能否满足业务发展、表或字段之间的辩证关系、字段名称、字段类型、索引等；数据结构变更（如在原有表中新增字段）也需要进行评审通过后上线。</p>
+<h5 id="2、【强制】在需求分析阶段，如果与系统交互的-User-超过一类并且相关的-User-Case-超过-5-个，使用用例图来表达更加清晰的结构化需求。"><a href="#2、【强制】在需求分析阶段，如果与系统交互的-User-超过一类并且相关的-User-Case-超过-5-个，使用用例图来表达更加清晰的结构化需求。" class="headerlink" title="2、【强制】在需求分析阶段，如果与系统交互的 User 超过一类并且相关的 User Case 超过 5 个，使用用例图来表达更加清晰的结构化需求。"></a>2、【强制】在需求分析阶段，如果与系统交互的 User 超过一类并且相关的 User Case 超过 5 个，使用用例图来表达更加清晰的结构化需求。</h5><h5 id="3、【强制】如果某个业务对象的状态超过-3-个，使用状态图来表达并且明确状态变化的各个触发条件。"><a href="#3、【强制】如果某个业务对象的状态超过-3-个，使用状态图来表达并且明确状态变化的各个触发条件。" class="headerlink" title="3、【强制】如果某个业务对象的状态超过 3 个，使用状态图来表达并且明确状态变化的各个触发条件。"></a>3、【强制】如果某个业务对象的状态超过 3 个，使用状态图来表达并且明确状态变化的各个触发条件。</h5><p>说明：状态图的核心是对象状态，首先明确对象有多少种状态，然后明确两两状态之间是否存在直接转换关系，再明确触发状态转换的条件是什么。</p>
+<p>正例：淘宝订单状态有已下单、待付款、已付款、待发货、已发货、已收货等。比如已下单与已收货这两种状态之间是不可能有直接转换关系的。</p>
+<h5 id="4、【强制】如果系统中某个功能的调用链路上的涉及对象超过-3-个，使用时序图来表达并且明确各调用环节的输入与输出。"><a href="#4、【强制】如果系统中某个功能的调用链路上的涉及对象超过-3-个，使用时序图来表达并且明确各调用环节的输入与输出。" class="headerlink" title="4、【强制】如果系统中某个功能的调用链路上的涉及对象超过 3 个，使用时序图来表达并且明确各调用环节的输入与输出。"></a>4、【强制】如果系统中某个功能的调用链路上的涉及对象超过 3 个，使用时序图来表达并且明确各调用环节的输入与输出。</h5><p>说明：时序图反映了一系列对象间的交互与协作关系，清晰立体地反映系统的调用纵深链路。</p>
+<h5 id="5、【强制】如果系统中模型类超过-5-个，并且存在复杂的依赖关系，使用类图来表达并且明确类之间的关系。"><a href="#5、【强制】如果系统中模型类超过-5-个，并且存在复杂的依赖关系，使用类图来表达并且明确类之间的关系。" class="headerlink" title="5、【强制】如果系统中模型类超过 5 个，并且存在复杂的依赖关系，使用类图来表达并且明确类之间的关系。"></a>5、【强制】如果系统中模型类超过 5 个，并且存在复杂的依赖关系，使用类图来表达并且明确类之间的关系。</h5><p>说明：类图像建筑领域的施工图，如果搭平房，可能不需要，但如果建造蚂蚁 Z 空间大楼，肯定需要详细的施工图。</p>
+<h5 id="6、【强制】如果系统中超过-2-个对象之间存在协作关系，并且需要表示复杂的处理流程，使用活动图来表示。"><a href="#6、【强制】如果系统中超过-2-个对象之间存在协作关系，并且需要表示复杂的处理流程，使用活动图来表示。" class="headerlink" title="6、【强制】如果系统中超过 2 个对象之间存在协作关系，并且需要表示复杂的处理流程，使用活动图来表示。"></a>6、【强制】如果系统中超过 2 个对象之间存在协作关系，并且需要表示复杂的处理流程，使用活动图来表示。</h5><p>说明：活动图是流程图的扩展，增加了能够体现协作关系的对象泳道，支持表示并发等。</p>
+<h5 id="7、【推荐】需求分析与系统设计在考虑主干功能的同时，需要充分评估异常流程与业务边界。"><a href="#7、【推荐】需求分析与系统设计在考虑主干功能的同时，需要充分评估异常流程与业务边界。" class="headerlink" title="7、【推荐】需求分析与系统设计在考虑主干功能的同时，需要充分评估异常流程与业务边界。"></a>7、【推荐】需求分析与系统设计在考虑主干功能的同时，需要充分评估异常流程与业务边界。</h5><p>反例：用户在淘宝付款过程中，银行扣款成功，发送给用户扣款成功短信，但是支付宝入款时由于断网演练产生异常，淘宝订单页面依然显示未付款，导致用户投诉。</p>
+<h5 id="8、【推荐】类在设计与实现时要符合单一原则。"><a href="#8、【推荐】类在设计与实现时要符合单一原则。" class="headerlink" title="8、【推荐】类在设计与实现时要符合单一原则。"></a>8、【推荐】类在设计与实现时要符合单一原则。</h5><p>说明：单一原则最易理解却是最难实现的一条规则，随着系统演进，很多时候，忘记了类设计的初衷。</p>
+<h5 id="9、【推荐】谨慎使用继承的方式来进行扩展，优先使用聚合-组合的方式来实现。"><a href="#9、【推荐】谨慎使用继承的方式来进行扩展，优先使用聚合-组合的方式来实现。" class="headerlink" title="9、【推荐】谨慎使用继承的方式来进行扩展，优先使用聚合&#x2F;组合的方式来实现。"></a>9、【推荐】谨慎使用继承的方式来进行扩展，优先使用聚合&#x2F;组合的方式来实现。</h5><p>说明：不得已使用继承的话，必须符合里氏代换原则，此原则说父类能够出现的地方子类一定能够出现，比如，“把钱交出来”，钱的子类美元、欧元、人民币等都可以出现。</p>
+<h5 id="10、【推荐】系统设计时，根据依赖倒置原则，尽量依赖抽象类与接口，有利于扩展与维护。"><a href="#10、【推荐】系统设计时，根据依赖倒置原则，尽量依赖抽象类与接口，有利于扩展与维护。" class="headerlink" title="10、【推荐】系统设计时，根据依赖倒置原则，尽量依赖抽象类与接口，有利于扩展与维护。"></a>10、【推荐】系统设计时，根据依赖倒置原则，尽量依赖抽象类与接口，有利于扩展与维护。</h5><p>说明：低层次模块依赖于高层次模块的抽象，方便系统间的解耦。</p>
+<h5 id="11、【推荐】系统设计时，注意对扩展开放，对修改闭合。"><a href="#11、【推荐】系统设计时，注意对扩展开放，对修改闭合。" class="headerlink" title="11、【推荐】系统设计时，注意对扩展开放，对修改闭合。"></a>11、【推荐】系统设计时，注意对扩展开放，对修改闭合。</h5><p>说明：极端情况下，交付的代码都是不可修改的，同一业务域内的需求变化，通过模块或类的扩展来实现。</p>
+<h5 id="12、【推荐】系统设计阶段，共性业务或公共行为抽取出来公共模块、公共配置、公共类、公共方法等，避免出现重复代码或重复配置的情况。"><a href="#12、【推荐】系统设计阶段，共性业务或公共行为抽取出来公共模块、公共配置、公共类、公共方法等，避免出现重复代码或重复配置的情况。" class="headerlink" title="12、【推荐】系统设计阶段，共性业务或公共行为抽取出来公共模块、公共配置、公共类、公共方法等，避免出现重复代码或重复配置的情况。"></a>12、【推荐】系统设计阶段，共性业务或公共行为抽取出来公共模块、公共配置、公共类、公共方法等，避免出现重复代码或重复配置的情况。</h5><p>说明：随着代码的重复次数不断增加，维护成本指数级上升。</p>
+<h5 id="13、【推荐】避免如下误解：敏捷开发-讲故事-编码-发布。"><a href="#13、【推荐】避免如下误解：敏捷开发-讲故事-编码-发布。" class="headerlink" title="13、【推荐】避免如下误解：敏捷开发 &#x3D; 讲故事 + 编码 + 发布。"></a>13、【推荐】避免如下误解：敏捷开发 &#x3D; 讲故事 + 编码 + 发布。</h5><p>说明：敏捷开发是快速交付迭代可用的系统，省略多余的设计方案，摒弃传统的审批流程，但核心关键点上的必要设计和文档沉淀是需要的。</p>
+<p>反例：某团队为了业务快速发展，敏捷成了产品经理催进度的借口，系统中均是勉强能运行但像面条一样的代码，可维护性和可扩展性极差，一年之后，不得不进行大规模重构，得不偿失。</p>
+<h5 id="14、【参考】系统设计主要目的是明确需求、理顺逻辑、后期维护，次要目的用于指导编码。"><a href="#14、【参考】系统设计主要目的是明确需求、理顺逻辑、后期维护，次要目的用于指导编码。" class="headerlink" title="14、【参考】系统设计主要目的是明确需求、理顺逻辑、后期维护，次要目的用于指导编码。"></a>14、【参考】系统设计主要目的是明确需求、理顺逻辑、后期维护，次要目的用于指导编码。</h5><p>说明：避免为了设计而设计，系统设计文档有助于后期的系统维护，所以设计结果需要进行分类归档保存。</p>
+<h5 id="15、【参考】设计的本质就是识别和表达系统难点，找到系统的变化点，并隔离变化点。"><a href="#15、【参考】设计的本质就是识别和表达系统难点，找到系统的变化点，并隔离变化点。" class="headerlink" title="15、【参考】设计的本质就是识别和表达系统难点，找到系统的变化点，并隔离变化点。"></a>15、【参考】设计的本质就是识别和表达系统难点，找到系统的变化点，并隔离变化点。</h5><p>说明：世间众多设计模式目的是相同的，即隔离系统变化点。</p>
+<h5 id="16、【参考】系统架构设计的目的："><a href="#16、【参考】系统架构设计的目的：" class="headerlink" title="16、【参考】系统架构设计的目的："></a>16、【参考】系统架构设计的目的：</h5><ul>
+<li>确定系统边界。确定系统在技术层面上的做与不做。</li>
+<li>确定系统内模块之间的关系。确定模块之间的依赖关系及模块的宏观输入与输出。</li>
+<li>确定指导后续设计与演化的原则。使后续的子系统或模块设计在规定的框架内继续演化。</li>
+<li>确定非功能性需求。非功能性需求是指安全性、可用性、可扩展性等。</li>
+</ul>
+<hr>
+<p>本文内容整理自《阿里巴巴Java开发手册》，获取完整版请在微信公众号 <strong>Java技术栈</strong> 后台回复关键字：手册。</p>
+<p><img src="http://img.javastack.cn/18-7-26/30485615.jpg"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">John Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/10/30/%E8%A7%84%E8%8C%83/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E5%88%B6%E5%AE%9A%E4%BA%86%E8%BF%99%2016%20%E6%9D%A1%E8%AE%BE%E8%AE%A1%E8%A7%84%E7%BA%A6%EF%BC%81/">http://example.com/2025/10/30/规范/阿里巴巴制定了这 16 条设计规约！/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">只有那年胜过年年</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%A7%84%E8%8C%83/">规范</a></div><div class="post-share"><div class="social-share" data-image="/img/logo.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/10/30/%E8%A7%84%E8%8C%83/%E7%96%AF%E4%BA%86%EF%BC%81%E5%90%8C%E4%BA%8B%E5%8F%88%E9%97%AE%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E7%94%A8%20isXXX/" title="疯了！同事又问我为什么不能用 isXXX"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">疯了！同事又问我为什么不能用 isXXX</div></div><div class="info-2"><div class="info-item-1">最近在做Code Review，写下了这篇文章：代码写成这样，老夫无可奈何！，说多了都是泪啊。。 最近又有人同事跑过来质疑我： 为什么变量名取名不能用 isXXX 这种方式，这样有什么问题？！ 醉了，讲了好多次都记不住，我让他自己去看阿里巴巴的《Java开发手册》，或者自行百度，说实话，有点工作经验人都知道，这都是基础的东西。 本没什么好写的，鉴于有好多小白程序员，今天栈长就把为什么不能用 isXXX 拿出来分享一篇文章吧，希望对你有用。 首先我们来看阿里巴巴的《Java开发手册》关于 isXXX 是怎么定义的吧：   【强制】POJO 类中布尔类型变量都不要加 is 前缀，否则部分框架解析会引起序列化错误。反例：定义为基本数据类型 Boolean isDeleted 的属性，它的方法也是 isDeleted()，RPC 框架在反向解析的时候，“误以为”对应的属性名称是 deleted，导致属性获取不到，进而抛出异常。  上面的规范很容易理解吧，就是如果使用 isXXX 这种命名形式会引起潜在的异常呗！ 获取阿里巴巴的《Java开发手册》完整版，请关注微信公众号：Java技术栈，...</div></div></div></a><a class="pagination-related" href="/2025/10/30/%E8%B5%84%E6%96%99/%E3%80%8A%E5%85%A8%E7%90%83%E6%9E%B6%E6%9E%84%E5%B8%88%E5%B3%B0%E4%BC%9A%E3%80%8B%E5%8F%82%E4%BC%9A%E5%9B%9E%E6%9D%A5%EF%BC%8C%E6%83%B3%E5%92%8C%E5%A4%A7%E5%AE%B6%E5%88%86%E4%BA%AB%E4%B8%8B/" title="《全球架构师峰会》参会回来，想和大家分享下"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">《全球架构师峰会》参会回来，想和大家分享下</div></div><div class="info-2"><div class="info-item-1">这两天（07.06 - 07.07）参加了 InfoQ 在深圳举办的 2018《全球架构师峰会》，它号称是一个面向高端技术管理者、架构师的技术会议，50 % 参会者拥有 8 年以上工作经验。从往期回顾看来，已经在深圳、北京一共举办了 5 场峰会。  说实话，我也是第一次参加这么高端大气上档次的峰会，如果现在要我来总结这两天的会议，只能用一片空白来形容了，会议太多，也比较杂乱。。主要包括微服务、深度和机器学习、人工智能、大数据、架构、区块链、金融、视频直播、产品研发等等。但同一时间只能听一场，所以只能选择性的听。 首先参加这个峰会的门票是不便宜的，两天下来要 6 千多不说，还有的是要坐飞机、请假过来参加的。花了大笔钱和时间，最重要的是要所收获的，不然怎么向公司领导交待成果？怎么向技术同事吹牛逼你这两天学到的东西？如果是个人，不学到一点东西，你怎么对得起你交的这大几千块钱、时间等等，毕竟这不是一笔小钱。  东西太多，记住的不多，后续翻下 PPT 好好回顾一下吧！累了，不多说了，全程拍了图，需要的回复 “AS2018” 获取吧。 </div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/10/30/%E8%A7%84%E8%8C%83/%E7%96%AF%E4%BA%86%EF%BC%81%E5%90%8C%E4%BA%8B%E5%8F%88%E9%97%AE%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E7%94%A8%20isXXX/" title="疯了！同事又问我为什么不能用 isXXX"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-30</div><div class="info-item-2">疯了！同事又问我为什么不能用 isXXX</div></div><div class="info-2"><div class="info-item-1">最近在做Code Review，写下了这篇文章：代码写成这样，老夫无可奈何！，说多了都是泪啊。。 最近又有人同事跑过来质疑我： 为什么变量名取名不能用 isXXX 这种方式，这样有什么问题？！ 醉了，讲了好多次都记不住，我让他自己去看阿里巴巴的《Java开发手册》，或者自行百度，说实话，有点工作经验人都知道，这都是基础的东西。 本没什么好写的，鉴于有好多小白程序员，今天栈长就把为什么不能用 isXXX 拿出来分享一篇文章吧，希望对你有用。 首先我们来看阿里巴巴的《Java开发手册》关于 isXXX 是怎么定义的吧：   【强制】POJO 类中布尔类型变量都不要加 is 前缀，否则部分框架解析会引起序列化错误。反例：定义为基本数据类型 Boolean isDeleted 的属性，它的方法也是 isDeleted()，RPC 框架在反向解析的时候，“误以为”对应的属性名称是 deleted，导致属性获取不到，进而抛出异常。  上面的规范很容易理解吧，就是如果使用 isXXX 这种命名形式会引起潜在的异常呗！ 获取阿里巴巴的《Java开发手册》完整版，请关注微信公众号：Java技术栈，...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81%E3%80%90%E5%BC%BA%E5%88%B6%E3%80%91%E5%AD%98%E5%82%A8%E6%96%B9%E6%A1%88%E5%92%8C%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9A%84%E8%AE%BE%E8%AE%A1%E8%8E%B7%E5%BE%97%E8%AF%84%E5%AE%A1%E4%B8%80%E8%87%B4%E9%80%9A%E8%BF%87%EF%BC%8C%E5%B9%B6%E6%B2%89%E6%B7%80%E6%88%90%E4%B8%BA%E6%96%87%E6%A1%A3%E3%80%82"><span class="toc-number">1.</span> <span class="toc-text">1、【强制】存储方案和底层数据结构的设计获得评审一致通过，并沉淀成为文档。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81%E3%80%90%E5%BC%BA%E5%88%B6%E3%80%91%E5%9C%A8%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E9%98%B6%E6%AE%B5%EF%BC%8C%E5%A6%82%E6%9E%9C%E4%B8%8E%E7%B3%BB%E7%BB%9F%E4%BA%A4%E4%BA%92%E7%9A%84-User-%E8%B6%85%E8%BF%87%E4%B8%80%E7%B1%BB%E5%B9%B6%E4%B8%94%E7%9B%B8%E5%85%B3%E7%9A%84-User-Case-%E8%B6%85%E8%BF%87-5-%E4%B8%AA%EF%BC%8C%E4%BD%BF%E7%94%A8%E7%94%A8%E4%BE%8B%E5%9B%BE%E6%9D%A5%E8%A1%A8%E8%BE%BE%E6%9B%B4%E5%8A%A0%E6%B8%85%E6%99%B0%E7%9A%84%E7%BB%93%E6%9E%84%E5%8C%96%E9%9C%80%E6%B1%82%E3%80%82"><span class="toc-number">2.</span> <span class="toc-text">2、【强制】在需求分析阶段，如果与系统交互的 User 超过一类并且相关的 User Case 超过 5 个，使用用例图来表达更加清晰的结构化需求。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%E3%80%81%E3%80%90%E5%BC%BA%E5%88%B6%E3%80%91%E5%A6%82%E6%9E%9C%E6%9F%90%E4%B8%AA%E4%B8%9A%E5%8A%A1%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%8A%B6%E6%80%81%E8%B6%85%E8%BF%87-3-%E4%B8%AA%EF%BC%8C%E4%BD%BF%E7%94%A8%E7%8A%B6%E6%80%81%E5%9B%BE%E6%9D%A5%E8%A1%A8%E8%BE%BE%E5%B9%B6%E4%B8%94%E6%98%8E%E7%A1%AE%E7%8A%B6%E6%80%81%E5%8F%98%E5%8C%96%E7%9A%84%E5%90%84%E4%B8%AA%E8%A7%A6%E5%8F%91%E6%9D%A1%E4%BB%B6%E3%80%82"><span class="toc-number">3.</span> <span class="toc-text">3、【强制】如果某个业务对象的状态超过 3 个，使用状态图来表达并且明确状态变化的各个触发条件。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4%E3%80%81%E3%80%90%E5%BC%BA%E5%88%B6%E3%80%91%E5%A6%82%E6%9E%9C%E7%B3%BB%E7%BB%9F%E4%B8%AD%E6%9F%90%E4%B8%AA%E5%8A%9F%E8%83%BD%E7%9A%84%E8%B0%83%E7%94%A8%E9%93%BE%E8%B7%AF%E4%B8%8A%E7%9A%84%E6%B6%89%E5%8F%8A%E5%AF%B9%E8%B1%A1%E8%B6%85%E8%BF%87-3-%E4%B8%AA%EF%BC%8C%E4%BD%BF%E7%94%A8%E6%97%B6%E5%BA%8F%E5%9B%BE%E6%9D%A5%E8%A1%A8%E8%BE%BE%E5%B9%B6%E4%B8%94%E6%98%8E%E7%A1%AE%E5%90%84%E8%B0%83%E7%94%A8%E7%8E%AF%E8%8A%82%E7%9A%84%E8%BE%93%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA%E3%80%82"><span class="toc-number">4.</span> <span class="toc-text">4、【强制】如果系统中某个功能的调用链路上的涉及对象超过 3 个，使用时序图来表达并且明确各调用环节的输入与输出。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5%E3%80%81%E3%80%90%E5%BC%BA%E5%88%B6%E3%80%91%E5%A6%82%E6%9E%9C%E7%B3%BB%E7%BB%9F%E4%B8%AD%E6%A8%A1%E5%9E%8B%E7%B1%BB%E8%B6%85%E8%BF%87-5-%E4%B8%AA%EF%BC%8C%E5%B9%B6%E4%B8%94%E5%AD%98%E5%9C%A8%E5%A4%8D%E6%9D%82%E7%9A%84%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB%EF%BC%8C%E4%BD%BF%E7%94%A8%E7%B1%BB%E5%9B%BE%E6%9D%A5%E8%A1%A8%E8%BE%BE%E5%B9%B6%E4%B8%94%E6%98%8E%E7%A1%AE%E7%B1%BB%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB%E3%80%82"><span class="toc-number">5.</span> <span class="toc-text">5、【强制】如果系统中模型类超过 5 个，并且存在复杂的依赖关系，使用类图来表达并且明确类之间的关系。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6%E3%80%81%E3%80%90%E5%BC%BA%E5%88%B6%E3%80%91%E5%A6%82%E6%9E%9C%E7%B3%BB%E7%BB%9F%E4%B8%AD%E8%B6%85%E8%BF%87-2-%E4%B8%AA%E5%AF%B9%E8%B1%A1%E4%B9%8B%E9%97%B4%E5%AD%98%E5%9C%A8%E5%8D%8F%E4%BD%9C%E5%85%B3%E7%B3%BB%EF%BC%8C%E5%B9%B6%E4%B8%94%E9%9C%80%E8%A6%81%E8%A1%A8%E7%A4%BA%E5%A4%8D%E6%9D%82%E7%9A%84%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B%EF%BC%8C%E4%BD%BF%E7%94%A8%E6%B4%BB%E5%8A%A8%E5%9B%BE%E6%9D%A5%E8%A1%A8%E7%A4%BA%E3%80%82"><span class="toc-number">6.</span> <span class="toc-text">6、【强制】如果系统中超过 2 个对象之间存在协作关系，并且需要表示复杂的处理流程，使用活动图来表示。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7%E3%80%81%E3%80%90%E6%8E%A8%E8%8D%90%E3%80%91%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E4%B8%8E%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%9C%A8%E8%80%83%E8%99%91%E4%B8%BB%E5%B9%B2%E5%8A%9F%E8%83%BD%E7%9A%84%E5%90%8C%E6%97%B6%EF%BC%8C%E9%9C%80%E8%A6%81%E5%85%85%E5%88%86%E8%AF%84%E4%BC%B0%E5%BC%82%E5%B8%B8%E6%B5%81%E7%A8%8B%E4%B8%8E%E4%B8%9A%E5%8A%A1%E8%BE%B9%E7%95%8C%E3%80%82"><span class="toc-number">7.</span> <span class="toc-text">7、【推荐】需求分析与系统设计在考虑主干功能的同时，需要充分评估异常流程与业务边界。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#8%E3%80%81%E3%80%90%E6%8E%A8%E8%8D%90%E3%80%91%E7%B1%BB%E5%9C%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0%E6%97%B6%E8%A6%81%E7%AC%A6%E5%90%88%E5%8D%95%E4%B8%80%E5%8E%9F%E5%88%99%E3%80%82"><span class="toc-number">8.</span> <span class="toc-text">8、【推荐】类在设计与实现时要符合单一原则。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#9%E3%80%81%E3%80%90%E6%8E%A8%E8%8D%90%E3%80%91%E8%B0%A8%E6%85%8E%E4%BD%BF%E7%94%A8%E7%BB%A7%E6%89%BF%E7%9A%84%E6%96%B9%E5%BC%8F%E6%9D%A5%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95%EF%BC%8C%E4%BC%98%E5%85%88%E4%BD%BF%E7%94%A8%E8%81%9A%E5%90%88-%E7%BB%84%E5%90%88%E7%9A%84%E6%96%B9%E5%BC%8F%E6%9D%A5%E5%AE%9E%E7%8E%B0%E3%80%82"><span class="toc-number">9.</span> <span class="toc-text">9、【推荐】谨慎使用继承的方式来进行扩展，优先使用聚合&#x2F;组合的方式来实现。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#10%E3%80%81%E3%80%90%E6%8E%A8%E8%8D%90%E3%80%91%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%97%B6%EF%BC%8C%E6%A0%B9%E6%8D%AE%E4%BE%9D%E8%B5%96%E5%80%92%E7%BD%AE%E5%8E%9F%E5%88%99%EF%BC%8C%E5%B0%BD%E9%87%8F%E4%BE%9D%E8%B5%96%E6%8A%BD%E8%B1%A1%E7%B1%BB%E4%B8%8E%E6%8E%A5%E5%8F%A3%EF%BC%8C%E6%9C%89%E5%88%A9%E4%BA%8E%E6%89%A9%E5%B1%95%E4%B8%8E%E7%BB%B4%E6%8A%A4%E3%80%82"><span class="toc-number">10.</span> <span class="toc-text">10、【推荐】系统设计时，根据依赖倒置原则，尽量依赖抽象类与接口，有利于扩展与维护。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#11%E3%80%81%E3%80%90%E6%8E%A8%E8%8D%90%E3%80%91%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%97%B6%EF%BC%8C%E6%B3%A8%E6%84%8F%E5%AF%B9%E6%89%A9%E5%B1%95%E5%BC%80%E6%94%BE%EF%BC%8C%E5%AF%B9%E4%BF%AE%E6%94%B9%E9%97%AD%E5%90%88%E3%80%82"><span class="toc-number">11.</span> <span class="toc-text">11、【推荐】系统设计时，注意对扩展开放，对修改闭合。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#12%E3%80%81%E3%80%90%E6%8E%A8%E8%8D%90%E3%80%91%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E9%98%B6%E6%AE%B5%EF%BC%8C%E5%85%B1%E6%80%A7%E4%B8%9A%E5%8A%A1%E6%88%96%E5%85%AC%E5%85%B1%E8%A1%8C%E4%B8%BA%E6%8A%BD%E5%8F%96%E5%87%BA%E6%9D%A5%E5%85%AC%E5%85%B1%E6%A8%A1%E5%9D%97%E3%80%81%E5%85%AC%E5%85%B1%E9%85%8D%E7%BD%AE%E3%80%81%E5%85%AC%E5%85%B1%E7%B1%BB%E3%80%81%E5%85%AC%E5%85%B1%E6%96%B9%E6%B3%95%E7%AD%89%EF%BC%8C%E9%81%BF%E5%85%8D%E5%87%BA%E7%8E%B0%E9%87%8D%E5%A4%8D%E4%BB%A3%E7%A0%81%E6%88%96%E9%87%8D%E5%A4%8D%E9%85%8D%E7%BD%AE%E7%9A%84%E6%83%85%E5%86%B5%E3%80%82"><span class="toc-number">12.</span> <span class="toc-text">12、【推荐】系统设计阶段，共性业务或公共行为抽取出来公共模块、公共配置、公共类、公共方法等，避免出现重复代码或重复配置的情况。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#13%E3%80%81%E3%80%90%E6%8E%A8%E8%8D%90%E3%80%91%E9%81%BF%E5%85%8D%E5%A6%82%E4%B8%8B%E8%AF%AF%E8%A7%A3%EF%BC%9A%E6%95%8F%E6%8D%B7%E5%BC%80%E5%8F%91-%E8%AE%B2%E6%95%85%E4%BA%8B-%E7%BC%96%E7%A0%81-%E5%8F%91%E5%B8%83%E3%80%82"><span class="toc-number">13.</span> <span class="toc-text">13、【推荐】避免如下误解：敏捷开发 &#x3D; 讲故事 + 编码 + 发布。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#14%E3%80%81%E3%80%90%E5%8F%82%E8%80%83%E3%80%91%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E4%B8%BB%E8%A6%81%E7%9B%AE%E7%9A%84%E6%98%AF%E6%98%8E%E7%A1%AE%E9%9C%80%E6%B1%82%E3%80%81%E7%90%86%E9%A1%BA%E9%80%BB%E8%BE%91%E3%80%81%E5%90%8E%E6%9C%9F%E7%BB%B4%E6%8A%A4%EF%BC%8C%E6%AC%A1%E8%A6%81%E7%9B%AE%E7%9A%84%E7%94%A8%E4%BA%8E%E6%8C%87%E5%AF%BC%E7%BC%96%E7%A0%81%E3%80%82"><span class="toc-number">14.</span> <span class="toc-text">14、【参考】系统设计主要目的是明确需求、理顺逻辑、后期维护，次要目的用于指导编码。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#15%E3%80%81%E3%80%90%E5%8F%82%E8%80%83%E3%80%91%E8%AE%BE%E8%AE%A1%E7%9A%84%E6%9C%AC%E8%B4%A8%E5%B0%B1%E6%98%AF%E8%AF%86%E5%88%AB%E5%92%8C%E8%A1%A8%E8%BE%BE%E7%B3%BB%E7%BB%9F%E9%9A%BE%E7%82%B9%EF%BC%8C%E6%89%BE%E5%88%B0%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%8F%98%E5%8C%96%E7%82%B9%EF%BC%8C%E5%B9%B6%E9%9A%94%E7%A6%BB%E5%8F%98%E5%8C%96%E7%82%B9%E3%80%82"><span class="toc-number">15.</span> <span class="toc-text">15、【参考】设计的本质就是识别和表达系统难点，找到系统的变化点，并隔离变化点。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#16%E3%80%81%E3%80%90%E5%8F%82%E8%80%83%E3%80%91%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E7%9A%84%E7%9B%AE%E7%9A%84%EF%BC%9A"><span class="toc-number">16.</span> <span class="toc-text">16、【参考】系统架构设计的目的：</span></a></li></ol></div></div></div></div></main><footer id="footer" style="background: transparent;"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By John Doe</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><div class="js-pjax"><script>(() => {
+  let initFn = window.walineFn || null
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const destroyWaline = ele => ele.destroy()
+
+  const initWaline = (Fn, el = document, path = window.location.pathname) => {
+    const waline = Fn({
+      el: el.querySelector('#waline-wrap'),
+      serverURL: 'https://walinecomments-gxccu74d8-chens-projects-7c4f92c5.vercel.app',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      comment: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyWaline = () => {
+        destroyWaline(waline)
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const loadWaline = (el, path) => {
+    if (initFn) initWaline(initFn, el, path)
+    else {
+      btf.getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css')
+        .then(() => import('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js'))
+        .then(({ init }) => {
+          initFn = init || Waline.init
+          initWaline(initFn, el, path)
+          window.walineFn = initFn
+        })
+    }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Waline'
+      ? window.shuoshuoComment = { loadComment: loadWaline } 
+      : window.loadOtherComment = loadWaline
+    return
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

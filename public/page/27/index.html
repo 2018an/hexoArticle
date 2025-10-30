@@ -1,0 +1,186 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>只有那年胜过年年</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#FC5531"><meta property="og:type" content="website">
+<meta property="og:title" content="只有那年胜过年年">
+<meta property="og:url" content="http://example.com/page/27/index.html">
+<meta property="og:site_name" content="只有那年胜过年年">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/logo.png">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/logo.png"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/page/27/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FC5531')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FC5531')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: John Doe","link":"链接: ","source":"来源: 只有那年胜过年年","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '只有那年胜过年年',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><meta name="generator" content="Hexo 8.1.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/logo.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">357</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">49</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/logo.png" alt="Logo"><span class="site-name">只有那年胜过年年</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><h1 class="title-seo">只有那年胜过年年</h1></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/%E7%BB%BC%E5%90%88%E6%8A%80%E6%9C%AF/%E4%BB%80%E4%B9%88%E6%98%AF%20CPU%20%E5%AF%86%E9%9B%86%E5%9E%8B%E3%80%81IO%E5%AF%86%E9%9B%86%E5%9E%8B%EF%BC%9F/" title="什么是 CPU 密集型、IO密集型？">什么是 CPU 密集型、IO密集型？</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-10-29T09:30:25.000Z" title="发表于 2025-10-29 17:30:25">2025-10-29</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></span></div><div class="content">CPU密集型（CPU-bound）CPU密集型也叫计算密集型，指的是系统的硬盘、内存性能相对CPU要好很多，此时，系统运作大部分的状况是CPU Loading 100%，CPU要读&#x2F;写I&#x2F;O(硬盘&#x2F;内存)，I&#x2F;O在很短的时间就可以完成，而CPU还有许多运算要处理，CPU Loading很高。 在多重程序系统中，大部份时间用来做计算、逻辑判断等CPU动作的程序称之CPU bound。例如一个计算圆周率至小数点一千位以下的程序，在执行的过程当中绝大部份时间用在三角函数和开根号的计算，便是属于CPU bound的程序。 CPU bound的程序一般而言CPU占用率相当高。这可能是因为任务本身不太需要访问I&#x2F;O设备，也可能是因为程序是多线程实现因此屏蔽掉了等待I&#x2F;O的时间。 IO密集型（I&#x2F;O bound）IO密集型指的是系统的CPU性能相对硬盘、内存要好很多，此时，系统运作，大部分的状况是CPU在等I&#x2F;O (硬盘&#x2F;内存) 的读&#x2F;写操作，此时CPU Loading并不高。 I&#x2F;O...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/%E7%BB%BC%E5%90%88%E6%8A%80%E6%9C%AF/%E4%BB%80%E4%B9%88%E6%98%AFKotlin%EF%BC%9FJava%E7%9A%84%E6%9B%BF%E4%BB%A3%E8%AF%AD%E8%A8%80%EF%BC%9F/" title="什么是Kotlin？Java的替代语言？">什么是Kotlin？Java的替代语言？</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-10-29T09:30:25.000Z" title="发表于 2025-10-29 17:30:25">2025-10-29</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></span></div><div class="content">什么是KotlinKotlin是一个基于JVM的新的编程语言，2010年由IntelliJ IDEA所在的JetBrains公司开发，自2012年以来一直开源。 Kotlin可以编译成Java字节码，也可以编译成JavaScript，方便在没有JVM的设备上运行。 Kotlin是面向对象和功能编程功能的JVM和Android的通用、开源、静态的实用的编程语言。它专注于交互性、安全性及清晰度和工具的支持。 设计理念1、创建一种兼容Java的语言 2、让它比Java更安全，能够静态检测常见的陷阱。如：引用空指针 3、让它比Java更简洁，通过支持variable type inference，higher-order functions (closures)，extension functions，mixins and first-class delegation等实现。 4、让它比最成熟的竞争对手Scala语言更加简单。 Kotlin优势1、简洁: 大大减少样板代码的数量。 2、安全: 避免空指针异常等整个类的错误。 3、互操作性: 充分利用 JVM、Android 和浏览器的现有...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/%E7%BB%BC%E5%90%88%E6%8A%80%E6%9C%AF/%E5%8F%82%E6%95%B0%E9%AA%8C%E8%AF%81%20@Validated%20%E5%92%8C%20@Valid%20%E7%9A%84%E5%8C%BA%E5%88%AB/" title="参数验证 @Validated 和 @Valid 的区别">参数验证 @Validated 和 @Valid 的区别</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-10-29T09:30:25.000Z" title="发表于 2025-10-29 17:30:25">2025-10-29</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></span></div><div class="content">Spring Validation验证框架对参数的验证机制提供了@Validated（Spring’s JSR-303 规范，是标准 JSR-303 的一个变种），javax提供了@Valid（标准JSR-303规范），配合 BindingResult 可以直接提供参数验证结果。其中对于字段的特定验证注解比如 @NotNull 等网上到处都有，这里不详述 在检验 Controller 的入参是否符合规范时，使用 @Validated 或者 @Valid 在基本验证功能上没有太多区别。但是在分组、注解地方、嵌套验证等功能上两个有所不同： 1. 分组@Validated：提供了一个分组功能，可以在入参验证时，根据不同的分组采用不同的验证机制，这个网上也有资料，不详述。@Valid：作为标准JSR-303规范，还没有吸收分组的功能。 2. 注解地方@Validated：可以用在类型、方法和方法参数上。但是不能用在成员属性（字段）上 @Valid：可以用在方法、构造函数、方法参数和成员属性（字段）上 两者是否能用于成员属性（字段）上直接影响能否提供嵌套验证的功能。 3. 嵌套验证在比较两...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/%E8%BF%9E%E6%8E%A5%E6%B1%A0/Druid%20-%20%E7%9B%AE%E5%89%8D%E6%9C%80%E5%A5%BD%E7%9A%84%E8%BF%9E%E6%8E%A5%E6%B1%A0/" title="Druid - 目前最好的连接池">Druid - 目前最好的连接池</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-10-29T09:30:25.000Z" title="发表于 2025-10-29 17:30:25">2025-10-29</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></span></div><div class="content">Druid是什么Druid是阿里开源的连接池，是Java语言中最好的数据库连接池.Druid能够提供强大的监控和扩展功能，是为监控而生的数据库连接池！  GitHub：https://github.com/alibaba/druid/  添加依赖&lt;dependency&gt; 	&lt;groupId&gt;com.alibaba&lt;&#x2F;groupId&gt; 	&lt;artifactId&gt;druid&lt;&#x2F;artifactId&gt; 	&lt;version&gt;1.1.2&lt;&#x2F;version&gt; &lt;&#x2F;dependency&gt;  参考配置&lt;bean id&#x3D;&quot;dataSource&quot; class&#x3D;&quot;com.alibaba.druid.pool.DruidDataSource&quot; init-method&#x3D;&quot;init&quot; destroy-method&#x3D;&quot;close&quot;&gt;       ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/%E8%BF%9E%E6%8E%A5%E6%B1%A0/%E4%B8%80%E6%AC%A1%20Druid%20%E8%BF%9E%E6%8E%A5%E6%B1%A0%E6%B3%84%E9%9C%B2%E5%BC%95%E5%8F%91%E7%9A%84%E8%A1%80%E6%A1%88%E3%80%82%E3%80%82/" title="一次 Druid 连接池泄露引发的血案。。">一次 Druid 连接池泄露引发的血案。。</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-10-29T09:30:25.000Z" title="发表于 2025-10-29 17:30:25">2025-10-29</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></span></div><div class="content">最近某个应用程序老是卡，需要重启才能解决问题，导致被各种投诉，排查问题是 Druid 连接池泄露引发的血案。。 异常日志如下： ERROR - com.alibaba.druid.pool.GetConnectionTimeoutException: wait millis 60000, active 50, maxActive 50, creating 0 	at com.alibaba.druid.pool.DruidDataSource.getConnectionInternal(DruidDataSource.java:1512) 	at com.alibaba.druid.pool.DruidDataSource.getConnectionDirect(DruidDataSource.java:1255) 	at com.alibaba.druid.filter.FilterChainImpl.dataSource_connect(FilterChainImpl.java:5007) 	at com.alibaba.druid.filter.stat.StatFilte...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/%E8%BF%9E%E6%8E%A5%E6%B1%A0/%E9%98%BF%E9%87%8C%20Druid%20%E8%BF%9E%E6%8E%A5%E6%B1%A0%E7%9A%84%E5%9D%91%E3%80%82%E3%80%82/" title="阿里 Druid 连接池的坑。。">阿里 Druid 连接池的坑。。</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-10-29T09:30:25.000Z" title="发表于 2025-10-29 17:30:25">2025-10-29</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></span></div><div class="content">Druid的坑当查询数据库的Clob转换为Oracle Clob类型的时候。 java.lang.ClassCastException: com.alibaba.druid.proxy.jdbc.ClobProxyImpl cannot be cast to oracle.sql.CLOB  问题原因ClobProxyImpl不能转换为Oracle的Clob字段，这也是醉了。 原因是Druid为Clob字段增加了代理类：com.alibaba.druid.proxy.jdbc.ClobProxyImpl，然后代码里面强制转换成Oracle的Clob就出现了这个问题。 解决方案现在的解决方案是先转换为Druid的代理类ClobProxy对象，然后获取原生的Oracle Clob字段内容即可。 public class ClobUtil &#123;  	public static CLOB parseOracleClob(Clob clob) &#123; 		SerializableClob sclob &#x3D; (SerializableClob) clob; 		Clob...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/%E8%BF%9E%E6%8E%A5%E6%B1%A0/%E9%98%BF%E9%87%8C%20Druid%20%E8%BF%9E%E6%8E%A5%E6%B1%A0%E7%9B%91%E6%8E%A7%E7%9A%84%E4%B8%A4%E4%B8%AA%E5%9D%91/" title="阿里 Druid 连接池监控的两个坑">阿里 Druid 连接池监控的两个坑</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-10-29T09:30:25.000Z" title="发表于 2025-10-29 17:30:25">2025-10-29</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></span></div><div class="content"> 阿里的Druid大家都知道是最好的连接池，其强大的监控功能是我们追求的重要特性。但在实际情况中也有不少坑，说下最近遇到的一个坑吧！ 问题1：不断打印error级别的错误日志 session ip change too many  下面是其报错的关键源码  com.alibaba.druid.support.http.stat.WebSessionStat#addRemoteAddress  public void addRemoteAddress(String ip) &#123;     if (remoteAddresses &#x3D;&#x3D; null) &#123;         this.remoteAddresses &#x3D; ip;         return;     &#125;      if (remoteAddresses.contains(ip)) &#123;         return;     &#125;      if (remoteAddresses.length() &gt; 256) &#123;         LOG...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Dubbo/Dubbo%20&amp;%20Spring%20Boot%20%E8%A6%81%E6%9D%A5%E4%BA%86/" title="Dubbo &amp; Spring Boot 要来了">Dubbo &amp; Spring Boot 要来了</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-10-29T09:30:25.000Z" title="发表于 2025-10-29 17:30:25">2025-10-29</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></span></div><div class="content"> Duboo和Spring Boot都是非常优秀的框架，现在它们要结合了。为了简化Dubbo开发集成，阿里Dubbo团队将发布基于Spring Boot的版本，可快速上手Dubbo的分布式开发，并提供了一些准生产环境特性（如安全、健康检查、配置外部化等……）。 如果你还不知道什么是Dubbo，可以去Dubbo官网（http://dubbo.io）花点时间了解下。 下面来看看Dubbo &amp; Spring Boot集成是如何做的！ 用过Dubbo的都知道，分布式场景中有两个重要的角色，一个是提供者，一个是消费者。 如何实现提供者服务1、定义一个提供者接口：DemoService public interface DemoService &#123;      String sayHello(String name);  &#125;  2、实现一个提供者，并实现DemoService接口 @Service(         version &#x3D; &quot;1.0.0&quot;,         application &#x3D; &quot;$&#123;dub...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Dubbo/%E5%8E%89%E5%AE%B3%E4%BA%86%EF%BC%8CDubbo%20%E6%AD%A3%E5%BC%8F%E6%AF%95%E4%B8%9A%EF%BC%81/" title="厉害了，Dubbo 正式毕业！">厉害了，Dubbo 正式毕业！</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-10-29T09:30:25.000Z" title="发表于 2025-10-29 17:30:25">2025-10-29</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></span></div><div class="content">厉害了，2019&#x2F;05&#x2F;21 Apache软件基金会发表博文，宣布 Dubbo 在 2019&#x2F;05&#x2F;20 这天正式毕业，成为 Apache 的顶级项目。  参考：https://blogs.apache.org/foundation/entry/the-apache-software-foundation-announces52  不过 Github 的名称还没改过来，还是叫 incubator-dubbo，坐等更新为：dubbo，估计快了。 栈长这里科普一下： Dubbo是阿里巴巴开源的 RPC 框架，后进入 Apache 开源孵化器，目前已在数十家公司中使用，包括阿里巴巴集团、中国人寿、中国电信、当当网、滴滴出行、海尔、中国工商银行等，大多是国内公司。 哈哈，上一张 Dubbo 的架构图，来自官网：  再来回顾下 Dubbo 的发展史： 2011&#x2F;10&#x2F;27： 阿里巴巴巴宣布 Dubbo 开源。 2012&#x2F;10&#x2F;23： 发布最后一个版本 2.5.3 并停止维护更新。 2017&#x2F;07&#x...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Dubbo/%E6%83%8A%E8%89%B3%EF%BC%8CDubbo%E5%9F%9F%E5%90%8D%E5%B7%B2%E6%94%B9%EF%BC%8C%E4%B9%9F%E4%B8%8D%E5%86%8D%E5%B1%80%E9%99%90%E4%BA%8EJava/" title="惊艳，Dubbo域名已改，也不再局限于Java">惊艳，Dubbo域名已改，也不再局限于Java</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-10-29T09:30:25.000Z" title="发表于 2025-10-29 17:30:25">2025-10-29</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></span></div><div class="content">今天作者想去 Dubbo 官网查下相关资料，发现官方域名由 dubbo.io 直接跳转至 dubbo.apache.org 下了，然后突然回想起 Dubbo 已经在 2 月份正式进入了 Apache 孵化器这回事，也就不觉得奇怪了。  看这个新官网还真清新亮丽，对比之前的老官网，这次调整还真不少，我想我有必要给大家重新介绍一下 Dubbo, 结合这次的变更下面给大家总结一下。 什么是 Dubbo ?Apache Dubbo (incubating) |ˈdʌbəʊ| 是一款高性能、轻量级的开源Java RPC框架，它提供了三大核心能力：面向接口的远程方法调用，智能容错和负载均衡，以及服务自动注册和发现。  这里有一篇 Dubbo 详解的好文：Dubbo架构设计详解，可以了解更多。 Dubbo主要特性 面向接口代理的高性能RPC调用 服务自动注册与发现 运行期流量调度 智能负载均衡 高度可扩展能力 可视化的服务治理与运维  Dubbo新变化1、官网切换了新域名：dubbo.apache.org。 2、官网支持中英文切换，默认为英文。 3、最大的调整和亮点是 Dubbo 开始多语言，...</div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/26/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/#content-inner">26</a><span class="page-number current">27</span><a class="page-number" href="/page/28/#content-inner">28</a><span class="space">&hellip;</span><a class="page-number" href="/page/36/#content-inner">36</a><a class="extend next" rel="next" href="/page/28/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/logo.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">John Doe</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">357</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">49</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/xxxxx" target="_blank" title="Github"><i class="fab fa-github" style="color: #hdhfbb;"></i></a><a class="social-icon" href="mailto:xxxxxx@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #000000;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">🌸 春去秋来，花开花落  📚 桌上的日历又薄了几页  💭 记忆中的昨天还那么清晰</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/30/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/JDK%20%E7%B4%A7%E6%80%A5%E6%BC%8F%E6%B4%9E%EF%BC%8CXMLDecoder%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%94%BB%E5%87%BB/" title="JDK 紧急漏洞，XMLDecoder反序列化攻击">JDK 紧急漏洞，XMLDecoder反序列化攻击</a><time datetime="2025-10-30T06:42:34.000Z" title="发表于 2025-10-30 14:42:34">2025-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/30/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/%E4%BC%9A%E8%AF%9D%E5%9B%BA%E5%AE%9A%E6%94%BB%E5%87%BB%E6%BC%8F%E6%B4%9E%EF%BC%88session%20fixation%20attack%EF%BC%89/" title="会话固定攻击漏洞">会话固定攻击漏洞</a><time datetime="2025-10-30T06:42:34.000Z" title="发表于 2025-10-30 14:42:34">2025-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/30/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/44%20%E4%B8%AA%20Java%20%E4%BB%A3%E7%A0%81%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%80%BB%E7%BB%93/" title="44 个 Java 代码性能优化总结">44 个 Java 代码性能优化总结</a><time datetime="2025-10-30T06:42:34.000Z" title="发表于 2025-10-30 14:42:34">2025-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/30/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/8%20%E6%9D%A1%E5%85%B3%E4%BA%8E%20Web%20%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E7%9A%84%E4%BC%98%E5%8C%96%E5%BB%BA%E8%AE%AE/" title="8 条关于 Web 前端性能的优化建议">8 条关于 Web 前端性能的优化建议</a><time datetime="2025-10-30T06:42:34.000Z" title="发表于 2025-10-30 14:42:34">2025-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/30/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E7%99%BE%E5%88%86%E4%B9%9D%E5%8D%81Java%E7%A8%8B%E5%BA%8F%E5%91%98%E8%A2%AB%E8%AF%AF%E5%AF%BC%E7%9A%84%E4%B8%80%E4%B8%AA%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%AD%96%E7%95%A5/" title="百分九十Java程序员被误导的一个性能优化策略">百分九十Java程序员被误导的一个性能优化策略</a><time datetime="2025-10-30T06:42:34.000Z" title="发表于 2025-10-30 14:42:34">2025-10-30</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%85%B6%E4%BB%96/"><span class="card-category-list-name">其他</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"><span class="card-category-list-name">区块链</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%90%8E%E7%AB%AF/"><span class="card-category-list-name">后端</span><span class="card-category-list-count">223</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/"><span class="card-category-list-name">安全漏洞</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/"><span class="card-category-list-name">工具</span><span class="card-category-list-count">30</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%80%A7%E8%83%BD/"><span class="card-category-list-name">性能</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%95%99%E7%A8%8B/"><span class="card-category-list-name">教程</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"><span class="card-category-list-name">数据库</span><span class="card-category-list-count">21</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%9E%B6%E6%9E%84/"><span class="card-category-list-name">架构</span><span class="card-category-list-count">15</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F/"><span class="card-category-list-name">程序人生</span><span class="card-category-list-count">53</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/%E6%96%87%E7%AB%A0/" style="font-size: 1.15em; color: rgb(50, 66, 173);">文章</a><a href="/tags/JVM/" style="font-size: 1.15em; color: rgb(129, 91, 101);">JVM</a><a href="/tags/%E5%85%B6%E4%BB%96/" style="font-size: 1.2em; color: rgb(121, 69, 86);">其他</a><a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF/" style="font-size: 1.24em; color: rgb(138, 50, 50);">分布式技术</a><a href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" style="font-size: 1.22em; color: rgb(61, 50, 50);">区块链</a><a href="/tags/Linux/" style="font-size: 1.15em; color: rgb(69, 63, 50);">Linux</a><a href="/tags/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/" style="font-size: 1.2em; color: rgb(50, 50, 50);">安全漏洞</a><a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 1.36em; color: rgb(89, 50, 189);">基础</a><a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 1.36em; color: rgb(144, 64, 154);">多线程</a><a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" style="font-size: 1.22em; color: rgb(153, 50, 160);">性能优化</a><a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" style="font-size: 1.43em; color: rgb(50, 181, 200);">新特性</a><a href="/tags/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F/" style="font-size: 1.31em; color: rgb(151, 191, 106);">程序人生</a><a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 1.22em; color: rgb(50, 155, 156);">算法</a><a href="/tags/%E8%A1%8C%E4%B8%9A%E5%8A%A8%E6%80%81/" style="font-size: 1.33em; color: rgb(200, 117, 104);">行业动态</a><a href="/tags/%E8%A7%84%E8%8C%83/" style="font-size: 1.17em; color: rgb(164, 50, 187);">规范</a><a href="/tags/%E8%B5%84%E6%96%99/" style="font-size: 1.15em; color: rgb(50, 122, 50);">资料</a><a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 1.22em; color: rgb(154, 132, 50);">集合</a><a href="/tags/%E8%BF%9B%E9%98%B6/" style="font-size: 1.33em; color: rgb(98, 93, 199);">进阶</a><a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 1.38em; color: rgb(105, 50, 173);">面试</a><a href="/tags/%E6%9E%B6%E6%9E%84/" style="font-size: 1.29em; color: rgb(50, 187, 71);">架构</a><a href="/tags/docker/" style="font-size: 1.15em; color: rgb(86, 153, 50);">docker</a><a href="/tags/Elastic-Job/" style="font-size: 1.2em; color: rgb(75, 195, 182);">Elastic Job</a><a href="/tags/JWT/" style="font-size: 1.17em; color: rgb(100, 50, 67);">JWT</a><a href="/tags/MyBatis/" style="font-size: 1.17em; color: rgb(50, 156, 50);">MyBatis</a><a href="/tags/Netty/" style="font-size: 1.15em; color: rgb(84, 106, 83);">Netty</a><a href="/tags/Shiro/" style="font-size: 1.22em; color: rgb(50, 50, 90);">Shiro</a><a href="/tags/Spring/" style="font-size: 1.27em; color: rgb(86, 59, 109);">Spring</a><a href="/tags/Spring-MVC/" style="font-size: 1.2em; color: rgb(123, 111, 61);">Spring MVC</a><a href="/tags/Spring-Cloud/" style="font-size: 1.4em; color: rgb(178, 50, 155);">Spring Cloud</a><a href="/tags/Spring-Boot/" style="font-size: 1.45em; color: rgb(83, 97, 186);">Spring Boot</a><a href="/tags/Tomcat/" style="font-size: 1.2em; color: rgb(177, 183, 173);">Tomcat</a><a href="/tags/Zookeeper/" style="font-size: 1.15em; color: rgb(50, 180, 85);">Zookeeper</a><a href="/tags/%E5%BC%80%E6%BA%90/" style="font-size: 1.22em; color: rgb(190, 50, 154);">开源</a><a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 1.22em; color: rgb(68, 50, 182);">日志</a><a href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" style="font-size: 1.17em; color: rgb(50, 148, 113);">消息队列</a><a href="/tags/%E7%BC%93%E5%AD%98/" style="font-size: 1.15em; color: rgb(107, 50, 82);">缓存</a><a href="/tags/%E7%BB%BC%E5%90%88%E6%8A%80%E6%9C%AF/" style="font-size: 1.29em; color: rgb(122, 87, 191);">综合技术</a><a href="/tags/%E8%BF%9E%E6%8E%A5%E6%B1%A0/" style="font-size: 1.22em; color: rgb(50, 67, 50);">连接池</a><a href="/tags/Eclipse/" style="font-size: 1.17em; color: rgb(64, 50, 50);">Eclipse</a><a href="/tags/Maven/" style="font-size: 1.22em; color: rgb(50, 106, 195);">Maven</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
+      
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/10/">
+            <span class="card-archive-list-date">
+              2025年10月
+            </span>
+            <span class="card-archive-list-count">355</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/09/">
+            <span class="card-archive-list-date">
+              2025年09月
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/12/">
+            <span class="card-archive-list-date">
+              2024年12月
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">357</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-10-30T09:02:56.218Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div><div class="card-widget user-map" id="user-map"><div class="item-headline"><i class="fas fa-heartbeat"></i><span>访客地图</span></div><div class="item-content"><script type="text/javascript" id="clstr_globe" src="//clustrmaps.com/globe.js?d=5V2tOKp8qAdRM-i8eu7ETTO9ugt5uKbbG-U7Yj8uMl8"></script></div></div></div></div></main><footer id="footer" style="background: transparent;"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By John Doe</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><div class="js-pjax"></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

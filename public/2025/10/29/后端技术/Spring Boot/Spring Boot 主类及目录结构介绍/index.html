@@ -1,0 +1,303 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Spring Boot 主类及目录结构介绍 | 只有那年胜过年年</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#FC5531"><meta name="description" content="使用 Spring Boot 会涉及到各种各样的配置，如开发、测试、线上就至少 3 套配置信息了。Spring Boot 可以轻松的帮助我们使用相同的代码就能使开发、测试、线上环境使用不同的配置。 在 Spring Boot 里面，可以使用以下几种方式来加载配置。本章内容基于 Spring Boot 2.0 进行详解。 1、properties文件； 2、YAML文件； 3、系统环境变量； 4、命">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring Boot 主类及目录结构介绍">
+<meta property="og:url" content="http://example.com/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Boot/Spring%20Boot%20%E4%B8%BB%E7%B1%BB%E5%8F%8A%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E4%BB%8B%E7%BB%8D/index.html">
+<meta property="og:site_name" content="只有那年胜过年年">
+<meta property="og:description" content="使用 Spring Boot 会涉及到各种各样的配置，如开发、测试、线上就至少 3 套配置信息了。Spring Boot 可以轻松的帮助我们使用相同的代码就能使开发、测试、线上环境使用不同的配置。 在 Spring Boot 里面，可以使用以下几种方式来加载配置。本章内容基于 Spring Boot 2.0 进行详解。 1、properties文件； 2、YAML文件； 3、系统环境变量； 4、命">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/logo.png">
+<meta property="article:published_time" content="2025-10-29T09:30:25.000Z">
+<meta property="article:modified_time" content="2025-10-29T09:26:24.912Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Spring Boot">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/logo.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Spring Boot 主类及目录结构介绍",
+  "url": "http://example.com/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Boot/Spring%20Boot%20%E4%B8%BB%E7%B1%BB%E5%8F%8A%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E4%BB%8B%E7%BB%8D/",
+  "image": "http://example.com/img/logo.png",
+  "datePublished": "2025-10-29T09:30:25.000Z",
+  "dateModified": "2025-10-29T09:26:24.912Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "John Doe",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Boot/Spring%20Boot%20%E4%B8%BB%E7%B1%BB%E5%8F%8A%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E4%BB%8B%E7%BB%8D/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FC5531')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FC5531')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: John Doe","link":"链接: ","source":"来源: 只有那年胜过年年","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Spring Boot 主类及目录结构介绍',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/logo.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">357</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">49</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/logo.png" alt="Logo"><span class="site-name">只有那年胜过年年</span></a><a class="nav-page-title" href="/"><span class="site-name">Spring Boot 主类及目录结构介绍</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Spring Boot 主类及目录结构介绍</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-10-29T09:30:25.000Z" title="发表于 2025-10-29 17:30:25">2025-10-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-10-29T09:26:24.912Z" title="更新于 2025-10-29 17:26:24">2025-10-29</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><p>使用 Spring Boot 会涉及到各种各样的配置，如开发、测试、线上就至少 3 套配置信息了。Spring Boot 可以轻松的帮助我们使用相同的代码就能使开发、测试、线上环境使用不同的配置。</p>
+<p><strong>在 Spring Boot 里面，可以使用以下几种方式来加载配置。本章内容基于 Spring Boot 2.0 进行详解。</strong></p>
+<p>1、properties文件；</p>
+<p>2、YAML文件；</p>
+<p>3、系统环境变量；</p>
+<p>4、命令行参数；</p>
+<p>等等……</p>
+<p><strong>我们可以在 Spring Beans 里面直接使用这些配置文件中加载的值，如：</strong></p>
+<p>1、使用 <code>@Value</code> 注解直接注入对应的值，这能获取到 Spring 中 <code>Environment</code> 的值；</p>
+<p>2、使用 <code>@ConfigurationProperties</code> 注解把对应的值绑定到一个对象；</p>
+<p>3、直接获取注入 <code>Environment</code> 进行获取；</p>
+<p>配置属性的方式很多，Spring boot使用了一种独有的 <code>PropertySource</code> 可以很方便的覆盖属性的值。</p>
+<p><strong>配置属性加载的顺序如下：</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">
+1、开发者工具 &#96;Devtools&#96; 全局配置参数；
+
+2、单元测试上的 &#96;@TestPropertySource&#96; 注解指定的参数；
+
+3、单元测试上的 &#96;@SpringBootTest&#96; 注解指定的参数；
+
+4、命令行指定的参数，如 &#96;java -jar springboot.jar --name&#x3D;&quot;Java技术栈&quot;&#96;；
+
+5、命令行中的 &#96;SPRING_APPLICATION_JSONJSON&#96; 指定参数, 如 &#96;java -Dspring.application.json&#x3D;&#39;&#123;&quot;name&quot;:&quot;Java技术栈&quot;&#125;&#39; -jar springboot.jar&#96;
+
+6、&#96;ServletConfig&#96; 初始化参数；
+
+7、&#96;ServletContext&#96; 初始化参数；
+
+8、JNDI参数（如 &#96;java:comp&#x2F;env&#x2F;spring.application.json&#96;）；
+
+9、Java系统参数（来源：&#96;System.getProperties()&#96;）；
+
+10、操作系统环境变量参数；
+
+11、&#96;RandomValuePropertySource&#96; 随机数，仅匹配：&#96;ramdom.*&#96;；
+
+12、JAR包外面的配置文件参数（&#96;application-&#123;profile&#125;.properties（YAML）&#96;）
+
+13、JAR包里面的配置文件参数（&#96;application-&#123;profile&#125;.properties（YAML）&#96;）
+
+14、JAR包外面的配置文件参数（&#96;application.properties（YAML）&#96;）
+
+15、JAR包里面的配置文件参数（&#96;application.properties（YAML）&#96;）
+
+16、&#96;@Configuration&#96;配置文件上 &#96;@PropertySource&#96; 注解加载的参数；
+
+17、默认参数（通过 &#96;SpringApplication.setDefaultProperties&#96; 指定）；
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>数字小的优先级越高，即数字小的会覆盖数字大的参数值，我们来实践下，验证以上配置参数的加载顺序。</strong></p>
+<p>1、在主应用程序中添加 Java 系统参数。</p>
+<pre class="line-numbers language-none"><code class="language-none">@Bean
+public CommandLineRunner commandLineRunner() &#123;
+	return (args) -&gt; &#123;
+		System.setProperty(&quot;name&quot;, &quot;javastack-system-properties&quot;);
+	&#125;;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>2、在 application.properties 文件中添加属性。</p>
+<pre class="line-numbers language-none"><code class="language-none">name &#x3D; javastack-application<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>3、在 application-dev.properties 文件中添加属性。</p>
+<pre class="line-numbers language-none"><code class="language-none">name &#x3D; javastack-application-dev
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>4、添加测试类</p>
+<pre class="line-numbers language-none"><code class="language-none">@RunWith(SpringRunner.class)
+@SpringBootTest(value &#x3D; &#123; &quot;name&#x3D;javastack-test&quot;, &quot;sex&#x3D;1&quot; &#125;)
+@ActiveProfiles(&quot;dev&quot;)
+public class SpringBootBestPracticeApplicationTests &#123;
+
+	@Value(&quot;$&#123;name&#125;&quot;)
+	private String name;
+
+	@Test
+	public void test() &#123;
+		System.out.println(&quot;name is &quot; + name);
+	&#125;
+
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>运行 test 单元测试，程序输出：</p>
+<pre class="line-numbers language-none"><code class="language-none">name is javastack-test<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>根据以上参数动态调整，发现参数会被正确被覆盖。了解了 Spring Boot 各种配置的加载顺序，如果配置被覆盖了我们就知道是什么问题了。</p>
+<p>Spring Boot 配置加载顺序详解这一章就到这里了，更多 Spring Boot 的教程请关注我们的 <strong><code>Java技术栈</code></strong> 微信公众号。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">John Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Boot/Spring%20Boot%20%E4%B8%BB%E7%B1%BB%E5%8F%8A%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E4%BB%8B%E7%BB%8D/">http://example.com/2025/10/29/后端技术/Spring Boot/Spring Boot 主类及目录结构介绍/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">只有那年胜过年年</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Spring-Boot/">Spring Boot</a></div><div class="post-share"><div class="social-share" data-image="/img/logo.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Boot/Spring%20Boot%20YML%20%E6%8E%80%E7%BF%BB%20Properties/" title="Spring Boot YML 掀翻 Properties"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Spring Boot YML 掀翻 Properties</div></div><div class="info-2"><div class="info-item-1">.properties 配置文件大家应该都很熟悉，键值对嘛，.yml 配置文件栈长也是从 Spring Boot 开始了解到的。 那么，这两种格式的配置文件到底有哪些区别呢？哪个更好？能不能替换代替？今天，栈长就来解开这些谜团，看 YML 能不能掀翻Properties。。。 .properties格式： spring.application.name&#x3D;register-center spring.security.user.name&#x3D;javastack spring.security.user.password&#x3D;javastack  .yml格式： spring:   application:     name: register-center   security:     user:       name: javastack       password: javastack  如上所示，.properties 是键值对形式，.yml 是树状结构的，配置更方便，可以直接写中文，阅读也可友好。 这还不算什么，yml最强大的是能节省很多配置，如下...</div></div></div></a><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Boot/Spring%20Boot%20%E4%B9%8B%E9%85%8D%E7%BD%AE%E5%AF%BC%E5%85%A5%EF%BC%8C%E5%BC%BA%E5%A4%A7%E5%88%B0%E4%B8%8D%E8%A1%8C/" title="Spring Boot 之配置导入，强大到不行"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Spring Boot 之配置导入，强大到不行</div></div><div class="info-2"><div class="info-item-1">我们知道在 Spring Boot 中可以用一个 @Configuration 配置文件来配置所有 Bean 及其他配置（不会的看这篇文章：Spring零配置之@Configuration注解详解），但其实没必要这么做。 我们可以把相关的配置独立出来，放到多个 @Configuration 中，如以下参考：  MainConfiguration：项目主要配置 DataSoureceConfiguration：数据源配置 RedisConfiguration：Redis配置 MongoDBConfiguration：MongoDB配置  这时候 @Import 注解就能派上用场了，来看下它的源码： @Target(ElementType.TYPE) @Retention(RetentionPolicy.RUNTIME) @Documented public @interface Import &#123;  	&#x2F;** 	 * &#123;@link Configuration&#125;, &#123;@link ImportSelector&#125;, &#123;@...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Boot/Spring%20Boot%201.5.10%20%E5%8F%91%E5%B8%83%EF%BC%9A%E4%BF%AE%E5%A4%8D%E9%87%8D%E8%A6%81%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%EF%BC%81%EF%BC%81%EF%BC%81/" title="Spring Boot 1.5.10 发布：修复重要安全漏洞！！！"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-29</div><div class="info-item-2">Spring Boot 1.5.10 发布：修复重要安全漏洞！！！</div></div><div class="info-2"><div class="info-item-1">2018&#x2F;01&#x2F;31，Spring Boot团队发布了Spring Boot 1.5.10。 Maven： &lt;parent&gt;     &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;     &lt;artifactId&gt;spring-boot-starter-parent&lt;&#x2F;artifactId&gt;     &lt;version&gt;1.5.10.RELEASE&lt;&#x2F;version&gt; &lt;&#x2F;parent&gt; &lt;dependencies&gt;     &lt;dependency&gt;         &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;         &lt;artifactId&gt;spring-boot-starter-web&lt;&#x2F;artifactId&gt;     &lt;&#x2F;dep...</div></div></div></a><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Boot/Spring%20Boot%202.0%20%E6%AD%A3%E5%BC%8F%E5%8F%91%E5%B8%83%EF%BC%81/" title="Spring Boot 2.0 正式发布！"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-29</div><div class="info-item-2">Spring Boot 2.0 正式发布！</div></div><div class="info-2"><div class="info-item-1"> Spring Boot 2.0 正式发布！2018&#x2F;03&#x2F;01最新消息，传得沸沸扬扬的Spring Boot 2.0 正式发布了。 小编去看了下Spring Boot的官网，正式版本已经释放出来了！！！  这个版本更是历经了17个月，超过了215个人共同开发，总共超过6800次+提交完成的。这个版本是继4年前Spring Boot 1.0 之后的第一个主要版本，也是第一个正式支持Spring Framework 5.0的发行版本。 我们也从Github上Spring Boot发布版本列表中看到了Spring Boot 2.0 的正式发布版本，版本号：v2.0.0.RELEASE。  Spring Boot版本发布列表：https://github.com/spring-projects/spring-boot/releases/   Spring Boot 2.0 新特性说了这么多，Spring Boot 2.0 和 1.0 比都有哪些变动和新特性呢？  JDK最低要求1.8+，并支持1.9； 支持Spring webflux&#x2F;webflux.fn...</div></div></div></a><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Boot/Spring%20Boot%202.1.0%20%E5%B7%B2%E5%8F%91%E5%B8%83%EF%BC%8C7%20%E4%B8%AA%E9%87%8D%E5%A4%A7%E6%9B%B4%E6%96%B0%EF%BC%81/" title="Spring Boot 2.1.0 已发布，7 个重大更新！"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-29</div><div class="info-item-2">Spring Boot 2.1.0 已发布，7 个重大更新！</div></div><div class="info-2"><div class="info-item-1">距离《重磅：Spring Boot 2.0 正式发布！》已经过去大半年了，而 Spring Boot 2.1.0 在 10 月底就发布了，我们来看下 Spring Boot 2.1.0 都更新了什么，每一个 Java 技术人都值得关注。 栈长其实早就看到了更新了，现在才有时间来更新下。 1、第三方类库升级 Hibernate 5.3 Micrometer 1.1 Reactor Californium Spring Data Lovelace Spring Framework 5.1 Tomcat 9 Undertow 2  主要就更新了这些类库，其实远不止这些。 2、性能提升1）应用程序性能改进性能作为 Spring Boot 团队持续努力的一部分，性能提升在 Spring Boot 2.1 中取得了一些重大进展。 现在 Spring Boot 2.1+ 应用程序启动速度变得更快，并且消耗的内存更少，这在内存非常稀缺的应用环境中尤其重要。 2）异步引导 Hibernate在 Spring Boot 2.1 中还采用了 Spring 框架和 Spring Data JPA 框架对...</div></div></div></a><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Boot/Spring%20Boot%202.1.5%20%E6%AD%A3%E5%BC%8F%E5%8F%91%E5%B8%83%EF%BC%8C1.5.x%20%E5%8D%B3%E5%B0%86%E7%BB%93%E6%9D%9F%E4%BD%BF%E5%91%BD%EF%BC%81/" title="Spring Boot 2.1.5 正式发布，1.5.x 即将结束使命！"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-29</div><div class="info-item-2">Spring Boot 2.1.5 正式发布，1.5.x 即将结束使命！</div></div><div class="info-2"><div class="info-item-1">Spring Boot 官网在 2019&#x2F;03&#x2F;15 这天发布了 Spring Boot 2.1.5 正式版，栈长表示真跟不上了。。 官宣如下 ：  https://spring.io/blog/2019/05/15/spring-boot-2-1-5-released  仓库也已经跟上：  那这个版本有什么新功能？ 1、增加了 Spring Session DefaultCookieSerializer 自动化配置； 2、增加了 MimeTypes 缓存，提升性能； 这两个是什么鬼，表示还没用到过。 另外就是修复一推的bug了，以及更新一些依赖包。。具体的可以参考这里：  https://github.com/spring-projects/spring-boot/releases/tag/v2.1.5.RELEASE  这个版本没啥大更新，只是例行公事更新下罢了，那么下面的事项你就得注意了，官方又发通知了。 重点来了！！！ 友情提醒： Spring Boot 1.5.x 将于 2019&#x2F;08&#x2F;01 结束使命，官方不再更新维护了，建议大家...</div></div></div></a><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Boot/Spring%20Boot%202.2%20%E5%A2%9E%E5%8A%A0%E4%BA%86%E4%B8%80%E4%B8%AA%E6%96%B0%E5%8A%9F%E8%83%BD%EF%BC%8C%E5%90%AF%E5%8A%A8%E9%A3%9E%E8%B5%B7~/" title="Spring Boot 2.2 增加了一个新功能，启动飞起~"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-29</div><div class="info-item-2">Spring Boot 2.2 增加了一个新功能，启动飞起~</div></div><div class="info-2"><div class="info-item-1">前几天栈长分享了一个好玩的框架：一个比Spring Boot快44倍的Java框架！，是不是感觉 Spring Boot 略慢？今天讲一下 Spring Boot 添加的这个新特性，可以大大提升 Spring Boot 的启动速度。 最近，Spring团队宣布在 Spring Boot 2.2+ 中添加了一个重要功能：延迟加载，目前这个版本暂时还是快照版，不过我们可以先了解下怎么使用这个延迟加载功能。 延迟加载是什么意思？有点经验的程序员应该都知道，在 Spring 框架中早已经支持延迟加载功能的，简单来说就是一个类的实例化，不需要 Spring 容器启动的时候就开始实例化，而是在第一次需要它的时候再实例化，这样大大提升了程序启动速度，也在一定程序上节省了系统资源。 怎么开启延迟加载？在传统 Spring 项目中我们是这么做的： &lt;bean id&#x3D;&quot;testBean&quot; calss&#x3D;&quot;cn.javastack.TestBean&quot; lazy-init&#x3D;&quot;true&quot; &#x2F;&gt;  ...</div></div></div></a><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Boot/Spring%20Boot%202.2.2%20%E5%8F%91%E5%B8%83%EF%BC%8C%E6%96%B0%E5%A2%9E%202%20%E4%B8%AA%E6%96%B0%E7%89%B9%E6%80%A7%EF%BC%81/" title="Spring Boot 2.2.2 发布，新增 2 个新特性！"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-29</div><div class="info-item-2">Spring Boot 2.2.2 发布，新增 2 个新特性！</div></div><div class="info-2"><div class="info-item-1">Spring Boot 2.2.2 发布咯！ Spring Boot 2.2.1 发布，一个有点坑的版本！ 2.2.1 发布没过一个月，2.2.2 就来了。 Maven依赖给大家奉上： &lt;dependency&gt;   &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;   &lt;artifactId&gt;spring-boot&lt;&#x2F;artifactId&gt;   &lt;version&gt;2.2.2.RELEASE&lt;&#x2F;version&gt; &lt;&#x2F;dependency&gt;  这个版本都更新了啥？ 新增了两个新特性1、支持在第三方类上的构造器参数绑定； 什么是构造器参数绑定？看下栈长之前写的这篇文章：Spring Boot 构造器参数绑定，越来越强大了！ 2、支持 Gradle 6； 日常维护修复了 88 个bug、性能优化、依赖更新。 想学 Spring Boot 的可以关注微信公众号：Java技术栈，在后台回复：boot，我都写了一大堆教程了...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/logo.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">John Doe</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">357</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">49</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/xxxxx" target="_blank" title="Github"><i class="fab fa-github" style="color: #hdhfbb;"></i></a><a class="social-icon" href="mailto:xxxxxx@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #000000;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">🌸 春去秋来，花开花落  📚 桌上的日历又薄了几页  💭 记忆中的昨天还那么清晰</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/30/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/JDK%20%E7%B4%A7%E6%80%A5%E6%BC%8F%E6%B4%9E%EF%BC%8CXMLDecoder%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%94%BB%E5%87%BB/" title="JDK 紧急漏洞，XMLDecoder反序列化攻击">JDK 紧急漏洞，XMLDecoder反序列化攻击</a><time datetime="2025-10-30T06:42:34.000Z" title="发表于 2025-10-30 14:42:34">2025-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/30/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/%E4%BC%9A%E8%AF%9D%E5%9B%BA%E5%AE%9A%E6%94%BB%E5%87%BB%E6%BC%8F%E6%B4%9E%EF%BC%88session%20fixation%20attack%EF%BC%89/" title="会话固定攻击漏洞">会话固定攻击漏洞</a><time datetime="2025-10-30T06:42:34.000Z" title="发表于 2025-10-30 14:42:34">2025-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/30/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/44%20%E4%B8%AA%20Java%20%E4%BB%A3%E7%A0%81%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%80%BB%E7%BB%93/" title="44 个 Java 代码性能优化总结">44 个 Java 代码性能优化总结</a><time datetime="2025-10-30T06:42:34.000Z" title="发表于 2025-10-30 14:42:34">2025-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/30/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/8%20%E6%9D%A1%E5%85%B3%E4%BA%8E%20Web%20%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E7%9A%84%E4%BC%98%E5%8C%96%E5%BB%BA%E8%AE%AE/" title="8 条关于 Web 前端性能的优化建议">8 条关于 Web 前端性能的优化建议</a><time datetime="2025-10-30T06:42:34.000Z" title="发表于 2025-10-30 14:42:34">2025-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/30/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E7%99%BE%E5%88%86%E4%B9%9D%E5%8D%81Java%E7%A8%8B%E5%BA%8F%E5%91%98%E8%A2%AB%E8%AF%AF%E5%AF%BC%E7%9A%84%E4%B8%80%E4%B8%AA%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%AD%96%E7%95%A5/" title="百分九十Java程序员被误导的一个性能优化策略">百分九十Java程序员被误导的一个性能优化策略</a><time datetime="2025-10-30T06:42:34.000Z" title="发表于 2025-10-30 14:42:34">2025-10-30</time></div></div></div></div></div></div></main><footer id="footer" style="background: transparent;"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By John Doe</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><div class="js-pjax"><script>(() => {
+  let initFn = window.walineFn || null
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const destroyWaline = ele => ele.destroy()
+
+  const initWaline = (Fn, el = document, path = window.location.pathname) => {
+    const waline = Fn({
+      el: el.querySelector('#waline-wrap'),
+      serverURL: 'https://walinecomments-gxccu74d8-chens-projects-7c4f92c5.vercel.app',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      comment: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyWaline = () => {
+        destroyWaline(waline)
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const loadWaline = (el, path) => {
+    if (initFn) initWaline(initFn, el, path)
+    else {
+      btf.getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css')
+        .then(() => import('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js'))
+        .then(({ init }) => {
+          initFn = init || Waline.init
+          initWaline(initFn, el, path)
+          window.walineFn = initFn
+        })
+    }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Waline'
+      ? window.shuoshuoComment = { loadComment: loadWaline } 
+      : window.loadOtherComment = loadWaline
+    return
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

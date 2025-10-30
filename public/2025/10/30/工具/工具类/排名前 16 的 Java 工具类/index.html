@@ -1,0 +1,355 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>排名前 16 的 Java 工具类 | 只有那年胜过年年</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#FC5531"><meta name="description" content="在Java中，工具类定义了一组公共方法，这篇文章将介绍Java中使用最频繁及最通用的Java工具类。以下工具类、方法按使用流行度排名，参考数据来源于Github上随机选取的5万个开源项目源码。 一. org.apache.commons.io.IOUtilscloseQuietly：关闭一个IO流、socket、或者selector且不抛出异常，通常放在finally块 toString：转换I">
+<meta property="og:type" content="article">
+<meta property="og:title" content="排名前 16 的 Java 工具类">
+<meta property="og:url" content="http://example.com/2025/10/30/%E5%B7%A5%E5%85%B7/%E5%B7%A5%E5%85%B7%E7%B1%BB/%E6%8E%92%E5%90%8D%E5%89%8D%2016%20%E7%9A%84%20Java%20%E5%B7%A5%E5%85%B7%E7%B1%BB/index.html">
+<meta property="og:site_name" content="只有那年胜过年年">
+<meta property="og:description" content="在Java中，工具类定义了一组公共方法，这篇文章将介绍Java中使用最频繁及最通用的Java工具类。以下工具类、方法按使用流行度排名，参考数据来源于Github上随机选取的5万个开源项目源码。 一. org.apache.commons.io.IOUtilscloseQuietly：关闭一个IO流、socket、或者selector且不抛出异常，通常放在finally块 toString：转换I">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/logo.png">
+<meta property="article:published_time" content="2025-10-30T06:42:34.000Z">
+<meta property="article:modified_time" content="2025-10-30T07:18:41.976Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="工具类">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/logo.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "排名前 16 的 Java 工具类",
+  "url": "http://example.com/2025/10/30/%E5%B7%A5%E5%85%B7/%E5%B7%A5%E5%85%B7%E7%B1%BB/%E6%8E%92%E5%90%8D%E5%89%8D%2016%20%E7%9A%84%20Java%20%E5%B7%A5%E5%85%B7%E7%B1%BB/",
+  "image": "http://example.com/img/logo.png",
+  "datePublished": "2025-10-30T06:42:34.000Z",
+  "dateModified": "2025-10-30T07:18:41.976Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "John Doe",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/10/30/%E5%B7%A5%E5%85%B7/%E5%B7%A5%E5%85%B7%E7%B1%BB/%E6%8E%92%E5%90%8D%E5%89%8D%2016%20%E7%9A%84%20Java%20%E5%B7%A5%E5%85%B7%E7%B1%BB/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FC5531')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FC5531')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: John Doe","link":"链接: ","source":"来源: 只有那年胜过年年","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '排名前 16 的 Java 工具类',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/logo.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">357</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">49</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/logo.png" alt="Logo"><span class="site-name">只有那年胜过年年</span></a><a class="nav-page-title" href="/"><span class="site-name">排名前 16 的 Java 工具类</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">排名前 16 的 Java 工具类</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-10-30T06:42:34.000Z" title="发表于 2025-10-30 14:42:34">2025-10-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-10-30T07:18:41.976Z" title="更新于 2025-10-30 15:18:41">2025-10-30</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><p><img src="http://img.javastack.cn/18-2-27/29152641.jpg"></p>
+<p>在Java中，工具类定义了一组公共方法，这篇文章将介绍Java中使用最频繁及最通用的Java工具类。以下工具类、方法按使用流行度排名，参考数据来源于Github上随机选取的5万个开源项目源码。</p>
+<h4 id="一-org-apache-commons-io-IOUtils"><a href="#一-org-apache-commons-io-IOUtils" class="headerlink" title="一. org.apache.commons.io.IOUtils"></a>一. org.apache.commons.io.IOUtils</h4><pre class="line-numbers language-none"><code class="language-none">closeQuietly：关闭一个IO流、socket、或者selector且不抛出异常，通常放在finally块
+toString：转换IO流、 Uri、 byte[]为String
+copy：IO流数据复制，从输入流写到输出流中，最大支持2GB
+toByteArray：从输入流、URI获取byte[]
+write：把字节. 字符等写入输出流
+toInputStream：把字符转换为输入流
+readLines：从输入流中读取多行数据，返回List&lt;String&gt;
+copyLarge：同copy，支持2GB以上数据的复制
+lineIterator：从输入流返回一个迭代器，根据参数要求读取的数据量，全部读取，如果数据不够，则失败<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="二-org-apache-commons-io-FileUtils"><a href="#二-org-apache-commons-io-FileUtils" class="headerlink" title="二. org.apache.commons.io.FileUtils"></a>二. org.apache.commons.io.FileUtils</h4><pre class="line-numbers language-none"><code class="language-none">deleteDirectory：删除文件夹
+readFileToString：以字符形式读取文件内容
+deleteQueitly：删除文件或文件夹且不会抛出异常
+copyFile：复制文件
+writeStringToFile：把字符写到目标文件，如果文件不存在，则创建
+forceMkdir：强制创建文件夹，如果该文件夹父级目录不存在，则创建父级
+write：把字符写到指定文件中
+listFiles：列举某个目录下的文件(根据过滤器)
+copyDirectory：复制文件夹
+forceDelete：强制删除文件<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="三-org-apache-commons-lang-StringUtils"><a href="#三-org-apache-commons-lang-StringUtils" class="headerlink" title="三. org.apache.commons.lang.StringUtils"></a>三. org.apache.commons.lang.StringUtils</h4><pre class="line-numbers language-none"><code class="language-none">isBlank：字符串是否为空 (trim后判断)
+isEmpty：字符串是否为空 (不trim并判断)
+equals：字符串是否相等
+join：合并数组为单一字符串，可传分隔符
+split：分割字符串
+EMPTY：返回空字符串
+trimToNull：trim后为空字符串则转换为null
+replace：替换字符串<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="四-org-apache-http-util-EntityUtils"><a href="#四-org-apache-http-util-EntityUtils" class="headerlink" title="四. org.apache.http.util.EntityUtils"></a>四. org.apache.http.util.EntityUtils</h4><pre class="line-numbers language-none"><code class="language-none">toString：把Entity转换为字符串
+consume：确保Entity中的内容全部被消费。可以看到源码里又一次消费了Entity的内容，假如用户没有消费，那调用Entity时候将会把它消费掉
+toByteArray：把Entity转换为字节流
+consumeQuietly：和consume一样，但不抛异常
+getContentCharset：获取内容的编码<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="五-org-apache-commons-lang3-StringUtils"><a href="#五-org-apache-commons-lang3-StringUtils" class="headerlink" title="五. org.apache.commons.lang3.StringUtils"></a>五. org.apache.commons.lang3.StringUtils</h4><pre class="line-numbers language-none"><code class="language-none">isBlank：字符串是否为空 (trim后判断)
+isEmpty：字符串是否为空 (不trim并判断)
+equals：字符串是否相等
+join：合并数组为单一字符串，可传分隔符
+split：分割字符串
+EMPTY：返回空字符串
+replace：替换字符串
+capitalize：首字符大写<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="六-org-apache-commons-io-FilenameUtils"><a href="#六-org-apache-commons-io-FilenameUtils" class="headerlink" title="六. org.apache.commons.io.FilenameUtils"></a>六. org.apache.commons.io.FilenameUtils</h4><pre class="line-numbers language-none"><code class="language-none">getExtension：返回文件后缀名
+getBaseName：返回文件名，不包含后缀名
+getName：返回文件全名
+concat：按命令行风格组合文件路径(详见方法注释)
+removeExtension：删除后缀名
+normalize：使路径正常化
+wildcardMatch：匹配通配符
+seperatorToUnix：路径分隔符改成unix系统格式的，即&#x2F;
+getFullPath：获取文件路径，不包括文件名
+isExtension：检查文件后缀名是不是传入参数(List&lt;String&gt;)中的一个<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="七-org-springframework-util-StringUtils"><a href="#七-org-springframework-util-StringUtils" class="headerlink" title="七. org.springframework.util.StringUtils"></a>七. org.springframework.util.StringUtils</h4><pre class="line-numbers language-none"><code class="language-none">hasText：检查字符串中是否包含文本
+hasLength：检测字符串是否长度大于0
+isEmpty：检测字符串是否为空（若传入为对象，则判断对象是否为null）
+commaDelimitedStringToArray：逗号分隔的String转换为数组
+collectionToDelimitedString：把集合转为CSV格式字符串
+replace 替换字符串
+7. delimitedListToStringArray：相当于split
+uncapitalize：首字母小写
+collectionToDelimitedCommaString：把集合转为CSV格式字符串
+tokenizeToStringArray：和split基本一样，但能自动去掉空白的单词<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="八-org-apache-commons-lang-ArrayUtils"><a href="#八-org-apache-commons-lang-ArrayUtils" class="headerlink" title="八. org.apache.commons.lang.ArrayUtils"></a>八. org.apache.commons.lang.ArrayUtils</h4><pre class="line-numbers language-none"><code class="language-none">contains：是否包含某字符串
+addAll：添加整个数组
+clone：克隆一个数组
+isEmpty：是否空数组
+add：向数组添加元素
+subarray：截取数组
+indexOf：查找某个元素的下标
+isEquals：比较数组是否相等
+toObject：基础类型数据数组转换为对应的Object数组<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="九-org-apache-commons-lang-StringEscapeUtils"><a href="#九-org-apache-commons-lang-StringEscapeUtils" class="headerlink" title="九. org.apache.commons.lang.StringEscapeUtils"></a>九. org.apache.commons.lang.StringEscapeUtils</h4><pre class="line-numbers language-none"><code class="language-none">参考十五：org.apache.commons.lang3.StringEscapeUtils<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="十-org-apache-http-client-utils-URLEncodedUtils"><a href="#十-org-apache-http-client-utils-URLEncodedUtils" class="headerlink" title="十. org.apache.http.client.utils.URLEncodedUtils"></a>十. org.apache.http.client.utils.URLEncodedUtils</h4><pre class="line-numbers language-none"><code class="language-none">format：格式化参数，返回一个HTTP POST或者HTTP PUT可用application&#x2F;x-www-form-urlencoded字符串
+parse：把String或者URI等转换为List&lt;NameValuePair&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="十一-org-apache-commons-codec-digest-DigestUtils"><a href="#十一-org-apache-commons-codec-digest-DigestUtils" class="headerlink" title="十一. org.apache.commons.codec.digest.DigestUtils"></a>十一. org.apache.commons.codec.digest.DigestUtils</h4><pre class="line-numbers language-none"><code class="language-none">md5Hex：MD5加密，返回32位字符串
+sha1Hex：SHA-1加密
+sha256Hex：SHA-256加密
+sha512Hex：SHA-512加密
+md5：MD5加密，返回16位字符串<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="十二-org-apache-commons-collections-CollectionUtils"><a href="#十二-org-apache-commons-collections-CollectionUtils" class="headerlink" title="十二. org.apache.commons.collections.CollectionUtils"></a>十二. org.apache.commons.collections.CollectionUtils</h4><pre class="line-numbers language-none"><code class="language-none">isEmpty：是否为空
+select：根据条件筛选集合元素
+transform：根据指定方法处理集合元素，类似List的map()
+filter：过滤元素，雷瑟List的filter()
+find：基本和select一样
+collect：和transform 差不多一样，但是返回新数组
+forAllDo：调用每个元素的指定方法
+isEqualCollection：判断两个集合是否一致<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="十三-org-apache-commons-lang3-ArrayUtils"><a href="#十三-org-apache-commons-lang3-ArrayUtils" class="headerlink" title="十三. org.apache.commons.lang3.ArrayUtils"></a>十三. org.apache.commons.lang3.ArrayUtils</h4><pre class="line-numbers language-none"><code class="language-none">contains：是否包含某个字符串
+addAll：添加整个数组
+clone：克隆一个数组
+isEmpty：是否空数组
+add：向数组添加元素
+subarray：截取数组
+indexOf：查找某个元素的下标
+isEquals：比较数组是否相等
+toObject：基础类型数据数组转换为对应的Object数组<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="十四-org-apache-commons-beanutils-PropertyUtils"><a href="#十四-org-apache-commons-beanutils-PropertyUtils" class="headerlink" title="十四. org.apache.commons.beanutils.PropertyUtils"></a>十四. org.apache.commons.beanutils.PropertyUtils</h4><pre class="line-numbers language-none"><code class="language-none">getProperty：获取对象属性值
+setProperty：设置对象属性值
+getPropertyDiscriptor：获取属性描述器
+isReadable：检查属性是否可访问
+copyProperties：复制属性值，从一个对象到另一个对象
+getPropertyDiscriptors：获取所有属性描述器
+isWriteable：检查属性是否可写
+getPropertyType：获取对象属性类型<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="十五-org-apache-commons-lang3-StringEscapeUtils"><a href="#十五-org-apache-commons-lang3-StringEscapeUtils" class="headerlink" title="十五. org.apache.commons.lang3.StringEscapeUtils"></a>十五. org.apache.commons.lang3.StringEscapeUtils</h4><pre class="line-numbers language-none"><code class="language-none">unescapeHtml4：转义html
+escapeHtml4：反转义html
+escapeXml：转义xml
+unescapeXml：反转义xml
+escapeJava：转义unicode编码
+escapeEcmaScript：转义EcmaScript字符
+unescapeJava：反转义unicode编码
+escapeJson：转义json字符
+escapeXml10：转义Xml10<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这个现在已经废弃了，建议使用commons-text包里面的方法。</p>
+<h4 id="十六-org-apache-commons-beanutils-BeanUtils"><a href="#十六-org-apache-commons-beanutils-BeanUtils" class="headerlink" title="十六. org.apache.commons.beanutils.BeanUtils"></a>十六. org.apache.commons.beanutils.BeanUtils</h4><pre class="line-numbers language-none"><code class="language-none">copyPeoperties：复制属性值，从一个对象到另一个对象
+getProperty：获取对象属性值
+setProperty：设置对象属性值
+populate：根据Map给属性复制
+copyPeoperty：复制单个值，从一个对象到另一个对象
+cloneBean：克隆bean实例<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>现在你只要了解了以上16种最流行的工具类方法，你就不必要再自己写工具类了，不必重复造轮子。大部分工具类方法通过其名字就能明白其用途，如果不清楚的，可以看下别人是怎么用的，或者去网上查询其用法。</p>
+<p>另外，工具类，根据阿里开发手册，包名如果要使用util不能带s，工具类命名为<code>XxxUtils</code>。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">John Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/10/30/%E5%B7%A5%E5%85%B7/%E5%B7%A5%E5%85%B7%E7%B1%BB/%E6%8E%92%E5%90%8D%E5%89%8D%2016%20%E7%9A%84%20Java%20%E5%B7%A5%E5%85%B7%E7%B1%BB/">http://example.com/2025/10/30/工具/工具类/排名前 16 的 Java 工具类/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">只有那年胜过年年</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%B7%A5%E5%85%B7%E7%B1%BB/">工具类</a></div><div class="post-share"><div class="social-share" data-image="/img/logo.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/10/30/%E5%B7%A5%E5%85%B7/%E5%B7%A5%E5%85%B7%E7%B1%BB/Java%E7%95%8C%E7%9A%84%E7%91%9E%E5%A3%AB%E5%86%9B%E5%88%80%EF%BC%8C%E6%97%A0%E6%B3%95%E6%83%B3%E8%B1%A1%E7%9A%84%E8%BD%BB%E9%87%8F%E7%BA%A7%E5%B7%A5%E5%85%B7%E5%8C%85/" title="Java界的瑞士军刀，无法想象的轻量级工具包"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Java界的瑞士军刀，无法想象的轻量级工具包</div></div><div class="info-2"><div class="info-item-1"> Jodd介绍Jodd是对于Java开发更便捷的开源迷你框架，包含工具类、实用功能的集合，总包体积不到1.7M。 Jodd构建于通用场景使开发变得简单，但Jodd并不简单！它能让你把事情做得更好，实现你的想法，让你享受编码的乐趣。 简而言之，如果你准备造轮子，先看看Jodd实现了没。你可以把Jodd想象成Java的”瑞士军刀”,不仅小，锋利而且包含许多便利的功能。 Jodd提供的功能 提供操作Java bean， 可以从各种数据源加载 Bean, 简化 JDBC 的接连与代码， 剖析 SQL 查询， 处理时间与日期， 操作与格式化 String, 搜索本地硬盘上的文件， 帮助处理 Servlet 请求等。 包含一个很小但实用的基于JSP的MVC框架。  Jodd组成Jodd 被分成众多模块，按需选择。 Jodd工具包 高性能的工具集合  TypeConverter 一个强大的类型转换工具 BeanUtil 高效的 Bean 工具，支持嵌套的属性，以及标准的集合类 Base64&#x2F;Base32 JDateTime 增强的时间类 IO 快速高性能的各种 Buffer、Writ...</div></div></div></a><a class="pagination-related" href="/2025/10/30/%E5%B7%A5%E5%85%B7/%E6%95%88%E7%8E%87/%E6%8E%A8%E8%8D%90%E4%B8%80%E6%AC%BE%E4%BB%A3%E7%A0%81%E7%A5%9E%E5%99%A8%EF%BC%8C%E4%BB%A3%E7%A0%81%E9%87%8F%E8%87%B3%E5%B0%91%E7%9C%81%E4%B8%80%E5%8D%8A%EF%BC%81/" title="推荐一款代码神器，代码量至少省一半！"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">推荐一款代码神器，代码量至少省一半！</div></div><div class="info-2"><div class="info-item-1">在我们 Java 项目里面，有很多 Java Bean 需要为每个属性生成 get&#x2F; set 方法，增删改属性都需要维护这些 get&#x2F; set 方法甚是麻烦。 今天给大家介绍一款能帮助我们简化这些代码的神器：Lombok！有了这个神器，你的 Java Bean 类的代码量至少可以省一半。 什么是Lombok？ https://www.projectlombok.org/  打开它的官网，这是它的简介。  Project Lombok is a java library that automatically plugs into your editor and build tools, spicing up your java.Never write another getter or equals method again. Early access to future java features such as val, and much more.  翻译过来就是说，Lombok项目是一个 Java 库，它能够自动嵌入到你的 IDE 编辑器和编译工具中。有...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/10/30/%E5%B7%A5%E5%85%B7/%E5%B7%A5%E5%85%B7%E7%B1%BB/Java%E7%95%8C%E7%9A%84%E7%91%9E%E5%A3%AB%E5%86%9B%E5%88%80%EF%BC%8C%E6%97%A0%E6%B3%95%E6%83%B3%E8%B1%A1%E7%9A%84%E8%BD%BB%E9%87%8F%E7%BA%A7%E5%B7%A5%E5%85%B7%E5%8C%85/" title="Java界的瑞士军刀，无法想象的轻量级工具包"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-30</div><div class="info-item-2">Java界的瑞士军刀，无法想象的轻量级工具包</div></div><div class="info-2"><div class="info-item-1"> Jodd介绍Jodd是对于Java开发更便捷的开源迷你框架，包含工具类、实用功能的集合，总包体积不到1.7M。 Jodd构建于通用场景使开发变得简单，但Jodd并不简单！它能让你把事情做得更好，实现你的想法，让你享受编码的乐趣。 简而言之，如果你准备造轮子，先看看Jodd实现了没。你可以把Jodd想象成Java的”瑞士军刀”,不仅小，锋利而且包含许多便利的功能。 Jodd提供的功能 提供操作Java bean， 可以从各种数据源加载 Bean, 简化 JDBC 的接连与代码， 剖析 SQL 查询， 处理时间与日期， 操作与格式化 String, 搜索本地硬盘上的文件， 帮助处理 Servlet 请求等。 包含一个很小但实用的基于JSP的MVC框架。  Jodd组成Jodd 被分成众多模块，按需选择。 Jodd工具包 高性能的工具集合  TypeConverter 一个强大的类型转换工具 BeanUtil 高效的 Bean 工具，支持嵌套的属性，以及标准的集合类 Base64&#x2F;Base32 JDateTime 增强的时间类 IO 快速高性能的各种 Buffer、Writ...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80-org-apache-commons-io-IOUtils"><span class="toc-number">1.</span> <span class="toc-text">一. org.apache.commons.io.IOUtils</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C-org-apache-commons-io-FileUtils"><span class="toc-number">2.</span> <span class="toc-text">二. org.apache.commons.io.FileUtils</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89-org-apache-commons-lang-StringUtils"><span class="toc-number">3.</span> <span class="toc-text">三. org.apache.commons.lang.StringUtils</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9B-org-apache-http-util-EntityUtils"><span class="toc-number">4.</span> <span class="toc-text">四. org.apache.http.util.EntityUtils</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%94-org-apache-commons-lang3-StringUtils"><span class="toc-number">5.</span> <span class="toc-text">五. org.apache.commons.lang3.StringUtils</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%AD-org-apache-commons-io-FilenameUtils"><span class="toc-number">6.</span> <span class="toc-text">六. org.apache.commons.io.FilenameUtils</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%83-org-springframework-util-StringUtils"><span class="toc-number">7.</span> <span class="toc-text">七. org.springframework.util.StringUtils</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%AB-org-apache-commons-lang-ArrayUtils"><span class="toc-number">8.</span> <span class="toc-text">八. org.apache.commons.lang.ArrayUtils</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B9%9D-org-apache-commons-lang-StringEscapeUtils"><span class="toc-number">9.</span> <span class="toc-text">九. org.apache.commons.lang.StringEscapeUtils</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%81-org-apache-http-client-utils-URLEncodedUtils"><span class="toc-number">10.</span> <span class="toc-text">十. org.apache.http.client.utils.URLEncodedUtils</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%81%E4%B8%80-org-apache-commons-codec-digest-DigestUtils"><span class="toc-number">11.</span> <span class="toc-text">十一. org.apache.commons.codec.digest.DigestUtils</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%81%E4%BA%8C-org-apache-commons-collections-CollectionUtils"><span class="toc-number">12.</span> <span class="toc-text">十二. org.apache.commons.collections.CollectionUtils</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%81%E4%B8%89-org-apache-commons-lang3-ArrayUtils"><span class="toc-number">13.</span> <span class="toc-text">十三. org.apache.commons.lang3.ArrayUtils</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%81%E5%9B%9B-org-apache-commons-beanutils-PropertyUtils"><span class="toc-number">14.</span> <span class="toc-text">十四. org.apache.commons.beanutils.PropertyUtils</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%81%E4%BA%94-org-apache-commons-lang3-StringEscapeUtils"><span class="toc-number">15.</span> <span class="toc-text">十五. org.apache.commons.lang3.StringEscapeUtils</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%81%E5%85%AD-org-apache-commons-beanutils-BeanUtils"><span class="toc-number">16.</span> <span class="toc-text">十六. org.apache.commons.beanutils.BeanUtils</span></a></li></ol></div></div></div></div></main><footer id="footer" style="background: transparent;"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By John Doe</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><div class="js-pjax"><script>(() => {
+  let initFn = window.walineFn || null
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const destroyWaline = ele => ele.destroy()
+
+  const initWaline = (Fn, el = document, path = window.location.pathname) => {
+    const waline = Fn({
+      el: el.querySelector('#waline-wrap'),
+      serverURL: 'https://walinecomments-gxccu74d8-chens-projects-7c4f92c5.vercel.app',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      comment: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyWaline = () => {
+        destroyWaline(waline)
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const loadWaline = (el, path) => {
+    if (initFn) initWaline(initFn, el, path)
+    else {
+      btf.getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css')
+        .then(() => import('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js'))
+        .then(({ init }) => {
+          initFn = init || Waline.init
+          initWaline(initFn, el, path)
+          window.walineFn = initFn
+        })
+    }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Waline'
+      ? window.shuoshuoComment = { loadComment: loadWaline } 
+      : window.loadOtherComment = loadWaline
+    return
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

@@ -1,0 +1,562 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Spring Boot 2.x 启动全过程源码分析（下）运行方法剖析 | 只有那年胜过年年</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#FC5531"><meta name="description" content="上篇《Spring Boot 2.x 启动全过程源码分析（一）入口类剖析》我们分析了 Spring Boot 入口类 SpringApplication 的源码，并知道了其构造原理，这篇我们继续往下面分析其核心 run 方法。 [toc] SpringApplication 实例 run 方法运行过程 上面分析了 SpringApplication 实例对象构造方法初始化过程，下面继续来看下这个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring Boot 2.x 启动全过程源码分析（下）运行方法剖析">
+<meta property="og:url" content="http://example.com/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Boot/Spring%20Boot%202.x%20%E5%90%AF%E5%8A%A8%E5%85%A8%E8%BF%87%E7%A8%8B%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8B%EF%BC%89%E8%BF%90%E8%A1%8C%E6%96%B9%E6%B3%95%E5%89%96%E6%9E%90/index.html">
+<meta property="og:site_name" content="只有那年胜过年年">
+<meta property="og:description" content="上篇《Spring Boot 2.x 启动全过程源码分析（一）入口类剖析》我们分析了 Spring Boot 入口类 SpringApplication 的源码，并知道了其构造原理，这篇我们继续往下面分析其核心 run 方法。 [toc] SpringApplication 实例 run 方法运行过程 上面分析了 SpringApplication 实例对象构造方法初始化过程，下面继续来看下这个">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/logo.png">
+<meta property="article:published_time" content="2025-10-29T09:30:25.000Z">
+<meta property="article:modified_time" content="2025-10-29T09:26:24.864Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Spring Boot">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/logo.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Spring Boot 2.x 启动全过程源码分析（下）运行方法剖析",
+  "url": "http://example.com/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Boot/Spring%20Boot%202.x%20%E5%90%AF%E5%8A%A8%E5%85%A8%E8%BF%87%E7%A8%8B%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8B%EF%BC%89%E8%BF%90%E8%A1%8C%E6%96%B9%E6%B3%95%E5%89%96%E6%9E%90/",
+  "image": "http://example.com/img/logo.png",
+  "datePublished": "2025-10-29T09:30:25.000Z",
+  "dateModified": "2025-10-29T09:26:24.864Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "John Doe",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Boot/Spring%20Boot%202.x%20%E5%90%AF%E5%8A%A8%E5%85%A8%E8%BF%87%E7%A8%8B%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8B%EF%BC%89%E8%BF%90%E8%A1%8C%E6%96%B9%E6%B3%95%E5%89%96%E6%9E%90/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FC5531')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FC5531')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: John Doe","link":"链接: ","source":"来源: 只有那年胜过年年","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Spring Boot 2.x 启动全过程源码分析（下）运行方法剖析',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/logo.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">357</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">49</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/logo.png" alt="Logo"><span class="site-name">只有那年胜过年年</span></a><a class="nav-page-title" href="/"><span class="site-name">Spring Boot 2.x 启动全过程源码分析（下）运行方法剖析</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Spring Boot 2.x 启动全过程源码分析（下）运行方法剖析</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-10-29T09:30:25.000Z" title="发表于 2025-10-29 17:30:25">2025-10-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-10-29T09:26:24.864Z" title="更新于 2025-10-29 17:26:24">2025-10-29</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><p>上篇《<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/RPU5gwvuWMyzUV8wFZziIw">Spring Boot 2.x 启动全过程源码分析（一）入口类剖析</a>》我们分析了 Spring Boot 入口类 SpringApplication 的源码，并知道了其构造原理，这篇我们继续往下面分析其核心 run 方法。</p>
+<p>[toc]</p>
+<h3 id="SpringApplication-实例-run-方法运行过程"><a href="#SpringApplication-实例-run-方法运行过程" class="headerlink" title="SpringApplication 实例 run 方法运行过程"></a>SpringApplication 实例 run 方法运行过程</h3><p><img src="http://img.javastack.cn/18-7-2/34936854.jpg"></p>
+<p>上面分析了 SpringApplication 实例对象构造方法初始化过程，下面继续来看下这个 SpringApplication 对象的 run 方法的源码和运行流程。</p>
+<pre class="line-numbers language-none"><code class="language-none">public ConfigurableApplicationContext run(String... args) &#123;
+    &#x2F;&#x2F; 1、创建并启动计时监控类
+	StopWatch stopWatch &#x3D; new StopWatch();
+	stopWatch.start();
+	
+	&#x2F;&#x2F; 2、初始化应用上下文和异常报告集合
+	ConfigurableApplicationContext context &#x3D; null;
+	Collection&lt;SpringBootExceptionReporter&gt; exceptionReporters &#x3D; new ArrayList&lt;&gt;();
+	
+	&#x2F;&#x2F; 3、设置系统属性 &#96;java.awt.headless&#96; 的值，默认值为：true
+	configureHeadlessProperty();
+	
+	&#x2F;&#x2F; 4、创建所有 Spring 运行监听器并发布应用启动事件
+	SpringApplicationRunListeners listeners &#x3D; getRunListeners(args);
+	listeners.starting();
+	
+	try &#123;
+	    &#x2F;&#x2F; 5、初始化默认应用参数类
+		ApplicationArguments applicationArguments &#x3D; new DefaultApplicationArguments(
+				args);
+				
+		&#x2F;&#x2F; 6、根据运行监听器和应用参数来准备 Spring 环境
+		ConfigurableEnvironment environment &#x3D; prepareEnvironment(listeners,
+				applicationArguments);
+		configureIgnoreBeanInfo(environment);
+		
+		&#x2F;&#x2F; 7、创建 Banner 打印类
+		Banner printedBanner &#x3D; printBanner(environment);
+		
+		&#x2F;&#x2F; 8、创建应用上下文
+		context &#x3D; createApplicationContext();
+		
+		&#x2F;&#x2F; 9、准备异常报告器
+		exceptionReporters &#x3D; getSpringFactoriesInstances(
+				SpringBootExceptionReporter.class,
+				new Class[] &#123; ConfigurableApplicationContext.class &#125;, context);
+				
+		&#x2F;&#x2F; 10、准备应用上下文
+		prepareContext(context, environment, listeners, applicationArguments,
+				printedBanner);
+				
+		&#x2F;&#x2F; 11、刷新应用上下文
+		refreshContext(context);
+		
+		&#x2F;&#x2F; 12、应用上下文刷新后置处理
+		afterRefresh(context, applicationArguments);
+		
+		&#x2F;&#x2F; 13、停止计时监控类
+		stopWatch.stop();
+		
+		&#x2F;&#x2F; 14、输出日志记录执行主类名、时间信息
+		if (this.logStartupInfo) &#123;
+			new StartupInfoLogger(this.mainApplicationClass)
+					.logStarted(getApplicationLog(), stopWatch);
+		&#125;
+		
+		&#x2F;&#x2F; 15、发布应用上下文启动完成事件
+		listeners.started(context);
+		
+		&#x2F;&#x2F; 16、执行所有 Runner 运行器
+		callRunners(context, applicationArguments);
+	&#125;
+	catch (Throwable ex) &#123;
+		handleRunFailure(context, ex, exceptionReporters, listeners);
+		throw new IllegalStateException(ex);
+	&#125;
+
+	try &#123;
+	    &#x2F;&#x2F; 17、发布应用上下文就绪事件
+		listeners.running(context);
+	&#125;
+	catch (Throwable ex) &#123;
+		handleRunFailure(context, ex, exceptionReporters, null);
+		throw new IllegalStateException(ex);
+	&#125;
+	
+	&#x2F;&#x2F; 18、返回应用上下文
+	return context;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>所以，我们可以按以下几步来分解 run 方法的启动过程。</p>
+<h4 id="1、创建并启动计时监控类"><a href="#1、创建并启动计时监控类" class="headerlink" title="1、创建并启动计时监控类"></a>1、创建并启动计时监控类</h4><pre class="line-numbers language-none"><code class="language-none">StopWatch stopWatch &#x3D; new StopWatch();
+stopWatch.start();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>来看下这个计时监控类 StopWatch 的相关源码：</p>
+<pre class="line-numbers language-none"><code class="language-none">public void start() throws IllegalStateException &#123;
+	start(&quot;&quot;);
+&#125;
+
+public void start(String taskName) throws IllegalStateException &#123;
+	if (this.currentTaskName !&#x3D; null) &#123;
+		throw new IllegalStateException(&quot;Can&#39;t start StopWatch: it&#39;s already running&quot;);
+	&#125;
+	this.currentTaskName &#x3D; taskName;
+	this.startTimeMillis &#x3D; System.currentTimeMillis();
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>首先记录了当前任务的名称，默认为空字符串，然后记录当前 Spring Boot 应用启动的开始时间。</p>
+<h4 id="2、初始化应用上下文和异常报告集合"><a href="#2、初始化应用上下文和异常报告集合" class="headerlink" title="2、初始化应用上下文和异常报告集合"></a>2、初始化应用上下文和异常报告集合</h4><pre class="line-numbers language-none"><code class="language-none">ConfigurableApplicationContext context &#x3D; null;
+Collection&lt;SpringBootExceptionReporter&gt; exceptionReporters &#x3D; new ArrayList&lt;&gt;();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="3、设置系统属性-java-awt-headless-的值"><a href="#3、设置系统属性-java-awt-headless-的值" class="headerlink" title="3、设置系统属性 java.awt.headless 的值"></a>3、设置系统属性 <code>java.awt.headless</code> 的值</h4><pre class="line-numbers language-none"><code class="language-none">configureHeadlessProperty();<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>设置该默认值为：true，Java.awt.headless &#x3D; true 有什么作用？</p>
+<blockquote>
+<p>对于一个 Java 服务器来说经常要处理一些图形元素，例如地图的创建或者图形和图表等。这些API基本上总是需要运行一个X-server以便能使用AWT（Abstract Window Toolkit，抽象窗口工具集）。然而运行一个不必要的 X-server 并不是一种好的管理方式。有时你甚至不能运行 X-server,因此最好的方案是运行 headless 服务器，来进行简单的图像处理。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://www.cnblogs.com/princessd8251/p/4000016.html">www.cnblogs.com/princessd8251/p/4000016.html</a></p>
+</blockquote>
+<h4 id="4、创建所有-Spring-运行监听器并发布应用启动事件"><a href="#4、创建所有-Spring-运行监听器并发布应用启动事件" class="headerlink" title="4、创建所有 Spring 运行监听器并发布应用启动事件"></a>4、创建所有 Spring 运行监听器并发布应用启动事件</h4><pre class="line-numbers language-none"><code class="language-none">SpringApplicationRunListeners listeners &#x3D; getRunListeners(args);
+listeners.starting();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>来看下创建 Spring 运行监听器相关的源码：</p>
+<pre class="line-numbers language-none"><code class="language-none">private SpringApplicationRunListeners getRunListeners(String[] args) &#123;
+	Class&lt;?&gt;[] types &#x3D; new Class&lt;?&gt;[] &#123; SpringApplication.class, String[].class &#125;;
+	return new SpringApplicationRunListeners(logger, getSpringFactoriesInstances(
+			SpringApplicationRunListener.class, types, this, args));
+&#125;
+
+SpringApplicationRunListeners(Log log,
+		Collection&lt;? extends SpringApplicationRunListener&gt; listeners) &#123;
+	this.log &#x3D; log;
+	this.listeners &#x3D; new ArrayList&lt;&gt;(listeners);
+&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>创建逻辑和之前实例化初始化器和监听器的一样，一样调用的是 <code>getSpringFactoriesInstances</code> 方法来获取配置的监听器名称并实例化所有的类。</p>
+<p>SpringApplicationRunListener 所有监听器配置在 <code>spring-boot-2.0.3.RELEASE.jar!/META-INF/spring.factories</code> 这个配置文件里面。</p>
+<pre class="line-numbers language-none"><code class="language-none"># Run Listeners
+org.springframework.boot.SpringApplicationRunListener&#x3D;\
+org.springframework.boot.context.event.EventPublishingRunListener<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="5、初始化默认应用参数类"><a href="#5、初始化默认应用参数类" class="headerlink" title="5、初始化默认应用参数类"></a>5、初始化默认应用参数类</h4><pre class="line-numbers language-none"><code class="language-none">ApplicationArguments applicationArguments &#x3D; new DefaultApplicationArguments(
+		args);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="6、根据运行监听器和应用参数来准备-Spring-环境"><a href="#6、根据运行监听器和应用参数来准备-Spring-环境" class="headerlink" title="6、根据运行监听器和应用参数来准备 Spring 环境"></a>6、根据运行监听器和应用参数来准备 Spring 环境</h4><pre class="line-numbers language-none"><code class="language-none">ConfigurableEnvironment environment &#x3D; prepareEnvironment(listeners,
+		applicationArguments);
+configureIgnoreBeanInfo(environment);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>下面我们主要来看下准备环境的 <code>prepareEnvironment</code> 源码：</p>
+<pre class="line-numbers language-none"><code class="language-none">private ConfigurableEnvironment prepareEnvironment(
+		SpringApplicationRunListeners listeners,
+		ApplicationArguments applicationArguments) &#123;
+	&#x2F;&#x2F; 6.1) 获取（或者创建）应用环境
+	ConfigurableEnvironment environment &#x3D; getOrCreateEnvironment();
+	
+	&#x2F;&#x2F; 6.2) 配置应用环境
+	configureEnvironment(environment, applicationArguments.getSourceArgs());
+	listeners.environmentPrepared(environment);
+	bindToSpringApplication(environment);
+	if (this.webApplicationType &#x3D;&#x3D; WebApplicationType.NONE) &#123;
+		environment &#x3D; new EnvironmentConverter(getClassLoader())
+				.convertToStandardEnvironmentIfNecessary(environment);
+	&#125;
+	ConfigurationPropertySources.attach(environment);
+	return environment;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>6.1) 获取（或者创建）应用环境</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">private ConfigurableEnvironment getOrCreateEnvironment() &#123;
+	if (this.environment !&#x3D; null) &#123;
+		return this.environment;
+	&#125;
+	if (this.webApplicationType &#x3D;&#x3D; WebApplicationType.SERVLET) &#123;
+		return new StandardServletEnvironment();
+	&#125;
+	return new StandardEnvironment();
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这里分为标准 Servlet 环境和标准环境。</p>
+<p><strong>6.2) 配置应用环境</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">protected void configureEnvironment(ConfigurableEnvironment environment,
+		String[] args) &#123;
+	configurePropertySources(environment, args);
+	configureProfiles(environment, args);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这里分为以下两步来配置应用环境。</p>
+<ul>
+<li>配置 property sources</li>
+<li>配置 Profiles</li>
+</ul>
+<p>这里主要处理所有 property sources 配置和 profiles 配置。</p>
+<h4 id="7、创建-Banner-打印类"><a href="#7、创建-Banner-打印类" class="headerlink" title="7、创建 Banner 打印类"></a>7、创建 Banner 打印类</h4><pre class="line-numbers language-none"><code class="language-none">Banner printedBanner &#x3D; printBanner(environment);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>这是用来打印 Banner 的处理类，这个没什么好说的。</p>
+<h4 id="8、创建应用上下文"><a href="#8、创建应用上下文" class="headerlink" title="8、创建应用上下文"></a>8、创建应用上下文</h4><pre class="line-numbers language-none"><code class="language-none">context &#x3D; createApplicationContext();<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>来看下 <code>createApplicationContext()</code> 方法的源码：</p>
+<pre class="line-numbers language-none"><code class="language-none">protected ConfigurableApplicationContext createApplicationContext() &#123;
+	Class&lt;?&gt; contextClass &#x3D; this.applicationContextClass;
+	if (contextClass &#x3D;&#x3D; null) &#123;
+		try &#123;
+			switch (this.webApplicationType) &#123;
+			case SERVLET:
+				contextClass &#x3D; Class.forName(DEFAULT_WEB_CONTEXT_CLASS);
+				break;
+			case REACTIVE:
+				contextClass &#x3D; Class.forName(DEFAULT_REACTIVE_WEB_CONTEXT_CLASS);
+				break;
+			default:
+				contextClass &#x3D; Class.forName(DEFAULT_CONTEXT_CLASS);
+			&#125;
+		&#125;
+		catch (ClassNotFoundException ex) &#123;
+			throw new IllegalStateException(
+					&quot;Unable create a default ApplicationContext, &quot;
+							+ &quot;please specify an ApplicationContextClass&quot;,
+					ex);
+		&#125;
+	&#125;
+	return (ConfigurableApplicationContext) BeanUtils.instantiateClass(contextClass);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>其实就是根据不同的应用类型初始化不同的上下文应用类。</p>
+<h4 id="9、准备异常报告器"><a href="#9、准备异常报告器" class="headerlink" title="9、准备异常报告器"></a>9、准备异常报告器</h4><pre class="line-numbers language-none"><code class="language-none">exceptionReporters &#x3D; getSpringFactoriesInstances(
+		SpringBootExceptionReporter.class,
+		new Class[] &#123; ConfigurableApplicationContext.class &#125;, context);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>逻辑和之前实例化初始化器和监听器的一样，一样调用的是 <code>getSpringFactoriesInstances</code> 方法来获取配置的异常类名称并实例化所有的异常处理类。</p>
+<p>该异常报告处理类配置在 <code>spring-boot-2.0.3.RELEASE.jar!/META-INF/spring.factories</code> 这个配置文件里面。</p>
+<pre class="line-numbers language-none"><code class="language-none"># Error Reporters
+org.springframework.boot.SpringBootExceptionReporter&#x3D;\
+org.springframework.boot.diagnostics.FailureAnalyzers<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h4 id="10、准备应用上下文"><a href="#10、准备应用上下文" class="headerlink" title="10、准备应用上下文"></a>10、准备应用上下文</h4><pre class="line-numbers language-none"><code class="language-none">prepareContext(context, environment, listeners, applicationArguments,
+		printedBanner);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>来看下 <code>prepareContext()</code> 方法的源码：</p>
+<pre class="line-numbers language-none"><code class="language-none">private void prepareContext(ConfigurableApplicationContext context,
+		ConfigurableEnvironment environment, SpringApplicationRunListeners listeners,
+		ApplicationArguments applicationArguments, Banner printedBanner) &#123;
+	&#x2F;&#x2F; 10.1）绑定环境到上下文
+	context.setEnvironment(environment);
+	
+	&#x2F;&#x2F; 10.2）配置上下文的 bean 生成器及资源加载器
+	postProcessApplicationContext(context);
+	
+	&#x2F;&#x2F; 10.3）为上下文应用所有初始化器
+	applyInitializers(context);
+	
+	&#x2F;&#x2F; 10.4）触发所有 SpringApplicationRunListener 监听器的 contextPrepared 事件方法
+	listeners.contextPrepared(context);
+	
+	&#x2F;&#x2F; 10.5）记录启动日志
+	if (this.logStartupInfo) &#123;
+		logStartupInfo(context.getParent() &#x3D;&#x3D; null);
+		logStartupProfileInfo(context);
+	&#125;
+
+	&#x2F;&#x2F; 10.6）注册两个特殊的单例bean
+	context.getBeanFactory().registerSingleton(&quot;springApplicationArguments&quot;,
+			applicationArguments);
+	if (printedBanner !&#x3D; null) &#123;
+		context.getBeanFactory().registerSingleton(&quot;springBootBanner&quot;, printedBanner);
+	&#125;
+
+	&#x2F;&#x2F; 10.7）加载所有资源
+	Set&lt;Object&gt; sources &#x3D; getAllSources();
+	Assert.notEmpty(sources, &quot;Sources must not be empty&quot;);
+	load(context, sources.toArray(new Object[0]));
+	
+	&#x2F;&#x2F; 10.8）触发所有 SpringApplicationRunListener 监听器的 contextLoaded 事件方法
+	listeners.contextLoaded(context);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="11、刷新应用上下文"><a href="#11、刷新应用上下文" class="headerlink" title="11、刷新应用上下文"></a>11、刷新应用上下文</h4><pre class="line-numbers language-none"><code class="language-none">refreshContext(context);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>这个主要是刷新 Spring 的应用上下文，源码如下，不详细说明。</p>
+<pre class="line-numbers language-none"><code class="language-none">private void refreshContext(ConfigurableApplicationContext context) &#123;
+	refresh(context);
+	if (this.registerShutdownHook) &#123;
+		try &#123;
+			context.registerShutdownHook();
+		&#125;
+		catch (AccessControlException ex) &#123;
+			&#x2F;&#x2F; Not allowed in some environments.
+		&#125;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="12、应用上下文刷新后置处理"><a href="#12、应用上下文刷新后置处理" class="headerlink" title="12、应用上下文刷新后置处理"></a>12、应用上下文刷新后置处理</h4><pre class="line-numbers language-none"><code class="language-none">afterRefresh(context, applicationArguments);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>看了下这个方法的源码是空的，目前可以做一些自定义的后置处理操作。</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;**
+ * Called after the context has been refreshed.
+ * @param context the application context
+ * @param args the application arguments
+ *&#x2F;
+protected void afterRefresh(ConfigurableApplicationContext context,
+		ApplicationArguments args) &#123;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="13、停止计时监控类"><a href="#13、停止计时监控类" class="headerlink" title="13、停止计时监控类"></a>13、停止计时监控类</h4><pre class="line-numbers language-none"><code class="language-none">stopWatch.stop();<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">public void stop() throws IllegalStateException &#123;
+	if (this.currentTaskName &#x3D;&#x3D; null) &#123;
+		throw new IllegalStateException(&quot;Can&#39;t stop StopWatch: it&#39;s not running&quot;);
+	&#125;
+	long lastTime &#x3D; System.currentTimeMillis() - this.startTimeMillis;
+	this.totalTimeMillis +&#x3D; lastTime;
+	this.lastTaskInfo &#x3D; new TaskInfo(this.currentTaskName, lastTime);
+	if (this.keepTaskList) &#123;
+		this.taskList.add(this.lastTaskInfo);
+	&#125;
+	++this.taskCount;
+	this.currentTaskName &#x3D; null;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>计时监听器停止，并统计一些任务执行信息。</p>
+<h4 id="14、输出日志记录执行主类名、时间信息"><a href="#14、输出日志记录执行主类名、时间信息" class="headerlink" title="14、输出日志记录执行主类名、时间信息"></a>14、输出日志记录执行主类名、时间信息</h4><pre class="line-numbers language-none"><code class="language-none">if (this.logStartupInfo) &#123;
+	new StartupInfoLogger(this.mainApplicationClass)
+			.logStarted(getApplicationLog(), stopWatch);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="15、发布应用上下文启动完成事件"><a href="#15、发布应用上下文启动完成事件" class="headerlink" title="15、发布应用上下文启动完成事件"></a>15、发布应用上下文启动完成事件</h4><pre class="line-numbers language-none"><code class="language-none">listeners.started(context);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>触发所有 SpringApplicationRunListener 监听器的 started 事件方法。</p>
+<h4 id="16、执行所有-Runner-运行器"><a href="#16、执行所有-Runner-运行器" class="headerlink" title="16、执行所有 Runner 运行器"></a>16、执行所有 Runner 运行器</h4><pre class="line-numbers language-none"><code class="language-none">callRunners(context, applicationArguments);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">private void callRunners(ApplicationContext context, ApplicationArguments args) &#123;
+	List&lt;Object&gt; runners &#x3D; new ArrayList&lt;&gt;();
+	runners.addAll(context.getBeansOfType(ApplicationRunner.class).values());
+	runners.addAll(context.getBeansOfType(CommandLineRunner.class).values());
+	AnnotationAwareOrderComparator.sort(runners);
+	for (Object runner : new LinkedHashSet&lt;&gt;(runners)) &#123;
+		if (runner instanceof ApplicationRunner) &#123;
+			callRunner((ApplicationRunner) runner, args);
+		&#125;
+		if (runner instanceof CommandLineRunner) &#123;
+			callRunner((CommandLineRunner) runner, args);
+		&#125;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>执行所有 <code>ApplicationRunner</code> 和 <code>CommandLineRunner</code> 这两种运行器，不详细展开了。</p>
+<h4 id="17、发布应用上下文就绪事件"><a href="#17、发布应用上下文就绪事件" class="headerlink" title="17、发布应用上下文就绪事件"></a>17、发布应用上下文就绪事件</h4><pre class="line-numbers language-none"><code class="language-none">listeners.running(context);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>触发所有 SpringApplicationRunListener 监听器的 running 事件方法。</p>
+<h4 id="18、返回应用上下文"><a href="#18、返回应用上下文" class="headerlink" title="18、返回应用上下文"></a>18、返回应用上下文</h4><pre class="line-numbers language-none"><code class="language-none">return context;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>Spring Boot 的启动全过程源码分析至此，分析 Spring 源码真是一个痛苦的过程，希望能给大家提供一点参考和思路，也希望能给正在 Spring Boot 学习路上的朋友一点收获。</p>
+<p>源码分析不易，点赞 + 转发支持一下吧！</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">John Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Boot/Spring%20Boot%202.x%20%E5%90%AF%E5%8A%A8%E5%85%A8%E8%BF%87%E7%A8%8B%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8B%EF%BC%89%E8%BF%90%E8%A1%8C%E6%96%B9%E6%B3%95%E5%89%96%E6%9E%90/">http://example.com/2025/10/29/后端技术/Spring Boot/Spring Boot 2.x 启动全过程源码分析（下）运行方法剖析/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">只有那年胜过年年</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Spring-Boot/">Spring Boot</a></div><div class="post-share"><div class="social-share" data-image="/img/logo.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Boot/Spring%20Boot%202.x%20%E5%90%AF%E5%8A%A8%E5%85%A8%E8%BF%87%E7%A8%8B%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8A%EF%BC%89%E5%85%A5%E5%8F%A3%E7%B1%BB%E5%89%96%E6%9E%90/" title="Spring Boot 2.x 启动全过程源码分析（上）入口类剖析"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Spring Boot 2.x 启动全过程源码分析（上）入口类剖析</div></div><div class="info-2"><div class="info-item-1">Spring Boot 的应用教程我们已经分享过很多了，今天来通过源码来分析下它的启动过程，探究下 Spring Boot 为什么这么简便的奥秘。 本篇基于 Spring Boot 2.0.3 版本进行分析，阅读本文需要有一些 Java 和 Spring 框架基础，如果还不知道 Spring Boot 是什么，建议先看下我们的 Spring Boot 教程。 Spring Boot 的入口类@SpringBootApplication public class SpringBootBestPracticeApplication &#123;  	public static void main(String[] args) &#123; 		SpringApplication.run(SpringBootBestPracticeApplication.class, args); 	&#125; 	 &#125;  做过 Spring Boot 项目的都知道，上面是 Spring Boot 最简单通用的入口类。入口类的要求是最顶层包下面第一个含有 main 方法的类，使用注解 @Sp...</div></div></div></a><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Boot/Spring%20Boot%20Profile%20%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3/" title="Spring Boot Profile 配置详解"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Spring Boot Profile 配置详解</div></div><div class="info-2"><div class="info-item-1">Profile是什么Profile我也找不出合适的中文来定义，简单来说，Profile就是Spring Boot可以对不同环境或者指令来读取不同的配置文件。 Profile使用假如有开发、测试、生产三个不同的环境，需要定义三个不同环境下的配置。 基于properties文件类型你可以另外建立3个环境下的配置文件： applcation.propertiesapplication-dev.propertiesapplication-test.propertiesapplication-prod.properties 然后在applcation.properties文件中指定当前的环境：spring.profiles.active&#x3D;test这时候读取的就是application-test.properties文件。 基于yml文件类型只需要一个applcation.yml文件就能搞定，推荐此方式。 spring:   profiles:      active: prod  --- spring:    profiles: dev      server:    port:...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Boot/Spring%20Boot%201.5.10%20%E5%8F%91%E5%B8%83%EF%BC%9A%E4%BF%AE%E5%A4%8D%E9%87%8D%E8%A6%81%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%EF%BC%81%EF%BC%81%EF%BC%81/" title="Spring Boot 1.5.10 发布：修复重要安全漏洞！！！"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-29</div><div class="info-item-2">Spring Boot 1.5.10 发布：修复重要安全漏洞！！！</div></div><div class="info-2"><div class="info-item-1">2018&#x2F;01&#x2F;31，Spring Boot团队发布了Spring Boot 1.5.10。 Maven： &lt;parent&gt;     &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;     &lt;artifactId&gt;spring-boot-starter-parent&lt;&#x2F;artifactId&gt;     &lt;version&gt;1.5.10.RELEASE&lt;&#x2F;version&gt; &lt;&#x2F;parent&gt; &lt;dependencies&gt;     &lt;dependency&gt;         &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;         &lt;artifactId&gt;spring-boot-starter-web&lt;&#x2F;artifactId&gt;     &lt;&#x2F;dep...</div></div></div></a><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Boot/Spring%20Boot%202.0%20%E6%AD%A3%E5%BC%8F%E5%8F%91%E5%B8%83%EF%BC%81/" title="Spring Boot 2.0 正式发布！"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-29</div><div class="info-item-2">Spring Boot 2.0 正式发布！</div></div><div class="info-2"><div class="info-item-1"> Spring Boot 2.0 正式发布！2018&#x2F;03&#x2F;01最新消息，传得沸沸扬扬的Spring Boot 2.0 正式发布了。 小编去看了下Spring Boot的官网，正式版本已经释放出来了！！！  这个版本更是历经了17个月，超过了215个人共同开发，总共超过6800次+提交完成的。这个版本是继4年前Spring Boot 1.0 之后的第一个主要版本，也是第一个正式支持Spring Framework 5.0的发行版本。 我们也从Github上Spring Boot发布版本列表中看到了Spring Boot 2.0 的正式发布版本，版本号：v2.0.0.RELEASE。  Spring Boot版本发布列表：https://github.com/spring-projects/spring-boot/releases/   Spring Boot 2.0 新特性说了这么多，Spring Boot 2.0 和 1.0 比都有哪些变动和新特性呢？  JDK最低要求1.8+，并支持1.9； 支持Spring webflux&#x2F;webflux.fn...</div></div></div></a><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Boot/Spring%20Boot%202.1.0%20%E5%B7%B2%E5%8F%91%E5%B8%83%EF%BC%8C7%20%E4%B8%AA%E9%87%8D%E5%A4%A7%E6%9B%B4%E6%96%B0%EF%BC%81/" title="Spring Boot 2.1.0 已发布，7 个重大更新！"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-29</div><div class="info-item-2">Spring Boot 2.1.0 已发布，7 个重大更新！</div></div><div class="info-2"><div class="info-item-1">距离《重磅：Spring Boot 2.0 正式发布！》已经过去大半年了，而 Spring Boot 2.1.0 在 10 月底就发布了，我们来看下 Spring Boot 2.1.0 都更新了什么，每一个 Java 技术人都值得关注。 栈长其实早就看到了更新了，现在才有时间来更新下。 1、第三方类库升级 Hibernate 5.3 Micrometer 1.1 Reactor Californium Spring Data Lovelace Spring Framework 5.1 Tomcat 9 Undertow 2  主要就更新了这些类库，其实远不止这些。 2、性能提升1）应用程序性能改进性能作为 Spring Boot 团队持续努力的一部分，性能提升在 Spring Boot 2.1 中取得了一些重大进展。 现在 Spring Boot 2.1+ 应用程序启动速度变得更快，并且消耗的内存更少，这在内存非常稀缺的应用环境中尤其重要。 2）异步引导 Hibernate在 Spring Boot 2.1 中还采用了 Spring 框架和 Spring Data JPA 框架对...</div></div></div></a><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Boot/Spring%20Boot%202.1.5%20%E6%AD%A3%E5%BC%8F%E5%8F%91%E5%B8%83%EF%BC%8C1.5.x%20%E5%8D%B3%E5%B0%86%E7%BB%93%E6%9D%9F%E4%BD%BF%E5%91%BD%EF%BC%81/" title="Spring Boot 2.1.5 正式发布，1.5.x 即将结束使命！"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-29</div><div class="info-item-2">Spring Boot 2.1.5 正式发布，1.5.x 即将结束使命！</div></div><div class="info-2"><div class="info-item-1">Spring Boot 官网在 2019&#x2F;03&#x2F;15 这天发布了 Spring Boot 2.1.5 正式版，栈长表示真跟不上了。。 官宣如下 ：  https://spring.io/blog/2019/05/15/spring-boot-2-1-5-released  仓库也已经跟上：  那这个版本有什么新功能？ 1、增加了 Spring Session DefaultCookieSerializer 自动化配置； 2、增加了 MimeTypes 缓存，提升性能； 这两个是什么鬼，表示还没用到过。 另外就是修复一推的bug了，以及更新一些依赖包。。具体的可以参考这里：  https://github.com/spring-projects/spring-boot/releases/tag/v2.1.5.RELEASE  这个版本没啥大更新，只是例行公事更新下罢了，那么下面的事项你就得注意了，官方又发通知了。 重点来了！！！ 友情提醒： Spring Boot 1.5.x 将于 2019&#x2F;08&#x2F;01 结束使命，官方不再更新维护了，建议大家...</div></div></div></a><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Boot/Spring%20Boot%202.2%20%E5%A2%9E%E5%8A%A0%E4%BA%86%E4%B8%80%E4%B8%AA%E6%96%B0%E5%8A%9F%E8%83%BD%EF%BC%8C%E5%90%AF%E5%8A%A8%E9%A3%9E%E8%B5%B7~/" title="Spring Boot 2.2 增加了一个新功能，启动飞起~"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-29</div><div class="info-item-2">Spring Boot 2.2 增加了一个新功能，启动飞起~</div></div><div class="info-2"><div class="info-item-1">前几天栈长分享了一个好玩的框架：一个比Spring Boot快44倍的Java框架！，是不是感觉 Spring Boot 略慢？今天讲一下 Spring Boot 添加的这个新特性，可以大大提升 Spring Boot 的启动速度。 最近，Spring团队宣布在 Spring Boot 2.2+ 中添加了一个重要功能：延迟加载，目前这个版本暂时还是快照版，不过我们可以先了解下怎么使用这个延迟加载功能。 延迟加载是什么意思？有点经验的程序员应该都知道，在 Spring 框架中早已经支持延迟加载功能的，简单来说就是一个类的实例化，不需要 Spring 容器启动的时候就开始实例化，而是在第一次需要它的时候再实例化，这样大大提升了程序启动速度，也在一定程序上节省了系统资源。 怎么开启延迟加载？在传统 Spring 项目中我们是这么做的： &lt;bean id&#x3D;&quot;testBean&quot; calss&#x3D;&quot;cn.javastack.TestBean&quot; lazy-init&#x3D;&quot;true&quot; &#x2F;&gt;  ...</div></div></div></a><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Boot/Spring%20Boot%202.2.2%20%E5%8F%91%E5%B8%83%EF%BC%8C%E6%96%B0%E5%A2%9E%202%20%E4%B8%AA%E6%96%B0%E7%89%B9%E6%80%A7%EF%BC%81/" title="Spring Boot 2.2.2 发布，新增 2 个新特性！"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-29</div><div class="info-item-2">Spring Boot 2.2.2 发布，新增 2 个新特性！</div></div><div class="info-2"><div class="info-item-1">Spring Boot 2.2.2 发布咯！ Spring Boot 2.2.1 发布，一个有点坑的版本！ 2.2.1 发布没过一个月，2.2.2 就来了。 Maven依赖给大家奉上： &lt;dependency&gt;   &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;   &lt;artifactId&gt;spring-boot&lt;&#x2F;artifactId&gt;   &lt;version&gt;2.2.2.RELEASE&lt;&#x2F;version&gt; &lt;&#x2F;dependency&gt;  这个版本都更新了啥？ 新增了两个新特性1、支持在第三方类上的构造器参数绑定； 什么是构造器参数绑定？看下栈长之前写的这篇文章：Spring Boot 构造器参数绑定，越来越强大了！ 2、支持 Gradle 6； 日常维护修复了 88 个bug、性能优化、依赖更新。 想学 Spring Boot 的可以关注微信公众号：Java技术栈，在后台回复：boot，我都写了一大堆教程了...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#SpringApplication-%E5%AE%9E%E4%BE%8B-run-%E6%96%B9%E6%B3%95%E8%BF%90%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">SpringApplication 实例 run 方法运行过程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E5%88%9B%E5%BB%BA%E5%B9%B6%E5%90%AF%E5%8A%A8%E8%AE%A1%E6%97%B6%E7%9B%91%E6%8E%A7%E7%B1%BB"><span class="toc-number">1.1.</span> <span class="toc-text">1、创建并启动计时监控类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E5%88%9D%E5%A7%8B%E5%8C%96%E5%BA%94%E7%94%A8%E4%B8%8A%E4%B8%8B%E6%96%87%E5%92%8C%E5%BC%82%E5%B8%B8%E6%8A%A5%E5%91%8A%E9%9B%86%E5%90%88"><span class="toc-number">1.2.</span> <span class="toc-text">2、初始化应用上下文和异常报告集合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E8%AE%BE%E7%BD%AE%E7%B3%BB%E7%BB%9F%E5%B1%9E%E6%80%A7-java-awt-headless-%E7%9A%84%E5%80%BC"><span class="toc-number">1.3.</span> <span class="toc-text">3、设置系统属性 java.awt.headless 的值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81%E5%88%9B%E5%BB%BA%E6%89%80%E6%9C%89-Spring-%E8%BF%90%E8%A1%8C%E7%9B%91%E5%90%AC%E5%99%A8%E5%B9%B6%E5%8F%91%E5%B8%83%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8%E4%BA%8B%E4%BB%B6"><span class="toc-number">1.4.</span> <span class="toc-text">4、创建所有 Spring 运行监听器并发布应用启动事件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81%E5%88%9D%E5%A7%8B%E5%8C%96%E9%BB%98%E8%AE%A4%E5%BA%94%E7%94%A8%E5%8F%82%E6%95%B0%E7%B1%BB"><span class="toc-number">1.5.</span> <span class="toc-text">5、初始化默认应用参数类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6%E3%80%81%E6%A0%B9%E6%8D%AE%E8%BF%90%E8%A1%8C%E7%9B%91%E5%90%AC%E5%99%A8%E5%92%8C%E5%BA%94%E7%94%A8%E5%8F%82%E6%95%B0%E6%9D%A5%E5%87%86%E5%A4%87-Spring-%E7%8E%AF%E5%A2%83"><span class="toc-number">1.6.</span> <span class="toc-text">6、根据运行监听器和应用参数来准备 Spring 环境</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7%E3%80%81%E5%88%9B%E5%BB%BA-Banner-%E6%89%93%E5%8D%B0%E7%B1%BB"><span class="toc-number">1.7.</span> <span class="toc-text">7、创建 Banner 打印类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8%E3%80%81%E5%88%9B%E5%BB%BA%E5%BA%94%E7%94%A8%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="toc-number">1.8.</span> <span class="toc-text">8、创建应用上下文</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9%E3%80%81%E5%87%86%E5%A4%87%E5%BC%82%E5%B8%B8%E6%8A%A5%E5%91%8A%E5%99%A8"><span class="toc-number">1.9.</span> <span class="toc-text">9、准备异常报告器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10%E3%80%81%E5%87%86%E5%A4%87%E5%BA%94%E7%94%A8%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="toc-number">1.10.</span> <span class="toc-text">10、准备应用上下文</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#11%E3%80%81%E5%88%B7%E6%96%B0%E5%BA%94%E7%94%A8%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="toc-number">1.11.</span> <span class="toc-text">11、刷新应用上下文</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#12%E3%80%81%E5%BA%94%E7%94%A8%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%B7%E6%96%B0%E5%90%8E%E7%BD%AE%E5%A4%84%E7%90%86"><span class="toc-number">1.12.</span> <span class="toc-text">12、应用上下文刷新后置处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#13%E3%80%81%E5%81%9C%E6%AD%A2%E8%AE%A1%E6%97%B6%E7%9B%91%E6%8E%A7%E7%B1%BB"><span class="toc-number">1.13.</span> <span class="toc-text">13、停止计时监控类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#14%E3%80%81%E8%BE%93%E5%87%BA%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95%E6%89%A7%E8%A1%8C%E4%B8%BB%E7%B1%BB%E5%90%8D%E3%80%81%E6%97%B6%E9%97%B4%E4%BF%A1%E6%81%AF"><span class="toc-number">1.14.</span> <span class="toc-text">14、输出日志记录执行主类名、时间信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#15%E3%80%81%E5%8F%91%E5%B8%83%E5%BA%94%E7%94%A8%E4%B8%8A%E4%B8%8B%E6%96%87%E5%90%AF%E5%8A%A8%E5%AE%8C%E6%88%90%E4%BA%8B%E4%BB%B6"><span class="toc-number">1.15.</span> <span class="toc-text">15、发布应用上下文启动完成事件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#16%E3%80%81%E6%89%A7%E8%A1%8C%E6%89%80%E6%9C%89-Runner-%E8%BF%90%E8%A1%8C%E5%99%A8"><span class="toc-number">1.16.</span> <span class="toc-text">16、执行所有 Runner 运行器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#17%E3%80%81%E5%8F%91%E5%B8%83%E5%BA%94%E7%94%A8%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B0%B1%E7%BB%AA%E4%BA%8B%E4%BB%B6"><span class="toc-number">1.17.</span> <span class="toc-text">17、发布应用上下文就绪事件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#18%E3%80%81%E8%BF%94%E5%9B%9E%E5%BA%94%E7%94%A8%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="toc-number">1.18.</span> <span class="toc-text">18、返回应用上下文</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">2.</span> <span class="toc-text">总结</span></a></li></ol></div></div></div></div></main><footer id="footer" style="background: transparent;"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By John Doe</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><div class="js-pjax"><script>(() => {
+  let initFn = window.walineFn || null
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const destroyWaline = ele => ele.destroy()
+
+  const initWaline = (Fn, el = document, path = window.location.pathname) => {
+    const waline = Fn({
+      el: el.querySelector('#waline-wrap'),
+      serverURL: 'https://walinecomments-gxccu74d8-chens-projects-7c4f92c5.vercel.app',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      comment: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyWaline = () => {
+        destroyWaline(waline)
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const loadWaline = (el, path) => {
+    if (initFn) initWaline(initFn, el, path)
+    else {
+      btf.getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css')
+        .then(() => import('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js'))
+        .then(({ init }) => {
+          initFn = init || Waline.init
+          initWaline(initFn, el, path)
+          window.walineFn = initFn
+        })
+    }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Waline'
+      ? window.shuoshuoComment = { loadComment: loadWaline } 
+      : window.loadOtherComment = loadWaline
+    return
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

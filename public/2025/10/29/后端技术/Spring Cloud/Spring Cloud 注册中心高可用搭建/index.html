@@ -1,0 +1,306 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Spring Cloud 注册中心高可用搭建 | 只有那年胜过年年</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#FC5531"><meta name="description" content="Spring Cloud的注册中心可以由Eureka、Consul、Zookeeper、ETCD等来实现，这里推荐使用Spring Cloud Eureka来实现注册中心，它基于Netfilix的Eureka做了二次封装，完成分布式服务中服务治理的功能，微服务系统中的服务注册与发现都通过这个注册中心来进行管理。 引入Eureka Server依赖之前的文章基础上加入Spring Cloud的依赖，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring Cloud 注册中心高可用搭建">
+<meta property="og:url" content="http://example.com/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Cloud/Spring%20Cloud%20%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E9%AB%98%E5%8F%AF%E7%94%A8%E6%90%AD%E5%BB%BA/index.html">
+<meta property="og:site_name" content="只有那年胜过年年">
+<meta property="og:description" content="Spring Cloud的注册中心可以由Eureka、Consul、Zookeeper、ETCD等来实现，这里推荐使用Spring Cloud Eureka来实现注册中心，它基于Netfilix的Eureka做了二次封装，完成分布式服务中服务治理的功能，微服务系统中的服务注册与发现都通过这个注册中心来进行管理。 引入Eureka Server依赖之前的文章基础上加入Spring Cloud的依赖，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/logo.png">
+<meta property="article:published_time" content="2025-10-29T09:30:25.000Z">
+<meta property="article:modified_time" content="2025-10-29T09:33:56.590Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Spring Cloud">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/logo.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Spring Cloud 注册中心高可用搭建",
+  "url": "http://example.com/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Cloud/Spring%20Cloud%20%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E9%AB%98%E5%8F%AF%E7%94%A8%E6%90%AD%E5%BB%BA/",
+  "image": "http://example.com/img/logo.png",
+  "datePublished": "2025-10-29T09:30:25.000Z",
+  "dateModified": "2025-10-29T09:33:56.590Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "John Doe",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Cloud/Spring%20Cloud%20%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E9%AB%98%E5%8F%AF%E7%94%A8%E6%90%AD%E5%BB%BA/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FC5531')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FC5531')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: John Doe","link":"链接: ","source":"来源: 只有那年胜过年年","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Spring Cloud 注册中心高可用搭建',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/logo.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">357</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">49</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/logo.png" alt="Logo"><span class="site-name">只有那年胜过年年</span></a><a class="nav-page-title" href="/"><span class="site-name">Spring Cloud 注册中心高可用搭建</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Spring Cloud 注册中心高可用搭建</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-10-29T09:30:25.000Z" title="发表于 2025-10-29 17:30:25">2025-10-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-10-29T09:33:56.590Z" title="更新于 2025-10-29 17:33:56">2025-10-29</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><p>Spring Cloud的注册中心可以由Eureka、Consul、Zookeeper、ETCD等来实现，这里推荐使用Spring Cloud Eureka来实现注册中心，它基于Netfilix的Eureka做了二次封装，完成分布式服务中服务治理的功能，微服务系统中的服务注册与发现都通过这个注册中心来进行管理。</p>
+<h2 id="引入Eureka-Server依赖"><a href="#引入Eureka-Server依赖" class="headerlink" title="引入Eureka Server依赖"></a>引入Eureka Server依赖</h2><p>之前的文章基础上加入Spring Cloud的依赖，现在再加入注册中心Eureka Server的依赖。</p>
+<pre class="line-numbers language-none"><code class="language-none">&lt;dependencies&gt;
+	&lt;dependency&gt;
+		&lt;groupId&gt;org.springframework.cloud&lt;&#x2F;groupId&gt;
+		&lt;artifactId&gt;spring-cloud-starter-eureka-server&lt;&#x2F;artifactId&gt;
+	&lt;&#x2F;dependency&gt;
+&lt;&#x2F;dependencies&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="添加启动类，开启Eureka-Server功能"><a href="#添加启动类，开启Eureka-Server功能" class="headerlink" title="添加启动类，开启Eureka Server功能"></a>添加启动类，开启Eureka Server功能</h2><p>在包根目录下加入启动类：</p>
+<pre class="line-numbers language-none"><code class="language-none">@EnableEurekaServer
+@SpringBootApplication
+public class RegisterApplication &#123;
+
+	public static void main(String[] args) &#123;
+		new SpringApplicationBuilder(RegisterApplication.class).bannerMode(Banner.Mode.LOG)
+				.run(args);
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><code>@EnableEurekaServer</code>注解即开启注册中心服务器的功能。</p>
+<h2 id="添加Eureka配置"><a href="#添加Eureka配置" class="headerlink" title="添加Eureka配置"></a>添加Eureka配置</h2><p>在application.yml中加入如下配置：</p>
+<pre class="line-numbers language-none"><code class="language-none">spring: 
+  application: 
+    name: register-center
+  profiles: 
+    active: register-center1
+    
+eureka:
+  instance: 
+    prefer-ip-address: true
+    instance-id: $&#123;spring.cloud.client.ipAddress&#125;:$&#123;server.port&#125;
+    lease-expiration-duration-in-seconds: $&#123;lease-expiration-duration-in-seconds&#125;
+    lease-renewal-interval-in-seconds: $&#123;lease-renewal-interval-in-seconds&#125;
+  server: 
+    enable-self-preservation: $&#123;enable-self-preservation&#125;  
+    eviction-interval-timer-in-ms: $&#123;eviction-interval-timer-in-ms&#125;
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl: 
+      defaultZone: $&#123;register-center.urls&#125;
+      
+---  
+spring: 
+  profiles: register-center1
+      
+server: 
+  port: $&#123;register-center1.server.port&#125;
+      
+---
+spring: 
+  profiles: register-center2
+  
+server: 
+  port: $&#123;register-center2.server.port&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这里做了两台注册中心的高可用配置register-center1,register-center2，也可以做多台，既然是高可用，每个注册中心都向别的注册中心注册自己。</p>
+<h2 id="Maven-filter配置"><a href="#Maven-filter配置" class="headerlink" title="Maven filter配置"></a>Maven filter配置</h2><p>${}里面的配置由maven resource filter来打包进行控制，不同的环境使用不同的配置文件。</p>
+<p>如filter-dev.properties的配置参考如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">#url
+register-center1.server.ip&#x3D;192.168.1.22
+register-center2.server.ip&#x3D;192.168.1.23
+register-center.urls&#x3D;http:&#x2F;&#x2F;$&#123;register-center1.server.ip&#125;:$&#123;register-center1.server.port&#125;&#x2F;eureka&#x2F;,http:&#x2F;&#x2F;$&#123;register-center2.server.ip&#125;:$&#123;register-center2.server.port&#125;&#x2F;eureka&#x2F;
+
+#port
+register-center1.server.port&#x3D;7001
+register-center2.server.port&#x3D;7002
+      
+#config
+enable-self-preservation&#x3D;false
+eviction-interval-timer-in-ms&#x3D;5000
+lease-expiration-duration-in-seconds&#x3D;20
+lease-renewal-interval-in-seconds&#x3D;6<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="Spring-Cloud配置详解"><a href="#Spring-Cloud配置详解" class="headerlink" title="Spring Cloud配置详解"></a>Spring Cloud配置详解</h2><p>Spring Boot的配置参考Spring Boot系列文章，这里只对Spring Cloud用到的配置解释。</p>
+<p>**<code>spring.application.name</code>**：配置应用名称，在注册中心中显示的服务注册名称。</p>
+<p>**<code>spring.cloud.client.ipAddress</code>**：获取客户端的IP地址。</p>
+<p>**<code>eureka.instance.prefer-ip-address</code>**：配置为true为喜欢IP，即连接注册中心使用IP地址形式，也可以使用HOSTNAME，但生产环境不推荐。</p>
+<p>**<code>eureka.instance.instance-id</code>**：配置在注册中心注册的唯一实例ID。</p>
+<p>**<code>eureka.instance.lease-expiration-duration-in-seconds</code>**：指示eureka服务器在接收到最后一个心跳之后等待的时间（秒），然后才能从此视图中删除此实例，并禁止此实例的流量。将此值设置得太长可能意味着流量可以路由到实例，即使实例不存在。设置此值太小可能意味着，由于临时网络故障，实例可能会被取消流量。此值将设置为至少高于lease-renewal-interval-in-seconds中指定的值。</p>
+<p>**<code>eureka.instance.lease-renewal-interval-in-seconds</code>**：指示eureka客户端需要向eureka服务器发送心跳以指示它仍然存在的频率（以秒为单位）。如果在lease-expiration-duration-in-seconds中指定的时间段内未收到心跳线，则eureka服务器将从其视图中删除该实例，因此不允许此实例的流量。请注意，如果该实例实现HealthCheckCallback，然后决定使其本身不可用，则该实例仍然可能无法访问流量。</p>
+<p>**<code>eureka.server.enable-self-preservation</code>**：配置注册中心是否开启服务的自我保护功能。</p>
+<p>**<code>eureka.server.eviction-interval-timer-in-ms</code>**：配置注册中心清理无效节点的时间间隔，默认60000毫秒，即60秒。</p>
+<p>**<code>eureka.client.register-with-eureka</code>**：配置为true指示此实例将其信息注册到eureka服务器以供其他人发现。在某些情况下，您不希望发现实例，而您只想发现其他实例配置为false。</p>
+<p>**<code>eureka.client.fetch-registry</code>**：指示该客户端是否应从eureka服务器获取eureka注册表信息。。</p>
+<p>**<code>eureka.client.serviceUrl.defaultZone</code>**：Eureka服务器地址。</p>
+<h2 id="启动注册中心"><a href="#启动注册中心" class="headerlink" title="启动注册中心"></a>启动注册中心</h2><p>这样一个两个注册心的Eureka Server就搭好了，启动的时候使用不同的Profile来指定不同的端口。</p>
+<pre class="line-numbers language-none"><code class="language-none">spring-boot:run -Drun.profiles&#x3D;register-center1  -P dev
+spring-boot:run -Drun.profiles&#x3D;register-center2  -P dev<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">John Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Cloud/Spring%20Cloud%20%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E9%AB%98%E5%8F%AF%E7%94%A8%E6%90%AD%E5%BB%BA/">http://example.com/2025/10/29/后端技术/Spring Cloud/Spring Cloud 注册中心高可用搭建/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">只有那年胜过年年</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Spring-Cloud/">Spring Cloud</a></div><div class="post-share"><div class="social-share" data-image="/img/logo.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Cloud/Spring%20Cloud%20%E6%9C%8D%E5%8A%A1%E5%AE%89%E5%85%A8%E8%BF%9E%E6%8E%A5/" title="Spring Cloud 服务安全连接"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Spring Cloud 服务安全连接</div></div><div class="info-2"><div class="info-item-1">Spring Cloud可以增加HTTP Basic认证来增加服务连接的安全性。 1、加入security启动器在maven配置文件中加入Spring Boot的security启动器。 &lt;dependency&gt; 	&lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt; 	&lt;artifactId&gt;spring-boot-starter-security&lt;&#x2F;artifactId&gt; &lt;&#x2F;dependency&gt;  这样，就开启对服务连接的安全保护，系统默认为生成一个用户名为”user”及一个随机密码，随机密码在服务启动的时候在日志中会打印出来。 2、自定义用户名密码随机密码没什么实际意义，我们需要一个固定的连接用户名和密码。 在应用配置文件中加入以下配置即可。 security:    user:      name: admin     password: admin123456  这样配置完后在连接这个服务的时候就会要求输入用户名和密码，如果认证失败...</div></div></div></a><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Cloud/Spring%20Cloud%20%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E5%86%85%E5%AE%B9%E5%8A%A0%E5%AF%86/" title="Spring Cloud 配置中心内容加密"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Spring Cloud 配置中心内容加密</div></div><div class="info-2"><div class="info-item-1">从配置获取的配置默认是明文的，有些像数据源这样的配置需要加密的话，需要对配置中心进行加密处理。 下面使用对称性加密来加密配置，需要配置一个密钥，当然也可以使用RSA非对称性加密，但对称加密比较方便也够用了，这里就以对称加密来配置即可。 1、安装JCEJDK下的JCR默认是有长度限制的，需要替换没有长度限制的JCE版本。  http://www.oracle.com/technetwork/java/javase/downloads/jce-7-download-432124.html  把下载包里面的两个jar文件复制替换到JAVA_HOME&#x2F;jre&#x2F;lib&#x2F;security目录下。 2、添加加密KEY配置中心配置文件中加入加密密钥。 encrypt:    key: 0e010e17-2529-4581-b907-c8edcfd6be09   3、查看加密功能状态http:&#x2F;&#x2F;192.168.1.237:7100&#x2F;encrypt&#x2F;status  功能正常会显示OK &#123;&quot;status&quo...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Cloud/Spring%20Cloud%20Alibaba%20Sentinel%20%E6%95%B4%E5%90%88%20Feign%20%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%AE%9E%E7%8E%B0/" title="Spring Cloud Alibaba Sentinel 整合 Feign 的设计实现"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-29</div><div class="info-item-2">Spring Cloud Alibaba Sentinel 整合 Feign 的设计实现</div></div><div class="info-2"><div class="info-item-1">  作者 | Spring Cloud Alibaba 高级开发工程师洛夜来自公众号阿里巴巴中间件投稿   前段时间 Hystrix 宣布不再维护之后（Hystrix 停止开发。。。Spring Cloud 何去何从？），Feign 作为一个跟 Hystrix 强依赖的组件，必然会有所担心后续的使用。 作为 Spring Cloud Alibaba 体系中的熔断器 Sentinel，Sentinel 目前整合了 Feign，本文对整合过程做一次总结，欢迎大家讨论和使用。 Feign 是什么？Feign 是一个 Java 实现的 Http 客户端，用于简化 Restful 调用。 Feign 跟 OkHttp、HttpClient 这种客户端实现理念不一样。Feign 强调接口的定义，接口中的一个方法对应一个 Http 请求，调用方法即发送一个 Http 请求；OkHttp 或 HttpClient 以过程式的方式发送 Http 请求。Feign 底层发送请求的实现可以跟 OkHttp 或 HttpClient 整合。 要想整合 Feign，首先要了解 Feign 的使用以及执行过...</div></div></div></a><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Cloud/Spring%20Cloud%20@RefreshScope%20%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F/" title="Spring Cloud @RefreshScope 原理是什么？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-29</div><div class="info-item-2">Spring Cloud @RefreshScope 原理是什么？</div></div><div class="info-2"><div class="info-item-1">要清楚RefreshScope,先要了解ScopeScope(org.springframework.beans.factory.config.Scope)是Spring 2.0开始就有的核心的概念 RefreshScope(org.springframework.cloud.context.scope.refresh)是spring cloud提供的一种特殊的scope实现，用来实现配置、实例热加载。 Scope -&gt; GenericScope -&gt; RefreshScope  Scope与ApplicationContext生命周期 AbstractBeanFactory#doGetBean创建Bean实例 protected &lt;T&gt; T doGetBean(...)&#123;     final RootBeanDefinition mbd &#x3D; ...     if (mbd.isSingleton()) &#123;         ...     &#125; else if (mbd.isPrototype())        .....</div></div></div></a><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Cloud/Spring%20Cloud%20Eureka%20%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3%EF%BC%8C%E5%BB%BA%E8%AE%AE%E6%94%B6%E8%97%8F%EF%BC%81/" title="Spring Cloud Eureka 常用配置详解，建议收藏！"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-29</div><div class="info-item-2">Spring Cloud Eureka 常用配置详解，建议收藏！</div></div><div class="info-2"><div class="info-item-1">前几天，栈长分享了 《Spring Cloud Eureka 注册中心集群搭建，Greenwich 最新版！》，今天来分享下 Spring Cloud Eureka 常用的一些参数配置及说明。 Spring Boot 的配置参考Java技术栈微信公众号往期 Spring Boot 系列文章，在公众号后台回复：boot。这篇只针对 Spring Cloud Eureka 常用到的配置进行解释。 Spring Cloud Eureka 主要分为下面三个模块的参数：  Eureka Server Eureka Client Eureka Instance  Eureka ServerEureka Server 的配置参数格式：eureka.server.xxx。 enable-self-preservation表示注册中心是否开启服务的自我保护能力。 什么是自我保护？看这篇文章：SpringCloud Eureka自我保护机制，或者关注Java技术栈微信公众号，在后台回复：cloud。 renewal-percent-threshold表示 Eureka Server 开启自我保护的系...</div></div></div></a><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Cloud/Spring%20Cloud%20Eureka%20%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA%EF%BC%8CGreenwich%20%E6%9C%80%E6%96%B0%E7%89%88%EF%BC%81/" title="Spring Cloud Eureka 注册中心集群搭建，Greenwich 最新版！"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-29</div><div class="info-item-2">Spring Cloud Eureka 注册中心集群搭建，Greenwich 最新版！</div></div><div class="info-2"><div class="info-item-1">Spring Cloud 的注册中心可以由 Eureka、Consul、Zookeeper、ETCD 等来实现，这里推荐使用 Spring Cloud Eureka 来实现注册中心，它基于 Netflix 的 Eureka 做了二次封装，完成分布式服务中服务治理的功能，微服务系统中的服务注册与发现都通过这个注册中心来进行管理。 今天栈长就来分享一个 Eureka 注册中心玩法，从 0 到分布式集群一步到位，单机版的咱就不玩了，没意义。 本文基于最新的 Spring Cloud Greenwich.SR1 以及 Spring Boot 2.1.3 版本进行分享。 快速构建一个 Eureka Server 项目打开 Spring 的快速构建网址，如下图所示，选择对应的参数，最后选择 Eureka Server 依赖，生成项目示例代码即可。  https://start.spring.io/    栈长这里是生成了一个 Maven 示例项目。 &lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&g...</div></div></div></a><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Cloud/Spring%20Cloud%20Eureka%20%E6%B3%A8%E5%86%8C%E5%AE%89%E5%85%A8%E4%B8%80%E5%AE%9A%E8%A6%81%E5%81%9A%E5%88%B0%E4%BD%8D%EF%BC%81/" title="Spring Cloud Eureka 注册安全一定要做到位！"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-29</div><div class="info-item-2">Spring Cloud Eureka 注册安全一定要做到位！</div></div><div class="info-2"><div class="info-item-1">前些天栈长在微信公众号Java技术栈分享了 Spring Cloud Eureka 最新版 实现注册中心的实战教程：Spring Cloud Eureka 注册中心集群搭建，Greenwich 最新版！，成功进入 Eureka 控制台页面。 但控制台首页默认是没有登录认证保护的，打开就能访问，而且你的微服务也能随意注册进去，这样是不安全的，本章栈长将加入登录认证功能，把你的 Eureka 注册中心保护起来。 本文基于最新的 Spring Cloud Greenwich.SR1 以及 Spring Boot 2.1.3 版本进行分享。 1、加入 Spring Security 依赖 &lt;dependency&gt; 	&lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt; 	&lt;artifactId&gt;spring-boot-starter-security&lt;&#x2F;artifactId&gt; &lt;&#x2F;dependency&gt;  2、添加安全配置 在 application.y...</div></div></div></a><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring%20Cloud/Spring%20Cloud%20Eureka%20%E8%87%AA%E6%88%91%E4%BF%9D%E6%8A%A4%E6%9C%BA%E5%88%B6/" title="Spring Cloud Eureka 自我保护机制"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-29</div><div class="info-item-2">Spring Cloud Eureka 自我保护机制</div></div><div class="info-2"><div class="info-item-1">自我保护背景首先对Eureka注册中心需要了解的是Eureka各个节点都是平等的，没有ZK中角色的概念， 即使N-1个节点挂掉也不会影响其他节点的正常运行。 默认情况下，如果Eureka Server在一定时间内（默认90秒）没有接收到某个微服务实例的心跳，Eureka Server将会移除该实例。但是当网络分区故障发生时，微服务与Eureka Server之间无法正常通信，而微服务本身是正常运行的，此时不应该移除这个微服务，所以引入了自我保护机制。 自我保护机制官方对于自我保护机制的定义：  https://github.com/Netflix/eureka/wiki/Understanding-Eureka-Peer-to-Peer-Communication  自我保护模式正是一种针对网络异常波动的安全保护措施，使用自我保护模式能使Eureka集群更加的健壮、稳定的运行。 自我保护机制的工作机制是如果在15分钟内超过85%的客户端节点都没有正常的心跳，那么Eureka就认为客户端与注册中心出现了网络故障，Eureka Server自动进入自我保护机制，此时会出现以下几种情况...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E5%85%A5Eureka-Server%E4%BE%9D%E8%B5%96"><span class="toc-number">1.</span> <span class="toc-text">引入Eureka Server依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E5%90%AF%E5%8A%A8%E7%B1%BB%EF%BC%8C%E5%BC%80%E5%90%AFEureka-Server%E5%8A%9F%E8%83%BD"><span class="toc-number">2.</span> <span class="toc-text">添加启动类，开启Eureka Server功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0Eureka%E9%85%8D%E7%BD%AE"><span class="toc-number">3.</span> <span class="toc-text">添加Eureka配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Maven-filter%E9%85%8D%E7%BD%AE"><span class="toc-number">4.</span> <span class="toc-text">Maven filter配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring-Cloud%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3"><span class="toc-number">5.</span> <span class="toc-text">Spring Cloud配置详解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83"><span class="toc-number">6.</span> <span class="toc-text">启动注册中心</span></a></li></ol></div></div></div></div></main><footer id="footer" style="background: transparent;"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By John Doe</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><div class="js-pjax"><script>(() => {
+  let initFn = window.walineFn || null
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const destroyWaline = ele => ele.destroy()
+
+  const initWaline = (Fn, el = document, path = window.location.pathname) => {
+    const waline = Fn({
+      el: el.querySelector('#waline-wrap'),
+      serverURL: 'https://walinecomments-gxccu74d8-chens-projects-7c4f92c5.vercel.app',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      comment: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyWaline = () => {
+        destroyWaline(waline)
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const loadWaline = (el, path) => {
+    if (initFn) initWaline(initFn, el, path)
+    else {
+      btf.getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css')
+        .then(() => import('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js'))
+        .then(({ init }) => {
+          initFn = init || Waline.init
+          initWaline(initFn, el, path)
+          window.walineFn = initFn
+        })
+    }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Waline'
+      ? window.shuoshuoComment = { loadComment: loadWaline } 
+      : window.loadOtherComment = loadWaline
+    return
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

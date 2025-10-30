@@ -1,0 +1,378 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>非常详尽的 Shiro 架构解析 | 只有那年胜过年年</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#FC5531"><meta name="description" content="Shiro是什么？Apache Shiro是一个强大而灵活的开源安全框架，它干净利落地处理身份认证，授权，企业会话管理和加密。 Apache Shiro的首要目标是易于使用和理解。安全有时候是很复杂的，甚至是痛苦的，但它没有必要这样。框架应该尽可能掩盖复杂的地方，露出一个干净而直观的API，来简化开发人员在使他们的应用程序安全上的努力。  官网：http:&#x2F;&#x2F;shiro.apache.org">
+<meta property="og:type" content="article">
+<meta property="og:title" content="非常详尽的 Shiro 架构解析">
+<meta property="og:url" content="http://example.com/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Shrio/%E9%9D%9E%E5%B8%B8%E8%AF%A6%E5%B0%BD%E7%9A%84%20Shiro%20%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/index.html">
+<meta property="og:site_name" content="只有那年胜过年年">
+<meta property="og:description" content="Shiro是什么？Apache Shiro是一个强大而灵活的开源安全框架，它干净利落地处理身份认证，授权，企业会话管理和加密。 Apache Shiro的首要目标是易于使用和理解。安全有时候是很复杂的，甚至是痛苦的，但它没有必要这样。框架应该尽可能掩盖复杂的地方，露出一个干净而直观的API，来简化开发人员在使他们的应用程序安全上的努力。  官网：http:&#x2F;&#x2F;shiro.apache.org">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/logo.png">
+<meta property="article:published_time" content="2025-10-29T09:30:25.000Z">
+<meta property="article:modified_time" content="2025-10-29T09:12:46.957Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Shiro">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/logo.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "非常详尽的 Shiro 架构解析",
+  "url": "http://example.com/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Shrio/%E9%9D%9E%E5%B8%B8%E8%AF%A6%E5%B0%BD%E7%9A%84%20Shiro%20%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/",
+  "image": "http://example.com/img/logo.png",
+  "datePublished": "2025-10-29T09:30:25.000Z",
+  "dateModified": "2025-10-29T09:12:46.957Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "John Doe",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Shrio/%E9%9D%9E%E5%B8%B8%E8%AF%A6%E5%B0%BD%E7%9A%84%20Shiro%20%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FC5531')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FC5531')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: John Doe","link":"链接: ","source":"来源: 只有那年胜过年年","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '非常详尽的 Shiro 架构解析',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/logo.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">357</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">49</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/logo.png" alt="Logo"><span class="site-name">只有那年胜过年年</span></a><a class="nav-page-title" href="/"><span class="site-name">非常详尽的 Shiro 架构解析</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">非常详尽的 Shiro 架构解析</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-10-29T09:30:25.000Z" title="发表于 2025-10-29 17:30:25">2025-10-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-10-29T09:12:46.957Z" title="更新于 2025-10-29 17:12:46">2025-10-29</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><p><img src="https://upload.wikimedia.org/wikipedia/commons/0/06/Apache_Shiro_Logo.png" alt="image"></p>
+<h2 id="Shiro是什么？"><a href="#Shiro是什么？" class="headerlink" title="Shiro是什么？"></a>Shiro是什么？</h2><p>Apache Shiro是一个强大而灵活的开源安全框架，它干净利落地处理身份认证，授权，企业会话管理和加密。</p>
+<p>Apache Shiro的首要目标是易于使用和理解。安全有时候是很复杂的，甚至是痛苦的，但它没有必要这样。框架应该尽可能掩盖复杂的地方，露出一个干净而直观的API，来简化开发人员在使他们的应用程序安全上的努力。</p>
+<blockquote>
+<p>官网：<a target="_blank" rel="noopener" href="http://shiro.apache.org/">http://shiro.apache.org</a></p>
+</blockquote>
+<h2 id="Shiro有什么用？"><a href="#Shiro有什么用？" class="headerlink" title="Shiro有什么用？"></a>Shiro有什么用？</h2><p>以下是你可以用Apache Shiro所做的事情：</p>
+<ul>
+<li><p>验证用户来核实他们的身份</p>
+</li>
+<li><p>对用户执行访问控制，如：</p>
+</li>
+</ul>
+<ol>
+<li><p>判断用户是否被分配了一个确定的安全角色；</p>
+</li>
+<li><p>判断用户是否被允许做某事；</p>
+</li>
+</ol>
+<ul>
+<li><p>在任何环境下使用Session API，即使没有Web或EJB容器。</p>
+</li>
+<li><p>在身份验证，访问控制期间或在会话的生命周期，对事件作出反应。</p>
+</li>
+<li><p>聚集一个或多个用户安全数据的数据源，并作为一个单一的复合用户“视图”。</p>
+</li>
+<li><p>启用单点登录（SSO）功能。</p>
+</li>
+<li><p>为没有关联到登录的用户启用”Remember Me”服务</p>
+</li>
+<li><p>以及更多——全部集成到紧密结合的易于使用的API中。</p>
+</li>
+</ul>
+<p>Shiro 视图在所有应用程序环境下实现这些目标——从最简单的命令行应用程序到最大的企业应用，不强制依赖其<br>他第三方框架，容器，或应用服务器。当然，该项目的目标是尽可能地融入到这些环境，但它能够在任何环境下立<br>即可用。</p>
+<h2 id="Shiro特性"><a href="#Shiro特性" class="headerlink" title="Shiro特性"></a>Shiro特性</h2><p>Apache Shiro是一个拥有许多功能的综合性的程序安全框架。</p>
+<p><img src="http://dl2.iteye.com/upload/attachment/0093/9788/d59f6d02-1f45-3285-8983-4ea5f18111d5.png" alt="image"></p>
+<h5 id="Shiro把Shiro开发团队称为“应用程序的四大基石”——身份验证，授权，会话管理和加密作为其目标。"><a href="#Shiro把Shiro开发团队称为“应用程序的四大基石”——身份验证，授权，会话管理和加密作为其目标。" class="headerlink" title="Shiro把Shiro开发团队称为“应用程序的四大基石”——身份验证，授权，会话管理和加密作为其目标。"></a>Shiro把Shiro开发团队称为“应用程序的四大基石”——身份验证，授权，会话管理和加密作为其目标。</h5><ul>
+<li><p>Authentication：有时也简称为“登录”，这是一个证明用户是他们所说的他们是谁的行为。</p>
+</li>
+<li><p>Authorization：访问控制的过程，也就是绝对“谁”去访问“什么”。</p>
+</li>
+<li><p>Session Management：管理用户特定的会话，即使在非 Web 或 EJB 应用程序。</p>
+</li>
+<li><p>Cryptography：通过使用加密算法保持数据安全同时易于使用。</p>
+</li>
+</ul>
+<h5 id="也提供了额外的功能来支持和加强在不同环境下所关注的方面，尤其是以下这些："><a href="#也提供了额外的功能来支持和加强在不同环境下所关注的方面，尤其是以下这些：" class="headerlink" title="也提供了额外的功能来支持和加强在不同环境下所关注的方面，尤其是以下这些："></a>也提供了额外的功能来支持和加强在不同环境下所关注的方面，尤其是以下这些：</h5><ul>
+<li><p>Web Support：Shiro的web支持的API能够轻松地帮助保护 Web 应用程序。</p>
+</li>
+<li><p>Caching：缓存是Apache Shiro中的第一层公民，来确保安全操作快速而又高效。</p>
+</li>
+<li><p>Concurrency：Apache Shiro利用它的并发特性来支持多线程应用程序。</p>
+</li>
+<li><p>Testing：测试支持的存在来帮助你编写单元测试和集成测试，并确保你的能够如预期的一样安全。</p>
+</li>
+<li><p>“Run As”：一个允许用户假设为另一个用户身份（如果允许）的功能，有时候在管理脚本很有用。</p>
+</li>
+<li><p>“Remember Me”：在会话中记住用户的身份，所以他们只需要在强制时候登录。</p>
+</li>
+</ul>
+<h2 id="Shiro-架构"><a href="#Shiro-架构" class="headerlink" title="Shiro 架构"></a>Shiro 架构</h2><p>Apache Shiro的设计目标是通过直观和易于使用来简化应用程序安全。Shiro 的核心设计体现了大多数人们是如何考<br>虑应用程序安全的——在某些人（或某些事）与应用程序交互的背景下。</p>
+<p>应用软件通常是基于用户背景情况设计的。也就是说，你将经常设计用户接口或服务API，基于一个用户将要（或应该）如何与该软件交互。例如，你可能会说，“如果用户与我的应用程序交互的用户已经登录，我将显示一个他们能够点击的按钮来查看他们的帐户信息。如果他们没有登录，我将显示一个登录按钮。”</p>
+<p>这个简单的陈述表明应用程序很大程度上的编写是为了满足用户的要求和需要。即使该“用户”是另一个软件系统而不是一个人类，你仍然得编写代码来响应行为，基于当前与你的软件进行交互的人或物。</p>
+<p>Shiro在它自己的设计中体现了这些概念。通过匹配那些对于软件开发人员来说已经很直观的东西，Apache Shiro几<br>乎在任何应用程序保持了直观和易用性。</p>
+<p>在最高的概念层次，Shiro的架构有3个主要的概念：Subject，SecurityManager 和 Realms。</p>
+<p>下面的关系图是关于这<br>些组件是如何交互的高级概述，而且我们将会在下面讨论每一个概念：</p>
+<p><img src="http://dl2.iteye.com/upload/attachment/0093/9790/5e0e9b41-0cca-367f-8c87-a8398910e7a6.png" alt="image"></p>
+<ul>
+<li><strong>Subject</strong></li>
+</ul>
+<p>在我们的教程中已经提到，Subject实质上是一个当前执行用户的特定的安全“视图”。鉴于”User”一词通常意味着一个人，而一个Subject可以是一个人，但它还可以代表第三方服务，daemon account，cron job，或其他类似的任何东西——基本上是当前正与软件进行交互的任何东西。</p>
+<p>所有Subject实例都被绑定到（且这是必须的）一个SecurityManager上。当你与一个Subject交互时，那些交互作用转化为与SecurityManager交互的特定subject的交互作用。</p>
+<ul>
+<li><strong>SecurityManager</strong></li>
+</ul>
+<p>SecurityManager是Shiro架构的心脏，并作为一种“保护伞”对象来协调内部的安全组件共同构成一个对象图。然而，一旦SecurityManager和它的内置对象图已经配置给一个应用程序，那么它单独留下来，且应用程序开发人员几乎使用他们所有的时间来处理Subject API。</p>
+<p>稍后会更详细地讨论SecurityManager，但重要的是要认识到，当你正与一个Subject进行交互时，实质上是幕后的 SecurityManager处理所有繁重的Subject安全操作。这反映在上面的基本流程图。</p>
+<ul>
+<li><strong>Realms</strong></li>
+</ul>
+<p>Realms担当Shiro和你的应用程序的安全数据之间的“桥梁”或“连接器”。当它实际上与安全相关的数据如用来执行身份验证（登录）及授权（访问控制）的用户帐户交互时，Shiro 从一个或多个为应用程序配置的Realm中寻找许多这样的东西。</p>
+<p>在这个意义上说，Realm本质上是一个特定安全的DAO：它封装了数据源的连接详细信息，使Shiro所需的相关的数据可用。当配置Shiro时，你必须指定至少一个Realm用来进行身份验证和&#x2F;或授权。SecurityManager可能配置多个Realms，但至少有一个是必须的。</p>
+<p>Shiro提供了立即可用的Realms来连接一些安全数据源（即目录），如LDAP，关系数据库（JDBC），文本配置源，像 INI 及属性文件，以及更多。你可以插入你自己的Realm 实现来代表自定义的数据源，如果默认地Realm不符合你的需求。</p>
+<p>像其他内置组件一样，Shiro SecurityManager控制 Realms是如何被用来获取安全和身份数据来代表 Subject 实例的。</p>
+<p>下图展示了Shiro的核心架构概念，紧跟其后的是每个的简短总结：</p>
+<p><img src="http://dl2.iteye.com/upload/attachment/0093/9792/9b959a65-799d-396e-b5f5-b4fcfe88f53c.png" alt="image"></p>
+<ul>
+<li><strong>Subject</strong>(org.apache.shiro.subject.Subject)</li>
+</ul>
+<p>当前与软件进行交互的实体（用户，第三方服务，cron job，等等）的安全特定“视图”。</p>
+<ul>
+<li><strong>SecurityManager</strong>(org.apache.shiro.mgt.SecurityManager)</li>
+</ul>
+<p>如上所述，SecurityManager是Shiro架构的心脏。它基本上是一个“保护伞”对象，协调其管理的组件以确保它们能够一起顺利的工作。它还管理每个应用程序用户的Shiro 的视图，因此它知道如何执行每个用户的安全操作。</p>
+<ul>
+<li><strong>Authenticator</strong>(org.apache.shiro.authc.Authenticator)</li>
+</ul>
+<p>Authenticator是一个对执行及对用户的身份验证（登录）尝试负责的组件。当一个用户尝试登录时，该逻辑被 Authenticator执行。Authenticator知道如何与一个或多个Realm协调来存储相关的用户&#x2F;帐户信息。从这些Realm中获得的数据被用来验证用户的身份来保证用户确实是他们所说的他们是谁。</p>
+<ul>
+<li><strong>Authentication Strategy</strong>(org.apache.shiro.authc.pam.AuthenticationStrategy)</li>
+</ul>
+<p>如果不止一个Realm被配置，则AuthenticationStrategy将会协调这些Realm来决定身份认证尝试成功或失败下的条件（例如，如果一个Realm成功，而其他的均失败，是否该尝试成功？是否所有的Realm必须成功？或只有第一个成功即可？）。</p>
+<ul>
+<li><strong>Authorizer</strong>(org.apache.shiro.authz.Authorizer)</li>
+</ul>
+<p>Authorizer是负责在应用程序中决定用户的访问控制的组件。它是一种最终判定用户是否被允许做某事的机制。与 Authenticator相似，Authorizer也知道如何协调多个后台数据源来访问角色恶化权限信息。Authorizer使用该信息来准确地决定用户是否被允许执行给定的动作。</p>
+<ul>
+<li><strong>SessionManager</strong>(org.apache.shiro.session.SessionManager)</li>
+</ul>
+<p>SessionManager知道如何去创建及管理用户Session生命周期来为所有环境下的用户提供一个强健的Session体验。这在安全框架界是一个独有的特色——Shiro拥有能够在任何环境下本地化管理用户Session的能力，即使没有可用的Web&#x2F;Servlet或EJB容器，它将会使用它内置的企业级会话管理来提供同样的编程体验。SessionDAO的存在允许任何数据源能够在持久会话中使用。</p>
+<ul>
+<li><strong>SessionDAO</strong>(org.apache.shiro.session.mgt.eis.SessionDAO)</li>
+</ul>
+<p>SesssionDAO代表SessionManager执行Session持久化（CRUD）操作。这允许任何数据存储被插入到会话管理的基础之中。</p>
+<ul>
+<li><strong>CacheManager</strong>(org.apahce.shiro.cache.CacheManager)</li>
+</ul>
+<p>CacheManager创建并管理其他Shiro组件使用的Cache实例生命周期。因为Shiro能够访问许多后台数据源，由于身份验证，授权和会话管理，缓存在框架中一直是一流的架构功能，用来在同时使用这些数据源时提高性能。任何现代开源和&#x2F;或企业的缓存产品能够被插入到Shiro来提供一个快速及高效的用户体验。</p>
+<ul>
+<li><strong>Cryptography</strong>(org.apache.shiro.crypto.*)</li>
+</ul>
+<p>Cryptography是对企业安全框架的一个很自然的补充。Shiro的crypto包包含量易于使用和理解的cryptographic Ciphers，Hasher（又名digests）以及不同的编码器实现的代表。所有在这个包中的类都被精心地设计以易于使用和易于理解。任何使用Java的本地密码支持的人都知道它可以是一个难以驯服的具有挑战性的动物。Shiro的cryptoAPI 简化了复杂的Java机制，并使加密对于普通人也易于使用。</p>
+<ul>
+<li><strong>Realms</strong>(org.apache.shiro.realm.Realm)</li>
+</ul>
+<p>如上所述，Realms在Shiro和你的应用程序的安全数据之间担当“桥梁”或“连接器”。当它实际上与安全相关的数据如用来执行身份验证（登录）及授权（访问控制）的用户帐户交互时，Shiro从一个或多个为应用程序配置的Realm中寻找许多这样的东西。你可以按你的需要配置多个Realm（通常一个数据源一个Realm），且Shiro将为身份验证和授权对它们进行必要的协调。</p>
+<p><strong>The SecurityManager</strong></p>
+<p>因为Shiro的API鼓励一个以Subject为中心的编程方式，大多数应用程序开发人员很少，如果真有，与SecurityManager直接进行交互（框架开发人员有时候会觉得它很有用）。即便如此，了解如何SecurityManager是如何工作的仍然是很重要的，尤其是在为应用程序配置一个SecurityManager的时候。</p>
+<p><strong>Design</strong></p>
+<p>如前所述，应用程序的SecurityManager执行安全操作并管理所有应用程序用户的状态。在Shiro的默认SecurityManager实现中，这包括：</p>
+<ul>
+<li><p>Authentication</p>
+</li>
+<li><p>Authorization</p>
+</li>
+<li><p>Session Management</p>
+</li>
+<li><p>Cache Management</p>
+</li>
+<li><p>Realm coordination</p>
+</li>
+<li><p>Event propagation</p>
+</li>
+<li><p>“Remember Me” Services</p>
+</li>
+<li><p>Subject creation</p>
+</li>
+<li><p>Logout</p>
+</li>
+</ul>
+<p>以及更多。</p>
+<p>但这是许多功能来尝试管理一个单一的组件。而且，使这些东西灵活而又可定制将会是非常困难的，如果一切都集<br>中到一个单一的实现类。</p>
+<p>为了简化配置并启用灵活配置&#x2F;可插性，Shiro的实现都是高度模块化设计——由于如此的模块化，SecurityManager实现（以及它的类层次结构）并没有做很多事情。相反，SecurityManager 实现主要是作为一个轻量级的“容器”组<br>件，委托计划所有的行为到嵌套&#x2F;包裹的组件。这种“包装”的设计体现在上面的详细构架图。</p>
+<p>虽然组件实际上执行逻辑，但SecurityManager实现知道何时以及如何协调组件来完成正确的行为。SecurityManager 实现和组件都是兼容JavaBean的，它允许你（或某个配置机制）通过标准的JavaBean的accessor&#x2F;mutator 方法（get*&#x2F;set*）轻松地自定义可拔插组件。这意味着 Shiro 的架构的组件性能够把自定义行为转化为非常容易的配置文件。</p>
+<blockquote>
+<p><strong>Easy Configuration</strong></p>
+<p>由于JavaBeans的兼容性，通过任何支持JavaBean风格的配置的机制可以很容易的用自定义组件配置SecurityManager，如 Spring，Guice，JBoss，等等。</p>
+</blockquote>
+<blockquote>
+<p>本文摘自：《Apache Shiro 开发手册》<br>整编：Java技术栈（公众号id: javastack）</p>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">John Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Shrio/%E9%9D%9E%E5%B8%B8%E8%AF%A6%E5%B0%BD%E7%9A%84%20Shiro%20%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/">http://example.com/2025/10/29/后端技术/Shrio/非常详尽的 Shiro 架构解析/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">只有那年胜过年年</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Shiro/">Shiro</a></div><div class="post-share"><div class="social-share" data-image="/img/logo.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Shrio/%E4%B8%80%E6%96%87%E6%90%9E%E5%AE%9A%20Spring%20Boot%20&amp;%20Shiro%20%E5%AE%9E%E6%88%98/" title="一文搞定 Spring Boot &amp; Shiro 实战"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">一文搞定 Spring Boot & Shiro 实战</div></div><div class="info-2"><div class="info-item-1">Spring Boot集成Shiro权限验证框架，可参考：  https://shiro.apache.org/spring-boot.html  引入依赖&lt;dependency&gt;     &lt;groupId&gt;org.apache.shiro&lt;&#x2F;groupId&gt;     &lt;artifactId&gt;shiro-spring-boot-web-starter&lt;&#x2F;artifactId&gt;     &lt;version&gt;1.4.0&lt;&#x2F;version&gt; &lt;&#x2F;dependency&gt;  配置ShiroShiroConfig： @ConfigurationProperties(prefix &#x3D; &quot;shiro&quot;) @Configuration public class ShiroConfig &#123;  	@Autowired 	private ApplicationConfig applicationConfig;  	private L...</div></div></div></a><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Spring/Spring%20Aware%20%E5%AE%B9%E5%99%A8%E6%84%9F%E7%9F%A5%E6%8A%80%E6%9C%AF/" title="Spring Aware 容器感知技术"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Spring Aware 容器感知技术</div></div><div class="info-2"><div class="info-item-1">Spring Aware是什么Spring提供Aware接口能让Bean感知Spring容器的存在，即让Bean可以使用Spring容器所提供的资源。 Spring Aware的分类几种常用的Aware接口如下。    Aware接口 说明    ApplicationContextAware 能获取Application Context调用容器的服务   ApplicationEventPublisherAware 应用事件发布器，可以用来发布事件   BeanClassLoaderAware 能获取加载当前Bean的类加载器   BeanFactoryAware 能获取Bean Factory调用容器的服务   BeanNameAware 能获取当前Bean的名称   EnvironmentAware 能获取当前容器的环境属性信息   MessageSourceAware 能获取国际化文本信息   ResourceLoaderAware 获取资源加载器读取资源文件   ServletConfigAware 能获取到ServletConfig   ServletContextA...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Shrio/10%20%E5%88%86%E9%92%9F%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%20Shiro%20%E6%96%B0%E6%89%8B%E6%95%99%E7%A8%8B/" title="10 分钟快速上手 Shiro 新手教程"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-29</div><div class="info-item-2">10 分钟快速上手 Shiro 新手教程</div></div><div class="info-2"><div class="info-item-1">当前用户现在我们能够开始做一些我们真正关心的事情——执行安全操作。 当保护我们的应用程序时，我们对自己可能提出的最为相关的问题是“当前用户是谁”或“当前用户是否被允许做XXX”。 当我们编写代码或设计用户接口时，问这些问题是很常见的：应用程序通常是基于用户的背景情况建立的，且你想基于每个用户标准体现（保障）功能。因此，对于我们考虑应用程序安全的最自然的方式是基于当前用户。 Shiro的API使用它的Subject概念从根本上代表了“当前用户”的概念。 几乎在所有的环境中，你可以通过下面的调用获取当前正在执行的用户： Subject currentUser &#x3D; SecurityUtils.getSubject();  使用 SecurityUtils.getSubject()，我们可以获得当前正在执行的Subject。Subject是一个安全术语，它基本上的意思是“当前正在执行的用户的特定的安全视图”。它并没有被称为”User”是因为”User”一词通常和人类相关联。 在安全界，术语”Subject”可以表示为人类，而且可是第三方进程，cron job，daemonacc...</div></div></div></a><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Shrio/Shiro%20Realm%20%E6%9D%83%E9%99%90%E7%9A%84%E9%AA%8C%E8%AF%81%E6%B5%81%E7%A8%8B%E5%92%8C%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/" title="Shiro Realm 权限的验证流程和缓存机制"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-29</div><div class="info-item-2">Shiro Realm 权限的验证流程和缓存机制</div></div><div class="info-2"><div class="info-item-1">我们可以定义多个Realm权限类，继承AuthenticatingRealm。 如果是这样，那Shiro验证的策略和顺序是怎样的呢？ 策略通过查看源码，Shiro的Spring Boot自动配置是至少一个通过策略，即有一个权限类通过就判定有权限并通过。 自动配置类：  org.apache.shiro.spring.config.web.autoconfigure.ShiroWebAutoConfiguration  @Bean @ConditionalOnMissingBean @Override protected AuthenticationStrategy authenticationStrategy() &#123;     return super.authenticationStrategy(); &#125;   protected AuthenticationStrategy authenticationStrategy() &#123;     return new AtLeastOneSuccessfulStrategy(); &#125;  其他还有全部通...</div></div></div></a><a class="pagination-related" href="/2025/10/29/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/Shrio/%E4%B8%80%E6%96%87%E6%90%9E%E5%AE%9A%20Spring%20Boot%20&%20Shiro%20%E5%AE%9E%E6%88%98/" title="一文搞定 Spring Boot &amp; Shiro 实战"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-29</div><div class="info-item-2">一文搞定 Spring Boot &amp; Shiro 实战</div></div><div class="info-2"><div class="info-item-1">Spring Boot集成Shiro权限验证框架，可参考：  https://shiro.apache.org/spring-boot.html  引入依赖&lt;dependency&gt;     &lt;groupId&gt;org.apache.shiro&lt;&#x2F;groupId&gt;     &lt;artifactId&gt;shiro-spring-boot-web-starter&lt;&#x2F;artifactId&gt;     &lt;version&gt;1.4.0&lt;&#x2F;version&gt; &lt;&#x2F;dependency&gt;  配置ShiroShiroConfig： @ConfigurationProperties(prefix &#x3D; &quot;shiro&quot;) @Configuration public class ShiroConfig &#123;  	@Autowired 	private ApplicationConfig applicationConfig;  	private L...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Shiro%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">Shiro是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Shiro%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">Shiro有什么用？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Shiro%E7%89%B9%E6%80%A7"><span class="toc-number">3.</span> <span class="toc-text">Shiro特性</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Shiro%E6%8A%8AShiro%E5%BC%80%E5%8F%91%E5%9B%A2%E9%98%9F%E7%A7%B0%E4%B8%BA%E2%80%9C%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%9B%9B%E5%A4%A7%E5%9F%BA%E7%9F%B3%E2%80%9D%E2%80%94%E2%80%94%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81%EF%BC%8C%E6%8E%88%E6%9D%83%EF%BC%8C%E4%BC%9A%E8%AF%9D%E7%AE%A1%E7%90%86%E5%92%8C%E5%8A%A0%E5%AF%86%E4%BD%9C%E4%B8%BA%E5%85%B6%E7%9B%AE%E6%A0%87%E3%80%82"><span class="toc-number">3.1.</span> <span class="toc-text">Shiro把Shiro开发团队称为“应用程序的四大基石”——身份验证，授权，会话管理和加密作为其目标。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B9%9F%E6%8F%90%E4%BE%9B%E4%BA%86%E9%A2%9D%E5%A4%96%E7%9A%84%E5%8A%9F%E8%83%BD%E6%9D%A5%E6%94%AF%E6%8C%81%E5%92%8C%E5%8A%A0%E5%BC%BA%E5%9C%A8%E4%B8%8D%E5%90%8C%E7%8E%AF%E5%A2%83%E4%B8%8B%E6%89%80%E5%85%B3%E6%B3%A8%E7%9A%84%E6%96%B9%E9%9D%A2%EF%BC%8C%E5%B0%A4%E5%85%B6%E6%98%AF%E4%BB%A5%E4%B8%8B%E8%BF%99%E4%BA%9B%EF%BC%9A"><span class="toc-number">3.2.</span> <span class="toc-text">也提供了额外的功能来支持和加强在不同环境下所关注的方面，尤其是以下这些：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Shiro-%E6%9E%B6%E6%9E%84"><span class="toc-number">4.</span> <span class="toc-text">Shiro 架构</span></a></li></ol></div></div></div></div></main><footer id="footer" style="background: transparent;"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By John Doe</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><div class="js-pjax"><script>(() => {
+  let initFn = window.walineFn || null
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const destroyWaline = ele => ele.destroy()
+
+  const initWaline = (Fn, el = document, path = window.location.pathname) => {
+    const waline = Fn({
+      el: el.querySelector('#waline-wrap'),
+      serverURL: 'https://walinecomments-gxccu74d8-chens-projects-7c4f92c5.vercel.app',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      comment: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyWaline = () => {
+        destroyWaline(waline)
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const loadWaline = (el, path) => {
+    if (initFn) initWaline(initFn, el, path)
+    else {
+      btf.getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css')
+        .then(() => import('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js'))
+        .then(({ init }) => {
+          initFn = init || Waline.init
+          initWaline(initFn, el, path)
+          window.walineFn = initFn
+        })
+    }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Waline'
+      ? window.shuoshuoComment = { loadComment: loadWaline } 
+      : window.loadOtherComment = loadWaline
+    return
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

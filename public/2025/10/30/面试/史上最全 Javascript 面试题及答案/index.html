@@ -1,0 +1,317 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>史上最全 Javascript 面试题及答案 | 只有那年胜过年年</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#FC5531"><meta name="description" content="1、如何判断一个变量是数组还是字符串？ 使用typeof。 2、“&#x3D;&#x3D;”与“&#x3D;&#x3D;&#x3D;”的区别？ “&#x3D;&#x3D;”是相等运算符，会隐式转换。“&#x3D;&#x3D;&#x3D;”是严格运算符，会判断类型。 3、如何去除字符串中的所有空格？ function trim(str){    return str.replace(&#x2F;\s|\xA0">
+<meta property="og:type" content="article">
+<meta property="og:title" content="史上最全 Javascript 面试题及答案">
+<meta property="og:url" content="http://example.com/2025/10/30/%E9%9D%A2%E8%AF%95/%E5%8F%B2%E4%B8%8A%E6%9C%80%E5%85%A8%20Javascript%20%E9%9D%A2%E8%AF%95%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88/index.html">
+<meta property="og:site_name" content="只有那年胜过年年">
+<meta property="og:description" content="1、如何判断一个变量是数组还是字符串？ 使用typeof。 2、“&#x3D;&#x3D;”与“&#x3D;&#x3D;&#x3D;”的区别？ “&#x3D;&#x3D;”是相等运算符，会隐式转换。“&#x3D;&#x3D;&#x3D;”是严格运算符，会判断类型。 3、如何去除字符串中的所有空格？ function trim(str){    return str.replace(&#x2F;\s|\xA0">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/logo.png">
+<meta property="article:published_time" content="2025-10-30T06:42:34.000Z">
+<meta property="article:modified_time" content="2025-10-30T09:00:36.910Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="面试">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/logo.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "史上最全 Javascript 面试题及答案",
+  "url": "http://example.com/2025/10/30/%E9%9D%A2%E8%AF%95/%E5%8F%B2%E4%B8%8A%E6%9C%80%E5%85%A8%20Javascript%20%E9%9D%A2%E8%AF%95%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88/",
+  "image": "http://example.com/img/logo.png",
+  "datePublished": "2025-10-30T06:42:34.000Z",
+  "dateModified": "2025-10-30T09:00:36.910Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "John Doe",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/10/30/%E9%9D%A2%E8%AF%95/%E5%8F%B2%E4%B8%8A%E6%9C%80%E5%85%A8%20Javascript%20%E9%9D%A2%E8%AF%95%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FC5531')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FC5531')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: John Doe","link":"链接: ","source":"来源: 只有那年胜过年年","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '史上最全 Javascript 面试题及答案',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/logo.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">357</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">49</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/logo.png" alt="Logo"><span class="site-name">只有那年胜过年年</span></a><a class="nav-page-title" href="/"><span class="site-name">史上最全 Javascript 面试题及答案</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">史上最全 Javascript 面试题及答案</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-10-30T06:42:34.000Z" title="发表于 2025-10-30 14:42:34">2025-10-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-10-30T09:00:36.910Z" title="更新于 2025-10-30 17:00:36">2025-10-30</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F/">程序人生</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><p>1、如何判断一个变量是数组还是字符串？</p>
+<p>使用typeof。</p>
+<p>2、“=&#x3D;”与“&#x3D;&#x3D;&#x3D;”的区别？</p>
+<p>“&#x3D;&#x3D;”是相等运算符，会隐式转换。<br>“&#x3D;&#x3D;&#x3D;”是严格运算符，会判断类型。</p>
+<p>3、如何去除字符串中的所有空格？</p>
+<p>function trim(str){<br>    return str.replace(&#x2F;\s|\xA0&#x2F;g,””);<br>}</p>
+<p>4、如何获取当前浏览的URL？</p>
+<p>window.location.href</p>
+<p>5、怎样添加、删除、移动、复制、创建和查找节点？</p>
+<p>1）创建新节点</p>
+<p>createDocumentFragment() &#x2F;&#x2F;创建一个DOM片段</p>
+<p>createElement() &#x2F;&#x2F;创建一个具体的元素</p>
+<p>createTextNode() &#x2F;&#x2F;创建一个文本节点</p>
+<p>2）添加、移除、替换、插入</p>
+<p>appendChild() &#x2F;&#x2F;添加</p>
+<p>removeChild() &#x2F;&#x2F;移除</p>
+<p>replaceChild() &#x2F;&#x2F;替换</p>
+<p>insertBefore() &#x2F;&#x2F;插入</p>
+<p>3）查找</p>
+<p>getElementsByTagName() &#x2F;&#x2F;通过标签名称</p>
+<p>getElementsByName() &#x2F;&#x2F;通过元素的Name属性的值</p>
+<p>getElementById() &#x2F;&#x2F;通过元素Id，唯一性</p>
+<p>实现一个函数clone，可以对JavaScript中的5种主要的数据类型(包括Number、String、Object、Array、Boolean)进行值复制。</p>
+<p>6、什么是闭包？</p>
+<p>闭包就是能够读取其他函数内部变量的函数。</p>
+<p>7、JS中const、let、var之间的区别</p>
+<p>1）const定义的变量不可以修改，而且必须初始化。</p>
+<p>2）var定义的变量可以修改，如果不初始化会输出undefined，不会报错。</p>
+<p>3）let是块级作用域，函数内部使用let定义后，对函数外部无影响。</p>
+<p>8、什么叫同源策略？有什么用？</p>
+<p>同源策略是指域名，协议，端口相同，只有同源的脚本才会被执行。</p>
+<p>9、什么是Ajax? 适用于哪些应用场景？</p>
+<p>Ajax是一种在无需重新加载整个网页的情况下，能够更新部分网页的技术。<br>如：无刷新判断验证码是否输入正确等。</p>
+<p>10、Ajax请求时get和post有什么区别？</p>
+<p>1）get参数放在url后面，post放在http body里面<br>2）有大小限制,get受url长度限制，post受内存限制<br>3）安全问题，get明文传输不侬好<br>4）应用不同，get用于获取数据，post提交数据</p>
+<p>11、谈谈Jsonp的原理？</p>
+<p>动态创建script标签，回调函数</p>
+<p>12、split()和join()函数的区别？</p>
+<p>前者是切割成数组的形式，后者是将数组转换成字符串</p>
+<p>13、写出3个使用this的典型应用。</p>
+<p>1）事件：如onclick  this-&gt;发生事件的对象<br>2）构造函数：this-&gt;new 出来的object<br>3）call&#x2F;apply：改变this</p>
+<p>14、怎么使用JS改变元素的class？</p>
+<p>object.ClassName &#x3D; xxxx</p>
+<p>15、普通事件与绑定事件有什么区别？</p>
+<p>普通事件只支持单个事件，而事件绑定可以添加多个事件</p>
+<p>16、请描述js里事件的三个阶段。</p>
+<p>捕获、处于目标阶段、冒泡阶段(IE8以下只支持冒泡)</p>
+<p>17、数组方法pop() push() unshift() shift()都有什么用？</p>
+<p>push()：尾部添加<br>pop()：尾部删除<br>unshift()：头部添加<br>shift()：头部删除</p>
+<p>18、IE和DOM事件流的区别是什么？</p>
+<p>1）执行顺序不一样<br>2）参数不一样<br>3）事件加不加on<br>4）this指向问题</p>
+<p>19、call和apply有什么区别？</p>
+<p>call与apply的区别就是参数写法不同:</p>
+<p>a.call(b,arg1,arg2,…)<br>a.apply(b,[arg1,arg2,…])</p>
+<p>20、什么是事件委托？</p>
+<p>让利用事件冒泡的原理，让自己的所触发的事件，让他的父元素代替执行！</p>
+<p>21、JS中的本地对象，内置对象和宿主对象分别有哪些？</p>
+<p>本地对象：array obj regExp等可以new实例化的<br>内置对象：Math等不可以实例化的<br>宿主对象：document window等浏览器自带的</p>
+<p>22、document load 和 document ready 的区别是什么？</p>
+<p>load必须等到页面内包括图片的所有元素加载完毕后才能执行。 ready是DOM结构绘制完毕后就执行，不必等到加载完毕。 </p>
+<p>23、你怎么理解WebPack和Grunt和Gulp？</p>
+<p>Webpack可以看做是模块打包器，把你的代码转换成合适的格式供浏览器使用；</p>
+<p>常用webpack构建本地服务器，可以让浏览器监听你代码的修改，自动刷新现实后的结果；</p>
+<p>Gulp&#x2F;Grunt是一种能够优化前端开发的流程工具，而WebPack是一种模块化的解决方案；</p>
+<p>WebPack有4个配置选项，打包速度越快，负面作用就越大，会不利于调试，文件的执行效率也有一定的影响；开发阶段使用：eval-source-map：使用eval打包源文件模块，在同一个文件中生成干净的完整的source map。这个选项可以在不影响构建速度的前提下生成完整的sourcemap，但是对打包后输出的JS文件的执行具有性能和安全的隐患。在开发阶段这是一个非常好的选项，在生产阶段则一定不要启用这个选项；</p>
+<p>babel是一个编译js的平台，把es6&#x2F;es7转换成浏览器支持的es5提供浏览器使用；</p>
+<p>24、JS有哪几种数据类型？</p>
+<p>String,Number,Boolean,Null,Undefined；Object,Array,Function（引用类型）</p>
+<p>25、什么是ES？ES和JS有什么联系？</p>
+<p>要讲清楚这个问题，需要回顾历史。1996年11月，JavaScript的创造者Netscape公司，决定将JavaScript提交给国际标准化组织ECMA，希望这种语言能够成为国际标准。次年，ECMA发布262号标准文件（ECMA-262）的第一版，规定了浏览器脚本语言的标准，并将这种语言称为ECMAScript，这个版本就是1.0版。</p>
+<p>该标准从一开始就是针对JavaScript语言制定的，但是之所以不叫JavaScript，有两个原因。一是商标，Java是Sun公司的商标，根据授权协议，只有Netscape公司可以合法地使用JavaScript这个名字，且JavaScript本身也已经被Netscape公司注册为商标。二是想体现这门语言的制定者是ECMA，不是Netscape，这样有利于保证这门语言的开放性和中立性。</p>
+<p>因此，ECMAScript和JavaScript的关系是，前者是后者的规格，后者是前者的一种实现（另外的ECMAScript方言还有Jscript和ActionScript）。在日常场合，这两个词是可以互换的。</p>
+<p>26、ES6有哪些新特性？</p>
+<p>箭头操作符；对class的支持（constructor构造函数）；不定参数…x；let和const关键字；for of遍历；模块的支持import；promise异步函数的处理模式(pending等待中；resolve返回成功，reject返回失败)；</p>
+<p>27、typeof都会返回什么数据类型？</p>
+<p>Object number function boolean underfind</p>
+<p>28、请例举3种强制类型转换和2种隐式类型转换。</p>
+<p>29、截取字符串javastack的java?</p>
+<p>30、如何规避javascript多人开发函数重名问题？</p>
+<p>31、检测一个变量是否是String类型有哪几种方式？</p>
+<p> 1）typeof(obj) &#x3D;&#x3D; ‘string’<br> 2）obj.constructor &#x3D;&#x3D; String;</p>
+<p>32、请说出至少三种减低页面加载时间的方法。</p>
+<p>1）压缩css、js文件<br>2）合并js、css文件，减少http请求<br>3）外部js、css文件放在最底下<br>4）减少dom操作，尽可能用变量替代不必要的dom操作</p>
+<p>33、请详细解释Ajax的工作原理。</p>
+<p>1）创建ajax对象（XMLHttpRequest&#x2F;ActiveXObject(Microsoft.XMLHttp)）<br>2）判断数据传输方式(GET&#x2F;POST)<br>3）打开链接 open()<br>4）发送 send()<br>5）当ajax对象完成第四步（onreadystatechange）数据接收完成，判断http响应状态（status）200-300之间或者304（缓存）执行回调函数</p>
+<p>34、JS中有哪几种函数？</p>
+<p>具名函数（命名函数）和匿名函数。</p>
+<p>35、请至少写出3种创建函数的方式。</p>
+<p>1）声明函数</p>
+<p>function fn1(){}</p>
+<p>2）创建匿名函数表达式</p>
+<p>var fn1 &#x3D; function (){}</p>
+<p>3）创建具名函数表达式</p>
+<p>var fn1 &#x3D; function javastack(){};</p>
+<p>36、什么是跨域？解决跨域的方法有哪些？</p>
+<p>由于浏览器同源策略，凡是发送请求url的协议、域名、端口三者之间任意一个与当前页面地址不同即为跨域。</p>
+<p>解决方案：JSONP、CORS、代理、服务器实现等。</p>
+<hr>
+<p>获取更多面试题及答案请关注微信公众号：Java技术栈，回复：面试。</p>
+<p><img src="http://img.javastack.cn/javastack.png"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">John Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/10/30/%E9%9D%A2%E8%AF%95/%E5%8F%B2%E4%B8%8A%E6%9C%80%E5%85%A8%20Javascript%20%E9%9D%A2%E8%AF%95%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88/">http://example.com/2025/10/30/面试/史上最全 Javascript 面试题及答案/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">只有那年胜过年年</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%9D%A2%E8%AF%95/">面试</a></div><div class="post-share"><div class="social-share" data-image="/img/logo.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/10/30/%E9%9D%A2%E8%AF%95/%E5%8F%B2%E4%B8%8A%E6%9C%80%E5%85%A8%20Java%20%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%9D%A2%E8%AF%95%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88/" title="史上最全 Java 多线程面试题及答案"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">史上最全 Java 多线程面试题及答案</div></div><div class="info-2"><div class="info-item-1"> 多线程并发编程是Java编程中重要的一块内容，也是面试重点覆盖区域。所以，学好多线程并发编程对Java程序员来来说极其重要的。下面小编整理了60道最常见的Java多线程面试题及答案，供你学习或者面试参考。  多线程有什么用？  线程和进程的区别是什么？  ava实现线程有哪几种方式？  启动线程方法start()和run()有什么区别？  怎么终止一个线程？如何优雅地终止线程？  一个线程的生命周期有哪几种状态？它们之间如何流转的？  线程中的wait()和sleep()方法有什么区别？  多线程同步有哪几种方法？  什么是死锁？如何避免死锁？  多线程之间如何进行通信？  线程怎样拿到返回结果？  violatile关键字的作用？  新建T1、T2、T3三个线程，如何保证它们按顺序执行？  怎么控制同一时间只有3个线程运行？  为什么要使用线程池？  常用的几种线程池并讲讲其中的工作原理。  线程池启动线程submit()和execute()方法有什么不同？  CyclicBarrier和CountDownLatch的区别？  什么是活锁、饥饿、无锁、死锁？  什么是原子性、...</div></div></div></a><a class="pagination-related" href="/2025/10/30/%E9%9D%A2%E8%AF%95/%E5%8F%B2%E4%B8%8A%E6%9C%80%E5%85%A8%E9%98%BF%E9%87%8C%20Java%20%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/" title="史上最全阿里 Java 面试题总结"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">史上最全阿里 Java 面试题总结</div></div><div class="info-2"><div class="info-item-1">以下为大家整理了阿里巴巴史上最全的 Java 面试题，涉及大量 Java 面试知识点和相关试题。  JAVA基础  JAVA中的几种基本数据类型是什么，各自占用多少字节。 String类能被继承吗，为什么。 String，Stringbuffer，StringBuilder的区别。 ArrayList和LinkedList有什么区别。 讲讲类的实例化顺序，比如父类静态数据，构造函数，字段，子类静态数据，构造函数，字段，当new的时候，他们的执行顺序。 用过哪些Map类，都有什么区别，HashMap是线程安全的吗,并发下使用的Map是什么，他们内部原理分别是什么，比如存储方式，hashcode，扩容，默认容量等。 JAVA8的ConcurrentHashMap为什么放弃了分段锁，有什么问题吗，如果你来设计，你如何设计。 有没有有顺序的Map实现类，如果有，他们是怎么保证有序的。 抽象类和接口的区别，类可以继承多个类么，接口可以继承多个接口么,类可以实现多个接口么。 继承和聚合的区别在哪。 IO模型有哪些，讲讲你理解的nio ，他和bio，aio的区别是啥，谈谈reactor模型。 ...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/10/30/%E9%9D%A2%E8%AF%95/10%20%E9%81%93%E8%85%BE%E8%AE%AF%E7%9A%84%20Java%20%E9%9D%A2%E8%AF%95%E9%A2%98/" title="10 道腾讯的 Java 面试题"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-30</div><div class="info-item-2">10 道腾讯的 Java 面试题</div></div><div class="info-2"><div class="info-item-1">下面总结10道面试腾讯的Java面试题。 1、说几种常见的攻击方式及预防手段。 2、http1.x和http2.x的区别。 3、mysql查询语句怎么做性能分析。 4、你知道哪几种排序算法？ 5、HashMap和HashTable的区别，并说明其底层实现数据结构。 6、HashMap满了之后怎么扩容？ 7、Linux中远程传输文件有什么方式？ 8、说说Java中异常的分类。 9、TCP和UDP的区别，TCP为什么是三次握手，不是两次。 10、说说数据库设计的三范式，可以违反三范式吗？ 说容易也容易说复杂也复杂，想把它们都答好也不是容易的事，所有题目在之前的文章有详细说明过，详情请关注公众号：Java技术栈。  </div></div></div></a><a class="pagination-related" href="/2025/10/30/%E9%9D%A2%E8%AF%95/75%20%E9%81%93%20BAJT%20%E4%B8%AD%E9%AB%98%E7%BA%A7%20Java%20%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%8C%E4%BD%A0%E8%83%BD%E7%AD%94%E4%B8%8A%E5%87%A0%E9%81%93%EF%BC%9F/" title="75 道 BAJT 中高级 Java 面试题，你能答上几道？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-30</div><div class="info-item-2">75 道 BAJT 中高级 Java 面试题，你能答上几道？</div></div><div class="info-2"><div class="info-item-1">整理了下 BATJ 关于 JAVA 的面试题目，大家参考下吧，希望对大家有所帮助，可以帮大家查漏不缺。答对这些面试题，PASS 掉 80 % 的求职竞争者。 75 道 BATJ 中高级 Java 面试题    hashcode相等两个类一定相等吗?equals呢?相反呢?    介绍一下集合框架?    hashmap hastable 底层实现什么区别?hashtable和concurrenthashtable呢?    hashmap和treemap什么区别?低层数据结构是什么?    线程池用过吗都有什么参数?底层如何实现的?    sychnized和Lock什么区别?sychnize 什么情况情况是对象锁? 什么时候是全局锁为什么?    ThreadLocal 是什么底层如何实现?写一个例子呗?    volitile的工作原理?    cas知道吗如何实现的?    请用至少四种写法写一个单例模式?小试牛刀，答对几道？    请介绍一下JVM内存模型??用过什么垃圾回收器都说说呗    线上发送频繁full gc如何处理? CPU 使用率过高怎么办?    如何定位...</div></div></div></a><a class="pagination-related" href="/2025/10/30/%E9%9D%A2%E8%AF%95/18%20%E9%81%93%20Java%20%E5%9F%BA%E7%A1%80%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AF%95%E9%A2%98/" title="18 道 Java 基础面试笔试题"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-30</div><div class="info-item-2">18 道 Java 基础面试笔试题</div></div><div class="info-2"><div class="info-item-1"> 上图来自Java技术栈微信群里的群友分享，看起来比较基础，但不一定人人都答得上来。图片比较模糊，小编把题目进行了文字化。 1.你最常上的两个技术站和最常使用的两个app分別进什么？主要解决你什么需求？ 2.请简述http协议中get请求和post请求的区别. 3.请简述session和cookie的区別. 4.简述Servlet与JSP的关系， 5.JSP内置对象有哪些，各自起到的作用 6.简述你所理解的JAVA封装、继承、多态。 7.写出2个常用的设计模式(伪代码)，并简述应用场景。 8.HashMap和HashTable区别。 9.HashSet和TreeSet的区别。 10.ArrayList和LinkedList的区别。 11.&#x3D;&#x3D;与equals的区别。 12.简述泛型、反射、注解应用场景及各自解决了哪些问题。 13.Thread类的方法有哪些，如何多种方式实现线程同步。 14进程与线程的区别，JAVA中有哪些方式可以创建线程。 15.现有一学生表结构(student-id,class-id,name)，请写出统计每班有多少学生的SQL语句。 16....</div></div></div></a><a class="pagination-related" href="/2025/10/30/%E9%9D%A2%E8%AF%95/Java%20%E9%9D%A2%E8%AF%95%E9%A2%98%E7%BB%8F%E5%85%B8%2077%20%E9%97%AE%EF%BC%81/" title="Java 面试题经典 77 问！"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-30</div><div class="info-item-2">Java 面试题经典 77 问！</div></div><div class="info-2"><div class="info-item-1"> 金三银四了，3月底，4月初，找工作换单位的黄金时期。4月初将会有有一大批职场人士流动。。。 作为Java开发码农的你是不是也在蠢蠢欲动，或者已经搞了几轮车轮战了？ 我们为大家准备了 77 道经典 Java 面试题，如果你面试不力，基础还不够强，那么你或许会受用！ 1、什么是Java虚拟机？为什么Java被称作是“平台无关的编程语言”？ 2、JDK和JRE的区别是什么？ 3、static关键字是什么意思？Java中是否可以覆盖(override)一个private或者是 static的方法？ 4、是否可以在static环境中访问非static变量？ 5、Java支持的数据类型有哪些？什么是自动拆装箱？ 6、Java中的方法覆盖(Overriding)和方法重载(Overloading)是什么意思？ 7、Java中，什么是构造函数？什么是构造函数重载？什么是复制构造函数？ 8、Java支持多继承么？ 9、接口和抽象类的区别是什么？ 10、什么是值传递和引用传递？ 11、进程和线程的区别是什么？ 12、创建线程有几种不同的方式？你喜欢哪一种？为什么？ 13、概括的解释下线程的几种可用...</div></div></div></a><a class="pagination-related" href="/2025/10/30/%E9%9D%A2%E8%AF%95/Redis%20%E9%9D%A2%E8%AF%95%E9%A2%98%2050%20%E9%97%AE%EF%BC%8C%E5%8F%B2%E4%B8%8A%E6%9C%80%E5%85%A8%E3%80%82/" title="Redis 面试题 50 问，史上最全。"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-30</div><div class="info-item-2">Redis 面试题 50 问，史上最全。</div></div><div class="info-2"><div class="info-item-1"> 1、什么是Redis？Redis本质上是一个Key-Value类型的内存数据库，很像memcached，整个数据库统统加载在内存当中进行操作，定期通过异步操作把数据库数据flush到硬盘上进行保存。因为是纯内存操作，Redis的性能非常出色，每秒可以处理超过 10万次读写操作，是已知性能最快的Key-Value DB。Redis的出色之处不仅仅是性能，Redis最大的魅力是支持保存多种数据结构，此外单个value的最大限制是1GB，不像 memcached只能保存1MB的数据，因此Redis可以用来实现很多有用的功能，比方说用他的List来做FIFO双向链表，实现一个轻量级的高性 能消息队列服务，用他的Set可以做高性能的tag系统等等。另外Redis也可以对存入的Key-Value设置expire时间，因此也可以被当作一 个功能加强版的memcached来用。Redis的主要缺点是数据库容量受到物理内存的限制，不能用作海量数据的高性能读写，因此Redis适合的场景主要局限在较小数据量的高性能操作和运算上。 2、Redis相比memcached有哪些优势？(1) memcach...</div></div></div></a><a class="pagination-related" href="/2025/10/30/%E9%9D%A2%E8%AF%95/Java%20%E4%B8%AD%E5%88%9B%E5%BB%BA%20String%20%E7%9A%84%E4%B8%A4%E9%81%93%E9%9D%A2%E8%AF%95%E9%A2%98%E5%8F%8A%E8%AF%A6%E8%A7%A3/" title="Java 中创建 String 的两道面试题及详解"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-10-30</div><div class="info-item-2">Java 中创建 String 的两道面试题及详解</div></div><div class="info-2"><div class="info-item-1">我们知道创建一个String类型的变量一般有以下两种方法： String str1 &#x3D; &quot;abcd&quot;; String str2 &#x3D; new String(&quot;abcd&quot;);  那么为什么会存在这两种创建方式呢，它们在内存中的表现形式各有什么区别？ 下面来看下面两道经常遇到的面试题。 面试题1：String a &#x3D; &quot;abcd&quot;; String b &#x3D; &quot;abcd&quot;; System.out.println(a &#x3D;&#x3D; b);  &#x2F;&#x2F; true System.out.println(a.equals(b)); &#x2F;&#x2F; true  解析： 用””创建的a,b两个字符串，&#x3D;&#x3D;和equals比较返回都为true，这是因为a,b都指向了方法区的同一个字符串。所以，当同样的一个字符串用””重复创建时只在方法区创建一次。 面试题2：String c &#x3D; new String(&quot;abcd...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/logo.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">John Doe</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">357</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">49</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/xxxxx" target="_blank" title="Github"><i class="fab fa-github" style="color: #hdhfbb;"></i></a><a class="social-icon" href="mailto:xxxxxx@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #000000;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">🌸 春去秋来，花开花落  📚 桌上的日历又薄了几页  💭 记忆中的昨天还那么清晰</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/30/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/JDK%20%E7%B4%A7%E6%80%A5%E6%BC%8F%E6%B4%9E%EF%BC%8CXMLDecoder%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%94%BB%E5%87%BB/" title="JDK 紧急漏洞，XMLDecoder反序列化攻击">JDK 紧急漏洞，XMLDecoder反序列化攻击</a><time datetime="2025-10-30T06:42:34.000Z" title="发表于 2025-10-30 14:42:34">2025-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/30/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/%E4%BC%9A%E8%AF%9D%E5%9B%BA%E5%AE%9A%E6%94%BB%E5%87%BB%E6%BC%8F%E6%B4%9E%EF%BC%88session%20fixation%20attack%EF%BC%89/" title="会话固定攻击漏洞">会话固定攻击漏洞</a><time datetime="2025-10-30T06:42:34.000Z" title="发表于 2025-10-30 14:42:34">2025-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/30/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/44%20%E4%B8%AA%20Java%20%E4%BB%A3%E7%A0%81%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%80%BB%E7%BB%93/" title="44 个 Java 代码性能优化总结">44 个 Java 代码性能优化总结</a><time datetime="2025-10-30T06:42:34.000Z" title="发表于 2025-10-30 14:42:34">2025-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/30/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/8%20%E6%9D%A1%E5%85%B3%E4%BA%8E%20Web%20%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E7%9A%84%E4%BC%98%E5%8C%96%E5%BB%BA%E8%AE%AE/" title="8 条关于 Web 前端性能的优化建议">8 条关于 Web 前端性能的优化建议</a><time datetime="2025-10-30T06:42:34.000Z" title="发表于 2025-10-30 14:42:34">2025-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/30/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E7%99%BE%E5%88%86%E4%B9%9D%E5%8D%81Java%E7%A8%8B%E5%BA%8F%E5%91%98%E8%A2%AB%E8%AF%AF%E5%AF%BC%E7%9A%84%E4%B8%80%E4%B8%AA%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%AD%96%E7%95%A5/" title="百分九十Java程序员被误导的一个性能优化策略">百分九十Java程序员被误导的一个性能优化策略</a><time datetime="2025-10-30T06:42:34.000Z" title="发表于 2025-10-30 14:42:34">2025-10-30</time></div></div></div></div></div></div></main><footer id="footer" style="background: transparent;"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By John Doe</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><div class="js-pjax"><script>(() => {
+  let initFn = window.walineFn || null
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const destroyWaline = ele => ele.destroy()
+
+  const initWaline = (Fn, el = document, path = window.location.pathname) => {
+    const waline = Fn({
+      el: el.querySelector('#waline-wrap'),
+      serverURL: 'https://walinecomments-gxccu74d8-chens-projects-7c4f92c5.vercel.app',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      comment: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyWaline = () => {
+        destroyWaline(waline)
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const loadWaline = (el, path) => {
+    if (initFn) initWaline(initFn, el, path)
+    else {
+      btf.getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css')
+        .then(() => import('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js'))
+        .then(({ init }) => {
+          initFn = init || Waline.init
+          initWaline(initFn, el, path)
+          window.walineFn = initFn
+        })
+    }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Waline'
+      ? window.shuoshuoComment = { loadComment: loadWaline } 
+      : window.loadOtherComment = loadWaline
+    return
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
