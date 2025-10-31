@@ -62,10 +62,6 @@ Spring Boot 项目在 IDE 中再配合 DevTools 工具，可以使本发开发�
 
 正如我们在上面所分析到的，延迟加载确实可以显着改善启动时间，但也有一些明显的缺点，所以我们一定小心谨慎的启用它。或者我们可以对项目进行评估下，延迟加载真的对我们的项目有这么重要或者急迫么？
 
-等正式版 Spring Boot 2.2 发布，栈长给再出一个实战文章，欢迎关注栈长的微信公众号：Java技术栈，不要走开。
-
-好了，今天的分享就到这里，关注Java技术栈微信公众号，在后台回复：boot，获取栈长整理的更多的 Spring Boot 教程，都是实战干货，以下仅为部分预览。
-
 - Spring Boot 读取配置的几种方式
 - Spring Boot 如何做参数校验？
 - Spring Boot 最核心的 25 个注解！
@@ -74,7 +70,5 @@ Spring Boot 项目在 IDE 中再配合 DevTools 工具，可以使本发开发�
 - ……
 
 最后，你们是怎么应用延迟加载功能的，欢迎留言分享~
-
-本文原创首发于微信公众号：Java技术栈（id:javastack），关注公众号在后台回复 "boot" 可获取更多 Spring Boot 教程，转载请原样保留本信息。
 
 ![](http://img.javastack.cn/wx_search_javastack.png)

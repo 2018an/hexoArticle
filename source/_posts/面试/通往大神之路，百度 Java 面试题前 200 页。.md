@@ -702,6 +702,3 @@ tags: 面试
 ## 日期
 * 计算两个日期之间的差距
 
-获取更多面试题及答案请关注微信公众号：Java技术栈，回复：面试。
-
-![](http://img.javastack.cn/javastack.png)

@@ -23,9 +23,6 @@ Java 程序员方向太多，且不说移动开发、大数据、区块链、人
 
 **推荐：**
 
-[Java 必看的 Spring 知识汇总](https://mp.weixin.qq.com/s/jV5Z3earaNk0g0h008mPbg)
-
-更多请在Java技术栈微信公众号后台回复关键字：spring。
 
 ## 2.Spring MVC
 
@@ -41,9 +38,7 @@ Spring MVC 是一个 MVC 开源框架，用来代替 Struts。它是 Spring 项�
 
 **推荐：**
 
-[从 0 开始手写一个 Spring MVC 框架](https://mp.weixin.qq.com/s/36F_fFbGKkRL20DJgX4ahg)
 
-更多请在Java技术栈微信公众号后台回复关键字：mvc。
 
 ## 3.Spring Boot
 
@@ -59,13 +54,7 @@ Spring Boot提供了各种组件的启动器（starters），开发者只要能�
 
 > https://github.com/spring-projects/spring-boot
 
-**推荐：**
 
-- [Spring Boot 核心配置文件详解](https://mp.weixin.qq.com/s/BzXNfBzq-2TOCbiHG3xcsQ)
-- [Spring Boot 2.x 启动全过程源码分析](https://mp.weixin.qq.com/s/iMPXjuKRKT5lMZ4oVSp4Ww)
-- [20 道 Spring Boot 面试题答案](https://mp.weixin.qq.com/s/GmTayi-Izb_lJqNz-zVhxg)
-
-更多请在Java技术栈微信公众号后台回复关键字：boot。
 
 ## 4.Spring Cloud
 
@@ -79,13 +68,7 @@ Spring Cloud 是一系列框架的有序集合，是目前最火热的微服务�
 
 > https://github.com/spring-cloud
 
-**推荐：**
 
-- [Spring Cloud 最新 Finchley 版本踩坑](https://mp.weixin.qq.com/s/CvAmV4mjWHqNPkUoy0CwYw)
-- [微服务为什么选Spring Cloud？](https://mp.weixin.qq.com/s/jQnxdrNdGDLvo8dUxOc2eQ)
-- [Spring Cloud 多版本怎么选择？](https://mp.weixin.qq.com/s/IqlHFsIrFJ5vBG9-1gldJw)
-
-更多请在Java技术栈微信公众号后台回复关键字：cloud。
 
 ## 5.Mybatis/ iBatis
 
@@ -99,11 +82,7 @@ iBatis 曾是开源软件组 Apache 推出的一种轻量级的对象关系映�
 
 > https://github.com/mybatis
 
-**推荐：**
 
-[Mybatis 传递多个参数的 4 种方式](https://mp.weixin.qq.com/s/8p5UTWHObodgIrgXjcNhIg)
-
-更多请关注Java技术栈微信公众号，在后台回复：mybatis。
 
 ## 6.Hibernate
 
@@ -129,12 +108,7 @@ Dubbo是阿里巴巴开源的基于 Java 的高性能 RPC 分布式服务框架�
 
 > https://github.com/apache/incubator-dubbo
 
-**推荐：**
 
-- [Dubbo 架构设计详解](https://mp.weixin.qq.com/s/q8S3Ihas0KXVMfbdNjau0w)
-- [史上最全 40 道 Dubbo 面试题及答案](https://mp.weixin.qq.com/s/PdWRHgm83XwPYP08KnkIsw)
-
-更多请在Java技术栈微信公众号后台回复关键字：dubbo。
 
 ## 8.Netty
 
@@ -172,11 +146,6 @@ EhCache 是一个纯Java的进程内缓存框架，具有快速、精干等特�
 
 > https://github.com/ehcache/ehcache3
 
-**推荐：**
-
-[Ehcache介绍及整合Spring实现高速缓存](https://mp.weixin.qq.com/s/FqstzO4u_kwH79B2YD83Aw)
-
-更多请在Java技术栈微信公众号后台回复关键字：ehcache。
 
 ## 11.Quartz
 
@@ -247,5 +216,3 @@ Log4j 是 Apache 的一个开源日志框架，通过 Log4j 我们可以将程�
 如果上面的大部分没用过，甚至都没听说过，那就怀疑你是不是个假程序员了，要加油了。
 
 这些都是 Java 程序员必备的开发框架，有些不一定是首选的选择，但这些一定是 Java 程序员必备的。。
-
-> 本文原创首发于微信公众号：Java技术栈（id:javastack），关注公众号在后台回复 "java" 可获取更多，转载请原样保留本信息。

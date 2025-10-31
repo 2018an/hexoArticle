@@ -40,16 +40,10 @@ Spring Cloud Gateway构建于 Spring 5+，基于 Spring Boot 2.x 响应式的、
 
 据了解，正是因为 Zuul 2.x 的不断跳票，Spring Cloud 才釜底抽薪推出了自己的服务网关：Spring Cloud Gateway，栈长看了下，使用起来比 Zuul 更简单，配置更方便，所以说选 Spring Cloud Gateway 没错，毕竟是 Spring Cloud 亲儿子，不会始乱终弃。
 
-关注Java技术栈微信公众号，栈长将继续分享 Spring Cloud Gateway 的实战教程，公众号第一时间推送，持续关注。在公众号后台回复：cloud，获取栈长整理的更多的 Spring Cloud 教程，都是实战干货，以下仅为部分预览。
-
 - Spring Cloud 最新 Finchley 版本踩坑
 - Spring Cloud 多版本如何选择
 - Spring Cloud 是什么，和 Dubbo 对比
 - Spring Cloud 注册中心高可用搭建
 - Spring Cloud Eureka 自我保护机制
-- ……
-
-本文原创首发于微信公众号：Java技术栈（id:javastack），关注公众号在后台回复 "cloud" 可获取更多 Spring Cloud 教程，转载请原样保留本信息。
-
 
 

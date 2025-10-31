@@ -74,14 +74,8 @@ spring.datasource.password=
 
 所以，这才是 Spring Boot 的核心，这才是我们为什么使用 Spring Boot 的原因。如果答不到这个关键点，那真没有掌握到 Spring Boot 的核心所在。
 
-好了，今天的分享就到这里，关注Java技术栈微信公众号，在后台回复：boot，获取栈长整理的更多的 Spring Boot 教程，都是实战干货，以下仅为部分预览。
-
 - Spring Boot 读取配置的几种方式
 - Spring Boot 如何做参数校验？
 - Spring Boot 最核心的 25 个注解！
 - Spring Boot 2.x 启动全过程源码分析
 - Spring Boot 2.x 新特性总结及迁移指南
-- ……
-
-> 本文原创首发于微信公众号：Java技术栈（id:javastack），关注公众号在后台回复 "boot" 可获取更多 Spring Boot 教程，转载请原样保留本信息。
-

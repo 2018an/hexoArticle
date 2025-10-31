@@ -41,15 +41,8 @@ bootstrap 配置文件有以下几个应用场景。
 
 ![](http://img.javastack.cn/18-4-2/38651438.jpg)
 
-做过 Spring Cloud 微服务的朋友应该对 bootstrap 的应用十分清楚，我们的微信公众号Java技术栈也有 Spring Cloud 的实战教程，在 Spring 专题中都能看到。
-
-好了，今天的分享就到这里，关注Java技术栈微信公众号，在后台回复：boot，获取栈长整理的更多的 Spring Boot 教程，都是实战干货，以下仅为部分预览。
-
 - Spring Boot 读取配置的几种方式
 - Spring Boot 如何做参数校验？
 - Spring Boot 最核心的 25 个注解！
 - Spring Boot 2.x 启动全过程源码分析
 - Spring Boot 2.x 新特性总结及迁移指南
-- ……
-
-本文原创首发于微信公众号：Java技术栈（id:javastack），转载请原样保留本信息。

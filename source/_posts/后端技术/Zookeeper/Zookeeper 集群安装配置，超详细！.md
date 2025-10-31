@@ -132,7 +132,3 @@ Mode: follower
 #### 注意
 
 如果是在单机创建的多个Zookeeper伪集群，需要对应修改配置中的端口、日志文件、数据文件位置等配置信息。
-
-跟着栈长学 Zookeeper，可以在Java技术栈微信公众号回复关键字：Zookeeper，后续会陆续更新 Zookeeper 系列文章。
-
-> 本文原创首发于微信公众号：Java技术栈（id:javastack），关注公众号在后台回复 "java" 可获取更多，转载请原样保留本信息。

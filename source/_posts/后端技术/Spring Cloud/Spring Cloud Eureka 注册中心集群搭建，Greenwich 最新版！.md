@@ -86,7 +86,6 @@ Spring Cloud 的注册中心可以由 Eureka、Consul、Zookeeper、ETCD 等来�
 
 主要是加入了 Eureka Server 和 Spring Test 依赖包，还有 Spring Boot 和 Spring Cloud 的基础依赖。
 
-Maven就不多介绍了，不熟悉的，请关注Java技术栈微信公众号，在后台回复：Maven，即可获取栈长整理的一系列 Maven 系列教程文章。
 
 ## 开启 Eureka Server 功能
 
@@ -103,8 +102,6 @@ public class EurekaServerApplication {
 ```
 
 在启动类上加入 @EnableEurekaServer 注解，`@EnableEurekaServer`注解即开启注册中心服务器的功能。
-
-Spring Boot就不多介绍了，不熟悉的，请关注Java技术栈微信公众号，在后台回复：Boot，即可获取栈长整理的一系列 Spring Boot 系列教程文章。
 
 ## 添加 Eureka Server 配置
 
@@ -154,8 +151,6 @@ server:
 eureka.instance.hostname: eureka2
 ```
 
-配置这里不细讲，下篇文章栈长单独分享这些参数的含义，关注微信公众号：Java技术栈，获取第一时间推送。
-
 这里做了两台注册中心的高可用配置rc1,rc2，也可以做多台，既然是高可用，每个注册中心都向别的注册中心注册自己。
 
 **注意不要用Localhost**
@@ -188,15 +183,9 @@ http://localhost:8762/
 
 我们可以看到两个注册的注册中心实例了。
 
-好了，今天的分享就到这里了，近期会分享更多 Eureka 高级玩法，栈长正在拼命撰写中……关注Java技术栈微信公众号可获取及时推送。在公众号后台回复：cloud，获取栈长整理的更多的 Spring Cloud 教程，都是实战干货，以下仅为部分预览。
-
 - Spring Cloud 最新 Finchley 版本踩坑
 - Spring Cloud 多版本如何选择
 - Spring Cloud 是什么，和 Dubbo 对比
 - Spring Cloud 配置中心高可用搭建
 - Spring Cloud Eureka 自我保护机制
-- ……
 
-大家有什么问题，也可以点击[这个链接](https://mp.weixin.qq.com/s/iqCLAduVzDqt19L6D4FCUQ)加入Java技术栈知识星球，和大家共同讨论，也可以向栈长提问，快 2000 人已加入。
-
-> 本文原创首发于微信公众号：Java技术栈（id:javastack），关注公众号在后台回复 "cloud" 可获取更多 Spring Cloud 教程，转载请原样保留本信息。

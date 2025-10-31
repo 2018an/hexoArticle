@@ -77,5 +77,3 @@ Nacos 可以与 Spring, Spring Boot, Spring Cloud 集成，并能代替 Spring C
 ## 参考
 
 - Nacos 官方文档。
-
-> 本文原创首发于微信公众号：Java技术栈（id:javastack），关注公众号在后台回复 "java" 可获取更多，转载请原样保留本信息。

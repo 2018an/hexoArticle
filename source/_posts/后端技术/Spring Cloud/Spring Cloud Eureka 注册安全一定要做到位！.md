@@ -5,7 +5,6 @@ category: 后端
 tags: Spring Cloud
 ---
 
-前些天栈长在微信公众号Java技术栈分享了 Spring Cloud Eureka 最新版 实现注册中心的实战教程：[Spring Cloud Eureka 注册中心集群搭建，Greenwich 最新版！](https://mp.weixin.qq.com/s/uyoN8iB1rLOS9mLuvVebbg)，成功进入 Eureka 控制台页面。
 
 但控制台首页默认是没有登录认证保护的，打开就能访问，而且你的微服务也能随意注册进去，这样是不安全的，本章栈长将加入登录认证功能，把你的 Eureka 注册中心保护起来。
 
@@ -77,13 +76,8 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 ![](http://img.javastack.cn/20190328145822.png)
 
-好了，今天的分享就到这里了，后续会分享更多 Eureka 高级玩法，栈长正在拼命撰写中……关注Java技术栈微信公众号可获取及时推送。在公众号后台回复：cloud，获取栈长整理的更多的 Spring Cloud 教程，都是实战干货，以下仅为部分预览。
-
 - Spring Cloud 最新 Finchley 版本踩坑
 - Spring Cloud 多版本如何选择
 - Spring Cloud 是什么，和 Dubbo 对比
 - Spring Cloud 注册中心高可用搭建
 - Spring Cloud Eureka 自我保护机制
-- ……
-
-> 本文原创首发于微信公众号：Java技术栈（id:javastack），关注公众号在后台回复 "cloud" 可获取更多 Spring Cloud 教程，转载请原样保留本信息。

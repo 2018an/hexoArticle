@@ -227,6 +227,3 @@ var fn1 = function javastack(){};
 
 ---
 
-获取更多面试题及答案请关注微信公众号：Java技术栈，回复：面试。
-
-![](http://img.javastack.cn/javastack.png)

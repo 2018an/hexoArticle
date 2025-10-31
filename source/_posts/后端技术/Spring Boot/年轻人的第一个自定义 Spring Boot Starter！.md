@@ -57,13 +57,11 @@ package cn.javastack.springboot.starter.service;
 public class TestService {
 
     public String getServiceName() {
-        return "Java技术栈";
+        return "Java";
     }
 
 }
 ```
-
-这个类就有一个方法 `getServiceName`，它就返回一个字符串：`Java技术栈`。
 
 #### 2、允许自动配置
 
@@ -108,7 +106,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 /**
- * 微信公众号：Java技术栈
+ * 
  */
 @SpringBootApplication
 public class Application {
@@ -143,7 +141,7 @@ javastack:
 
 #### 4、运行测试
 
-运行 Application 类的 main 方法，最后会输出结果：Java技术栈。
+运行 Application 类的 main 方法，最后会输出结果：Java。
 
 当我们把配置改为：
 
@@ -160,11 +158,3 @@ javastack:
 本章栈长简单演示了如何自定义一个 Spring Boot Starter，根据某个参数的值来决定是否自动配置，其实还可以根据是否有某个类、某个Bean……等，可以看下《[Spring Boot 最核心的 25 个注解](https://mp.weixin.qq.com/s/lOA9djEptJyZ2sm93nxr-Q)》这篇文章对应的 `ConditionOnXXX` 系列注解。
 
 其实了解了 Spring Boot 自动配置的原理，自定义一个 Starter 并不难，你可以在这个实例基础上灵活扩展。
-
-**本文完整的代码实例 Github 地址：**
-
-> https://github.com/javastacks/spring-boot-best-practice
-
-赶紧关注微信公众号：Java技术栈，已经更新一大堆教程了，后续这个教程会持续更新……
-
-![](http://img.javastack.cn/wx_search_javastack.png)

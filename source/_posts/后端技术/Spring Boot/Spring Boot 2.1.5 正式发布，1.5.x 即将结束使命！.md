@@ -35,8 +35,7 @@ Spring Boot 官网在 2019/03/15 这天发布了 Spring Boot 2.1.5 正式版，�
 
 Spring Boot 1.5.x 将于 2019/08/01 结束使命，官方不再更新维护了，建议大家迁移到 Spring Boot 2.x 上面来。
 
-Spring Boot 2.x 最低支持 JDK 8+，如果你的 Spring Boot 1.x 用的 JDK 1.7，那升级就要注意兼容性了，具体的迁移文档栈长在微信公众号Java技术栈已经分享过：《[Spring Boot 2.x 新特性总结及迁移指南](https://mp.weixin.qq.com/s/-WWBvWpD0Prib02XoU1sjw)》，在公众号后台回复："boot"即可获取更多 Spring Boot 教程，都是实战干货，以下仅为部分预览。
-
+Spring Boot 2.x 最低支持 JDK 8+，如果你的 Spring Boot 1.x 用的 JDK 1.7，那升级就要注意兼容性了。
 - Spring Boot 读取配置的几种方式
 - Spring Boot 如何做参数校验？
 - Spring Boot 最核心的 25 个注解！

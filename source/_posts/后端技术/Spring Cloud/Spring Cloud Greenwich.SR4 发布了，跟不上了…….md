@@ -62,8 +62,6 @@ Spring Cloud Gateway 增加了对 Spring Cloud LoadBalancer 的支持。
 
 @ All 码农们：你们升级了吗？有遇到什么样的坑？欢迎留言！
 
-关注微信公众号：Java技术栈，在公众号后台回复：cloud，获取栈长整理的 Spring Cloud 系列教程，都是实战干货。
-
 - Spring Cloud 配置中心高可用搭建
 - Spring Cloud 多版本如何选择
 - Spring Cloud 是什么，和 Dubbo 对比

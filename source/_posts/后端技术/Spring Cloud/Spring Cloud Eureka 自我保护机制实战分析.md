@@ -5,12 +5,6 @@ category: 后端
 tags: Spring Cloud
 ---
 
-前些天栈长在Java技术栈微信公众号分享过 Spring Cloud Eureka 的系列文章：
-
-- [Spring Cloud Eureka 自我保护机制
-](https://mp.weixin.qq.com/s/vwPstQ0R0s_PsEhZnALP9Q)
-- [Spring Cloud Eureka 常用配置详解](https://mp.weixin.qq.com/s/5lUJE_pHZJcvk_gHMhoX2Q)
-
 其中，可能大家关于自我机制的具体保护逻辑还不是特别清楚，今天栈长就具体分析和实战一下，自我保护机制到底是怎么工作的。
 
 现在我们把保护机制开启：
@@ -70,13 +64,8 @@ Renews (last min) = 4 * 2 = 8
 
 好了，今天的分享就到这里了，建议转发收藏，不再迷路。
 
-后续会分享更多 Eureka 高级玩法，栈长正在拼命撰写中……关注Java技术栈微信公众号可获取及时推送。在公众号后台回复：cloud，获取栈长整理的更多的 Spring Cloud 教程，都是实战干货，以下仅为部分预览。
-
 - Spring Cloud 配置中心高可用搭建
 - Spring Cloud 多版本如何选择
 - Spring Cloud 是什么，和 Dubbo 对比
 - Spring Cloud 注册中心高可用搭建
 - Spring Cloud Eureka 自我保护机制
-- ……
-
-本文原创首发于微信公众号：Java技术栈（id:javastack），关注公众号在后台回复 "cloud" 可获取更多 Spring Cloud 教程，转载请原样保留本信息。

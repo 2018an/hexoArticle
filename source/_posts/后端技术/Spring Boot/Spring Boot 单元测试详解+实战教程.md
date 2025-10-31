@@ -70,7 +70,7 @@ GET请求测试
 @Test
 public void get() throws Exception {
     Map<String,String> multiValueMap = new HashMap<>();
-    multiValueMap.put("username","Java技术栈");
+    multiValueMap.put("username","Java");
     ActResult result = testRestTemplate.getForObject("/test/getUser?username={username}",ActResult.class,multiValueMap);
     Assert.assertEquals(result.getCode(),0);
 }
@@ -82,7 +82,7 @@ POST请求测试
 @Test
 public void post() throws Exception {
     MultiValueMap multiValueMap = new LinkedMultiValueMap();
-    multiValueMap.add("username","Java技术栈");
+    multiValueMap.add("username","Java");
     ActResult result = testRestTemplate.postForObject("/test/post",multiValueMap,ActResult.class);
     Assert.assertEquals(result.getCode(),0);
 }
@@ -95,7 +95,7 @@ public void post() throws Exception {
 public void upload() throws Exception {
     Resource resource = new FileSystemResource("/home/javastack/test.jar");
     MultiValueMap multiValueMap = new LinkedMultiValueMap();
-    multiValueMap.add("username","Java技术栈");
+    multiValueMap.add("username","Java");
     multiValueMap.add("files",resource);
     ActResult result = testRestTemplate.postForObject("/test/upload",multiValueMap,ActResult.class);
     Assert.assertEquals(result.getCode(),0);

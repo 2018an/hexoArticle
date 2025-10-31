@@ -220,7 +220,3 @@ public interface TestService {
 Sentinel Starter 整合 Feign 的代码目前已经在 github 仓库上，但是没未发版。预计月底发版，如果现在就想使用，可以在 pom 中引入 Spring SNAPSHOT 的 repository 或自行下载源码进行编译。
 
 最后再附上一个使用 Nacos 做服务发现和 Sentinel 做限流的 Feign 例子。
-
-> https://github.com/spring-cloud-incubator/spring-cloud-alibaba/tree/master/spring-cloud-alibaba-examples/nacos-example/nacos-discovery-example
-
-> 本文原创首发于微信公众号：Java技术栈（id:javastack），关注公众号在后台回复 "cloud" 可获取更多，转载请原样保留本信息。

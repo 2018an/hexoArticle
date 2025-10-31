@@ -40,9 +40,9 @@ tags: Spring Boot
 
 3、单元测试上的 `@SpringBootTest` 注解指定的参数；
 
-4、命令行指定的参数，如 `java -jar springboot.jar --name="Java技术栈"`；
+4、命令行指定的参数，如 `java -jar springboot.jar --name="Java"`；
 
-5、命令行中的 `SPRING_APPLICATION_JSONJSON` 指定参数, 如 `java -Dspring.application.json='{"name":"Java技术栈"}' -jar springboot.jar`
+5、命令行中的 `SPRING_APPLICATION_JSONJSON` 指定参数, 如 `java -Dspring.application.json='{"name":"Java"}' -jar springboot.jar`
 
 6、`ServletConfig` 初始化参数；
 
@@ -123,5 +123,4 @@ name is javastack-test
 
 根据以上参数动态调整，发现参数会被正确被覆盖。了解了 Spring Boot 各种配置的加载顺序，如果配置被覆盖了我们就知道是什么问题了。
 
-Spring Boot 配置加载顺序详解这一章就到这里了，更多 Spring Boot 的教程请关注我们的 **`Java技术栈`** 微信公众号。
 

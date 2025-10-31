@@ -66,7 +66,3 @@ public class Application
 如果从 Spring Boot 2.2.0 过度到 Spring Boot 2.2.1，对于这个配置，如果不注意，就可能会有问题。
 
 所以，千万别升级太快，否则是给自己挖坑……
-
-未完，栈长将陆续分享 Spring Boot 最新技术教程，现在已经写了一堆存货了，关注微信公众号 "Java技术栈" ，公众号第一时间推送！
-
-![](http://img.javastack.cn/wx_search_javastack.png)

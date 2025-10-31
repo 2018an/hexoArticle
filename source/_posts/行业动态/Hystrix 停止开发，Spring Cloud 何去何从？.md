@@ -57,5 +57,3 @@ Sentinel 开源地址：
 后面 Spring Cloud 会使用什么组件作为其默认的熔断组件还不好说，但我们必须提前做好准备，知道了这些替代品，就不会慌了。
 
 Spring Cloud 也是醉了，Eureka 2.x 难产，现在 Hystrix 又停止开发，大家怎么看？
-
-> 本文原创首发于微信公众号：Java技术栈（id:javastack），转载请原样保留本信息。

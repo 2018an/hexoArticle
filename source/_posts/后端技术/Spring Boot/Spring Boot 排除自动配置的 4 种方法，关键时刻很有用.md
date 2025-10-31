@@ -31,8 +31,6 @@ public class Application {
 }
 ```
 
-这个注解集成了 `@EnableAutoConfiguration` 注解及其里面的参数，这个不用多解释了，具体看这篇文章：[Spring Boot 最核心的 3 个注解详解](https://mp.weixin.qq.com/s/kNvy_0jb4oJtYdaxryq5xg)。另外，关注Java技术栈微信公众号，在后台回复：boot，可以获取更多 Spring Boot 干货。
-
 #### 方法2
 
 单独使用 `@EnableAutoConfiguration` 注解的时候：
@@ -100,17 +98,10 @@ spring:
 
 知道了这 4 种排除方法，我们使用 Spring Boot 的自动配置功能就游刃有余了，怎么样？都 get 到了不？建议转发+收藏，再置顶公众号，以后不迷路~
 
-好了，今天的分享就到这里，更多 Spring Boot 文章正在撰写中，关注Java技术栈微信公众号获取第一时间推送。在公众号后台回复：boot，还能获取栈长整理的往期 Spring Boot 教程，都是实战干货，以下仅为部分预览。
-
 - Spring Boot 读取配置的几种方式
 - Spring Boot 如何做参数校验？
 - Spring Boot 最核心的 25 个注解！
 - Spring Boot 2.x 启动全过程源码分析
 - Spring Boot 2.x 新特性总结及迁移指南
-- ……
-
-获取所有 Spring Boot 示例代码，请关注微信公众号 "Java技术栈" 在后台回复关键字：bootcode。
-
-未完，栈长将陆续分享 Spring Boot 最新技术教程，现在已经写了一堆存货了，关注微信公众号 "Java技术栈" ，公众号第一时间推送！
 
 ![](http://img.javastack.cn/wx_search_javastack.png)

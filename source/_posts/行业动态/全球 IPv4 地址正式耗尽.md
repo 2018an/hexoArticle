@@ -57,6 +57,3 @@ FF01::1101
 
 @All 你有什么想说的，欢迎留言！
 
-本文首发微信公众号：Java技术栈，扫码关注公众号，热文干货第一时间推送，在公众号后台回复 "java" 还能获取我这些年整理的 Java 技术教程，都是干货。
-
-![](http://img.javastack.cn/wx_search_javastack.png)

@@ -7,15 +7,6 @@ tags: Spring Boot
 
 本节内容基于 Spring Boot 2.0.
 
-## 你所需具备的基础
-
-- [什么是 Spring Boot?](https://mp.weixin.qq.com/s/jWLcPxTg9bH3D9_7qbYbfw)
-- [Spring Boot 核心配置文件详解](https://mp.weixin.qq.com/s/BzXNfBzq-2TOCbiHG3xcsQ)
-- [Spring Boot 开启的 2 种方式](https://mp.weixin.qq.com/s/PYM_iV-u3dPMpP3MNz7Hig)
-- [Spring Boot 自动配置原理、实战](https://mp.weixin.qq.com/s/gs2zLSH6m9ijO0-pP2sr9Q)
-- [Spring Boot 2.x 启动全过程源码分析](https://mp.weixin.qq.com/s/iMPXjuKRKT5lMZ4oVSp4Ww)
-
-更多请在Java技术栈微信公众号后台回复关键字：boot。
 
 ## Spring Boot 日志综合介绍
 
@@ -122,9 +113,3 @@ JDK (Java Util Logging）| logging.properties
 既然默认是支持 `Logback` 的，那现在只要在资源根目录下创建一个 `logback-spring.xml` 文件即可。`xx-spring` 这是 Spring Boot 推荐的命名方式，否则 Spring Boot 不能完全控制日志初始化，因为默认命名配置文件 `logback.xml` 加载较早不能获取到 `application.properties` 中的配置信息。
 
 看到这里，相信你对 Spring Boot 的日志应该有了一个全面的了解。如何使用配置文件打印日志和传统项目一样，这里就不啰嗦了。
-
-所有 Spring Boot 文章示例代码都在 Github 上面，大家可以 Star 关注一下。
-
-> https://github.com/javastacks/spring-boot-best-practice
-
-> 本文原创首发于微信公众号：Java技术栈（id:javastack），关注公众号在后台回复 "boot" 可获取更多，转载请原样保留本信息。

@@ -81,9 +81,3 @@ Zuul 1	   |  Spring Cloud Gateway
 Archaius 1 |  Spring Boot external config + Spring Cloud Config
 
 这个版本除了以上重大更新，还有一些子项目的版本更新、问题修复等，这里就不详细分析了，大家有兴趣的可以去看官方发布博文：
-
-> https://spring.io/blog/2019/01/23/spring-cloud-greenwich-release-is-now-available
-
-如果你也在使用 Spring Cloud 搭建微服务，可以关注Java技术栈微信公众号，在后台回复关键字：spring，栈长整理了一系列 boot/ cloud 技术文章，都是干货。
-
-> 本文原创首发于微信公众号：Java技术栈（id:javastack），关注公众号在后台回复 "spring" 可获取更多，转载请原样保留本信息。

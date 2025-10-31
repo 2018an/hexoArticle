@@ -245,6 +245,3 @@ protected static class RefreshableEurekaClientConfiguration{
 > 作者：黄大海
 https://www.jianshu.com/p/188013dd3d02
 
-关注微信公众号：Java技术栈，Spring Cloud 干货第一时间推送。在公众号后台回复：cloud，还能获取栈长整理的 Spring Cloud 系列教程，都是实战干货。
-
-![](http://img.javastack.cn/wx_search_javastack.png)

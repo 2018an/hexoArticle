@@ -15,8 +15,6 @@ tags: Spring Boot
 - [Spring Boot 自动配置原理、实战](https://mp.weixin.qq.com/s/gs2zLSH6m9ijO0-pP2sr9Q)
 - [Spring Boot 2.x 启动全过程源码分析](https://mp.weixin.qq.com/s/iMPXjuKRKT5lMZ4oVSp4Ww)
 
-更多请在Java技术栈微信公众号后台回复关键字：boot。
-
 ## Spring Boot 核心注解讲解
 
 Spring Boot 最大的特点是无需 XML 配置文件，能自动扫描包路径装载并注入对象，并能做到根据 classpath 下的 jar 包自动配置。
@@ -105,5 +103,3 @@ public @interface SpringBootApplication {
 看完涨姿势了吗？
 
 点赞转发一下吧，以后碾压面试官！
-
-> 本文原创首发于微信公众号：Java技术栈（id:javastack），关注公众号在后台回复 "boot" 可获取更多，转载请原样保留本信息。

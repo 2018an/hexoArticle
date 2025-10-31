@@ -101,7 +101,3 @@ Spring Cloud Alibaba 项目将于 2019 年从孵化器毕业，到时会正式�
 对同时使用 Spring Boot & Cloud 和阿里巴巴项目的人来说无疑带来了巨大的便利，一方面能结合 Spring 无缝接入，另一方面还能使用阿里巴巴的组件，也带来了更多的可选择性。
 
 在感受到 Dubbo 加入 Apache 孵化器后的蜕变《[惊艳，Dubbo域名已改，也不再局限于Java！！](https://mp.weixin.qq.com/s/ZkFh851uwLJwT2cxYNuFWg)》，同时，现在更多优秀的阿里产品融入开源社区，相信 Java 开发环境会越来越好，Java 也会越来越强大！
-
-最后，在Java技术栈微信公众号后台回复：cloud，可获取栈长整理的一系列 Spring Cloud 教程，目前大量教程还在撰写中……
-
-> 本文原创首发于微信公众号：Java技术栈（id:javastack），关注公众号在后台回复 "cloud" 可获取更多，转载请原样保留本信息。

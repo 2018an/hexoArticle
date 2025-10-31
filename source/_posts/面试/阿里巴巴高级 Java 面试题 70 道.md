@@ -146,7 +146,3 @@ tags: 面试
 69、如何理解选主算法？
 
 70、OSI有哪七层模型？TCP/IP是哪四层模型。
-
-获取答案请关注微信公众号：Java技术栈，回复：面试。
-
-![](http://img.javastack.cn/javastack.png)

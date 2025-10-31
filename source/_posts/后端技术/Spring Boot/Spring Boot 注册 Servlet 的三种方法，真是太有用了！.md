@@ -7,15 +7,7 @@ tags: Spring Boot
 
 本文栈长教你如何在 Spring Boot 注册 Servlet、Filter、Listener。
 
-## 你所需具备的基础
 
-- [什么是 Spring Boot?](https://mp.weixin.qq.com/s/jWLcPxTg9bH3D9_7qbYbfw)
-- [Spring Boot 核心配置文件详解](https://mp.weixin.qq.com/s/BzXNfBzq-2TOCbiHG3xcsQ)
-- [Spring Boot 开启的 2 种方式](https://mp.weixin.qq.com/s/PYM_iV-u3dPMpP3MNz7Hig)
-- [Spring Boot 自动配置原理、实战](https://mp.weixin.qq.com/s/gs2zLSH6m9ijO0-pP2sr9Q)
-- [Spring Boot 2.x 启动全过程源码分析](https://mp.weixin.qq.com/s/iMPXjuKRKT5lMZ4oVSp4Ww)
-
-更多请在Java技术栈微信公众号后台回复关键字：boot。
 
 ## 一、Spring Boot 注册
 
@@ -28,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @author Java技术栈
+ * 
  */
 public class RegisterServlet extends HttpServlet {
 
@@ -80,7 +72,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @author Java技术栈
+ * 
  */
 @WebServlet(name = "javaServlet", urlPatterns = "/javastack.cn", asyncSupported = true,
 		initParams = {
@@ -104,7 +96,7 @@ public class JavaServlet extends HttpServlet {
 
 ```
 /**
- * @author Java技术栈
+ * 
  */
 @WebFilter(filterName = "javaFilter", urlPatterns = "/*", initParams = {
 		@WebInitParam(name = "name", value = "javastack"),
@@ -162,7 +154,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @author Java技术栈
+ * 
  */
 @WebServlet(name = "javaServlet", urlPatterns = "/javastack.cn", asyncSupported = true,
 		initParams = {
@@ -189,7 +181,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletRegistration;
 
 /**
- * @author Java技术栈
+ * 
  */
 @Component
 public class ServletConfig implements ServletContextInitializer {
@@ -212,8 +204,6 @@ public class ServletConfig implements ServletContextInitializer {
 本文介绍了在 Spring Boot 下的 3 种注册 Servlet、Filter、Listener 的方式，大家灵活运用。
 
 看完有收获，点赞转发一下吧！
-
-好了，今天的分享就到这里，更多 Spring Boot 文章正在撰写中，关注Java技术栈微信公众号获取第一时间推送。在公众号后台回复：boot，还能获取栈长整理的往期 Spring Boot 教程，都是实战干货，以下仅为部分预览。
 
 - Spring Boot 读取配置的几种方式
 - Spring Boot 如何做参数校验？

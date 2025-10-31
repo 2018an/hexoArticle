@@ -37,7 +37,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 /**
- * 微信公众号：Java技术栈
+ * 
  */
 @Component
 @ConfigurationProperties(prefix = "user.random")

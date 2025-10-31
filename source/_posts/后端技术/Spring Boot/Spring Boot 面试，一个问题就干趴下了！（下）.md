@@ -5,8 +5,6 @@ category: 后端
 tags: Spring Boot
 ---
 
-前些天栈长在**Java技术栈**微信公众号分享一篇文章：[Spring Boot 面试，一个问题就干趴下了！](https://mp.weixin.qq.com/s/Yd9yuAJLS2yWtSF09Xk1Gw)，看到大家的留言很精彩，特别是说"约定大于配置"的这两个玩家。
-
 ![](http://img.javastack.cn/20190402135751.png)
 
 哈哈，上墙的朋友开不开森？
@@ -132,14 +130,8 @@ Maven规定了哪个目录放什么文件，哪个文件做什么用，Maven会�
 
 关于 “约定优于配置” 的思想，你还有什么好的想法，欢迎留言分享~
 
-好了，今天的分享就到这里，关注Java技术栈微信公众号，在后台回复：boot，获取栈长整理的更多的 Spring Boot 教程，都是实战干货，以下仅为部分预览。
-
 - Spring Boot 读取配置的几种方式
 - Spring Boot 如何做参数校验？
 - Spring Boot 最核心的 25 个注解！
 - Spring Boot 2.x 启动全过程源码分析
 - Spring Boot 2.x 新特性总结及迁移指南
-- ……
-
-本文原创首发于微信公众号：Java技术栈（id:javastack），关注公众号在后台回复 "boot" 可获取更多 Spring Boot 教程，转载请原样保留本信息。
-

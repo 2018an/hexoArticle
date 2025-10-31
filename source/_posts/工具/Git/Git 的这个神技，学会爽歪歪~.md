@@ -77,5 +77,4 @@ Hi javastacks! You've successfully authenticated, but GitHub does not provide sh
 
 这样配置完，我们就能愉快的使用各种不同的仓库了~
 
-本文原创首发于微信公众号：Java技术栈（id:javastack），获取更多 Git 神技，请在公众号后台回复：git，转载请原样保留本信息。
 

@@ -81,14 +81,14 @@ Google 使用的是 HMAC-SHA1 算法，全称是：Hash-based message authentica
 
 ```
 /**
- * 微信公众号：Java技术栈
+ * 
  */
 public class AuthTest {
 
 	@Test
 	public void genSecretTest() {
 		String secret = GoogleAuthenticator.generateSecretKey();
-		String qrcode = GoogleAuthenticator.getQRBarcodeURL("Java技术栈", "javastack.cn", secret);
+		String qrcode = GoogleAuthenticator.getQRBarcodeURL("Java", "javastack.cn", secret);
 		System.out.println("二维码地址:" + qrcode);
 		System.out.println("密钥:" + secret);
 	}

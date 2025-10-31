@@ -110,5 +110,3 @@ rename-command CONFIG   "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 ```
 
 上面的 XX 可以定义新命令名称，或者用随机字符代替。
-
-经过以上的设置之后，危险命令就不会被客户端执行了。关注微信公众号：Java技术栈，回复:redis, 可以获取所有 redis 系列文章。

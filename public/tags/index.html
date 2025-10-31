@@ -1,0 +1,146 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>标签集合 | 只有那年胜过年年</title><meta name="author" content="2025"><meta name="copyright" content="2025"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#FC5531"><meta name="description" content="📁 标签云                                📋 所有标签                                             🏷️                           篇文章">
+<meta property="og:type" content="website">
+<meta property="og:title" content="标签集合">
+<meta property="og:url" content="http://example.com/tags/index.html">
+<meta property="og:site_name" content="只有那年胜过年年">
+<meta property="og:description" content="📁 标签云                                📋 所有标签                                             🏷️                           篇文章">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/logo.png">
+<meta property="article:published_time" content="2025-10-31T03:41:39.108Z">
+<meta property="article:modified_time" content="2025-10-31T03:41:39.108Z">
+<meta property="article:author" content="2025">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/logo.png"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/tags/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FC5531')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FC5531')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: 2025","link":"链接: ","source":"来源: 只有那年胜过年年","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '标签集合',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'tags'
+}</script><meta name="generator" content="Hexo 8.1.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/logo.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">357</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">49</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page type-tags" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/logo.png" alt="Logo"><span class="site-name">只有那年胜过年年</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><h1 class="title-seo">标签集合</h1></header><main class="layout hide-aside" id="content-inner"><div id="page"><div class="page-title">标签集合</div><div class="tag-cloud-list text-center"><a href="/tags/%E6%96%87%E7%AB%A0/" style="font-size: 1.2em; background-color: rgb(50, 53, 182);">文章</a><a href="/tags/JVM/" style="font-size: 1.2em; background-color: rgb(120, 95, 50);">JVM</a><a href="/tags/Linux/" style="font-size: 1.2em; background-color: rgb(50, 199, 50);">Linux</a><a href="/tags/%E5%85%B6%E4%BB%96/" style="font-size: 1.24em; background-color: rgb(50, 57, 50);">其他</a><a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF/" style="font-size: 1.29em; background-color: rgb(64, 175, 65);">分布式技术</a><a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 1.43em; background-color: rgb(50, 139, 50);">基础</a><a href="/tags/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/" style="font-size: 1.24em; background-color: rgb(50, 193, 50);">安全漏洞</a><a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 1.43em; background-color: rgb(50, 50, 120);">多线程</a><a href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" style="font-size: 1.26em; background-color: rgb(50, 182, 88);">区块链</a><a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" style="font-size: 1.26em; background-color: rgb(197, 50, 76);">性能优化</a><a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" style="font-size: 1.48em; background-color: rgb(57, 59, 161);">新特性</a><a href="/tags/%E6%9E%B6%E6%9E%84/" style="font-size: 1.33em; background-color: rgb(50, 53, 143);">架构</a><a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 1.26em; background-color: rgb(50, 50, 163);">算法</a><a href="/tags/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F/" style="font-size: 1.39em; background-color: rgb(101, 141, 139);">程序人生</a><a href="/tags/%E8%A1%8C%E4%B8%9A%E5%8A%A8%E6%80%81/" style="font-size: 1.41em; background-color: rgb(188, 181, 172);">行业动态</a><a href="/tags/%E8%A7%84%E8%8C%83/" style="font-size: 1.22em; background-color: rgb(105, 50, 146);">规范</a><a href="/tags/%E8%B5%84%E6%96%99/" style="font-size: 1.2em; background-color: rgb(185, 117, 50);">资料</a><a href="/tags/%E8%BF%9B%E9%98%B6/" style="font-size: 1.41em; background-color: rgb(120, 106, 58);">进阶</a><a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 1.26em; background-color: rgb(78, 50, 70);">集合</a><a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 1.44em; background-color: rgb(119, 50, 77);">面试</a><a href="/tags/docker/" style="font-size: 1.2em; background-color: rgb(78, 195, 95);">docker</a><a href="/tags/Dubbo/" style="font-size: 1.26em; background-color: rgb(92, 155, 125);">Dubbo</a><a href="/tags/JWT/" style="font-size: 1.22em; background-color: rgb(177, 114, 50);">JWT</a><a href="/tags/Elastic-Job/" style="font-size: 1.24em; background-color: rgb(119, 73, 147);">Elastic Job</a><a href="/tags/MyBatis/" style="font-size: 1.22em; background-color: rgb(115, 169, 193);">MyBatis</a><a href="/tags/Netty/" style="font-size: 1.2em; background-color: rgb(74, 50, 121);">Netty</a><a href="/tags/Shiro/" style="font-size: 1.26em; background-color: rgb(148, 104, 59);">Shiro</a><a href="/tags/Spring/" style="font-size: 1.31em; background-color: rgb(50, 198, 79);">Spring</a><a href="/tags/Spring-MVC/" style="font-size: 1.24em; background-color: rgb(120, 50, 124);">Spring MVC</a><a href="/tags/Spring-Cloud/" style="font-size: 1.46em; background-color: rgb(50, 73, 167);">Spring Cloud</a><a href="/tags/Spring-Boot/" style="font-size: 1.5em; background-color: rgb(50, 176, 157);">Spring Boot</a><a href="/tags/Tomcat/" style="font-size: 1.24em; background-color: rgb(134, 96, 50);">Tomcat</a><a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 1.26em; background-color: rgb(157, 54, 175);">日志</a><a href="/tags/Zookeeper/" style="font-size: 1.2em; background-color: rgb(186, 152, 113);">Zookeeper</a><a href="/tags/%E7%BB%BC%E5%90%88%E6%8A%80%E6%9C%AF/" style="font-size: 1.33em; background-color: rgb(161, 96, 90);">综合技术</a><a href="/tags/%E5%BC%80%E6%BA%90/" style="font-size: 1.26em; background-color: rgb(150, 123, 125);">开源</a><a href="/tags/%E8%BF%9E%E6%8E%A5%E6%B1%A0/" style="font-size: 1.26em; background-color: rgb(50, 71, 188);">连接池</a><a href="/tags/%E7%BC%93%E5%AD%98/" style="font-size: 1.2em; background-color: rgb(144, 164, 187);">缓存</a><a href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" style="font-size: 1.22em; background-color: rgb(122, 157, 183);">消息队列</a><a href="/tags/IDEA/" style="font-size: 1.29em; background-color: rgb(50, 169, 61);">IDEA</a><a href="/tags/Eclipse/" style="font-size: 1.22em; background-color: rgb(72, 131, 186);">Eclipse</a><a href="/tags/Git/" style="font-size: 1.33em; background-color: rgb(50, 113, 52);">Git</a><a href="/tags/Swagger/" style="font-size: 1.22em; background-color: rgb(118, 192, 90);">Swagger</a><a href="/tags/Maven/" style="font-size: 1.26em; background-color: rgb(113, 111, 88);">Maven</a><a href="/tags/%E5%B7%A5%E5%85%B7%E7%B1%BB/" style="font-size: 1.22em; background-color: rgb(136, 50, 58);">工具类</a><a href="/tags/%E6%95%88%E7%8E%87/" style="font-size: 1.27em; background-color: rgb(181, 50, 153);">效率</a><a href="/tags/MongoDB/" style="font-size: 1.35em; background-color: rgb(156, 96, 56);">MongoDB</a><a href="/tags/Redis/" style="font-size: 1.37em; background-color: rgb(64, 104, 170);">Redis</a><a href="/tags/Kafka/" style="font-size: 1.22em; background-color: rgb(104, 50, 50);">Kafka</a></div></div></main><footer id="footer" style="background: transparent;"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By 2025</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><div class="js-pjax"></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

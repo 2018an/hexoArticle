@@ -88,8 +88,6 @@ public class DemoApplication {
 }
 ```
 
-这里不作过多介绍，我在Java技术栈微信公众号写过这篇文章：《[Spring Boot 主类及目录结构介绍](https://mp.weixin.qq.com/s/auJGrOFVGlH8uzdk9SIHPw)》，不清楚的可以看一下。
-
 ## 第三步
 
 添加年轻人的第一个 Spring Boot 请求：/hello.

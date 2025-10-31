@@ -115,6 +115,4 @@ tags: 面试
 
 55、mysql中有哪几种锁？
 
-获取答案请关注微信公众号：Java技术栈，回复：面试。
 
-![](http://img.javastack.cn/javastack.png)

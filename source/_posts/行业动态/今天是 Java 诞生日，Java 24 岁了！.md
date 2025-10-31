@@ -81,5 +81,3 @@ WebRunner，后更名为Hotjava。Oak编写的Applet让网页由静态转成动�
 > 参考：www.sohu.com/a/194505161_775404
 
 最后祝我大Java生日快乐，栈长给各位Java程序员准备了一份生日礼物，请笑纳：[Java 核心编程技术干货，2019 最新整理版！](https://mp.weixin.qq.com/s/caQB7fmuWvqpdE5-AMSirg)
-
-关注Java技术栈微信公众号，在后台回复关键字：Java，spring, redis，后端， 面试，算法，架构，可以获取更多栈长整理的Java技术栈干货。

@@ -203,6 +203,4 @@ Cryptography是对企业安全框架的一个很自然的补充。Shiro的crypto
 > 
 > 由于JavaBeans的兼容性，通过任何支持JavaBean风格的配置的机制可以很容易的用自定义组件配置SecurityManager，如 Spring，Guice，JBoss，等等。
 
-> 本文摘自：《Apache Shiro 开发手册》
-> 整编：Java技术栈（公众号id: javastack）
 

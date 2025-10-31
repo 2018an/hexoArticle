@@ -46,9 +46,6 @@ tags: IDEA
 
 好了，今天的表演就到这了，倍儿爽，建议收藏+转发，日后绝对有用~
 
-关注Java技术栈微信公众号，栈长将继续分享 Intellij IDEA 的实战教程，公众号第一时间推送，持续关注。
-
-在Java技术栈微信公众号后台回复：idea，获取栈长整理的更多的 Intellij IDEA 教程，都是实战干货，以下仅为部分预览。
 
 - Intellij IDEA 最常用配置详细图解
 - Intellij IDEA 非常6的10个姿势

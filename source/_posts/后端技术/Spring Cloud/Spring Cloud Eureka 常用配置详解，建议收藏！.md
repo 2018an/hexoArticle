@@ -7,8 +7,6 @@ tags: Spring Cloud
 
 前几天，栈长分享了 《[Spring Cloud Eureka 注册中心集群搭建，Greenwich 最新版！](https://mp.weixin.qq.com/s/uyoN8iB1rLOS9mLuvVebbg)》，今天来分享下 Spring Cloud Eureka 常用的一些参数配置及说明。
 
-Spring Boot 的配置参考Java技术栈微信公众号往期 Spring Boot 系列文章，在公众号后台回复：boot。这篇只针对 Spring Cloud Eureka 常用到的配置进行解释。
-
 Spring Cloud Eureka 主要分为下面三个模块的参数：
 
 - **Eureka Server**
@@ -22,8 +20,6 @@ Eureka Server 的配置参数格式：eureka.server.xxx。
 #### enable-self-preservation
 
 表示注册中心是否开启服务的自我保护能力。
-
-什么是自我保护？看这篇文章：[SpringCloud Eureka自我保护机制](https://mp.weixin.qq.com/s/vwPstQ0R0s_PsEhZnALP9Q)，或者关注Java技术栈微信公众号，在后台回复：cloud。
 
 #### renewal-percent-threshold
 
@@ -105,13 +101,8 @@ Eureka 控制台上面的其他参数都可以定制。
 
 好了，今天的分享就到这里了，建议转发收藏，不再迷路。
 
-后续会分享更多 Eureka 高级玩法，栈长正在拼命撰写中……关注Java技术栈微信公众号可获取及时推送。在公众号后台回复：cloud，获取栈长整理的更多的 Spring Cloud 教程，都是实战干货，以下仅为部分预览。
-
 - Spring Cloud 配置中心高可用搭建
 - Spring Cloud 多版本如何选择
 - Spring Cloud 是什么，和 Dubbo 对比
 - Spring Cloud 注册中心高可用搭建
 - Spring Cloud Eureka 自我保护机制
-- ……
-
-> 本文原创首发于微信公众号：Java技术栈（id:javastack），关注公众号在后台回复 "cloud" 可获取更多 Spring Cloud 教程，转载请原样保留本信息。

@@ -62,8 +62,7 @@ server:
 eureka.instance.hostname: eureka3
 ```
 
-以上配置，yml一个配置文件就能搞定，而用 properties 则需要三个文件，具体你可以看下Java技术栈微信公众号发过的《[Spring Boot Profile不同环境配置](https://mp.weixin.qq.com/s/K0kdQwoo2t5FDsTUJttSAA)》这篇文章就知道 yml 的厉害了。
-
+以上配置，yml一个配置文件就能搞定，而用 properties 则需要三个文件。
 但在 .yml 配置文件中需要注意以下几点：
 
 - 键冒号后面需要带一个空格
@@ -75,15 +74,3 @@ eureka.instance.hostname: eureka3
 当然这只是在 Spring Boot 中能完全替代，某些框架还是需要用 properties 的，如：某些日志配置文件、第三方的配置文件等。
 
 你还知道其他的 yml 的更多玩法不，欢迎留言分享~
-
-好了，今天的分享就到这里，关注Java技术栈微信公众号，在后台回复：boot，获取栈长整理的更多的 Spring Boot 教程，都是实战干货，以下仅为部分预览。
-
-- Spring Boot 读取配置的几种方式
-- Spring Boot 如何做参数校验？
-- Spring Boot 最核心的 25 个注解！
-- Spring Boot 2.x 启动全过程源码分析
-- Spring Boot 2.x 新特性总结及迁移指南
-- ……
-
-> 本文原创首发于微信公众号：Java技术栈（id:javastack），关注公众号在后台回复 "boot" 可获取更多 Spring Boot 教程，转载请原样保留本信息。
-

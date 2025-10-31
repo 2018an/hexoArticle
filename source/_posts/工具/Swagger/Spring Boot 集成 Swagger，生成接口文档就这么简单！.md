@@ -7,15 +7,7 @@ tags: Swagger
 
 之前的文章介绍了《[推荐一款接口 API 设计神器！](https://mp.weixin.qq.com/s/KcX68KZPR7KOfwSCImbUIg)》，今天栈长给大家介绍下如何与优秀的 Spring Boot 框架进行集成，简直不能太简单。
 
-## 你所需具备的基础
 
-- [告诉你，Spring Boot 真是个牛逼货！](https://mp.weixin.qq.com/s/jsvvBQYs6DKBEFo3Qz3YDA)
-- [Spring Boot 核心配置文件详解](https://mp.weixin.qq.com/s/BzXNfBzq-2TOCbiHG3xcsQ)
-- [Spring Boot 开启的 2 种方式](https://mp.weixin.qq.com/s/PYM_iV-u3dPMpP3MNz7Hig)
-- [Spring Boot 自动配置原理、实战](https://mp.weixin.qq.com/s/gs2zLSH6m9ijO0-pP2sr9Q)
-- [Spring Boot 2.x 启动全过程源码分析](https://mp.weixin.qq.com/s/iMPXjuKRKT5lMZ4oVSp4Ww)
-
-更多请在Java技术栈微信公众号后台回复关键字：boot。
 
 ## Spring Boot 集成 Swagger
 
@@ -156,13 +148,10 @@ public class LoginController {
 
 打开 swagger-ui 界面，可以看到所有的 API 接口定义，也可以在上面发起接口测试。
 
-关注Java技术栈微信公众号，在后台回复：工具，获取栈长整理的更多的工具绝技，都是实战干货，以下仅为部分预览。
 
 - Java 开发必知道的国外 10 大网站
 - 免费在线创作流程图、思维导图软件
 - 推荐一款代码神器，代码量至少省一半！
 - 推荐一款接口 API 设计神器！
 - 超详细的 Git 实战教程，傻瓜一看也会！
-- ……
 
-> 本文原创首发于微信公众号：Java技术栈（id:javastack），关注公众号在后台回复 "工具" 可获取更多，转载请原样保留本信息。

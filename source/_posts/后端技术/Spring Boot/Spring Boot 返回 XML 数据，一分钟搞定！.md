@@ -7,15 +7,6 @@ tags: Spring Boot
 
 Spring Boot 返回 XML 数据，前提必须已经搭建了 Spring Boot 项目，所以这一块代码就不贴了，可以点击查看之前分享的 [Spring Boot 返回 JSON 数据，一分钟搞定！](https://mp.weixin.qq.com/s/cFztjzQttMwBQJqAowUZ2A)。
 
-## 你所需具备的基础
-
-- [什么是 Spring Boot?](https://mp.weixin.qq.com/s/jWLcPxTg9bH3D9_7qbYbfw)
-- [Spring Boot 核心配置文件详解](https://mp.weixin.qq.com/s/BzXNfBzq-2TOCbiHG3xcsQ)
-- [Spring Boot 开启的 2 种方式](https://mp.weixin.qq.com/s/PYM_iV-u3dPMpP3MNz7Hig)
-- [Spring Boot 自动配置原理、实战](https://mp.weixin.qq.com/s/gs2zLSH6m9ijO0-pP2sr9Q)
-- [Spring Boot 2.x 启动全过程源码分析](https://mp.weixin.qq.com/s/iMPXjuKRKT5lMZ4oVSp4Ww)
-
-更多请在Java技术栈微信公众号后台回复关键字：boot。
 
 ## 如何返回 XML 数据？
 
@@ -114,4 +105,3 @@ com.fasterxml.jackson.databind.ObjectMapper#writeValueAsString
 
 好了，Spring Boot 返回 XML 格式数据就是这么简单，有什么不懂的可以点击阅读原文加入星球和大家一起学习讨论。
 
-> 本文原创首发于微信公众号：Java技术栈（id:javastack），关注公众号在后台回复 "boot" 可获取更多，转载请原样保留本信息。

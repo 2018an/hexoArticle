@@ -16,7 +16,7 @@ tags: Spring Boot
 - [Spring Boot 2.x 启动全过程源码分析](https://mp.weixin.qq.com/s/iMPXjuKRKT5lMZ4oVSp4Ww)
 - [Java 必须掌握的 12 种 Spring 常用注解！](https://mp.weixin.qq.com/s/nSIyS35N6KpnFCWdI43THA)
 
-更多请在Java技术栈微信公众号后台回复关键字：boot。
+
 
 ## Spring Boot 最核心的 25 个注解
 
@@ -158,8 +158,6 @@ public class MybatisAutoConfiguration {
 **25、@ImportResource**
 
 这是 Spring 3.0 添加的新注解，用来导入一个或者多个 Spring  配置文件，这对 Spring Boot 兼容老项目非常有用，因为有些配置无法通过 Java Config 的形式来配置就只能用这个注解来导入。
-
-好了，终于总结完了，花了栈长我 2 个小时。。。另外，关注微信公众号Java技术栈，在后台回复关键字：boot, 可以获取栈长整理的更多 Spring Boot 系列教程文章。
 
 对以上有疑问或者对 Spring Boot 有不懂的都可以点击文末阅读原文链接加入栈长的知识星球，和栈长及更多 Java 技术人一起学习。
 

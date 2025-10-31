@@ -319,6 +319,3 @@ info
 
 但偶尔重新启动是必须的，如为升级 Redis 程序到新的版本，或者当你需要修改某些目前 CONFIG 命令还不支持的配置参数的时候。
 
-更多面试题及答案请关注微信公众号：Java技术栈，回复：面试。
-
-![](http://img.javastack.cn/javastack.png)

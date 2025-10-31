@@ -37,7 +37,6 @@ public @interface Import {
 - ImportSelector
 - ImportBeanDefinitionRegistrar
 
-第一个已经讲过了，其他两个后面会讲，关注Java技术栈微信公众号，获取第一时间推送。
 
 先来看一个 `@Import` 示例，直接导入其他配置文件：
 
@@ -61,8 +60,6 @@ public class MainConfiguration {
 public @interface EnableRedis {
 }
 ```
-
-具体可以参考这篇文章：[Spring Enable*高级应用及原理](https://mp.weixin.qq.com/s/o73F_KbqH6biCwuN77eiuQ)，另外，关注Java技术栈微信公众号，在后台回复：spring，可以获取更多 Spring 干货。
 
 **那么问题来了，老项目想用 Spring Boot 框架，但还有大量的 XML 配置文件，很难迁移到 `@Configuration` 配置文件里面来，怎么处理？**
 
@@ -99,10 +96,5 @@ public class MainConfiguration {
 }
 ```
 
-获取所有 Spring Boot 示例代码，请关注微信公众号 "Java技术栈" 在后台回复关键字：bootcode
 
 通过本文的介绍，可以看出来 Spring Boot 现在对原有的 Spring MVC 传统项目是支持的非常好的，不管是 Servlet，还是 XML  配置文件，都可以轻松集成。
-
-上面说的这些注解在《[Spring Boot 最核心的 25 个注解](https://mp.weixin.qq.com/s/lOA9djEptJyZ2sm93nxr-Q)》文章中都有说明，后面会逐步分解开来，关注Java技术栈微信公众号，获取第一时间推送。
-
-![](http://img.javastack.cn/wx_search_javastack.png)

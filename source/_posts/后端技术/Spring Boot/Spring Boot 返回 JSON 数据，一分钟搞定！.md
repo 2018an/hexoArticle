@@ -7,15 +7,6 @@ tags: Spring Boot
 
 在 WEB 项目中返回 JSON 数据是常见的交互形式，在 Spring Boot 中这一切都变得十分简单。So easy!!!
 
-## 你所需具备的基础
-
-- [什么是 Spring Boot?](https://mp.weixin.qq.com/s/jWLcPxTg9bH3D9_7qbYbfw)
-- [Spring Boot 核心配置文件详解](https://mp.weixin.qq.com/s/BzXNfBzq-2TOCbiHG3xcsQ)
-- [Spring Boot 开启的 2 种方式](https://mp.weixin.qq.com/s/PYM_iV-u3dPMpP3MNz7Hig)
-- [Spring Boot 自动配置原理、实战](https://mp.weixin.qq.com/s/gs2zLSH6m9ijO0-pP2sr9Q)
-- [Spring Boot 2.x 启动全过程源码分析](https://mp.weixin.qq.com/s/iMPXjuKRKT5lMZ4oVSp4Ww)
-
-更多请在Java技术栈微信公众号后台回复关键字：boot。
 
 ## 如何返回 JSON 数据？
 
@@ -57,7 +48,7 @@ public class JsonTest {
 
 	@GetMapping(value = "/user/{userId}")
 	public User getUserInfo(@PathVariable("userId") String userId) {
-		User user = new User("Java技术栈", 18);
+		User user = new User("Java", 18);
 		user.setId(Long.valueOf(userId));
 		return user;
 	}
@@ -94,7 +85,7 @@ public class User {
 程序输出：
 
 ```
-{"id":1,"age":18,"user-name":"Java技术栈"}
+{"id":1,"age":18,"user-name":"Java"}
 ```
 
 上面演示了几个常用的注解。
@@ -126,5 +117,3 @@ User jsonUser = objectMapper.readValue(userJsonStr, User.class);
 好了，Spring Boot 返回 JSON 格式数据就是这么简单，有什么不懂的可以点击阅读原文加入星球和大家一起学习讨论。
 
 《Spring Boot 返回 XML 数据》栈长正在拼命写作中，过两天分享。
-
-> 本文原创首发于微信公众号：Java技术栈（id:javastack），关注公众号在后台回复 "boot" 可获取更多，转载请原样保留本信息。

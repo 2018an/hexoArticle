@@ -93,5 +93,5 @@ guest.password=guest
 
 ![](http://img.javastack.cn/18-3-19/94019933.jpg)
 
-好了，这节的 Elastic-Job 运维平台搭建使用指南就到这里了，更多的内容大家可以去摸索，有问题可以去Java技术栈知识星球提问，星主会认真回答每个粉丝的提问。
+好了，这节的 Elastic-Job 运维平台搭建使用指南就到这里了。
 

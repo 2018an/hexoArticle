@@ -40,8 +40,6 @@ Dalston | 1.5.x
 分不清这些版本的区别和意义？可以参考栈长之前写的关于版本的文章：
 [Spring Cloud 多版本怎么选择？](https://mp.weixin.qq.com/s/IqlHFsIrFJ5vBG9-1gldJw)。
 
-有兴趣的可以关注栈长的微信公众号：**Java技术栈**，Spring Boot、Spring Cloud 干货教程及时推送。
-
 ## Feign踩坑
 
 升级后，应用启动正常，但调用 Feign 服务的时候报了个这个异常：
@@ -89,8 +87,6 @@ public interface XXXService extends IXXXService {
 如果项目中有多个 `configuration`，那会受影响，我们没有多个这样的配置，所以暂且先配置这个参数解决问题。解决之后，就能正常使用 Feign 了，正常访问微服务。
 
 这难道是 Feign 的坑吗？不可能把所有东西都写在一个接口服务里面啊！暂时也没找到好的办法，后续再研究下吧。
-
-未完，栈长将陆续分享 Spring Cloud 最新技术教程，现在已经写了一堆存货了，关注微信公众号 "Java技术栈" ，公众号第一时间推送！
 
 @ All 码农们：你们升级了吗？有遇到什么样的坑？欢迎留言！
 

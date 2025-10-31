@@ -45,5 +45,3 @@ Preferences/Settings → Editor → Font, 然后选择 JetBrains Mono 字体。
 
 有兴趣的、爱折腾的朋友们也可以尝试下哦，生活和工作这么 boring 了，总要来点新花样不是。
 
-关注**Java技术栈**微信公众号，栈长将继续分享好玩的 Java 技术，公众号第一时间推送，在公众号后台回复：Java，可以获取历史 Java 教程，都是干货。
-

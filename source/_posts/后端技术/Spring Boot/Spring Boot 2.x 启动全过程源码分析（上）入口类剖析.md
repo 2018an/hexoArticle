@@ -372,6 +372,6 @@ private Class<?> deduceMainApplicationClass() {
 
 ### 总结
 
-源码分析内容有点多，也很麻烦，本章暂时分析到 `SpringApplication` 构造方法的初始化流程，下章再继续分析其 `run` 方法，作者很快写完过两天就发布，扫码关注下面的公众号 "Java技术栈" 即可获取推送更新。
+源码分析内容有点多，也很麻烦，本章暂时分析到 `SpringApplication` 构造方法的初始化流程，下章再继续分析其 `run` 方法。
 
 源码分析不易，点赞 + 转发支持一下吧！
