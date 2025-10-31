@@ -5,6 +5,10 @@ const {
 
 module.exports = (req, res) => {
     let target = ''
+    // CORS 设置
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
     // 代理目标地址
     // 这里使用 backend 主要用于区分 vercel serverless 的 api 路径
