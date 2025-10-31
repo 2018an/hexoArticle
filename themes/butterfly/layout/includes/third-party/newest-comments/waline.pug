@@ -9,8 +9,8 @@ script.
 
     const getComment = async (ele) => {
       try {
-        // const res = await fetch('!{serverURL}/api/comment?type=recent&count=!{newestCommentsLimit}')
-        const res = await fetch('/api/proxy/api/comment?type=recent&count=!{newestCommentsLimit}')
+         const res = await fetch('!{serverURL}/api/comment?type=recent&count=!{newestCommentsLimit}')
+        // const res = await fetch('/api/proxy/api/comment?type=recent&count=!{newestCommentsLimit}')
         const result = await res.json()
         const walineArray = result.data.map(e => {
           return {
