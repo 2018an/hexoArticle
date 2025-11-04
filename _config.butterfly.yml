@@ -681,7 +681,7 @@ valine:
 waline:
   # 服务器 URL
 #  serverURL: https://walinecomments-gxccu74d8-chens-projects-7c4f92c5.vercel.app
-  serverURL: https://walinecomments-fd4cgek65-chens-projects-7c4f92c5.vercel.app
+  serverURL: http://walinecomments.deepseekjava.site
   # 评论框背景图片
   bg:
   # 使用 Waline 的访客计数作为页面的访客量
