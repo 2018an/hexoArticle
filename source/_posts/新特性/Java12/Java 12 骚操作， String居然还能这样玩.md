@@ -149,8 +149,8 @@ public Optional<String> describeConstable() {
 
 历史 Java 新特性干货分享：
 
-![](http://img.javastack.cn/20190613135450.png)
-![](http://img.javastack.cn/20190613135537.png)
+![](img/20190613135450.png)
+![](img/20190613135537.png)
 
 
 

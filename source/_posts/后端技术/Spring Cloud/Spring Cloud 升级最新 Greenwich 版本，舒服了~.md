@@ -70,13 +70,13 @@ public interface XXXService extends IXXXService {
 
 那是因为在 Spring Boot 2.1.0 之后把默认值改成了false。
 
-![](http://img.javastack.cn/20191107153501.png)
+![](img/20191107153501.png)
 
-![](http://img.javastack.cn/20191107164525.png)
+![](img/20191107164525.png)
 
 而在 Spring Boot 2.1.0 之前这个值都是 true，也没有这个参数可以修改这个配置。
 
-![](http://img.javastack.cn/20191107152500.png)
+![](img/20191107152500.png)
 
 **那这个参数到底有什么用？**
 
@@ -89,5 +89,3 @@ public interface XXXService extends IXXXService {
 这难道是 Feign 的坑吗？不可能把所有东西都写在一个接口服务里面啊！暂时也没找到好的办法，后续再研究下吧。
 
 @ All 码农们：你们升级了吗？有遇到什么样的坑？欢迎留言！
-
-![](http://img.javastack.cn/wx_search_javastack.png)

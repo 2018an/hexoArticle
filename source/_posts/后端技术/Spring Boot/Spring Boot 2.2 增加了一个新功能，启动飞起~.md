@@ -67,8 +67,3 @@ Spring Boot 项目在 IDE 中再配合 DevTools 工具，可以使本发开发�
 - Spring Boot 最核心的 25 个注解！
 - Spring Boot 2.x 启动全过程源码分析
 - Spring Boot 2.x 新特性总结及迁移指南
-- ……
-
-最后，你们是怎么应用延迟加载功能的，欢迎留言分享~
-
-![](http://img.javastack.cn/wx_search_javastack.png)

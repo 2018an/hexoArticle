@@ -43,7 +43,7 @@ Github地址：
 
 既然这么牛逼，肯定有不少公司在使用吧，下面列出了官方给出的使用登录顺序图。
 
-![](http://img.javastack.cn/20190730173335.png)
+![](img/20190730173335.png)
 
 ## 快速安装
 
@@ -124,7 +124,7 @@ time      2019-07-30 14:49:34
 
 > $ dashboard
 
-![](http://img.javastack.cn/20190730154952.png)
+![](img/20190730154952.png)
 
 #### 2、thread
 
@@ -134,13 +134,13 @@ thread id， 显示指定线程的运行堆栈：
 
 > $ thread 20
 
-![](http://img.javastack.cn/20190730163759.png)
+![](img/20190730163759.png)
 
 显示当前最忙的前N个线程并打印堆栈：
 
 > $ thread -n 3
 
-![](http://img.javastack.cn/20190730163734.png)
+![](img/20190730163734.png)
 
 #### 3、sc
 
@@ -148,7 +148,7 @@ thread id， 显示指定线程的运行堆栈：
 
 > $ sc -d *Test
 
-![](http://img.javastack.cn/20190730155704.png)
+![](img/20190730155704.png)
 
 #### 4、sm
 
@@ -156,7 +156,7 @@ thread id， 显示指定线程的运行堆栈：
 
 > $ sm -d cn.javastack.springbootbestpractice.SpringBootBestPracticeApplication main
 
-![](http://img.javastack.cn/20190730160555.png)
+![](img/20190730160555.png)
 
 #### 5、jad 
 
@@ -164,7 +164,7 @@ thread id， 显示指定线程的运行堆栈：
 
 > $ jad cn.javastack.springbootbestpractice.SpringBootBestPracticeApplication
 
-![](http://img.javastack.cn/20190730155942.png)
+![](img/20190730155942.png)
 
 #### 6、trace
 
@@ -172,7 +172,7 @@ thread id， 显示指定线程的运行堆栈：
 
 > $ trace -j cn.javastack.springbootbestpractice.web.JsonTest getUserInfo
 
-![](http://img.javastack.cn/20190730165157.png)
+![](img/20190730165157.png)
 
 -j：表示跳过 JDK 中的方法路径。
 
@@ -182,7 +182,7 @@ thread id， 显示指定线程的运行堆栈：
 
 > $ monitor cn.javastack.springbootbestpractice.web.JsonTest getUserInfo -c 5
 
-![](http://img.javastack.cn/20190730170442.png)
+![](img/20190730170442.png)
 
 -c 5：表示每5秒统计一次，统计周期，默认值为120秒。
 
@@ -205,7 +205,7 @@ fail-rate  | 失败率
 
 > $ watch cn.javastack.springbootbestpractice.web.JsonTest getUserInfo '{params, returnObj}' -x 2 -b
 
-![](http://img.javastack.cn/20190730171659.png)
+![](img/20190730171659.png)
 
 以上监控的是一个方法的入参情况，在方法执行前监控：-b，遍历深度：-x 2。
 
@@ -221,7 +221,7 @@ fail-rate  | 失败率
 
 以上演示了 10 个命令的基本使用，各种命令的使用详情可以在命令带 `--help` 进行查阅。
 
-![](http://img.javastack.cn/20190730172757.png)
+![](img/20190730172757.png)
 
 更多其他命令请参考：
 

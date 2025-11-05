@@ -13,7 +13,7 @@ RefreshScope(org.springframework.cloud.context.scope.refresh)是spring cloud提�
 
 Scope -> GenericScope -> RefreshScope
 
-![](http://img.javastack.cn/20191214133725.png)
+![](img/20191214133725.png)
 
 **Scope与ApplicationContext生命周期**
 

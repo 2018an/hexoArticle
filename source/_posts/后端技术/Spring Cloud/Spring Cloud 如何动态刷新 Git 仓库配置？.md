@@ -81,7 +81,7 @@ public class MailProperties {
 
 如下图所示：
 
-![](http://img.javastack.cn/20191209171607.png)
+![](img/20191209171607.png)
 
 如果参数有变更，刷新成功的话，会返回一个含有参数名的变更数组。
 
@@ -91,7 +91,7 @@ public class MailProperties {
 
 Gitlab配置如下图所示：
 
-![](http://img.javastack.cn/20191209165252.png)
+![](img/20191209165252.png)
 
 Github也差不多的，可以配置一个 URL（用于变更通知）和一个 Secret Token（用于请求验证）。
 
@@ -105,6 +105,6 @@ Github也差不多的，可以配置一个 URL（用于变更通知）和一个 
 
 如果使用配置中心项目少的情况，我们是可以通过上面的方式进行配置动态刷新，如果项目比较复杂的情况呢？
 
-![](http://img.javastack.cn/wx_search_javastack.png)
+
 
 

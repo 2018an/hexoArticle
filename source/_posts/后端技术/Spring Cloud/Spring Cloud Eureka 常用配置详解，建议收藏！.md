@@ -95,7 +95,7 @@ Eureka Client 的配置参数格式：eureka.client.xxx。
 
 上面讲的 Eureka 某些参数可以在 Eureka 控制台上面找到。
 
-![](http://img.javastack.cn/20190423153640.png)
+![](img/20190423153640.png)
 
 Eureka 控制台上面的其他参数都可以定制。
 

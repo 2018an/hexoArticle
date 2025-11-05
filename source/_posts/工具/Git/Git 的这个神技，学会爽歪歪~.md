@@ -32,7 +32,7 @@ tags: Git
 
 复制 `xxx_id_rsa.pub` 公钥文件里面的内容到对应仓库里面，以下 Github 示例：
 
-![](http://img.javastack.cn/20190821105635.png)
+![](img/20190821105635.png)
 
 ## 三、添加 config 配置
 

@@ -53,7 +53,7 @@ Spring Boot 项目在使用 Spring Boot Maven 插件执行启动命令 `spring-b
 mvn spring-boot:run -Dspring-boot.run.jvmArguments="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005"
 ```
 
-![](http://img.javastack.cn/20191030171505.png)
+![](img/20191030171505.png)
 
 最新配置可以参考官方说明：
 
@@ -63,7 +63,7 @@ mvn spring-boot:run -Dspring-boot.run.jvmArguments="-Xdebug -Xrunjdwp:transport=
 
 在开发工具里面新增一个 Remote 配置：
 
-![](http://img.javastack.cn/20191030170633.png)
+![](img/20191030170633.png)
 
 只需要确定 Host、Port 参数即可。
 
@@ -79,11 +79,11 @@ localhost：本地启动地址；
 
 先启动加了 `jvmArguments` 参数的 Spring Boot 项目：
 
-![](http://img.javastack.cn/20191030174448.png)
+![](img/20191030174448.png)
 
 程序停在监听端口：5005，再 debug 启动Remote：
 
-![](http://img.javastack.cn/20191030174710.png)
+![](img/20191030174710.png)
 
 再回到项目，开始启动输出日志，然后就可以进行断点调试了。
 

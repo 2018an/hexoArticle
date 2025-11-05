@@ -39,7 +39,7 @@ public class XXXProperties
 
 **Spring Boot 2.2.1：**
 
-![](http://img.javastack.cn/20191108112508.png)
+![](img/20191108112508.png)
 
 `@ConfigurationProperties` 自动扫描支持被废弃，恢复到 2.2.0 之前的用法了，又加了一个新的配置方法：
 

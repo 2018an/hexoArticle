@@ -5,8 +5,8 @@ category: 后端
 tags: 新特性
 ---
 
-![](http://img.javastack.cn/20190613135450.png)
-![](http://img.javastack.cn/20190613135537.png)
+![](img/20190613135450.png)
+![](img/20190613135537.png)
 
 
 今天来分享下在 Java 8 中创建 Stream 的 10 种方式，我就整理了 10 种，其实还有更多，仅供大家参考学习下。

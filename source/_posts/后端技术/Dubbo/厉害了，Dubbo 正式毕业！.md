@@ -17,7 +17,7 @@ Dubbo是阿里巴巴开源的 RPC 框架，后进入 Apache 开源孵化器，�
 
 哈哈，上一张 Dubbo 的架构图，来自官网：
 
-![](http://img.javastack.cn/20190521155904.png)
+![](img/20190521155904.png)
 
 **再来回顾下 Dubbo 的发展史：**
 

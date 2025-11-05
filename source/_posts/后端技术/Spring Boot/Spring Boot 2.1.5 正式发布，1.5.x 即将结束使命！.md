@@ -13,7 +13,7 @@ Spring Boot 官网在 2019/03/15 这天发布了 Spring Boot 2.1.5 正式版，�
 
 仓库也已经跟上：
 
-![](http://img.javastack.cn/20190516154242.png)
+![](img/20190516154242.png)
 
 **那这个版本有什么新功能？**
 
@@ -41,8 +41,3 @@ Spring Boot 2.x 最低支持 JDK 8+，如果你的 Spring Boot 1.x 用的 JDK 1.
 - Spring Boot 最核心的 25 个注解！
 - Spring Boot 2.x 启动全过程源码分析
 - Spring Boot 2.x 新特性总结及迁移指南
-- ……
-
-栈长将继续第一时间在公众号推送 Spring Boot 最新进展及热门技术教程。最后，大家用的哪个版本呢？欢迎留言~
-
-![](http://img.javastack.cn/wx_search_javastack.png)

@@ -114,5 +114,3 @@ Main-Class: org.springframework.boot.loader.JarLauncher
 - Spring Boot 最核心的 25 个注解！
 - Spring Boot 2.x 启动全过程源码分析
 - Spring Boot 2.x 新特性总结及迁移指南
-
-![](http://img.javastack.cn/wx_search_javastack.png)

@@ -42,8 +42,8 @@ Intellij IDEA 直接集成了一个工具菜单，可以直接查看字节码，
 
 > View -> Show bytecode
 
-![](http://img.javastack.cn/20191205114156.png)
-![](http://img.javastack.cn/20191205114048.png)
+![](img/20191205114156.png)
+![](img/20191205114048.png)
 
 如图所示，可以看到 String 类的的字节码。
 
@@ -58,7 +58,7 @@ Intellij IDEA 直接集成了一个工具菜单，可以直接查看字节码，
 
 在 Eclipse 中查看字节码稍显麻烦，需要安装插件，并打开插件窗口，安装和使用方式如下：
 
-![](http://img.javastack.cn/20191205134348.png)
+![](img/20191205134348.png)
 
 **Name：** bytecode
 
@@ -70,7 +70,7 @@ Eclipse 打开 `ByteCode` 插件窗口：
 
 > Window-> Show View -> Other -> Java -> Bytecode 
 
-![](http://img.javastack.cn/20191205134934.png)
+![](img/20191205134934.png)
 
 如图所示，可以看到 String 类的的字节码。
 

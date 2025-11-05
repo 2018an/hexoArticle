@@ -17,9 +17,9 @@ Spring Cloud 的注册中心可以由 Eureka、Consul、Zookeeper、ETCD 等来�
 
 > https://start.spring.io/
 
-![](http://img.javastack.cn/微信截图_20190327180739.png)
+![](img/微信截图_20190327180739.png)
 
-![](http://img.javastack.cn/微信截图_20190327180726.png)
+![](img/微信截图_20190327180726.png)
 
 栈长这里是生成了一个 Maven 示例项目。
 
@@ -155,7 +155,7 @@ eureka.instance.hostname: eureka2
 
 **注意不要用Localhost**
 
-![](http://img.javastack.cn/20190328114313.png)
+![](img/20190328114313.png)
 
 如上图所示，如果大家在实战中遇到集群不可用，出现在 unavailable-replicas 里面时，说明是你配置的问题。
 
@@ -179,7 +179,7 @@ spring-boot:run -Dspring-boot.run.profiles=rc2
 > http://localhost:8761/
 http://localhost:8762/
 
-![](http://img.javastack.cn/20190328103743.png)
+![](img/20190328103743.png)
 
 我们可以看到两个注册的注册中心实例了。
 

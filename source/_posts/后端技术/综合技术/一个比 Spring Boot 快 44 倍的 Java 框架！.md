@@ -27,7 +27,7 @@ tags: 综合技术
 
 这里有一份 benchmark 的测试报告，它与 Spring Boot 及其他微服务平台作了一个比较：
 
-![](http://img.javastack.cn/20190322142231.png)
+![](img/20190322142231.png)
 
 > 详细报告：https://github.com/networknt/microservices-framework-benchmark
 
@@ -62,7 +62,7 @@ tags: 综合技术
 
 > Github地址：https://github.com/networknt/light-4j
 
-![](http://img.javastack.cn/20190322135924.png)
+![](img/20190322135924.png)
 
 #### 栈长有话说
 

@@ -9,7 +9,7 @@ tags: MyBatis
 
 愿景就是成为 MyBatis 最好的搭档，就像魂斗罗中的 1P、2P，基友搭配，效率翻倍。
 
-![](http://img.javastack.cn/20190529110805.png)
+![](img/20190529110805.png)
 
 官网地址：
 
@@ -21,7 +21,7 @@ Github地址：
 
 现在已经超过 5K+ Star 了。。
 
-![](http://img.javastack.cn/20190529111707.png)
+![](img/20190529111707.png)
 
 ## 特性
 
@@ -43,7 +43,7 @@ Github地址：
 
 ## 框架结构
 
-![](http://img.javastack.cn/20190529110859.png)
+![](img/20190529110859.png)
 
 ## 快速开始
 

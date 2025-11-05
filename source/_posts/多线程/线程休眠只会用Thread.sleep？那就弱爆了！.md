@@ -52,7 +52,7 @@ TimeUnit.MINUTES.sleep(10);
 
 **来看下 TimeUnit 的详细方法和枚举值：**
 
-![](http://img.javastack.cn/TimeUnit.png)
+![](img/TimeUnit.png)
 
 其实 TimeUnit 还可以用来做时间单位转换，TimeUnit 提供了各种丰富的时间单位转换方法。
 

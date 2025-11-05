@@ -5,7 +5,7 @@ category: 后端
 tags: Spring Boot
 ---
 
-![](http://img.javastack.cn/20190402135751.png)
+![](img/20190402135751.png)
 
 哈哈，上墙的朋友开不开森？
 
@@ -120,9 +120,9 @@ public class MultipartProperties {
 
 如果还不能理解，再来看 Maven 怎么做的，Maven 简直把约定大于配置的思想体现淋漓尽致。
 
-![](http://img.javastack.cn/20190402143208.png)
+![](img/20190402143208.png)
 
-![](http://img.javastack.cn/20190402143236.png)
+![](img/20190402143236.png)
 
 Maven规定了哪个目录放什么文件，哪个文件做什么用，Maven会自动去处理，不需要我们再额外配置，其实我们也没有额外配置的需要，至少栈长我现在还没有遇到过。如果这些目录都让你来通过配置文件来配置，而每个项目配置的又不一样，你会不会想要崩溃？
 

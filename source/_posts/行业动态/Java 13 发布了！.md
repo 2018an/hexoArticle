@@ -5,7 +5,7 @@ category: 程序人生
 tags: 行业动态
 ---
 
-![](http://img.javastack.cn/20190918161554.png)
+![](img/20190918161554.png)
 
 **通告一下，Java 13 09/17 发布了，尝鲜地址：**
 

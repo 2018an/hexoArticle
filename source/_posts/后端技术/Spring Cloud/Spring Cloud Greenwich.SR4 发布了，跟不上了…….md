@@ -67,6 +67,3 @@ Spring Cloud Gateway 增加了对 Spring Cloud LoadBalancer 的支持。
 - Spring Cloud 是什么，和 Dubbo 对比
 - Spring Cloud 注册中心高可用搭建
 - Spring Cloud Eureka 自我保护机制
-- ……
-
-![](http://img.javastack.cn/wx_search_javastack.png)

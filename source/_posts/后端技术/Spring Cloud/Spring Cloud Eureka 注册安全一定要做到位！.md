@@ -51,7 +51,7 @@ defaultZone: http://javastack:javastack@eureka1:8761/eureka/, http://javastack:j
 
 **4、禁用CSRF**
 
-![](http://img.javastack.cn/20190328114313.png)
+![](img/20190328114313.png)
 
 如上图所示，注册实例出现在 unavailable-replicas 里面。
 
@@ -74,7 +74,7 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 这样配置后，打开 Eureka 控制台页面会先要跳到登录页面做登录认证才能访问，如下图所示。
 
-![](http://img.javastack.cn/20190328145822.png)
+![](img/20190328145822.png)
 
 - Spring Cloud 最新 Finchley 版本踩坑
 - Spring Cloud 多版本如何选择

@@ -9,7 +9,7 @@ tags: Spring Cloud
 
 现在我们把保护机制开启：
 
-![](http://img.javastack.cn/20190514114125.png)
+![](img/20190514114125.png)
 
 关注右上角的两个重要参数：
 
@@ -46,7 +46,7 @@ Renews (last min) = 4 * 2 = 8
 
 现在删除一个配置中心实例测试一下：
 
-![](http://img.javastack.cn/20190514113747.png)
+![](img/20190514113747.png)
 
 出现警告：
 

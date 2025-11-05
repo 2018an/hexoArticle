@@ -13,11 +13,11 @@ tags: 行业动态
 
 GitHub for mobile 提供了强大的便利性，无论你身在何处都可以继续与开发团队保持协作，能很方便的做很多不是十分复杂的事情，比如分享反馈、Code Review 等，如下图所示。
 
-![](http://img.javastack.cn/20191115110012.png)
+![](img/20191115110012.png)
 
 GitHub for mobile 作为一个移动端原生应用程序，能自动适配各种屏幕尺寸，甚至在暗模式下也可以根据你的设备偏好进行调整。
 
-![](http://img.javastack.cn/20191115110136.png)
+![](img/20191115110136.png)
 
 iOS 目前还是 Beta 版本，Android Beta 版也即将发布。
 
@@ -25,7 +25,7 @@ iOS 目前还是 Beta 版本，Android Beta 版也即将发布。
 
 > https://github.com/mobile/beta
 
-![](http://img.javastack.cn/20191115110519.png)
+![](img/20191115110519.png)
 
 虽然这样是方便了，但码农苦逼了，以后挤个地铁，搭个班车，都能随时随地写代码、改 bug 了。。
 

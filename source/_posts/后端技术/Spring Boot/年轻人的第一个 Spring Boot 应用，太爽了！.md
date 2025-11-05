@@ -19,13 +19,13 @@ Spring Boot 大家都知道是啥吧？
 
 废话不说，看下图，几秒搞定！
 
-![](http://img.javastack.cn/init.gif)
+![](img/init.gif)
 
 ## 第二步
 
 解压生成的 demo 项目，导入到 IDE 中。
 
-![](http://img.javastack.cn/20190528173103.png)
+![](img/20190528173103.png)
 
 来看下 `pom.xml` 文件内容：
 
@@ -115,7 +115,7 @@ public class DemoApplication {
 
 运行 Spring Boot 应用，在 IDE 中运行 `DemoApplication` main 方法即可。当然，运行 Spring Boot 还有很多方式，参考：[运行 Spring Boot 应用的 3 种方式！](https://mp.weixin.qq.com/s/lZsQnvlR38TLuV--D3F7Ag)。
 
-![](http://img.javastack.cn/20190528173441.png)
+![](img/20190528173441.png)
 
 如图所示，程序已经启动，牛逼啊，2秒多就启动起来了，爽。。。它能跑起来，是因为内置了 Tomcat 容器，当然你也可以替换或者自定义配置，参考：[Spring Boot Server容器配置](https://mp.weixin.qq.com/s/aEghlvBHE9rpfsAjiq1Kfw)。
 
@@ -125,7 +125,7 @@ public class DemoApplication {
 
 > http://localhost:8080/hello
 
-![](http://img.javastack.cn/20190528164756.png)
+![](img/20190528164756.png)
 
 如下图所示，页面输出了hello.
 
@@ -142,8 +142,3 @@ Spring Boot我已经写了一大堆教程了，都是最新的实战干货，关
 - Spring Boot 最核心的 25 个注解！
 - Spring Boot 2.x 启动全过程源码分析
 - Spring Boot 2.x 新特性总结及迁移指南
-- ……
-
-栈长将继续第一时间在公众号推送 Spring Boot 最新进展及热门技术教程。最后，大家用的哪个版本呢？欢迎留言~
-
-![](http://img.javastack.cn/wx_search_javastack.png)

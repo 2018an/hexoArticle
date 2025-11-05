@@ -159,6 +159,3 @@ public class MybatisAutoConfiguration {
 
 这是 Spring 3.0 添加的新注解，用来导入一个或者多个 Spring  配置文件，这对 Spring Boot 兼容老项目非常有用，因为有些配置无法通过 Java Config 的形式来配置就只能用这个注解来导入。
 
-对以上有疑问或者对 Spring Boot 有不懂的都可以点击文末阅读原文链接加入栈长的知识星球，和栈长及更多 Java 技术人一起学习。
-
-![](http://img.javastack.cn/wx_search_javastack.png)

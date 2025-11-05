@@ -125,5 +125,3 @@ public @interface ConstructorBinding {
 
 涨姿势了吧？？又学会了一种绑定参数的新方法了！
 
-
-![](http://img.javastack.cn/wx_search_javastack.png)
