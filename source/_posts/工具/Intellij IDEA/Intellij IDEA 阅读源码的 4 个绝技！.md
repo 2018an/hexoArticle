@@ -23,45 +23,45 @@ public static Object getBean(String name) {
 
 > org.springframework.beans.factory.BeanFactory
 
-![](http://img.javastack.cn/18-11-8/28812875.jpg)
+![](img/18-11-8-28812875.jpg)
 
 在 IDEA 中略显麻烦，在引用的方法上 CTRL + ALT + 鼠标左击（B）可以实现跳转至实现类，如果有多个实现类会弹出让你选择。
 
-![](http://img.javastack.cn/18-11-8/8414314.jpg)
+![](img/18-11-8-8414314.jpg)
 
 点击右上角 Open as Tool Window 图标还能展开更多详细。
 
-![](http://img.javastack.cn/18-11-8/76662103.jpg)
+![](img/18-11-8-76662103.jpg)
 
 ## 2、查看类层级关系
 
 到了 BeanFactory 类，在任意地方使用快捷键 CTRL + H 可以打开类的继承层级面板。
 
-![](http://img.javastack.cn/18-11-8/49197466.jpg)
+![](img/18-11-8-49197466.jpg)
 
 或者直接选中 BeanFactory 类名称，再按 CTRL + ALT + 鼠标左击（B），同样可以展示 BeanFactory 类的所有继承类的关系。
 
-![](http://img.javastack.cn/18-11-8/19092696.jpg)
+![](img/18-11-8-19092696.jpg)
 
 还有更屌的！
 
 右键任意类，选择 Diagrams > Show Diagram... 可以打开类的继承图。
 
-![](http://img.javastack.cn/18-11-8/15269334.jpg)
+![](img/18-11-8-15269334.jpg)
 
-![](http://img.javastack.cn/18-11-8/989246.jpg)
+![](img/18-11-8-989246.jpg)
 
-![](http://img.javastack.cn/18-11-8/84258483.jpg)
+![](img/18-11-8-84258483.jpg)
 
-![](http://img.javastack.cn/18-11-8/84659140.jpg)
+![](img/18-11-8-84659140.jpg)
 
 看起来有点乱，那是因为我选择了所有实现类展示，实际请合理利用  Show Parents 和 Show Implementations 菜单。
 
 ## 3、查看类结构
 
-![](http://img.javastack.cn/18-11-8/55959388.jpg)
+![](img/18-11-8-55959388.jpg)
 
-![](http://img.javastack.cn/18-11-8/81818680.jpg)
+![](img/18-11-8-81818680.jpg)
 
 如上图所示，IDEA 中也有 Eclipse 中 outline 的面板，叫作：Structure，有了这个面板，可以快速浏览一个类的大纲，也可以快速定位到类的方法、变量等。
 
@@ -69,9 +69,9 @@ public static Object getBean(String name) {
 
 ## 4、源码统计
 
-![](http://img.javastack.cn/18-11-8/10605575.jpg)
+![](img/18-11-8-10605575.jpg)
 
-![](http://img.javastack.cn/18-11-8/18502731.jpg)
+![](img/18-11-8-18502731.jpg)
 
 如图所示，栈长在 IDEA 中装了一个 Statistic 插件，这个插件只支持 JDK 1.8+。
 

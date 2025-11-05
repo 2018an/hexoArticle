@@ -5,7 +5,7 @@ category: 程序人生
 tags: 面试
 ---
 
-![image](http://img.javastack.cn/18-2-2/29383437.jpg)
+![image](img/18-2-2-29383437.jpg)
 
 ##### 1、什么是Redis？
 

@@ -9,7 +9,7 @@ tags: 行业动态
 
 随后，Gitlab 趁势带了一波节奏，在其官网上祝贺 Github 被微软收购，并表示此次收购代表着软件开发者的影响力的日渐增长，将软件开发的下一个发展看成是每个人都可以贡献的世界。
 
-![](http://img.javastack.cn/18-6-4/95497790.jpg)
+![](img/18-6-4-95497790.jpg)
 
 > 原文：https://about.gitlab.com/2018/06/03/microsoft-acquires-github/
 
