@@ -11,7 +11,7 @@ tags: Swagger
 
 > 官网：https://swagger.io/
 
-![](http://img.javastack.cn/18-10-25/30041.jpg)
+![](img/18-10-25-30041.jpg)
 
 Swagger 如官网所示，它是最好的 API 构建工具。
 
@@ -23,7 +23,7 @@ Swagger 包含的主要套件：
 - Swagger UI - 基于 OpenAPI 规范动态生成 API 规范文档。
 - Swagger Codegen - 个模板驱动引擎，用来生成客户端代码。
 
-![](http://img.javastack.cn/18-10-25/15444134.jpg)
+![](img/18-10-25-15444134.jpg)
 
 图片来源见博客水印。
 
@@ -50,7 +50,7 @@ OpenAPI 规范，以前叫 Swagger 规范。它是一个为 REST APIs的接口�
 
 > http://editor.swagger.io/
 
-![](http://img.javastack.cn/18-10-25/51053663.jpg)
+![](img/18-10-25-51053663.jpg)
 
 ## 为什么需要Swagger？
 

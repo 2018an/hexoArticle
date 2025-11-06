@@ -43,7 +43,7 @@ System.out.println(str); // ava
 
 这其实是初学者的一个误区，从上面看 String 的结构可以得知字符串是由字符数组构成的，str 只是一个引用而已，第一次引用了 "Python"，后面变成了 "Java"，而 substring 也是用 Arrays.copyOfRange 方法重新复制字符数组构造了一个新的字符串。
 
-![](http://img.javastack.cn/18-9-12/688492.jpg)
+![](img/18-9-12-688492.jpg)
 
 所以说，这里的字符串并不是可变，只是变更了字符串引用。
 

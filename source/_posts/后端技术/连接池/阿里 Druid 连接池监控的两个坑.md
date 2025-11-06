@@ -5,7 +5,7 @@ category: 后端
 tags: 连接池
 ---
 
-![image](http://img.javastack.cn/18-2-4/38258738.jpg)
+![image](img/18-2-4-38258738.jpg)
 
 阿里的Druid大家都知道是最好的连接池，其强大的监控功能是我们追求的重要特性。但在实际情况中也有不少坑，说下最近遇到的一个坑吧！
 
@@ -81,7 +81,7 @@ public static String getRemoteAddr(HttpServletRequest request) {
 
 作者去看了阿里最新的包，此问题还存在。
 
-![](http://img.javastack.cn/18-1-29/92452744.jpg)
+![](img/18-1-29-92452744.jpg)
 
 并且Github上的Druid官方错误申报里面也有同样的问题，阿里也没有修复的意思，所以我们已暂时关闭session监控功能。
 
@@ -106,7 +106,7 @@ java.util.ConcurrentModificationException
 
 无力吐槽。。
 
-![](http://img.javastack.cn/18-1-29/83615861.jpg)
+![](img/18-1-29-83615861.jpg)
 
 for循环里面重复定义Map，可能在别的地方有元素变动，导致发生ConcurrentModificationException异常。
 

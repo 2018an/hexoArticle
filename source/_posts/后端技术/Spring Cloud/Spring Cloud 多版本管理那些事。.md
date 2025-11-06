@@ -11,7 +11,7 @@ tags: Spring Cloud
 
 #### Spring Cloud 的多版本
 
-![](http://img.javastack.cn/18-4-2/44559010.jpg)
+![](img/18-4-2-44559010.jpg)
 
 这么多不同的版本，它们都有什么区别，我们开发微服务到底使用哪一个版本呢？这些版本与 Spring Boot 版本又是一个怎样的依赖关系？带着这些问题，我们必须把它一一搞清楚，不然总会让你很头疼。。
 
@@ -42,11 +42,11 @@ https://projects.spring.io/spring-cloud/
 
 下图揭示了主项目和子项目版本的依赖关系。
 
-![](http://img.javastack.cn/18-4-2/50615593.jpg)
+![](img/18-4-2-50615593.jpg)
 
 #### Spring Cloud & Spring Boot 依赖关系
 
-![](http://img.javastack.cn/18-4-2/47489606.jpg)
+![](img/18-4-2-47489606.jpg)
 
 - Finchley 是基于 Spring Boot 2.0.x 构建的，不支持 Spring Boot 1.5.x
 - Dalston 和 Edgware 是基于 Spring Boot 1.5.x 构建的，不支持 Spring Boot 2.0.x

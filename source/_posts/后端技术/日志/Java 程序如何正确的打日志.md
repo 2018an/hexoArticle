@@ -23,7 +23,7 @@ log4j, Logging, commons-logging, slf4j, logback, 开发的同学对这几个日�
 
 如图所示，这是 Java 自带的日志工具类，在 JDK 1.5 开始就已经有了，在 `java.util.logging` 包下。
 
-![](http://img.javastack.cn/18-5-2/8748931.jpg)
+![](img/18-5-2-8748931.jpg)
 
 更多关于 Java Logging 的介绍可以看官方文档。
 
@@ -89,7 +89,7 @@ Logback 的官方地址：
 
 3、一般首选强烈推荐使用 `slf4j + logback`。当然也可以使用`slf4j + log4j`, `commons-logging + log4j` 这两种日志组合框架。
 
-![](http://img.javastack.cn/18-5-2/21444405.jpg)
+![](img/18-5-2-21444405.jpg)
 
 从上图可以看出 `slf4j` 很强大吧，不但能和各种日志框架对接，还能和日志门面 `commons-logging` 进行融合。
 
@@ -99,7 +99,7 @@ Logback 的官方地址：
 
 Log4j 的级别类 `org.apache.log4j.Level` 里面定义了日志级别，日志输出优先级由高到底分别为以下8种。
 
-![](http://img.javastack.cn/18-2-27/44471775.jpg)
+![](img/18-2-27-44471775.jpg)
 
 日志级别 | 描述
 ---|---
@@ -122,11 +122,11 @@ ALL   | 所有：输出所有级别信息。
 
 具体的输出关系可以参考下图：
 
-![image](http://img.javastack.cn/18-2-27/77007337.jpg)
+![image](img/18-2-27-77007337.jpg)
 
 **知道了日志级别，这还只是基础，如何了解打日志的规范，以及如何正确地打日志姿势呢？！**
 
-![image](http://img.javastack.cn/18-2-27/42201304.jpg)
+![image](img/18-2-27-42201304.jpg)
 
 #### 打日志的规范准则
 
@@ -136,7 +136,7 @@ ALL   | 所有：输出所有级别信息。
 
 **下面是阿里的《Java开发手册》终极版日志规约篇。**
 
-![](http://img.javastack.cn/18-4-29/8351917.jpg)
+![](img/18-4-29-8351917.jpg)
 
 
 阿里是一线互联网公司，所制定的日志规范也都符合我们的要求，很有参考意义，能把阿里这套日志规约普及也真很不错了。

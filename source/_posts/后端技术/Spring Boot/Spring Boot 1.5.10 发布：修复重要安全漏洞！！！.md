@@ -5,7 +5,7 @@ category: 后端
 tags: Spring Boot
 ---
 
-![image](http://img.javastack.cn/18-1-31/1092928.jpg)
+![image](img/18-1-31-1092928.jpg)
 **2018/01/31，Spring Boot团队发布了Spring Boot 1.5.10。**
 
 **Maven：**

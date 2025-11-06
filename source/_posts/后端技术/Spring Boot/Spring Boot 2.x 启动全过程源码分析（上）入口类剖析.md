@@ -47,7 +47,7 @@ public static ConfigurableApplicationContext run(Class<?>[] primarySources,
 
 ### SpringApplication 的实例化过程
 
-![](http://img.javastack.cn/18-7-2/69983860.jpg)
+![](img/18-7-2-69983860.jpg)
 
 接着上面的 `SpringApplication` 构造方法进入以下源码：
 

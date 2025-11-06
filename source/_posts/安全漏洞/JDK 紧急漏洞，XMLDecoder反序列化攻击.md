@@ -5,7 +5,7 @@ category: 安全漏洞
 tags: 安全漏洞
 ---
 
-![](http://img.javastack.cn/17-12-20/73076296.jpg)
+![](img/17-12-20-73076296.jpg)
 
 
 昨天在公司发现了一个jdk中的XMLDecoder反序列化的漏洞，看起来很危险！下面通过两个示例来看看这个漏洞的危害！
@@ -83,7 +83,7 @@ private static void byXmlString() {
 
 这段代码改成了用String输入源的形式，这不重要，重要的是还是利用了jdk中的XmlDecoder类来解析xml字符串。这段代码执行后，会调用出本地的计算器程序。
 
-![](http://img.javastack.cn/17-12-20/29679880.jpg)
+![](img/17-12-20-29679880.jpg)
 
 其中ProcessBuilder.start()的方法和Runtime.exec()方法一样，都可以被用来创建一个操作系统进程，可用来控制进程状态并获得相关信息。
 

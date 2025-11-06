@@ -53,7 +53,7 @@ Elastic-Job-Lite定位为轻量级无中心化解决方案，使用jar包的形�
 
 **Elastic-Job-Lite**
 
-![image](http://img.javastack.cn/18-2-24/59132374.jpg)
+![image](img/18-2-24-59132374.jpg)
 
 **Elastic-Job-Cloud**
 

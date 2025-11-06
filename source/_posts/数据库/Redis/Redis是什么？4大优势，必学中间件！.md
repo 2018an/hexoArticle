@@ -5,7 +5,7 @@ category: 数据库
 tags: Redis
 ---
 
-![image](http://img.javastack.cn/18-3-15/65807497.jpg)
+![image](img/18-3-15-65807497.jpg)
 
 #### Redis是什么？
 

@@ -5,7 +5,7 @@ category: 后端
 tags: 日志
 ---
 
-![image](http://img.javastack.cn/18-2-4/79455273.jpg)
+![image](img/18-2-4-79455273.jpg)
 
 在JSP里，获取客户端的IP地址的方法是：request.getRemoteAddr()，这种方法在大部分情况下都是有效的。但是在通过了Apache，Squid等反向代理软件就不能获取到客户端的真实IP地址了。
 

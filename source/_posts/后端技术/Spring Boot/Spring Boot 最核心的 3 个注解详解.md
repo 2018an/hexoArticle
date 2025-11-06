@@ -98,7 +98,7 @@ public @interface SpringBootApplication {
 }
 ```
 
-![](http://img.javastack.cn/18-8-27/31801590.jpg)
+![](img/18-8-27-31801590.jpg)
 
 看完涨姿势了吗？
 

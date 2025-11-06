@@ -5,11 +5,11 @@ category: 后端
 tags: Spring Cloud
 ---
 
-![](http://img.javastack.cn/18-6-20/82197726.jpg)
+![](img/18-6-20-82197726.jpg)
 
 在 Spring 的官方博客上已经看到 Spring Cloud Finchley 在 06 月 19 日这一天正式发布了，我们在 Maven 中央仓库也看到了最新版的更新。
 
-![](http://img.javastack.cn/18-6-20/96626148.jpg)
+![](img/18-6-20-96626148.jpg)
 
 Finchley 正式版的发布貌似经历了相当长的时间，果然是闷声发大财，这次的重大发布主要带来了以下 4 项重大更新。
 

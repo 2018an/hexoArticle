@@ -39,7 +39,7 @@ bootstrap 配置文件有以下几个应用场景。
 
 以下这个截图是一个国外网友问了一个 Spring Cloud 工程师得到的回答。
 
-![](http://img.javastack.cn/18-4-2/38651438.jpg)
+![](img/18-4-2-38651438.jpg)
 
 - Spring Boot 读取配置的几种方式
 - Spring Boot 如何做参数校验？

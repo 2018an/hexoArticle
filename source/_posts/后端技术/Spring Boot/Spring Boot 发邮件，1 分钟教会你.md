@@ -77,10 +77,10 @@ Spring Boot 发现类路径下有这个 `spring-boot-starter-mail` 包和 `sprin
 
 > org.springframework.boot.autoconfigure.mail.MailSenderAutoConfiguration
 
-![](http://img.javastack.cn/18-8-27/70236436.jpg)
+![](img/18-8-27-70236436.jpg)
 
 > org.springframework.boot.autoconfigure.mail.MailSenderPropertiesConfiguration
 
-![](http://img.javastack.cn/18-8-27/56485452.jpg)
+![](img/18-8-27-56485452.jpg)
 
 其实就是用了上面装配的参数注册了一个 `JavaMailSenderImpl` 实例而已，然后你就可以注入使用了。

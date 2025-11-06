@@ -113,7 +113,7 @@ private static void test3() throws InterruptedException {
 
 来看 sleep 的源码：
 
-![](http://img.javastack.cn/18-6-1/1779530.jpg)
+![](img/18-6-1-1779530.jpg)
 
 可以看出 sleep() 方法被中断后会清除中断标记，所以循环会继续运行。。
 

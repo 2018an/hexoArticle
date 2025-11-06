@@ -5,7 +5,7 @@ category: 后端
 tags: 进阶
 ---
 
-![image](http://img.javastack.cn/17-12-27/5366993.jpg)
+![image](img/17-12-27-5366993.jpg)
 
 
 为了使程序能更加灵活地控制对象的生命周期，从JDK1.2版本开始，JDK把对象的引用级别分为了以下四种。

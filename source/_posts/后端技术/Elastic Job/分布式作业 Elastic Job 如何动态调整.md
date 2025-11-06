@@ -56,13 +56,13 @@ cd d:/elastic-job-lite-2.1.5
 mvn install
 ```
 
-![](http://img.javastack.cn/18-3-19/70978286.jpg)
+![](img/18-3-19-70978286.jpg)
 
 **3、启动运维平台**
 
 在编译目录 `d:\elastic-job-lite-2.1.5\elastic-job-lite\elastic-job-lite-console\target` 找到编译后的包： `elastic-job-lite-console-2.1.5.tar.gz` ，然后解压到 `elastic-job-lite-console-2.1.5` ，并执行 `bin` 目录下的 `start.bat` 即可启动，Linux下为 `start.sh`。
 
-![](http://img.javastack.cn/18-3-19/67592187.jpg)
+![](img/18-3-19-67592187.jpg)
 
 `8899` 为默认端口号，可通过启动脚本输入 `-p` 自定义端口号。
 
@@ -79,19 +79,19 @@ guest.password=guest
 
 打开浏览器访问 `http://localhost:8899/` 输出用户名和密码即可访问控制台。
 
-![](http://img.javastack.cn/18-3-19/91428457.jpg)
+![](img/18-3-19-91428457.jpg)
 
 **5、连接到注册中心**
 
 运维平台搭建完后，需要添加目标注册中心，再进行连接。
 
-![](http://img.javastack.cn/18-3-19/89674953.jpg)
+![](img/18-3-19-89674953.jpg)
 
 **6、作业操作**
 
 我们可以对作业配置进行修改、查看详情、失效、终止、手动触发作业等操作，但终止作业后，需要重启工程才能重新启动作业，控制台不能手动启动。
 
-![](http://img.javastack.cn/18-3-19/94019933.jpg)
+![](img/18-3-19-94019933.jpg)
 
 好了，这节的 Elastic-Job 运维平台搭建使用指南就到这里了。
 

@@ -5,7 +5,7 @@ category: 后端
 tags: MyBatis
 ---
 
-![image](http://img.javastack.cn/18-1-20/16848962.jpg)
+![image](img/18-1-20-16848962.jpg)
 
 现在大多项目都是使用Mybatis了，但也有些公司使用Hibernate。使用Mybatis最大的特性就是sql需要自己写，而写sql就需要传递多个参数。面对各种复杂的业务场景，传递参数也是一种学问。
 

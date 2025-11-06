@@ -11,7 +11,7 @@ tags: 安全漏洞
 
 **看下面Session Fixation攻击的一个简单例子：**
 
-![image](http://img.javastack.cn/18-1-27/44844045.jpg)
+![image](img/18-1-27-44844045.jpg)
 
 **整个攻击流程是：**
 

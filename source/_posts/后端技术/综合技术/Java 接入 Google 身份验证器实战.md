@@ -21,31 +21,31 @@ Google Authenticator 身份验证器是一款基于时间与哈希的一次性�
 
 如图所示，默认 Github 是没有开启两步验证的，点击设置按钮进行设置。
 
-![](http://img.javastack.cn/18-6-4/89202323.jpg)
+![](img/18-6-4-89202323.jpg)
 
 Github 提供了基于 APP （谷歌身份验证器）和短信验证码两种两步验证的方式，我们选择第一种谷歌身份验证器。
 
-![](http://img.javastack.cn/18-6-4/60561582.jpg)
+![](img/18-6-4-60561582.jpg)
 
 进入第一种验证模式，接下来展示了一堆的恢复码，用来当 APP 验证器不能工作的紧急情况使用。把它们保存起来，然后点击下一步。
 
-![](http://img.javastack.cn/18-6-4/53581436.jpg)
+![](img/18-6-4-53581436.jpg)
 
 这个就是身份验证器的关键了，下载 Google 的 `Authenticator` APP，然后扫描这个二维码进行绑定。
 
-![](http://img.javastack.cn/18-6-4/22628043.jpg)
+![](img/18-6-4-22628043.jpg)
 
 绑定之后，APP Github 模块下面会显示一个 6 位的验证码，把它输入到上面那个框里面就行了。
 
-![](http://img.javastack.cn/18-6-4/52228687.jpg)
+![](img/18-6-4-52228687.jpg)
 
 如下图所示，已经成功开启两步验证了。
 
-![](http://img.javastack.cn/18-6-4/67672750.jpg)
+![](img/18-6-4-67672750.jpg)
 
 接下来我们退出 Github 再重新登录，页面就会提示要输入 Google 的身份验证器验证码了，如果 APP 不能正常工作，最下方还能通过之前保存下来的恢复码进行登录。
 
-![](http://img.javastack.cn/18-6-4/8537646.jpg)
+![](img/18-6-4-8537646.jpg)
 
 好了，Google Authenticator 使用就到这里，那它是如何工作的，它是什么原理呢？我们的网站、APP 如何接入 Google Authenticator，接下来我们一一拉开谜底。
 

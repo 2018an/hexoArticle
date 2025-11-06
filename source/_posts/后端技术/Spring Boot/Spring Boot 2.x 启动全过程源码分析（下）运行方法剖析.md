@@ -11,7 +11,7 @@ tags: Spring Boot
 
 ### SpringApplication 实例 run 方法运行过程
 
-![](http://img.javastack.cn/18-7-2/34936854.jpg)
+![](img/18-7-2-34936854.jpg)
 
 上面分析了 SpringApplication 实例对象构造方法初始化过程，下面继续来看下这个 SpringApplication 对象的 run 方法的源码和运行流程。
 

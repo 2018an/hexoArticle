@@ -5,7 +5,7 @@ category: 后端
 tags: 开源
 ---
 
-![](http://img.javastack.cn/18-11-21/1234410.jpg)
+![](img/18-11-21-1234410.jpg)
 
 ## 什么是 Nacos？
 
@@ -21,11 +21,11 @@ Nacos 帮助您更敏捷和容易地构建、交付和管理微服务平台。 N
 
 全景图：
 
-![](http://img.javastack.cn/18-11-21/54787075.jpg)
+![](img/18-11-21-54787075.jpg)
 
 ## 架构及概念
 
-![](http://img.javastack.cn/18-11-21/95099270.jpg)
+![](img/18-11-21-95099270.jpg)
 
 - **服务 (Service)**
 

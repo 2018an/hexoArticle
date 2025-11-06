@@ -18,7 +18,7 @@ tags: Spring Boot
 
 Spring Boot 默认采用 jar 包内嵌 Tomcat、Jetty 等 Server 的方式，并需要提供一个含有 main 方法的主类。这个时候，直接在 IDE 中运行这个 main 方法就能启动 Spring Boot 应用了。
 
-![](http://img.javastack.cn/18-8-24/89912145.jpg)
+![](img/18-8-24-89912145.jpg)
 
 - **war 包方式**
 
@@ -58,7 +58,7 @@ Spring Boot 默认采用 jar 包内嵌 Tomcat、Jetty 等 Server 的方式，并
 
 最后来一张 Maven 的截图。
 
-![](http://img.javastack.cn/18-8-24/27826270.jpg)
+![](img/18-8-24-27826270.jpg)
 
 #### 总结
 

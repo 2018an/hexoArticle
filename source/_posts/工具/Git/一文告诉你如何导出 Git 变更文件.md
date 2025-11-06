@@ -5,11 +5,11 @@ category: 工具
 tags: Git
 ---
 
-![](http://img.javastack.cn/18-6-7/58683179.jpg)
+![](img/18-6-7-58683179.jpg)
 
 有时候我们想导出某次版本提交时有哪些变更的文件，在 svn 中有一个 export 功能，很方便，如下图所示。
 
-![](http://img.javastack.cn/18-5-24/63533749.jpg)
+![](img/18-5-24-63533749.jpg)
 
 **在 Git 中我也找到了以下两种方法。**
 
@@ -35,7 +35,7 @@ git archive -o c:/Users/yourusername/Desktop/export.zip 479d554cf570edcc28c20ce2
 
 下载 `TortoiseGit` Git 客户端软件，使用方法和 svn 的 export 功能类似。
 
-![](http://img.javastack.cn/18-5-24/17828748.jpg)
+![](img/18-5-24-17828748.jpg)
 
 很明显，方法2不用敲命令，不用拷贝提交版本号，方法2更方便，更实用！
 

@@ -5,7 +5,7 @@ category: 后端
 tags: Spring Boot
 ---
 
-![image](http://img.javastack.cn/18-3-1/6871468.jpg)
+![image](img/18-3-1-6871468.jpg)
 
 #### Spring Boot 2.0 正式发布！
 
@@ -13,7 +13,7 @@ tags: Spring Boot
 
 小编去看了下Spring Boot的官网，正式版本已经释放出来了！！！
 
-![](http://img.javastack.cn/18-3-1/48186693.jpg)
+![](img/18-3-1-48186693.jpg)
 
 **这个版本更是历经了17个月，超过了215个人共同开发，总共超过6800次+提交完成的。这个版本是继4年前Spring Boot 1.0 之后的第一个主要版本，也是第一个正式支持Spring Framework 5.0的发行版本。**
 
@@ -21,7 +21,7 @@ tags: Spring Boot
 
 > Spring Boot版本发布列表：https://github.com/spring-projects/spring-boot/releases/
 
-![](http://img.javastack.cn/18-3-1/85348337.jpg)
+![](img/18-3-1-85348337.jpg)
 
 #### Spring Boot 2.0 新特性
 

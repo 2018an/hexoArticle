@@ -5,7 +5,7 @@ category: 后端
 tags: Tomcat
 ---
 
-![](http://img.javastack.cn/18-2-27/1096232.jpg)
+![](img/18-2-27-1096232.jpg)
 
 **Tomcat8.5，当Get请求中包含了未经编码的中文字符时，会报以下错误，请求未到应用程序在Tomcat层就被拦截了。**
 
