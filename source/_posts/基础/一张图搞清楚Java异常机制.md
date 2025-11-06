@@ -7,7 +7,7 @@ tags: 基础
 
 下面是Java异常类的组织结构，红色区域的异常类表示是程序需要显示捕捉或者抛出的。
 
-![image](https://www.programcreek.com/wp-content/uploads/2009/02/Exception-Hierarchy-Diagram.jpeg)
+![image](img/exception20251106.jpeg)
 
 ### Throwable
 Throwable是Java异常的顶级类，所有的异常都继承于这个类。
