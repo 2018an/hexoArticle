@@ -145,3 +145,11 @@ deploy:
 #    Access-Control-Allow-Origin: "*"
 #    Access-Control-Allow-Methods: "GET, POST, PUT, DELETE, OPTIONS"
 #    Access-Control-Allow-Headers: "Content-Type, Authorization"
+
+# 通用 Sitemap
+sitemap:
+  path: sitemap.xml
+
+# 百度 Sitemap (如果安装了)
+baidusitemap:
+  path: baidusitemap.xml
