@@ -29,9 +29,6 @@ tags: Spring Boot
 
 除了 Spring Boot 必须自带的 parent 依赖外，仅仅只需要加入这个 `spring-boot-starter-web` 包即可，它会自动包含所有 JSON 处理的包，如下图所示。
 
-![](http://qianniu.javastack.cn/18-8-16/4664411.jpg)
-
-这个插件感谢知识星球球友的分享，简单不错，点击文章底部的阅读原文，可以加入一起学习。
 
 
 ### 返回 JSON 数据格式定义
@@ -114,6 +111,3 @@ User jsonUser = objectMapper.readValue(userJsonStr, User.class);
 
 更多相关的使用及原理可以查看这个包。
 
-好了，Spring Boot 返回 JSON 格式数据就是这么简单，有什么不懂的可以点击阅读原文加入星球和大家一起学习讨论。
-
-《Spring Boot 返回 XML 数据》栈长正在拼命写作中，过两天分享。

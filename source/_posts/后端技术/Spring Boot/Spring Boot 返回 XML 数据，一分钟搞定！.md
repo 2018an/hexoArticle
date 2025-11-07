@@ -103,5 +103,4 @@ com.fasterxml.jackson.databind.ObjectMapper#writeValueAsString
 
 更多相关的使用及原理可以查看这个包。
 
-好了，Spring Boot 返回 XML 格式数据就是这么简单，有什么不懂的可以点击阅读原文加入星球和大家一起学习讨论。
 

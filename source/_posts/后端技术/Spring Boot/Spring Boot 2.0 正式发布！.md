@@ -43,5 +43,4 @@ tags: Spring Boot
 
 > 升级文档：https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.0-Migration-Guide
 
-还不知道Spring Boot技术或者还不够深入了解的，我们准备了一系列的Spring Boot实战教程，可以点击左下方的阅读原文进行深入学习。
 

@@ -52,6 +52,3 @@ tags: IDEA
 - Intellij IDEA 所有乱码解决方案
 - Intellij IDEA 阅读源码的4个绝技
 - Intellij IDEA Debug调试技巧
-- ……
-
-如果你喜欢 IDEA, 可以点击阅读原文链接加入我们的知识星球，我会经常在上面分享 IDEA 的使用小技巧，对 IDEA 有什么不懂的也可以在上面向我和大家提问。
